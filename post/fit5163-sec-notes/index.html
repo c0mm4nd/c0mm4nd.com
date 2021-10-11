@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这门课是Blockchain的前置课。 主要讲的是一些安全方面的内容。 assignment两个，一个是期中考试（15%），一个叫mini research应该是论文解读相关（25%）。 剩下60%是考试。 平时tut主要是带你做题目方式答疑，tut和lec之间每周内容对应（这周lec这周tut讲完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fit5163-sec-notes">
+<meta property="og:url" content="https://c0mm4nd.com/post/fit5163-sec-notes/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="这门课是Blockchain的前置课。 主要讲的是一些安全方面的内容。 assignment两个，一个是期中考试（15%），一个叫mini research应该是论文解读相关（25%）。 剩下60%是考试。 平时tut主要是带你做题目方式答疑，tut和lec之间每周内容对应（这周lec这周tut讲完">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210904214224475.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210904231525896.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905000105744.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905013819258.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905013846123.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905020902244.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905115816646.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/fit5163-sec-notes/image-20210905130857579.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/fit5163-sec-notes/image-20210905130903456.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905135628189.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905143751106.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905155214885.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905161547567.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905162222378.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905162536045.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905162552183.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905163049159.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905163551848.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905164150831.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905165722021.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905170859083.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905200105145.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210905204328085.png">
+<meta property="article:published_time" content="2021-08-01T23:31:57.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:21:35.876Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210904214224475.png">
+
+<link rel="canonical" href="https://c0mm4nd.com/post/fit5163-sec-notes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>fit5163-sec-notes | Talkless</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Talkless</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">63</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/post/fit5163-sec-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          fit5163-sec-notes
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-02 07:31:57" itemprop="dateCreated datePublished" datetime="2021-08-02T07:31:57+08:00">2021-08-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-11 17:21:35" itemprop="dateModified" datetime="2021-10-11T17:21:35+08:00">2021-10-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这门课是Blockchain的前置课。</p>
+<p>主要讲的是一些安全方面的内容。</p>
+<p>assignment两个，一个是期中考试（15%），一个叫mini research应该是论文解读相关（25%）。</p>
+<p>剩下60%是考试。</p>
+<p>平时tut主要是带你做题目方式答疑，tut和lec之间每周内容对应（这周lec这周tut讲完</p>
+<span id="more"></span>
+
+<h2 id="W1-Intro"><a href="#W1-Intro" class="headerlink" title="W1: Intro"></a>W1: Intro</h2><p>定义了一下各类术语，以及进行一些分类。</p>
+<h3 id="Security-standards安全标准"><a href="#Security-standards安全标准" class="headerlink" title="Security standards安全标准"></a>Security standards安全标准</h3><p>网络安全标准Cybersecurity standards: </p>
+<p>are techniques set forth in published materials that attempt to protect the cyber environment of a user or organization, 例如AES(from NIST)</p>
+<ul>
+<li>国际标准International standards: ISO/IEC 27000(澳洲用), <strong>ITU-T X.800</strong>, IEC 62443</li>
+<li>国家标准: US: NIST, FIPS140; UK: Cyber Essentials</li>
+</ul>
+<p>术语（会让你说这个事/物算哪个，经常问Threat和Vulnerability和Risk）</p>
+<ul>
+<li><p>Adversary (threat agent, attacker, hacker): Adversary意思是对手</p>
+</li>
+<li><p>Threat: 违反安全的<strong>可能性（potential）</strong>，当存在可能违反安全并造成伤害的情况、能力、行动或事件时，就存在这种可能性。</p>
+</li>
+<li><p>Vulnerability: 系统设计、实施或操作和管理中的<strong>缺陷或弱点</strong>，可被利用来违反系统的安全策略。</p>
+</li>
+<li><p>Attack: 源自智能威胁的对系统安全的攻击； 故意逃避安全服务并违反系统的安全策略</p>
+</li>
+<li><p>Countermeasure对策: 通过消除或防止威胁、漏洞或攻击，通过最大限度地减少其可能造成的伤害，或通过发现和报告它以便采取纠正措施来减少威胁、漏洞或攻击的行动、设备、程序或技术</p>
+</li>
+<li><p>Risk: <strong>损失预期</strong>，表示为特定威胁利用特定漏洞并产生特定有害结果的<strong>可能性</strong>。</p>
+</li>
+<li><p>Security Policy: <strong>一组规则和实践</strong>，指定系统或组织如何提供安全服务以保护敏感和关键系统资源。</p>
+</li>
+<li><p>System Resource (Asset) - Data: 系统提供的服务； 系统能力； 一项系统设备； 容纳系统操作和设备的设施。</p>
+</li>
+</ul>
+<img src="/post/fit5163-sec-notes/image-20210904214224475.png" class="" title="image-20210904214224475">
+
+<p><strong>信息安全</strong>是关于如何防止攻击，或者如何防止攻击，以检测对基于信息的系统的攻击</p>
+<p>信息安全的 3 个方面：</p>
+<ul>
+<li>安全攻击/威胁：可能违反安全策略的一种可能方式（例如，完整性或机密性的丢失）。</li>
+<li>安全服务：一种可以用来应对威胁或反击攻击的措施（例如提供保密性）。</li>
+<li>安全机制：提供服务的手段（例如加密、数字签名）</li>
+</ul>
+<h3 id="Security-attacks安全攻击"><a href="#Security-attacks安全攻击" class="headerlink" title="Security attacks安全攻击"></a>Security attacks安全攻击</h3><p>General Well-Known Threats </p>
+<p>• Viruses, worms, trojans </p>
+<p>• Malware • Phishing </p>
+<p>• Botnets </p>
+<p>• Brute-force </p>
+<p>• DoS/DDoS </p>
+<p>• Man-in-the-middle </p>
+<p>• SQL injection</p>
+<p>Resources/Assets</p>
+<ul>
+<li>Information/data: Password, credit card, e-health records </li>
+<li>Service: Storage service, data process services </li>
+<li>Hardware  • RAM, cache, hard disks, branch predictor units, GPU </li>
+<li>Software </li>
+<li>Firmware: BIOS</li>
+</ul>
+<p>动机</p>
+<ul>
+<li>Obtain/access private resources → Confidentiality</li>
+<li>Bypass authentication for accessing private resources→ Authentication</li>
+<li>Break the availability of a service → Availability</li>
+<li>Breach the integrity of information → Integrity</li>
+</ul>
+<p>分类</p>
+<p>Passive attacks </p>
+<ul>
+<li>Interception: an attack on <strong>confidentiality</strong> 只嗅探这样</li>
+</ul>
+<p>Active attacks </p>
+<ul>
+<li>Interruption: an attack on availability: DoS这样影响了可用性</li>
+<li>Modification: an attack on integrity </li>
+<li>Fabrication: an attack on authenticity &amp; integrity </li>
+<li>Replay: an attack on freshness</li>
+</ul>
+<h3 id="Security-services安全服务"><a href="#Security-services安全服务" class="headerlink" title="Security services安全服务"></a>Security services安全服务</h3><p>旨在对抗安全攻击<br>利用一种或多种安全机制来提供服务<br>6 项主要安全服务/财产/目标：<br>• <strong>Confidentiality</strong><br>• <strong>Integrity</strong><br>• <strong>Availability</strong><br>• Authentication<br>• Non-repudiation 不可否认性：防止通信中的一方否认<br>• Access control<br>信息安全的主要重点是平衡保护数据的机密性、完整性和可用性（也称为 CIA triad三元组）</p>
+<p>技术手段</p>
+<ul>
+<li>Confidentiality-&gt; encryption</li>
+<li>Integrity -&gt; Message Authentication Code (MAC); Message Authentication Code (MAC); Digital signature</li>
+<li>Availability-&gt; High availability systems</li>
+<li>Authentication -&gt;  <strong>What U know</strong>: PIN, or a password; <strong>What U have</strong>: a driver’s license or a magnetic swipe card; <strong>What U are</strong> biometrics, including palm prints, fingerprints, voice  prints and retina (eye) scans </li>
+<li>Non-Repudiation: Digital signature; Message Authentication Code (MAC)</li>
+<li>Access Control: File permissions in Unix/NT file systems</li>
+</ul>
+<h3 id="Security-mechanism安全机制"><a href="#Security-mechanism安全机制" class="headerlink" title="Security mechanism安全机制"></a>Security mechanism安全机制</h3><p><strong>Specific security mechanisms</strong>: 用于提供特定的安全服务</p>
+<p><strong>Pervasive security mechanisms</strong>: （遍布的，普适的）不特定于特定服务</p>
+<p>Specific Security Mechanisms</p>
+<p>• Encipherment (encryption) : hide or covers data</p>
+<p>• Data integrity </p>
+<p>• Digital signatures </p>
+<p>• Access controls </p>
+<p>• Authentication exchange: 通过信息交换确保实体的身份</p>
+<p>• Traffic padding: 将bits插入数据流中的间隙以阻断流量分析尝试</p>
+<p>• Routing control: 选择并不断改变发送方和接收方之间不同的可用路线</p>
+<p>• Notarization 公证; 使用受信任的第三方来控制双方之间的通信</p>
+<p>Pervasive Security Mechanisms</p>
+<p>• Trusted functionality: 可用于扩展范围或建立其他安全机制的有效性; 任何直接提供或提供对安全机制的访问的功能都应该是值得信赖的</p>
+<p>• Security labels: 系统资源可能具有与其相关联的安全标签，例如，用于指示敏感度级别（绝密、机密、机密、未分类）; 通常需要在传输数据时传送适当的安全标签</p>
+<p>• Event detection: 检测与安全相关的事件</p>
+<p>• Security audit trails 安全审计追踪: 过去与安全相关的事件的日志; 允许检测和调查过去的安全漏洞</p>
+<p>• Security recovery: 包括处理从安全故障中恢复的请求的机制; 可能包括操作的立即中止、实体的临时失效、将实体添加到黑名单</p>
+<img src="/post/fit5163-sec-notes/image-20210904231525896.png" class="" title="image-20210904231525896">
+
+
+
+<h3 id="Model-of-system-inter-network-security-系统-网络安全模型"><a href="#Model-of-system-inter-network-security-系统-网络安全模型" class="headerlink" title="Model of system/(inter)network security 系统/网络安全模型"></a>Model of system/(inter)network security 系统/网络安全模型</h3><p>主要会问到底属于 系统/网络间/网络内 的安全问题</p>
+<h4 id="Network-Security"><a href="#Network-Security" class="headerlink" title="Network Security"></a>Network Security</h4><img src="/post/fit5163-sec-notes/image-20210905000105744.png" class="" title="image-20210905000105744">
+
+<h3 id="Tut-数学回顾"><a href="#Tut-数学回顾" class="headerlink" title="Tut:  数学回顾"></a>Tut:  数学回顾</h3><p>质数分解，GCD 略</p>
+<p>Congruent class of each number每个数字的全等类-&gt;就是算余数</p>
+<p>Eulers Totient φ(n) : φ(n) = (p − 1) × (q − 1) if p and q are primes.</p>
+<p>a truth table: ¯表示取反</p>
+<table>
+<thead>
+<tr>
+<th>x</th>
+<th>y</th>
+<th>x + y</th>
+<th>x + ¯y</th>
+<th>¯x + y</th>
+<th>(x + y)(x + ¯y)(¯x + y)</th>
+<th>xy</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>⊕表示XOR抑或(=  (x!=y) )</p>
+<table>
+<thead>
+<tr>
+<th>x</th>
+<th>y</th>
+<th>⊕</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<h2 id="W2-加密规则-Principles-of-Encryption"><a href="#W2-加密规则-Principles-of-Encryption" class="headerlink" title="W2: 加密规则 Principles of Encryption"></a>W2: 加密规则 Principles of Encryption</h2><p>加（解）密的一些原理</p>
+<p>术语</p>
+<p>• Plaintext – 原始消息</p>
+<p>• Ciphertext – 编码/加密的消息 </p>
+<p>• Cipher –明文和密文之间的转换算法</p>
+<p>• Key – 密码中使用的秘密信息，只有发送方和接收方知道</p>
+<p>• Encrypt/encipher – 明文转换为密文  </p>
+<p>• Decrypt/decipher – 密文转换为纯文本 </p>
+<p>• Cryptography – 安全通信技术的研究 </p>
+<p>• Cryptanalysis (codebreaking) – 分析密码技术的研究（不知道密钥） </p>
+<p>• Cryptology – 密码学和密码分析领域</p>
+<p>Caesar Cipher: 熟悉的置换（<strong>Substitution</strong>）比如ABCD -&gt; EFGH，即</p>
+<p>C = Enc(k, P) = (P + k) mod 26</p>
+<p>P = Dec(k, C) = (C – k) mod 26</p>
+<p>如果 (a mod n) = (b mod n) ，则 a 和 b 被称为模 n 全等； 等价于 a Ξ b (mod n)</p>
+<p>r 称为a mod n 的残差, a = qn + r。 通常选择最小的<strong>正余数</strong>作为残差（-12 mod 7 = 2 mod 7 = 2）</p>
+<h4 id="Monoalphabetic-Ciphers"><a href="#Monoalphabetic-Ciphers" class="headerlink" title="Monoalphabetic Ciphers"></a>Monoalphabetic Ciphers</h4><p>单字母密码: 每个明文字母映射到不同的随机密文字母</p>
+<p>攻击: 单字母替换密码不会改变相对字母频率</p>
+<p>计算密文的字母频率-&gt; 将计数/图与已知值进行比较</p>
+<p>常见的双/三字母表也有帮助-&gt;碰瓷the这类单词</p>
+<h4 id="Polyalphabetic-Ciphers"><a href="#Polyalphabetic-Ciphers" class="headerlink" title="Polyalphabetic Ciphers"></a>Polyalphabetic Ciphers</h4><p>多字母密码: 在处理明文消息时使用不同的单字母替换</p>
+<p>Vigenère Cipher维吉尼亚密码: 用一个和Ptxt等长的Key，密文Ctxt[i] = Ptxt[i] + Key[i] mod 26</p>
+<p>• 每个明文字母有多个密文字母, 字母频率被掩盖。但是，并没有完全迷失<br>• 破解密码取决于猜测密钥长度： 例如 “红色”的 2 个实例由 9 个字符位置分隔。<br>• 使用语言频率分别攻击每个单字母密码</p>
+<p>具体攻击实现Kasiski Method </p>
+<p>密文中的重复提供有关关键字长度的线索</p>
+<p>-&gt;查找重复文本块之间的距离</p>
+<p>-&gt;这些块的公约数给出了关键字长度（概率很高）例如重复的“VTW”——建议密钥大小为 3 或 9 </p>
+<p>-&gt;然后，使用与以前相同的技术单独攻击每个单字母密码</p>
+<p>One-Time Pad: 使用真正随机，与Ptxt等长，的Key</p>
+<p>• 始终存在将明文映射到密文的密钥 </p>
+<p>• 今天的计算机化应用：明文位与真正随机的密钥位进行异或</p>
+<p>缺陷：</p>
+<p>• 需要生成很长的密钥 – 同时分发和存储这些长密钥 </p>
+<p>• 密钥需要真正随机</p>
+<p> • 此外，同一个密钥只能使用一次</p>
+<p>Transposition Ciphers换位密码</p>
+<p>略</p>
+<p>Rail Fence cipher栅栏密码</p>
+<p>略</p>
+<p>Product Ciphers乘积密码</p>
+<p>略</p>
+<h4 id="Desirable-Properties理想的属性"><a href="#Desirable-Properties理想的属性" class="headerlink" title="Desirable Properties理想的属性"></a>Desirable Properties理想的属性</h4><ul>
+<li>No information loss: $f^-1(f(x))  \rarr x$</li>
+<li>Ciphertext needs to completely <strong>obscure statistical  properties</strong> with respect to the original message: 密文需要完全掩盖原始消息的统计属性<ul>
+<li>Confusion: 使密文和密钥之间的统计关系尽可能复杂 &gt; 通过substitution替换实现</li>
+<li>Diffusion:  每一位密文都应该受到每一位明文和密钥的影响（复杂的关系应该在所有位之间传播） &gt; 通过transposition/permutation转置/排列实现</li>
+</ul>
+</li>
+<li><strong>Avalanche effect</strong> 雪崩效应:<br>明文或密钥的微小变化会导致密文发生重大变化<br>一位明文或密钥的变化应该会导致密文的许多位发生变化<br>-&gt;使猜测密钥的尝试变得不可能</li>
+<li>From the view of information security we would like to  have <strong>unconditional security</strong>从信息安全的角度，我们希望有无条件的安全: 无论有多少计算机能力可用，密码都无法破解，因为密文提供的信息不足以唯一确定相应的明文</li>
+<li>From the view of computational efficiency we would like  to have <strong>computational security</strong>从计算效率的角度来看，我们希望有计算安全性: 计算成本/时间&gt;&gt;攻击成本/时间</li>
+</ul>
+<h3 id="Attacks"><a href="#Attacks" class="headerlink" title="Attacks"></a>Attacks</h3><ul>
+<li>Cryptanalytic attack 密码分析攻击</li>
+<li>Brute-force attack 略</li>
+</ul>
+<h4 id="Cryptanalytic-attack-密码分析攻击"><a href="#Cryptanalytic-attack-密码分析攻击" class="headerlink" title="Cryptanalytic attack 密码分析攻击"></a>Cryptanalytic attack 密码分析攻击</h4><p>攻击依赖于算法的性质加上对明文一般特征的一些了解</p>
+<p>攻击利用算法的特性来尝试推断特定的明文或推断使用的密钥</p>
+<p>– Ciphertext only attack: 攻击者只能访问密文; 不知道什么明文加密为给定的密文; 最弱的攻击者</p>
+<p>– Known plaintext attack: 攻击者可以访问 ( ptxt , ctxt ) 对，其中 ctxt =Enc(ptxt); 但是，<strong>不能选择出</strong> (ptxt , ctxt) 对; 目标是破解明文未知的密文或恢复出密钥</p>
+<p>– Chosen plaintext attack: 攻击者可以访问 ( ptxt , ctxt ) 对，其中 <strong>ptxt</strong> 由攻击者选择； 与已知明文攻击的目标相同</p>
+<p>– Chosen ciphertext attack: 攻击者可以访问 ( ptxt , ctxt ) 对，其中 <strong>ctxt</strong> 由攻击者选择； 与已知明文攻击的目标相同</p>
+<p>– Chosen text attack: 攻击者可以访问 ( ptxt , ctxt ) 对，他可以在其中选择 ptxt 或 ctxt； 最强攻击者</p>
+<h3 id="Tut-Intro"><a href="#Tut-Intro" class="headerlink" title="Tut: Intro"></a>Tut: Intro</h3><p>一堆文字题……</p>
+<h2 id="W3-对称加密-Symmetric-Cryptography"><a href="#W3-对称加密-Symmetric-Cryptography" class="headerlink" title="W3: 对称加密 Symmetric Cryptography"></a>W3: 对称加密 Symmetric Cryptography</h2><p>大家熟悉的AES案例</p>
+<p>更侧重讲的是Block的，stream的部分是放在了W2结尾</p>
+<img src="/post/fit5163-sec-notes/image-20210905013819258.png" class="" title="image-20210905013819258">
+
+<p>规则</p>
+<img src="/post/fit5163-sec-notes/image-20210905013846123.png" class="" title="image-20210905013846123">
+
+<ul>
+<li> $A$ 与 $B$ 共享一个密钥 $K$，密钥可由密钥分发中心 (KDC, key distribution center) 分发。</li>
+<li>$A$ 通过应用<u>加密函数 $E$</u> 和密钥 $K$ 来加密明文消息 $P$ 以创建密文 $C = E_K(P)$</li>
+<li>$A$ 通过通信信道将密文 $C$ 发送给 $B$。 即使 B 以外的其他人获得了 $C$ 的副本，除非他拥有 $K$，否则他无法解密该消息。</li>
+<li>如果密钥分发是完美的，或者 $B$ 没有意外或故意泄露密钥，那么除了$B$ 之外没有人应该拥有密钥 $K$。</li>
+<li>在接收到 $C$ 时，$B$ 使用密钥 $K$ 在 $C$ 上应用解密函数 $D$ 以恢复明文消息 P: $D_K(C) = D_K(E_K(P)) = P$</li>
+</ul>
+<p>对称密码</p>
+<p>Stream cipher: ➢ 连续处理输入元素 ➢ 一次产生一个元素（1 位或 1 字节） ➢ 例如，RC4 和rabbit</p>
+<p>Block cipher:➢ 一次处理一个输入块 ➢ 为每个输入块产生一个输出块 ➢ 例如，3DES 和 AES</p>
+<h4 id="Stream-Cipher"><a href="#Stream-Cipher" class="headerlink" title="Stream Cipher"></a>Stream Cipher</h4><p>流密码属性<br>• 一些设计注意事项是：<br>– 没有重复的密钥流的长周期<br>– 密钥流在统计上是随机的<br>– 种子（主密钥）足够长且随机（128-256 位）<br>– KSG 函数很难反转<br>• 如果设计得当，可以像块一样安全<br>具有相同大小密钥的密码</p>
+<p>• 但通常更简单、更快</p>
+<p>• 示例：RC4</p>
+<p>RC4</p>
+<p>• 目标：为明文的每个字节生成一个字节（8 位）<br>• 主要思想：以“随机”方式从 256 个候选者中挑选一个值</p>
+<img src="/post/fit5163-sec-notes/image-20210905020902244.png" class="" title="image-20210905020902244">
+
+<p>• RC4 逐字节加密明文<br>• RC4 提供了一种以“随机”方式从 256（即 $2^8$）个候选中挑选一个值的方法</p>
+<ol>
+<li>Initialize an array of 256 bytes T (initial state of S &amp; T) S=Seed T[i]=K[i mod keylen]</li>
+<li>KSA(Key Schedule Algorithm, permutation of S), S内部Swap</li>
+<li>Key Stream Generation, Ci = Mi XOR S[t]</li>
+</ol>
+<p>由于 RC4 是一种流密码，绝不能重复使用相同的密钥流！– 相同的密钥在 RC4 中提供相同的密钥流！</p>
+<p>这个想法是通过诉诸计算安全性使“一次性密码”变得实用<br>• 步骤：<br>1）从一个小密钥（“种子”）生成一个长密钥流<br>2) 将密钥流与消息进行异或<br>• 密钥流称为“伪随机”<br>– 不像一次性纸垫那样真正随机！<br>– 与消息长度相同<br>• 密钥流的随机性破坏了消息中的统计属性</p>
+<p>𝑀: 消息<br>𝜅: 主键<br>𝐾: 生成的密钥流<br>𝐼𝑉: 初始化向量，所有人可知非私密<br>• 2 个步骤（形式化）：</p>
+<ol>
+<li>𝐾 ← 𝐾𝑆𝐺(𝜅,𝐼𝑉)，其中 KSG 是一个“密钥流生成器”</li>
+<li>𝐶 = 𝑀 ⊕ 𝐾</li>
+</ol>
+<img src="/post/fit5163-sec-notes/image-20210905115816646.png" class="" title="image-20210905115816646">
+
+<p>密钥流生成器 (KSG) 或伪随机生成器 (PRG) 是一种确定的过程，它将随机种子 (Key) 映射到无法（在计算上）与随机字符串区分开的较长伪随机字符串。</p>
+<p>Seed/Main Key通常是从均匀分布中随机抽取的短二进制字符串</p>
+<h4 id="Block-Cipher"><a href="#Block-Cipher" class="headerlink" title="Block Cipher"></a>Block Cipher</h4><p>Feistel Cipher: 许多分组密码算法，包括 DES（数据加密标准），都具有由 IBM 的 Horst Feistel 于 1973 年首次描述的结构。“Feistel Cipher/Network/Structure”本身并没有描述具体的分组密码，而是设计分组密码的一般方法</p>
+<p>• 将明文分成两等份 (𝐿0, 𝑅0)<br>• 第𝑛 轮次处理二分之一<br>• 对于每一轮 𝑖 = 1,2, … , 𝑛<br>𝐿𝑖 = 𝑅𝑖−1<br>𝑅𝑖 = 𝐿𝑖−1 ⊕ 𝐹(𝑅𝑖−1,𝐾𝑖)<br>其中 𝐹 是轮函数，𝐾𝑖 是子密钥或轮密钥<br>• 在第 𝑛 轮之后，密文是 (𝐿𝑛, 𝑅𝑛)。<br>• 不管函数𝐹，解密是通过<br>𝑅𝑖−1 = 𝐿𝑖<br>𝐿𝑖−1 = 𝑅𝑖 ⊕ 𝐹(𝐿𝑖 ,𝐾𝑖)<br>• 16 轮的示例图</p>
+<p><img src="fit5163-sec-notes/image-20210905130857579.png" alt="image-20210905130857579" loading="lazy"><img src="fit5163-sec-notes/image-20210905130903456.png" alt="image-20210905130903456" loading="lazy"></p>
+<p>左：加密； 右：解密</p>
+<p>Block size块大小：更大的块大小意味着更高的安全性</p>
+<p>Key size密钥大小：较大的密钥大小意味着更高的安全性</p>
+<p>Number of rounds 轮数：更多轮提供更高的安全性，通常为 16 回合</p>
+<p>Subkey generation algorithm子密钥生成算法：复杂度越大，密码分析难度越大</p>
+<p>Round function 每轮函数：更大的复杂性意味着更大的阻力</p>
+<p>（但是要考虑到convenience</p>
+<h5 id="DES"><a href="#DES" class="headerlink" title="DES"></a>DES</h5><p>Feistel structure; Cipher: Block; </p>
+<p>Block size: 64 bits; (Effective) Key size: 56 bits （=64-8）</p>
+<p>16 subkeys created for 16  rounds</p>
+<img src="/post/fit5163-sec-notes/image-20210905135628189.png" class="" title="image-20210905135628189">
+
+<p>IP初始化置换: 把x整成一个ixj的矩阵（将原块中的第 n 位放入新块的 (8* i+j 位</p>
+<p>Round Function: </p>
+<ol>
+<li>明文被分成 32 位的一半 $L_i$ 和 $R_i$</li>
+<li>$R_i$ 被送入函数 f ，然后对其输出进行异或运算<br>与$L_i$</li>
+<li>左右半边互换</li>
+</ol>
+<img src="/post/fit5163-sec-notes/image-20210905143751106.png" class="" title="image-20210905143751106">
+
+<p>函数 f 输入$R_{i-1}$和每轮的key $k_i$:</p>
+<ol>
+<li><p>扩展E（增加漫射diffusion）: 把一个32bits扩展到48（6x8）bits。n 位于第 i 行第 j 列表示，将原块中的第 n 位放入新块的第 (6* i+j) 位 </p>
+</li>
+<li><p>与轮key计算异或: 轮密钥和扩展 E 的输出的按位异或; 轮密钥派生自 DES 密钥表中的主密钥（在少数</p>
+</li>
+<li><p>S-box矩阵替换（DES 安全的关键要素！非线性且抗差分密码分析）: 8个表，6bits输入，4bits输出 </p>
+</li>
+<li><p>置换（增加漫射diffusion）: 按位排列; 一个 S Box 的输出位会影响下一轮的多个 S Box。<br>E、S 盒和 P 的Diffusion 确保了在第 5 轮之后每一位都是每个密钥位和每个明文位的函数</p>
+</li>
+</ol>
+<p>最后一轮后，进行反向IP操作</p>
+<p><strong>DES的Subkey生成</strong></p>
+<p>DES 需要 16 个来自原始 56 位密钥的 48 位轮密钥/子密钥</p>
+<p>输入key大小为 64 位：56 位key和 8 位parity（校验）</p>
+<p>步骤：</p>
+<ul>
+<li>丢弃 8 个校验位</li>
+<li>置换bits</li>
+<li>分成两个28位</li>
+<li>往左旋转<strong>1bit</strong>（在第 1、2、9 和 16 轮的进行1bit；剩余轮次（3,4,5,6,7,8,10, …..15）移动2bits ）</li>
+<li>置换并提取 48 位作为子密钥</li>
+</ul>
+<p>主要问题：密钥长度太小！</p>
+<p>S Boxes的设计一直保密</p>
+<p>还有密码分析攻击；差分密码分析，线性密码分析，…</p>
+<p>它们在实践中不会构成真正的威胁，但对于了解安全方面仍然很重要</p>
+<p>如何在不需要大改动的情况下解决这些问题？3DES</p>
+<p>3DES</p>
+<p>应用DES算法3次；使用 3 个密钥和 3 次执行 DES 算法（加密解密加密）：略</p>
+<p>其他加密算法</p>
+<p>International Data Encryption Algorithm (IDEA); Blowfish; RC5</p>
+<h4 id="AES"><a href="#AES" class="headerlink" title="AES"></a>AES</h4><p>1997年，美国国家标准与技术研究院（NIST）正式启动高级加密标准（AES）比赛，以取代DES。基于：安全性、计算效率、内存要求、软硬件适用性、灵活性</p>
+<p>由比利时的 Joan Daemen 和 Vincent Rijmen 开发，也称为 Rijndael 算法</p>
+<p>AES 是一种Block cipher</p>
+<p>设计简单/灵活/高效，适用于软件和硬件的实现，以及许多 CPU 上的代码紧凑性。</p>
+<p>由于更大的块大小和更长的密钥，AES 提供了更高的安全性。</p>
+<p>提供了很大的灵活性：AES 通常足够灵活，可以处理 32 位的<strong>任意倍数的密钥</strong>和<strong>块大小</strong>，最小为 128 位，最大为 256 位。</p>
+<p>安全性：抵抗功耗分析和其他实施攻击 </p>
+<p>足以满足当今的大多数需求</p>
+<p>规格：</p>
+<p>固定块长度：128 位</p>
+<p>3 种不同的密钥长度：128、192 和 256 位</p>
+<p>密码由 N 轮组成，其中轮数取决于密钥长度：16 字节（128 位）密钥 10 轮；24 字节（192 位）密钥 12 轮；32 字节（256 位）密钥的 14 轮。</p>
+<p>每个变换都采用一个或多个 4 x 4 矩阵作为输入，并生成一个 4 x 4 矩阵作为输出。 被称为state状态</p>
+<p>密钥扩展函数生成 N + 1 个轮密钥，每个轮密钥是一个不同的 4 x 4 矩阵</p>
+<p>结构：</p>
+<p>前 N-1 轮由 4 个组成部分组成：</p>
+<ul>
+<li><p>字节替换 Byte substitution（每个字节使用 1 个 S box）</p>
+<ul>
+<li>每个字节被由 16x16 表的行（左 4 位）和列（右 4 位）索引的字节替换</li>
+</ul>
+</li>
+<li><p>移动行（简单置换 simple permutation）：第 1 行：不移位，第 2 行：1Byte 左循环移位，第 3 行：2Byte 移位，第 4 行：3Byte 移位</p>
+<ul>
+<li>在 ShiftRows 步骤中，状态的每一行中的字节循环向左移动。 对于每一行，每个字节移位的位置数逐渐不同。</li>
+</ul>
+</li>
+<li><p>混合列（混合state bits)</p>
+<ul>
+<li>每列都使用固定矩阵进行转换（矩阵左乘以列给出状态中列的新值）</li>
+</ul>
+</li>
+<li><p>添加轮密钥（XOR state矩阵与扩展的key矩阵，每个ij求xor）</p>
+</li>
+</ul>
+<p>最后一轮 N 包含： SubBytes 、 ShiftRows 、（无混合列） 和 AddRoundKey</p>
+<p>AES 128 needs 11 round keys</p>
+<p>AES 192 needs 13 round keys</p>
+<p>AES 256 needs 15 round keys</p>
+<p>操作模式</p>
+<p>块密码加密固定大小的块，例如 DES 使用 56 位密钥加密 64 位块<br>明文可以是任意长度，可以由多个块组成</p>
+<p>在实践中需要某种方式来加密/解密任意数量的数据</p>
+<p>NIST SP 800 38A 定义了 5 种操作模式</p>
+<p>涵盖广泛的应用，可以与任何分组密码一起使用</p>
+<p>5 种常用模式，其中明文、密钥和/或密文组合以加密/解密任意大小的块。每个都有不同的优点/缺点</p>
+<ul>
+<li>电子码本 (ECB) 模式</li>
+<li>密码块<strong>链接</strong> (CBC) 模式<ul>
+<li>密码<strong>反馈</strong> (CFB) 模式</li>
+</ul>
+</li>
+<li>输出<strong>反馈</strong> (OFB) 模式</li>
+<li>计数器 (CTR) 模式</li>
+</ul>
+<p><strong>ECB (Electronic Codebook) 模式</strong></p>
+<p><strong>最简单</strong>的模式，每个块独立加密和解密</p>
+<p>一次处理每个块（64/128 位）</p>
+<p>输入数据被填充为块大小的整数倍</p>
+<p>丢失的数据块不影响其他块的解密</p>
+<p>错误不传播，仅限于单个块</p>
+<p>所有块都使用相同的密钥加密</p>
+<p>缺点：</p>
+<ul>
+<li>相同的明文产生相同的密文</li>
+<li>不隐藏模式</li>
+<li>如果消息包含重复元素，则可以识别这些元素</li>
+<li>流量分析是可能的</li>
+</ul>
+<p><strong>CBC (Cipher Block Chaining) 模式</strong></p>
+<p><strong>最常用</strong>的模式，每个明文块与前一个密文块进行异或并加密</p>
+<p>第一个明文块与初始化向量 (IV) 异或</p>
+<p>每个块使用相同的加密密钥</p>
+<p>在每个加密步骤之前加扰明文</p>
+<p><strong>更安全</strong>：相同密钥的不同消息对应不同的IV； 有效地重复模式不会暴露</p>
+<p>缺点：</p>
+<ul>
+<li>数据块的加密变得依赖于它之前的所有块</li>
+<li>丢失的数据块将阻止对下一个数据块的解码</li>
+<li>块不能并行加密（可以并行解密</li>
+<li>明文的变化在密文中传播</li>
+</ul>
+<p><strong>CFB (Cipher feedback) 模式</strong></p>
+<p>在第一个块中，初始化向量 (IV) 被加密，然后与明文块进行异或</p>
+<p>前一个密文块被加密，然后与每个明文块异或</p>
+<p>每个块使用相同的加密密钥</p>
+<p>CFB和CBC一样的优缺点</p>
+<p>与 CBC 的区别：明文在每个加密步骤后会参与混淆</p>
+<p><strong>OFB (Output feedback) 模式</strong></p>
+<p>与CFB的区别：</p>
+<ul>
+<li>cipher 加密的输出用作下一个块的 IV，而不是最终块的密文</li>
+<li>由于明文或密文仅用于最终的异或，因此可以预先执行分组密码操作，一旦有明文或密文可用，就允许并行执行最后一步。</li>
+</ul>
+<p><strong>CTR (Counter) 模式</strong></p>
+<p>一种“新”模式，虽然很早就提出了</p>
+<p>与 OFB 类似，但使用<strong>计数器值</strong>而不是任何反馈值进行加密</p>
+<p>每个明文块必须具有不同的计数器/随机数值（从未重用）</p>
+<ul>
+<li><p>𝑂𝑖=𝐸𝐾(𝑖)</p>
+</li>
+<li><p>𝐶𝑖=𝑃𝑖⊕𝑂𝑖</p>
+</li>
+</ul>
+<p>用途：高速网络加密</p>
+<p>优势：高效率</p>
+<ul>
+<li>可以在硬件或软件中进行并行加密</li>
+<li>可以在需要之前进行预处理</li>
+<li>适用于突发高速链接</li>
+<li>随机访问加密数据块</li>
+<li>可证明的安全性（与其他模式一样好）</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>但必须确保不重复使用计数器值，否则可能会被破坏（参见 OFB）</li>
+</ul>
+<h4 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h4><p>哈希函数 H 是一种单向函数，它接受消息 M 并产生固定大小（例如 256 位）的输出（称为消息摘要或哈希值或指纹）</p>
+<p>对于任何消息 M，很容易计算 h=H(M)</p>
+<ul>
+<li>One way property单向性质：给定 h，找到 x 使得 H(x)=h 在计算上是不可行的</li>
+<li>Collision resistance抗碰撞性：找到任何一对 (x, y) 使得 H(y)=H(x) 在计算上也不可行</li>
+<li>Deterministic确定性：相同的消息总是导致相同的散列</li>
+</ul>
+<p>hash函数只将消息（不需要密钥）作为输入来生成消息摘要，任何人都可以计算任何值的哈希值！</p>
+<p>如果输入仅相差 1 位，则输出将完全不同！</p>
+<p>可以看作是一个确定性的伪随机函数（生成一个随机数）</p>
+<p>包括 MD5、SHA 1、SHA 256 等。</p>
+<h4 id="Message-Authentication-Code-MAC"><a href="#Message-Authentication-Code-MAC" class="headerlink" title="Message Authentication Code (MAC)"></a>Message Authentication Code (MAC)</h4><p>（不是网卡那个哦，那个叫**media access control **address</p>
+<p>MAC可以提供的服务：</p>
+<ul>
+<li>完整性：确认消息未被更改</li>
+<li>真实性：确认消息来自指定的发件人</li>
+</ul>
+<p>MAC也作为标签</p>
+<p>基于对称加密原语，由 3 部分组成：</p>
+<p>生成密钥 K，在发送方和接收方之间共享</p>
+<p>给定 K 和 m，生成： 𝑀𝐴𝐶=𝐶𝐾(𝑚)</p>
+<p>给定 K、m 和 MAC，验证：𝑀𝐴𝐶=𝐶𝐾(𝑚)</p>
+<p>MAC属性</p>
+<p>将可变长度消息 M 压缩为固定大小的验证器：<br>MAC：{0,1}∗→{0,1}𝑛</p>
+<p>是多对一（Many to one）功能：可能许多消息具有相同的 MAC； 但是在计算上很难找到具有相同 MAC 的 2 条消息</p>
+<p>MAC 应该平等地依赖于消息的所有位</p>
+<p>Message Code 功能</p>
+<ul>
+<li>HMAC（其实就是hash加盐，把盐拿来当key）</li>
+<li>对称密码</li>
+<li>基于密码的消息认证代码 (CMAC</li>
+<li>认证加密</li>
+</ul>
+<img src="/post/fit5163-sec-notes/image-20210905155214885.png" class="" title="image-20210905155214885">
+
+
+
+<p><strong>为AES加密提供认证（保证integrity</strong></p>
+<p>带有关联数据的身份验证加密 (AEAD) 操作模式</p>
+<p>使用 Encrypt then MAC 方法</p>
+<p>可以在其内部组件中使用具有 128 位块大小（例如 AES）的块密码</p>
+<p>使用计数器模式的变体</p>
+<p>提供机密数据的真实性（对称概念）（每次调用最多 64 GB）</p>
+<p>在 NIST SP 800 38d 中标准化 GCM 加密：</p>
+<ul>
+<li><p>加密机密数据</p>
+</li>
+<li><p>在机密数据和</p>
+</li>
+<li><p>任何额外的非机密数据</p>
+</li>
+</ul>
+<p>安全考虑：IV 不能被重用（在相同的密钥下）否则消息的保密性可能会受到损害</p>
+<p><strong>AES Counter Mode with CBC MAC (CCM)</strong></p>
+<p>具有关联数据的经过身份验证的加密</p>
+<p>使用 MAC 然后加密方法</p>
+<p>加密计数器模式</p>
+<p>用于身份验证的 CBC MAC</p>
+<p>在 RFC 3610 中提出，在 NIST SP 800 38c 中标准化</p>
+<p>Nonce (IV) 不得重复（在同一密钥下），否则会危及安全性</p>
+<h2 id="W4-数理-Number-Theory"><a href="#W4-数理-Number-Theory" class="headerlink" title="W4: 数理 Number Theory"></a>W4: 数理 Number Theory</h2><h3 id="整数分解问题"><a href="#整数分解问题" class="headerlink" title="整数分解问题"></a>整数分解问题</h3><p>b|a 表示a可被b整除(abs(a)&gt;=abs(b))。quotient为商。</p>
+<p>质数是数理的中心，只被1和自身整除的数。非质且&gt;1的数称为composite合数。<br>factor a num分解一个数。factorisation质数分解。</p>
+<p>给定一个大正整数n=p·q，找到也都是大正整数且为质数的p和q。</p>
+<h4 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h4><p>GCD(a,b)表示同时能将a，b整除的最大整数。=1表示ab互质。</p>
+<p>Euclidean Algorithm（欧几里得算法，辗转相除法）<br>就是质数分解之后挑出共有的部分。</p>
+<h3 id="群，环，域的概念"><a href="#群，环，域的概念" class="headerlink" title="群，环，域的概念"></a>群，环，域的概念</h3><img src="/post/fit5163-sec-notes/image-20210905161547567.png" class="" title="image-20210905161547567">
+
+<h4 id="群"><a href="#群" class="headerlink" title="群"></a>群</h4><p>具有二元运算·的一组元素 G 将 G 中的每个有序元素对 (a,b) 与 G 中的元素 (a·b) 相关联，从而遵守以下公理</p>
+<ul>
+<li>(A1) Closure 闭包：<blockquote>
+<p>如果 a 和 b 属于 G，则 a·b 也属于 G</p>
+</blockquote>
+</li>
+<li>(A2) Associative 相关：<blockquote>
+<p>a·(b·c) = (a·b)·c 对于 G 中的所有 a, b, c</p>
+</blockquote>
+</li>
+<li>(A3) Identity element 单位元：<blockquote>
+<p>G 中有一个元素 e 使得 a·e = e·a = a 对于 G 中的所有 a</p>
+</blockquote>
+</li>
+<li>(A4) Inverse element 逆元素：<blockquote>
+<p>对于 G 中的每个 a，在 G 中有一个元素 a’ 使得 aa’ = a’  a = e</p>
+</blockquote>
+</li>
+<li>[Abelian Group] (A5) Commutative 交换律：<blockquote>
+<p>a·b = b·a 对于所有 a, b 在 G</p>
+</blockquote>
+</li>
+</ul>
+<p>(ℤ, +) 是群吗？<br>– (A1) 两个整数之和得到一个整数，即𝑎 + 𝑏 ∈ ℤ 对于任何𝑎，𝑏 ∈ ℤ<br>– (A2) a + (𝑏 + 𝑐) = (𝑎 + 𝑏) + 𝑐 对于任何整数𝑎, 𝑏, 𝑐 ∈ℤ<br>– (A3) 0 是关于加法的单位元素<br>– (A4) 对于任何整数 𝑎 ∈ ℤ，−𝑎 是 𝑎 的逆<br>其也为Abelian，因为 𝑎 + 𝑏 = 𝑏 + 𝑎 对于任何整数𝑎，𝑏 ∈ ℤ</p>
+<h4 id="Rings-环"><a href="#Rings-环" class="headerlink" title="Rings 环"></a>Rings 环</h4><p>有时用 {R , + , × } 表示的环 R 是一组元素，有两个二元运算，称为加法addition 和乘法multiplication，这样对于 R 中的所有 a ， b ， c 都遵守以下公理：</p>
+<ul>
+<li><p>[A1-A5]</p>
+</li>
+<li><p>(M1) Closure under multiplication 乘法闭包：如果 a 和 b 属于 R ，则 ab 也在 R 中</p>
+</li>
+<li><p>(M2) 乘法的结合性：对于 R 中的所有 a  b  c,  a(bc) = (ab)c </p>
+</li>
+<li><p>分配法：对于 R 中的所有 a , b , c</p>
+<ul>
+<li>a (b + c) = ab + ac </li>
+<li>(a + b) c = ac + bc </li>
+</ul>
+</li>
+</ul>
+<p>本质上，环是一个集合，我们可以在其中进行加减 [a - b=a + (-b )] 和乘法而不离开该集合</p>
+<p>Commutative Ring 可交换环: </p>
+<p>• 如果环满足以下附加条件，则称其为可交换环：<br>▪ (M4) 乘法的交换性：对于R内所有a b, ab = ba</p>
+<p> Integral Domain 积分域</p>
+<p>积分域是遵循以下公理的交换环。<br>▪ (M5) 乘法恒等式：对于 R 中的所有 a, R 中有一个元素 e’ 使得 a e’ = e’a = a<br>▪ (M6) 无零除数：如果 a , b 在 R 中且 ab = 0，则 a = 0 或 b = 0</p>
+<h4 id="Field-域"><a href="#Field-域" class="headerlink" title="Field 域"></a>Field 域</h4><p>域 F 有时用 {F, +,×} 表示，是一组具有两个二元运算（称为加法和乘法）的元素，因此对于 F 中的所有 a、b、c，都遵循以下公理：</p>
+<ul>
+<li>[A1-M6]</li>
+<li>(M7) 乘法逆：对于 F 中的每个 a，除了 0，在 F 中存在一个元素 $a^{-1}$ 使得  $aa^{-1}=a^{-1}a=1$</li>
+</ul>
+<p>• 本质上，域是一个集合，我们可以在不离开集合的情况下进行加、减、乘、除运算。 除法定义如下： $a/b = ab^{-1}$</p>
+<h4 id="Modular-Arithmetic-算术取模"><a href="#Modular-Arithmetic-算术取模" class="headerlink" title="Modular Arithmetic 算术取模"></a>Modular Arithmetic 算术取模</h4><p>如果a是整数，n是正整数，我们定义模算子“a mod n”为a除以n的余数； 整数 n 称为模数<br>如果 (a mod n) = (b mod n) ，则两个整数 a 和 b 被称为congruent modulo n （模 n 全等）；等价于 a ≡ b(mod n)<br>b 被称为 a mod n 的余数<br>– a = qn + b<br>– 通常选择最小的正余数作为余数<br>– 过程被称为modulo reduction 模归约</p>
+<p>(𝒎𝒐𝒅 𝒏) 运算符将所有整数映射到整数集：{0, 1, … , 𝑛 − 1}<br>• 我们将ℤ𝑛 = {0, 1, … , 𝑛 − 1} 定义为残差集<br>• ℤ𝑛 形成一个交换环</p>
+<p>注意一些特殊性<br>• 如果 (𝒂 + 𝒃) ≡ (𝒂 + 𝒄) 𝒎𝒐𝒅 𝒏 那么𝒃 ≡ 𝒄 (𝒎𝒐𝒅 𝒏)<br>• 但是如果 (𝒂 × 𝒃) ≡ (𝒂 × 𝒄) (𝒎𝒐𝒅 𝒏) 那么 𝒃 ≡ 𝒄 (𝒎𝒐𝒅 𝒏) 仅当𝒂 相对质数于𝒏</p>
+<img src="/post/fit5163-sec-notes/image-20210905162222378.png" class="" title="image-20210905162222378">
+
+<p>Mod 8 Addition</p>
+<img src="/post/fit5163-sec-notes/image-20210905162536045.png" class="" title="image-20210905162536045">
+
+<p>Mod 8 Multiplication</p>
+<img src="/post/fit5163-sec-notes/image-20210905162552183.png" class="" title="image-20210905162552183">
+
+
+
+<h4 id="Finite有限-Galois域"><a href="#Finite有限-Galois域" class="headerlink" title="Finite有限/Galois域"></a>Finite有限/Galois域</h4><p>有限域在密码学中发挥关键作用<br>有限域中的<strong>元素数</strong>必须是<strong>素数的幂</strong> $p^n$ (n 为正整数)<br>也被称为“Galois”域，以纪念首先研究有限域的数学家<br>• 记为 $GF(p^n)$<br>• 特别是，我们经常使用以下域：<br>– $GF(p)$ [本课程最常用的]<br>– $GF(2n)$</p>
+<p>GF(p) 是整数 {0,1, … , p-1} 的集合，其具有以 p 为模的算术运算，</p>
+<p>因为有乘法逆（Zp 中的所有整数都与 p 互质），这些形成一个有限域<br>因此算术“表现良好”，可以在不离开域 GF(p) 的情况下进行加法、减法、乘法和除法（除了被零除，这是未定义的）</p>
+<p>GF(7) Multiplication</p>
+<img src="/post/fit5163-sec-notes/image-20210905163049159.png" class="" title="image-20210905163049159">
+
+<p>Modular Exponentiation 模幂运算</p>
+<p>假设我们要计算 $a^x \mod n$的大值𝒙<br>• 选项 1：计算 𝒂 ⋅ 𝒂 ⋯ 𝒂 然后 mod n: 非常低效，需要 𝑥 步操作<br>• 选项2：使用<strong>平方乘法算法</strong>！非常高效，只需要 $log_2{x}$ 操作</p>
+<p>平方乘法算法</p>
+<ol>
+<li>找出最接近 𝒙 的 2 的幂，用 𝒓 表示（不应超过𝑥）</li>
+<li>计算重复平方模 𝒏 到 $a^r$</li>
+<li>将$a^x\ mod\ n$ 相关幂相乘</li>
+</ol>
+<img src="/post/fit5163-sec-notes/image-20210905163551848.png" class="" title="image-20210905163551848">
+
+<h3 id="Fermat’s-and-Euler’s-Theorems-费马和欧拉定理-𝝓-n"><a href="#Fermat’s-and-Euler’s-Theorems-费马和欧拉定理-𝝓-n" class="headerlink" title="Fermat’s and Euler’s Theorems 费马和欧拉定理 𝝓(n)"></a>Fermat’s and Euler’s Theorems 费马和欧拉定理 𝝓(n)</h3><p>费马小定理<br>• $a^{p-1} ≡ 1 \pmod p$<br>– 其中 p 是素数<br>– a 是一个正整数并且<br>– gcd(a,p)=1<br>另一种形式是： $a^p ≡ a \pmod p$<br>在公钥密码学中扮演重要角色</p>
+<p>欧拉的 Totient 函数 𝝓(𝒏)<br>• 做算术取模时 𝑛<br>• 余数的完整集合是：{0,1, … , 𝑛-1}<br>• 减少的余数集是那些与 𝑛 相对质数的数字（余数）<br>– 例如，对于 n=10，<br>– 完整的余数集是 {0,1,2,3,4,5,6,7,8,9}<br>– 削减余数集是 {1,3,7,9}<br>• 削减余数集合中的元素数量 称为欧拉 Totient 函数 𝝓(𝑛)</p>
+<img src="/post/fit5163-sec-notes/image-20210905164150831.png" class="" title="image-20210905164150831">
+
+<p>要计算 𝝓(𝑛) 需要计算要排除的余数数量</p>
+<p>一般需要质因数分解，但<br>– 对于 𝑝 (𝑝 质数) ：𝝓(𝑝) = 𝑝 − 1<br>– 对于 𝑝𝑞 (𝑝 和 𝑞 为质数) ：𝝓(𝑝𝑞) = (𝑝 − 1)(𝑞 − 1)<br>例如<br>𝝓(37) = 36<br>𝝓(21) = 𝝓(3 × 7) = (3– 1) × (7– 1) = 2 × 6 = 12</p>
+<p>欧拉定理<br>• 费马小定理的推广<br>• $a^{𝝓(n)} = 1 (mod\ n)$ 对于任何 a,n，其中 gcd(a,n)=1<br>例如<br>a=3；n=10； 𝝓(10)=4；因此 $3^4$ = 81 = 1 mod 10<br>a=2；n=11； 𝝓(11)=10；因此 $2^{10}$ = 1024 = 1 mod 11</p>
+<p><strong>使用欧拉定理求乘法逆</strong>: $a^{-1} = a^{𝝓(n)-1} mod\ n$</p>
+<p>中国余数定理 (CRT)</p>
+<p>如果 𝑛1, … , 𝑛𝑘 是成对互质，并且如果 𝑎1,…, 𝑎𝑘 是任何整数，则系统：</p>
+<p>$x ≡ a_1 (mod\ n_1)$ </p>
+<p>…</p>
+<p>$x ≡ a_k (mod\ n_k)$</p>
+<p>有一个或多个解决方案。</p>
+<p>解决方案：</p>
+<ol>
+<li>得到 $N = n_1 * ⋯ * n_k$</li>
+<li>得到 $N_i = \frac{N}{n_i}$</li>
+<li>得到 $Y_i$，其中 $ Y_i * N_i ≡ 1\ mod\ n_i$<br> 然后$x ≡ a_1 * N_1 ∗ Y_1 + … +  a_n * N_n ∗ Y_n\ mod\ N$</li>
+</ol>
+<img src="/post/fit5163-sec-notes/image-20210905165722021.png" class="" title="image-20210905165722021">
+
+<h3 id="Primitive-Roots-原始根"><a href="#Primitive-Roots-原始根" class="headerlink" title="Primitive Roots 原始根"></a>Primitive Roots 原始根</h3><p>原始根<br>• 从欧拉定理有一个 𝝓(n)mod n=1<br>• 考虑一个 m=1 (mod n), GCD(a,n)=1<br>– 存在于 m = 𝝓(n) 但可能更小<br>– 一旦幂达到 m，循环将重复<br>• 如果最小的是 m = 𝝓(n) 则 a 称为原始根<br>• 如果 n 是素数，则原始根的连续幂“生成”所有余数 mod n<br>• 这些很有用，但相对难以找到</p>
+<h3 id="离散对数问题-DLP"><a href="#离散对数问题-DLP" class="headerlink" title="离散对数问题 (DLP)"></a>离散对数问题 (DLP)</h3><p>• 另一个核心密码问题</p>
+<p>令𝑮 =&lt; 𝒂 &gt; 是一个cyclic group循环群</p>
+<p><strong>DLP</strong>：给定𝒂 和随机𝒃 ∈ 𝑮，找到𝒙 使得</p>
+<p>$a^x = b$</p>
+<p>由于𝒂 生成𝑮，我们知道一定有这样一个𝒙</p>
+<p>在实践中我们要求群的order是大的, 即，$|𝐺| &gt; 2^{128}$</p>
+<p>Miller-Rabin Algorithm</p>
+<p>通常用于测试大量数字是否为质数<br>算法是：TEST (n)</p>
+<ol>
+<li>求整数 k,q,k&gt;0，q为奇数，使得$(n-1)=2^kq$</li>
+<li>选择一个随机整数a, 1&lt;a&lt;n-1 ;</li>
+<li>if $a^q\ mod\ n = 1$ then return (“无结果”)；</li>
+<li>当 j = 0 做 k – 1 </li>
+<li>if $(a^{2jq}\ mod\ n = n – 1)$ then return (“无结果”) ;</li>
+<li>返回（“复合数”）</li>
+</ol>
+<img src="/post/fit5163-sec-notes/image-20210905170859083.png" class="" title="image-20210905170859083">
+
+<h2 id="W5-amp-W6-非对称加密-Asymmetric-Cryptography"><a href="#W5-amp-W6-非对称加密-Asymmetric-Cryptography" class="headerlink" title="W5&amp;W6: 非对称加密 Asymmetric Cryptography"></a>W5&amp;W6: 非对称加密 Asymmetric Cryptography</h2><p>副标题是New era of secure communications(加密传输的新纪元)</p>
+<p>DSA&amp;ECDSA: 喊我呢？<br>（其实并没有出现，这俩主要用于数字签名，然而课程专注于的是加密所以是RSA</p>
+<p>RSA</p>
+<p>私有/对称密钥密码的问题<br>• 要使用私钥密码（例如 DES/AES）进行安全通信，首先必须在发送方和接收方之间共享密钥。问题：如果他们以前从未见过面怎么办？<br>• 如果爱丽丝希望与 100 个不同的人进行保密通信，她需要保留 100 个不同的密钥<br>− 一般而言，𝑛 不同的密钥与 𝑛 不同的各方进行安全通信<br>• 如果任何密钥被泄露，通信就会受到损害<br>• 不保护 Alice（发件人）免遭 Marvin（攻击者）伪造消息并声称是 Alice（发件人）发送的</p>
+<p>公钥密码系统原理</p>
+<p>公钥密码学的概念源于试图解决与对称加密相关的两个最困难的问题：</p>
+<ul>
+<li>Key distribution 密钥分发</li>
+<li>Digital signatures 数字签名</li>
+</ul>
+<p>公钥/双密钥/非对称密码术涉及使用两个密钥（一个密钥对）：</p>
+<ul>
+<li>任何人都可能知道的<strong>公钥</strong>，可用于加密消息和验证签名</li>
+<li><strong>私钥</strong>，仅由所有者拥有，用于解密消息和签署（创建）消息（签名）</li>
+<li>但是，不是两个独立的Key！</li>
+</ul>
+<p>不对称，是因为各方不平等，因为 加密消息 或 验证签名 的人不能分别 解密消息 或 创建签名</p>
+<p>理想的功能</p>
+<p>• 攻击者无法从公钥中找出私钥（秘密）。<br>• Alice 和 Bob 无需事先分发共享密钥！<br>• 每个用户只需要一对公钥和私钥！( Alice 可以用一对钥匙与 100+ 人交流！！</p>
+<p>公钥要求(必须满足的条件：</p>
+<ul>
+<li>一方生成密钥对（公钥$PU_b$，私钥$PR_b$）在计算上很容易</li>
+<li>发送者 A 知道公钥和要加密的消息，在计算上很容易生成相应的密文，C = E($PU_b$, M)</li>
+<li>接收者 B 使用私钥解密生成的密文以恢复原始消息在计算上很容易，D[$PR_b$, E($PU_b$, M)] = M</li>
+<li>对于知道公钥 $PU_b$的对手来说，确定私钥 $PR_b$ 在计算上是<strong>不可行的</strong></li>
+<li>对于知道公钥和密文的对手来说，恢复原始消息 M 在计算上是<strong>不可行的</strong></li>
+</ul>
+<p>公钥密码系统的应用</p>
+<p>• 公钥密码系统可用于：</p>
+<ul>
+<li>Encryption/decryption: </li>
+<li>Digital signature: 发件人用他的私钥“签署”一条消息</li>
+<li>Key exchange: 双方合作交换会话密钥</li>
+</ul>
+<p>• 一些算法适用于所有 3 种应用程序，而其他算法只能用于一两个应用程序</p>
+<img src="/post/fit5163-sec-notes/image-20210905200105145.png" class="" title="image-20210905200105145">
+
+
+
+<p>单向函数</p>
+<p>单向函数是将一个域映射到一个范围，使得每个函数值都有一个唯一的逆函数，条件是函数的计算很容易，而逆函数的计算是不可行的<br>$Y = f(X)$ 容易； $X = f^{–1}(Y)$ 不可行（实践中很难）</p>
+<p>trap-door（活板门）单向函数是一系列可逆函数 fk，使得<br>− $Y = fk(X)$ 容易，如果 k 和 X 已知<br>− $X = fk^{–1}(Y)$ 容易，如果 k 和 Y 已知<br>− $X = fk^{–1}(Y)$ 不可行，如果 Y 已知，但 k 未知</p>
+<p>实用的公钥方案取决于合适的trap-door单向函数</p>
+<p>如何构建公钥密码系统？</p>
+<p>今天的公钥系统依赖于两个基本的数论假设（问题）：</p>
+<ul>
+<li>整数分解问题（IFP）示例：RSA </li>
+<li>离散对数问题 (DLP)  示例：Diffie-Hellman (DH) 密钥交换，ElGamal 加密</li>
+</ul>
+<h4 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h4><p>它是一种密码，其中明文和密文是 0 到 n – 1 之间的整数，其中某些 n<br>− n 的典型大小为 2048 位（今天，必须至少使用 2048 位才能获得可靠的安全性<br>• n 称为 RSA 模数</p>
+<p>• RSA 使用带指数的表达式<br>• 明文以块为单位加密，每个块的二进制值小于某个数 n<br>• 加密和解密的形式如下，对于一些明文块 M 和密文块 C<br>$C = M^e \mod n$<br>$M = C^d \mod n = (M^e)^d \mod n = M^{ed} \mod n$<br>• 发送方和接收方都必须知道 n 的值<br>• 发送者知道 e 的值，只有接收者知道 d 的值<br>• 这是一种公钥加密算法，公钥为PU={e,n}，私钥为PR={d}</p>
+<p>Key Generation</p>
+<p>选择 p, q p 和 q 都是素数，p ≠ q</p>
+<p>计算 $n = p \times q$</p>
+<p>计算 $𝝓(n) = (p – 1)(q – 1)$</p>
+<p>选择整数 e:  $gcd(𝝓(n), e) = 1; 1 &lt; e &lt; 𝝓(n)$</p>
+<p>计算 d: $d ≡ e^{-1}(\mod 𝝓(n))$ </p>
+<p>简单来说就是(e * d) mod n =1,倒推一个d （e 和 d 的值很大，否则很容易受到蛮力攻击和其他形式的密码分析</p>
+<p>公钥 PU = {e, n}</p>
+<p>私钥 PR = {d}</p>
+<p>Encryption</p>
+<p>明文：M &lt; n (消息 m 必须是范围 [1, n] 之间的整数，可以通过将明文分割成小于n的块来实现</p>
+<p>密文：$C = M^e \mod n$</p>
+<p>Decryption</p>
+<p>密文：C</p>
+<p>明文：$M = C^d \mod n$</p>
+<p>为什么 RSA 有效<br>欧拉定理：$a^{𝝓(n)} mod n = 1$，其中 gcd(a,n)=1<br>在 RSA 中有：<br>− $n=p \times q$<br>− $𝝓(n)=(p-1)(q-1)$<br>− $e \times d =1 \mod 𝝓(n)$ → $e \times d=1+k \times 𝝓(n)$对于某个整数 k<br>• 因此：$C^d = (M^e)^d = M^{ed} = M^{1+k𝝓(n)} = M^1(M^{𝝓(n)})^k \mod n = M^1*(1)^k = M^1 = M \mod n$</p>
+<p>为了加密长消息，我们可以使用混合密码系统</p>
+<ol>
+<li>使用非对称密码（如 RSA）就对称密钥达成一致<br>− 例如，一个用户生成一个随机对称密钥，用另一方的公钥对其进行加密并通过<br>− 或者双方运行密钥协商协议，例如 Diffie-Hellman 协议（下一讲）<br>2）使用对称密码（如AES）使用商定的对称密钥在其余部分进行加密<br>无需事先达成密钥协议！</li>
+</ol>
+<p>平方和乘法算法<br>• 加密和解密都涉及求幂<br>$c = m^e (\mod n)$</p>
+<p>$m = c^d (\mod n)$<br>可以使用平方和乘法算法计算取幂</p>
+<ol>
+<li>将指数转换为二进制。</li>
+<li>对第一个1，只需列出数字</li>
+<li>对于每个随后的0，做<strong>平方</strong>运算</li>
+<li>对于每个随后的1，做<strong>平方和乘法</strong>运算</li>
+</ol>
+<p> 示例：𝑵𝟑𝟕，仅 7 个步骤</p>
+<img src="/post/fit5163-sec-notes/image-20210905204328085.png" class="" title="image-20210905204328085">
+
+<p>使用公钥高效操作</p>
+<p>• 为了加快使用公钥的 RSA 算法的操作，通常对 e 进行特定选择<br>• 最常见的选择是 65537 ($2^{16} + 1$)<br>• 另外两个流行的选择是 e=3 和 e=17<br>− 这些选择中的每一个都<strong>只有两位 1</strong>，因此执行幂运算所需的<strong>乘法次数被最小化</strong><br>− 使用非常小的公钥，例如 e = 3，RSA 变得容易受到简单攻击<br>− 所以，e=3（甚至 e=17）不是一个安全的选择！</p>
+<p>使用私钥高效操作<br>• 解密使用幂运算为 d 提供幂<br>− 较小的 d 值容易受到蛮力攻击和其他形式的密码分析<br>• 可以使用中国剩余定理 (CRT) 来加速解密计算<br>− 计算$d_p = d \mod (p-1)$和$d_q =d \mod (q-1)$<br>− 解密𝐶：计算 $M_p = C^{d_p} \mod p$; 计算$M_q = C^{d_q}\mod q$<br>由于</p>
+<p>$M ≡M_p \mod p$</p>
+<p>$M≡M_q \mod q$</p>
+<p>我们可以通过 𝑀𝑝 &amp; 𝑀𝑞使用 CRT 来找到 𝑀 使得 $M=C^d \mod n$ （比直接快~4 倍</p>
+<p>if p=5, q=11, e=3, d=27, C=52 -&gt; $M=C^d \pmod n = 52^{27} \mod 55$</p>
+<p>快速计算M:</p>
+<p>$d_p=27 \mod (5-1)= 3$ ;$d_q= 27 \mod (11-1)=7$</p>
+<p>$M_p=52^{3} \mod 5 = 3$ ;$M_q=52^{7} \mod 11=2$ </p>
+<p>得到</p>
+<p>$M ≡ 3 \mod 5 $</p>
+<p>$M ≡ 2 \mod 11 $</p>
+<p>N=pq=55; </p>
+<p>N_1=N/5=11; </p>
+<p>N_2=55/11=5; </p>
+<p>Y1*11 ≡ 1 mod 5; Y1=(1+5*2)/11=1; </p>
+<p>Y2*5 ≡ 1 mod 11;Y2=(1+11*4)/5=9;</p>
+<p>M ≡ (3*11*1 + 2*5*9) mod 55≡(101)mod 55=13</p>
+<p>M = 13</p>
+<p>攻击RSA</p>
+<p>Brute force</p>
+<p>Mathematical attacks: 有几种方法，都等价于对两个素数的乘积进行因式分解</p>
+<p>Side-channel attacks, e.g., timing attacks: 这取决于解密算法的运行时间</p>
+<p>Hardware fault-based attack: 这涉及在生成数字签名的处理器中引发硬件故障</p>
+<p>Chosen ciphertext attacks: 这种类型的攻击利用了 RSA 算法的特性</p>
+<p>整数分解问题<br>• RSA 的安全性严重依赖于整数因式分解问题<br>• 我们可以从数学上确定 3 种攻击 RSA 的方法：<br>− 将 n 分解为其两个质因数。 这可以计算 ø(n) = (p – 1) x (q – 1)，进而确定 d = e-1 (mod ø(n))<br>− 直接确定 ø(n) 而不先确定 p 和 q。 同样，这可以确定 d = e-1(mod ø(n))<br>− 不先确定 ø(n) 直接确定 d</p>
+<p>侧信道攻击：定时攻击<br>• 窥探者可以通过跟踪计算机解密消息所需的时间来确定私钥<br>• 利用算法运行时间的密钥依赖性<br>• 示例：平方和乘法算法</p>
+<ol>
+<li>将指数转换为二进制。</li>
+<li>对于前1，只需列出数字</li>
+<li>对于每个随后的0，做平方运算</li>
+<li>对于每个随后的 1，做平方和乘法运算<br>• 该攻击不仅适用于 RSA，还适用于其他密码系统</li>
+</ol>
+<p>时序攻击对策<br>常数取幂时间<br>• 确保所有求幂在返回结果之前花费相同的时间； 这是一个简单的修复，但确实会降低性能<br>随机延迟<br>• 通过向取幂算法添加随机延迟以混淆时序攻击，可以获得更好的性能</p>
+<p>基于故障的攻击<br>• 对生成 RSA 数字签名的处理器的攻击<br>− 通过降低处理器的功率来导致签名计算中的错误<br>− 故障导致软件产生无效签名，然后攻击者可以分析这些签名以恢复私钥<br>• 攻击算法涉及引入单位错误并观察结果<br>• 攻击者需要物理访问目标机器和直接控制处理器输入功率的能力</p>
+<p>选择密文攻击 (CCA)<br>• CCA：对手 Eve 选择一些密文，然后给出相应的明文，用目标的私钥解密<br>− 假设目标消息是 t，Eve 只知道它的密文 𝐶,𝑤ℎ𝑒𝑟𝑒𝐶 =𝑡𝑒 mod n<br>− Eve 可以选择 2 作为明文，得到 𝐶𝑎 =2𝑒𝑚𝑜𝑑𝑛，求 𝐶𝑏 =𝐶∗𝐶𝑎 = 2∗𝑡 𝑒𝑚𝑜𝑛的明文<br>− 给定 𝑚=2∗𝑡，t=m/2<br>• 为应对此类攻击，RSA Security Inc. 建议使用称为最佳非对称加密填充 (OAEP) 的程序修改明文</p>
+<p>私钥密码<br>• 优势:  </p>
+<ul>
+<li>使用成本低; </li>
+<li>快; </li>
+<li>提供低成本硬件芯片</li>
+</ul>
+<p>• 弱点</p>
+<ul>
+<li>密钥分发是个问题</li>
+<li>安全所需的密钥数量</li>
+<li>一对用户之间安全通信所需的密钥数量与用户数量成正比</li>
+</ul>
+<p>公钥密码<br>• 优势</p>
+<ul>
+<li>密钥分发不是问题</li>
+<li>与 n 个用户通信只需要 2 个密钥</li>
+</ul>
+<p>• 弱点</p>
+<ul>
+<li>使用相对昂贵</li>
+<li>相对较慢</li>
+<li>硬件芯片不可用或成本相对较高</li>
+</ul>
+<h3 id="Key-management"><a href="#Key-management" class="headerlink" title="Key management"></a>Key management</h3><p>Key<br>• 用于一对方（人员、系统等）之间对称加密的单个密钥<br>• 一对密钥（公共和私人）用于您和任何其他人（人、系统）之间的非对称加密。<br>• 公钥加密有助于解决对称加密的密钥分发问题<br>– 使用公钥密码术来分发秘密密钥<br>– 公钥的分发</p>
+<h4 id="Distribution-of-public-keys"><a href="#Distribution-of-public-keys" class="headerlink" title="Distribution of public keys"></a>Distribution of public keys</h4><p>公钥分发<br>• 公告<br>• 公开目录<br>• 公钥授权和证书</p>
+<p>用户将公钥分发给收件人或向整个社区广播<br>– 例如 将密钥附加到电子邮件或发布到新闻组或电子邮件列表<br>• 主要弱点是伪造/制造（伪装、冒充）攻击<br>– 任何人都可以创建一个声称是其他人的密钥并广播它<br>– 在发现伪造之前，他们可以伪装成声称的用户</p>
+<p>为了防止攻击：<br>– 在 Bob 为 Alice 加密消息之前，他必须确保他拥有 Alice 的正确公钥（而不是伪造的）。<br>– Bob 需要一种方法来测试任何将 Alice 的公钥通知给 Bob 的“Alice 的密钥消息”的真实性。<br>– 除了 Alice 之外，没有人应该能够产生这样的消息，以便它通过 Bob 的测试。</p>
+<p>用于实现公钥完整性的一种加密工具是“证书颁发机构”（Certificate Authorities，CA）</p>
+<p>公开目录<br>• 可以通过向公共目录注册密钥来获得更高的安全性<br>• 目录必须具有以下属性信任：<br>– 包含 {name, public-key} 条目<br>– 参与者通过目录安全注册<br>– 参与者可以随时更换钥匙<br>– 目录定期发布<br>– 可以电子方式访问目录<br>• 公共目录的维护和分发必须由某个受信任的实体或组织负责<br>• 仍然容易被篡改或伪造</p>
+<p>公钥证书<br>• 证书允许在不实时访问公钥授权的情况下交换密钥<br>• 证书将身份与公钥绑定，证明公钥的所有权（通常带有其他信息，例如有效期、使用权等<br>• 所有内容均由受信任的公钥或证书颁发机构 (CA) 签名<br>• 任何知道证书颁发机构 (CA) 公钥的人都可以验证<br>• 大多数网络安全应用程序中使用的 X.509 证书</p>
+<p>信任链：实际中存在多个Root CA。如果你信任一个Root CA，那么你就会信任它生成的证书</p>
+<h4 id="Diffie-Hellman-key-exchange"><a href="#Diffie-Hellman-key-exchange" class="headerlink" title="Diffie-Hellman key exchange"></a>Diffie-Hellman key exchange</h4><p>回忆前面提到的混合系统<br>– 公钥算法很慢<br>– 我们通常使用对称加密来保护消息内容<br>– 使用公钥算法共享对称密钥</p>
+<p>协商合适的<strong>会话密钥</strong>的替代方法：Diffie-Hellman (DH) 密钥交换<br>– 密钥协商方案可以建立一个只有参与者知道的公共密钥<br>– 依赖于<strong>离散对数问题 (DLP)</strong></p>
+<p>离散对数问题 (DLP)<br>• 令𝑮是一个带有生成元𝒈的循环群： 𝐺 =&lt;𝑔&gt;<br>• DLP：给定𝒈、𝑮和一些𝒉∈𝑮，很难找到𝒙使得𝒈𝒙 =𝒉。<br>– 一定有这样的𝒙，因为𝐺中的每一个元素都可以写成𝑔的幂</p>
+<p>• 可以在任何组中定义 DLP<br>• 两种著名方案：</p>
+<ol>
+<li>在 ℤ𝑛 中（更准确地说，是它的一个循环子群）<br>-&gt; 由于安全要求需要大𝑛<br>-&gt; 较大的参数 → 效率较低</li>
+<li>在“椭圆曲线”组中（不就是ECDH） -&gt; 更小的参数→更高效</li>
+</ol>
+<p>目前，我们将重点关注ℤ𝒏</p>
+<p>Diffie-Hellman (DH) 密钥交换</p>
+<p>所有用户都认可的全局参数：<br>– 大素数整数（或多项式）p<br>– g 是p 的原始根</p>
+<p>用户生成自己的密钥</p>
+<ol>
+<li>选择一个密钥（数字）：<br>-&gt; Alice:𝑎&lt;𝑝<br>-&gt; Bob：𝑏&lt;𝑝</li>
+<li>计算并发布他们各自的<strong>公钥</strong>：<br>-&gt; Alice:$y_A = g^a \mod p$<br>-&gt; Bob:$y_B = g^b \mod p$</li>
+<li>计算共享<strong>会话密钥 K</strong><br>-&gt; Alice: $K = (y_B)^a = g^{ab} \mod p$<br>-&gt; Bob: ：$K = (y_A)^b = g^{ab} \mod p$<br>K 在 Alice 和 Bob 之间的对称加密中用作会话密钥</li>
+</ol>
+<p>中间人攻击<br>由于DH方案中Alice和Bob之间没有身份验证，攻击者可以伪装成Alice/Bob来创建会话密钥并获取Alice和Bob之间的所有通信消息</p>
+<p>哈希函数<br>• 哈希函数 H 是一种单向函数，它接受消息 M 并产生固定大小（例如 256 位）的输出（称为消息摘要或哈希值或指纹）<br>– 很容易为任何消息 M 计算 h=H(M)<br>• 单向性质：给定 h，找到 x 使得 H(x)=h 在计算上是不可行的<br>• 抗碰撞性：找到任何一对 (x, y) 使得 H(y)=H(x) 在计算上也不可行<br>• 确定性：相同的消息总是产生相同的散列</p>
+<h3 id="Hash-function"><a href="#Hash-function" class="headerlink" title="Hash function"></a>Hash function</h3><p>哈希函数<br>• 哈希函数仅将消息（不需要密钥）作为输入来生成消息摘要<br>– 任何人都可以计算任何值的哈希值！<br>• 如果输入仅相差 1 位，则输出将完全不同！<br>• 可视为确定性伪随机函数（生成随机数）<br>• 示例包括 MD5、SHA-1、SHA-256 等。</p>
+<p>哈希函数用途</p>
+<ol>
+<li><p>常用于创建单向密码文件</p>
+<ul>
+<li>当用户输入密码时，将该密码的哈希值与存储的哈希值进行比较以进行验证</li>
+<li>大多数操作系统都使用这种密码保护方法</li>
+</ul>
+</li>
+<li><p>可用于入侵和病毒检测</p>
+<ul>
+<li>为系统上的每个文件存储 H(F) 并保护散列值</li>
+<li>稍后可以通过重新计算 H(F) 来确定文件是否已被修改</li>
+<li>入侵者需要在不改变 H(F) 的情况下改变 F</li>
+</ul>
+</li>
+<li><p>可用于构造伪随机函数 (PRF) 或伪随机数生成器 (PRNG)</p>
+<ul>
+<li>基于散列的 PRF 的一个常见应用是生成对称密钥</li>
+</ul>
+</li>
+</ol>
+<p>要求和安全<br>原像(Preimage)<br>• x 是哈希值 h 的原像 h = H(x) 是一个数据块，其哈希函数，使用函数 H，是 h<br>• 因为 H 是多对一映射，对于任何给定的哈希值 h，通常会有多个原像Preimage<br>碰撞<br>• 在我们有 x ≠ y 且 H(x) = H(y) 时发生<br>• 因为我们使用散列函数来保证数据完整性，所以冲突显然是不可取的</p>
+<p>攻击</p>
+<ul>
+<li>Brute-Force Attacks</li>
+<li>Cryptanalysis （MD5 and SHA-1 are  broken by cryptanalysis,）</li>
+</ul>
+<p>Birthday Attacks<br>• “如果有 23 人的房间，他们的生日完全随机，则该房间中的任何 2 个人有 50 到 50 次生日相同的机会”<br>• 生日悖论：如果你从一组𝑁元素中随机选择大约 𝑁元素，你很可能会选择相同的元素两次<br>• 生日攻击：对手希望找到两个产生相同哈希函数的消息或数据块<br>• 生日攻击的工作原理：</p>
+<ul>
+<li>随机生成一系列明文X1,X2…</li>
+<li>对每个Xi计算hash测试是否存在相同</li>
+<li>当碰撞就停</li>
+</ul>
+<h3 id="Advanced-asymmetric-cryptosystems"><a href="#Advanced-asymmetric-cryptosystems" class="headerlink" title="Advanced asymmetric cryptosystems"></a>Advanced asymmetric cryptosystems</h3><p>传统的公钥密码学需要一个基础设施（有CA的存在）来确保公钥的真实性<br>• 它还需要昂贵的通信和计算（获取证书 + 验证证书）<br>• 不需要这种昂贵过程的新密码系统——基于身份的加密 (IBE)</p>
+<p>• IBE，每个用户都由一个身份代表——可以是电子邮件地址、姓名、身份证号码等。<br>• 加密只需要收件人的身份（例如电子邮件地址）<br>• 私钥生成器 (PKG)，受信任的第 3 方，发布所有用户的私钥<br>• 不需要公钥或证书！</p>
+<p>• 系统设置过程：PKG 生成自己的主密钥 (msk) 和主公钥 (mpk)<br>– msk 只有 PKG 知道<br>– mpk 作为公共参数发布<br>• 密钥生成过程：</p>
+<ol>
+<li>用户去PKG（带有一些带照片的ID或物理文件，其中包含用户的身份作为物理认证过程）</li>
+<li>PKG 使用其 msk 为该用户生成与用户身份相关联的用户密钥。</li>
+</ol>
+<p>加密过程：<br>1.发送方只需要知道接收方的身份（以及系统参数mpk）<br>2.发送者从(m, ID, mpk)生成密文，其中m为明文消息，ID为接收者身份，mpk为系统参数</p>
+<p>解密过程：</p>
+<ol>
+<li>接收者使用他/她的用户密钥来解密密文</li>
+</ol>
+<p>安全：<br>– 如果密文是为 <a href="mailto:&#x61;&#x6c;&#105;&#99;&#x65;&#x40;&#x61;&#x62;&#x63;&#46;&#99;&#111;&#109;">&#x61;&#x6c;&#105;&#99;&#x65;&#x40;&#x61;&#x62;&#x63;&#46;&#99;&#111;&#109;</a> 加密的，除了与 <a href="mailto:&#97;&#x6c;&#105;&#99;&#101;&#x40;&#x61;&#98;&#x63;&#x2e;&#x63;&#111;&#109;">&#97;&#x6c;&#105;&#99;&#101;&#x40;&#x61;&#98;&#x63;&#x2e;&#x63;&#111;&#109;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
+<p>IBE 需要一个称为双线性配对的数学函数（基于椭圆曲线）<br>• 它是两组之间的单向映射函数：G 和 GT，使得 G 和 GT 中的离散对数很难<br>• 表示为一个映射<br>$e: G \times G →G_T$<br>它取 G 组中的两个元素并输出 $G_T$ 组中的一个元素</p>
+<p>双线性配对<br>• 假设$g$是具有群序$p$的$G$生成器（即，$G$具有$p$个元素：$|G| =p$）<br>• 我们有以下属性：<br>– Bilinear双线性：$e(g^x,g^y)=e(g,g)^{xy}$, 对于$x \in Z_p &gt; e(g^x,g)=e(g,g^x)=e(g,g)^x$<br>– Non-degenerate 非退化：$e(g,g)\neq1$</p>
+<p>第一个实用的 IBE 方案是由 Dan Boneh 和 Matthew K. Franklin 在 2001 年（我们称之为 Boneh-Franklin 计划）</p>
+<p>设置：<br>– 双线性配对 $e: G \times G →G_T$ 群序为 p<br>– g 是 G 中的生成器<br>– PKG 选择$s \in Z_p$ 作为主密钥<br>– PKG 计算$K = g^s$ 作为主公钥（mpk）<br>– 选择两个哈希函数：<br>-&gt; $H_1: { 0,1 }^∗ →G$<br>-&gt; $H_2: G_T → {0,1}^n$ 对于一些固定的 n<br>– 输出系统参数：{e, G, GT, K, H1, H2}</p>
+<p>密钥生成：<br>为一个 $ID \in {0, 1}^*$，发布一个密钥PKG 计算：</p>
+<ol>
+<li>$Q_{ID} =H_1(ID)$</li>
+<li>用户密钥$d_{ID}=(Q_{ID})^s $, 该密钥以𝐼𝐷身份提供给用户</li>
+</ol>
+<p>加密<br>给定一个消息$m \in {0, 1}^n$，以及一个身份$ID \in {0, 1}^*$​, 计算：</p>
+<ol>
+<li>$Q_{ID} =H_1(ID)$</li>
+<li>选择一个随机数$r \in _RZ_p$</li>
+<li>计算$T_{ID} = e(Q_{ID}, K)$, K 即 mpk</li>
+<li>计算$c = (g^r, m⊕H_2(T_{ID}^r)) = (u, v)$</li>
+</ol>
+<p>解密<br>给定 $c = (u,v)$, 可以使用与 𝐼𝐷 关联的密钥检索明文：<br>$m = v⊕H_2(e(d_{ID}, u))$<br>• 由于$v=m⊕H_2(T_{ID}^r)$ ，我们只需要验证是否$T_{ID}^r = e(d_{ID}, u)$?<br>• 回忆：<br>– PKG 的公钥𝐾 =𝑔𝑠<br>– Alice 的密钥 $d_{ID} = Q_{ID}^s$<br>– 密文$u = g^r$<br>– 𝑇𝐼𝐷 =𝑒(𝑄𝐼𝐷,𝐾)<br>正确性：<br>$e(d_{ID}, u) = e(Q_{ID}^s, g^r) \=e(Q_{ID},g)^{sr} = e(Q_{ID},g^s)^r \ = T_{ID}^r$</p>
+<p>IBE 消除了证书的使用, 然而，它仍然是一对一的加密<br>– 即，每个密文的目标是由单方解密<br>• 是否可以进行一对多加密？<br>– 广播加密<br>– 基于属性的加密 (ABE)</p>
+<p>基于属性的加密 (ABE)<br>• 1 个权限和具有不同属性的用户<br>• 属性可以是：<br>– {男，学生，计算机科学，莫纳什大学}<br>– {女性，会计师，ABC 公司}<br>– {日本人，1980-1989 年间出生，博士}<br>• 用户通过他/她的属性来识别，而不是公钥或身份<br>• 用户根据他/她的属性从权限获取密钥</p>
+<p>• 用户是否可以根据他/她的属性是否满足访问策略来解密密文，例如<br>– { 学生 AND 计算机科学 AND 莫纳什大学}</p>
+<p>基于属性的加密 (ABE) 2 种类型：</p>
+<ol>
+<li>密钥策略 ABE (KP-ABE)<br>-&gt; 根据访问策略生成用户的密钥<br>-&gt; 数据使用一组属性加密</li>
+<li>密文策略 ABE (CP-ABE)<br>-&gt; 用户的密钥是通过一组属性生成的<br>-&gt; 数据使用访问策略加密</li>
+</ol>
+<p>特性<br>• 一对多<br>• 公共参数、加密/解密复杂度、密钥大小、密文大小都与用户（解密者）数量无关<br>• 加密者不需要知道解密者的身份（只需设置策略）<br>• 如果有很多用户（例如一家公司有 100 万员工），优势将非常显着</p>
+<h2 id="Mid-term"><a href="#Mid-term" class="headerlink" title="Mid term"></a>Mid term</h2><h2 id="W7-amp-8-数字签名-Digital-Signature"><a href="#W7-amp-8-数字签名-Digital-Signature" class="headerlink" title="W7&amp;8: 数字签名 Digital Signature"></a>W7&amp;8: 数字签名 Digital Signature</h2><p>考试来了。W7是考试。</p>
+<p>BTC: 老本行了</p>
+<h2 id="W9-Lightweight-Security"><a href="#W9-Lightweight-Security" class="headerlink" title="W9: Lightweight Security"></a>W9: Lightweight Security</h2><p>这周之后开始讲行业了</p>
+<h2 id="W10-DB-Security"><a href="#W10-DB-Security" class="headerlink" title="W10: DB Security"></a>W10: DB Security</h2><h2 id="W11"><a href="#W11" class="headerlink" title="W11: ?"></a>W11: ?</h2><h2 id="W12-Blockchain"><a href="#W12-Blockchain" class="headerlink" title="W12: Blockchain"></a>W12: Blockchain</h2><p>密码学集大成者</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/randomx-design/" rel="prev" title="RandomX Design">
+      <i class="fa fa-chevron-left"></i> RandomX Design
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/bulletproof-paper/" rel="next" title="Bulletproof: 适用于机密交易及更多方面的简短证明">
+      Bulletproof: 适用于机密交易及更多方面的简短证明 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#W1-Intro"><span class="nav-number">1.</span> <span class="nav-text">W1: Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Security-standards%E5%AE%89%E5%85%A8%E6%A0%87%E5%87%86"><span class="nav-number">1.1.</span> <span class="nav-text">Security standards安全标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Security-attacks%E5%AE%89%E5%85%A8%E6%94%BB%E5%87%BB"><span class="nav-number">1.2.</span> <span class="nav-text">Security attacks安全攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Security-services%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.3.</span> <span class="nav-text">Security services安全服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Security-mechanism%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6"><span class="nav-number">1.4.</span> <span class="nav-text">Security mechanism安全机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-of-system-inter-network-security-%E7%B3%BB%E7%BB%9F-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.5.</span> <span class="nav-text">Model of system&#x2F;(inter)network security 系统&#x2F;网络安全模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Network-Security"><span class="nav-number">1.5.1.</span> <span class="nav-text">Network Security</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tut-%E6%95%B0%E5%AD%A6%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.6.</span> <span class="nav-text">Tut:  数学回顾</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W2-%E5%8A%A0%E5%AF%86%E8%A7%84%E5%88%99-Principles-of-Encryption"><span class="nav-number">2.</span> <span class="nav-text">W2: 加密规则 Principles of Encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Monoalphabetic-Ciphers"><span class="nav-number">2.0.1.</span> <span class="nav-text">Monoalphabetic Ciphers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Polyalphabetic-Ciphers"><span class="nav-number">2.0.2.</span> <span class="nav-text">Polyalphabetic Ciphers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Desirable-Properties%E7%90%86%E6%83%B3%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">2.0.3.</span> <span class="nav-text">Desirable Properties理想的属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Attacks"><span class="nav-number">2.1.</span> <span class="nav-text">Attacks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cryptanalytic-attack-%E5%AF%86%E7%A0%81%E5%88%86%E6%9E%90%E6%94%BB%E5%87%BB"><span class="nav-number">2.1.1.</span> <span class="nav-text">Cryptanalytic attack 密码分析攻击</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tut-Intro"><span class="nav-number">2.2.</span> <span class="nav-text">Tut: Intro</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W3-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86-Symmetric-Cryptography"><span class="nav-number">3.</span> <span class="nav-text">W3: 对称加密 Symmetric Cryptography</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Stream-Cipher"><span class="nav-number">3.0.1.</span> <span class="nav-text">Stream Cipher</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Block-Cipher"><span class="nav-number">3.0.2.</span> <span class="nav-text">Block Cipher</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DES"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">DES</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AES"><span class="nav-number">3.0.3.</span> <span class="nav-text">AES</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hash"><span class="nav-number">3.0.4.</span> <span class="nav-text">Hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Message-Authentication-Code-MAC"><span class="nav-number">3.0.5.</span> <span class="nav-text">Message Authentication Code (MAC)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W4-%E6%95%B0%E7%90%86-Number-Theory"><span class="nav-number">4.</span> <span class="nav-text">W4: 数理 Number Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E5%88%86%E8%A7%A3%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">整数分解问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">最大公约数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%A4%EF%BC%8C%E7%8E%AF%EF%BC%8C%E5%9F%9F%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">4.2.</span> <span class="nav-text">群，环，域的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BE%A4"><span class="nav-number">4.2.1.</span> <span class="nav-text">群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rings-%E7%8E%AF"><span class="nav-number">4.2.2.</span> <span class="nav-text">Rings 环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Field-%E5%9F%9F"><span class="nav-number">4.2.3.</span> <span class="nav-text">Field 域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Modular-Arithmetic-%E7%AE%97%E6%9C%AF%E5%8F%96%E6%A8%A1"><span class="nav-number">4.2.4.</span> <span class="nav-text">Modular Arithmetic 算术取模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Finite%E6%9C%89%E9%99%90-Galois%E5%9F%9F"><span class="nav-number">4.2.5.</span> <span class="nav-text">Finite有限&#x2F;Galois域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fermat%E2%80%99s-and-Euler%E2%80%99s-Theorems-%E8%B4%B9%E9%A9%AC%E5%92%8C%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86-%F0%9D%9D%93-n"><span class="nav-number">4.3.</span> <span class="nav-text">Fermat’s and Euler’s Theorems 费马和欧拉定理 𝝓(n)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Primitive-Roots-%E5%8E%9F%E5%A7%8B%E6%A0%B9"><span class="nav-number">4.4.</span> <span class="nav-text">Primitive Roots 原始根</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E9%97%AE%E9%A2%98-DLP"><span class="nav-number">4.5.</span> <span class="nav-text">离散对数问题 (DLP)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W5-amp-W6-%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86-Asymmetric-Cryptography"><span class="nav-number">5.</span> <span class="nav-text">W5&amp;W6: 非对称加密 Asymmetric Cryptography</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RSA"><span class="nav-number">5.0.1.</span> <span class="nav-text">RSA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-management"><span class="nav-number">5.1.</span> <span class="nav-text">Key management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Distribution-of-public-keys"><span class="nav-number">5.1.1.</span> <span class="nav-text">Distribution of public keys</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Diffie-Hellman-key-exchange"><span class="nav-number">5.1.2.</span> <span class="nav-text">Diffie-Hellman key exchange</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash-function"><span class="nav-number">5.2.</span> <span class="nav-text">Hash function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advanced-asymmetric-cryptosystems"><span class="nav-number">5.3.</span> <span class="nav-text">Advanced asymmetric cryptosystems</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mid-term"><span class="nav-number">6.</span> <span class="nav-text">Mid term</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W7-amp-8-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D-Digital-Signature"><span class="nav-number">7.</span> <span class="nav-text">W7&amp;8: 数字签名 Digital Signature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W9-Lightweight-Security"><span class="nav-number">8.</span> <span class="nav-text">W9: Lightweight Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W10-DB-Security"><span class="nav-number">9.</span> <span class="nav-text">W10: DB Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W11"><span class="nav-number">10.</span> <span class="nav-text">W11: ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W12-Blockchain"><span class="nav-number">11.</span> <span class="nav-text">W12: Blockchain</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : '53bf6b118204be069df21ae14ef11e6c',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

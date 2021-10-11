@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="所谓的“高级数据库技术”居然是NoSQL…… W1 Intro关系型Structured Query Language (SQL)ACID (Atomicity, Consistency, Isolation, Durability) 原子性，一致性，隔离性，持久性 非关系型BASE (Basically Available, Soft state, Eventual consistency) B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes for FIT5137: Advanced database technology">
+<meta property="og:url" content="https://c0mm4nd.com/post/fit5137-adv-db-notes/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="所谓的“高级数据库技术”居然是NoSQL…… W1 Intro关系型Structured Query Language (SQL)ACID (Atomicity, Consistency, Isolation, Durability) 原子性，一致性，隔离性，持久性 非关系型BASE (Basically Available, Soft state, Eventual consistency) B">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-20T16:05:45.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:21:35.866Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
+<meta property="article:tag" content="database">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://c0mm4nd.com/post/fit5137-adv-db-notes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Notes for FIT5137: Advanced database technology | Talkless</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Talkless</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">63</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/post/fit5137-adv-db-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes for FIT5137: Advanced database technology
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-21 00:05:45" itemprop="dateCreated datePublished" datetime="2021-08-21T00:05:45+08:00">2021-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-11 17:21:35" itemprop="dateModified" datetime="2021-10-11T17:21:35+08:00">2021-10-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>所谓的“高级数据库技术”居然是NoSQL……</p>
+<h2 id="W1-Intro"><a href="#W1-Intro" class="headerlink" title="W1 Intro"></a>W1 Intro</h2><p>关系型<br>Structured Query Language (SQL)<br>ACID (Atomicity, Consistency, Isolation, Durability) 原子性，一致性，隔离性，持久性</p>
+<p>非关系型<br>BASE (Basically Available, Soft state, Eventual consistency)</p>
+<p>Big Data</p>
+<ul>
+<li>Volume （数据）量 -&gt; Scaling up/out</li>
+<li>Velocity （数据输入的）速 -&gt; stream/feedback-loop</li>
+<li>Variety 多样化 -&gt; Structured/Unstructured/Semi-structured</li>
+</ul>
+<p>NoSQL<br>schema-free<br>Support distributed database architectures.<br>high scalability, high availability, and fault tolerance</p>
+<p>Categories</p>
+<ul>
+<li>Key-value databases</li>
+<li>Document-oriented databases</li>
+<li>Column-oriented databases</li>
+<li>Graph databases</li>
+</ul>
+<p>NoSQL</p>
+<table>
+<thead>
+<tr>
+<th>Adv</th>
+<th>Disadv</th>
+</tr>
+</thead>
+</table>
+<p>Relational Model</p>
+<table>
+<thead>
+<tr>
+<th>Adv</th>
+<th>Disadv</th>
+</tr>
+</thead>
+</table>
+<h2 id="W2-Intro-to-MongoDB"><a href="#W2-Intro-to-MongoDB" class="headerlink" title="W2: Intro to MongoDB"></a>W2: Intro to MongoDB</h2><p>Document-oriented databases, 本质上是K-V数据库的子类</p>
+<p>面向文档的数据库是无模式的。</p>
+<ul>
+<li>存储的数据没有预定义的结构。</li>
+<li>每个文档都可以有自己的结构</li>
+</ul>
+<p>MongoDB<br>结合了横向扩展(scale out)的能力和各种功能，如二级索引、范围查询、排序、聚合和地理空间索引。</p>
+<h2 id="W3-Mongo-Shell"><a href="#W3-Mongo-Shell" class="headerlink" title="W3: Mongo Shell"></a>W3: Mongo Shell</h2><p>一些MongoDB的CRUD操作，GUI是在MongoDB Compass下。</p>
+<p>Create（<code>createCollection</code>， <code>insert[One/Many](&lt;Array of Objects&gt;)</code>，），Update(<code>update[One/Many](&lt;filter&gt;, &lt;update&gt;, &lt;options&gt;</code>)<br>)和Delete(<code>.drop()</code>, <code>.dropDatabase()</code>,<code>delete[One/Many]</code>)在GUI下很简单，这里省略。<br>主要需要关注R里Query的编写：<br><code>find[One/Many](&lt;query&gt;, &lt;fields&gt;)</code></p>
+<p>Projection: find的第二个字段表示输出（Project）的内容</p>
+<p>Limit &amp; Skip: Skip优先于Limit</p>
+<p>Sort: 1 ascending , -1 descending</p>
+<h2 id="W4-MongoDB-Aggregation"><a href="#W4-MongoDB-Aggregation" class="headerlink" title="W4: MongoDB Aggregation"></a>W4: MongoDB Aggregation</h2><p>略难的部分</p>
+<p>$match：等于find</p>
+<p>$group</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.persons.aggregate([</span><br><span class="line">    &#123; $match: &#123;gender: <span class="string">&quot;female&quot;</span>&#125; &#125;,</span><br><span class="line">    &#123; </span><br><span class="line">        $group: &#123; <span class="comment">// 表示总人数</span></span><br><span class="line">            _id: &#123; state: <span class="string">&quot;$location.state&quot;</span> &#125;, <span class="comment">//匹配了上面所有</span></span><br><span class="line">            totalPersons: <span class="comment">// 新字段名字 </span></span><br><span class="line">                &#123; $sum: <span class="number">1</span> &#125; <span class="comment">// group需要配合$sum, $avg, $max, $min, $first, $last之类的操作分组</span></span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">]).pretty()</span><br></pre></td></tr></table></figure>
+
+<p>$sort</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; $sort: &#123; totalPersons: <span class="number">-1</span> &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>$project</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$project: &#123;</span><br><span class="line">    _id: 0, </span><br><span class="line">    name: 1, </span><br><span class="line">    email: 1, </span><br><span class="line">    birthdate: &#123; $convert: &#123; input: &#x27;$dob.date&#x27;, to: &#x27;date&#x27; &#125; &#125;, </span><br><span class="line">    age: &quot;$dob.age&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>$lookup(匹配文档之间关系)生成嵌入文档</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    $lookup: &#123;</span><br><span class="line">        from: &lt;collection to join&gt;,</span><br><span class="line">        localField: &lt;field from the input documents&gt;,</span><br><span class="line">        foreignField: &lt;field from the documents of the <span class="string">&quot;from&quot;</span> collection&gt;,</span><br><span class="line">        as: &lt;output array field&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如，我们现有文档含有_id这个字段，从address这个collection（含有patron_id）之中找到和_id相同（匹配）的patron_id，然后作为一个列表放在当前文档的addresses里</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.patron.aggregate([</span><br><span class="line">    &#123;</span><br><span class="line">        $lookup: &#123;</span><br><span class="line">            from: <span class="string">&quot;address&quot;</span>,</span><br><span class="line">            localField: <span class="string">&quot;_id&quot;</span>,</span><br><span class="line">            foreignField: <span class="string">&quot;patron_id&quot;</span>,</span><br><span class="line">            as: <span class="string">&quot;addresses&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Map-Reduce，检索每个含k的文档作为一个map，然后每个执行reduce</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">db.collection.mapReduce(</span><br><span class="line">                         &lt;map&gt;, // function() &#123; emit(this.cust_id, this.amount) &#125;</span><br><span class="line">                         &lt;reduce&gt;, // function(k, v) &#123; return Array.sum(v) &#125; </span><br><span class="line">                         &#123;</span><br><span class="line">                           out: &lt;collection&gt;,</span><br><span class="line">                           query: &lt;document&gt;,</span><br><span class="line">                           sort: &lt;document&gt;,</span><br><span class="line">                           limit: &lt;number&gt;,</span><br><span class="line">                           finalize: &lt;function&gt;,</span><br><span class="line">                           scope: &lt;document&gt;,</span><br><span class="line">                           jsMode: &lt;boolean&gt;,</span><br><span class="line">                           verbose: &lt;boolean&gt;,</span><br><span class="line">                           bypassDocumentValidation: &lt;boolean&gt;</span><br><span class="line">                         &#125;</span><br><span class="line">                       )</span><br></pre></td></tr></table></figure>
+
+<p>estimatedDocumentCount( )<br>count( )<br>distinct( )</p>
+<h2 id="W7-Designing-Column-Oriented-Databases-列数据库设计"><a href="#W7-Designing-Column-Oriented-Databases-列数据库设计" class="headerlink" title="W7 Designing Column-Oriented Databases 列数据库设计"></a>W7 Designing Column-Oriented Databases 列数据库设计</h2><h3 id="Primary-amp-Compound-Keys-主键与复合键"><a href="#Primary-amp-Compound-Keys-主键与复合键" class="headerlink" title="Primary &amp; Compound Keys 主键与复合键"></a>Primary &amp; Compound Keys 主键与复合键</h3><p>Cassandra 中的主键可以是复合键，复合键是指由多列组成的键。<br>当指定复合键时，第一个键被考虑用于数据分区，称为分区键。<br>每个分区中的数据按剩余的键进行聚类和排序。</p>
+<h3 id="Guidelines-for-Designing-Tables-表设计"><a href="#Guidelines-for-Designing-Tables-表设计" class="headerlink" title="Guidelines for Designing Tables 表设计"></a>Guidelines for Designing Tables 表设计</h3><p>面向列的数据库的实现方式与关系数据库不同。<br>▪ 重要的是要了解：<br>➢ 列族数据库被实现为稀疏的多维映射。<br>➢ 行之间的列可以不同。<br>➢ 可以动态添加列。<br>➢ 不使用连接； 数据被非规范化。<br>列数据库的这些特性将影响数据库设计指南</p>
+<p>在面向列的数据库中设计表时的几个准则：<br>➢ 非规范化而不是连接。<br>➢ 利用无值的列。<br>➢ 使用列名和列值来存储数据。<br>➢ 使用单行对实体进行建模。<br>➢ 避免行键热点。<br>➢ 保留适当数量的列值版本。<br>➢ 避免列值中的复杂数据结构。<br>▪ 应该注意的是，其中一些建议（例如 使用适当数量的列值版本）并不适用于所有列族数据库系统。</p>
+<p>Denormalize Instead of Join<br>面向列的数据库通常需要比关系数据库更少的表。<br>➢ 它对数据进行非规范化以避免需要连接。</p>
+<p>Make Use of Valueless Columns<br>该表没有像“ProductPurchased1”这样名称为“PR _ B1839”的列，而是简单地将产品 ID 存储为列名</p>
+<p>Use Both Column Names and Column Values to Store Data<br>▪ 列名和列值都可以存储数据。<br>▪ 使用无值列的一种变体使用列值进行非规范化。<br>▪ 非规范化数据的缺点：在客户表中保留产品名称的副本会增加使用的存储量。<br>▪ 非规范化数据的好处：客户和他们购买的产品的报告是通过只引用一张表而不是两张表来生成的。<br>▪ 实际上，我们是在牺牲对额外存储的需求来提高读取性能。</p>
+<p>Model an Entity with a Single Row<br>▪ 单个实体，例如特定客户或特定产品，应将其所有属性放在一行中。<br>➢ 这可能导致某些行存储的列值多于其他行的情况，但这在列族数据库中并不少见。<br>▪ ColumnFamily数据库不提供与关系数据库相同级别的事务控制。 通常，写入一行是原子的。 如果您更新表中的多个列，它们将全部更新，或者它们都不更新。</p>
+<p>Avoid Hotspotting in Row Keys<br>分布式系统使您能够利用大量服务器来解决问题。 在一台或几台机器上指挥过多的工作而其他机器未得到充分利用是低效的。</p>
+<p>Keep an Appropriate Number of Column Value Versions<br>▪ HBase 使您能够存储列值的多个版本。<br>▪ 列值带有时间戳，因此您可以确定最新和最早的值。<br>▪ 与其他形式的版本控制一样，如果您<br>需要回滚您对列值所做的更改。<br>▪ 这不适用于 Apache Cassandra</p>
+<p>Avoid Complex Data Structures in Column Values<br>例如，关于客户的 JSON 文档可能包含一个存储地址信息的嵌入文档，如下所示：<br>▪ 这种类型的数据结构可能存储在一个列值中，但不推荐使用，除非有特殊原因需要维护这种结构。<br>▪ 为每个属性使用单独的列可以更轻松地将数据库功能应用于属性。 例如，为街道、城市、州和邮政编码创建单独的列意味着您可以对这些值创建二级索引。<br>▪ 此外，将属性分成单独的列允许您在需要时使用不同的列族。 使用二级索引的能力和根据列的使用方式分隔列的选项都可以提高数据库性能。</p>
+<p>Using Secondary Indexes Managed by the Column Family Database System<br>使用 ColumnFamily 数据库系统管理的二级索引<br>如果您需要列值的二级索引并且列族数据库系统提供了自动管理的二级索引，那么您应该使用它们。<br>▪ 使用自动管理的二级索引的主要优点是与替代方法相比，它们需要更少的代码来维护。<br>▪ 有时您不应该使用自动管理的索引。 在以下情况下<strong>避免</strong>或至少仔细测试索引的使用：<br>➢ 列中有少量不同的值。<br>➢ 一列有很多唯一unique值。<br>➢ 列值稀疏</p>
+<p>▪ 有很少不同值的列不是二级索引的良好候选。<br>▪ 当列中不同值的数量（称为列的基数）很小时，索引不会对性能有太大帮助——它甚至可能会受到伤害。<br>▪ 具有太多不同值的行也不适合用作索引。<br>▪ 自动管理的索引在这里可能没有多大帮助，因为索引必须维护如此多的数据，搜索索引和检索数据可能比扫描表以获取特定值花费更多的时间<br>▪ 在许多行不使用列的情况下，二级索引可能无济于事。<br>▪ 不应为稀疏填充的列编制索引</p>
+<p>何时使用表创建和管理二级索引<br>▪ 帮助生成列出购买特定产品的所有客户的报告。<br>▪ 他们还想要一份关于特定产品以及哪些客户购买了这些产品的报告</p>
+<h3 id="Guidelines-for-Indexing-索引设计"><a href="#Guidelines-for-Indexing-索引设计" class="headerlink" title="Guidelines for Indexing 索引设计"></a>Guidelines for Indexing 索引设计</h3><h3 id="Cassandra-Data-Model-数据模型"><a href="#Cassandra-Data-Model-数据模型" class="headerlink" title="Cassandra Data Model 数据模型"></a>Cassandra Data Model 数据模型</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/database/" rel="tag"># database</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/bulletproof-paper/" rel="prev" title="Bulletproof: 适用于机密交易及更多方面的简短证明">
+      <i class="fa fa-chevron-left"></i> Bulletproof: 适用于机密交易及更多方面的简短证明
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/go-interesting/" rel="next" title="Go Interesting">
+      Go Interesting <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#W1-Intro"><span class="nav-number">1.</span> <span class="nav-text">W1 Intro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W2-Intro-to-MongoDB"><span class="nav-number">2.</span> <span class="nav-text">W2: Intro to MongoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W3-Mongo-Shell"><span class="nav-number">3.</span> <span class="nav-text">W3: Mongo Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W4-MongoDB-Aggregation"><span class="nav-number">4.</span> <span class="nav-text">W4: MongoDB Aggregation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W7-Designing-Column-Oriented-Databases-%E5%88%97%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">W7 Designing Column-Oriented Databases 列数据库设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Primary-amp-Compound-Keys-%E4%B8%BB%E9%94%AE%E4%B8%8E%E5%A4%8D%E5%90%88%E9%94%AE"><span class="nav-number">5.1.</span> <span class="nav-text">Primary &amp; Compound Keys 主键与复合键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Guidelines-for-Designing-Tables-%E8%A1%A8%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.2.</span> <span class="nav-text">Guidelines for Designing Tables 表设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Guidelines-for-Indexing-%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.3.</span> <span class="nav-text">Guidelines for Indexing 索引设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cassandra-Data-Model-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.4.</span> <span class="nav-text">Cassandra Data Model 数据模型</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : '7a0e9f893c9528dde7a6d8c6aca5a78a',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

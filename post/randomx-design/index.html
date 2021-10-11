@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="原文https:&#x2F;&#x2F;github.com&#x2F;tevador&#x2F;RandomX&#x2F;blob&#x2F;master&#x2F;doc&#x2F;design.md 为了最大限度地减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现设备绑定。这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。 有两类不同的通用处理设备：中央处理单元 (CPU) 和图形处理单元 (GPU)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RandomX Design">
+<meta property="og:url" content="https://c0mm4nd.com/post/randomx-design/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="原文https:&#x2F;&#x2F;github.com&#x2F;tevador&#x2F;RandomX&#x2F;blob&#x2F;master&#x2F;doc&#x2F;design.md 为了最大限度地减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现设备绑定。这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。 有两类不同的通用处理设备：中央处理单元 (CPU) 和图形处理单元 (GPU)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/64G4qE8.png">
+<meta property="og:image" content="https://i.imgur.com/pRz6aBG.png">
+<meta property="article:published_time" content="2021-07-21T17:40:48.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:21:35.944Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/64G4qE8.png">
+
+<link rel="canonical" href="https://c0mm4nd.com/post/randomx-design/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>RandomX Design | Talkless</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Talkless</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">63</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/post/randomx-design/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RandomX Design
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-22 01:40:48" itemprop="dateCreated datePublished" datetime="2021-07-22T01:40:48+08:00">2021-07-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-11 17:21:35" itemprop="dateModified" datetime="2021-10-11T17:21:35+08:00">2021-10-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>原文<a href="https://github.com/tevador/RandomX/blob/master/doc/design.md" target="_blank" rel="noopener">https://github.com/tevador/RandomX/blob/master/doc/design.md</a></p>
+<p>为了最大限度地减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现<em>设备绑定</em>。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
+<p>有两类不同的通用处理设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
+<ul>
+<li>CPU非专业挖矿设备，对于正常用户来说更普遍且更容易访问。受 CPU 限制的算法更加平等，并允许更多参与者加入网络。这是[原始CryptoNote白皮书][cn_paper]中所述的目标之一。</li>
+<li>在不同的 CPU 体系结构中存在大量通用的本地硬件指令子集。GPU 则不能这样说。例如，NVIDIA 和 AMD GPU <a href="https://github.com/ifdefelse/ProgPOW/issues/16" target="_blank" rel="noopener">没有通用的整数乘法指​​令</a>。</li>
+<li>所有主要的CPU 指令集都有详细的文档记录，有多个可用的开源编译器。相比之下，GPU 指令集通常是专有的，可能需要供应商特定的闭源驱动程序才能获得最大性能。</li>
+</ul>
+<h2 id="1-设计考量"><a href="#1-设计考量" class="headerlink" title="1. 设计考量"></a>1. 设计考量</h2><p>CPU 绑定工作量证明的最基本思想是“工作”必须是动态的。这利用了 CPU 接受两种输入的事实：数据（主要输入）和代码（指定对数据执行什么操作）。</p>
+<p>相反，经典的加密散列hash函数 [ 3 ] 并不适合 CPU 的工作，因为它们的唯一输入是<em>数据</em>，而<strong>操作序列是固定</strong>的，可以通过专用集成电路ASIC更有效地执行。</p>
+<h3 id="1-1-动态工作量证明"><a href="#1-1-动态工作量证明" class="headerlink" title="1.1 动态工作量证明"></a>1.1 动态工作量证明</h3><p>一个动态PoW算法通常可以包括以下4个步骤：</p>
+<ol>
+<li>生成随机程序。</li>
+<li>将其翻译成CPU的本地机器代码（机器码）。</li>
+<li>执行程序。</li>
+<li>将程序的输出转换为加密安全值。</li>
+</ol>
+<p>实际“有用”的 CPU 密集型工作在步骤 3 中执行，因此必须调整算法以最小化剩余步骤的开销。</p>
+<h4 id="1-1-1-生成随机程序"><a href="#1-1-1-生成随机程序" class="headerlink" title="1.1.1 生成随机程序"></a>1.1.1 生成随机程序</h4><p>在动态PoW设计早期的尝试是基于在高级语言，如C或Javascript [4，5]。但是，由于两个主要原因，导致非常低效：</p>
+<ul>
+<li>高级语言具有复杂的语法，因此生成有效程序的速度相对较慢，因为它需要创建抽象语法树 (ASL)。</li>
+<li>一旦生成了程序的源代码，编译器一般会将文本表示解析回ASL，这使得生成源代码的整个过程变得多余。</li>
+</ul>
+<p>生成随机程序的最快方法是使用无逻辑生成器：简单地用随机数据填充缓冲区。<br>这当然需要设计一种无语法的编程语言（或指令集），其中所有随机位串都代表有效程序。</p>
+<h4 id="1-1-2-将程序翻译成机器码"><a href="#1-1-2-将程序翻译成机器码" class="headerlink" title="1.1.2 将程序翻译成机器码"></a>1.1.2 将程序翻译成机器码</h4><p>这一步是不可避免的，因为我们不想将算法限制在特定的 CPU 架构上。<br>为了尽可能快地生成机器代码，我们需要我们的指令集尽可能接近原生硬件，同时仍然足够通用以支持不同的架构。<br>在代码编译期间没有足够的时间进行昂贵的优化。</p>
+<h4 id="1-1-3-执行程序"><a href="#1-1-3-执行程序" class="headerlink" title="1.1.3 执行程序"></a>1.1.3 执行程序</h4><p>实际的程序执行应该使用尽可能多的CPU组件。应该在程序中使用的一些功能是：</p>
+<ul>
+<li>多级缓存（L1、L2、L3）</li>
+<li>μop 缓存 [ 6 ]</li>
+<li>算术逻辑单元 (ALU)</li>
+<li>浮点单元 (FPU)</li>
+<li>内存控制器</li>
+<li>指令级并行[ 7 ]<ul>
+<li>超标量执行 [ 8 ]</li>
+<li>乱序执行 [ 9 ]</li>
+<li>投机性执行 [ 10 ]</li>
+<li>寄存器重命名 [ 11 ]</li>
+</ul>
+</li>
+</ul>
+<p>第2章描述了 RandomX VM 如何利用这些功能。</p>
+<h4 id="1-1-4-计算最终结果"><a href="#1-1-4-计算最终结果" class="headerlink" title="1.1.4 计算最终结果"></a>1.1.4 计算最终结果</h4><p>Blake2b是一种加密安全的散列函数，专门设计用于在软件中快速运行，尤其是在现代 64 位处理器上，它比 SHA-3 快三倍左右，并且可以以每 3 个时钟周期的速度运行输入字节。此函数是用于 CPU 友好的工作证明的理想候选者。</p>
+<p>为了以加密安全的方式处理大量数据，高级加密标准 (AES) 可以提供最快的处理速度，因为许多现代 CPU 支持这些操作的硬件加速。有关在 RandomX 中使用 AES 的更多详细信息，请参阅第 3 章。</p>
+<h3 id="1-2-“简易程序问题”"><a href="#1-2-“简易程序问题”" class="headerlink" title="1.2 “简易程序问题”"></a>1.2 “简易程序问题”</h3><p>当一个随机程序产生时，人们可以选择只在它有利的时候执行它。这种策略之所以可行，主要有两个原因：</p>
+<p>随机生成程序的运行时间通常遵循对数正态分布 [ 14 ]（另见附录 C）。</p>
+<ol>
+<li>生成的程序可能会被快速分析，如果它的运行时间可能高于平均水平，则可能会跳过程序执行并生成一个新程序。这可以显着提高性能，尤其是在运行时分布有重尾（许多长期运行的异常值）并且程序生成成本低的情况下。</li>
+<li>实现可以选择优化程序执行所需的功能子集。例如，可能会放弃对某些操作（例如除法）的支持，或者可能会更有效地实现某些指令序列。生成的程序只有在符合优化实施的特定要求时才会被分析和执行。</li>
+</ol>
+<p>这些搜索特定属性程序的策略与此工作量证明的目标背道而驰，因此必须消除它们。这可以通过要求执行一系列N个随机程序来实现，这样每个程序都是从前一个程序的输出生成的。然后将最终程序的输出用作结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">          +---------------+     +---------------+               +---------------+     +---------------+</span><br><span class="line">          |               |     |               |               |               |     |               |</span><br><span class="line">input --&gt; |   program 1   | --&gt; |   program 2   | --&gt;  ...  --&gt; | program (N-1) | --&gt; |   program N   | --&gt; result</span><br><span class="line">          |               |     |               |               |               |     |               |</span><br><span class="line">          +---------------+     +---------------+               +---------------+     +---------------+</span><br></pre></td></tr></table></figure>
+
+<p>其原理是，在第一个程序执行后，矿工要么承诺完成整个链（可能包括不利的程序），要么重新开始并浪费在未完成的链上花费的精力。附录 A 中给出了这如何影响不同挖掘策略的哈希率的示例。</p>
+<p>此外，这种链式程序执行具有均衡整个链的运行时间的好处，因为相同分布的运行时间总和的相对偏差减少了。</p>
+<p>1.3 验证时间<br>由于工作量证明的目的是在去信任的点对点网络中使用，网络参与者必须能够快速验证证明是否有效。这为工作量证明算法的复杂性设置了上限。特别是，我们为 RandomX 设定了一个目标，使其验证速度至少与 CryptoNight 哈希函数 [ 15 ]一样快，它旨在取代它。</p>
+<p>1.4 记忆强度<br>除了纯计算资源，如 ALU 和 FPU，CPU 通常可以以 DRAM [ 16 ]的形式访问大量内存。内存子系统的性能通常会根据计算能力进行调整，例如 [ 17 ]：</p>
+<ul>
+<li>用于嵌入式和低功耗 CPU 的单通道内存</li>
+<li>用于台式机 CPU 的双通道内存</li>
+<li>用于工作站 CPU 的三通道或四通道内存</li>
+<li>用于高端服务器 CPU 的六或八通道内存</li>
+</ul>
+<p>为了利用外部存储器以及片上存储器控制器，工作量证明算法应该访问一个大的存储器缓冲区（称为“数据集”）。数据集必须是：</p>
+<ol>
+<li>大于可以存储在芯片上的内容（需要外部存储器）</li>
+<li>动态（需要可写内存）</li>
+</ol>
+<p>对于 16 nm 工艺而言，单个芯片上可放置的最大 SRAM 量超过 512 MiB，而对于 7 nm 工艺而言，则超过 2 GiB [ 18 ]。理想情况下，数据集的大小应至少为 4 GiB。但是，由于验证时间的限制（见下文），RandomX 使用的大小选择为 2080 MiB。虽然理论上可以使用当前技术（2019 年为 7 nm）使用如此数量的 SRAM 制造单个芯片，但这种解决方案的可行性值得怀疑，至少在不久的将来如此。</p>
+<p>1.4.1 轻客户端验证<br>虽然对于解决工作量证明的专用挖矿系统要求 &gt;2 GiB 是合理的，但必须为轻客户端提供一个选项，以使用更少的内存来验证证明。</p>
+<p>必须谨慎选择“快速”和“轻”模式所需的内存比例，以免轻模式适合挖矿。特别是，光模式的面积时间（AT）乘积不应小于快速模式的AT乘积。减少 AT 乘积是衡量权衡攻击的常用方法 [ 19 ]。</p>
+<p>考虑到前几章中描述的限制，根据经验确定快速和轻型验证模式之间的最大可能性能比为 8。这是因为：</p>
+<ol>
+<li>进一步增加光验证时间将违反第 1.3 章中规定的限制。</li>
+<li>进一步减少快速模式运行时间会违反第 1.1 章中规定的约束，特别是程序生成和结果计算的开销时间会变得太高。</li>
+</ol>
+<p>此外，256 MiB 被选为轻客户端模式下可能需要的最大内存量。即使对于 Raspberry Pi 这样的小型单板计算机，这个数量也是可以接受的。</p>
+<p>为了保持恒定的内存时间乘积，最大的快速模式内存要求是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8 * 256 MiB = 2048 MiB</span><br></pre></td></tr></table></figure>
+
+<p>这可以进一步增加，因为光照模式需要额外的芯片面积用于 SuperscalarHash 函数（参见规范的第 3.4 章和第 6 章）。假设保守估计每个 SuperscalarHash 核心0.2 mm 2和 DRAM 密度为 0.149 Gb/mm 2 [ 20 ]，额外的内存为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8 * 0.2 * 0.149 * 1024 / 8 = 30.5 MiB</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>虚拟机架构<br>本节介绍 RandomX 虚拟机 (VM) 的设计。</li>
+</ol>
+<p>2.1 指令集<br>RandomX 使用固定长度的指令编码，每条指令有 8 个字节。这允许在指令字中包含 32 位立即数。选择指令字位的解释，以便任何 8 字节字都是有效指令。这允许非常有效的随机程序生成（参见第 1.1.1 章）。</p>
+<p>2.1.1 指令复杂度<br>VM 是一个复杂的指令集机器，允许寄存器和内存寻址操作数。然而，每条 RandomX 指令只能转换为 1-7 条 x86 指令（平均 1.8 条）。保持指令复杂度相对较低以最小化具有定制指令集的专用硬件的效率优势非常重要。</p>
+<p>2.2 程序<br>VM 执行的程序具有循环的形式，由 256 条随机指令组成。</p>
+<ul>
+<li>256条指令足够长，可以提供大量可能的程序和足够的分支空间。可以生成的不同程序的数量限制为 2 512 = 1.3e+154，这是随机生成器可能的种子值的数量。</li>
+<li>256 条指令足够短，因此高性能 CPU 可以在与从 DRAM 中获取数据所需的时间相似的时间内执行一次迭代。这是有利的，因为它允许同步数据集访问并完全可预取（参见第 2.9 章）。</li>
+<li>由于程序是一个循环，它可以利用一些 x86 CPU 中存在的 μop 缓存 [ 6 ]。从 μop 缓存运行循环允许 CPU 关闭 x86 指令解码器的电源，这应该有助于平衡 x86 和具有简单指令解码的体系结构之间的功率效率。</li>
+</ul>
+<p>2.3 寄存器<br>VM 使用 8 个整数寄存器和 12 个浮点寄存器。这是 x86-64 中可以分配为物理寄存器的最大值，这是常见的 64 位 CPU 架构中架构寄存器最少的。使用更多寄存器会使 x86 CPU 处于劣势，因为它们必须使用内存来存储 VM 寄存器内容。</p>
+<p>2.4 整数运算<br>RandomX 使用所有具有高输出熵的原始整数运算：加法（IADD_RS、IADD_M）、减法（ISUB_R、ISUB_M、INEG_R）、乘法（IMUL_R、IMUL_M、IMULH_R、IMULH_M、ISMULH_R、ISMULH_M、IMULR_RIXOR） IXOR_M) 和旋转 (IROR_R, IROL_R)。</p>
+<p>2.4.1 IADD_RS<br>IADD_RS 指令利用 CPU 的地址计算逻辑，大多数 CPU（x86 lea、arm add）都可以在单个硬件指令中执行。</p>
+<p>2.4.2 IMUL_RCP<br>因为整数除法在 CPU 中没有完全流水线化，在 ASIC 中可以做得更快，所以 IMUL_RCP 指令每个程序只需要一个除法来计算倒数。这迫使 ASIC 包含硬件分频器，而不会在程序执行期间给它们带来性能优势。</p>
+<p>2.4.3 IROR_R/IROL_R<br>旋转指令分为右旋转和左旋转，比例为 4:1。向右旋转具有更高的频率，因为某些架构（如 ARM）本身不支持向左旋转（必须使用向右旋转来模拟）。</p>
+<p>2.4.4 ISWAP_R<br>支持寄存器重命名/移动消除的 CPU 可以有效地执行此指令。</p>
+<p>2.5 浮点运算<br>RandomX 使用双精度浮点运算，大多数 CPU 都支持这种运算，并且需要比单精度更复杂的硬件。所有操作都作为 128 位向量操作执行，所有主要 CPU 架构也支持这种操作。</p>
+<p>RandomX 使用 IEEE 754 标准保证的五种运算来提供正确的舍入结果：加法、减法、乘法、除法和平方根。使用标准定义的所有 4 种舍入模式。</p>
+<p>2.5.1 浮点寄存器组<br>浮点运算的域分为使用寄存器组 F 的“加法”运算和使用寄存器组 E 的“乘法”运算。这样做是为了防止加法/减法在添加少量数字时变为空操作到大量。由于 F 组寄存器的范围限制在 左右±3.0e+14，因此对绝对值大于 1 的浮点数进行加减运算总是至少改变 5 个小数位。</p>
+<p>由于 F 组寄存器的有限范围将允许使用更有效的定点表示（80 位数字），因此 FSCAL 指令操纵浮点格式的二进制表示，使这种优化更加困难。</p>
+<p>E 组寄存器限制为正值，以避免出现NaN结果（例如负数的平方根或0 * ∞）。除法仅使用内存源操作数，以避免被优化为常数倒数的乘法。E组内存操作数的指数设置为-255和0之间的值，以避免除以0和乘以0并增加可以获得的数字范围。可能基团E的寄存器值的近似范围为1.7E-77至infinity。</p>
+<p>每个程序循环结束时浮点寄存器值的近似分布如下图所示（左 - F组，右 - E组）：</p>
+<p><img src="https://i.imgur.com/64G4qE8.png" alt="Imgur" loading="lazy"></p>
+<p>1e+14FSCAL 指令导致的 F 寄存器值较少，显着增加了寄存器值的范围。</p>
+<p>E 组寄存器涵盖了非常大的值范围。大约 2% 的程序至少产生一个infinity值。</p>
+<p>为了最大化熵并适应一个 64 字节的高速缓存线，浮点寄存器在每次迭代结束时使用 XOR 运算进行组合，然后存储到暂存器中。</p>
+<p><em>（注意：bins 由区间的左侧值标记，例如标记为 <code>1e-40</code> 的 bin 包含从 <code>1e-40</code> 到 <code>1e-20</code> 的值。）</em></p>
+<p><code>1e+14</code> 处的 F 寄存器值较少是由 FSCAL 指令引起的，该指令显着增加了寄存器值的范围。</p>
+<p>E 组寄存器涵盖了非常大的值范围。 大约 2% 的程序产生至少一个“无穷大”值。</p>
+<p>为了最大化熵并适应一个 64 字节的高速缓存线，浮点寄存器在每次迭代结束时使用 XOR 操作进行组合，然后存储到暂存器中。</p>
+<h3 id="2-6-分支"><a href="#2-6-分支" class="headerlink" title="2.6 分支"></a>2.6 分支</h3><p>现代 CPU 投入大量芯片面积和精力来处理分支。这包括：</p>
+<ul>
+<li>分支预测器单元 <a href="https://en.wikipedia.org/wiki/Branch_predictor" target="_blank" rel="noopener">Branch predictor</a></li>
+<li>检查点/回滚状态，允许 CPU 在分支预测错误的情况下恢复。</li>
+</ul>
+<p>为了利用推测设计，随机程序应该包含分支。但是，如果分支预测失败，则推测执行的指令将被丢弃，这导致每次错误预测都会浪费一定的能量。因此，我们的目标应该是尽量减少错误预测的数量。</p>
+<p>此外，代码中的分支是必不可少的，因为它们显着减少了可以进行的静态优化的数量。例如，考虑以下 x86 指令序列：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    ...</span><br><span class="line">branch_target_00:</span><br><span class="line">    ...</span><br><span class="line">    xor r8, r9</span><br><span class="line">    test r10, 2088960</span><br><span class="line">    je branch_target_00</span><br><span class="line">    xor r8, r9</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>XOR 操作通常会取消，但由于分支而无法优化掉，因为如果采用分支，结果会有所不同。类似地，如果不是用于分支，ISWAP_R 指令可以始终被静态优化。</p>
+<p>一般来说，随机分支必须以这样的方式设计：</p>
+<ol>
+<li>无限循环是不可能的。</li>
+<li>预测错误的分支数量少。</li>
+<li>分支条件取决于运行时值以禁用静态分支优化。</li>
+</ol>
+<h4 id="2-6-1-分支预测"><a href="#2-6-1-分支预测" class="headerlink" title="2.6.1 分支预测"></a>2.6.1 分支预测</h4><p>不幸的是，我们还没有找到如何在 RandomX 中利用分支预测的方法。因为 RandomX 是一个共识协议，所以所有的规则都必须提前制定，包括分支规则。完全可预测的分支不能依赖于任何 VM 寄存器的运行时值（因为寄存器值是伪随机且不可预测的），因此它们必须是静态的，因此可以通过专用硬件轻松优化。</p>
+<h4 id="2-6-2-CBRANCH-指令"><a href="#2-6-2-CBRANCH-指令" class="headerlink" title="2.6.2 CBRANCH 指令"></a>2.6.2 CBRANCH 指令</h4><p>因此，RandomX 使用跳跃概率为 1/256 的随机分支和依赖于整数寄存器值的分支条件。这些分支将被 CPU 预测为“未采用”。这些分支在大多数 CPU 设计中是“免费的”，除非它们被采用。虽然这没有利用分支预测器，但与非推测分支处理相比，推测设计将显着提高性能 - 有关更多信息，请参阅附录 B。</p>
+<p>分支条件和跳转目标的选择方式使得 RandomX 代码中的无限循环是不可能的，因为控制分支的寄存器永远不会在重复代码块中被修改。每条 CBRANCH 指令最多可以连续跳转两次。使用谓词执行 [<a href="https://en.wikipedia.org/wiki/Predication_(computer_architecture)" target="_blank" rel="noopener">22</a>] 处理 CBRANCH 是不切实际的，因为大部分时间都不采用分支。</p>
+<h3 id="2-7-指令级并行"><a href="#2-7-指令级并行" class="headerlink" title="2.7 指令级并行"></a>2.7 指令级并行</h3><p>CPU 使用几种利用执行代码的指令级并行性的技术来提高其性能。这些技术包括：</p>
+<ul>
+<li>拥有多个可以并行执行操作的执行单元（<em>超标量执行</em>）。</li>
+<li>执行指令不是按照程序顺序，而是按照操作数可用性的顺序（<em>乱序执行</em>）。</li>
+<li>预测分支将采用哪种方式来增强超标量和无序执行的好处。</li>
+</ul>
+<p>RandomX 受益于所有这些优化。详细分析见附录 B。</p>
+<h3 id="2-8-Scratchpad"><a href="#2-8-Scratchpad" class="headerlink" title="2.8 Scratchpad"></a>2.8 Scratchpad</h3><p>Scratchpad 用作读写存储器。它的大小被选择为完全适合 CPU 缓存。</p>
+<h4 id="2-8-1-Scratchpad-级别"><a href="#2-8-1-Scratchpad-级别" class="headerlink" title="2.8.1 Scratchpad 级别"></a>2.8.1 Scratchpad 级别</h4><p>Scratchpad 分为 3 个级别以模仿典型的 CPU 缓存层次结构 <a href="https://en.wikipedia.org/wiki/CPU_cache" target="_blank" rel="noopener">CPU_cache</a>。大多数 VM 指令访问“L1”和“L2”暂存器，因为 L1 和 L2 CPU 缓存位于靠近 CPU 执行单元的位置，并提供最佳的随机访问延迟。从 L1 和 L2 读取的比率为 3:1，这与典型延迟的反比相匹配（见下表）。</p>
+<table>
+<thead>
+<tr>
+<th>CPU μ 架构</th>
+<th>L1 延迟</th>
+<th>L2 延迟</th>
+<th>L3 延迟</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARM Cortex A55</td>
+<td>2</td>
+<td>6</td>
+<td>-</td>
+<td>[<a href="https://www.anandtech.com/show/11441/dynamiq-and-arms-new-cpus-cortex-a75-a55/4" target="_blank" rel="noopener">src</a>]</td>
+</tr>
+<tr>
+<td>AMD Zen+</td>
+<td>4</td>
+<td>12</td>
+<td>40</td>
+<td>[<a href="https://en.wikichip.org/wiki/amd/microarchitectures/zen%2B#Memory_Hierarchy" target="_blank" rel="noopener">src</a>]</td>
+</tr>
+<tr>
+<td>Intel Skylake</td>
+<td>4</td>
+<td>12</td>
+<td>42</td>
+<td>[<a href="https://en.wikichip.org/wiki/intel/microarchitectures/skylake_(client)#Memory_Hierarchy" target="_blank" rel="noopener">src</a>]</td>
+</tr>
+</tbody></table>
+<p>L3 缓存要大得多，并且离 CPU 内核更远。因此，它的访问延迟要高得多，并可能导致程序执行停顿。</p>
+<p>因此，RandomX 每次程序迭代仅对“L3”Scratchpad 执行 2 次随机访问（规范第 4.6.2 章中的第 2 步和第 3 步）。来自给定迭代的寄存器值被写入它们从中加载的相同位置，这保证了所需的缓存线已移动到更快的 L1 或 L2 缓存中。</p>
+<p>此外，从固定地址读取的整数指令也使用整个“L3”暂存器（规范的表 5.1.4），因为重复访问将确保缓存线将放置在 CPU 的 L1 缓存中。这表明 Scratchpad 级别并不总是直接对应于相同的 CPU 缓存级别。</p>
+<h3 id="2-9-数据集"><a href="#2-9-数据集" class="headerlink" title="2.9 数据集"></a>2.9 数据集</h3><p>由于 Scratchpad 通常存储在 CPU 缓存中，因此只有数据集访问使用内存控制器。</p>
+<p>RandomX 每次程序迭代从数据集随机读取一次（每个哈希结果 16384 次）。由于数据集必须存储在 DRAM 中，因此它提供了一个自然的并行化限制，因为 DRAM 每个存储体组每秒不能进行超过约 2500 万次随机访问。每个可单独寻址的银行组允许大约 1500 H/s 的吞吐量。</p>
+<p>所有数据集访问读取一个 CPU 缓存行（64 字节）并完全预取。执行规范第 4.6.2 章中描述的一个程序迭代的时间与典型的 DRAM 访问延迟（50-100 ns）大致相同。</p>
+<h4 id="2-9-1-缓存"><a href="#2-9-1-缓存" class="headerlink" title="2.9.1 缓存"></a>2.9.1 缓存</h4><p>用于光照验证和Dataset构建的Cache，比Dataset小8倍左右。为了保持恒定的区域时间乘积，每个数据集项都由 8 次随机缓存访问构成。</p>
+<p>由于 256 MiB 足够小，可以包含在芯片上，RandomX 使用自定义的高延迟、高功率混合函数（“SuperscalarHash”），这抵消了使用低延迟内存的好处，并且计算 SuperscalarHash 所需的能量变得轻巧模式非常低效的挖矿（见第 3.4 章）。</p>
+<p>由于使用了具有 3 次迭代的抗折衷 Argon2d，因此不可能使用少于 256 MiB 的内存。当使用 3 次迭代（passes）时，将内存使用量减半会使最佳权衡攻击的计算成本增加 3423 倍 <a href="https://eprint.iacr.org/2015/430.pdf" target="_blank" rel="noopener">Fast and Tradeoff-Resilient Memory-Hard Functions for Cryptocurrencies and Password Hashing</a></p>
+<h4 id="2-8-2-Scratchpad-写入"><a href="#2-8-2-Scratchpad-写入" class="headerlink" title="2.8.2 Scratchpad 写入"></a>2.8.2 Scratchpad 写入</h4><p>在 VM 执行期间，有两种方式修改 Scratchpad：</p>
+<ol>
+<li>在每次程序迭代结束时，所有寄存器值都写入“L3”暂存器（参见规范章节 4.6.2，步骤 9 和 11）。这在两个 64 字节的块中每次迭代总共写入 128 字节。</li>
+<li>ISTORE 指令执行显式存储。每个程序平均有 16 个商店，其中 2 个商店进入“L3”级别。每个 ISTORE 指令写入 8 个字节。</li>
+</ol>
+<p>下图显示了写入暂存器的分布示例。图像中的每个像素代表 Scratchpad 的 8 个字节。红色像素代表在散列计算期间至少被覆盖一次的便签本部分。 “L1”和“L2”级别位于左侧（几乎完全覆盖）。暂存器的右侧代表底部 1792 KiB。其中只有大约 66% 被覆盖，但写入是均匀随机分布的。</p>
+<p><img src="https://i.imgur.com/pRz6aBG.png" alt="Imgur" loading="lazy"></p>
+<p>有关 Scratchpad 熵的分析，请参见附录 D。</p>
+<h4 id="2-8-3-读写比例"><a href="#2-8-3-读写比例" class="headerlink" title="2.8.3 读写比例"></a>2.8.3 读写比例</h4><p>程序每次程序迭代平均对便笺簿进行 39 次读取（指令 IADD_M、ISUB_M、IMUL_M、IMULH_M、ISMULH_M、IXOR_M、FADD_M、FSUB_M、FDIV_M）和 16 次写入（指令 ISTORE）。额外的 128 个字节被隐式读取和写入以初始化和存储寄存器值。每次迭代从 Dataset 中读取 64 字节的数据。总共：</p>
+<ul>
+<li>每次程序迭代从内存读取的平均数据量为：39 * 8 + 128 + 64 = <strong>504 字节</strong>。</li>
+<li>每次程序迭代写入内存的平均数据量为：16 * 8 + 128 = <strong>256 字节</strong>。</li>
+</ul>
+<p>这接近于 2:1 的读/写比，这是 CPU 优化的。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/pow-algo-design/" rel="prev" title="PoW Algorithm Design">
+      <i class="fa fa-chevron-left"></i> PoW Algorithm Design
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/fit5163-sec-notes/" rel="next" title="fit5163-sec-notes">
+      fit5163-sec-notes <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%AE%BE%E8%AE%A1%E8%80%83%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">1. 设计考量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%8A%A8%E6%80%81%E5%B7%A5%E4%BD%9C%E9%87%8F%E8%AF%81%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 动态工作量证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1 生成随机程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-%E5%B0%86%E7%A8%8B%E5%BA%8F%E7%BF%BB%E8%AF%91%E6%88%90%E6%9C%BA%E5%99%A8%E7%A0%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1.2 将程序翻译成机器码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-3-%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.1.3 执行程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-4-%E8%AE%A1%E7%AE%97%E6%9C%80%E7%BB%88%E7%BB%93%E6%9E%9C"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.1.4 计算最终结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E2%80%9C%E7%AE%80%E6%98%93%E7%A8%8B%E5%BA%8F%E9%97%AE%E9%A2%98%E2%80%9D"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 “简易程序问题”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%88%86%E6%94%AF"><span class="nav-number">1.3.</span> <span class="nav-text">2.6 分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-1-%E5%88%86%E6%94%AF%E9%A2%84%E6%B5%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.6.1 分支预测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-2-CBRANCH-%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.6.2 CBRANCH 指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-%E6%8C%87%E4%BB%A4%E7%BA%A7%E5%B9%B6%E8%A1%8C"><span class="nav-number">1.4.</span> <span class="nav-text">2.7 指令级并行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-Scratchpad"><span class="nav-number">1.5.</span> <span class="nav-text">2.8 Scratchpad</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8-1-Scratchpad-%E7%BA%A7%E5%88%AB"><span class="nav-number">1.5.1.</span> <span class="nav-text">2.8.1 Scratchpad 级别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.6.</span> <span class="nav-text">2.9 数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-9-1-%E7%BC%93%E5%AD%98"><span class="nav-number">1.6.1.</span> <span class="nav-text">2.9.1 缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8-2-Scratchpad-%E5%86%99%E5%85%A5"><span class="nav-number">1.6.2.</span> <span class="nav-text">2.8.2 Scratchpad 写入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8-3-%E8%AF%BB%E5%86%99%E6%AF%94%E4%BE%8B"><span class="nav-number">1.6.3.</span> <span class="nav-text">2.8.3 读写比例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : 'd8f48d2cfdfd8f1c12d87a638bfd3489',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

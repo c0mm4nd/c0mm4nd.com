@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="基于区块链的加密货币通过维护全球分布式但同步的分类账区块链来实现点对点电子价值转移。任何独立的观察者都可以验证区块链的当前状态以及分类帐上所有交易的有效性。在比特币中，这项创新要求交易的所有细节都是公开的：发送方、接收方和转账金额。一般来说，我们将支付的隐私分为两个属性：（1）匿名性，在交易中隐藏发送者和接收者的身份；（2）保密性，隐藏转移的金额。虽然比特币通过比特币地址与现实世界身份的不可链接性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bulletproof: 适用于机密交易及更多方面的简短证明">
+<meta property="og:url" content="https://c0mm4nd.com/post/bulletproof-paper/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="基于区块链的加密货币通过维护全球分布式但同步的分类账区块链来实现点对点电子价值转移。任何独立的观察者都可以验证区块链的当前状态以及分类帐上所有交易的有效性。在比特币中，这项创新要求交易的所有细节都是公开的：发送方、接收方和转账金额。一般来说，我们将支付的隐私分为两个属性：（1）匿名性，在交易中隐藏发送者和接收者的身份；（2）保密性，隐藏转移的金额。虽然比特币通过比特币地址与现实世界身份的不可链接性">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-12T17:25:28.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:21:35.798Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
+<meta property="article:tag" content="crypto">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://c0mm4nd.com/post/bulletproof-paper/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Bulletproof: 适用于机密交易及更多方面的简短证明 | Talkless</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Talkless</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">63</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/post/bulletproof-paper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Bulletproof: 适用于机密交易及更多方面的简短证明
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-13 01:25:28" itemprop="dateCreated datePublished" datetime="2021-08-13T01:25:28+08:00">2021-08-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-11 17:21:35" itemprop="dateModified" datetime="2021-10-11T17:21:35+08:00">2021-10-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>基于区块链的加密货币通过维护全球分布式但同步的分类账区块链来实现点对点电子价值转移。任何独立的观察者都可以验证区块链的当前状态以及分类帐上所有交易的有效性。在比特币中，这项创新要求交易的所有细节都是公开的：发送方、接收方和转账金额。一般来说，我们将支付的隐私分为两个属性：（1）匿名性，在交易中隐藏发送者和接收者的身份；（2）保密性，隐藏转移的金额。虽然比特币通过比特币地址与现实世界身份的不可链接性提供了一些弱匿名性，但它缺乏任何机密性。这对比特币来说是一个严重的限制，对于许多用例来说可能是禁止的。如果这意味着他们的工资发布在公共区块链上，员工是否愿意以比特币获得他们的工资？</p>
+<p>为了解决交易金额的保密问题，Maxwell [Max16] 引入了机密交易（CT），其中涉及的每笔交易金额都使用对金额的承诺隐藏起来，不让公众看到。这种方法似乎阻止了区块链的公开验证；观察者无法再检查交易输入的总和是否大于交易输出的总和，以及所有交易值是否为正。这可以通过在每笔交易中包含机密交易有效性的零知识证明来解决。</p>
+<p>当前关于 CT 零知识证明 [PBF] 的提议要么大得令人望而却步，要么需要可信的设置。两者都不是可取的。虽然可以使用简洁的零知识证明 (SNARK) [BSCG13,GGPR13]，但它们需要可信设置，这意味着每个人都需要相信设置已正确执行。人们可以通过使用 STARK [BSBTHR18] 来避免可信设置，但由此产生的范围证明虽然渐近有效，但实际上比目前提出的解决方案还要大。</p>
+<p>如本文所述，没有可信设置的简短非交互式零知识证明在加密货币领域有许多应用。在证明通过网络传输或长期存储的任何分布式系统中，简短证明了总体成本的降低。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>我们首先讨论 Bulletproofs 的几个应用程序以及特定于这些应用程序的相关工作。 其他相关工作在第 1.3 节中讨论。</p>
+<h3 id="机密交易和-Mimblewimble"><a href="#机密交易和-Mimblewimble" class="headerlink" title="机密交易和 Mimblewimble"></a>机密交易和 Mimblewimble</h3><p>比特币和其他类似的加密货币使用基于交易输出的系统，其中每笔交易完全花费之前未花费交易的输出。 这些未花费的交易输出称为 UTXO。<br>比特币允许将单个 UTXO 用于许多不同的输出，每个输出都与不同的地址相关联。 要花费一个 UTXO，用户必须提供一个签名，或者更准确地说是一个 scriptSig，使交易 SCRIPT 能够评估为真 [BMC`15]。<br>除了 scriptSig 的有效性外，矿工还验证交易是否花费了之前未花费的输出，并且输入的总和大于输出的总和</p>
+<p>Maxwell [Max16] 引入了“机密交易”的概念，其中交易中的输入和输出金额隐藏在 Pedersen 承诺中 [P<code>91]。  为了实现公开验证，交易包含一个零知识证明，即提交输入的总和大于提交输出的总和，并且所有输出都是正的，即它们位于区间 $[0, 2^n]$， 其中 $2^n$ 远小于组大小。  当前所有机密交易的实现 [Max16, MP15, PBF</code>, NM`16] 都使用提交值的range proof范围证明，其中证明大小在 n 中是线性的。<br>这些范围证明是机密交易规模的主要贡献者。 在当前的实现中 [Max16]，只有两个输出和 32 位精度的机密交易是 5.4 KB 字节，其中 5 KB 分配给范围证明。<br>即使最近进行了优化，范围证明仍将占用 3.8 KB。</p>
+<p>我们在第 6 节中展示了 Bulletproofs 大大改进了这一点，即使对于单个范围证明，同时以边际额外成本（64 字节）将范围证明精度加倍。<br>logarithmic proof对数证明的大小还使证明者能够聚合多个范围证明，例如对于具有多个输出的交易，转换为一个简短的证明。<br>使用 Bulletproofs，$m$ 范围证明只是单个范围证明上的 $O(log(m))$ 附加群元素。这对于当前形式的机密交易已经很有用，因为大多数比特币交易都有两个或多个输出。<br>它还提供了一个有趣的机会，可以将来自不同方的多个范围证明聚合为一个证明，例如在 CoinJoin 交易中需要的证明 [Max13]。<br>在 4.5 节中，我们提出了一个简单有效的 MPC 协议，该协议允许多个用户使用单个聚合范围证明生成单个交易。<br>用户不必向任何其他参与者透露他们的机密交易价值。</p>
+<p>机密交易实现可用于侧链 [PBF<code>]、私有区块链 [And17] 和流行的注重隐私的加密货币 Monero [NM</code>16]。 所有这些实现都将受益于 Bulletproofs。<br>在撰写本文时，比特币拥有来自 2200 万笔交易的大约 5000 万个 UTXO（参见 statoshi.info）。 使用比特币的 52 位表示，可以覆盖从 1 satoshi 到 2100 万比特币的所有值，这导致使用当前系统的范围证明数据大约为 160GB。<br>使用聚合的 Bulletproofs，所有 UTXO 的范围证明将需要不到 17GB，大小减少约 10 倍</p>
+<h4 id="Mimblewimble"><a href="#Mimblewimble" class="headerlink" title="Mimblewimble"></a>Mimblewimble</h4><p>最近，有人提议对机密交易进行改进，称为 Mimblewimble [Jed16,Poe]，可进一步节省成本。</p>
+<p>Jedusor [Jed16] 意识到 Pedersen 对 0 的承诺可以被视为 ECDSA 公钥，并且对于有效的机密交易，输出、输入和交易费用之间的差异必须为 0。因此，构建机密交易的证明者可以签名以输出和输入的差异作为公钥的交易。这一小改动消除了对 scriptSig 的需求，极大地简化了机密交易的结构。<br>Poelstra [Poe] 进一步完善和改进了 Mimblewimble，并表明这些改进可以实现一个大大简化的区块链，其中所有花费的交易都可以被修剪，新节点可以有效地验证整个区块链，而无需下载任何旧的和花费的交易。<br>随着进一步优化，这会导致高度压缩的区块链。它仅包含一小部分区块头以及剩余的未花费交易输出和随附的范围证明以及每笔交易不可修剪的 32 字节。 Mimblewimble 还允许在将交易发送到区块链之前进行聚合。</p>
+<p>Mimblewimble 区块链随着 UTXO 集的大小而增长。<br>使用 Bulletproofs，它只会随着具有未花费输出的交易数量而增长，这远小于 UTXO 集的大小。<br>总体而言，Bulletproofs 不仅可以替代机密交易中的范围证明，而且还可以帮助 Mimblewimble 成为一个实用的方案，其区块链比当前的比特币区块链小得多。</p>
+<h3 id="Provisions-协议"><a href="#Provisions-协议" class="headerlink" title="Provisions 协议"></a>Provisions 协议</h3><p>Dagher et al. [DBB`15] 引入了 Provisions 协议，该协议允许比特币交易所证明它们具有偿付能力，而无需透露任何额外信息。<br>该协议主要依靠范围证明来防止交易所插入带有负余额的假账户。<br>这些占用超过 13GB 的范围证明是为具有 200 万客户的大型交易所提供近 18GB 证明大小的主要贡献者。<br>样张大小实际上与客户数量呈线性关系。<br>由于在该协议中，一方（交易所）必须同时构建多个范围证明，因此第 4.3 节中的通用 Bulletproofs 协议是 Provisions 中使用的 NIZK 证明的自然替代品。<br>使用第 6 节中列出的证明大小，我们获得范围证明在我们的协议中将占用不到 2 KB。<br>此外，证明的其他部分可以使用第 5 节中的协议进行类似压缩。<br>然后证明将由每个客户的一个承诺主导，大小为 62 MB。这大约比目前实施的规定小 300 倍。</p>
+<h4 id="可验证洗牌-verifiable-shuffle"><a href="#可验证洗牌-verifiable-shuffle" class="headerlink" title="可验证洗牌 verifiable shuffle"></a>可验证洗牌 verifiable shuffle</h4><p>考虑两个提交值列表 $x_1,…,x_n$ 和 $y_1,…,y_n$ 。目的是证明第二个列表是第一个列表的排列。<br>这个问题称为<strong>可验证洗牌 verifiable shuffle</strong>。<br>它在投票 [FS01,Nef01]、混合网络 [Cha82] 和偿付能力证明 [DBB`15] 中有许多应用。<br>Neff [Nef01] 给出了可验证 shuffle 的实际实现，后来对其进行了改进 [Gro03,GI08a]。 Neff [Nef01] 给出了可验证 shuffle 的实际实现，后来对其进行了改进 [Gro03,GI08a]。<br>目前最有效的 shuffle [BG12] 的大小为 $O(\sqrt{n})$。</p>
+<p>Bulletproofs 可用于创建大小为 $O(\log{n})$ 的可验证洗牌。<br>这两个commitment列表作为第 5 节中电路协议的输入。<br>回路可以通过对两个列表进行排序然后检查它们是否相等来实现混洗。<br>排序回路可以使用 $O(n\cdot\log{n})$ 乘法来实现，这意味着证明大小将仅为 Oplogpnqq。<br>这比以前提出的协议小得多。<br>鉴于 Bulletproofs 的具体效率，使用 Bulletproofs 进行可验证的 shuffle 在实践中将非常有效。<br>构建证明并验证它只需要$n$的线性时间。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/crypto/" rel="tag"># crypto</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/fit5163-sec-notes/" rel="prev" title="fit5163-sec-notes">
+      <i class="fa fa-chevron-left"></i> fit5163-sec-notes
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/fit5137-adv-db-notes/" rel="next" title="Notes for FIT5137: Advanced database technology">
+      Notes for FIT5137: Advanced database technology <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%AF%86%E4%BA%A4%E6%98%93%E5%92%8C-Mimblewimble"><span class="nav-number">1.1.</span> <span class="nav-text">机密交易和 Mimblewimble</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mimblewimble"><span class="nav-number">1.1.1.</span> <span class="nav-text">Mimblewimble</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Provisions-%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.</span> <span class="nav-text">Provisions 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%AA%8C%E8%AF%81%E6%B4%97%E7%89%8C-verifiable-shuffle"><span class="nav-number">1.2.1.</span> <span class="nav-text">可验证洗牌 verifiable shuffle</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : 'f84a3726f327c855e4e53337ae65c8f9',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

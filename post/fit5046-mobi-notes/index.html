@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这门课说的是Mobile，但是实际上在开发时就完全是Android，至少到w5期中都没见iOS的影子。 另外这门也不纯粹是开发（虽然占大头），也有读paper的ass">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes for FIT5046: Mobile and distributed computing systems">
+<meta property="og:url" content="https://c0mm4nd.com/post/fit5046-mobi-notes/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="这门课说的是Mobile，但是实际上在开发时就完全是Android，至少到w5期中都没见iOS的影子。 另外这门也不纯粹是开发（虽然占大头），也有读paper的ass">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5046-mobi-notes/image-20210604142704800.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5046-mobi-notes/image-20210604235524113.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5046-mobi-notes/image-20210604235529057.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5046-mobi-notes/image-20210605164634294.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5046-mobi-notes/image-20210605164642991.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5046-mobi-notes/image-20210605165212828.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5046-mobi-notes/image-20210605215713114.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5046-mobi-notes/image-20210605215749334.png">
+<meta property="article:published_time" content="2021-10-11T09:21:35.805Z">
+<meta property="article:modified_time" content="2021-10-11T09:21:35.805Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="distributed system">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://c0mm4nd.com/post/fit5046-mobi-notes/image-20210604142704800.png">
+
+<link rel="canonical" href="https://c0mm4nd.com/post/fit5046-mobi-notes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Notes for FIT5046: Mobile and distributed computing systems | Talkless</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Talkless</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">63</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/post/fit5046-mobi-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes for FIT5046: Mobile and distributed computing systems
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-11 17:21:35" itemprop="dateCreated datePublished" datetime="2021-10-11T17:21:35+08:00">2021-10-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这门课说的是Mobile，但是实际上在开发时就完全是Android，至少到w5期中都没见iOS的影子。</p>
+<p>另外这门也不纯粹是开发（虽然占大头），也有读paper的ass</p>
+<span id="more"></span>
+
+<h2 id="W1-理论介绍"><a href="#W1-理论介绍" class="headerlink" title="W1 理论介绍"></a>W1 理论介绍</h2><p>最后考试部分为part2与REST</p>
+<p>（不考的part1是课程介绍）</p>
+<h3 id="分布式的定义"><a href="#分布式的定义" class="headerlink" title="分布式的定义"></a>分布式的定义</h3><p>一系列自制系统实体组成计算上的范式，实体在地理上分散，之间能够通过网络交流与交换信息以达成特定任务</p>
+<p>垂直（V）分布：不同业务逻辑分层到不同机器上</p>
+<p>水平（H）分布： 单个层、组件分布到众多机器来扩容（分布式数据库）</p>
+<h4 id="新兴概念"><a href="#新兴概念" class="headerlink" title="新兴概念"></a>新兴概念</h4><ul>
+<li>节点不固定的移动计算</li>
+<li>无处不在的计算，其中节点嵌入我们的环境中</li>
+<li>上下文感知计算</li>
+<li>IoT（物联网）</li>
+<li>云计算</li>
+<li>边缘或雾计算</li>
+</ul>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><ul>
+<li><p><strong>C/S</strong></p>
+</li>
+<li><p><strong>P2P</strong></p>
+</li>
+</ul>
+<h4 id="SOA-Service-Oriented-Architecture"><a href="#SOA-Service-Oriented-Architecture" class="headerlink" title="SOA (Service-Oriented Architecture)"></a>SOA (Service-Oriented Architecture)</h4><p>应用程序功能作为松散耦合的服务提供<br>使用标准接口（Web 服务）来调用、发布和发现服务<br>通过接口进行基于消息的交互<br>重用公共服务、服务组合和互操作性以支持不同平台</p>
+<h4 id="Web-Services"><a href="#Web-Services" class="headerlink" title="Web Services"></a>Web Services</h4><p>Web 服务是一段软件/代码，旨在支持通过网络 (W3C) 进行可互操作的机器对机器交互<br>Web 服务提供了一个接口，使一组操作可供公众使用<br>它们支持访问业务逻辑、数据和流程或其他服务<br>它们可以被人类、机器或其他 WS 访问<br>使用如此多的支持工具进行开发既简单又便宜<br>SOAP 和 RESTful Web 服务（RESTful Web API）</p>
+<h4 id="SOAP-Simple-Object-Access-Protocol"><a href="#SOAP-Simple-Object-Access-Protocol" class="headerlink" title="SOAP (Simple Object Access Protocol)"></a>SOAP (Simple Object Access Protocol)</h4><p>XML, WSDL and UDDI</p>
+<p>WSDL 用于定义和描述 SOAP Web 服务</p>
+<p>UDDI（通用描述、发现和集成）用于使用目录注册和发现 SOAP Web 服务（就route）</p>
+<p>SOAP 涵盖以下主要领域：</p>
+<ul>
+<li>消息结构：提供一种消息格式，描述消息如何打包到 XML 文档中</li>
+<li>处理模型：处理 SOAP 消息的规则和涉及处理 SOAP 消息的实体的简单分类。 消息的哪些部分应该由谁阅读以及如何在内容不被理解的情况下做出反应</li>
+<li>可扩展性模型：如何使用特定于应用程序的构造来扩展基本消息构造</li>
+<li>协议绑定框架：允许使用不同的协议（HTTP、SMTP、TCP 等）传输 SOAP 消息<ul>
+<li>HTTP 的具体绑定</li>
+</ul>
+</li>
+</ul>
+<h5 id="SOAP-Message"><a href="#SOAP-Message" class="headerlink" title="SOAP Message"></a>SOAP Message</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">soap:Envelope</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:soap</span>=<span class="string">&quot;http://www.w3.org/2001/12/soap-envelope&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">soap:encodingStyle</span>=<span class="string">&quot;http://www.w3.org/2001/12/soap-encoding&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">soap:Header</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--header is optional--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">soap:Header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">soap:Body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">soap:Fault</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--Fault is optional--&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">soap:Fault</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">soap:Body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">soap:Envelope</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Header: </p>
+<ul>
+<li>可选的</li>
+<li>SOAP Header 元素包含特定于应用程序的信息: 身份验证（PIN，密码）、加密、缓冲/缓存等</li>
+<li>如果Header 元素存在，它必须是Envelope 元素的第一个子元素。</li>
+<li>SOAP Header 中定义的属性（mustUnderstand）定义了接收者应该如何处理 SOAP 消息。如果 mustUnderstand 的值为 1，则中间节点必须对header中间内容进行处理，否则会发生错误</li>
+</ul>
+<p>Body：</p>
+<ul>
+<li>m:XXX 命名空间限定 namespace-qualified</li>
+</ul>
+<h5 id="http-binding"><a href="#http-binding" class="headerlink" title="http binding"></a>http binding</h5><p>Content-Type: application/soap+xml;</p>
+<h4 id="WSDL-的作用"><a href="#WSDL-的作用" class="headerlink" title="WSDL 的作用"></a>WSDL 的作用</h4><p>由 URI 标识的软件应用程序，其接口和绑定能够被定义、描述和发现为 XML 工件.</p>
+<p>即为类A与处理B之间的绑定，让接收到A之后能开始运行B（routeMap）</p>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><p>CS</p>
+<h4 id="约束：Client-Server："><a href="#约束：Client-Server：" class="headerlink" title="约束：Client-Server："></a>约束：Client-Server：</h4><p>分离关注点</p>
+<ul>
+<li>将用户界面问题（例如客户端）与数据存储问题（例如服务器）分开</li>
+<li>允许组件独立进化</li>
+<li>提高用户界面跨多个平台的可移植性</li>
+<li>通过简化服务器组件提高可扩展性</li>
+</ul>
+<h4 id="Stateless"><a href="#Stateless" class="headerlink" title="Stateless"></a>Stateless</h4><p>从客户端到服务器的每个请求都必须包含理解请求所需的所有信息</p>
+<p>不能利用服务器上任何存储的上下文</p>
+<p>提高可扩展性和可靠性</p>
+<h4 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h4><p>对请求的响应中的数据被隐式或显式标记为可缓存或不可缓存</p>
+<p>如果响应是可缓存的，则该响应可以在以后重复用于等效请求</p>
+<ul>
+<li>提高网络效率和性能</li>
+<li>降低可靠性（陈旧数据的可能性）</li>
+</ul>
+<h4 id="Uniform-Interface"><a href="#Uniform-Interface" class="headerlink" title="Uniform Interface"></a>Uniform Interface</h4><p>所有资源都使用通用接口访问（例如， HTTP GET、POST、PUT、DELETE）</p>
+<h4 id="Layered-System"><a href="#Layered-System" class="headerlink" title="Layered System"></a>Layered System</h4><p>允许架构由分层层组成</p>
+<ul>
+<li>每个组件都不能“看到”超出它们与之交互的直接层</li>
+<li>客户端不知道他们调用的服务也可能调用其他服务</li>
+<li>这可用于通过启用跨多个网络和处理器的服务负载平衡来提高可扩展性</li>
+</ul>
+<h4 id="Code-On-Demand"><a href="#Code-On-Demand" class="headerlink" title="[Code-On-Demand]"></a>[Code-On-Demand]</h4><p>“允许通过下载和执行小程序或脚本形式的代码来扩展客户端功能。”</p>
+<h2 id="W2-安卓开发基础"><a href="#W2-安卓开发基础" class="headerlink" title="W2 安卓开发基础"></a>W2 安卓开发基础</h2><p>最基础的EventListener和Spinner（相当于下拉选择器）</p>
+<p>考点：</p>
+<ul>
+<li>3种 mobile applications</li>
+<li>Views, ViewGroupsand Layouts (what they are and their purpose)</li>
+<li>All the <strong>important files</strong> in Android, what they are and their purpose</li>
+</ul>
+<p>Spinner不考</p>
+<h3 id="mobile-app分类"><a href="#mobile-app分类" class="headerlink" title="mobile app分类"></a>mobile app分类</h3><ul>
+<li><p>Native App：略</p>
+</li>
+<li><p>Web Apps：说的不是Cordova这种哦，是纯网页的，没任何线下的，比如bitcointalk网站</p>
+</li>
+<li><p>Progressive Web App (PWA)：React Native居然算PWA。。。（flutter应该也算了</p>
+</li>
+</ul>
+<h3 id="基础布局-Layout"><a href="#基础布局-Layout" class="headerlink" title="基础布局 Layout"></a>基础布局 Layout</h3><p>模拟考题内容</p>
+<p>作为APP组件，定义app界面（how the app will look like）</p>
+<h4 id="Layout，View-amp-ViewGroup关系"><a href="#Layout，View-amp-ViewGroup关系" class="headerlink" title="Layout，View &amp; ViewGroup关系"></a>Layout，View &amp; ViewGroup关系</h4><ul>
+<li>Layout定义了活动/片段中 UI 的结构</li>
+<li>Layout的元素由 View 和 ViewGroup 对象的层次结构组成</li>
+<li>ViewGroup 就像一个<strong>不可见的容器</strong>，可以包含其他View</li>
+<li>ViewGroup 是 <strong>Layout</strong> 和 <strong>View</strong> 容器的 <strong>基类</strong> （ViewGroup是View的子类</li>
+<li>View 表示 UI 组件的<strong>基本构建块</strong></li>
+<li>基类是类似按钮和文本字段等小部件</li>
+</ul>
+<h4 id="常见Layout"><a href="#常见Layout" class="headerlink" title="常见Layout"></a>常见Layout</h4><p>ConstraintLayout, RelativeLayout, Linear layouts (Vertical or Horizontal), FrameLayout, GridLayout</p>
+<h5 id="ConstraintLayout"><a href="#ConstraintLayout" class="headerlink" title="ConstraintLayout"></a>ConstraintLayout</h5><p>Android Studio 中的默认布局</p>
+<p>它支持创建复杂的布局</p>
+<p>它只能使用布局编辑器的可视化工具构建（？我明明盲着编辑的</p>
+<p>类似于相对布局，它创建了一个平面视图层次结构</p>
+<p>它需要添加约束constraints来定义视图的位置</p>
+<p>每个View需要至少一个水平和一个垂直约束</p>
+<h3 id="重要文件"><a href="#重要文件" class="headerlink" title="重要文件"></a>重要文件</h3><ul>
+<li>manifests<ul>
+<li>manifests/AndroidManifest.xml</li>
+<li>包括有关应用程序的重要信息：应用程序组件的描述，例如Activity和Service；声明所需的权限</li>
+</ul>
+</li>
+<li>GradleScripts： Android build gradle提供了一个自定义构建工具来管理和配置构建apk文件，有助于导入、下载和添加本地和远程依赖项<ul>
+<li>build.gradle(Project: APPLICATION_NAME) 作用域为整个项目<ul>
+<li>使您能够轻松导入和使用远程存储库</li>
+<li>存储库Repositories 是指存储所有库和jar文件的位置/目录，Repositories 包括 google() 和 jcenter() maven 存储库</li>
+<li>所有 Jetpack 组件都可以通过谷歌 Maven 存储库 google() 获得，您可以添加项目中所有模块使用的仓库 例如<code>maven &#123; url&quot;https://jitpack.io&quot; &#125;</code></li>
+</ul>
+</li>
+<li>build.gradle(Module: app) 作用域为单个Module<ul>
+<li>包含有关 compileSDKversion, minSdkVersion, targetSdkVersion、版本代码version code和名称name 等信息</li>
+<li>您可以在此处添加和配置应用程序依赖项，但请确保它们的存储库包含在 build.gradle(Project) 中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>java<ul>
+<li>java/PACKAGE_NAME/MainActivity.java 定义应用程序的行为方式以及与用户的交互方式</li>
+</ul>
+</li>
+<li>res<ul>
+<li>res/drawable</li>
+<li>res/layout/activity_main.xml(and any other layout files)</li>
+<li>res/menu：目录的Layout文件</li>
+<li>res/values/strings.xml<ul>
+<li>可以在此文件中包含字符串常量</li>
+<li>能够在一个位置管理所有 UI 文本，更容易在应用中查找和更新文本</li>
+<li>在Java代码中引用方式：<code>String message = getString(R.string.edit_message);</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h3><p>在构建和运行应用程序时，在 MainActivity 类中，<code>setContentView()</code> 方法加载并扩充作为参数传递给它的 XML 布局文件并创建视图层次树</p>
+<h4 id="Activity-生命周期"><a href="#Activity-生命周期" class="headerlink" title="Activity 生命周期"></a>Activity 生命周期</h4><ol>
+<li>onCreate() 初始化活动组件，例如 创建视图或用数据填充列表（这里必须调用 setContentView() 方法</li>
+<li>OnStart() Activity变得可见</li>
+<li>onResume() 已准备好接受用户输入，在活动堆栈的顶部（即，在前台）</li>
+<li>onPause() 失去焦点，将进入停止或恢复状态</li>
+<li>onStop() 不再可见</li>
+<li>onDestroy() 即将终止</li>
+</ol>
+<h3 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h3><p>简洁明了</p>
+<p>安全的（避免 NullPointerException 问题）</p>
+<p>工具友好</p>
+<p>可以在JVM上工作，可以与 Java 和 Android 完全互操作</p>
+<p>Kotlin 类中的属性被声明为 var或者 val</p>
+<p>用于可变属性的变量，例如 var message: String=”你好”</p>
+<p>valis 用于只读属性，例如 val message: String=”你好”</p>
+<p>必须初始化属性或必须提供自定义访问器</p>
+<p>lateinit 修饰符 可用于声明为非空的属性，以便稍后对其进行初始化 <code>private lateinit var binding: ActivityMainBinding</code></p>
+<h4 id="空值安全-Null-Safe"><a href="#空值安全-Null-Safe" class="headerlink" title="空值安全 Null Safe"></a>空值安全 Null Safe</h4><p>Kotlin 的 null 安全旨在消除 Java 的 NullPointerException(NPE)</p>
+<p>在 Kotlin 中，常规属性不能为空（非空类型）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var message: String=&quot;Hello&quot;</span><br><span class="line">message = null // 在编译时产生错误</span><br></pre></td></tr></table></figure>
+
+<p>要允许空值并将属性声明为可空值，请使用“?”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var message：String? = &quot;Hello&quot;</span><br><span class="line">message = null // 现在可以了</span><br></pre></td></tr></table></figure>
+
+<p>使用可空引用时：</p>
+<ul>
+<li>选项 1：检查条件是否为空，例如 <code>if (message != null)</code></li>
+<li>选项 2：通过使用此符号 ? 来使用安全调用。例如 <code>println(message?.length)</code></li>
+<li>选项 3：使用!!运算符将任何值转换为非空类型并在值为空时抛出异常（行为与 Java 相同）<code>val = b!!.length</code></li>
+</ul>
+<h4 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h4><p>类的主要构造函数可以是类头类的一部分</p>
+<p><code>class Person(varvalue: Double) &#123; /*...*/ &#125;</code></p>
+<p>主构造函数不能包含任何代码，因此初始化代码放置在初始化程序块中，例如 <code>init&#123; if(value&lt;1) value=1.0 &#125;</code></p>
+<p>默认情况下，Kotlin类是final（不能继承）。<br>要使类可继承，请使用 open 关键字，例如 <code>open class Person</code></p>
+<p>使用单个冒号字符 (:) 继承，而不是 Java的extends 关键字</p>
+<p>不需要 new 关键字，并且要创建对匿名内部类的引用，它使用“对象”</p>
+<p>在 Kotlin 中，所有方法都是函数（fun）</p>
+<p>冒号 (:) 在函数中用于返回类型，例如 fundoubleIt(x: Int): Int{ …}</p>
+<p>Protected 具有私有的可见性和子类的可见性（类似于 Java 的私有和公共可见性）</p>
+<h4 id="Backing-fields-amp-properties"><a href="#Backing-fields-amp-properties" class="headerlink" title="Backing fields &amp; properties"></a>Backing fields &amp; properties</h4><ul>
+<li><p>Backing fields 支持字段：在访问器中使用字段标识符</p>
+<ul>
+<li><p>‘field’ 关键字只能在属性被初始化时使用</p>
+</li>
+<li><p>```kotlin<br>varname:String=”default”<br>get() = field.capitalize()<br>set(value){</p>
+<pre><code>if(value.isEmpty()) &#123;
+    field = &quot;blank&quot;
+&#125;
+</code></pre>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- Backing properties 支持属性：当支持字段不足以满足我们需要做的事情时使用，使用概念上相同但一个具有更广泛可见性的两个属性，另一个是实现细节</span><br><span class="line"></span><br><span class="line">  - binding 属性的作用域仅在 onCreateView 和 onDestroyView 之间</span><br><span class="line"></span><br><span class="line">  - ```kotlin</span><br><span class="line">    private var _binding: ViewFragmentBinding? = null</span><br><span class="line">    private val binding get() = _binding!!</span><br><span class="line">    </span><br><span class="line">    // ...</span><br><span class="line">    </span><br><span class="line">    _binding = ViewFragmentBinding.inflate(inflater, container, false)</span><br><span class="line">    val view = binding.root</span><br><span class="line">    </span><br><span class="line">    // ...</span><br><span class="line">    </span><br><span class="line">    override fun onDestroyView() &#123;</span><br><span class="line">    	super.onDestroyView()</span><br><span class="line">    	_binding = null</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="W3-多Activity项目开发"><a href="#W3-多Activity项目开发" class="headerlink" title="W3 多Activity项目开发"></a>W3 多Activity项目开发</h2><p>Multiple Activities结构的APP 以及用于在Activities直接传输消息的Intent</p>
+<ul>
+<li>Views 和 Event Handling（例如按钮onClick）</li>
+<li>Views 和 Adapters （ Spinner ）</li>
+<li>View binding</li>
+<li>Intent和Multi-Activity</li>
+<li>Bundle</li>
+<li>Parcelable</li>
+</ul>
+<h3 id="Events-amp-Event-Listeners"><a href="#Events-amp-Event-Listeners" class="headerlink" title="Events &amp; Event Listeners"></a>Events &amp; Event Listeners</h3><h3 id="View-Binding"><a href="#View-Binding" class="headerlink" title="View Binding"></a>View Binding</h3><p>优势：</p>
+<ul>
+<li>减少样板代码</li>
+<li>空值安全 - 视图绑定创建对视图的直接引用，因此它消除了空指针异常的风险</li>
+<li>类型安全：每个绑定类中的字段都具有与视图匹配的类型，因此它避免了类转换异常</li>
+</ul>
+<h3 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h3><ul>
+<li>启动Activity</li>
+<li>启动Service</li>
+<li>启动广播Broadcast （让其他App可接受到</li>
+<li>Activity之间传递信息</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>,SecondActivity.class);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+
+<p>类似于建立一个通道，然后往通道塞东西，在通道另一端主动收取（go chan？</p>
+<p>而且还是个双向的，对方也可以取这个来返回消息</p>
+<h4 id="Use-Intent-to-Receive-Results"><a href="#Use-Intent-to-Receive-Results" class="headerlink" title="Use Intent to Receive Results"></a>Use Intent to Receive Results</h4><ol>
+<li>startActivity() 方法启动另一个活动（单向）</li>
+<li>开始另一个Activity并接收结果：</li>
+<li>第一个Activity：<ol>
+<li>唤起<code>startActivityForResult(Intent intent, int requestCode)</code>， 你提供一个像 1 (requestCode&gt;= 0) 这样的值，这样你就可以得到结果.</li>
+<li>实现 <code>onActivityResult()</code> 方法接收结果</li>
+</ol>
+</li>
+<li>第二个Activity：<ol>
+<li>调用 setResult() 方法设置将返回到第一个活动的结果。<code>void setResult(int resultCode, Intent intent)</code>，result code可以是标准结果RESULT_CANCELED，或者RESULT_OK<br>您不创建新的 Intent，而是使用第一个Activity给的<code>Intent returnIntent= getIntent();</code></li>
+<li>将结果发送给调用者后，调用<code>finish()</code> 方法关闭并销毁Activity</li>
+</ol>
+</li>
+</ol>
+<h3 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h3><p>有了Intent，要发送一组数据项，您可以使用 Bundle</p>
+<p>您将所有数据项添加到一个包对象，然后通过调用 putExtras() 将包添加到 Intent，例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Bundle bundle=<span class="keyword">new</span> Bundle();</span><br><span class="line"></span><br><span class="line">bundle.putString(“name”, “Helen”);</span><br><span class="line">bundle.putString(“surname”, “Jones”);</span><br><span class="line">bundle.putString(“phone”, “<span class="number">9902000</span>”);</span><br><span class="line"></span><br><span class="line">intent.putExtras(bundle);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+
+<p>在第二个Activity中从bundle中检索数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Bundle bundle=getIntent(). getExtras();</span><br><span class="line">String name=bundle.getString(“name”);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Parcelable"><a href="#Parcelable" class="headerlink" title="Parcelable"></a>Parcelable</h3><p>Bundle传的都是KV的，如果要传的是Object就需要实现个Parcelable</p>
+<p>与 Java 的序列化相比，Android Parcelable 是一个用于序列化对象并更快地（具有更好的性能）传输对象及其状态和属性的接口</p>
+<ol>
+<li>添加一个parcelable<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bundle.putParcelable(<span class="string">&quot;student1&quot;</span>, student);</span><br><span class="line">intent.putExtras(bundle);</span><br></pre></td></tr></table></figure></li>
+<li>在其他Activity检索parcelable<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Bundle bundle= getIntent().getExtras();</span><br><span class="line">bundle.getParcelable(“student1&quot;);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>但这<strong>只有在学生类是 Parcelable 时才有效</strong></p>
+<p>实现Parcelable</p>
+<ol>
+<li>implements Parcelable</li>
+<li>加个<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel parcel, <span class="keyword">int</span> flags)</span> </span>&#123;</span><br><span class="line">  parcel.writeInt(id);</span><br><span class="line">  parcel.writeString(name);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>写个无脑赋值constructor</li>
+<li>加个public int describeContents()</li>
+<li>加个<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Creator&lt;T&gt; CREATOR = <span class="keyword">new</span> Creator&lt;T&gt;() &#123;<span class="comment">/**/&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li>加getter、setter</li>
+<li>= = 让IDE教自己吧</li>
+</ol>
+<h2 id="W4-基于Fragment的开发"><a href="#W4-基于Fragment的开发" class="headerlink" title="W4 基于Fragment的开发"></a>W4 基于Fragment的开发</h2><p>Fragments 结构的APP，先学的是用SharedPref来通信（其实就是个本地db</p>
+<p>以及用于在Fragments直接传输消息的LiveData</p>
+<h3 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h3><ul>
+<li>用于构建应用程序用户界面的一部分</li>
+<li>有自己的布局和生命周期</li>
+<li>必须托管在Activity中</li>
+<li>具有附加到宿主的视图层次结构的视图层次结构</li>
+<li>提供可重用性和模块化</li>
+<li>使用fragment，更容易动态修改activity的外观</li>
+</ul>
+<h4 id="Fragment的生命周期"><a href="#Fragment的生命周期" class="headerlink" title="Fragment的生命周期"></a>Fragment的生命周期</h4><p>Lifecycle：</p>
+<p>onCreate()→onCreateView()→onViewCreated()→onStart()→onResume()</p>
+<p>→onPause()→onStop()→onSaveInstanceState()→onDestoryView()→onDestoy()</p>
+<p>在fragment类中必须实现onCreateView()方法并调用inflate()方法返回View为fragment绘制UI<br>inflate() 方法从指定的 XML 节点inflate（膨胀）一个新的视图层次结构，将其转换为相应的View和ViewGroup</p>
+<p><strong>Callback Methods</strong>:</p>
+<ul>
+<li>onAttach(): 当附加到其宿主Activity时调用</li>
+<li>onDetach(): 当与其宿主Activity分离时调用</li>
+</ul>
+<h3 id="SharedPreferences"><a href="#SharedPreferences" class="headerlink" title="SharedPreferences"></a>SharedPreferences</h3><ul>
+<li>能够以key-vaule的形式保存和检索简单的值</li>
+<li>SharedPreferences 对象指向包含键值对的 XML 文件，并提供简单的方法来读取和写入它们</li>
+<li>如果<strong>不需要存储大量数据</strong>，也<strong>不需要结构</strong>，这是一种合适的存储和访问数据的方式<br>这是一种在Fragment之间传递数据的简单方法</li>
+</ul>
+<h3 id="LiveData"><a href="#LiveData" class="headerlink" title="LiveData"></a>LiveData</h3><ul>
+<li>LiveData 是 Android Jetpack 中的架构组件之一</li>
+<li>LiveData是一个可以被观察的数据持有者类（一个抽象类），使用observer（观察者）模式</li>
+<li>LiveData 允许observer订阅更新，当 LiveData 对象持有的数据发生变化时，observer会收到通知</li>
+<li>当一个类（一个活动或一个片段）想要被通知可观察对象的变化时，它可以实现Observer接口</li>
+<li>LiveDatais 具有生命周期感知能力<ul>
+<li>LiveData 更新处于活动生命周期状态下的App组件observer</li>
+</ul>
+</li>
+<li>LiveData 的实例通常在 ViewModel 类中创建</li>
+<li>LiveData 对象（保存数据）存储在 ViewModel 对象中，并通过 getter 方法访问</li>
+<li>LiveData 允许应用程序组件（例如 Activity 或 Fragment）中的观察者观察更新，并获得更改通知</li>
+</ul>
+<p>MutableLiveData extends LiveData</p>
+<h3 id="ViewModel"><a href="#ViewModel" class="headerlink" title="ViewModel"></a>ViewModel</h3><ul>
+<li>ViewModel 也是 Jetpack 中的架构组件之一</li>
+<li>ViewModel 为片段或活动准备和管理数据</li>
+<li>当 Activity 处于其任何生命周期状态，ViewModel 都处于活动状态且正在运行，</li>
+<li>ViewModel 保留数据——它不会在配置更改期间被破坏，例如旋转设备破坏并重新创建其所有者（Activity或Fragment）</li>
+</ul>
+<h2 id="W5-导航栏-Navigation"><a href="#W5-导航栏-Navigation" class="headerlink" title="W5  导航栏 Navigation"></a>W5  导航栏 Navigation</h2><p>导航栏（侧边</p>
+<p>大作业这部分要求用侧边的，用底部的不给分</p>
+<ul>
+<li>Material Design 中的导航</li>
+<li>导航抽屉</li>
+<li>Jetpack 导航组件<ul>
+<li>NavigationUI</li>
+<li>NavHost</li>
+<li>NavController</li>
+<li>Navigation Graph</li>
+</ul>
+</li>
+</ul>
+<h3 id="导航的类别"><a href="#导航的类别" class="headerlink" title="导航的类别"></a>导航的类别</h3><ol>
+<li>Lateral 横向导航：Navigation Drawer, Bottom Nav Bar, Tabs</li>
+<li>Forward 前向导航：Container(Card), Button, Link</li>
+<li>Reverse (Upward) 反向导航: 回退按键</li>
+</ol>
+<h3 id="Drawer"><a href="#Drawer" class="headerlink" title="Drawer"></a>Drawer</h3><p>侧边叫Modal drawer。底部身上来的叫Bottom drawer</p>
+<h4 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h4><ul>
+<li>可识别<ul>
+<li>确保用户可以清楚地识别导航</li>
+<li>基于位置和列表样式内容的抽屉</li>
+</ul>
+</li>
+<li>有组织的<ul>
+<li>确保按重要性或使用频率对导航抽屉中的菜单选项（目的地）进行排序，并将相关的组合在一起</li>
+</ul>
+</li>
+<li>上下文相关<ul>
+<li>导航抽屉可以显示或隐藏以适应不同的应用程序布局</li>
+</ul>
+</li>
+</ul>
+<h2 id="W6-基于-Room-的安卓存储"><a href="#W6-基于-Room-的安卓存储" class="headerlink" title="W6 基于 Room 的安卓存储"></a>W6 基于 Room 的安卓存储</h2><p>关系型数据库</p>
+<p>Android 单线程模型的两条规则：</p>
+<ul>
+<li>规则 1：不要阻塞 UI 线程</li>
+<li>规则 2：不要从 UI 线程之外（从worker thread）访问 Android UI 工具包</li>
+</ul>
+<p>解决方案：</p>
+<p>runOnUiThread(Runnable)</p>
+<p>View.post(Runnable)</p>
+<p>View.postDelayed(Runnable, long) // long: the delay (in milliseconds)</p>
+<h3 id="Tasks"><a href="#Tasks" class="headerlink" title="Tasks"></a>Tasks</h3><h4 id="Immediate"><a href="#Immediate" class="headerlink" title="Immediate:"></a>Immediate:</h4><p>需要用户活跃</p>
+<ul>
+<li>Java: ExecutorService and a thread pool</li>
+<li>Kotlin: Kotlin coroutines</li>
+</ul>
+<h4 id="Exact"><a href="#Exact" class="headerlink" title="Exact:"></a>Exact:</h4><p>AlarmManager</p>
+<h4 id="Deferred"><a href="#Deferred" class="headerlink" title="Deferred:"></a>Deferred:</h4><p>WorkManager</p>
+<h3 id="Room-Persistence-Library"><a href="#Room-Persistence-Library" class="headerlink" title="Room Persistence Library"></a>Room Persistence Library</h3><ul>
+<li>Room Persistence 库是 Android Jetpack 的一部分</li>
+<li>Room 在 SQLite 上提供了一个抽象层，可以实现更强大的数据库访问</li>
+<li>SQLite 提供了一个关系数据库管理系统，用于永久存储结构化数据</li>
+<li>存储在 SQLite 中的数据可以被应用程序中的任何类访问，但不能被应用程序外部访问</li>
+<li>直接使用 SQLite API 需要编写复杂的代码，并使用 Helper 和 Cursor 来访问和管理数据</li>
+<li>为了减少创建和管理 SQLite 数据库的工作量，引入了 Room</li>
+</ul>
+<p>Room Persistent Library 包括：</p>
+<ul>
+<li>数据库Database：包含数据库持有者并有权访问底层持久化的关系数据（SQLite 数据库）</li>
+<li>实体Entity：代表数据库中的表</li>
+<li>DAO（数据访问对象Data Access Object）类<ul>
+<li>包含提供对数据库的抽象访问的查询方法</li>
+<li>提供 SQL 查询到插入或删除等方法的映射</li>
+</ul>
+</li>
+</ul>
+<h3 id="Entity-Class"><a href="#Entity-Class" class="headerlink" title="Entity Class"></a>Entity Class</h3><ul>
+<li>@Entity 将类标记为实体</li>
+<li>对于每个实体，在关联数据库中创建一个表</li>
+<li>实体类提供了到数据库中 SQLite 表的映射</li>
+<li>Room 默认使用数据库表名作为类名</li>
+<li>要更改表名，请使用@Entity 注解的tableName 属性</li>
+<li>Room 使用字段/属性名称作为数据库中的列名称</li>
+<li>要更改列名，请在字段中添加@ColumnInfo 注释</li>
+<li>每个实体必须有一个主键，注释为 @PrimaryKey</li>
+<li>如果您希望 Room 为实体分配自动 ID，请设置 @PrimaryKey 的 autoGenerate 属性</li>
+<li>为了使该字段持久化，Room 必须有权访问它，或者将它们设为公开（不需要 getter 和 setter）或私有，但为包括 id 在内的所有字段添加 getter 和 setter</li>
+</ul>
+<h4 id="在两个实体之间创建一对多关系"><a href="#在两个实体之间创建一对多关系" class="headerlink" title="在两个实体之间创建一对多关系"></a>在两个实体之间创建一对多关系</h4><ul>
+<li>子实体（Playlist)）必须包含一个引用主键的变量</li>
+<li>父实体（User）的</li>
+<li>使用子实体实例列表（Playlists）创建一个新的表示关系的类（UserWithPlayLists）</li>
+<li>给子实体（用户）的实例添加**@Relation**注解</li>
+<li>设置 parentColumn 为父实体的主键</li>
+<li>将 entityColumn 设置为引用父实体 PK 的子实体的列</li>
+</ul>
+<h3 id="DAO-Data-Access-Object"><a href="#DAO-Data-Access-Object" class="headerlink" title="DAO (Data Access Object)"></a>DAO (Data Access Object)</h3><ul>
+<li>DAO 包括提供对数据库的抽象访问的方法</li>
+<li>通过使用 DAO 类而不是直接查询来访问数据库，我们可以将数据库的不同组件分开</li>
+<li>DAO 方法示例：<ul>
+<li>@Insert</li>
+<li>@Update</li>
+<li>@Delete</li>
+<li>@Query</li>
+</ul>
+</li>
+</ul>
+<p>Dao下也能用LiveData的返回值来实现observer订阅</p>
+<p>如果需要ViewModel则需要继承AndroidViewModel，需要将Application 作为上下文传入来实现全局注册</p>
+<h4 id="RoomDatabase"><a href="#RoomDatabase" class="headerlink" title="RoomDatabase"></a>RoomDatabase</h4><p>数据库类满足以下条件：</p>
+<p>成为扩展 RoomDatabase 的抽象类</p>
+<p><code>public abstract class CustomerDatabase extends RoomDatabase &#123;</code></p>
+<p>在@Database 注释中包含数据库的实体列表</p>
+<p><code>@Database(entities = &#123;Customer.class&#125;, version = 1, exportSchema =false)</code></p>
+<p>包含一个没有参数的抽象方法，返回 DAO</p>
+<p><code>public abstract CustomerDAO customerDao();</code></p>
+<p>创建基于单例模式的 Database 实例，以防止同时打开多个数据库实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> CustomerDatabase INSTANCE;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> CustomerDatabase <span class="title">getInstance</span><span class="params">(<span class="keyword">final</span> Context context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (INSTANCE == <span class="keyword">null</span>) &#123;</span><br><span class="line">        INSTANCE = Room.databaseBuilder(context.getApplicationContext(),</span><br><span class="line">        		CustomerDatabase.class, <span class="string">&quot;CustomerDatabase&quot;</span>).build();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> INSTANCE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了在工作线程/后台线程上运行数据库操作，我们使用了一个带有固定线程池的 ExecutorService（允许重用以前创建的线程来执行多个数据请求）</p>
+<p><code>public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);</code></p>
+<p>如果数据库架构更改，则处理迁移（略</p>
+<h3 id="Repository"><a href="#Repository" class="headerlink" title="Repository"></a>Repository</h3><p>Repository 就像是 DAO 和 ViewModel 之间的中间层，提供了一个“干净的 API”</p>
+<ul>
+<li>它还负责管理查询线程（ExecutorService 和我们在 Database 类中添加的线程池）</li>
+<li>Repository 类中的 DAO 实例提供通过它访问数据库的所有读/写方法</li>
+</ul>
+<p>相当于就是中间一层专门用db.databaseWriteExecutor.execute(()-&gt;{dao.insert(customer);});</p>
+<h3 id="Kotlin-1"><a href="#Kotlin-1" class="headerlink" title="Kotlin"></a>Kotlin</h3><p>Dao，Room这种差不多，但是异步上因为Kotlin有自家Coroutines，因此与Java的操作有大不同</p>
+<p>协程是一种并发设计模式，用于在不阻塞主线程的情况下管理长时间运行的作业（用于异步编程）</p>
+<ul>
+<li>协程使用“暂停”技术，使它们“轻量级”</li>
+<li>多个协程可以在一个线程上运行而不阻塞线程</li>
+<li>提高资源消耗和并发操作</li>
+<li>Suspend：一个正在运行的协程可以被挂起，其相应的计算将被暂停，但它的局部变量将存储在内存中，使线程可以自由执行其他作业</li>
+<li>Resume：当计算准备好继续时，它返回到一个线程，并从它挂起的地方继续执行挂起的协程</li>
+<li>我们使用 suspend 关键字来强制从协程中调用一个函数（挂起函数）</li>
+</ul>
+<p>挂起函数只返回一个值，但为了支持 LiveData，我们需要接收多个值（更新），因此我们使用 Kotlin 的 Flow</p>
+<ul>
+<li>一个 Flow 可以依次产生多个值</li>
+<li>在 Room 中，可以使用 Flow 接收来自数据库的实时更新</li>
+<li>在 Kotlin 中，我们通过使用 Dao 中的 Flow 来实现 LiveData，使 UI 在底层数据发生变化时自动更新</li>
+<li>然后在 ViewModel 类中，我们可以通过调用 asLiveData() 将 Flow 转换为 LiveData</li>
+</ul>
+<p>要创建协程，我们需要在某些 CoroutineScope 的上下文中使用诸如 launch 或 async 之类的协程构建器</p>
+<ul>
+<li>launch 创建一个新的协程，它不携带任何结果值</li>
+<li>async 是另一个协程构建器，用于创建一个协程，稍后将结果作为延迟值返回</li>
+<li>为了得到结果，我们对延迟值使用 .await()</li>
+</ul>
+<p>协程是在某些 CoroutineScope 的上下文中创建的</p>
+<ul>
+<li>viewModelScope 是一个预定义的 CoroutineScope，因此我们访问<br>ViewModel 通过其 viewModelScope 属性的 CoroutineScope： ViewModel.viewModelScope</li>
+<li>在主activity中，我们可以访问LifecycleOwner.lifecycleScope</li>
+</ul>
+<p>Kotlin 协程使用调度器来确定哪些线程用于协程执行<br>常见的调度员有以下三种类型：</p>
+<ul>
+<li>Dispatchers.Default - 该调度器经过优化，可以在主线程之外执行 CPU 密集型工作，例如 对列表进行排序并解析 JSON</li>
+<li>Dispatchers.IO – 它用于在主线程之外执行磁盘或网络 I/O，例如使用 Room 组件、读取或写入文件以及运行任何网络操作<strong>（安卓里取数据基本用这个）</strong></li>
+<li>Dispatchers.Main（和 Dispatchers.Main.immediate）——在与 UI 交互时使用，例如调用挂起函数、处理 Android UI 对象或更新 LiveData 对象</li>
+</ul>
+<h2 id="W6-RecyclerView"><a href="#W6-RecyclerView" class="headerlink" title="W6 RecyclerView"></a>W6 RecyclerView</h2><p>考前才发现这个没看（全算考试内容的），考试考到了挺简单的</p>
+<p>实际考试出题在ViewHolder（就是单个item的layout）上，以及onBindViewHolder()作用（用list内容填充各个layout）。比较简单就不加上去了</p>
+<h2 id="W7-UI"><a href="#W7-UI" class="headerlink" title="W7 UI"></a>W7 UI</h2><p>主要还是讲G家的UI规范：MD</p>
+<h3 id="设计风格与范式"><a href="#设计风格与范式" class="headerlink" title="设计风格与范式"></a>设计风格与范式</h3><ul>
+<li>拟物</li>
+<li>Flat平面</li>
+<li>Material Design</li>
+</ul>
+<h3 id="Material-Design"><a href="#Material-Design" class="headerlink" title="Material Design"></a>Material Design</h3><h4 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h4><h5 id="Material（材料）是个隐喻"><a href="#Material（材料）是个隐喻" class="headerlink" title="Material（材料）是个隐喻"></a>Material（材料）是个隐喻</h5><ul>
+<li>Material design 试图根据现实世界的物体创造数字世界，捕捉它们的光影</li>
+</ul>
+<h5 id="粗体、图形、刻意"><a href="#粗体、图形、刻意" class="headerlink" title="粗体、图形、刻意"></a>粗体、图形、刻意</h5><ul>
+<li>Material Design 使用排版、空间、比例、颜色和图像来创建层次结构、意义和焦点</li>
+<li>用于强调操作并使它们对用户可见</li>
+<li>旨在创造一种身临其境的体验</li>
+</ul>
+<h5 id="运动提供意义"><a href="#运动提供意义" class="headerlink" title="运动提供意义"></a>运动提供意义</h5><ul>
+<li>用户执行动作和动作创建动作，通过微妙的反馈和连贯的过渡</li>
+<li>动作应该是有意义和适当的</li>
+<li>反馈应该清晰可见，但不能太明显和分散注意力</li>
+</ul>
+<h4 id="环境Environment"><a href="#环境Environment" class="headerlink" title="环境Environment"></a>环境Environment</h4><p>材料设计支持使用光、阴影，和具有 x、y 和 z 3维度的Material对象的 3D 环境</p>
+<ul>
+<li>每个Sheet都有标准的 1dp 厚度</li>
+</ul>
+<h4 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h4><p>定义</p>
+<ul>
+<li>颜色系统用于创建反映您的品牌或风格的颜色主题</li>
+<li><strong>主色primary colour</strong>是屏幕上最常用的颜色</li>
+<li><strong>主要颜色的浅色或深色变体</strong>可用于创建对比度以区分 UI 元素</li>
+<li><strong>副色secondary colour</strong>是可选的，可用于强调 UI 中的选定部分<ul>
+<li>常用于浮动动作按钮文本选择、进度条、滑块、开关和链接</li>
+</ul>
+</li>
+<li><strong>对比色Contrast</strong>：基于可访问性标准的原色和副色之间</li>
+</ul>
+<p>规则</p>
+<ul>
+<li>分层：使用颜色来显示它们的重要性级别以及它们之间的关系</li>
+<li>品牌：使用颜色来强调品牌存在感</li>
+<li>状态：使用颜色来显示元素或组件的当前状态，或应用程序、组件或元素的状态变化</li>
+<li>含义：使用颜色来传达 UI 元素的含义</li>
+</ul>
+<h4 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h4><ul>
+<li>原则：<ul>
+<li>信息性：发送明确的信息</li>
+<li>令人愉快的：带来快乐和愉悦</li>
+<li>有意：必须有目的和故事</li>
+</ul>
+</li>
+<li>使用适当的分辨率大小</li>
+<li>使排版在图像之上清晰易读</li>
+<li>使用用户生成的摄影、专业摄影或不同类型的插图</li>
+</ul>
+<h4 id="图标，字体，菜单"><a href="#图标，字体，菜单" class="headerlink" title="图标，字体，菜单"></a>图标，字体，菜单</h4><p>略</p>
+<h4 id="Tabs"><a href="#Tabs" class="headerlink" title="Tabs"></a>Tabs</h4><p>使用滚动Tabs：</p>
+<ul>
+<li>当一组选项卡无法显示在屏幕上时</li>
+<li>选项的数量约为5到7</li>
+<li>当items密切相关或属于一个类别时</li>
+<li>某些项目将不可见（被挤出去了），因此用户无法一次看到所有项目</li>
+</ul>
+<p><strong>滚动标签不用于主要导航</strong></p>
+<h4 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h4><ul>
+<li>创建流畅自然的对话流程</li>
+<li>字段的逻辑分组和排序</li>
+<li>区分分组项目</li>
+<li>有意义且熟悉的字段标签</li>
+<li>一致的术语和缩写</li>
+<li>如果需要，提供提示和示例</li>
+<li>视觉上吸引人的布局（对齐）</li>
+<li>可选和必填字段明确标记（*）</li>
+<li>如果可能，使用列表来减少错误</li>
+<li>最小化输入的数量：<ul>
+<li>合并相似的输入字段</li>
+<li>消除多余的和不太重要的条目</li>
+</ul>
+</li>
+<li>错误预防和错误消息<ul>
+<li>使用有意义且清晰的错误消息</li>
+<li>纠错：重新关注包含错误的字段</li>
+</ul>
+</li>
+<li>即时反馈和完成反馈<ul>
+<li>为用户提供当前状态和进度的反馈</li>
+<li>尽早验证，但不要中断对话流程</li>
+<li>适当的内联反馈</li>
+</ul>
+</li>
+</ul>
+<p>纵向排列Label和input优于横向</p>
+<h3 id="WCAG-2-0-and-Other-W3C-WAI-Guidelines"><a href="#WCAG-2-0-and-Other-W3C-WAI-Guidelines" class="headerlink" title="WCAG 2.0 and Other W3C/WAI Guidelines"></a>WCAG 2.0 and Other W3C/WAI Guidelines</h3><h4 id="原则-1：可感知"><a href="#原则-1：可感知" class="headerlink" title="原则 1：可感知"></a>原则 1：可感知</h4><h5 id="1-1-小屏幕尺寸"><a href="#1-1-小屏幕尺寸" class="headerlink" title="1.1. 小屏幕尺寸"></a>1.1. 小屏幕尺寸</h5><ul>
+<li>最小化信息量（例如更少的内容模块或图像）</li>
+<li>提供合理的默认尺寸以最小化放大和缩小的需要</li>
+<li>将表单字段置于其标签下方</li>
+<li>使链接文本的长度适应视口宽度<ul>
+<li>视口指的是网页的可见区域，在手机上较小</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-2-缩放-放大"><a href="#1-2-缩放-放大" class="headerlink" title="1.2 缩放/放大"></a>1.2 缩放/放大</h5><ul>
+<li>允许用户在移动设备上控制内容/文本大小的方法<ul>
+<li>例如。 在用户手指下使用放大镜视图</li>
+<li>文本的大小最多可调整为 200%</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-3-对比度"><a href="#1-3-对比度" class="headerlink" title="1.3 对比度"></a>1.3 对比度</h5><ul>
+<li>移动设备在不同照明环境中使用<ul>
+<li>为小屏幕考虑正确的大/小文本对比度</li>
+</ul>
+</li>
+</ul>
+<h4 id="原则-2：可操作"><a href="#原则-2：可操作" class="headerlink" title="原则 2：可操作"></a>原则 2：可操作</h4><h5 id="2-1-触摸屏设备的键盘控制"><a href="#2-1-触摸屏设备的键盘控制" class="headerlink" title="2.1 触摸屏设备的键盘控制"></a>2.1 触摸屏设备的键盘控制</h5><p>当前的移动设备显示屏幕键盘以接受文本输入</p>
+<ul>
+<li>键盘可访问性非常重要，一些移动操作系统包含键盘接口以支持外部键盘或其他替代品</li>
+</ul>
+<h5 id="2-2-触摸目标尺寸和间距"><a href="#2-2-触摸目标尺寸和间距" class="headerlink" title="2.2 触摸目标尺寸和间距"></a>2.2 触摸目标尺寸和间距</h5><ul>
+<li>交互元素必须足够大，彼此之间有足够的距离</li>
+<li>为触摸目标使用正确的大小和间距</li>
+</ul>
+<h5 id="2-3-触摸屏手势"><a href="#2-3-触摸屏手势" class="headerlink" title="2.3 触摸屏手势"></a>2.3 触摸屏手势</h5><p>可以通过触摸屏上的手势操作移动设备</p>
+<p>手势包括简单的敲击或使用多个手指的复杂操作</p>
+<ul>
+<li>手势应该尽可能简单</li>
+<li>对于复杂的手势，设计替代方案以支持简单的点击或滑动手势</li>
+<li>通过 mouseup或者 touchend event 激活元素</li>
+<li>使用 mouseup或者 touchend event 触发操作有助于防止在触摸和鼠标交互过程中出现意外操作</li>
+</ul>
+<h5 id="2-4-设备操作手势"><a href="#2-4-设备操作手势" class="headerlink" title="2.4 设备操作手势"></a>2.4 设备操作手势</h5><ul>
+<li>设备的物理操作，例如摇晃或倾斜</li>
+<li>确保提供触摸和键盘可操作的替代控制选项</li>
+</ul>
+<h5 id="2-5-将按钮放置在易于访问的位置"><a href="#2-5-将按钮放置在易于访问的位置" class="headerlink" title="2.5 将按钮放置在易于访问的位置"></a>2.5 将按钮放置在易于访问的位置</h5><ul>
+<li>请将按钮放置在用户可以轻松够到的地方，即使用户不同姿势摆放设备</li>
+</ul>
+<h4 id="原则-3：可理解"><a href="#原则-3：可理解" class="headerlink" title="原则 3：可理解"></a>原则 3：可理解</h4><h5 id="3-1-更改屏幕方向（纵向-横向）"><a href="#3-1-更改屏幕方向（纵向-横向）" class="headerlink" title="3.1 更改屏幕方向（纵向/横向）"></a>3.1 更改屏幕方向（纵向/横向）</h5><p>支持两种方向模式，不要期望用户旋转（例如当移动设备安装在轮椅的固定臂上时）</p>
+<h5 id="3-2-一致的布局"><a href="#3-2-一致的布局" class="headerlink" title="3.2 一致的布局"></a>3.2 一致的布局</h5><p>“跨多个页面重复的组件应该以一致的布局呈现。”</p>
+<h5 id="3-3-在页面滚动前定位重要的页面元素"><a href="#3-3-在页面滚动前定位重要的页面元素" class="headerlink" title="3.3 在页面滚动前定位重要的页面元素"></a>3.3 在页面滚动前定位重要的页面元素</h5><p>小屏幕限制了无需滚动即可显示的内容量</p>
+<ul>
+<li>定位重要的页面信息，使其无需滚动即可看到，以帮助弱视用户和有认知障碍的用户</li>
+</ul>
+<h5 id="3-4-对执行相同动作的可操作元素进行分组"><a href="#3-4-对执行相同动作的可操作元素进行分组" class="headerlink" title="3.4 对执行相同动作的可操作元素进行分组"></a>3.4 对执行相同动作的可操作元素进行分组</h5><p>“当多个元素执行相同的操作或前往相同的目的地时（例如带有链接文本的链接图标），这些应该包含在同一个可操作的元素中”。</p>
+<h5 id="3-5-明确说明要素是可操作的"><a href="#3-5-明确说明要素是可操作的" class="headerlink" title="3.5 明确说明要素是可操作的"></a>3.5 明确说明要素是可操作的</h5><p>使用视觉特征来表示可操作的元素（例如斜角按钮）</p>
+<h5 id="3-6-提供自定义触摸屏和设备操作手势的说明"><a href="#3-6-提供自定义触摸屏和设备操作手势的说明" class="headerlink" title="3.6 提供自定义触摸屏和设备操作手势的说明"></a>3.6 提供自定义触摸屏和设备操作手势的说明</h5><p>提供可见且易于访问的说明，例如工具提示和教程</p>
+<h4 id="原则-4：Robust"><a href="#原则-4：Robust" class="headerlink" title="原则 4：Robust"></a>原则 4：Robust</h4><h5 id="4-1将虚拟键盘设置为所需的数据输入类型"><a href="#4-1将虚拟键盘设置为所需的数据输入类型" class="headerlink" title="4.1将虚拟键盘设置为所需的数据输入类型"></a>4.1将虚拟键盘设置为所需的数据输入类型</h5><h5 id="4-2-提供简单的数据录入方法"><a href="#4-2-提供简单的数据录入方法" class="headerlink" title="4.2 提供简单的数据录入方法"></a>4.2 提供简单的数据录入方法</h5><ul>
+<li>通过提供菜单、单选按钮或自动输入减少文本输入量</li>
+</ul>
+<h5 id="4-3-支持平台特性"><a href="#4-3-支持平台特性" class="headerlink" title="4.3 支持平台特性"></a>4.3 支持平台特性</h5><p>移动设备提供帮助残障用户的功能，例如缩放、字幕或更大的字体，但这些功能因设备类型和操作系统而异</p>
+<h2 id="W7-Retrofit-网络库"><a href="#W7-Retrofit-网络库" class="headerlink" title="W7 Retrofit 网络库"></a>W7 Retrofit 网络库</h2><p>网络请求库 <a href="https://square.github.io/retrofit/" target="_blank" rel="noopener">https://square.github.io/retrofit/</a></p>
+<p>权限声明 <code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</code>写进AndroidManifest.xml</p>
+<h3 id="Model-Classes"><a href="#Model-Classes" class="headerlink" title="Model Classes"></a>Model Classes</h3><p>其实就是Entity</p>
+<p>创建Model类以提供到响应正文及其元素的结构的映射，作为 JSON模型</p>
+<p>通常，对公共 API 的 http GET 调用会返回非常长且复杂的 JSON 响应。 使用 Retrofit 的 Model 类，您可以仅包含映射所需的 JSON 响应中的字段/对象</p>
+<p>例如。 <a href="https://developers.google.com/custom-search/v1/reference/rest/v1/Search" target="_blank" rel="noopener">Google 搜索响应 (JSON) </a>包含许多对象，但我们只想访问“items”下的“snippet”，因此我们创建了一个 Retrofit Model 类来仅映射这两个对象并忽略其他对象</p>
+<p>Model 类应该匹配 Retrofit Interface 中返回的类型</p>
+<h3 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h3><p>只讲了GET…</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span></span>&#123;</span><br><span class="line">    <span class="meta">@GET(“students/&#123;id&#125;&quot;)</span></span><br><span class="line">        <span class="function">Call&lt;StudentResponse&gt; <span class="title">getStudentById</span><span class="params">(<span class="meta">@Path(“id&quot;)</span> Long id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span></span>&#123;</span><br><span class="line">    <span class="meta">@GET(&quot;customsearch/v1&quot;)</span></span><br><span class="line">    <span class="function">Call&lt;SearchResponse&gt; <span class="title">customSearch</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="meta">@Query(&quot;key&quot;)</span> String API_KEY,</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="meta">@Query(&quot;cx&quot;)</span> String SEARCH_ID_cx,</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="meta">@Query(&quot;q&quot;)</span> String keyword)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><ul>
+<li><p>Retrofit 客户端类负责创建 Retrofit 实例</p>
+</li>
+<li><p>Retrofit 有一个 Retrofit.Builder 可以通过提供以下配置使用配置的值调用 build() 轻松创建 Retrofit 实例：</p>
+<ul>
+<li>baseUrl() 设置 API 基本 URL</li>
+<li>转换器通过调用 addConverterFactory() 并将 GsonConverterFactoryforencoding 传递给 JSON 并从 JSON 解码</li>
+</ul>
+</li>
+<li><p>我们在 Retrofit 实例上调用 create() 方法并传递我们创建的 Retrofit 接口，以便 Retrofit 可以生成接口定义的 API 端点（即 URL）的实现</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RetrofitClient</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Retrofit retrofit;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String BASE_URL=<span class="string">&quot;https://www.googleapis.com/&quot;</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="title">RetrofitInterfacegetRetrofitService</span><span class="params">()</span></span>&#123;</span><br><span class="line">		retrofit=<span class="keyword">new</span> Builder()</span><br><span class="line">			.baseUrl(BASE_URL)</span><br><span class="line">			.addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">			.build();</span><br><span class="line">		<span class="keyword">return</span> retrofit.create(RetrofitInterface.class); </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Call-back"><a href="#Call-back" class="headerlink" title="Call(back)"></a>Call(back)</h3><h4 id="InterfaceCall-lt-T-gt"><a href="#InterfaceCall-lt-T-gt" class="headerlink" title="InterfaceCall&lt;T&gt;"></a><code>InterfaceCall&lt;T&gt;</code></h4><p>Call 发送请求并返回响应</p>
+<p>Call 提供了两种发出 HTTP 请求的方法：</p>
+<ol>
+<li><code>Response&lt;T&gt; execute()</code> – 用于发送同步请求</li>
+<li><code>void enqueue(Callback&lt;T&gt;)</code> – 用于发送异步请求并在收到响应时调用回调方法</li>
+</ol>
+<h4 id="InterfaceCallback-lt-T-gt"><a href="#InterfaceCallback-lt-T-gt" class="headerlink" title="InterfaceCallback&lt;T&gt;"></a><code>InterfaceCallback&lt;T&gt;</code></h4><p>回调需要实现两个方法：</p>
+<ol>
+<li><p><code>void onResponse(Call&lt;T&gt; call, Response&lt;T&gt; response)</code></p>
+<ul>
+<li>为收到的 HTTP 响应调用</li>
+<li><code>Response.isSuccessful()</code> 可以调用来判断响应是否成功</li>
+</ul>
+</li>
+<li><p><code>void onFailure(Call&lt;T&gt; call, Throwable t)</code></p>
+<ul>
+<li>发生网络异常或意外异常时调用</li>
+</ul>
+</li>
+</ol>
+<h3 id="Kotlin-2"><a href="#Kotlin-2" class="headerlink" title="Kotlin"></a>Kotlin</h3><p>协程写法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">RetrofitInterface</span></span>&#123;</span><br><span class="line">	<span class="meta">@GET(&quot;customsearch/v1&quot;)</span></span><br><span class="line">	<span class="function">suspend fun <span class="title">customSearch</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">		<span class="meta">@Query(&quot;key&quot;)</span> API_KEY: String,</span></span></span><br><span class="line"><span class="params"><span class="function">		<span class="meta">@Query(&quot;cx&quot;)</span> SEARCH_ID_cx: String,</span></span></span><br><span class="line"><span class="params"><span class="function">		<span class="meta">@Query(&quot;q&quot;)</span> keyword: String</span></span></span><br><span class="line"><span class="params"><span class="function">	)</span>: Response&lt;SearchResponse&gt;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里给fun加了个suspend</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">val retrofitInterface: RetrofitInterface= RetrofitClient.getRetrofitService()</span><br><span class="line"></span><br><span class="line">binding.btnSearch.setOnClickListener(object : View.OnClickListener&#123;</span><br><span class="line">	override fun onClick(v: View?) &#123;</span><br><span class="line">		keyword = binding.editText.text.toString()</span><br><span class="line">		CoroutineScope(Dispatchers.IO).launch&#123;</span><br><span class="line">			val response: Response&lt;SearchResponse&gt; = retrofitInterface.customSearch(API_KEY,SEARCH_ID_cx,keyword)</span><br><span class="line">			withContext(Dispatchers.Main)&#123;</span><br><span class="line">				if (response.isSuccessful) &#123;</span><br><span class="line">					val list = response.body()!!.items</span><br><span class="line">					val result: String = list[0].snippet</span><br><span class="line">					binding.tvResult.text= result</span><br><span class="line">				&#125; else &#123;</span><br><span class="line">					Log.i(&quot;Error &quot;, &quot;Response failed&quot;)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在CoroutineScope作用域里干活</p>
+<h2 id="W8-普适计算-Ubiquitous-Computing"><a href="#W8-普适计算-Ubiquitous-Computing" class="headerlink" title="W8 普适计算 Ubiquitous Computing"></a>W8 普适计算 Ubiquitous Computing</h2><p>普适计算，也叫pervasive computing（无孔不入计算），由 Mark Weiser 于 1988 年左右创造的一种计算范式，其中计算机变得如此普遍和“隐形”，以至于我们根本看不到计算机</p>
+<ul>
+<li>“<strong>隐形</strong>”传感和处理设备<strong>嵌入我们的环境中</strong>，如此自然、如此友好，以至于我们在使用它们时甚至没有注意到</li>
+<li>这是关于“<strong>随时随地</strong>”的计算</li>
+</ul>
+<h3 id="人机交互（HCI"><a href="#人机交互（HCI" class="headerlink" title="人机交互（HCI"></a>人机交互（HCI</h3><ul>
+<li>从命令行交互开始，然后转向直接操作</li>
+<li>在普适计算中，设备无处不在并嵌入我们的环境中</li>
+<li>沉浸式系统</li>
+<li>多模式交互</li>
+</ul>
+<h4 id="输入设备"><a href="#输入设备" class="headerlink" title="输入设备"></a>输入设备</h4><ul>
+<li>间接指向设备<ul>
+<li>鼠标、轨迹球、操纵杆</li>
+</ul>
+</li>
+<li>直接指向设备<ul>
+<li>触摸屏、触控笔</li>
+</ul>
+</li>
+<li>语音/语音</li>
+<li>动作和手势</li>
+<li>生物识别输入数据：<ul>
+<li>面部、手指、虹膜或视网膜，或行走方式/步态</li>
+</ul>
+</li>
+<li>生理信号（例如心率、血压、脑电图信号）<ul>
+<li>基于脑信号的脑机接口（BCI）</li>
+</ul>
+</li>
+</ul>
+<h4 id="输出设备"><a href="#输出设备" class="headerlink" title="输出设备"></a>输出设备</h4><ul>
+<li>语音/语音</li>
+<li>小尺寸到壁挂式屏幕</li>
+<li>3D打印机</li>
+<li>3D可视化</li>
+<li>全息图</li>
+<li>虚拟现实和增强现实</li>
+</ul>
+<h3 id="上下文-情境感知计算-Context-Situation-Aware-Computing"><a href="#上下文-情境感知计算-Context-Situation-Aware-Computing" class="headerlink" title="上下文/情境感知计算 Context/Situation-Aware Computing"></a>上下文/情境感知计算 Context/Situation-Aware Computing</h3><p>相关领域</p>
+<p>Context： 任何可用于表征实体情况的信息</p>
+<h4 id="上下文感知"><a href="#上下文感知" class="headerlink" title="上下文感知"></a>上下文感知</h4><p>“根据其使用位置、附近人和物体的集合以及这些物体随时间的变化进行调整的应用程序”</p>
+<p>“应用程序感知和响应有关<strong>环境、位置、时间</strong>或<strong>用户</strong>的上下文信息的能力”</p>
+<ul>
+<li>上下文感知被认为是无处不在的计算系统的关键组成部分</li>
+<li>上下文感知系统了解当前上下文，例如位置和物理环境，并使用此信息相应地调整其行为或操作</li>
+<li>它使应用程序能够：<ul>
+<li>适应动态变化</li>
+<li>个性化</li>
+<li>聪明主动</li>
+<li>成本效益</li>
+<li>聪明伶俐</li>
+</ul>
+</li>
+</ul>
+<p>首个上下文感知系统：<strong>Active Badge</strong> system at Cambridge AT&amp;T Lab，使用红外信号检测建筑物内人员的位置</p>
+<h4 id="情景：高级上下文"><a href="#情景：高级上下文" class="headerlink" title="情景：高级上下文"></a>情景：高级上下文</h4><ul>
+<li>情境指的是高层次的上下文</li>
+<li>情境代表感兴趣的现实生活情境</li>
+<li>情境提供了对周围环境的更广阔视野<ul>
+<li>示例：忙碌、迟到、开会、健康、火灾威胁或开车</li>
+</ul>
+</li>
+<li>通过使用推理/推理方法推断情况</li>
+<li>从多条上下文的聚合（融合）中推断出情况</li>
+</ul>
+<p>上下文/情境推理方法通过对低级上下文进行推理（建模）来产生高级上下文信息</p>
+<h4 id="上下文建模"><a href="#上下文建模" class="headerlink" title="上下文建模"></a>上下文建模</h4><p>能够以标准和一致的方式表示上下文</p>
+<p>支持应用程序之间的上下文共享</p>
+<p>可以在上下文中进行推理</p>
+<h4 id="上下文-情境推理"><a href="#上下文-情境推理" class="headerlink" title="上下文/情境推理"></a>上下文/情境推理</h4><ul>
+<li>简单的逻辑法</li>
+<li>模糊逻辑法</li>
+<li>基于本体的推理</li>
+<li>机器学习<ul>
+<li>朴素贝叶斯</li>
+<li>贝叶斯网络</li>
+<li>隐马尔可夫模型</li>
+<li>决策树</li>
+<li>神经网络</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<h3 id="移动感知-Mobile-Sensing"><a href="#移动感知-Mobile-Sensing" class="headerlink" title="移动感知 Mobile Sensing"></a>移动感知 Mobile Sensing</h3><p>也是相关领域</p>
+<p>移动感知是指从移动设备收集传感数据</p>
+<p>移动感知通常涉及在手机后台运行的移动应用程序，从内部或外部传感器收集传感数据并将收集到的数据传输到云端或远程来源</p>
+<p>感知和收集的关键上下文信息是位置</p>
+<p>隐私是移动感知的主要挑战</p>
+<h4 id="移动人群感知-Mobile-CrowdSensing"><a href="#移动人群感知-Mobile-CrowdSensing" class="headerlink" title="移动人群感知 Mobile CrowdSensing"></a>移动人群感知 Mobile CrowdSensing</h4><p>术语“人群感应”是指利用人群的力量，使用移动和可穿戴设备中的可用传感器收集有关某些感兴趣现象的信息</p>
+<p>移动人群感知从大量用户远程收集有关环境和物理世界的数据，并将其提供给 MCS 应用程序</p>
+<h5 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h5><ol>
+<li><p>参与式感知 Participatory sensing： </p>
+<ul>
+<li>用户直接参与数据收集过程</li>
+</ul>
+</li>
+<li><p>机会式感知 Opportunistic sensing：</p>
+<ul>
+<li>用户不直接参与数据收集过程（最少参与）</li>
+<li>感知任务在后台发生</li>
+<li>移动设备决定何时以及如何参与传感任务</li>
+</ul>
+</li>
+</ol>
+<p>也有个别的移动传感应用，移动传感只在一部手机上单独进行，不与其他用户合作</p>
+<h3 id="IoT"><a href="#IoT" class="headerlink" title="IoT"></a>IoT</h3><p>也是相关领域</p>
+<p>由麻省理工学院的 Kevin Ashton 创造</p>
+<p>开启了普适(计算)的新时代</p>
+<p>日常物品网络（智能物品）</p>
+<p>移动设备、汽车、智能电器等所有对象都连接到互联网，可以进行通信和交换数据</p>
+<h3 id="Cloud-and-edge-computing"><a href="#Cloud-and-edge-computing" class="headerlink" title="Cloud and edge computing"></a>Cloud and edge computing</h3><h4 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h4><p>“云计算是通过互联网通过云服务平台按需交付计算能力、数据库存储、应用程序和其他 IT 资源，并采用即用即付定价。” （AWS）</p>
+<p>“云计算，通常简称为“云”，是通过互联网以按使用付费的方式交付按需计算资源——从应用程序到数据中心的一切。”（IBM）</p>
+<ul>
+<li>由计算机、服务器、数据中心和资源组成的大型网络</li>
+<li>基于互联网的计算</li>
+<li>分布式计算</li>
+<li>节省硬件、软件和维护成本</li>
+<li>基础设施、平台、软件、硬件和应用即服务</li>
+<li>按需和基于效用的计算（按使用付费）</li>
+</ul>
+<p>公有云</p>
+<ul>
+<li>所有硬件、软件或支持基础设施均由第三方服务提供商拥有和管理，并由客户通过 Internet 访问</li>
+<li>低成本、免维护和无限资源</li>
+</ul>
+<p>私有云</p>
+<ul>
+<li>由类似政府机构的组织在专用网络上运营</li>
+<li>资源部署在本地</li>
+<li>更高的安全性和更灵活</li>
+</ul>
+<p>混合云</p>
+<ul>
+<li>公共和私有云网络的组合</li>
+</ul>
+<h4 id="边缘计算"><a href="#边缘计算" class="headerlink" title="边缘计算"></a>边缘计算</h4><p>“雾计算是定义边缘计算应该如何工作的标准”（Cisco）</p>
+<ul>
+<li>随着物联网的不断发展，传感器和智能事物产生了大量数据，但将所有物联网数据传输到云端非常昂贵</li>
+<li>边缘计算允许在边缘处理数据，更靠近生成位置，而不是将其发送到云</li>
+<li>边缘可以是路由器、汽车、笔记本电脑、服务器或无人机</li>
+</ul>
+<h5 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h5><ol>
+<li><p>解决大数据问题</p>
+<ul>
+<li><p>仅将大数据摘要发送到云端</p>
+</li>
+<li><p>通过在本地聚合和处理数据并将数据摘要发送到云来降低网络带宽和数据传输的成本</p>
+</li>
+<li><p>通过在边缘执行不太复杂的数据分析来缩短响应时间</p>
+</li>
+</ul>
+</li>
+<li><p>安全性：敏感数据可以在边缘进行分析，而不是将其发送到云端</p>
+</li>
+<li><p>互联网不可用情况下仍可用：数据可以在边缘缓存，然后上传到云端</p>
+</li>
+</ol>
+<h2 id="W9-无线传感器-Wireless-Sensors"><a href="#W9-无线传感器-Wireless-Sensors" class="headerlink" title="W9 无线传感器 Wireless Sensors"></a>W9 无线传感器 Wireless Sensors</h2><p>无线传感器是一种感知物理现象（如噪声、运动、光、压力或温度）并将这些物理参数转换为可由设备处理的电子信号的设备</p>
+<p>无线传感器然后将感测到的数据<strong>无线传输</strong>到另一个设备</p>
+<img src="/post/fit5046-mobi-notes/image-20210604142704800.png" class="" title="image-20210604142704800">
+
+<h3 id="电源Power"><a href="#电源Power" class="headerlink" title="电源Power"></a>电源Power</h3><p>负责提供能量</p>
+<ul>
+<li>电池供电<ul>
+<li>最终需要更换电池但基本上用不完</li>
+<li>需要能源管理以减少电池消耗</li>
+</ul>
+</li>
+<li>能量收集<ul>
+<li>从环境和其他来源中提取能量<ul>
+<li>太阳能</li>
+<li>机械能：风力、水流或振动</li>
+<li>热能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="传感器网络-Wireless-Sensor-Networks-WSNs"><a href="#传感器网络-Wireless-Sensor-Networks-WSNs" class="headerlink" title="传感器网络 Wireless Sensor Networks (WSNs)"></a>传感器网络 Wireless Sensor Networks (WSNs)</h3><p>无线传感器网络由大量传感器节点组成，这些节点密集部署在一个区域内，以实现对物理世界的监控</p>
+<p>对许多应用领域都很重要</p>
+<h3 id="传感器节点-Sensor-Nodes"><a href="#传感器节点-Sensor-Nodes" class="headerlink" title="传感器节点 Sensor Nodes"></a>传感器节点 Sensor Nodes</h3><p>在 WSN 中，节点感知和观察物理现象</p>
+<ul>
+<li>节点通过无线链路（无线电）将收集到的信息传送到通常的接收器/基站</li>
+<li>每个传感器都有能力收集和路由数据</li>
+<li>通常传感器管理协议确定哪些节点感知以及哪些节点路由数据以确保能源效率</li>
+<li>节点具有最少的 CPU、内存和极低的功耗</li>
+</ul>
+<h3 id="接收器-Sink"><a href="#接收器-Sink" class="headerlink" title="接收器 Sink"></a>接收器 Sink</h3><p>传感器收集的数据通常转发到接收器</p>
+<p>与传感器不同，接收器拥有大量资源（内存、CPU、存储、电源）</p>
+<p>一个接收器可以在本地使用数据，执行简单的数据处理，或者它可以作为连接到互联网的网关（遥感）</p>
+<p>接收器可以向节点发送查询或命令以收集数据</p>
+<h3 id="传感器操作模式-Sensor-Operation-Modes"><a href="#传感器操作模式-Sensor-Operation-Modes" class="headerlink" title="传感器操作模式 Sensor Operation Modes"></a>传感器操作模式 Sensor Operation Modes</h3><p>传感器的处理器、收发器和传感部件可以处于不同的操作模式</p>
+<ul>
+<li>例如。 主动、睡眠或深度睡眠</li>
+<li>通过根据当前情况和上下文控制传感器的占空比参数，可以减少电池消耗</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Sleep States</th>
+<th>Sensing</th>
+<th>Radio/Transceiver</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S0</td>
+<td>On</td>
+<td>Both transmitter and receiver ON</td>
+</tr>
+<tr>
+<td>S1</td>
+<td>On</td>
+<td>Receiver On (Transmitter off)</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>On</td>
+<td>Both Off</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>Off</td>
+<td>Both Off</td>
+</tr>
+</tbody></table>
+<h3 id="节点拓扑"><a href="#节点拓扑" class="headerlink" title="节点拓扑"></a>节点拓扑</h3><ul>
+<li>Point to Point Topology</li>
+<li>Star Topology</li>
+<li>Mesh Topology</li>
+<li>Tree Topology</li>
+</ul>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><h4 id="静态接收器和移动接收器网络"><a href="#静态接收器和移动接收器网络" class="headerlink" title="静态接收器和移动接收器网络"></a>静态接收器和移动接收器网络</h4><p><strong>静态接受器网络</strong>：</p>
+<p>靠近感应区域的固定位置的水槽</p>
+<p>它可能会导致瓶颈情况</p>
+<p>靠近sink的节点很快就会消亡</p>
+<p><strong>移动接收器网络</strong></p>
+<p>在mobile-sink网络中，sink在区域内移动</p>
+<p>它可以解决上述问题</p>
+<h4 id="确定性或非确定性网络"><a href="#确定性或非确定性网络" class="headerlink" title="确定性或非确定性网络"></a>确定性或非确定性网络</h4><p>在<strong>确定性网络</strong>中，传感器的位置是预先计划好的。反之不然</p>
+<h4 id="同构或异构网络"><a href="#同构或异构网络" class="headerlink" title="同构或异构网络"></a>同构或异构网络</h4><p><strong>同构网络</strong>包括具有相同功能（能量、计算和存储）的传感器</p>
+<h4 id="单汇或多汇网络"><a href="#单汇或多汇网络" class="headerlink" title="单汇或多汇网络"></a>单汇或多汇网络</h4><p>在网络中有多个接收器的多个接收器中，传感器可以将数据发送到最近的接收器</p>
+<p>它会增加复杂性和成本，但会提高性能</p>
+<h4 id="单跳或多跳无线传感器网络"><a href="#单跳或多跳无线传感器网络" class="headerlink" title="单跳或多跳无线传感器网络"></a>单跳或多跳无线传感器网络</h4><p>（例题考点，估计考边上的其他几种）</p>
+<p><strong>单跳网络</strong></p>
+<p>长距离，因此在能源消耗方面更昂贵</p>
+<p>适用于短覆盖和节点有限的网络</p>
+<p>更易于控制和管理</p>
+<p><strong>多跳网络</strong></p>
+<p>传感器节点通过一个或多个中间节点将其数据传输到接收器</p>
+<p>它涉及短距离传输，因此更节能</p>
+<p>管理可能很复杂</p>
+<p>适用于更大的网络</p>
+<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p><strong>多跳传感器网络</strong>可以分为两种类型：</p>
+<ul>
+<li><p>平面传感器网络</p>
+</li>
+<li><p>基于集群的传感器网络</p>
+</li>
+</ul>
+<h4 id="平面多跳架构"><a href="#平面多跳架构" class="headerlink" title="平面多跳架构"></a>平面多跳架构</h4><p>所有传感器节点具有相同的角色并充当对等体</p>
+<p>在这样的网络中，sink 通常向所有节点发送查询，只有数据满足查询的节点才会响应</p>
+<p>传感器节点也可以充当路由器，通过多跳路由将数据传输到接收器，使用它们的对等节点来中继数据</p>
+<h4 id="基于集群的多跳架构"><a href="#基于集群的多跳架构" class="headerlink" title="基于集群的多跳架构"></a>基于集群的多跳架构</h4><p>传感器节点被分组到集群中</p>
+<p>每个簇有一个簇头（CH）</p>
+<p>每个集群中的传感器节点向其 CH 发送数据</p>
+<p>CH进行简单的处理，将处理后的数据发送给sink</p>
+<p>减少通信方面的能源消耗</p>
+<p>提高大型网络的可扩展性并平衡流量负载</p>
+<h4 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h4><p>“最佳”路线可以是特定于应用程序的</p>
+<p>就能源消耗而言，它可以是延长网络寿命的最有效途径</p>
+<p>它可以是最短路径和最小跳数</p>
+<h5 id="Flooding-and-Gossiping"><a href="#Flooding-and-Gossiping" class="headerlink" title="Flooding and Gossiping"></a>Flooding and Gossiping</h5><p>Flooding是最简单的路由技术</p>
+<p>节点将数据广播给它的邻居，然后再将数据转发给邻居，直到它到达接收器</p>
+<ul>
+<li>Flooding导致内爆和重叠，因为节点可以接收相同数据消息的多个副本</li>
+<li>网络内浪费能源和带宽</li>
+</ul>
+<p>Gossiping：接收节点只向随机选择的邻居广播数据</p>
+<ul>
+<li>它减少了内爆，但仍有一些节点可能会收到相同的数据副本</li>
+</ul>
+<h5 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h5><ul>
+<li><p>基于集群的路由（已经讨论过）</p>
+</li>
+<li><p>基于属性的路由</p>
+</li>
+<li><p>基于位置的路由</p>
+</li>
+<li><p>以数据为中心的路由</p>
+</li>
+<li><p>定向扩散</p>
+</li>
+<li><p>基于能量的路由</p>
+</li>
+<li><p>服务质量 (QoS) 路由</p>
+</li>
+</ul>
+<p>这些路由方法有时会重叠</p>
+<h5 id="路由选择"><a href="#路由选择" class="headerlink" title="路由选择"></a>路由选择</h5><p><strong>基于属性值的路由</strong></p>
+<ul>
+<li>感知数据包括属性值对</li>
+<li>接收器可以发送一个查询来表达它的“兴趣”</li>
+<li>匹配“兴趣”的数据将被检索并发送回接收器</li>
+</ul>
+<p><strong>基于位置的路由</strong></p>
+<ul>
+<li>位置被视为查询的一个属性</li>
+<li>使用位置信息来选择路线</li>
+<li>根据节点的位置限制路由</li>
+<li>节点可以维护一个路由表来识别下一跳</li>
+</ul>
+<h5 id="以数据为中心的路由和网络内处理"><a href="#以数据为中心的路由和网络内处理" class="headerlink" title="以数据为中心的路由和网络内处理"></a>以数据为中心的路由和网络内处理</h5><p>以数据为中心的路由：中间节点执行网络内处理</p>
+<ul>
+<li>网络内处理可能涉及：<ul>
+<li>数据聚合或平均</li>
+<li>过滤掉冗余/重复数据</li>
+</ul>
+</li>
+<li>基于处理比通信更耗能的事实</li>
+</ul>
+<h5 id="网络内处理好处"><a href="#网络内处理好处" class="headerlink" title="网络内处理好处"></a>网络内处理好处</h5><ul>
+<li>可以防止瓶颈问题</li>
+<li>解决了内爆问题（和重复）</li>
+<li>通过最小化传输的数据量来降低能耗，从而延长网络寿命</li>
+</ul>
+<h5 id="定向传播：广播兴趣"><a href="#定向传播：广播兴趣" class="headerlink" title="定向传播：广播兴趣"></a>定向传播：广播兴趣</h5><p>它是一个基于属性值的协议</p>
+<p>由三个主要步骤组成：</p>
+<ul>
+<li>兴趣传播</li>
+<li>梯度建立</li>
+<li>沿加强路径传输数据</li>
+</ul>
+<p>扩散：接收器将通过网络扩散（广播）它的“兴趣”</p>
+<ul>
+<li><p>使用属性值对将兴趣转换为查询</p>
+</li>
+<li><p>一个例子：</p>
+<p>利息 = 温度 &gt; 40</p>
+<p>采样周期 = 10s</p>
+</li>
+</ul>
+<h5 id="定向扩散：梯度建立"><a href="#定向扩散：梯度建立" class="headerlink" title="定向扩散：梯度建立"></a>定向扩散：梯度建立</h5><p>任何收到兴趣的节点都会将兴趣进一步传播给邻居</p>
+<p>梯度建立：节点向收到兴趣的邻居建立梯度（即回复链接）</p>
+<p>源节点是与兴趣匹配的节点</p>
+<p>传感器检测到的数据示例</p>
+<ul>
+<li>事件 = 温度 41</li>
+<li>位置 = 矩形 = [-100, 100, 200, 400]</li>
+</ul>
+<h5 id="定向扩散：强化"><a href="#定向扩散：强化" class="headerlink" title="定向扩散：强化"></a>定向扩散：强化</h5><p>从源到接收器可能有几条路径</p>
+<p>传感器网络加强了一个梯度路径</p>
+<p>例如。 加强路径可以基于最短路径</p>
+<h5 id="能源集约型路由"><a href="#能源集约型路由" class="headerlink" title="能源集约型路由"></a>能源集约型路由</h5><p>基于能量的路由方案侧重于确定最有效的路径</p>
+<p>可以考虑节点的能源等级</p>
+<p>目的是延长网络生命周期</p>
+<h5 id="多路径路由和能源效率"><a href="#多路径路由和能源效率" class="headerlink" title="多路径路由和能源效率"></a>多路径路由和能源效率</h5><p>将查询从 Sink 路由到 T</p>
+<img src="/post/fit5046-mobi-notes/image-20210604235524113.png" class="" title="image-20210604235524113">
+
+<ul>
+<li><p>PA 是可用功率</p>
+</li>
+<li><p>α是通过相关路由传输数据包所需的能量</p>
+</li>
+</ul>
+<img src="/post/fit5046-mobi-notes/image-20210604235529057.png" class="" title="image-20210604235529057">
+
+<p>最低能量路线：Route 1 （α最小）</p>
+<p>最小跳数路由：Route 3</p>
+<h5 id="服务质量-QoS-路由"><a href="#服务质量-QoS-路由" class="headerlink" title="服务质量 (QoS) 路由"></a>服务质量 (QoS) 路由</h5><p>在 WSN 中，应用程序可能有不同的要求</p>
+<p>除了讨论的路由选项之外，QoS routing 还可以关注其他标准</p>
+<p>QoS routing旨在平衡数据质量和能耗以实现路由优化</p>
+<p>网络质量可以包括 QoS metrics，例如：</p>
+<ul>
+<li>能源（节能路由），</li>
+<li>成功交付率（丢包）</li>
+<li>延迟</li>
+<li>网络带宽</li>
+</ul>
+<h3 id="遥感-通信"><a href="#遥感-通信" class="headerlink" title="遥感-通信"></a>遥感-通信</h3><p>传感器节点和接收器之间通信的无线技术：</p>
+<ul>
+<li>ZigBee (IEEE 802.15.4)</li>
+<li>蓝牙 (IEEE 802.15.1)</li>
+<li>WiFi(IEEE 802.11x)</li>
+</ul>
+<p>接收器和远程计算机之间通信的其他通信选项：</p>
+<ul>
+<li>4G 和 5G 等蜂窝网络</li>
+<li>卫星通讯</li>
+<li>无线网络 WiMAX</li>
+</ul>
+<h2 id="W10-位置感知计算-Location-Aware-Computing"><a href="#W10-位置感知计算-Location-Aware-Computing" class="headerlink" title="W10 位置感知计算 Location Aware Computing"></a>W10 位置感知计算 Location Aware Computing</h2><p>全考</p>
+<ul>
+<li>Location-aware Computing</li>
+<li>GPS</li>
+<li>室内定位系统 Indoor Positioning Systems (IPS)</li>
+<li>Applications</li>
+</ul>
+<p>定义</p>
+<ul>
+<li>室内外定位系统用于确定物体或人的精确物理位置</li>
+<li>位置感知应用程序从定位系统获取位置信息</li>
+<li>位置感知应用程序用于许多领域：<ul>
+<li>运输、军事、营销和广告、快递服务、旅游、跟踪和监控应用</li>
+</ul>
+</li>
+</ul>
+<p>纬度和经度可以表示为：</p>
+<ul>
+<li><p>十进制度</p>
+<ul>
+<li><p>一度等于大约 70 英里</p>
+</li>
+<li><p>例如。 莫纳什考菲尔德校区：</p>
+<p>-37.876823, 145.045837</p>
+<p>37.876823°S, 145.045837°E </p>
+</li>
+</ul>
+</li>
+<li><p>度、分和秒 (DMS)</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Latitude</td>
+<td>-37.876823</td>
+</tr>
+<tr>
+<td>Longitude</td>
+<td>145.045837</td>
+</tr>
+<tr>
+<td>DMS Lat</td>
+<td>37°52’ 36.5628’’ S</td>
+</tr>
+<tr>
+<td>DMS Lon</td>
+<td>145°2’ 45.0132’’ E</td>
+</tr>
+</tbody></table>
+<p><strong>三边测量和三角测量</strong></p>
+<ul>
+<li>Lateration 边（三边测量 Trilateration）：通过测量物体与多个参考位置的距离来计算物体的位置</li>
+<li>Angulation 角度（三角测量 Triangulation):）：使用距离和角度（三角形的几何特性）来确定对象的位置</li>
+</ul>
+<p>（就是画圆和画线求交点，如果有误差那就是交区</p>
+<h3 id="GPS架构"><a href="#GPS架构" class="headerlink" title="GPS架构"></a>GPS架构</h3><ul>
+<li>GPS卫星</li>
+<li>GPS接收器</li>
+<li>地面站：跟踪和监控 GPS 卫星及其传输、执行分析以及更新时钟和卫星轨道</li>
+</ul>
+<p>第一颗可操作的 GPS 卫星于 1978 年发射</p>
+<p>GPS卫星（Navstar）由美国政府维护</p>
+<p>GNSS - 全球导航卫星系统</p>
+<p>其他卫星导航系统，如俄罗斯的 GLONASS、欧洲的伽利略和中国的北斗</p>
+<h4 id="排列"><a href="#排列" class="headerlink" title="排列"></a>排列</h4><p>定位在 MEO（中地球轨道）中的 GPS 卫星</p>
+<p>每颗卫星每天绕地球运行两次</p>
+<p>卫星排列成 6 个等距环绕地球的轨道平面</p>
+<p>最初的 24 槽排列确保几乎从任何角度都能看到至少四颗卫星</p>
+<p>目前共有31颗可运行的GPS卫星（2021年1月9日）</p>
+<h4 id="GPS的三边测量"><a href="#GPS的三边测量" class="headerlink" title="GPS的三边测量"></a>GPS的三边测量</h4><p>和两个卫星的距离已知，可以画出俩球，俩球交面和地球切出一条线就是可能的位置，这时候再得到个第三个卫星距离（第三个球），该球和线的位置就是实际位置</p>
+<p>为了确定位置，GPS 接收器需要知道：</p>
+<ul>
+<li>四颗或更多卫星的轨道信息和位置</li>
+<li>来自需要时钟同步的卫星发射器的无线电信号的<strong>到达时间</strong>：将使用此信息来计算您与每颗卫星之间的<strong>距离</strong></li>
+</ul>
+<h4 id="计算卫星距离"><a href="#计算卫星距离" class="headerlink" title="计算卫星距离"></a>计算卫星距离</h4><ul>
+<li>速度：无线电波以光速传播（真空中每秒约 299,792 公里）</li>
+<li>时间：GPS卫星广播信号的传输时间及其当时的位置</li>
+<li>卫星使用原子钟</li>
+</ul>
+<p>距离：接收器可以通过以下方式计算信号传播的距离：</p>
+<p>$ 距离= （接收器接收信号的时间-卫星发射信号的时间）\times 光速$</p>
+<p>为了确定物体的位置，GPS 接收器需要：</p>
+<ol>
+<li>定位四颗或更多卫星</li>
+<li>通过测量卫星和接收器之间信号的传输时间并乘以光速来计算到每个卫星的距离</li>
+<li>使用此信息执行三边测量以确定位置</li>
+<li>还要考虑并解决接收器的时钟偏差（时间同步）</li>
+</ol>
+<h3 id="室内定位系统-Indoor-Positioning-Systems-IPS"><a href="#室内定位系统-Indoor-Positioning-Systems-IPS" class="headerlink" title="室内定位系统 Indoor Positioning Systems (IPS)"></a>室内定位系统 Indoor Positioning Systems (IPS)</h3><ul>
+<li>虽然 GPS 和户外导航对于许多应用至关重要，但室内定位系统 (IPS) 也可以提供许多用途和好处</li>
+<li>此类应用的示例：<ul>
+<li>紧急服务（例如在建筑物内定位消防员）</li>
+<li>基于位置的广告，例如 在购物中心或机场</li>
+<li>寻找博物馆的兴趣点</li>
+<li>事件或库存管理</li>
+<li>医院室内导航</li>
+<li>手推车跟踪</li>
+</ul>
+</li>
+</ul>
+<p>使用无线通信技术的IPS：</p>
+<ul>
+<li>无线上网</li>
+<li>蓝牙</li>
+<li>红外线 (IR)</li>
+<li>射频识别 (RFID)</li>
+<li>超声波脉冲</li>
+<li>蜂窝网络</li>
+<li>LiFi</li>
+</ul>
+<p>IPS 可以使用从以下位置收集的其他数据：</p>
+<ul>
+<li>罗盘</li>
+<li>陀螺仪（测量方向）</li>
+<li>加速度计</li>
+<li>里程表</li>
+<li>气压计（测量大气压力）</li>
+</ul>
+<h3 id="RSS"><a href="#RSS" class="headerlink" title="RSS"></a>RSS</h3><p>RSS（接收信号强度）是对接收到的无线信号强度的测量</p>
+<p>RSS 和 TOA（到达时间）广泛用于室内定位，例如 WiFi 三边测量和 WiFi 指纹识别</p>
+<p>WiFi 三边测量使用 WiFi 信号强度 (RSS) 信息、WiFi 接入点 (AP) 的位置和 MAC 地址来计算移动设备与 AP 的距离，然后执行三边测量来计算设备的室内位置</p>
+<h3 id="位置指纹识别-Location-Fingerprinting"><a href="#位置指纹识别-Location-Fingerprinting" class="headerlink" title="位置指纹识别 Location Fingerprinting"></a>位置指纹识别 Location Fingerprinting</h3><p>指纹识别使用RSS，由在线和离线阶段组成</p>
+<ul>
+<li>离线阶段：在该区域选择一组参考点，并在每个点测量来自 AP 的 RSS 并存储在数据库中以表示该区域的无线电地图</li>
+<li>在线阶段：测量移动站的 RSS 并与数据库中的测量值进行比较，以找到最相似的指纹以估计设备的位置</li>
+</ul>
+<p>例: Microsoft RADAR</p>
+<h3 id="用于室内定位的-LiFi"><a href="#用于室内定位的-LiFi" class="headerlink" title="用于室内定位的 LiFi"></a>用于室内定位的 LiFi</h3><p>Li-Fi 是一种可见光通信 (VLC) 技术，使用 LED 以光的形式传输高速数据。 使用可见光的光通信的 IEEE 802.15.7 标准，可以比 WiFi 更快更便宜</p>
+<p>数据通过 LiFi 发送，通过调制 LED 发出的光（速度太快以至于人类无法注意到）</p>
+<ul>
+<li><p>LED 部署在预定的固定位置</p>
+</li>
+<li><p>传输的数据包括：i) 确定发射器坐标的发送方 ID 和 ii) 确定距离的时间戳</p>
+</li>
+<li><p>发送方和接收方的时钟必须同步</p>
+</li>
+<li><p>使用三边测量或三角测量计算位置</p>
+</li>
+</ul>
+<h3 id="主动蝙蝠系统"><a href="#主动蝙蝠系统" class="headerlink" title="主动蝙蝠系统"></a>主动蝙蝠系统</h3><p>主动蝙蝠向天花板上的接收器发送超声波脉冲</p>
+<p>距离是根据飞行时间（ToF）确定的</p>
+<p>信号发射与反射后返回发送端的时间差</p>
+<p>然后根据三边测量原理，通过计算主动蝙蝠到 3 个或更多接收器的距离来确定位置</p>
+<h3 id="板球系统，MIT"><a href="#板球系统，MIT" class="headerlink" title="板球系统，MIT"></a>板球系统，MIT</h3><p>安装在天花板上的信标发射超声波脉冲和射频信号</p>
+<p>移动设备上的听众接收射频信号，然后接收超声波脉冲</p>
+<p>听者估计对应信标的距离，然后进行三边测量</p>
+<h3 id="位置感知钟"><a href="#位置感知钟" class="headerlink" title="位置感知钟"></a>位置感知钟</h3><p>论文：行踪钟 Whereabouts Clock（Brown，2007）</p>
+<ul>
+<li>钟面显示家庭成员的当前位置</li>
+<li>它使用手机上可用的手机 ID 来提供位置数据</li>
+</ul>
+<h3 id="地理围栏"><a href="#地理围栏" class="headerlink" title="地理围栏"></a>地理围栏</h3><p>将有关用户当前位置的信息与用户与感兴趣位置的接近程度相结合</p>
+<p>地理围栏 = 位置（纬度和经度）+ 接近度（半径）</p>
+<p>地理围栏可以使用您移动设备的定位服务来获取您进入或退出时（或您在地理围栏区域内停留的时间）的信息</p>
+<p>它可以向用户的移动设备发送广告，例如 特别优惠信息、提醒、优惠券或其他信息</p>
+<h2 id="W12-移动传输技术-Mobile-Communication-Technologies"><a href="#W12-移动传输技术-Mobile-Communication-Technologies" class="headerlink" title="W12 移动传输技术 Mobile Communication Technologies"></a>W12 移动传输技术 Mobile Communication Technologies</h2><p>全考</p>
+<ul>
+<li>无线电radio基础</li>
+<li>IEEE 802.11 标准和 WiFi</li>
+<li>无线个域网 Wireless Personal Area Networks (WPAN) (IEEE 802.15)<ul>
+<li>蓝牙 (IEEE 802.15.1)</li>
+<li>ZigBee (IEEE 802.15.4)</li>
+</ul>
+</li>
+<li>射频识别 RFID</li>
+<li>WiMAX (IEEE 802.16)</li>
+<li>蜂窝网络 Cellular Networks</li>
+</ul>
+<h3 id="无线电radio基础"><a href="#无线电radio基础" class="headerlink" title="无线电radio基础"></a>无线电radio基础</h3><ul>
+<li>无线电波radio wave使无线通信和网络成为可能</li>
+<li>无需电缆，信号通过空气传输</li>
+<li>无线电波是一种电磁辐射</li>
+<li>电磁辐射具有三个重要特性：<ul>
+<li>频率：每秒周期数(Hz)</li>
+<li>波长：峰间距离</li>
+<li>能量：在光子中发现的能量</li>
+</ul>
+</li>
+</ul>
+<p>工业、科学和医疗 (ISM) 包括国际保留的无线电频段，无需许可即可使用</p>
+<p>FCC（联邦通信委员会）在 5 GHz 范围内引入了新频段（UNII-1、UNII-2、UNII-3</p>
+<p>【UNII =（未经许可的国家信息基础设施）</p>
+<h3 id="IEEE-802-11"><a href="#IEEE-802-11" class="headerlink" title="IEEE 802.11"></a>IEEE 802.11</h3><p>IEEE 802.11 是一组用于定义和实现无线局域网 (WLAN) 通信的标准</p>
+<h4 id="操作模式"><a href="#操作模式" class="headerlink" title="操作模式"></a>操作模式</h4><ol>
+<li>基础设施网络：无线客户端通过无线接入点 (AP) 相互通信</li>
+<li>Ad Hoc Network：临时建立的去中心化点对点网络。例如。 在自然灾害等紧急情况下或在员工之间的会议室中</li>
+</ol>
+<p>Wi-Fi Direct：让 Wi-Fi 设备在没有互联网连接的情况下以简单方便的方式相互连接</p>
+<h4 id="架构-1"><a href="#架构-1" class="headerlink" title="架构"></a>架构</h4><ul>
+<li>基站 Station (STA)：无线/移动客户端，例如笔记本电脑或智能手机</li>
+<li>接入点 Access Point (AP)：使 STA 与骨干网之间的通信成为可能</li>
+<li>基本服务集 Basic Service Set（BSS）：是由支持多个STA的单个无线AP组成的无线网络<ul>
+<li>客户端站之间不直接通信</li>
+</ul>
+</li>
+<li>分布式系统 Distribution System（DS）：连接两个或多个 AP 并扩展 BSS。</li>
+<li>扩展服务集 Extended Service Set (ESS)：由多个互连的基本服务集 (BSS) 组成，连接到同一有线网络骨干网</li>
+<li>独立基本服务集 Independent basic service set（IBSS）：ad hoc模式下的STA形成IBSS，无法接入无线AP<br><a href="https://technet.microsoft.com/pt-pt/library/cc757419(v=ws.10).aspx" target="_blank" rel="noopener">https://technet.microsoft.com/pt-pt/library/cc757419(v=ws.10).aspx</a></li>
+</ul>
+<h4 id="无线分配系统-Wireless-Distribution-System-WDS"><a href="#无线分配系统-Wireless-Distribution-System-WDS" class="headerlink" title="无线分配系统 Wireless Distribution System (WDS)"></a>无线分配系统 Wireless Distribution System (WDS)</h4><p>WDS 是指两个或多个相互连接的无线 AP</p>
+<ul>
+<li>无线桥接 Wireless Bridging，其中无线 AP 相互通信，并作为路由器与其他移动客户端通信</li>
+<li>无线中继 Wireless Repeating，其中无线 AP 仅相互通信（作为中继器），扩展现有 AP 的无线覆盖范围</li>
+</ul>
+<img src="/post/fit5046-mobi-notes/image-20210605164634294.png" class="" title="image-20210605164634294">
+
+<img src="/post/fit5046-mobi-notes/image-20210605164642991.png" class="" title="image-20210605164642991">
+
+<h4 id="Wi-Fi"><a href="#Wi-Fi" class="headerlink" title="Wi-Fi"></a>Wi-Fi</h4><p>Wi-Fi 是 WiFiAlliance 的商标<br>“……基于电气和电子工程师协会 (IEEE) 802.11 标准的无线局域网 (WLAN) 产品”（Wi-Fi 联盟）</p>
+<p>WiFiAlliance 是一个贸易协会，致力于推广和认证符合特定互操作性标准的产品</p>
+<ul>
+<li>802.11a：由于在高频 5GHz 频段上运行，数据速率更高，但墙壁和其他物理障碍物对信号的吸收更多</li>
+<li>802.11b：在 2.4 GHz 频段运行以解决衰减问题</li>
+<li>802.11g：在 2.4 GHz 频段运行，但数据速率更高</li>
+<li>802.11n (WiFi4)：在 2.4GHz 和 5GHz 频段上运行，数据速率更高</li>
+<li>802.11ac (WiFi5)：在 5GHz 频段上运行，数据速率更高</li>
+<li>802.11ad (WiGig)：在 60GHz 频段上运行，速度非常快，距离短</li>
+<li>802.11ah：工作在900MHz频段，支持物联网</li>
+<li>802.11ax (WiFi6)：在 2.4GHz 或 5GHz 以及 6 GHz 频段上运行</li>
+</ul>
+<img src="/post/fit5046-mobi-notes/image-20210605165212828.png" class="" title="image-20210605165212828">
+
+<h3 id="无线个域网-Wireless-Personal-Area-Networks-WPAN-IEEE-802-15"><a href="#无线个域网-Wireless-Personal-Area-Networks-WPAN-IEEE-802-15" class="headerlink" title="无线个域网 Wireless Personal Area Networks (WPAN) (IEEE 802.15)"></a>无线个域网 Wireless Personal Area Networks (WPAN) (IEEE 802.15)</h3><h4 id="IEEE-802-15"><a href="#IEEE-802-15" class="headerlink" title="IEEE 802.15"></a>IEEE 802.15</h4><p>由 IEEE 802.15 Task Group 管理的无线个人区域网络 (WPAN) 的一系列通信规范</p>
+<ul>
+<li>任务组 1：IEEE 802.15.1（蓝牙）</li>
+<li>任务组 2：IEEE 802.15.2-2003: 提供互操作性并解决 WPAN 和 WLAN 共存的问题</li>
+<li>任务组 3：IEEE 802.15.3（高速 WPAN）: 支持实时视频和音乐，更好的电源管理</li>
+<li>任务组 4：IEEE 802.15.4（低速率 WPAN）：<ul>
+<li>非常低带宽、低能耗的家庭通信（例如遥控器、警报）、WSN</li>
+<li>ZigBee 的基础</li>
+</ul>
+</li>
+<li>任务组 5：IEEE 802.15.5（网状网络）</li>
+<li>任务组 6：IEEE 802.15.6：人体内外的短距离、低功耗和高度可靠的无线通信<ul>
+<li>支持无线体域网 (BAN) 中的通信</li>
+</ul>
+</li>
+<li>任务组 7：IEEE 802.15.7 使用可见光的光通信标准: <ul>
+<li>Li-Fi 是一种可见光通信 (VLC) 技术，使用 LED 以光的形式传输高速数据</li>
+</ul>
+</li>
+</ul>
+<h4 id="蓝牙"><a href="#蓝牙" class="headerlink" title="蓝牙"></a>蓝牙</h4><p>一种短距离无线通信技术和标准，2002 年标准化为 IEEE 802.15**.1**</p>
+<p>短程、低功耗、高效</p>
+<p>在 <strong>2.4 GHz ISM 频段 (2402-2480 MHz)</strong> 上运行</p>
+<p>最初旨在成为 RS-232 的无线替代品</p>
+<p>广泛的应用</p>
+<h4 id="ZigBee"><a href="#ZigBee" class="headerlink" title="ZigBee"></a>ZigBee</h4><p>基于 IEEE 802.15**.4** 的低速率 WPAN（无线个人区域网络）标准</p>
+<p>在 <strong>868 MHz 和 915 (900-928) MHz 频段</strong>上运行</p>
+<p>ZigBee 的好处：</p>
+<ul>
+<li><p>易于设置和维护（网格、自组织）</p>
+</li>
+<li><p>可靠性（自我恢复）</p>
+</li>
+<li><p>能够扩展到数千个设备（节点）</p>
+</li>
+<li><p>电池寿命长</p>
+</li>
+<li><p>低成本</p>
+</li>
+</ul>
+<h4 id="RFID"><a href="#RFID" class="headerlink" title="RFID"></a>RFID</h4><p>RFID（射频识别）是一种电子标签/识别技术，便于自动识别</p>
+<p>它的工作原理是在阅读器和标签之间交换电磁信号</p>
+<p>[125 KHz, 5.8 GHz]</p>
+<p>RFID 系统也可能不受 125 KHz 和 5.8 GHz 的限制。 系统<br>也正在为这个范围之外的频率开发</p>
+<p>应答器/标签的类型</p>
+<ul>
+<li>被动：无内部电源</li>
+<li>半被动：他们有自己的电源（一个小电池），只为微芯片供电</li>
+<li>主动：它们有发射器和内部电源（板载电池）来为微芯片供电并将信号传输到阅读器</li>
+</ul>
+<p>基本形式的 RFID 系统包含以下内容:</p>
+<p>Reader: 阅读器发送用于为标签供电/唤醒的微弱信号（一种能量形式）。 然后标签将其微芯片上的信息传输回阅读器。</p>
+<p>Tag/transponder: 带有硅芯片的设备，盘绕天线（Coiled Antenna）</p>
+<ul>
+<li><p>近距离访问控制（卡和钥匙扣）</p>
+</li>
+<li><p>护照</p>
+</li>
+<li><p>收费</p>
+</li>
+<li><p>运输和物流</p>
+</li>
+<li><p>医院和医疗保健</p>
+</li>
+<li><p>牲畜和野生动物追踪</p>
+</li>
+<li><p>零售</p>
+</li>
+<li><p>供应链</p>
+</li>
+<li><p>资产追踪</p>
+</li>
+<li><p>库存系统</p>
+</li>
+</ul>
+<p>（本科时候图书馆里的书籍管理、借阅</p>
+<h3 id="IEEE-802-16-and-WiMAX"><a href="#IEEE-802-16-and-WiMAX" class="headerlink" title="IEEE 802.16 and WiMAX"></a>IEEE 802.16 and WiMAX</h3><p>IEEE 802.16 是用于大型城市无线网络的无线 MAN（城域网）标准系列</p>
+<p>WiMAX（微波接入全球互操作性）是 IEEE 802.16 标准的商业名称</p>
+<p>WiMAX 在不同国家的不同频段上运行； 通常在2.3 GHz、2.5 GHz、3.5 GHz、5.8 GHz频段</p>
+<p>IEEE 802.16 标准最初针对固定无线宽带接入技术（Fixed WiMAX）</p>
+<p>后来在移动 WiMAX 中考虑了移动性支持，这是一种广域无线网络技术</p>
+<p>移动 WiMAX，一种用于 4G 的竞争技术</p>
+<h4 id="Fixed-WiMAX-架构"><a href="#Fixed-WiMAX-架构" class="headerlink" title="Fixed WiMAX 架构"></a>Fixed WiMAX 架构</h4><p>WiMAX 基站 (BS)：连接到公共网络</p>
+<p>用户站（SS）：通常为建筑物提供服务</p>
+<p>覆盖“最后一公里”区域：为普通有线技术无法覆盖的区域提供高速互联网接入</p>
+<h3 id="Cellular-Networks"><a href="#Cellular-Networks" class="headerlink" title="Cellular Networks"></a>Cellular Networks</h3><p>蜂窝网络，贝尔实验室（1957 -1960）</p>
+<p>在蜂窝网络中，地理覆盖区域通常被划分为小区，用六边形表示</p>
+<p>多个用户如何可以同时共享同一个链接而不受干扰？</p>
+<ul>
+<li>频分多址 Frequency-Division Multiple Access (FDMA)</li>
+<li>时分多址 Time-Division Multiple Access (TDMA)</li>
+<li>码分多址 Code Division Multiple Access (CDMA)</li>
+<li>直接序列扩频 Direct-sequence spread spectrum (DSSS)</li>
+<li>跳频扩频 Frequency-hopping spread spectrum (FHSS)</li>
+<li>正交频分复用 Orthogonal Frequency Division Multiplexing (OFDM)</li>
+</ul>
+<h2 id="错题集"><a href="#错题集" class="headerlink" title="错题集"></a>错题集</h2><p>Question 1. Which of the following statements is NOT true about a multi-hop sensor network?</p>
+<p>A. It makes it easy to control and manage the network.</p>
+<p>B. It involves transmission over short distances.</p>
+<p>C. It involves one or more intermediate nodes along the path that receive and forward packets.</p>
+<p>D. It can quickly drain the battery of the nodes close to the sink.</p>
+<p>答案A，错选BD。</p>
+<p>A是单跳的</p>
+<p>多跳网络描述：</p>
+<ul>
+<li><p>传感器节点通过一个或多个中间节点将其数据传输到接收器（C对）</p>
+</li>
+<li><p>它涉及短距离传输，因此更节能（B对）</p>
+</li>
+<li><p>管理可能很复杂（和A相反）</p>
+</li>
+<li><p>适用于更大的网络</p>
+</li>
+</ul>
+<p>D需要理解。</p>
+<img src="/post/fit5046-mobi-notes/image-20210605215713114.png" class="" title="image-20210605215713114">
+
+<p>如图，多跳下，不管怎么跳肯定要跳到最上面的三个上面。</p>
+<img src="/post/fit5046-mobi-notes/image-20210605215749334.png" class="" title="image-20210605215749334">
+
+<p>单跳就不用。</p>
+<p>所以多跳时候上面三个更closer的就更费电</p>
+<p>Question 2. Which of the following statements is NOT true about a ViewGroup?</p>
+<p>A. A ViewGroup is a special view that can contain other views.</p>
+<p>B. A ViewGroup is the base class for widgets, which are used to create interactive UI components.</p>
+<p>C. A ViewGroup is the base class for layouts and views containers.</p>
+<p>D. The ViewGroup is a subclass of View.</p>
+<p>答案B，错选CD。</p>
+<p>W2内容</p>
+<p>ViewGroup是结构上的底层概念，本质上是没有UI的一个概念体。具体形状由View负责。因此B里面作为UI组件的基类是明显不对的，C说法正确。D搜出来的确对的，ViewGroup extends View</p>
+<p>ViewGroup 是 View 类的特殊子类，用作多个 View 的容器。 有几个有用的小部件可以扩展 ViewGroup 类。 大多数实际上是另一个称为Layout（的 ViewGroup） 的子类。</p>
+<p>Question 4. Which of the following Kotlin code examples is CORRECT?</p>
+<p>A. var num:Int</p>
+<p>B. var Int:num = 1</p>
+<p>C. var num:Int = null</p>
+<p>D. var num = 1</p>
+<p>答案D，错选AD。</p>
+<p>因为在playground测试了A是可以的（只要后面有用值初始化</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> i: <span class="built_in">Int</span></span><br><span class="line">	i = <span class="number">1</span></span><br><span class="line">    print(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><del>精C玩家震怒。这里就只能当是错的吧</del></p>
+<p>错误原因见[空值](#空值安全 Null Safe)和前面那个lateinit。因为没?也没lateinit声明所以A就不正确</p>
+<p>考试又考了一遍，正确答案就在空值部分例子里</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/android/" rel="tag"># android</a>
+              <a href="/tags/distributed-system/" rel="tag"># distributed system</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/environmental_monitoring_system_based_on_blockchain/" rel="prev" title="基于区块链的环境监测系统 Environmental Monitoring System based on Blockchain">
+      <i class="fa fa-chevron-left"></i> 基于区块链的环境监测系统 Environmental Monitoring System based on Blockchain
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/fit5057-pm-notes/" rel="next" title="Notes for FIT5057: Project management">
+      Notes for FIT5057: Project management <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#W1-%E7%90%86%E8%AE%BA%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">W1 理论介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">分布式的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%85%B4%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">新兴概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SOA-Service-Oriented-Architecture"><span class="nav-number">1.1.3.</span> <span class="nav-text">SOA (Service-Oriented Architecture)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-Services"><span class="nav-number">1.1.4.</span> <span class="nav-text">Web Services</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SOAP-Simple-Object-Access-Protocol"><span class="nav-number">1.1.5.</span> <span class="nav-text">SOAP (Simple Object Access Protocol)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SOAP-Message"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">SOAP Message</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http-binding"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">http binding</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WSDL-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.6.</span> <span class="nav-text">WSDL 的作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REST"><span class="nav-number">1.2.</span> <span class="nav-text">REST</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F%EF%BC%9AClient-Server%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">约束：Client-Server：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Stateless"><span class="nav-number">1.2.2.</span> <span class="nav-text">Stateless</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cache"><span class="nav-number">1.2.3.</span> <span class="nav-text">Cache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Uniform-Interface"><span class="nav-number">1.2.4.</span> <span class="nav-text">Uniform Interface</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Layered-System"><span class="nav-number">1.2.5.</span> <span class="nav-text">Layered System</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-On-Demand"><span class="nav-number">1.2.6.</span> <span class="nav-text">[Code-On-Demand]</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W2-%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">W2 安卓开发基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-app%E5%88%86%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">mobile app分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%B8%83%E5%B1%80-Layout"><span class="nav-number">2.2.</span> <span class="nav-text">基础布局 Layout</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Layout%EF%BC%8CView-amp-ViewGroup%E5%85%B3%E7%B3%BB"><span class="nav-number">2.2.1.</span> <span class="nav-text">Layout，View &amp; ViewGroup关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81Layout"><span class="nav-number">2.2.2.</span> <span class="nav-text">常见Layout</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ConstraintLayout"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">ConstraintLayout</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">重要文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity"><span class="nav-number">2.4.</span> <span class="nav-text">Activity</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Activity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">2.4.1.</span> <span class="nav-text">Activity 生命周期</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kotlin"><span class="nav-number">2.5.</span> <span class="nav-text">Kotlin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E5%80%BC%E5%AE%89%E5%85%A8-Null-Safe"><span class="nav-number">2.5.1.</span> <span class="nav-text">空值安全 Null Safe</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.5.2.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Backing-fields-amp-properties"><span class="nav-number">2.5.3.</span> <span class="nav-text">Backing fields &amp; properties</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W3-%E5%A4%9AActivity%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91"><span class="nav-number">3.</span> <span class="nav-text">W3 多Activity项目开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Events-amp-Event-Listeners"><span class="nav-number">3.1.</span> <span class="nav-text">Events &amp; Event Listeners</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#View-Binding"><span class="nav-number">3.2.</span> <span class="nav-text">View Binding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intent"><span class="nav-number">3.3.</span> <span class="nav-text">Intent</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Use-Intent-to-Receive-Results"><span class="nav-number">3.3.1.</span> <span class="nav-text">Use Intent to Receive Results</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bundle"><span class="nav-number">3.4.</span> <span class="nav-text">Bundle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parcelable"><span class="nav-number">3.5.</span> <span class="nav-text">Parcelable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W4-%E5%9F%BA%E4%BA%8EFragment%E7%9A%84%E5%BC%80%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">W4 基于Fragment的开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fragment"><span class="nav-number">4.1.</span> <span class="nav-text">Fragment</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Fragment%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">4.1.1.</span> <span class="nav-text">Fragment的生命周期</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SharedPreferences"><span class="nav-number">4.2.</span> <span class="nav-text">SharedPreferences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LiveData"><span class="nav-number">4.3.</span> <span class="nav-text">LiveData</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewModel"><span class="nav-number">4.4.</span> <span class="nav-text">ViewModel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W5-%E5%AF%BC%E8%88%AA%E6%A0%8F-Navigation"><span class="nav-number">5.</span> <span class="nav-text">W5  导航栏 Navigation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E8%88%AA%E7%9A%84%E7%B1%BB%E5%88%AB"><span class="nav-number">5.1.</span> <span class="nav-text">导航的类别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drawer"><span class="nav-number">5.2.</span> <span class="nav-text">Drawer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Principle"><span class="nav-number">5.2.1.</span> <span class="nav-text">Principle</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W6-%E5%9F%BA%E4%BA%8E-Room-%E7%9A%84%E5%AE%89%E5%8D%93%E5%AD%98%E5%82%A8"><span class="nav-number">6.</span> <span class="nav-text">W6 基于 Room 的安卓存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tasks"><span class="nav-number">6.1.</span> <span class="nav-text">Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Immediate"><span class="nav-number">6.1.1.</span> <span class="nav-text">Immediate:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exact"><span class="nav-number">6.1.2.</span> <span class="nav-text">Exact:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deferred"><span class="nav-number">6.1.3.</span> <span class="nav-text">Deferred:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Room-Persistence-Library"><span class="nav-number">6.2.</span> <span class="nav-text">Room Persistence Library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entity-Class"><span class="nav-number">6.3.</span> <span class="nav-text">Entity Class</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E4%B8%A4%E4%B8%AA%E5%AE%9E%E4%BD%93%E4%B9%8B%E9%97%B4%E5%88%9B%E5%BB%BA%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%85%B3%E7%B3%BB"><span class="nav-number">6.3.1.</span> <span class="nav-text">在两个实体之间创建一对多关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DAO-Data-Access-Object"><span class="nav-number">6.4.</span> <span class="nav-text">DAO (Data Access Object)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RoomDatabase"><span class="nav-number">6.4.1.</span> <span class="nav-text">RoomDatabase</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repository"><span class="nav-number">6.5.</span> <span class="nav-text">Repository</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kotlin-1"><span class="nav-number">6.6.</span> <span class="nav-text">Kotlin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W6-RecyclerView"><span class="nav-number">7.</span> <span class="nav-text">W6 RecyclerView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W7-UI"><span class="nav-number">8.</span> <span class="nav-text">W7 UI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E9%A3%8E%E6%A0%BC%E4%B8%8E%E8%8C%83%E5%BC%8F"><span class="nav-number">8.1.</span> <span class="nav-text">设计风格与范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Material-Design"><span class="nav-number">8.2.</span> <span class="nav-text">Material Design</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%88%99"><span class="nav-number">8.2.1.</span> <span class="nav-text">原则</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Material%EF%BC%88%E6%9D%90%E6%96%99%EF%BC%89%E6%98%AF%E4%B8%AA%E9%9A%90%E5%96%BB"><span class="nav-number">8.2.1.1.</span> <span class="nav-text">Material（材料）是个隐喻</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B2%97%E4%BD%93%E3%80%81%E5%9B%BE%E5%BD%A2%E3%80%81%E5%88%BB%E6%84%8F"><span class="nav-number">8.2.1.2.</span> <span class="nav-text">粗体、图形、刻意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%90%E5%8A%A8%E6%8F%90%E4%BE%9B%E6%84%8F%E4%B9%89"><span class="nav-number">8.2.1.3.</span> <span class="nav-text">运动提供意义</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83Environment"><span class="nav-number">8.2.2.</span> <span class="nav-text">环境Environment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2"><span class="nav-number">8.2.3.</span> <span class="nav-text">颜色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F"><span class="nav-number">8.2.4.</span> <span class="nav-text">图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E6%A0%87%EF%BC%8C%E5%AD%97%E4%BD%93%EF%BC%8C%E8%8F%9C%E5%8D%95"><span class="nav-number">8.2.5.</span> <span class="nav-text">图标，字体，菜单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tabs"><span class="nav-number">8.2.6.</span> <span class="nav-text">Tabs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95"><span class="nav-number">8.2.7.</span> <span class="nav-text">表单</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WCAG-2-0-and-Other-W3C-WAI-Guidelines"><span class="nav-number">8.3.</span> <span class="nav-text">WCAG 2.0 and Other W3C&#x2F;WAI Guidelines</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%88%99-1%EF%BC%9A%E5%8F%AF%E6%84%9F%E7%9F%A5"><span class="nav-number">8.3.1.</span> <span class="nav-text">原则 1：可感知</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-%E5%B0%8F%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8"><span class="nav-number">8.3.1.1.</span> <span class="nav-text">1.1. 小屏幕尺寸</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-%E7%BC%A9%E6%94%BE-%E6%94%BE%E5%A4%A7"><span class="nav-number">8.3.1.2.</span> <span class="nav-text">1.2 缩放&#x2F;放大</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-%E5%AF%B9%E6%AF%94%E5%BA%A6"><span class="nav-number">8.3.1.3.</span> <span class="nav-text">1.3 对比度</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%88%99-2%EF%BC%9A%E5%8F%AF%E6%93%8D%E4%BD%9C"><span class="nav-number">8.3.2.</span> <span class="nav-text">原则 2：可操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-%E8%A7%A6%E6%91%B8%E5%B1%8F%E8%AE%BE%E5%A4%87%E7%9A%84%E9%94%AE%E7%9B%98%E6%8E%A7%E5%88%B6"><span class="nav-number">8.3.2.1.</span> <span class="nav-text">2.1 触摸屏设备的键盘控制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-%E8%A7%A6%E6%91%B8%E7%9B%AE%E6%A0%87%E5%B0%BA%E5%AF%B8%E5%92%8C%E9%97%B4%E8%B7%9D"><span class="nav-number">8.3.2.2.</span> <span class="nav-text">2.2 触摸目标尺寸和间距</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-%E8%A7%A6%E6%91%B8%E5%B1%8F%E6%89%8B%E5%8A%BF"><span class="nav-number">8.3.2.3.</span> <span class="nav-text">2.3 触摸屏手势</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-%E8%AE%BE%E5%A4%87%E6%93%8D%E4%BD%9C%E6%89%8B%E5%8A%BF"><span class="nav-number">8.3.2.4.</span> <span class="nav-text">2.4 设备操作手势</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-%E5%B0%86%E6%8C%89%E9%92%AE%E6%94%BE%E7%BD%AE%E5%9C%A8%E6%98%93%E4%BA%8E%E8%AE%BF%E9%97%AE%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">8.3.2.5.</span> <span class="nav-text">2.5 将按钮放置在易于访问的位置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%88%99-3%EF%BC%9A%E5%8F%AF%E7%90%86%E8%A7%A3"><span class="nav-number">8.3.3.</span> <span class="nav-text">原则 3：可理解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-%E6%9B%B4%E6%94%B9%E5%B1%8F%E5%B9%95%E6%96%B9%E5%90%91%EF%BC%88%E7%BA%B5%E5%90%91-%E6%A8%AA%E5%90%91%EF%BC%89"><span class="nav-number">8.3.3.1.</span> <span class="nav-text">3.1 更改屏幕方向（纵向&#x2F;横向）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-%E4%B8%80%E8%87%B4%E7%9A%84%E5%B8%83%E5%B1%80"><span class="nav-number">8.3.3.2.</span> <span class="nav-text">3.2 一致的布局</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-%E5%9C%A8%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8%E5%89%8D%E5%AE%9A%E4%BD%8D%E9%87%8D%E8%A6%81%E7%9A%84%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0"><span class="nav-number">8.3.3.3.</span> <span class="nav-text">3.3 在页面滚动前定位重要的页面元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-%E5%AF%B9%E6%89%A7%E8%A1%8C%E7%9B%B8%E5%90%8C%E5%8A%A8%E4%BD%9C%E7%9A%84%E5%8F%AF%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84"><span class="nav-number">8.3.3.4.</span> <span class="nav-text">3.4 对执行相同动作的可操作元素进行分组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-%E6%98%8E%E7%A1%AE%E8%AF%B4%E6%98%8E%E8%A6%81%E7%B4%A0%E6%98%AF%E5%8F%AF%E6%93%8D%E4%BD%9C%E7%9A%84"><span class="nav-number">8.3.3.5.</span> <span class="nav-text">3.5 明确说明要素是可操作的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-6-%E6%8F%90%E4%BE%9B%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A7%A6%E6%91%B8%E5%B1%8F%E5%92%8C%E8%AE%BE%E5%A4%87%E6%93%8D%E4%BD%9C%E6%89%8B%E5%8A%BF%E7%9A%84%E8%AF%B4%E6%98%8E"><span class="nav-number">8.3.3.6.</span> <span class="nav-text">3.6 提供自定义触摸屏和设备操作手势的说明</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%88%99-4%EF%BC%9ARobust"><span class="nav-number">8.3.4.</span> <span class="nav-text">原则 4：Robust</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1%E5%B0%86%E8%99%9A%E6%8B%9F%E9%94%AE%E7%9B%98%E8%AE%BE%E7%BD%AE%E4%B8%BA%E6%89%80%E9%9C%80%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.3.4.1.</span> <span class="nav-text">4.1将虚拟键盘设置为所需的数据输入类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-%E6%8F%90%E4%BE%9B%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BD%95%E5%85%A5%E6%96%B9%E6%B3%95"><span class="nav-number">8.3.4.2.</span> <span class="nav-text">4.2 提供简单的数据录入方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-%E6%94%AF%E6%8C%81%E5%B9%B3%E5%8F%B0%E7%89%B9%E6%80%A7"><span class="nav-number">8.3.4.3.</span> <span class="nav-text">4.3 支持平台特性</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W7-Retrofit-%E7%BD%91%E7%BB%9C%E5%BA%93"><span class="nav-number">9.</span> <span class="nav-text">W7 Retrofit 网络库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-Classes"><span class="nav-number">9.1.</span> <span class="nav-text">Model Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GET"><span class="nav-number">9.2.</span> <span class="nav-text">GET</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client"><span class="nav-number">9.3.</span> <span class="nav-text">Client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Call-back"><span class="nav-number">9.4.</span> <span class="nav-text">Call(back)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#InterfaceCall-lt-T-gt"><span class="nav-number">9.4.1.</span> <span class="nav-text">InterfaceCall&lt;T&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InterfaceCallback-lt-T-gt"><span class="nav-number">9.4.2.</span> <span class="nav-text">InterfaceCallback&lt;T&gt;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kotlin-2"><span class="nav-number">9.5.</span> <span class="nav-text">Kotlin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W8-%E6%99%AE%E9%80%82%E8%AE%A1%E7%AE%97-Ubiquitous-Computing"><span class="nav-number">10.</span> <span class="nav-text">W8 普适计算 Ubiquitous Computing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92%EF%BC%88HCI"><span class="nav-number">10.1.</span> <span class="nav-text">人机交互（HCI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%AE%BE%E5%A4%87"><span class="nav-number">10.1.1.</span> <span class="nav-text">输入设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E8%AE%BE%E5%A4%87"><span class="nav-number">10.1.2.</span> <span class="nav-text">输出设备</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87-%E6%83%85%E5%A2%83%E6%84%9F%E7%9F%A5%E8%AE%A1%E7%AE%97-Context-Situation-Aware-Computing"><span class="nav-number">10.2.</span> <span class="nav-text">上下文&#x2F;情境感知计算 Context&#x2F;Situation-Aware Computing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E6%84%9F%E7%9F%A5"><span class="nav-number">10.2.1.</span> <span class="nav-text">上下文感知</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%83%85%E6%99%AF%EF%BC%9A%E9%AB%98%E7%BA%A7%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">10.2.2.</span> <span class="nav-text">情景：高级上下文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%BB%BA%E6%A8%A1"><span class="nav-number">10.2.3.</span> <span class="nav-text">上下文建模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87-%E6%83%85%E5%A2%83%E6%8E%A8%E7%90%86"><span class="nav-number">10.2.4.</span> <span class="nav-text">上下文&#x2F;情境推理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E6%84%9F%E7%9F%A5-Mobile-Sensing"><span class="nav-number">10.3.</span> <span class="nav-text">移动感知 Mobile Sensing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E4%BA%BA%E7%BE%A4%E6%84%9F%E7%9F%A5-Mobile-CrowdSensing"><span class="nav-number">10.3.1.</span> <span class="nav-text">移动人群感知 Mobile CrowdSensing</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">10.3.1.1.</span> <span class="nav-text">实现方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IoT"><span class="nav-number">10.4.</span> <span class="nav-text">IoT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cloud-and-edge-computing"><span class="nav-number">10.5.</span> <span class="nav-text">Cloud and edge computing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97"><span class="nav-number">10.5.1.</span> <span class="nav-text">云计算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97"><span class="nav-number">10.5.2.</span> <span class="nav-text">边缘计算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A5%BD%E5%A4%84"><span class="nav-number">10.5.2.1.</span> <span class="nav-text">好处</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W9-%E6%97%A0%E7%BA%BF%E4%BC%A0%E6%84%9F%E5%99%A8-Wireless-Sensors"><span class="nav-number">11.</span> <span class="nav-text">W9 无线传感器 Wireless Sensors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%BA%90Power"><span class="nav-number">11.1.</span> <span class="nav-text">电源Power</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E6%84%9F%E5%99%A8%E7%BD%91%E7%BB%9C-Wireless-Sensor-Networks-WSNs"><span class="nav-number">11.2.</span> <span class="nav-text">传感器网络 Wireless Sensor Networks (WSNs)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E6%84%9F%E5%99%A8%E8%8A%82%E7%82%B9-Sensor-Nodes"><span class="nav-number">11.3.</span> <span class="nav-text">传感器节点 Sensor Nodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E5%99%A8-Sink"><span class="nav-number">11.4.</span> <span class="nav-text">接收器 Sink</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E6%84%9F%E5%99%A8%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%BC%8F-Sensor-Operation-Modes"><span class="nav-number">11.5.</span> <span class="nav-text">传感器操作模式 Sensor Operation Modes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E6%8B%93%E6%89%91"><span class="nav-number">11.6.</span> <span class="nav-text">节点拓扑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">11.7.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%8E%A5%E6%94%B6%E5%99%A8%E5%92%8C%E7%A7%BB%E5%8A%A8%E6%8E%A5%E6%94%B6%E5%99%A8%E7%BD%91%E7%BB%9C"><span class="nav-number">11.7.1.</span> <span class="nav-text">静态接收器和移动接收器网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E6%80%A7%E6%88%96%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%80%A7%E7%BD%91%E7%BB%9C"><span class="nav-number">11.7.2.</span> <span class="nav-text">确定性或非确定性网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%9E%84%E6%88%96%E5%BC%82%E6%9E%84%E7%BD%91%E7%BB%9C"><span class="nav-number">11.7.3.</span> <span class="nav-text">同构或异构网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E6%B1%87%E6%88%96%E5%A4%9A%E6%B1%87%E7%BD%91%E7%BB%9C"><span class="nav-number">11.7.4.</span> <span class="nav-text">单汇或多汇网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E8%B7%B3%E6%88%96%E5%A4%9A%E8%B7%B3%E6%97%A0%E7%BA%BF%E4%BC%A0%E6%84%9F%E5%99%A8%E7%BD%91%E7%BB%9C"><span class="nav-number">11.7.5.</span> <span class="nav-text">单跳或多跳无线传感器网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">11.8.</span> <span class="nav-text">架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B3%E9%9D%A2%E5%A4%9A%E8%B7%B3%E6%9E%B6%E6%9E%84"><span class="nav-number">11.8.1.</span> <span class="nav-text">平面多跳架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%9B%86%E7%BE%A4%E7%9A%84%E5%A4%9A%E8%B7%B3%E6%9E%B6%E6%9E%84"><span class="nav-number">11.8.2.</span> <span class="nav-text">基于集群的多跳架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="nav-number">11.8.3.</span> <span class="nav-text">路由协议</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Flooding-and-Gossiping"><span class="nav-number">11.8.3.1.</span> <span class="nav-text">Flooding and Gossiping</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1"><span class="nav-number">11.8.3.2.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9"><span class="nav-number">11.8.3.3.</span> <span class="nav-text">路由选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A5%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E8%B7%AF%E7%94%B1%E5%92%8C%E7%BD%91%E7%BB%9C%E5%86%85%E5%A4%84%E7%90%86"><span class="nav-number">11.8.3.4.</span> <span class="nav-text">以数据为中心的路由和网络内处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%86%85%E5%A4%84%E7%90%86%E5%A5%BD%E5%A4%84"><span class="nav-number">11.8.3.5.</span> <span class="nav-text">网络内处理好处</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E5%90%91%E4%BC%A0%E6%92%AD%EF%BC%9A%E5%B9%BF%E6%92%AD%E5%85%B4%E8%B6%A3"><span class="nav-number">11.8.3.6.</span> <span class="nav-text">定向传播：广播兴趣</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E5%90%91%E6%89%A9%E6%95%A3%EF%BC%9A%E6%A2%AF%E5%BA%A6%E5%BB%BA%E7%AB%8B"><span class="nav-number">11.8.3.7.</span> <span class="nav-text">定向扩散：梯度建立</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E5%90%91%E6%89%A9%E6%95%A3%EF%BC%9A%E5%BC%BA%E5%8C%96"><span class="nav-number">11.8.3.8.</span> <span class="nav-text">定向扩散：强化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%83%BD%E6%BA%90%E9%9B%86%E7%BA%A6%E5%9E%8B%E8%B7%AF%E7%94%B1"><span class="nav-number">11.8.3.9.</span> <span class="nav-text">能源集约型路由</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%BE%84%E8%B7%AF%E7%94%B1%E5%92%8C%E8%83%BD%E6%BA%90%E6%95%88%E7%8E%87"><span class="nav-number">11.8.3.10.</span> <span class="nav-text">多路径路由和能源效率</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F-QoS-%E8%B7%AF%E7%94%B1"><span class="nav-number">11.8.3.11.</span> <span class="nav-text">服务质量 (QoS) 路由</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%A5%E6%84%9F-%E9%80%9A%E4%BF%A1"><span class="nav-number">11.9.</span> <span class="nav-text">遥感-通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W10-%E4%BD%8D%E7%BD%AE%E6%84%9F%E7%9F%A5%E8%AE%A1%E7%AE%97-Location-Aware-Computing"><span class="nav-number">12.</span> <span class="nav-text">W10 位置感知计算 Location Aware Computing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GPS%E6%9E%B6%E6%9E%84"><span class="nav-number">12.1.</span> <span class="nav-text">GPS架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%88%97"><span class="nav-number">12.1.1.</span> <span class="nav-text">排列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GPS%E7%9A%84%E4%B8%89%E8%BE%B9%E6%B5%8B%E9%87%8F"><span class="nav-number">12.1.2.</span> <span class="nav-text">GPS的三边测量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%8D%AB%E6%98%9F%E8%B7%9D%E7%A6%BB"><span class="nav-number">12.1.3.</span> <span class="nav-text">计算卫星距离</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A4%E5%86%85%E5%AE%9A%E4%BD%8D%E7%B3%BB%E7%BB%9F-Indoor-Positioning-Systems-IPS"><span class="nav-number">12.2.</span> <span class="nav-text">室内定位系统 Indoor Positioning Systems (IPS)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSS"><span class="nav-number">12.3.</span> <span class="nav-text">RSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB-Location-Fingerprinting"><span class="nav-number">12.4.</span> <span class="nav-text">位置指纹识别 Location Fingerprinting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E4%BA%8E%E5%AE%A4%E5%86%85%E5%AE%9A%E4%BD%8D%E7%9A%84-LiFi"><span class="nav-number">12.5.</span> <span class="nav-text">用于室内定位的 LiFi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E8%9D%99%E8%9D%A0%E7%B3%BB%E7%BB%9F"><span class="nav-number">12.6.</span> <span class="nav-text">主动蝙蝠系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%BF%E7%90%83%E7%B3%BB%E7%BB%9F%EF%BC%8CMIT"><span class="nav-number">12.7.</span> <span class="nav-text">板球系统，MIT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E6%84%9F%E7%9F%A5%E9%92%9F"><span class="nav-number">12.8.</span> <span class="nav-text">位置感知钟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E7%90%86%E5%9B%B4%E6%A0%8F"><span class="nav-number">12.9.</span> <span class="nav-text">地理围栏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W12-%E7%A7%BB%E5%8A%A8%E4%BC%A0%E8%BE%93%E6%8A%80%E6%9C%AF-Mobile-Communication-Technologies"><span class="nav-number">13.</span> <span class="nav-text">W12 移动传输技术 Mobile Communication Technologies</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E7%94%B5radio%E5%9F%BA%E7%A1%80"><span class="nav-number">13.1.</span> <span class="nav-text">无线电radio基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IEEE-802-11"><span class="nav-number">13.2.</span> <span class="nav-text">IEEE 802.11</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-number">13.2.1.</span> <span class="nav-text">操作模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84-1"><span class="nav-number">13.2.2.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E5%88%86%E9%85%8D%E7%B3%BB%E7%BB%9F-Wireless-Distribution-System-WDS"><span class="nav-number">13.2.3.</span> <span class="nav-text">无线分配系统 Wireless Distribution System (WDS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Wi-Fi"><span class="nav-number">13.2.4.</span> <span class="nav-text">Wi-Fi</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E4%B8%AA%E5%9F%9F%E7%BD%91-Wireless-Personal-Area-Networks-WPAN-IEEE-802-15"><span class="nav-number">13.3.</span> <span class="nav-text">无线个域网 Wireless Personal Area Networks (WPAN) (IEEE 802.15)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IEEE-802-15"><span class="nav-number">13.3.1.</span> <span class="nav-text">IEEE 802.15</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%93%9D%E7%89%99"><span class="nav-number">13.3.2.</span> <span class="nav-text">蓝牙</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZigBee"><span class="nav-number">13.3.3.</span> <span class="nav-text">ZigBee</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RFID"><span class="nav-number">13.3.4.</span> <span class="nav-text">RFID</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IEEE-802-16-and-WiMAX"><span class="nav-number">13.4.</span> <span class="nav-text">IEEE 802.16 and WiMAX</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Fixed-WiMAX-%E6%9E%B6%E6%9E%84"><span class="nav-number">13.4.1.</span> <span class="nav-text">Fixed WiMAX 架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cellular-Networks"><span class="nav-number">13.5.</span> <span class="nav-text">Cellular Networks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E9%A2%98%E9%9B%86"><span class="nav-number">14.</span> <span class="nav-text">错题集</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : '4541c60c3876d67335f1a7204aee6156',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

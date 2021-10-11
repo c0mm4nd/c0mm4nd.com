@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这门课是本科，研究生和博士生一起上的。任务量巨大。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes for FIT5125: IT research methods S1 2021">
+<meta property="og:url" content="https://c0mm4nd.com/post/fit5125-research-method-notes/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="这门课是本科，研究生和博士生一起上的。任务量巨大。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5125-research-method-notes/image-20210511195219137.png">
+<meta property="og:image" content="https://c0mm4nd.com/post/fit5125-research-method-notes/Ind.jpg">
+<meta property="article:published_time" content="2021-10-11T09:21:35.814Z">
+<meta property="article:modified_time" content="2021-10-11T09:21:35.814Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
+<meta property="article:tag" content="research">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://c0mm4nd.com/post/fit5125-research-method-notes/image-20210511195219137.png">
+
+<link rel="canonical" href="https://c0mm4nd.com/post/fit5125-research-method-notes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Notes for FIT5125: IT research methods S1 2021 | Talkless</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Talkless</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">63</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/post/fit5125-research-method-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes for FIT5125: IT research methods S1 2021
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-11 17:21:35" itemprop="dateCreated datePublished" datetime="2021-10-11T17:21:35+08:00">2021-10-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这门课是本科，研究生和博士生一起上的。任务量巨大。</p>
+<span id="more"></span>
+
+<p>W2</p>
+<ul>
+<li>Physical or psychological harm or abuse 身体或心理上的伤害或虐待</li>
+<li>Informed consent 知情同意</li>
+<li>Right of withdrawal 退出的权利 ​​</li>
+<li>Access to outcomes 对成果知情</li>
+<li>Vulnerable participant groups 弱势参与者群体</li>
+<li>Deception and coercion 欺骗与强迫</li>
+<li>Illegal practices 违法</li>
+<li>Invasion of privacy 侵犯隐私</li>
+<li>Confidentiality 保密</li>
+<li>Human subject data 人体主题数据</li>
+</ul>
+<p>Deception 欺骗<br>欺骗的类型：<br>•“故意”：告诉参与者不正确的事情<br>•“遗漏”：不告诉参与者或模棱两可<br>一些研究需要欺骗，例如：<br>•防止参与者猜测正在研究的行为<br>•“欺骗”本身就是正在研究的现象<br>•当需要研究员的“同盟”时<br>尽量减少欺骗<br>必须尽早通知参与者有关欺骗的信息<br>汇报时<br>欺骗不得造成困扰（包括汇报后）<br>欺骗的使用受到争议（违反了知情同意）</p>
+<p>强制和不当影响 Coercion &amp; undue influence<br>参与研究的压力。<br>显式强制 Explicit coercion：例如<br>•告诉参与者他们将不会获得某些好处<br>•告诉参与者他们必须参加<br>隐式强制 Implicit coercion：例如<br>•参与者推断他们将受到不利待遇<br>不当影响 Undue influence：<br>•参与奖励过多或不适当<br>研究人员必须意识到会对潜在参与者产生不适当的影响：<br>•例如 在他们的学生或同事身上</p>
+<hr>
+<h2 id="W6-质性研究"><a href="#W6-质性研究" class="headerlink" title="W6 质性研究"></a>W6 质性研究</h2><p>关键学的是主题分析（法），百科上内容挺少。</p>
+<p>这里内容来自<a href="https://www.jianshu.com/p/427779f36752%E7%9A%84%E8%AE%B0%E5%BD%95" target="_blank" rel="noopener">https://www.jianshu.com/p/427779f36752的记录</a></p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>对这些内容进行归纳整理，从而提炼出一些主题</p>
+<h3 id="1-熟悉数据"><a href="#1-熟悉数据" class="headerlink" title="1. 熟悉数据"></a>1. 熟悉数据</h3><p><em>将口头语言转录为文字</em></p>
+<h3 id="2-生成初始code"><a href="#2-生成初始code" class="headerlink" title="2. 生成初始code"></a>2. 生成初始code</h3><p>对数据进行初步的编码。</p>
+<p>编码在一定程度上取决于主题是更“数据驱动”还是“理论驱动” </p>
+<p>在前者中，主题将取决于数据，但在后者中，是在特定问题中处理数据。</p>
+<p>在编码过程中需要注意：<br> a）尽可能多地编码潜在主题/模式——因为永远不知道后面的内容是否与此相关；<br> b）对代码的摘录中，保留一些上下文相关的数据。<br> c）可以按照适合的多种“主题”来编码单个数据摘录，因此，相关的摘录可能会未被编码，被一次编码或多次编码。</p>
+<h3 id="3-寻找主题"><a href="#3-寻找主题" class="headerlink" title="3. 寻找主题"></a>3. 寻找主题</h3><p>对代码进行整理和归纳。即分析编码，并要考虑如何将代码结合形成一个总体主题。</p>
+<p>排序不同的代码到潜在的主题，整理所有相关的编码数据中提取出的主题。</p>
+<p>有些编码可能会形成主主题，有些则成为子主题，还有一些可能不属于任何地方，可以为此创建一个名为“misc”的主题来存放这类编码。</p>
+<p>最后得到候选主题和子主题的集合，以及与它们相关的编码的所有数据摘要。</p>
+<h3 id="4-审阅主题"><a href="#4-审阅主题" class="headerlink" title="4. 审阅主题"></a>4. 审阅主题</h3><p>通过详细分析，会发现一些候选主题并不是真正的主题(例如，如果没有足够的数据来支持它们，或者数据太多样化)，而其他的主题可能会相互合并(例如，两个明显独立的主题可能会形成一个主题)。有些主题可能需要被分解成单独的主题。</p>
+<h3 id="5-定义与命名主题"><a href="#5-定义与命名主题" class="headerlink" title="5. 定义与命名主题"></a>5. 定义与命名主题</h3><p>通过定义和细化，我们指的是确定每个主题的本质(以及主题的总体)，并确定每个主题捕获的数据的哪个方面。</p>
+<p>段结束时，可以清楚地定义什么是你的主题，什么不是。或者，是否能用几句话来描述每个主题的范围和内容</p>
+<h3 id="6-撰写报告"><a href="#6-撰写报告" class="headerlink" title="6. 撰写报告"></a>6. 撰写报告</h3><p>主题分析写作的任务，无论是出版或研究任务或论文，是以一种让读者信服你的分析的价值和有效性的方式，讲述数据背后的复杂故事。</p>
+<p>重要的是，分析(包括数据摘录)提供了一个简洁、连贯、有逻辑、不重复、有趣的数据在主题内和主题间讲述的故事。你的书面记录必须在数据中提供足够的关于主题的证据，也就是说，足够的数据摘录来证明主题的普遍性。选择特别生动的例子，或能抓住你所展示的要点的精华，作为这个问题的示例。</p>
+<p>然而，报告需要做的不仅仅是提供数据。摘要需要嵌入到一个分析性的叙述中，以引人注目地说明你正在讲述的关于你的数据的故事，而你的分析性的叙述需要超越对数据的描述，并对你的研究问题提出一个论点。</p>
+<hr>
+<p>W7</p>
+<p>统计</p>
+<p>descriptive statistics</p>
+<p>敘述统计（descriptive statistics），是统计学中，来描绘或总结观察量的基本情况的统计总称</p>
+<hr>
+<p>W8</p>
+<img src="/post/fit5125-research-method-notes/image-20210511195219137.png" class="" title="image-20210511195219137">
+
+<p>correlational 与 experimental study的区别</p>
+<p>cor就相关性研究（相关性 -1→ 0 → 1）</p>
+<p>相关研究是揭示相关关系，实验研究是揭示因果关系</p>
+<p>exp：</p>
+<p>要证明两个变量之间有因果关系，必须满足以下几个条件：</p>
+<p>第一，两个变量均是引发变量。即自变量必须是可以人为操纵变化的（这个变化是指在同一个人身上的变化），因变量的变化必须是自变量的变化所引起的。</p>
+<p>第二，两个变量在时间上有前后关系，比如，必须是A先发生，B后发生，才能有因果关系的可能。</p>
+<p>第三，两个变量的关系需排除掉第三种可能的解释。</p>
+<p>Experimental design is about varying/manipulating one or more Independent Variables, to see its effect on one or more Dependent Variables, whilst minimising the effect of Confounding Variables</p>
+<p>独立度量设计和重复度量设计有什么区别？</p>
+<p>1.独立措施：<br>独立度量设计（也称为组间）是一种实验设计，其中在自变量的<strong>每种条件</strong>下使用<strong>不同的参与者</strong>。这意味着实验的每个条件都包括不同的参与者组。 </p>
+<p>这应该通过随机分配来完成，这可以确保每个参与者都有被分配到一个组或另一个组的同等机会。</p>
+<p>独立措施涉及使用两组独立的参与者；每个条件一个。例如：</p>
+<img src="/post/fit5125-research-method-notes/Ind.jpg" class="" title="独立措施实验设计">
+
+<p>缺点：与重复测量设计相比，需要更多的人（即，更耗时）。<br>优点：由于人们仅参与一种情况，因此避免了订单效应（例如练习或疲劳）。如果一个人遇到多种情况，到第二种情况时他们可能会变得无聊，疲倦和烦躁，或者对实验的要求变得明智！<br>缺点：例如，小组参与者之间的差异可能会影响结果。年龄，性别或社会背景的差异。这些差异称为参与者变量（即，一种无关的变量）。<br>控制：招募参与者后，应将他们随机分配到他们的组中。这应确保各组平均相似（减少参与者变量）。</p>
+<p>2.重复措施：<br>重复测量设计是一种实验设计，其中<strong>相同的参与者</strong>参与自变量的<strong>每种条件</strong>。这意味着实验的每个条件都包括同一组参与者。</p>
+<p>重复测量设计也称为组内或主题内设计。</p>
+<p>优点：由于在每种情况下使用相同的参与者，因此参与者变量（即个体差异）减少了。<br>缺点：可能会有订单效果。顺序效应是指影响参与者行为的条件顺序。第二种情况下的表现可能会更好，因为参与者知道该做什么（即练习效果）。否则在第二种情况下它们的性能可能会变差，因为它们很累（即疲劳效果）。可以使用平衡来控制此限制。<br>优点：参与各种情况所需的人员更少（即节省时间）。<br>控制：为了对抗秩序效应，研究人员平衡了参与者的条件秩序。改变参与者在不同实验条件下的执行顺序。</p>
+<p><strong>参数测试</strong> 假设数据中存在基础统计分布。因此，必须满足几个有效性条件，以便参数测试的结果可靠。例如，仅当每个样本服从正态分布并且样本方差是均质的时，两个独立样本的Student t检验才是可靠的。</p>
+<p><strong>非参数测试</strong> 不依赖任何分布。因此，即使不满足有效性的参数条件，也可以应用它们。 </p>
+<p>非参数测试 比参数测试更 <strong>健壮</strong>。换句话说，它们在更广泛的情况下（较少的有效条件）有效。</p>
+<p>使用参数测试而不是非参数等效项的优点在于，前者 将比后者具有更大的统计 <strong>能力</strong>。换句话说，参数测试更有可能导致拒绝H0。在大多数情况下，与参数测试关联的p值将低于与在相同数据上运行的非参数等效项关联的p值。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/research/" rel="tag"># research</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/fit5057-pm-notes/" rel="prev" title="Notes for FIT5057: Project management">
+      <i class="fa fa-chevron-left"></i> Notes for FIT5057: Project management
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/fit5136-se-notes/" rel="next" title="Notes for FIT5136: Software engineering">
+      Notes for FIT5136: Software engineering <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#W6-%E8%B4%A8%E6%80%A7%E7%A0%94%E7%A9%B6"><span class="nav-number">1.</span> <span class="nav-text">W6 质性研究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%86%9F%E6%82%89%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">1. 熟悉数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%94%9F%E6%88%90%E5%88%9D%E5%A7%8Bcode"><span class="nav-number">1.3.</span> <span class="nav-text">2. 生成初始code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AF%BB%E6%89%BE%E4%B8%BB%E9%A2%98"><span class="nav-number">1.4.</span> <span class="nav-text">3. 寻找主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%A1%E9%98%85%E4%B8%BB%E9%A2%98"><span class="nav-number">1.5.</span> <span class="nav-text">4. 审阅主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%91%BD%E5%90%8D%E4%B8%BB%E9%A2%98"><span class="nav-number">1.6.</span> <span class="nav-text">5. 定义与命名主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%92%B0%E5%86%99%E6%8A%A5%E5%91%8A"><span class="nav-number">1.7.</span> <span class="nav-text">6. 撰写报告</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : '996c02a38e0bd2b6abfac1964e60a6c1',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

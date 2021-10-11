@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="今天为小平板配置精简版开发环境来着，因为vscode在ngcore上一直报  go list failed to return CompiledGoFiles. This may indicate failure to perform cgo processing; try building at the command line.  这样的错误，所以认为是因为没有gcc的问题。那就装msys2.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="New Env in msys2: msys2引入的新环境">
+<meta property="og:url" content="https://c0mm4nd.com/post/new-env-in-msys2/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="今天为小平板配置精简版开发环境来着，因为vscode在ngcore上一直报  go list failed to return CompiledGoFiles. This may indicate failure to perform cgo processing; try building at the command line.  这样的错误，所以认为是因为没有gcc的问题。那就装msys2.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-02T18:00:28.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:21:35.942Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://c0mm4nd.com/post/new-env-in-msys2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>New Env in msys2: msys2引入的新环境 | Talkless</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Talkless</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">63</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/post/new-env-in-msys2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          New Env in msys2: msys2引入的新环境
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-03 02:00:28" itemprop="dateCreated datePublished" datetime="2021-07-03T02:00:28+08:00">2021-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-11 17:21:35" itemprop="dateModified" datetime="2021-10-11T17:21:35+08:00">2021-10-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>今天为小平板配置精简版开发环境来着，因为vscode在ngcore上一直报</p>
+<blockquote>
+<p>go list failed to return CompiledGoFiles. This may indicate failure to perform cgo processing; try building at the command line.</p>
+</blockquote>
+<p>这样的错误，所以认为是因为没有gcc的问题。那就装msys2.</p>
+<span id="more"></span>
+
+<p>相比我上次装（应该是至少有半年了），这次msys2的installer换了个更精致的皮。不过在最后一步应该是开terminal初始化的时候还是会有各种乱码，而且内容格式也很混乱。</p>
+<p>熟悉地pacman -Syu一阵之后根据提示自动关闭了installer弹出的msys2界面。然后进安装目录找exe打算再起一个terminal，结果发现多了个clang64.exe（没看到ucrt64，因为在后面平板屏幕小没拉下去继续看）。一开始觉得只是多了个clang定制入口没太当回事，打开mingw64并pacman -Ss gcc查找toolchain全名（安装这么多次从没记住过）。结果跳出来的相比以前有一堆ucrt64/开头的，让人一脸懵逼。</p>
+<p>这里就简单说一下当前的msys2内部支持的环境/架构：</p>
+<table>
+<thead>
+<tr>
+<th>环境</th>
+<th>路径前缀</th>
+<th>toolchain</th>
+<th>架构</th>
+<th>C库</th>
+<th>C++库</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>msys2</td>
+<td><code>/usr</code></td>
+<td>gcc</td>
+<td>x86_64</td>
+<td>cygwin</td>
+<td>libstdc++</td>
+</tr>
+<tr>
+<td>mingw64</td>
+<td><code>/mingw64</code></td>
+<td>gcc</td>
+<td>x86_64</td>
+<td>msvcrt</td>
+<td>libstdc++</td>
+</tr>
+<tr>
+<td>ucrt64</td>
+<td><code>/ucrt64</code></td>
+<td>gcc</td>
+<td>x86_64</td>
+<td>ucrt</td>
+<td>libstdc++</td>
+</tr>
+<tr>
+<td>clang64</td>
+<td><code>/clang64</code></td>
+<td>llvm</td>
+<td>x86_64</td>
+<td>ucrt</td>
+<td>libc++</td>
+</tr>
+<tr>
+<td>mingw32</td>
+<td><code>/mingw32</code></td>
+<td>gcc</td>
+<td>x86_64</td>
+<td>msvcrt</td>
+<td>libstdc++</td>
+</tr>
+</tbody></table>
+<p>先从列内容说起。</p>
+<ul>
+<li>路径前缀：因为msys2是多环境混合的，所以就可能同时存在多个gcc这样的程序，因此使用路径前缀区分</li>
+<li>Toolchain：就是一套默认的编译链，像arch上的base-devel和ubuntu上build-essential</li>
+<li>架构：64和32位</li>
+<li>C库：C语言的标准库，环境决定</li>
+<li>C++库：C++标准库，编译器决定</li>
+</ul>
+<p>然后逐行介绍</p>
+<ul>
+<li>msys2：这个是msys2的支持环境，所有在msys2里直接跑的命令（比如最常用的pacman）都是这个环境支持的，环境基于cygwin也导致了它带的gcc编译出来的东西不好跑……真的不建议用它干任何除了pacman包管理以外的任何事。</li>
+<li>mingw64 &amp; mingw32：这里把w32也一起说了。根据我的记忆，一开始是只有mingw32没有msys2，其基于msvcrt（Microsoft Visual C++ Runtime）因此相比cygwin（需要一堆支持库）更好用，可以直接在Windows下跑起来。那时候还是全32位的时代。后来64位成为了主流，也有人开始基于mingw32做了mingw64，但是包更新巨慢，而且w32和w64的更新器也非常难用（就vb程序显示一堆多选列表，每次都得取整个列表）。于是msys2出来带着pacman来管理各个包。</li>
+<li>ucrt64：Visual Studio的新宠，全名是Universal C Runtime，用来替代前面mingw64&amp;w32里的msvcrt。ucrt不支持加载msvcrt的产物，因此老版本Windows（&lt;10）不能直接兼容基于它的软件。但是这不是无理由的激进，要知道msvcrt在当前开发环境里真的是让开发打哑谜，（原生）不支持C99，不支持UTF8</li>
+<li>clang64：就是大家熟悉的llvm前端，其实mingw64/w32里也有它的toolchain不过不是默认，这里它被拆出来作为默认且基于ucrt了。</li>
+</ul>
+<p>我现在的选择是开始尝试使用ucrt一阵子，后面再根据体验来反馈一下。<br>emmmmm…算是出师未捷身先死了，直接golang这关就过不了。首先我用的golang是官方预编译的安装版，肯定就是带msvcrt编译的，用cgo就出现了下面的报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Go\pkg\tool\windows_amd64\link.exe: running gcc failed: exit status 1</span><br><span class="line">C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\Users\c\AppData\Local\Temp\go-link-397521815\000007.o: in function `_cgo_preinit_init&#x27;:</span><br><span class="line">c:\go\src\runtime\cgo/gcc_libinit_windows.c:30: undefined reference to `__imp___iob_func&#x27;</span><br><span class="line">C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\Users\c\AppData\Local\Temp\go-link-397521815\000007.o: in function `x_cgo_sys_thread_create&#x27;:</span><br><span class="line">c:\go\src\runtime\cgo/gcc_libinit_windows.c:60: undefined reference to `__imp___iob_func&#x27;</span><br><span class="line">C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\Users\c\AppData\Local\Temp\go-link-397521815\000007.o: in function `x_cgo_notify_runtime_init_done&#x27;:</span><br><span class="line">c:\go\src\runtime\cgo/gcc_libinit_windows.c:101: undefined reference to `__imp___iob_func&#x27;</span><br><span class="line">C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\Users\c\AppData\Local\Temp\go-link-397521815\000008.o: in function `x_cgo_thread_start&#x27;:</span><br><span class="line">c:\go\src\runtime\cgo/gcc_util.c:18: undefined reference to `__imp___iob_func&#x27;</span><br><span class="line">C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\Users\c\AppData\Local\Temp\go-link-397521815\000009.o: in function `_cgo_sys_thread_start&#x27;:</span><br><span class="line">c:\go\src\runtime\cgo/gcc_windows_amd64.c:29: undefined reference to `__imp___iob_func&#x27;</span><br><span class="line">collect2.exe: error: ld returned 1 exit status</span><br></pre></td></tr></table></figure>
+<p>为了继续体验就只能先把预编译的卸载了，在msys2里装<code>mingw-w64-ucrt-x86_64-go</code>。换完golang就能编译了。说明编译期间也支持装载msvcrt编译的.a文件</p>
+<p>根据运行来看，对msvcrt下编译好的静态库.a的支持也是没有问题。</p>
+<p>golang的动态库导入实现即plugin库还是不支持Windows。大概得靠rust来测试了。</p>
+<hr>
+<p>在小平板上用vscode+gopls配合完全没有问题，但是在PC上使用goland就出现问题了（虽然并不是ucrt的问题）——goland不支持msys2下的go……</p>
+<p><del>goland在Windows上会直接找整个go的安装（linux下为tar解压后的）文件夹，在msys2这里并没有这样的一个单独文件夹给go，所以goland根本就不认。</del></p>
+<p><del>唯一办法就是自己编译一个文件夹出来覆盖掉，但是以后升级什么的都得自己编译了。</del></p>
+<hr>
+<p>仔细搜了一下msys2里GOROOT的定义，发现了<code>/&lt;Env&gt;/lib/go</code>这个路径，即<code>C:\msys64\&lt;Env&gt;\lib\go</code>这个文件夹保留着GOROOT的全部内容</p>
+<p>（默默把刚装回去的官方golang给卸载</p>
+<p>试了下goland的确能识别这个目录作为SDK的。<br>但是有个小问题，就是GOROOT在msys2里写死了路径（即<code>C:\msys64\&lt;Env&gt;\lib\go</code>）意味着如果要用这个默认值你就不能把msys2装到其他盘或者其他目录（比如choco会把msys2放进<code>C:\tools\msys2</code>目录，直接导致了goland上的golangci-lint插件挂掉）。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/ngchain-serialization-selection/" rel="prev" title="ngchain Serialization Selection: ngchain的序列化方案选择">
+      <i class="fa fa-chevron-left"></i> ngchain Serialization Selection: ngchain的序列化方案选择
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/profiling-ngcore-in-go/" rel="next" title="Profiling ngcore in go">
+      Profiling ngcore in go <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : '00419ae435d9570f1cf7af7ed07a6d80',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
