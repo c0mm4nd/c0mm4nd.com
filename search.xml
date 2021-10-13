@@ -52,6 +52,57 @@
       </tags>
   </entry>
   <entry>
+    <title>Bulletproof: 适用于机密交易及更多方面的简短证明</title>
+    <url>/post/bulletproof-paper/</url>
+    <content><![CDATA[<p>基于区块链的加密货币通过维护全球分布式但同步的分类账区块链来实现点对点电子价值转移。任何独立的观察者都可以验证区块链的当前状态以及分类帐上所有交易的有效性。在比特币中，这项创新要求交易的所有细节都是公开的：发送方、接收方和转账金额。一般来说，我们将支付的隐私分为两个属性：（1）匿名性，在交易中隐藏发送者和接收者的身份；（2）保密性，隐藏转移的金额。虽然比特币通过比特币地址与现实世界身份的不可链接性提供了一些弱匿名性，但它缺乏任何机密性。这对比特币来说是一个严重的限制，对于许多用例来说可能是禁止的。如果这意味着他们的工资发布在公共区块链上，员工是否愿意以比特币获得他们的工资？</p>
+<p>为了解决交易金额的保密问题，Maxwell [Max16] 引入了机密交易（CT），其中涉及的每笔交易金额都使用对金额的承诺隐藏起来，不让公众看到。这种方法似乎阻止了区块链的公开验证；观察者无法再检查交易输入的总和是否大于交易输出的总和，以及所有交易值是否为正。这可以通过在每笔交易中包含机密交易有效性的零知识证明来解决。</p>
+<p>当前关于 CT 零知识证明 [PBF] 的提议要么大得令人望而却步，要么需要可信的设置。两者都不是可取的。虽然可以使用简洁的零知识证明 (SNARK) [BSCG13,GGPR13]，但它们需要可信设置，这意味着每个人都需要相信设置已正确执行。人们可以通过使用 STARK [BSBTHR18] 来避免可信设置，但由此产生的范围证明虽然渐近有效，但实际上比目前提出的解决方案还要大。</p>
+<p>如本文所述，没有可信设置的简短非交互式零知识证明在加密货币领域有许多应用。在证明通过网络传输或长期存储的任何分布式系统中，简短证明了总体成本的降低。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>我们首先讨论 Bulletproofs 的几个应用程序以及特定于这些应用程序的相关工作。 其他相关工作在第 1.3 节中讨论。</p>
+<h3 id="机密交易和-Mimblewimble"><a href="#机密交易和-Mimblewimble" class="headerlink" title="机密交易和 Mimblewimble"></a>机密交易和 Mimblewimble</h3><p>比特币和其他类似的加密货币使用基于交易输出的系统，其中每笔交易完全花费之前未花费交易的输出。 这些未花费的交易输出称为 UTXO。<br>比特币允许将单个 UTXO 用于许多不同的输出，每个输出都与不同的地址相关联。 要花费一个 UTXO，用户必须提供一个签名，或者更准确地说是一个 scriptSig，使交易 SCRIPT 能够评估为真 [BMC`15]。<br>除了 scriptSig 的有效性外，矿工还验证交易是否花费了之前未花费的输出，并且输入的总和大于输出的总和</p>
+<p>Maxwell [Max16] 引入了“机密交易”的概念，其中交易中的输入和输出金额隐藏在 Pedersen 承诺中 [P<code>91]。  为了实现公开验证，交易包含一个零知识证明，即提交输入的总和大于提交输出的总和，并且所有输出都是正的，即它们位于区间 $[0, 2^n]$， 其中 $2^n$ 远小于组大小。  当前所有机密交易的实现 [Max16, MP15, PBF</code>, NM`16] 都使用提交值的range proof范围证明，其中证明大小在 n 中是线性的。<br>这些范围证明是机密交易规模的主要贡献者。 在当前的实现中 [Max16]，只有两个输出和 32 位精度的机密交易是 5.4 KB 字节，其中 5 KB 分配给范围证明。<br>即使最近进行了优化，范围证明仍将占用 3.8 KB。</p>
+<p>我们在第 6 节中展示了 Bulletproofs 大大改进了这一点，即使对于单个范围证明，同时以边际额外成本（64 字节）将范围证明精度加倍。<br>logarithmic proof对数证明的大小还使证明者能够聚合多个范围证明，例如对于具有多个输出的交易，转换为一个简短的证明。<br>使用 Bulletproofs，$m$ 范围证明只是单个范围证明上的 $O(log(m))$ 附加群元素。这对于当前形式的机密交易已经很有用，因为大多数比特币交易都有两个或多个输出。<br>它还提供了一个有趣的机会，可以将来自不同方的多个范围证明聚合为一个证明，例如在 CoinJoin 交易中需要的证明 [Max13]。<br>在 4.5 节中，我们提出了一个简单有效的 MPC 协议，该协议允许多个用户使用单个聚合范围证明生成单个交易。<br>用户不必向任何其他参与者透露他们的机密交易价值。</p>
+<p>机密交易实现可用于侧链 [PBF<code>]、私有区块链 [And17] 和流行的注重隐私的加密货币 Monero [NM</code>16]。 所有这些实现都将受益于 Bulletproofs。<br>在撰写本文时，比特币拥有来自 2200 万笔交易的大约 5000 万个 UTXO（参见 statoshi.info）。 使用比特币的 52 位表示，可以覆盖从 1 satoshi 到 2100 万比特币的所有值，这导致使用当前系统的范围证明数据大约为 160GB。<br>使用聚合的 Bulletproofs，所有 UTXO 的范围证明将需要不到 17GB，大小减少约 10 倍</p>
+<h4 id="Mimblewimble"><a href="#Mimblewimble" class="headerlink" title="Mimblewimble"></a>Mimblewimble</h4><p>最近，有人提议对机密交易进行改进，称为 Mimblewimble [Jed16,Poe]，可进一步节省成本。</p>
+<p>Jedusor [Jed16] 意识到 Pedersen 对 0 的承诺可以被视为 ECDSA 公钥，并且对于有效的机密交易，输出、输入和交易费用之间的差异必须为 0。因此，构建机密交易的证明者可以签名以输出和输入的差异作为公钥的交易。这一小改动消除了对 scriptSig 的需求，极大地简化了机密交易的结构。<br>Poelstra [Poe] 进一步完善和改进了 Mimblewimble，并表明这些改进可以实现一个大大简化的区块链，其中所有花费的交易都可以被修剪，新节点可以有效地验证整个区块链，而无需下载任何旧的和花费的交易。<br>随着进一步优化，这会导致高度压缩的区块链。它仅包含一小部分区块头以及剩余的未花费交易输出和随附的范围证明以及每笔交易不可修剪的 32 字节。 Mimblewimble 还允许在将交易发送到区块链之前进行聚合。</p>
+<p>Mimblewimble 区块链随着 UTXO 集的大小而增长。<br>使用 Bulletproofs，它只会随着具有未花费输出的交易数量而增长，这远小于 UTXO 集的大小。<br>总体而言，Bulletproofs 不仅可以替代机密交易中的范围证明，而且还可以帮助 Mimblewimble 成为一个实用的方案，其区块链比当前的比特币区块链小得多。</p>
+<h3 id="Provisions-协议"><a href="#Provisions-协议" class="headerlink" title="Provisions 协议"></a>Provisions 协议</h3><p>Dagher et al. [DBB`15] 引入了 Provisions 协议，该协议允许比特币交易所证明它们具有偿付能力，而无需透露任何额外信息。<br>该协议主要依靠范围证明来防止交易所插入带有负余额的假账户。<br>这些占用超过 13GB 的范围证明是为具有 200 万客户的大型交易所提供近 18GB 证明大小的主要贡献者。<br>样张大小实际上与客户数量呈线性关系。<br>由于在该协议中，一方（交易所）必须同时构建多个范围证明，因此第 4.3 节中的通用 Bulletproofs 协议是 Provisions 中使用的 NIZK 证明的自然替代品。<br>使用第 6 节中列出的证明大小，我们获得范围证明在我们的协议中将占用不到 2 KB。<br>此外，证明的其他部分可以使用第 5 节中的协议进行类似压缩。<br>然后证明将由每个客户的一个承诺主导，大小为 62 MB。这大约比目前实施的规定小 300 倍。</p>
+<h4 id="可验证洗牌-verifiable-shuffle"><a href="#可验证洗牌-verifiable-shuffle" class="headerlink" title="可验证洗牌 verifiable shuffle"></a>可验证洗牌 verifiable shuffle</h4><p>考虑两个提交值列表 $x_1,…,x_n$ 和 $y_1,…,y_n$ 。目的是证明第二个列表是第一个列表的排列。<br>这个问题称为<strong>可验证洗牌 verifiable shuffle</strong>。<br>它在投票 [FS01,Nef01]、混合网络 [Cha82] 和偿付能力证明 [DBB`15] 中有许多应用。<br>Neff [Nef01] 给出了可验证 shuffle 的实际实现，后来对其进行了改进 [Gro03,GI08a]。 Neff [Nef01] 给出了可验证 shuffle 的实际实现，后来对其进行了改进 [Gro03,GI08a]。<br>目前最有效的 shuffle [BG12] 的大小为 $O(\sqrt{n})$。</p>
+<p>Bulletproofs 可用于创建大小为 $O(\log{n})$ 的可验证洗牌。<br>这两个commitment列表作为第 5 节中电路协议的输入。<br>回路可以通过对两个列表进行排序然后检查它们是否相等来实现混洗。<br>排序回路可以使用 $O(n\cdot\log{n})$ 乘法来实现，这意味着证明大小将仅为 Oplogpnqq。<br>这比以前提出的协议小得多。<br>鉴于 Bulletproofs 的具体效率，使用 Bulletproofs 进行可验证的 shuffle 在实践中将非常有效。<br>构建证明并验证它只需要$n$的线性时间。</p>
+]]></content>
+      <tags>
+        <tag>crypto</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Wasm Runtime的创作: Build Wasm Runtime</title>
+    <url>/post/build-wasm-runtime/</url>
+    <content><![CDATA[<p>因为NGIN的contract系统也就是智能合约上需要嵌入的wasm engine支持fee cost on opcode(instr)，因此需要从wasmtime迁移到其他引擎。</p>
+<p>虽然说找到了<a href="https://github.com/perlin-network/life" target="_blank" rel="noopener">life</a>完全符合我们的需要，但毕竟是人家的项目而且在host func嵌入的方面不如wasmtime顺手。</p>
+<p>既然是从头做起(from scratch)的项目，那么再多做个wasm runtime应该也不过分。</p>
+<span id="more"></span>
+
+<h2 id="Compilation-Execution-modes"><a href="#Compilation-Execution-modes" class="headerlink" title="Compilation/Execution modes"></a>Compilation/Execution modes</h2><p>从<a href="https://github.com/appcypher/awesome-wasm-runtimes" target="_blank" rel="noopener">awesome-wasm-runtimes</a>的项目介绍里可以看到life的编译/执行模式是Interpreted，而wasmtime是JIT。</p>
+<p>其实还有个叫AOT的，像Lucet这个引擎就是用的AOT。</p>
+<p>Interpreted顾名思义就是被“解释”，就类似脚本语言那样一句一句地输入并执行。换句话说就是引擎会读取源码或IR（介于高级语言和二进制机器码之间的中间表达，比如bytecode，wasm binary可以认为是IR）并立即把这些语句执行掉。</p>
+<p>JIT一边读取源代码或IR，一边对已读取内容飞速编译再执行，即在执行时编译。可以认为是JIT是对内容与当前执行环境做了优化之后再进行执行。</p>
+<p>AOT则接近gcc这种编译器。AOT在程序执行之前进行完整编译。</p>
+<p>所以很明显JIT引擎在优化后很容易比Interpreted快很多，wagon和wasmtime，wasmer的<a href="https://github.com/wasmerio/wasmer-go#benchmarks" target="_blank" rel="noopener">速度根本没法比</a>(虽然也有语言速度上差距)。但是从wasmtime的issue记录来看负优化也不是没有。</p>
+<p>因此从当前目标来看其实我们只需要先完成一个解释器，然后再通过编写compiler去对内容再做优化（JIT）。</p>
+<h2 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h2><p>这里我们选择的是<a href="https://www.w3.org/TR/wasm-core-1/" target="_blank" rel="noopener">w3c的wasm标准</a>，也就是version1。</p>
+<p>其中的Values，Modules等内容在别的wasm内容中也提过了所以不多说。</p>
+<p>最为关键的在于如何将一个Module给实例化为Instance且通过Call一个mainFunc的方式跑起来。</p>
+<h2 id="Compile-Interpret"><a href="#Compile-Interpret" class="headerlink" title="Compile/Interpret"></a>Compile/Interpret</h2><p>本质上就是需要将wasm解释为机械码然后跑起来。</p>
+<p>在将module实力化之前，我们需要对module中内容进行解析，构建出一个索引空间，用来快速访问我们需要的内容（其实也就function，global，table，memory）。这个内容也可能是外部module提供的，因此也需要提供externModules。</p>
+]]></content>
+      <tags>
+        <tag>wasm</tag>
+        <tag>wasi</tag>
+        <tag>runtime</tag>
+        <tag>todo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bitcontracts: Supporting Smart Contracts in Legacy Blockchains</title>
     <url>/post/bitcontracts/</url>
     <content><![CDATA[<h1 id="Bitcontracts：传统区块链上支持智能合约"><a href="#Bitcontracts：传统区块链上支持智能合约" class="headerlink" title="Bitcontracts：传统区块链上支持智能合约"></a>Bitcontracts：传统区块链上支持智能合约</h1><p><strong>摘要：</strong>在本文中，我们提出了 Bitcontracts，这是一种新颖的解决方案，可以在未修改的传统加密货币（如原生不支持合约的比特币）之上安全高效地执行通用智能合约。我们解决方案的出发点是一个链下执行模型，其中合约的发行者指定一组服务提供商来执行合约的代码。如果法定数量的服务提供商报告相同的结果，并且客户可以自由选择他们信任和使用哪些此类合约，则合约的执行结果被接受。本文的主要技术贡献是如何在不修改底层区块链的情况下安全高效地实现这样的信任模型。我们还确定了区块链系统必须支持的一组通用属性，以便可以安全地添加富有表现力的智能合约，并根据这些标准分析流行的现有区块链。</p>
@@ -188,62 +239,18 @@
 <p>在本节中，我们首先评估在流行的传统区块链平台上运行的 Bitcontracts（第 IX-A 节）。之后，我们在 Bitcontracts 之上评估流行的现实世界智能合约的存储和成本（第 IX-B 节）。</p>
 <p>A. 传统加密货币的Bitcontracts </p>
 <p>对于我们的第一次评估，我们考虑在 6 种流行的传统加密货币（比特币、比特币现金、莱特币、达世币、狗狗币、Zcash）上运行 Bitcontracts，并比较数据更改的成本以及数据量方面的吞吐量改为以太坊。以太坊遵循大致相似的资源管理模型，其中交易费用取决于计算复杂性和状态变化存储。我们还单独讨论了其他系统（例如 EOS）中执行不同费用模型的智能合约的成本。</p>
-<p>可扩展性。如上所述，比特币和相关加密货币的多重签名功能使执行设置达到|E|= 15 个服务提供商的规模。</p>
-<p>密钥管理开销。服务提供商的密钥管理开销在存储、计算和通信方面很低。每个服务提供商只需要存储一个私钥，他可以将其用于他负责的所有合同。每个服务提供者只需为每个合约执行生成一个签名，服务提供者之间不需要通信。</p>
-<p>计算。我们工作的主要焦点是合约调用，其计算类似于今天在以太坊中看到的计算，即以毫秒为单位。然而，没有什么可以限制系统运行更复杂的合约，类似于 ACE [50]、Arbitrum [25] 或 Yoda [17] 支持的合约。我们不提供智能合约执行速度的详细评估，因为合约调用只是 Python 程序执行，因此测量它们的执行速度不会提供任何新的见解，并且合约执行的成本主要由链上存储主导费用描述如下。</p>
+<p><strong>可扩展性</strong>。如上所述，比特币和相关加密货币的多重签名功能使执行设置达到|E|= 15 个服务提供商的规模。</p>
+<p><strong>密钥管理开销</strong>。服务提供商的密钥管理开销在存储、计算和通信方面很低。每个服务提供商只需要存储一个私钥，他可以将其用于他负责的所有合同。每个服务提供者只需为每个合约执行生成一个签名，服务提供者之间不需要通信。</p>
+<p><strong>计算</strong>。我们工作的主要焦点是合约调用，其计算类似于今天在以太坊中看到的计算，即以毫秒为单位。然而，没有什么可以限制系统运行更复杂的合约，类似于 ACE [50]、Arbitrum [25] 或 Yoda [17] 支持的合约。我们不提供智能合约执行速度的详细评估，因为合约调用只是 Python 程序执行，因此测量它们的执行速度不会提供任何新的见解，并且合约执行的成本主要由链上存储主导费用描述如下。</p>
 <p>为了说明这一点，我们将以太坊合约中快速排序的执行成本与在 AWS t2.micro 实例上执行类似的 Python 实现的成本进行了比较。为了对 2048 个整数元素进行排序，以太坊实现需要 650 万气体（接近区块气体限制），成本约为 59 美元（基于 2020-06-08 的费用价格），而在 t2.micro 实例上， Python 实现的执行时间不到 6 毫秒，这对应于不到 3 美元·10−7 美元的有效总执行成本，如果我们假设这在最大大小为 15 的执行集中的每个服务提供者上执行（当然，这并不意味着在实践中费用会这么低，因为服务提供商需要盈利，因此实践中的费用将由市场决定并且难以预测，但它表明在Bitcontracts 中执行通常很便宜）</p>
+<p><strong>通信</strong>。通信成本低，因为每次调用只需要查询每个涉及的服务提供商（最大 |E| = 15）及其响应。客户端从服务提供商收到响应之前的延迟包括一个 Internet 往返时间加上数据传输所需的时间，这取决于状态更改的大小。对于大多数合约，对于状态变化很多的合约，这将是几毫秒或最多几秒的数量级。我们不会通过实验来评估这一点，因为互联网通信延迟已经在其他地方进行了广泛的研究。区块中交易确认的延迟与底层区块链中其他交易的延迟相同（例如在比特币中平均为 10 分钟）。请注意，与其他交易一样，Bitcontracts 合约调用也可以基于未确认的交易执行，即同一合约的多个 Bitcontracts 交易可以包含在同一个区块中。</p>
+<p><strong>存储成本</strong>。 Bitcontracts 的第一个有趣的评估指标是其存储成本。在表二中，我们首先展示了流行区块链平台中当前的交易费用（下一个区块包含截至 2020 年 6 月 8 日）以供参考。之后，我们展示了相同区块链平台每 KB 状态变化的 Bitcontracts 存储成本。从表中可以看出，Bitcontracts 带来的存储成本开销非常小。</p>
+<p>我们还将比特合约的存储成本与以太坊进行了比较。从表 II 中可以看出，存储 1KB 数据的以太坊合约的成本在 1.44 美元（如果没有值从零变为非零）和 5.75 美元（如果所有更改的值都从零变为非零）之间，这不不包括任何计算。与此相比，Bitcontracts 的链上存储费用要小得多（0.80 美元或更少）。</p>
+<p><strong>最大存储量</strong>。第二个相关评估指标是每个事务可以存储的最大数据量（即状态变化）。表二显示，在比特币、比特币现金、莱特币、达世币和狗狗币中，每 210 字节输出可以存储 195 字节，因此每笔交易的最大存储量限制为最多 92KB，因为它们的标准规则不会传播交易大于 100KB。在 Zcash 中，最大交易大小仅为<br>受最大块大小 (2MB) 的限制，允许每个事务最多存储 1.86MB 的数据。我们注意到，这些限制并不限制合约状态的整体大小，而只是限制每次合约调用的状态更改次数。此外，这些限制还受到交易其他部分的影响。例如，如果一笔交易有大量的客户端输入或输出，则数据存储的限制会相应减少。</p>
+<p>相比之下，从表 II 中可以看出，在给定当前区块 gas 限制的情况下，当前的以太坊合约在一笔交易中只能在 16 到 63 KB 的存储空间之间变化（取决于值是否设置为从零到非零）。这样的交易将完全填满一个区块。在以太坊上使用比特合约可以增加这个限制。由于 Bitcontracts 不需要将状态转换存储在存储中，只需要它们在交易中可见，它们可以简单地作为交易数据发送，这需要更少的气体，因此理论上允许存储高达 625KB 的数据每个交易。在实践中，这会稍微少一些，具体取决于仲裁大小和由此产生的签名验证成本。</p>
+<p><strong>吞吐量</strong>。 Bitcontracts 的另一个有意义的评估指标是吞吐量。我们通过测量系统每秒可以处理的状态更新数据量来评估吞吐量。该吞吐量值取决于区块间隔和底层区块链平台每个区块的最大存储量。如表二所示，就可能的更改数据量而言，在原生不支持合约的传统平台上使用 Bitcontracts 执行智能合约与以太坊的吞吐量相比具有优势。</p>
+<p><strong>不同收费模式下的成本</strong>。一些加密货币，例如 EOS，遵循不同的收费模式。 EOS 股权基金的参与者不是直接为计算和状态变化付费，即他们将它们锁定一段时间，作为回报，他们可以使用与其抵押资金成比例的一小部分计算和带宽资源。因此，交易的主要成本来自不使用质押资金的机会成本。存储（在 EOS 中称为“RAM”）是购买的（并且可以交易），但与以太坊和比特合约不同，因为参与者不为状态变化付费，而是为拥有 RAM 付费。 EOS 中 1KB 存储的成本为 0.15 美元（截至 2020 年 6 月 8 日），这比在 Bitcontracts 中新分配存储（比特币除外）的成本更高，但更改已分配的存储是免费的。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Wasm Runtime的创作: Build Wasm Runtime</title>
-    <url>/post/build-wasm-runtime/</url>
-    <content><![CDATA[<p>因为NGIN的contract系统也就是智能合约上需要嵌入的wasm engine支持fee cost on opcode(instr)，因此需要从wasmtime迁移到其他引擎。</p>
-<p>虽然说找到了<a href="https://github.com/perlin-network/life" target="_blank" rel="noopener">life</a>完全符合我们的需要，但毕竟是人家的项目而且在host func嵌入的方面不如wasmtime顺手。</p>
-<p>既然是从头做起(from scratch)的项目，那么再多做个wasm runtime应该也不过分。</p>
-<span id="more"></span>
-
-<h2 id="Compilation-Execution-modes"><a href="#Compilation-Execution-modes" class="headerlink" title="Compilation/Execution modes"></a>Compilation/Execution modes</h2><p>从<a href="https://github.com/appcypher/awesome-wasm-runtimes" target="_blank" rel="noopener">awesome-wasm-runtimes</a>的项目介绍里可以看到life的编译/执行模式是Interpreted，而wasmtime是JIT。</p>
-<p>其实还有个叫AOT的，像Lucet这个引擎就是用的AOT。</p>
-<p>Interpreted顾名思义就是被“解释”，就类似脚本语言那样一句一句地输入并执行。换句话说就是引擎会读取源码或IR（介于高级语言和二进制机器码之间的中间表达，比如bytecode，wasm binary可以认为是IR）并立即把这些语句执行掉。</p>
-<p>JIT一边读取源代码或IR，一边对已读取内容飞速编译再执行，即在执行时编译。可以认为是JIT是对内容与当前执行环境做了优化之后再进行执行。</p>
-<p>AOT则接近gcc这种编译器。AOT在程序执行之前进行完整编译。</p>
-<p>所以很明显JIT引擎在优化后很容易比Interpreted快很多，wagon和wasmtime，wasmer的<a href="https://github.com/wasmerio/wasmer-go#benchmarks" target="_blank" rel="noopener">速度根本没法比</a>(虽然也有语言速度上差距)。但是从wasmtime的issue记录来看负优化也不是没有。</p>
-<p>因此从当前目标来看其实我们只需要先完成一个解释器，然后再通过编写compiler去对内容再做优化（JIT）。</p>
-<h2 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h2><p>这里我们选择的是<a href="https://www.w3.org/TR/wasm-core-1/" target="_blank" rel="noopener">w3c的wasm标准</a>，也就是version1。</p>
-<p>其中的Values，Modules等内容在别的wasm内容中也提过了所以不多说。</p>
-<p>最为关键的在于如何将一个Module给实例化为Instance且通过Call一个mainFunc的方式跑起来。</p>
-<h2 id="Compile-Interpret"><a href="#Compile-Interpret" class="headerlink" title="Compile/Interpret"></a>Compile/Interpret</h2><p>本质上就是需要将wasm解释为机械码然后跑起来。</p>
-<p>在将module实力化之前，我们需要对module中内容进行解析，构建出一个索引空间，用来快速访问我们需要的内容（其实也就function，global，table，memory）。这个内容也可能是外部module提供的，因此也需要提供externModules。</p>
-]]></content>
-      <tags>
-        <tag>wasm</tag>
-        <tag>wasi</tag>
-        <tag>runtime</tag>
-        <tag>todo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Bulletproof: 适用于机密交易及更多方面的简短证明</title>
-    <url>/post/bulletproof-paper/</url>
-    <content><![CDATA[<p>基于区块链的加密货币通过维护全球分布式但同步的分类账区块链来实现点对点电子价值转移。任何独立的观察者都可以验证区块链的当前状态以及分类帐上所有交易的有效性。在比特币中，这项创新要求交易的所有细节都是公开的：发送方、接收方和转账金额。一般来说，我们将支付的隐私分为两个属性：（1）匿名性，在交易中隐藏发送者和接收者的身份；（2）保密性，隐藏转移的金额。虽然比特币通过比特币地址与现实世界身份的不可链接性提供了一些弱匿名性，但它缺乏任何机密性。这对比特币来说是一个严重的限制，对于许多用例来说可能是禁止的。如果这意味着他们的工资发布在公共区块链上，员工是否愿意以比特币获得他们的工资？</p>
-<p>为了解决交易金额的保密问题，Maxwell [Max16] 引入了机密交易（CT），其中涉及的每笔交易金额都使用对金额的承诺隐藏起来，不让公众看到。这种方法似乎阻止了区块链的公开验证；观察者无法再检查交易输入的总和是否大于交易输出的总和，以及所有交易值是否为正。这可以通过在每笔交易中包含机密交易有效性的零知识证明来解决。</p>
-<p>当前关于 CT 零知识证明 [PBF] 的提议要么大得令人望而却步，要么需要可信的设置。两者都不是可取的。虽然可以使用简洁的零知识证明 (SNARK) [BSCG13,GGPR13]，但它们需要可信设置，这意味着每个人都需要相信设置已正确执行。人们可以通过使用 STARK [BSBTHR18] 来避免可信设置，但由此产生的范围证明虽然渐近有效，但实际上比目前提出的解决方案还要大。</p>
-<p>如本文所述，没有可信设置的简短非交互式零知识证明在加密货币领域有许多应用。在证明通过网络传输或长期存储的任何分布式系统中，简短证明了总体成本的降低。</p>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>我们首先讨论 Bulletproofs 的几个应用程序以及特定于这些应用程序的相关工作。 其他相关工作在第 1.3 节中讨论。</p>
-<h3 id="机密交易和-Mimblewimble"><a href="#机密交易和-Mimblewimble" class="headerlink" title="机密交易和 Mimblewimble"></a>机密交易和 Mimblewimble</h3><p>比特币和其他类似的加密货币使用基于交易输出的系统，其中每笔交易完全花费之前未花费交易的输出。 这些未花费的交易输出称为 UTXO。<br>比特币允许将单个 UTXO 用于许多不同的输出，每个输出都与不同的地址相关联。 要花费一个 UTXO，用户必须提供一个签名，或者更准确地说是一个 scriptSig，使交易 SCRIPT 能够评估为真 [BMC`15]。<br>除了 scriptSig 的有效性外，矿工还验证交易是否花费了之前未花费的输出，并且输入的总和大于输出的总和</p>
-<p>Maxwell [Max16] 引入了“机密交易”的概念，其中交易中的输入和输出金额隐藏在 Pedersen 承诺中 [P<code>91]。  为了实现公开验证，交易包含一个零知识证明，即提交输入的总和大于提交输出的总和，并且所有输出都是正的，即它们位于区间 $[0, 2^n]$， 其中 $2^n$ 远小于组大小。  当前所有机密交易的实现 [Max16, MP15, PBF</code>, NM`16] 都使用提交值的range proof范围证明，其中证明大小在 n 中是线性的。<br>这些范围证明是机密交易规模的主要贡献者。 在当前的实现中 [Max16]，只有两个输出和 32 位精度的机密交易是 5.4 KB 字节，其中 5 KB 分配给范围证明。<br>即使最近进行了优化，范围证明仍将占用 3.8 KB。</p>
-<p>我们在第 6 节中展示了 Bulletproofs 大大改进了这一点，即使对于单个范围证明，同时以边际额外成本（64 字节）将范围证明精度加倍。<br>logarithmic proof对数证明的大小还使证明者能够聚合多个范围证明，例如对于具有多个输出的交易，转换为一个简短的证明。<br>使用 Bulletproofs，$m$ 范围证明只是单个范围证明上的 $O(log(m))$ 附加群元素。这对于当前形式的机密交易已经很有用，因为大多数比特币交易都有两个或多个输出。<br>它还提供了一个有趣的机会，可以将来自不同方的多个范围证明聚合为一个证明，例如在 CoinJoin 交易中需要的证明 [Max13]。<br>在 4.5 节中，我们提出了一个简单有效的 MPC 协议，该协议允许多个用户使用单个聚合范围证明生成单个交易。<br>用户不必向任何其他参与者透露他们的机密交易价值。</p>
-<p>机密交易实现可用于侧链 [PBF<code>]、私有区块链 [And17] 和流行的注重隐私的加密货币 Monero [NM</code>16]。 所有这些实现都将受益于 Bulletproofs。<br>在撰写本文时，比特币拥有来自 2200 万笔交易的大约 5000 万个 UTXO（参见 statoshi.info）。 使用比特币的 52 位表示，可以覆盖从 1 satoshi 到 2100 万比特币的所有值，这导致使用当前系统的范围证明数据大约为 160GB。<br>使用聚合的 Bulletproofs，所有 UTXO 的范围证明将需要不到 17GB，大小减少约 10 倍</p>
-<h4 id="Mimblewimble"><a href="#Mimblewimble" class="headerlink" title="Mimblewimble"></a>Mimblewimble</h4><p>最近，有人提议对机密交易进行改进，称为 Mimblewimble [Jed16,Poe]，可进一步节省成本。</p>
-<p>Jedusor [Jed16] 意识到 Pedersen 对 0 的承诺可以被视为 ECDSA 公钥，并且对于有效的机密交易，输出、输入和交易费用之间的差异必须为 0。因此，构建机密交易的证明者可以签名以输出和输入的差异作为公钥的交易。这一小改动消除了对 scriptSig 的需求，极大地简化了机密交易的结构。<br>Poelstra [Poe] 进一步完善和改进了 Mimblewimble，并表明这些改进可以实现一个大大简化的区块链，其中所有花费的交易都可以被修剪，新节点可以有效地验证整个区块链，而无需下载任何旧的和花费的交易。<br>随着进一步优化，这会导致高度压缩的区块链。它仅包含一小部分区块头以及剩余的未花费交易输出和随附的范围证明以及每笔交易不可修剪的 32 字节。 Mimblewimble 还允许在将交易发送到区块链之前进行聚合。</p>
-<p>Mimblewimble 区块链随着 UTXO 集的大小而增长。<br>使用 Bulletproofs，它只会随着具有未花费输出的交易数量而增长，这远小于 UTXO 集的大小。<br>总体而言，Bulletproofs 不仅可以替代机密交易中的范围证明，而且还可以帮助 Mimblewimble 成为一个实用的方案，其区块链比当前的比特币区块链小得多。</p>
-<h3 id="Provisions-协议"><a href="#Provisions-协议" class="headerlink" title="Provisions 协议"></a>Provisions 协议</h3><p>Dagher et al. [DBB`15] 引入了 Provisions 协议，该协议允许比特币交易所证明它们具有偿付能力，而无需透露任何额外信息。<br>该协议主要依靠范围证明来防止交易所插入带有负余额的假账户。<br>这些占用超过 13GB 的范围证明是为具有 200 万客户的大型交易所提供近 18GB 证明大小的主要贡献者。<br>样张大小实际上与客户数量呈线性关系。<br>由于在该协议中，一方（交易所）必须同时构建多个范围证明，因此第 4.3 节中的通用 Bulletproofs 协议是 Provisions 中使用的 NIZK 证明的自然替代品。<br>使用第 6 节中列出的证明大小，我们获得范围证明在我们的协议中将占用不到 2 KB。<br>此外，证明的其他部分可以使用第 5 节中的协议进行类似压缩。<br>然后证明将由每个客户的一个承诺主导，大小为 62 MB。这大约比目前实施的规定小 300 倍。</p>
-<h4 id="可验证洗牌-verifiable-shuffle"><a href="#可验证洗牌-verifiable-shuffle" class="headerlink" title="可验证洗牌 verifiable shuffle"></a>可验证洗牌 verifiable shuffle</h4><p>考虑两个提交值列表 $x_1,…,x_n$ 和 $y_1,…,y_n$ 。目的是证明第二个列表是第一个列表的排列。<br>这个问题称为<strong>可验证洗牌 verifiable shuffle</strong>。<br>它在投票 [FS01,Nef01]、混合网络 [Cha82] 和偿付能力证明 [DBB`15] 中有许多应用。<br>Neff [Nef01] 给出了可验证 shuffle 的实际实现，后来对其进行了改进 [Gro03,GI08a]。 Neff [Nef01] 给出了可验证 shuffle 的实际实现，后来对其进行了改进 [Gro03,GI08a]。<br>目前最有效的 shuffle [BG12] 的大小为 $O(\sqrt{n})$。</p>
-<p>Bulletproofs 可用于创建大小为 $O(\log{n})$ 的可验证洗牌。<br>这两个commitment列表作为第 5 节中电路协议的输入。<br>回路可以通过对两个列表进行排序然后检查它们是否相等来实现混洗。<br>排序回路可以使用 $O(n\cdot\log{n})$ 乘法来实现，这意味着证明大小将仅为 Oplogpnqq。<br>这比以前提出的协议小得多。<br>鉴于 Bulletproofs 的具体效率，使用 Bulletproofs 进行可验证的 shuffle 在实践中将非常有效。<br>构建证明并验证它只需要$n$的线性时间。</p>
-]]></content>
-      <tags>
-        <tag>crypto</tag>
-      </tags>
   </entry>
   <entry>
     <title>区块链缩放研究</title>
@@ -503,6 +510,193 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
       </tags>
   </entry>
   <entry>
+    <title>ECDSA签名及验证</title>
+    <url>/post/ecdsa-sign/</url>
+    <content><![CDATA[<p>ECDSA私钥是取q为模后得到的整数x。相关标准规定x不得为0。 因此，x是在[1，q-1]范围内的整数。qlen为q的二进制长度。</p>
+<p>签名的生成使用了密码学哈希函数H和输入的消息m。消息首先由H处理，产生值H(m)即消息m的hash，它是长度为hlen的二进制序列。通常，选择H使其输出长度hlen大致等于qlen，因为签名方案的总体安全性取决于hlen和qlen之间的最小值；但是，相关标准支持hlen和qlen的所有组合。</p>
+<span id="more"></span>
+
+<ol>
+<li>使用bits2int变换和额外的模块化约简将H(m)转换为整数模q：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">h = bits2int(H(m)) mod q</span><br></pre></td></tr></table></figure>
+<p>正如在bit2octets的描述中所指出的那样，额外的模块化缩减只不过是有条件的减法。</p>
+<ol start="2">
+<li><p>生成称为k的取模q的随机值。 该值不为0。因此，它位于[1，q-1]范围内。在ECDSA中，应通过随机选择来选择k，该选择应以均匀的概率从q-1个可能的值中选择一个值。</p>
+</li>
+<li><p>根据k和关键参数计算出值r (modulo q)。计算出点kG；其X坐标（定义了E的字段的成员）被转换为整数，该整数以q为模减小，从而得出r。如果r变为零，则应选择一个新的k并再次计算r（这是完全不可能的情况）。</p>
+</li>
+<li><p>值s (modulo q)的计算如下：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">s =（h + x * r）/ k mod q     </span><br></pre></td></tr></table></figure>
+
+<p>(r, s)就是签名。ECDSA标准本身并未涵盖如何对签名进行编码； 常见的方法是使用DER编码的ASN.1结构（两个INTEGER的SEQUENCE，分别用于r和s），或者作为两个32bytes拼接为一个64bytes。</p>
+<p>签名验证过程如下：</p>
+<ol>
+<li><p>验证 <em>r , s</em> 都处于 [1, n-1] 范围内的整型数，否则验证失败</p>
+</li>
+<li><p><em>e</em>为消息的hash值</p>
+</li>
+<li><p>计算<em>z</em></p>
+</li>
+<li><p>计算参数 <em>w</em> :</p>
+<p>$w=s^{−1}\ mod\ n$</p>
+</li>
+<li><p>计算两个参数 <em>u1, u2</em> :</p>
+<p>$u_1=zw\ mod\ n,\ u_2=rw\ mod\ n$</p>
+</li>
+<li><p>(x1, y1)，如果该点不是同一个曲线上的点，验证失败</p>
+<p>$(x_{1}, y_{1}) = u_{1} \times G + u_{2} \times Q_{A}$</p>
+</li>
+<li><p>如果存在下面的恒等式，则验证通过，否则验证失败</p>
+<p>$r≡x_1\ mod\ n$</p>
+</li>
+</ol>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><p>生成不变的sign</p>
+]]></content>
+      <tags>
+        <tag>todo</tag>
+        <tag>ECDSA</tag>
+        <tag>cryptography</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Design of Contracts</title>
+    <url>/post/design-of-contracts/</url>
+    <content><![CDATA[<p>说实话其实一开始压根没想做合约，就只是想做个chain。</p>
+<p>但是后来发现你不做DAPP你的chain都没人看，那些做coin的也都在往DAPP靠。就有种被逼上梁山的感觉。不过还好现在有个去华山的路（WASM），可以考虑上了华山再往梁山飞。</p>
+<p>其实我也不算是第一个选择华山飞梁山的，cosmos和eth2.0也选，不过人家有现成地图，我只能凭感觉乱飘。而且我们不是一个山头起飞的，他们选了更早被人发现的山头（wasmer），我选了个看起来粗大(?)一点的新山头（wasmtime）。</p>
+<span id="more"></span>
+
+<p>不瞎扯了，下面就开始分析对于合约的设计。</p>
+<p>做ethereum开发的都知道Solidity，因此需求也是从这个上面靠拢。不过由于现在主要支持wasm的语言C和RUST都是比较成熟的所以直接就选择他们对具体功能开干。</p>
+<p>+-x÷是都没有问题，问题在于和链的互动，和rpc的互动，以及事件的侦听。</p>
+<h1 id="ngVM"><a href="#ngVM" class="headerlink" title="ngVM"></a>ngVM</h1><h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p>上传至链上的wasm需要为<a href="https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md" target="_blank" rel="noopener">binary格式</a></p>
+<h3 id="数据类型-data-type"><a href="#数据类型-data-type" class="headerlink" title="数据类型 data type"></a>数据类型 data type</h3><ul>
+<li>i32: 返回code，&gt;0为正常，&lt;=异常 </li>
+<li>i64: 指针</li>
+<li>u64: 账户</li>
+<li>bytes: 底层mem</li>
+</ul>
+<h3 id="Imports"><a href="#Imports" class="headerlink" title="Imports"></a>Imports</h3><p>wasm只能import在ngVMI中指定的接口。</p>
+<h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><p>在Debug环境里提供一系列print的接口</p>
+<h3 id="Exports"><a href="#Exports" class="headerlink" title="Exports"></a>Exports</h3><p>合同必须完全具有两个export：</p>
+<ul>
+<li><code>memory</code>: 可供EEI写入的共享内存空间。</li>
+<li><code>main</code>: 没有参数和结果值的函数。</li>
+</ul>
+<h3 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h3><p>导出为<code>main</code>的方法将由NGIN内部VM Manager执行。</p>
+<p>如果成功执行，则正常返回。</p>
+<p>如果由于故障而需要中止，则返回error，避免panic。</p>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>如果执行wasm代码触发了wasm异常，则执行将失败并终止。</p>
+<h2 id="接口-ngVMI-NGIN-VM-Interface"><a href="#接口-ngVMI-NGIN-VM-Interface" class="headerlink" title="接口(ngVMI: NGIN VM Interface)"></a>接口(ngVMI: NGIN VM Interface)</h2><p>WIP</p>
+<h3 id="log-debug-msg-ptr-i64-msg-len-i64"><a href="#log-debug-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::debug(msg_ptr i64, msg_len i64)"></a>log::debug(msg_ptr i64, msg_len i64)</h3><h3 id="log-info-msg-ptr-i64-msg-len-i64"><a href="#log-info-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::info(msg_ptr i64, msg_len i64)"></a>log::info(msg_ptr i64, msg_len i64)</h3><h3 id="log-error-msg-ptr-i64-msg-len-i64"><a href="#log-error-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::error(msg_ptr i64, msg_len i64)"></a>log::error(msg_ptr i64, msg_len i64)</h3><h3 id="log-warn-msg-ptr-i64-msg-len-i64"><a href="#log-warn-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::warn(msg_ptr i64, msg_len i64)"></a>log::warn(msg_ptr i64, msg_len i64)</h3><p>打印输出，默认关闭。</p>
+<h3 id="account-get-host-gt-num-i64"><a href="#account-get-host-gt-num-i64" class="headerlink" title="account::get_host() -&gt; num i64"></a>account::get_host() -&gt; num i64</h3><p>获取vm自身account num(uint64)</p>
+<h3 id="account-get-owner-size-account-num-uint64-gt-owner-ptr-i64"><a href="#account-get-owner-size-account-num-uint64-gt-owner-ptr-i64" class="headerlink" title="account::get_owner_size(account_num uint64) -&gt; owner_ptr i64"></a>account::get_owner_size(account_num uint64) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address的长度（当前肯定是35）</p>
+<h3 id="account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64"><a href="#account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64" class="headerlink" title="account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64"></a>account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address (length = 35 bytes)，并将其写入ptr指针处。返回值为成功写入的字节数。</p>
+<h3 id="account-get-contract-len-ptr-i64-gt-contract-ptr-i64"><a href="#account-get-contract-len-ptr-i64-gt-contract-ptr-i64" class="headerlink" title="account::get_contract(len_ptr i64) -&gt; contract_ptr i64"></a>account::get_contract(len_ptr i64) -&gt; contract_ptr i64</h3><p>已删除</p>
+<p>原：获取vm自身合约代码</p>
+<p>现：由于获取全部二进制内容毫无意义，而且会占用较多内存，所以废弃此内容。<br><del>作为替代，将来提供get_contract_hash函数来帮助开发者做对线上内容的快速double check。</del><br>不能在内容里对内容hash……</p>
+<p>如果是需要读取其他account下的contract内容，暂时感觉也没必要。</p>
+<h3 id="account-get-context-account-num-u64-ptr-u32-gt-u32"><a href="#account-get-context-account-num-u64-ptr-u32-gt-u32" class="headerlink" title="account::get_context(account_num u64, ptr u32) -&gt; u32"></a>account::get_context(account_num u64, ptr u32) -&gt; u32</h3><p>获取可持续存储内容</p>
+<p>可持续存储读取</p>
+<h3 id="context-alloc-len-u64"><a href="#context-alloc-len-u64" class="headerlink" title="context::alloc(len: u64)"></a>context::alloc(len: u64)</h3><p>为可持续存储分配空间<br>//TODO: 收费</p>
+<h3 id="context-write-src-ptr-i64-dst-ptr-i64-len-u64"><a href="#context-write-src-ptr-i64-dst-ptr-i64-len-u64" class="headerlink" title="context::write(src_ptr: i64, dst_ptr: i64, len: u64)"></a>context::write(src_ptr: i64, dst_ptr: i64, len: u64)</h3><p>可持续存储写入</p>
+<h3 id="coin-transfer-to-u64-value-ptr-i64-gt-i32"><a href="#coin-transfer-to-u64-value-ptr-i64-gt-i32" class="headerlink" title="coin::transfer(to: u64, value_ptr: i64) -&gt; i32"></a>coin::transfer(to: u64, value_ptr: i64) -&gt; i32</h3><p>类似于eth里的<code>seller.send(price)</code></p>
+<p>原来叫create_transaction，表示由wasm_vm主动创建一个事务tx让chain通过处理tx方式修改state</p>
+<p>通过此函数，vm能够提供例如bank/token的基础资金转移功能。</p>
+<p>但是遇到一个之前忽略掉的问题——从vm里发出的交易该怎么sign？</p>
+<p>根据ETH的方法，调用都会被算为是由tx的call触发，因此这些变化都是由原tx负责。</p>
+<p>换句话说，变动的只有state，并不会出现由contract主动触发的tx。</p>
+<p>因此这个tx摆在这里就不合适了，因为vm里的操作都是直接作用于state</p>
+<p>所以这里就不应该使用transaction or tx来称呼这个操作，而用transfer来简化这个函数。</p>
+<p>假如to的account不存在，那个需要触发trap</p>
+<h3 id="tx-get-convener-gt-num-u64"><a href="#tx-get-convener-gt-num-u64" class="headerlink" title="tx::get_convener() -&gt; num u64"></a>tx::get_convener() -&gt; num u64</h3><p>获取transaction的convener</p>
+<h3 id="tx-get-participants-len-gt-len-u64"><a href="#tx-get-participants-len-gt-len-u64" class="headerlink" title="tx::get_participants_len() -&gt; len u64"></a>tx::get_participants_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
+<h3 id="tx-get-participant-index-u64-gt-account-ptr-i64"><a href="#tx-get-participant-index-u64-gt-account-ptr-i64" class="headerlink" title="tx::get_participant(index: u64) -&gt; account_ptr i64"></a>tx::get_participant(index: u64) -&gt; account_ptr i64</h3><p>获取transaction的参与人，需要用account namespace的api处理</p>
+<h3 id="tx-get-values-len-gt-len-u64"><a href="#tx-get-values-len-gt-len-u64" class="headerlink" title="tx::get_values_len() -&gt; len u64"></a>tx::get_values_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
+<h3 id="tx-get-value-index-u64-gt-value-ptr-i64"><a href="#tx-get-value-index-u64-gt-value-ptr-i64" class="headerlink" title="tx::get_value(index: u64) -&gt; value_ptr i64"></a>tx::get_value(index: u64) -&gt; value_ptr i64</h3><p>获取transacation的对应value(uint256)</p>
+<h3 id="state-get-balance-addr-i64-gt-balance-ptr-i64"><a href="#state-get-balance-addr-i64-gt-balance-ptr-i64" class="headerlink" title="state::get_balance(addr: i64) -&gt; balance_ptr i64"></a>state::get_balance(addr: i64) -&gt; balance_ptr i64</h3><p>balance 长度 8*4 = 24 </p>
+<h3 id="state-get-owner-num-u64-gt-addr-ptr-i64"><a href="#state-get-owner-num-u64-gt-addr-ptr-i64" class="headerlink" title="state::get_owner(num: u64) -&gt; addr_ptr i64"></a>state::get_owner(num: u64) -&gt; addr_ptr i64</h3><p>addr 长度 33</p>
+<h2 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h2><p>Assign &amp; Append tx</p>
+<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>WASM的发布分为两种: Web or Wasm.</p>
+<h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><p>任何ngcore节点能够作为http server提供http服务(单页面)，端口为52528。默认关闭，通过Flag打开</p>
+<p>例如 <a href="http://app.ngin.sh:52528/#10086/path1/path2" target="_blank" rel="noopener">http://app.ngin.sh:52528/#10086/path1/path2</a></p>
+<p>服务运营者可以通过nginx反代限制app为</p>
+<p><a href="https://app.mydomain.com/path1/path2?param1=1&amp;params2=2" target="_blank" rel="noopener">https://app.mydomain.com/path1/path2?param1=1&amp;params2=2</a></p>
+<p>发布Web应用需要将wasm binary写入Contract字段。在访问时会自动将字段作为文件拉取，并且通过导出的main函数进行执行</p>
+<h3 id="Wasm"><a href="#Wasm" class="headerlink" title="Wasm"></a>Wasm</h3><p>Wasm可以作为网站后端运行，也可以纯提供链上事务或者作为其他Wasi运行库</p>
+<p>Wasm要求Contract为wasm binary.</p>
+<h2 id="当前遇到的问题"><a href="#当前遇到的问题" class="headerlink" title="当前遇到的问题"></a>当前遇到的问题</h2><h3 id="Infinite-loop"><a href="#Infinite-loop" class="headerlink" title="Infinite loop"></a>Infinite loop</h3><p>当前使用wasmtime，无法在运行前拦截vm中infinite loop</p>
+<p>当loop执行，就会导致全网主机阻塞在处理该vm对应的tx上</p>
+<p>感觉该看一下wasm的opcode</p>
+<h3 id="Fee-charging"><a href="#Fee-charging" class="headerlink" title="Fee charging"></a>Fee charging</h3><p>由于wasmtime只提供封闭的ffi，因此无法将opcode与fee进行挂钩</p>
+<p>这里可以理解为我们需要自己写一个ngin专用的wasm runtime</p>
+<p>找材料的时候发现了perlin-network的一个wasm方案，<a href="https://github.com/perlin-network/life" target="_blank" rel="noopener">life</a>.</p>
+<p>钱多好办事哈，人家自己也折腾了个chain daemon叫<a href="https://github.com/perlin-network/wavelet" target="_blank" rel="noopener">wavelet</a>，意思是小波浪</p>
+<p>life里加gas是在compile时候，对每个Block做totalCost的计算（递增1，即每个instruction费用为1），然后给每个block的code前面都加上一个add_gas的instruction。</p>
+<p>当然这个add_gas的ins当前还没用，也不知道他们准备加点啥。</p>
+<p>compile是将wasm binary转换为host上的一个module，他们的api应该是参考的<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/compile" target="_blank" rel="noopener">js interface</a></p>
+]]></content>
+      <tags>
+        <tag>todo</tag>
+        <tag>NGIN</tag>
+        <tag>contract</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于区块链的环境监测系统 Environmental Monitoring System based on Blockchain</title>
+    <url>/post/environmental_monitoring_system_based_on_blockchain/</url>
+    <content><![CDATA[<p>FIT5125 Ass4 里要求的做成视频表述</p>
+<p>原文：</p>
+<p>Yan, J., Zhang, F, Ma, F., Xinxin, A., Li, Y., &amp; Huang,Y., (2019). Environmental Monitoring System Based on Blockchain. In Proceedings of the 4th International Conference on Crowd Science and Engineering (ICCSE’19). Association for Computing Machinery,. <a href="https://doi.org/10.1145/3371238.3371245" target="_blank" rel="noopener">https://doi.org/10.1145/3371238.3371245</a></p>
+<p>翻译内容非全文。</p>
+<p>随着信息技术、生物技术、遥感技术等技术的应用，环境保护领域的研究取得了重大突破。 但是现有的环保体系还存在环境数据的硬件造假和软件造假等问题。<br>本文提出了一种基于区块链的环境监测系统，其中全网环境数据统一，数据处理、共识和发布需要多方认证。 因此，通过采用本文所建议的系统，可以防止环境数据的伪造。<br>此外，提出了三维环境监控架构和智能可信设备，可以保证设备采集的环境数据的完整性和原始性。</p>
+<span id="more"></span>
+
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>环境监测是环境保护的前提，环境监测是生态文明建设的重要环节。基于环境监测数据，不仅可以客观评价环境质量，还可以反映治理的有效性。此外，环境管理和决策也应以环境监测数据为基础。但是，污染企业数据造假、政府环境监测设备干扰、各部门环境数据不一致等行为屡禁不止。上述情况严重降低了环境监测数据的质量，进而影响环境管理水平。<br>由于环境监测涉及方多，监测设备数量多且分散，测试环境复杂，环境监测数据质量很难提高。因此，有必要采用一个全面，多方向，系统的环境监测系统。<br>本文提出了一种基于区块链的环境监测系统。区块链的特点非常符合提高环境监测数据质量的需求。</p>
+<h3 id="此前研究"><a href="#此前研究" class="headerlink" title="此前研究"></a>此前研究</h3><p>随着城市化和能源消耗的快速发展，环境污染日益严重。与此同时，越来越多的机构和个人开始关注环境保护。<br>关于空气污染的研究如下。研究表明，许多疾病与<strong>空气污染</strong>密切相关[1, 2]。 CO 和 SO2 是中国大多数城市的两种重要污染物，但城市之间的差异很大[3]。空气质量及其影响因素具有明显的空间异质性[4]。许多研究都着眼于通过开发许多新的空气污染指数和测试来提高 AQI [5, 6]。对于<strong>水污染</strong>，分析了主要的水污染物及其对人体健康的影响[7]。综述了处理药物残留的电化学方法[8]。<br>在环境监测领域，有<strong>新的设备、试剂[9]和型号的研究</strong>。在遥感方面，高分系列卫星不仅用于检测局部污染，还用于监测水、大气和生态环境[10]。<br>对于环境数据收集，环境监测数据涉及复杂的多维权衡[11]，它需要跨学科和系统的方法、新的数据源和利益相关者的伙伴关系[12]。</p>
+<h3 id="传统数据采集方法缺陷"><a href="#传统数据采集方法缺陷" class="headerlink" title="传统数据采集方法缺陷"></a>传统数据采集方法缺陷</h3><p>如<strong>图1</strong>所示，传统的环保数据采集方式为部门采集、第三方采集和部门间数据共享。 部门采集包括车辆排放监测、企业排放监测、其他渠道的数据采集等，采集的数据大部分将采集到监测平台的数据中心。 而传统的监测数据采集方法存在诸多缺陷。</p>
+<ul>
+<li>数据收集和管理的方式大不相同。</li>
+<li>目前，没有标准化的质量保证和质量控制手段。</li>
+<li>报告低置信度数据的风险。</li>
+</ul>
+<p>有两个主要的自动数据收集通道。 一个是属于政府的监测站，另一个是公共和私人组成的传感器网络。</p>
+<p>另外，监控数据本身也存在很多问题。 环境数据存在的问题分为三部分，如<strong>图3</strong>所示，即硬件欺诈、软件欺诈和公开透明。 一旦出现问题，从数据的采集、处理、传输、发布，都很难开展环保工作。</p>
+<h3 id="假想平台架构"><a href="#假想平台架构" class="headerlink" title="假想平台架构"></a>假想平台架构</h3><p>提出的基于区块链的环保系统如<strong>图4</strong>所示。 在系统中，底部是环境数据采集设备，例如 空气和水品质的传感器。 然后，从数千台设备收集的原始数据直接汇集到大数据平台。 基于大数据平台，将完成三项任务。 <strong>一是要搭建一个区块链平台</strong>，搭建一个网络，搭建一个服务。 其次，原始数据的哈希值、即刻采样的原始数据、统计数据、修正后的<strong>环保数据</strong>应毫无保留地写入区块链。 <strong>三是智能监测分析</strong>，包括环保标准监测、装置参数监测、原始数据采集监测、修正数据监测等。</p>
+<p>区块链在防止环境数据造假方面的价值可以列举如下。</p>
+<ul>
+<li>全网环境数据统一，杜绝数据造假。</li>
+<li>直接记录原始数据，这减少了数据流链接并提高了数据的可靠性。</li>
+<li>修改设备参数和监控数据需要达成共识，加强监管，增加软件造假难度。</li>
+<li>数据处理、共识和发布需要多方认证，记录信息不可修改，权责清晰。 建立责任追溯制度，相关人员对原始监测数据和监测报告的真实性负责。</li>
+<li>环境数据记录公开透明，增强了数据的可信度，也便于监督和实施。</li>
+<li>为大数据分析提供可靠的数据记录，更好地支持设备运行状态分析，帮助识别恶意数据欺诈。</li>
+</ul>
+<p>环保传感器与区块链网络的交互机制如<strong>图5</strong>所示。作为一个轻节点，每个传感器应该具备以下四个功能。<br>首先，它可以存储公钥和私钥。<br>其次，应该有区块链客户端SDK。<br>第三，所有收集的原始数据都应签名和加密。<br>第四，每个传感器可以将采集到的原始数据存储一段时间。<br>签名和加密的数据将通过网络从传感器传输到整个节点。<br>然后，在整个节点内，将完成两个主要功能，将传感器数据发送到区块链和同步区块链网络内的所有数据。</p>
+<h3 id="分布式与可信数据"><a href="#分布式与可信数据" class="headerlink" title="分布式与可信数据"></a>分布式与可信数据</h3><h4 id="3D-三维-环境监控系统"><a href="#3D-三维-环境监控系统" class="headerlink" title="3D (三维)环境监控系统"></a>3D (三维)环境监控系统</h4><p>三维环境监测系统由四个主要部分组成。<br>最外围是空间卫星，可以实现对大气、水、土壤和生态的动态监测。<br>第二部分是航空气象、污染物和辐射监测。 第三部分是针对人类活动的，包括工业、农业、交通、建筑的监测，可以实现跨行业的数据分析和验证。<br>底部为地面，通过分布在各处的物联网设备监测土壤、水和生态状况。</p>
+<h4 id="智能可信设备"><a href="#智能可信设备" class="headerlink" title="智能可信设备"></a>智能可信设备</h4><p>如<strong>图3</strong>所示，监测数据存在问题。区块链虽然在某些情况下可以防止环境数据被篡改，但无法保证原始数据的真实性和有效性。<br>基于以上考虑，提出了一种环保机器人方案，主要由全息数据采集模块、通信模块、执行模块、存储模块、电源模块、智能可信设备组成。</p>
+<p>智能环保监控机器人具有感知、视觉、听觉、分析、计算、学习、管理、控制等功能，多台智能环保监控机器人根据其能覆盖的范围部署在特定区域。<br>它们与环保平台互联互通，形成环保监控智慧网络，是环保监控物联网的升级版。</p>
+<p>所提出的机器人的具体功能如下。</p>
+<ul>
+<li>能够以有线或无线方式连接环保平台。</li>
+<li>机器人可以通过有线或无线方式相互连接。</li>
+<li>机器人可自动采集特定区域的关键环境数据，如大气、水、土壤、噪声等参数。</li>
+<li>通过摄像头实时监控特定的环保区域。</li>
+<li>基于分析和学习控制联网的智能机械操作。</li>
+<li>多台机器人协同分析诊断特定区域的环保状况。</li>
+</ul>
+<p>智能可信设备的详细功能见<strong>图8</strong>。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在本文中，我们提出了一种基于区块链的环境监测系统，包括环境数据采集装置、大数据平台、区块链和智能监测。<br>采用区块链可以防止环境数据被篡改，其中全网环境数据统一，数据处理、共识和发布需要多方认证。<br>还提供了传感器与区块链网络之间的交互机制。<br>此外，提出了三维环境监测系统，由四个主要部分组成，保证了采集数据的完整性。<br>而对于智能可信设备，则可以保证数据的来源。</p>
+<p>在这篇论文的基础上，还有很多进一步的研究可以做。<br>首先，应提供更多详细信息。 其次，建议的系统需要通过案例研究进行分析和验证。</p>
+]]></content>
+      <tags>
+        <tag>blockchain</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Enabling Cross-Chain Transactions: A Decentralized Cryptocurrency Exchange Protocol</title>
     <url>/post/enabling-x-chain-txs/</url>
     <content><![CDATA[<h1 id="赋能跨链交易：一项分布式的加密货币交易协议"><a href="#赋能跨链交易：一项分布式的加密货币交易协议" class="headerlink" title="赋能跨链交易：一项分布式的加密货币交易协议"></a>赋能跨链交易：一项分布式的加密货币交易协议</h1><img src="/post/enabling-x-chain-txs/image-20211011032455266.png" class="" title="image-20211011032455266">
@@ -706,193 +900,6 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
       </tags>
   </entry>
   <entry>
-    <title>Design of Contracts</title>
-    <url>/post/design-of-contracts/</url>
-    <content><![CDATA[<p>说实话其实一开始压根没想做合约，就只是想做个chain。</p>
-<p>但是后来发现你不做DAPP你的chain都没人看，那些做coin的也都在往DAPP靠。就有种被逼上梁山的感觉。不过还好现在有个去华山的路（WASM），可以考虑上了华山再往梁山飞。</p>
-<p>其实我也不算是第一个选择华山飞梁山的，cosmos和eth2.0也选，不过人家有现成地图，我只能凭感觉乱飘。而且我们不是一个山头起飞的，他们选了更早被人发现的山头（wasmer），我选了个看起来粗大(?)一点的新山头（wasmtime）。</p>
-<span id="more"></span>
-
-<p>不瞎扯了，下面就开始分析对于合约的设计。</p>
-<p>做ethereum开发的都知道Solidity，因此需求也是从这个上面靠拢。不过由于现在主要支持wasm的语言C和RUST都是比较成熟的所以直接就选择他们对具体功能开干。</p>
-<p>+-x÷是都没有问题，问题在于和链的互动，和rpc的互动，以及事件的侦听。</p>
-<h1 id="ngVM"><a href="#ngVM" class="headerlink" title="ngVM"></a>ngVM</h1><h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p>上传至链上的wasm需要为<a href="https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md" target="_blank" rel="noopener">binary格式</a></p>
-<h3 id="数据类型-data-type"><a href="#数据类型-data-type" class="headerlink" title="数据类型 data type"></a>数据类型 data type</h3><ul>
-<li>i32: 返回code，&gt;0为正常，&lt;=异常 </li>
-<li>i64: 指针</li>
-<li>u64: 账户</li>
-<li>bytes: 底层mem</li>
-</ul>
-<h3 id="Imports"><a href="#Imports" class="headerlink" title="Imports"></a>Imports</h3><p>wasm只能import在ngVMI中指定的接口。</p>
-<h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><p>在Debug环境里提供一系列print的接口</p>
-<h3 id="Exports"><a href="#Exports" class="headerlink" title="Exports"></a>Exports</h3><p>合同必须完全具有两个export：</p>
-<ul>
-<li><code>memory</code>: 可供EEI写入的共享内存空间。</li>
-<li><code>main</code>: 没有参数和结果值的函数。</li>
-</ul>
-<h3 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h3><p>导出为<code>main</code>的方法将由NGIN内部VM Manager执行。</p>
-<p>如果成功执行，则正常返回。</p>
-<p>如果由于故障而需要中止，则返回error，避免panic。</p>
-<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>如果执行wasm代码触发了wasm异常，则执行将失败并终止。</p>
-<h2 id="接口-ngVMI-NGIN-VM-Interface"><a href="#接口-ngVMI-NGIN-VM-Interface" class="headerlink" title="接口(ngVMI: NGIN VM Interface)"></a>接口(ngVMI: NGIN VM Interface)</h2><p>WIP</p>
-<h3 id="log-debug-msg-ptr-i64-msg-len-i64"><a href="#log-debug-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::debug(msg_ptr i64, msg_len i64)"></a>log::debug(msg_ptr i64, msg_len i64)</h3><h3 id="log-info-msg-ptr-i64-msg-len-i64"><a href="#log-info-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::info(msg_ptr i64, msg_len i64)"></a>log::info(msg_ptr i64, msg_len i64)</h3><h3 id="log-error-msg-ptr-i64-msg-len-i64"><a href="#log-error-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::error(msg_ptr i64, msg_len i64)"></a>log::error(msg_ptr i64, msg_len i64)</h3><h3 id="log-warn-msg-ptr-i64-msg-len-i64"><a href="#log-warn-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::warn(msg_ptr i64, msg_len i64)"></a>log::warn(msg_ptr i64, msg_len i64)</h3><p>打印输出，默认关闭。</p>
-<h3 id="account-get-host-gt-num-i64"><a href="#account-get-host-gt-num-i64" class="headerlink" title="account::get_host() -&gt; num i64"></a>account::get_host() -&gt; num i64</h3><p>获取vm自身account num(uint64)</p>
-<h3 id="account-get-owner-size-account-num-uint64-gt-owner-ptr-i64"><a href="#account-get-owner-size-account-num-uint64-gt-owner-ptr-i64" class="headerlink" title="account::get_owner_size(account_num uint64) -&gt; owner_ptr i64"></a>account::get_owner_size(account_num uint64) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address的长度（当前肯定是35）</p>
-<h3 id="account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64"><a href="#account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64" class="headerlink" title="account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64"></a>account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address (length = 35 bytes)，并将其写入ptr指针处。返回值为成功写入的字节数。</p>
-<h3 id="account-get-contract-len-ptr-i64-gt-contract-ptr-i64"><a href="#account-get-contract-len-ptr-i64-gt-contract-ptr-i64" class="headerlink" title="account::get_contract(len_ptr i64) -&gt; contract_ptr i64"></a>account::get_contract(len_ptr i64) -&gt; contract_ptr i64</h3><p>已删除</p>
-<p>原：获取vm自身合约代码</p>
-<p>现：由于获取全部二进制内容毫无意义，而且会占用较多内存，所以废弃此内容。<br><del>作为替代，将来提供get_contract_hash函数来帮助开发者做对线上内容的快速double check。</del><br>不能在内容里对内容hash……</p>
-<p>如果是需要读取其他account下的contract内容，暂时感觉也没必要。</p>
-<h3 id="account-get-context-account-num-u64-ptr-u32-gt-u32"><a href="#account-get-context-account-num-u64-ptr-u32-gt-u32" class="headerlink" title="account::get_context(account_num u64, ptr u32) -&gt; u32"></a>account::get_context(account_num u64, ptr u32) -&gt; u32</h3><p>获取可持续存储内容</p>
-<p>可持续存储读取</p>
-<h3 id="context-alloc-len-u64"><a href="#context-alloc-len-u64" class="headerlink" title="context::alloc(len: u64)"></a>context::alloc(len: u64)</h3><p>为可持续存储分配空间<br>//TODO: 收费</p>
-<h3 id="context-write-src-ptr-i64-dst-ptr-i64-len-u64"><a href="#context-write-src-ptr-i64-dst-ptr-i64-len-u64" class="headerlink" title="context::write(src_ptr: i64, dst_ptr: i64, len: u64)"></a>context::write(src_ptr: i64, dst_ptr: i64, len: u64)</h3><p>可持续存储写入</p>
-<h3 id="coin-transfer-to-u64-value-ptr-i64-gt-i32"><a href="#coin-transfer-to-u64-value-ptr-i64-gt-i32" class="headerlink" title="coin::transfer(to: u64, value_ptr: i64) -&gt; i32"></a>coin::transfer(to: u64, value_ptr: i64) -&gt; i32</h3><p>类似于eth里的<code>seller.send(price)</code></p>
-<p>原来叫create_transaction，表示由wasm_vm主动创建一个事务tx让chain通过处理tx方式修改state</p>
-<p>通过此函数，vm能够提供例如bank/token的基础资金转移功能。</p>
-<p>但是遇到一个之前忽略掉的问题——从vm里发出的交易该怎么sign？</p>
-<p>根据ETH的方法，调用都会被算为是由tx的call触发，因此这些变化都是由原tx负责。</p>
-<p>换句话说，变动的只有state，并不会出现由contract主动触发的tx。</p>
-<p>因此这个tx摆在这里就不合适了，因为vm里的操作都是直接作用于state</p>
-<p>所以这里就不应该使用transaction or tx来称呼这个操作，而用transfer来简化这个函数。</p>
-<p>假如to的account不存在，那个需要触发trap</p>
-<h3 id="tx-get-convener-gt-num-u64"><a href="#tx-get-convener-gt-num-u64" class="headerlink" title="tx::get_convener() -&gt; num u64"></a>tx::get_convener() -&gt; num u64</h3><p>获取transaction的convener</p>
-<h3 id="tx-get-participants-len-gt-len-u64"><a href="#tx-get-participants-len-gt-len-u64" class="headerlink" title="tx::get_participants_len() -&gt; len u64"></a>tx::get_participants_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
-<h3 id="tx-get-participant-index-u64-gt-account-ptr-i64"><a href="#tx-get-participant-index-u64-gt-account-ptr-i64" class="headerlink" title="tx::get_participant(index: u64) -&gt; account_ptr i64"></a>tx::get_participant(index: u64) -&gt; account_ptr i64</h3><p>获取transaction的参与人，需要用account namespace的api处理</p>
-<h3 id="tx-get-values-len-gt-len-u64"><a href="#tx-get-values-len-gt-len-u64" class="headerlink" title="tx::get_values_len() -&gt; len u64"></a>tx::get_values_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
-<h3 id="tx-get-value-index-u64-gt-value-ptr-i64"><a href="#tx-get-value-index-u64-gt-value-ptr-i64" class="headerlink" title="tx::get_value(index: u64) -&gt; value_ptr i64"></a>tx::get_value(index: u64) -&gt; value_ptr i64</h3><p>获取transacation的对应value(uint256)</p>
-<h3 id="state-get-balance-addr-i64-gt-balance-ptr-i64"><a href="#state-get-balance-addr-i64-gt-balance-ptr-i64" class="headerlink" title="state::get_balance(addr: i64) -&gt; balance_ptr i64"></a>state::get_balance(addr: i64) -&gt; balance_ptr i64</h3><p>balance 长度 8*4 = 24 </p>
-<h3 id="state-get-owner-num-u64-gt-addr-ptr-i64"><a href="#state-get-owner-num-u64-gt-addr-ptr-i64" class="headerlink" title="state::get_owner(num: u64) -&gt; addr_ptr i64"></a>state::get_owner(num: u64) -&gt; addr_ptr i64</h3><p>addr 长度 33</p>
-<h2 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h2><p>Assign &amp; Append tx</p>
-<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>WASM的发布分为两种: Web or Wasm.</p>
-<h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><p>任何ngcore节点能够作为http server提供http服务(单页面)，端口为52528。默认关闭，通过Flag打开</p>
-<p>例如 <a href="http://app.ngin.sh:52528/#10086/path1/path2" target="_blank" rel="noopener">http://app.ngin.sh:52528/#10086/path1/path2</a></p>
-<p>服务运营者可以通过nginx反代限制app为</p>
-<p><a href="https://app.mydomain.com/path1/path2?param1=1&amp;params2=2" target="_blank" rel="noopener">https://app.mydomain.com/path1/path2?param1=1&amp;params2=2</a></p>
-<p>发布Web应用需要将wasm binary写入Contract字段。在访问时会自动将字段作为文件拉取，并且通过导出的main函数进行执行</p>
-<h3 id="Wasm"><a href="#Wasm" class="headerlink" title="Wasm"></a>Wasm</h3><p>Wasm可以作为网站后端运行，也可以纯提供链上事务或者作为其他Wasi运行库</p>
-<p>Wasm要求Contract为wasm binary.</p>
-<h2 id="当前遇到的问题"><a href="#当前遇到的问题" class="headerlink" title="当前遇到的问题"></a>当前遇到的问题</h2><h3 id="Infinite-loop"><a href="#Infinite-loop" class="headerlink" title="Infinite loop"></a>Infinite loop</h3><p>当前使用wasmtime，无法在运行前拦截vm中infinite loop</p>
-<p>当loop执行，就会导致全网主机阻塞在处理该vm对应的tx上</p>
-<p>感觉该看一下wasm的opcode</p>
-<h3 id="Fee-charging"><a href="#Fee-charging" class="headerlink" title="Fee charging"></a>Fee charging</h3><p>由于wasmtime只提供封闭的ffi，因此无法将opcode与fee进行挂钩</p>
-<p>这里可以理解为我们需要自己写一个ngin专用的wasm runtime</p>
-<p>找材料的时候发现了perlin-network的一个wasm方案，<a href="https://github.com/perlin-network/life" target="_blank" rel="noopener">life</a>.</p>
-<p>钱多好办事哈，人家自己也折腾了个chain daemon叫<a href="https://github.com/perlin-network/wavelet" target="_blank" rel="noopener">wavelet</a>，意思是小波浪</p>
-<p>life里加gas是在compile时候，对每个Block做totalCost的计算（递增1，即每个instruction费用为1），然后给每个block的code前面都加上一个add_gas的instruction。</p>
-<p>当然这个add_gas的ins当前还没用，也不知道他们准备加点啥。</p>
-<p>compile是将wasm binary转换为host上的一个module，他们的api应该是参考的<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/compile" target="_blank" rel="noopener">js interface</a></p>
-]]></content>
-      <tags>
-        <tag>todo</tag>
-        <tag>NGIN</tag>
-        <tag>contract</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于区块链的环境监测系统 Environmental Monitoring System based on Blockchain</title>
-    <url>/post/environmental_monitoring_system_based_on_blockchain/</url>
-    <content><![CDATA[<p>FIT5125 Ass4 里要求的做成视频表述</p>
-<p>原文：</p>
-<p>Yan, J., Zhang, F, Ma, F., Xinxin, A., Li, Y., &amp; Huang,Y., (2019). Environmental Monitoring System Based on Blockchain. In Proceedings of the 4th International Conference on Crowd Science and Engineering (ICCSE’19). Association for Computing Machinery,. <a href="https://doi.org/10.1145/3371238.3371245" target="_blank" rel="noopener">https://doi.org/10.1145/3371238.3371245</a></p>
-<p>翻译内容非全文。</p>
-<p>随着信息技术、生物技术、遥感技术等技术的应用，环境保护领域的研究取得了重大突破。 但是现有的环保体系还存在环境数据的硬件造假和软件造假等问题。<br>本文提出了一种基于区块链的环境监测系统，其中全网环境数据统一，数据处理、共识和发布需要多方认证。 因此，通过采用本文所建议的系统，可以防止环境数据的伪造。<br>此外，提出了三维环境监控架构和智能可信设备，可以保证设备采集的环境数据的完整性和原始性。</p>
-<span id="more"></span>
-
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>环境监测是环境保护的前提，环境监测是生态文明建设的重要环节。基于环境监测数据，不仅可以客观评价环境质量，还可以反映治理的有效性。此外，环境管理和决策也应以环境监测数据为基础。但是，污染企业数据造假、政府环境监测设备干扰、各部门环境数据不一致等行为屡禁不止。上述情况严重降低了环境监测数据的质量，进而影响环境管理水平。<br>由于环境监测涉及方多，监测设备数量多且分散，测试环境复杂，环境监测数据质量很难提高。因此，有必要采用一个全面，多方向，系统的环境监测系统。<br>本文提出了一种基于区块链的环境监测系统。区块链的特点非常符合提高环境监测数据质量的需求。</p>
-<h3 id="此前研究"><a href="#此前研究" class="headerlink" title="此前研究"></a>此前研究</h3><p>随着城市化和能源消耗的快速发展，环境污染日益严重。与此同时，越来越多的机构和个人开始关注环境保护。<br>关于空气污染的研究如下。研究表明，许多疾病与<strong>空气污染</strong>密切相关[1, 2]。 CO 和 SO2 是中国大多数城市的两种重要污染物，但城市之间的差异很大[3]。空气质量及其影响因素具有明显的空间异质性[4]。许多研究都着眼于通过开发许多新的空气污染指数和测试来提高 AQI [5, 6]。对于<strong>水污染</strong>，分析了主要的水污染物及其对人体健康的影响[7]。综述了处理药物残留的电化学方法[8]。<br>在环境监测领域，有<strong>新的设备、试剂[9]和型号的研究</strong>。在遥感方面，高分系列卫星不仅用于检测局部污染，还用于监测水、大气和生态环境[10]。<br>对于环境数据收集，环境监测数据涉及复杂的多维权衡[11]，它需要跨学科和系统的方法、新的数据源和利益相关者的伙伴关系[12]。</p>
-<h3 id="传统数据采集方法缺陷"><a href="#传统数据采集方法缺陷" class="headerlink" title="传统数据采集方法缺陷"></a>传统数据采集方法缺陷</h3><p>如<strong>图1</strong>所示，传统的环保数据采集方式为部门采集、第三方采集和部门间数据共享。 部门采集包括车辆排放监测、企业排放监测、其他渠道的数据采集等，采集的数据大部分将采集到监测平台的数据中心。 而传统的监测数据采集方法存在诸多缺陷。</p>
-<ul>
-<li>数据收集和管理的方式大不相同。</li>
-<li>目前，没有标准化的质量保证和质量控制手段。</li>
-<li>报告低置信度数据的风险。</li>
-</ul>
-<p>有两个主要的自动数据收集通道。 一个是属于政府的监测站，另一个是公共和私人组成的传感器网络。</p>
-<p>另外，监控数据本身也存在很多问题。 环境数据存在的问题分为三部分，如<strong>图3</strong>所示，即硬件欺诈、软件欺诈和公开透明。 一旦出现问题，从数据的采集、处理、传输、发布，都很难开展环保工作。</p>
-<h3 id="假想平台架构"><a href="#假想平台架构" class="headerlink" title="假想平台架构"></a>假想平台架构</h3><p>提出的基于区块链的环保系统如<strong>图4</strong>所示。 在系统中，底部是环境数据采集设备，例如 空气和水品质的传感器。 然后，从数千台设备收集的原始数据直接汇集到大数据平台。 基于大数据平台，将完成三项任务。 <strong>一是要搭建一个区块链平台</strong>，搭建一个网络，搭建一个服务。 其次，原始数据的哈希值、即刻采样的原始数据、统计数据、修正后的<strong>环保数据</strong>应毫无保留地写入区块链。 <strong>三是智能监测分析</strong>，包括环保标准监测、装置参数监测、原始数据采集监测、修正数据监测等。</p>
-<p>区块链在防止环境数据造假方面的价值可以列举如下。</p>
-<ul>
-<li>全网环境数据统一，杜绝数据造假。</li>
-<li>直接记录原始数据，这减少了数据流链接并提高了数据的可靠性。</li>
-<li>修改设备参数和监控数据需要达成共识，加强监管，增加软件造假难度。</li>
-<li>数据处理、共识和发布需要多方认证，记录信息不可修改，权责清晰。 建立责任追溯制度，相关人员对原始监测数据和监测报告的真实性负责。</li>
-<li>环境数据记录公开透明，增强了数据的可信度，也便于监督和实施。</li>
-<li>为大数据分析提供可靠的数据记录，更好地支持设备运行状态分析，帮助识别恶意数据欺诈。</li>
-</ul>
-<p>环保传感器与区块链网络的交互机制如<strong>图5</strong>所示。作为一个轻节点，每个传感器应该具备以下四个功能。<br>首先，它可以存储公钥和私钥。<br>其次，应该有区块链客户端SDK。<br>第三，所有收集的原始数据都应签名和加密。<br>第四，每个传感器可以将采集到的原始数据存储一段时间。<br>签名和加密的数据将通过网络从传感器传输到整个节点。<br>然后，在整个节点内，将完成两个主要功能，将传感器数据发送到区块链和同步区块链网络内的所有数据。</p>
-<h3 id="分布式与可信数据"><a href="#分布式与可信数据" class="headerlink" title="分布式与可信数据"></a>分布式与可信数据</h3><h4 id="3D-三维-环境监控系统"><a href="#3D-三维-环境监控系统" class="headerlink" title="3D (三维)环境监控系统"></a>3D (三维)环境监控系统</h4><p>三维环境监测系统由四个主要部分组成。<br>最外围是空间卫星，可以实现对大气、水、土壤和生态的动态监测。<br>第二部分是航空气象、污染物和辐射监测。 第三部分是针对人类活动的，包括工业、农业、交通、建筑的监测，可以实现跨行业的数据分析和验证。<br>底部为地面，通过分布在各处的物联网设备监测土壤、水和生态状况。</p>
-<h4 id="智能可信设备"><a href="#智能可信设备" class="headerlink" title="智能可信设备"></a>智能可信设备</h4><p>如<strong>图3</strong>所示，监测数据存在问题。区块链虽然在某些情况下可以防止环境数据被篡改，但无法保证原始数据的真实性和有效性。<br>基于以上考虑，提出了一种环保机器人方案，主要由全息数据采集模块、通信模块、执行模块、存储模块、电源模块、智能可信设备组成。</p>
-<p>智能环保监控机器人具有感知、视觉、听觉、分析、计算、学习、管理、控制等功能，多台智能环保监控机器人根据其能覆盖的范围部署在特定区域。<br>它们与环保平台互联互通，形成环保监控智慧网络，是环保监控物联网的升级版。</p>
-<p>所提出的机器人的具体功能如下。</p>
-<ul>
-<li>能够以有线或无线方式连接环保平台。</li>
-<li>机器人可以通过有线或无线方式相互连接。</li>
-<li>机器人可自动采集特定区域的关键环境数据，如大气、水、土壤、噪声等参数。</li>
-<li>通过摄像头实时监控特定的环保区域。</li>
-<li>基于分析和学习控制联网的智能机械操作。</li>
-<li>多台机器人协同分析诊断特定区域的环保状况。</li>
-</ul>
-<p>智能可信设备的详细功能见<strong>图8</strong>。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在本文中，我们提出了一种基于区块链的环境监测系统，包括环境数据采集装置、大数据平台、区块链和智能监测。<br>采用区块链可以防止环境数据被篡改，其中全网环境数据统一，数据处理、共识和发布需要多方认证。<br>还提供了传感器与区块链网络之间的交互机制。<br>此外，提出了三维环境监测系统，由四个主要部分组成，保证了采集数据的完整性。<br>而对于智能可信设备，则可以保证数据的来源。</p>
-<p>在这篇论文的基础上，还有很多进一步的研究可以做。<br>首先，应提供更多详细信息。 其次，建议的系统需要通过案例研究进行分析和验证。</p>
-]]></content>
-      <tags>
-        <tag>blockchain</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ECDSA签名及验证</title>
-    <url>/post/ecdsa-sign/</url>
-    <content><![CDATA[<p>ECDSA私钥是取q为模后得到的整数x。相关标准规定x不得为0。 因此，x是在[1，q-1]范围内的整数。qlen为q的二进制长度。</p>
-<p>签名的生成使用了密码学哈希函数H和输入的消息m。消息首先由H处理，产生值H(m)即消息m的hash，它是长度为hlen的二进制序列。通常，选择H使其输出长度hlen大致等于qlen，因为签名方案的总体安全性取决于hlen和qlen之间的最小值；但是，相关标准支持hlen和qlen的所有组合。</p>
-<span id="more"></span>
-
-<ol>
-<li>使用bits2int变换和额外的模块化约简将H(m)转换为整数模q：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">h = bits2int(H(m)) mod q</span><br></pre></td></tr></table></figure>
-<p>正如在bit2octets的描述中所指出的那样，额外的模块化缩减只不过是有条件的减法。</p>
-<ol start="2">
-<li><p>生成称为k的取模q的随机值。 该值不为0。因此，它位于[1，q-1]范围内。在ECDSA中，应通过随机选择来选择k，该选择应以均匀的概率从q-1个可能的值中选择一个值。</p>
-</li>
-<li><p>根据k和关键参数计算出值r (modulo q)。计算出点kG；其X坐标（定义了E的字段的成员）被转换为整数，该整数以q为模减小，从而得出r。如果r变为零，则应选择一个新的k并再次计算r（这是完全不可能的情况）。</p>
-</li>
-<li><p>值s (modulo q)的计算如下：</p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">s =（h + x * r）/ k mod q     </span><br></pre></td></tr></table></figure>
-
-<p>(r, s)就是签名。ECDSA标准本身并未涵盖如何对签名进行编码； 常见的方法是使用DER编码的ASN.1结构（两个INTEGER的SEQUENCE，分别用于r和s），或者作为两个32bytes拼接为一个64bytes。</p>
-<p>签名验证过程如下：</p>
-<ol>
-<li><p>验证 <em>r , s</em> 都处于 [1, n-1] 范围内的整型数，否则验证失败</p>
-</li>
-<li><p><em>e</em>为消息的hash值</p>
-</li>
-<li><p>计算<em>z</em></p>
-</li>
-<li><p>计算参数 <em>w</em> :</p>
-<p>$w=s^{−1}\ mod\ n$</p>
-</li>
-<li><p>计算两个参数 <em>u1, u2</em> :</p>
-<p>$u_1=zw\ mod\ n,\ u_2=rw\ mod\ n$</p>
-</li>
-<li><p>(x1, y1)，如果该点不是同一个曲线上的点，验证失败</p>
-<p>$(x_{1}, y_{1}) = u_{1} \times G + u_{2} \times Q_{A}$</p>
-</li>
-<li><p>如果存在下面的恒等式，则验证通过，否则验证失败</p>
-<p>$r≡x_1\ mod\ n$</p>
-</li>
-</ol>
-<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><p>生成不变的sign</p>
-]]></content>
-      <tags>
-        <tag>todo</tag>
-        <tag>ECDSA</tag>
-        <tag>cryptography</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用现有基础架构进行服务器端WiFi室内定位的经验与挑战 Experiences &amp; Challenges with Server-Side WiFi Indoor Localization Using Existing Infrastructure</title>
     <url>/post/fit5046-a2-paper/</url>
     <content><![CDATA[<p>FIT5046 要求做PPT演讲的paper</p>
@@ -990,6 +997,56 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
       <tags>
         <tag>Wi-Fi</tag>
         <tag>IPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Notes for FIT5057: Project management</title>
+    <url>/post/fit5057-pm-notes/</url>
+    <content><![CDATA[<p>可以说是上到现在觉得PPT做的最操蛋的一门课了，花里胡哨的，知识点不清晰，很难让人抓住重点。</p>
+<img src="/post/fit5057-pm-notes/image-20210408081128562.png" class="" title="image-20210408081128562">
+
+<p>主要学习内容为<del>图中1234</del>全部</p>
+<span id="more"></span>
+
+<h2 id="W1"><a href="#W1" class="headerlink" title="W1"></a>W1</h2><p>PM的定义：A temporaryendeavor undertaken to create a unique product, service or result</p>
+<p>6个特性Key Characteristics：</p>
+<p>PM Lifecycle Vs SDLC Lifecycle</p>
+<h2 id="W2"><a href="#W2" class="headerlink" title="W2"></a>W2</h2><p>Enterprise Architecture, Software Development &amp; DevOps Fundamentals</p>
+<p>基本上涵盖了整个ASS1</p>
+<p>EA Methodology describes the program management activities for creating and maintaining, storing &amp; retrieving and using the EA documents in strategy, business &amp; technology management &amp; project work </p>
+<p>EA Frameworks describe the organisation structure of how all the EA documents are to be catalogued and accessed to develop digital capabilities in the organisation from the perspectives of strategic, business &amp; technology requirements</p>
+<h3 id="SDLC-Phases"><a href="#SDLC-Phases" class="headerlink" title="SDLC Phases"></a>SDLC Phases</h3><p>Software Development Lifecycle( SLDC)的各个阶段 </p>
+<p>User Requirement Analysis -&gt; System Design -&gt; System Coding -&gt; System Testing -&gt; Software Operational Support</p>
+<h3 id="Software-Development-Configuration-Strategies"><a href="#Software-Development-Configuration-Strategies" class="headerlink" title="Software Development Configuration Strategies"></a>Software Development Configuration Strategies</h3><p>Waterfall SDLC: Execute the Lifecycle Phases sequentially <strong>ONCE</strong></p>
+<img src="/post/fit5057-pm-notes/image-20210408212011519.png" class="" title="image-20210408212011519">
+
+<p>Agile SDLC: Execute the Lifecycle Phases sequentially <strong>more than ONCE</strong></p>
+<img src="/post/fit5057-pm-notes/image-20210408212138839.png" class="" title="image-20210408212138839">
+
+<h3 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h3><p>Combining SDLC &amp; Ops Management Methodologies as one seamless process from software conceptualisation to operations</p>
+<p>“DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes. This speed enables organizations to better serve their customers and compete more effectively in the market”</p>
+<img src="/post/fit5057-pm-notes/image-20210408213249088.png" class="" title="image-20210408213249088">
+
+<p>EA和DevOps关系</p>
+<img src="/post/fit5057-pm-notes/image-20210408220150479.png" class="" title="image-20210408220150479">
+
+
+
+<h2 id="W3"><a href="#W3" class="headerlink" title="W3"></a>W3</h2><p>Software Design, Governance &amp; Project Setup</p>
+<h2 id="W4"><a href="#W4" class="headerlink" title="W4"></a>W4</h2><p>Managing People (Workbook2) 项目人员管理</p>
+<h3 id="项目利益相关者管理"><a href="#项目利益相关者管理" class="headerlink" title="项目利益相关者管理"></a>项目利益相关者管理</h3><p>项目相关方管理 </p>
+<h3 id="项目资源管理"><a href="#项目资源管理" class="headerlink" title="项目资源管理"></a>项目资源管理</h3><h3 id="项目交流管理"><a href="#项目交流管理" class="headerlink" title="项目交流管理"></a>项目交流管理</h3><h2 id="W5-项目范围管理"><a href="#W5-项目范围管理" class="headerlink" title="W5 项目范围管理"></a>W5 项目范围管理</h2><p>Scope Management</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>Scope</strong>: The sum of the products, services, and results to be provided as a project.</p>
+<p><strong>Product Scope</strong>: The features and functionalities that characterize a product, service, or result.</p>
+<p><strong>Project Scope</strong> (=work scope/<strong>WBS</strong>): The DevOps work performed to deliver a product, service, or result as specified in the product scope</p>
+<p>WBS = Work breakdown structure</p>
+<h3 id="范围管理过程"><a href="#范围管理过程" class="headerlink" title="范围管理过程"></a>范围管理过程</h3><p>范围准线文档</p>
+<p>控制范围延申</p>
+<p>范围管理方法</p>
+<h2 id="W7"><a href="#W7" class="headerlink" title="W7"></a>W7</h2><p>成本管理</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h3 id="成本管理过程"><a href="#成本管理过程" class="headerlink" title="成本管理过程"></a>成本管理过程</h3><h3 id="成本透明与欺诈"><a href="#成本透明与欺诈" class="headerlink" title="成本透明与欺诈"></a>成本透明与欺诈</h3>]]></content>
+      <tags>
+        <tag>project management</tag>
       </tags>
   </entry>
   <entry>
@@ -2438,56 +2495,6 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
       </tags>
   </entry>
   <entry>
-    <title>Notes for FIT5057: Project management</title>
-    <url>/post/fit5057-pm-notes/</url>
-    <content><![CDATA[<p>可以说是上到现在觉得PPT做的最操蛋的一门课了，花里胡哨的，知识点不清晰，很难让人抓住重点。</p>
-<img src="/post/fit5057-pm-notes/image-20210408081128562.png" class="" title="image-20210408081128562">
-
-<p>主要学习内容为<del>图中1234</del>全部</p>
-<span id="more"></span>
-
-<h2 id="W1"><a href="#W1" class="headerlink" title="W1"></a>W1</h2><p>PM的定义：A temporaryendeavor undertaken to create a unique product, service or result</p>
-<p>6个特性Key Characteristics：</p>
-<p>PM Lifecycle Vs SDLC Lifecycle</p>
-<h2 id="W2"><a href="#W2" class="headerlink" title="W2"></a>W2</h2><p>Enterprise Architecture, Software Development &amp; DevOps Fundamentals</p>
-<p>基本上涵盖了整个ASS1</p>
-<p>EA Methodology describes the program management activities for creating and maintaining, storing &amp; retrieving and using the EA documents in strategy, business &amp; technology management &amp; project work </p>
-<p>EA Frameworks describe the organisation structure of how all the EA documents are to be catalogued and accessed to develop digital capabilities in the organisation from the perspectives of strategic, business &amp; technology requirements</p>
-<h3 id="SDLC-Phases"><a href="#SDLC-Phases" class="headerlink" title="SDLC Phases"></a>SDLC Phases</h3><p>Software Development Lifecycle( SLDC)的各个阶段 </p>
-<p>User Requirement Analysis -&gt; System Design -&gt; System Coding -&gt; System Testing -&gt; Software Operational Support</p>
-<h3 id="Software-Development-Configuration-Strategies"><a href="#Software-Development-Configuration-Strategies" class="headerlink" title="Software Development Configuration Strategies"></a>Software Development Configuration Strategies</h3><p>Waterfall SDLC: Execute the Lifecycle Phases sequentially <strong>ONCE</strong></p>
-<img src="/post/fit5057-pm-notes/image-20210408212011519.png" class="" title="image-20210408212011519">
-
-<p>Agile SDLC: Execute the Lifecycle Phases sequentially <strong>more than ONCE</strong></p>
-<img src="/post/fit5057-pm-notes/image-20210408212138839.png" class="" title="image-20210408212138839">
-
-<h3 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h3><p>Combining SDLC &amp; Ops Management Methodologies as one seamless process from software conceptualisation to operations</p>
-<p>“DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes. This speed enables organizations to better serve their customers and compete more effectively in the market”</p>
-<img src="/post/fit5057-pm-notes/image-20210408213249088.png" class="" title="image-20210408213249088">
-
-<p>EA和DevOps关系</p>
-<img src="/post/fit5057-pm-notes/image-20210408220150479.png" class="" title="image-20210408220150479">
-
-
-
-<h2 id="W3"><a href="#W3" class="headerlink" title="W3"></a>W3</h2><p>Software Design, Governance &amp; Project Setup</p>
-<h2 id="W4"><a href="#W4" class="headerlink" title="W4"></a>W4</h2><p>Managing People (Workbook2) 项目人员管理</p>
-<h3 id="项目利益相关者管理"><a href="#项目利益相关者管理" class="headerlink" title="项目利益相关者管理"></a>项目利益相关者管理</h3><p>项目相关方管理 </p>
-<h3 id="项目资源管理"><a href="#项目资源管理" class="headerlink" title="项目资源管理"></a>项目资源管理</h3><h3 id="项目交流管理"><a href="#项目交流管理" class="headerlink" title="项目交流管理"></a>项目交流管理</h3><h2 id="W5-项目范围管理"><a href="#W5-项目范围管理" class="headerlink" title="W5 项目范围管理"></a>W5 项目范围管理</h2><p>Scope Management</p>
-<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>Scope</strong>: The sum of the products, services, and results to be provided as a project.</p>
-<p><strong>Product Scope</strong>: The features and functionalities that characterize a product, service, or result.</p>
-<p><strong>Project Scope</strong> (=work scope/<strong>WBS</strong>): The DevOps work performed to deliver a product, service, or result as specified in the product scope</p>
-<p>WBS = Work breakdown structure</p>
-<h3 id="范围管理过程"><a href="#范围管理过程" class="headerlink" title="范围管理过程"></a>范围管理过程</h3><p>范围准线文档</p>
-<p>控制范围延申</p>
-<p>范围管理方法</p>
-<h2 id="W7"><a href="#W7" class="headerlink" title="W7"></a>W7</h2><p>成本管理</p>
-<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h3 id="成本管理过程"><a href="#成本管理过程" class="headerlink" title="成本管理过程"></a>成本管理过程</h3><h3 id="成本透明与欺诈"><a href="#成本透明与欺诈" class="headerlink" title="成本透明与欺诈"></a>成本透明与欺诈</h3>]]></content>
-      <tags>
-        <tag>project management</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Notes for FIT5125: IT research methods S1 2021</title>
     <url>/post/fit5125-research-method-notes/</url>
     <content><![CDATA[<p>这门课是本科，研究生和博士生一起上的。任务量巨大。</p>
@@ -2652,155 +2659,6 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
 <h3 id="Guidelines-for-Indexing-索引设计"><a href="#Guidelines-for-Indexing-索引设计" class="headerlink" title="Guidelines for Indexing 索引设计"></a>Guidelines for Indexing 索引设计</h3><h3 id="Cassandra-Data-Model-数据模型"><a href="#Cassandra-Data-Model-数据模型" class="headerlink" title="Cassandra Data Model 数据模型"></a>Cassandra Data Model 数据模型</h3>]]></content>
       <tags>
         <tag>database</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Reading paper in FIT5152: 知识评估和进展分析与设计的统一框架 A Unified Framework for Knowledge Assessment and Progression Analysis and Design</title>
-    <url>/post/fit5152-a1-paper/</url>
-    <content><![CDATA[<p>作者 Shuhan Wang, Fang He &amp; Erik Andersen</p>
-<p>论文翻译，侵删</p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>设计引人入胜的学习内容固然重要，但也很困难，并且通常涉及许多手动规范。 我们提出了一个统一的框架，该框架利用<strong>自动问题分解和部分排序图的构建</strong>来简化多个工作流：知识评估以及进行性分析和设计。 我们通过在线日语评估工具对847名参与者进行了研究，结果表明我们的框架可以有效地衡量学生的能力并预测学生在特定问题上的表现。 我们还提供了对课程分析的结果，结果表明两种不同教科书的进度令人惊讶地相似，并且我们的框架可以导致发现专家进行设计的一般原理。 最后，我们演示了自动进度生成以及所需的排序和步调，允许进行进度定制以及将从一个课程中提取的参数映射到另一个课程</p>
-<span id="more"></span>
-
-<p>ACM Classification Keywords</p>
-<p>H.5.0 Information Interfaces and Presentation: General</p>
-<p>Author Keywords</p>
-<p>education; automatic problem decomposition; knowledgeassessment; progression analysis and design</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>教育中的一个关键挑战是保持学生的参与度，而首要考虑的是向特定学生展示最佳知识的顺序。 排序是一个挑战：首先应该引入哪些知识？ 另一个速度是：进步会变得越来越困难。尽管有教育和心理学等方面的指导原则[15，55，59]可以帮助设计进步，但缺乏务实和自动的方法来弥合教育理论与实践之间的差距， 尤其是整个课程的规模。 设计和优化进度的困难也限制了课程适应每个学生需求的能力</p>
-<p>在HCI中，此问题与教育软件[7、14]，视频游戏[11、22、33、37、45]和软件可学习性[25、31]的设计有关。目前，我们主要是手工设计进度，这很昂贵，并且限制了我们寻找最佳进度的实验能力。最近，在自动进度设计中已有一些工作[6，11]。尽管这项工作能够自动组织内容，但仅解决了程序性主题和视频游戏级设计。我们仍然缺乏一个通用的框架来表征能够处理一些非过程性主题（如语言学习）的教育进程。此外，我们<strong>需要一种形式上的方法来使用相同的框架来评估学生的知识</strong>，以便<strong>我们可以针对该学生量身定制学习进度和进度</strong>。理想情况下，我们将能够在不费吹灰之力的情况下针对广泛的教育领域建立适应性的进步。</p>
-<p>在本文中，我们提出了一个框架，<strong>该框架允许针对非过程性任务进行自动问题分解和部分排序图构造。该框架促进了多个工作流程</strong>。它建立在项目反应理论[53]，知识空间理论[28]和知识追踪[14]的基础之上，以创建学生知识和问题难度的多维度量，从而可以快速评估和预测绩效。它还定义了起搏和其他进度参数的参数空间，并提供了一种方法来表征和比较进度以及设计符合所需参数的新进度。</p>
-<p>我们对框架进行了多次评估。首先，我们提出了对自动问题分解和偏序图构建的理论贡献，以帮助外语学习语法，这是一个重要的非程序性主题。然后，我们讨论了一个有847名参与者的用户对日语评估工具的评估，这表明我们的自动评估算法可以根据项目响应理论准确地进行能力评估和绩效预测。我们还提供了自动分析语言学习进度的结果，显示出两本用于学习日语的教科书令人惊讶地具有相似的节奏和其他进阶特征，并且两种在线语言学习工具具有非常不同的进阶设计策略。最后，我们证明了我们的框架可以自动生成具有所需特征的进度，例如学习进度以及学习和复习的比例。这使得从进度分析中获得的见解可以直接应用于进度设计和个人进度剪裁</p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><h3 id="智能辅导系统"><a href="#智能辅导系统" class="headerlink" title="智能辅导系统"></a>智能辅导系统</h3><p>有成功的适应性学习系统，例如认知母语导师[7]。其中一些工作专门针对语言学习[63，65]。认知导师通过跟踪认知模型中个体生产规则的表现来利用知识边缘跟踪[14]来跟踪知识的获取并提供量身定制的指导[14，39]。该模型已通过多种方式扩展，包括估算学生了解技能的初始概率[49]，评估帮助功能对获得概率的影响[10]以及与项目难度模型集成[ 50]。另一种方法是逻辑回归，这对于涉及多种技能的任务特别有效[64]。但是，这些方法通常不考虑起搏。取而代之的是，他们一直给问题赋予特定的生产规则，直到“隐马尔可夫模型”获得了95％的置信度，即学生已经学会了该规则，然后继续研究下一个概念。此外，认知导师很难构建。据估计，设计一个小时的内容需要多达200-300个小时的专家设计工作[3]，尽管更新的设计技术已将其减少到50-100个小时[4]。我们的工作旨在开发自动分析和优化教育进度的途径。</p>
-<h3 id="教育与心理学"><a href="#教育与心理学" class="headerlink" title="教育与心理学"></a>教育与心理学</h3><p>许多理论都支持适度的难度对于交往很重要[1，8，16，20，34，47]。当国际象棋选手的排名略高于他们时[1]，最不愉快的情况。对非竞技游戏的进展分析也支持中等难度的使用[44]。 Csikszentmihalyi的流量理论规定，当挑战既不太高又不太低时，人们最会参与其中[16]。 Vygotsky的近端发展区[59]规定，学习者可以在一定指导下获得一系列概念，而教育内容应继续以此为目标。Reigeluth和Stein的阐述理论[55]认为，简单概念的首先应教授一项任务，然后逐步讲解原始任务，然后逐步进行更复杂的任务。 Li等。通过使用机器学习代理检查问题排序来研究问题排序，发现交错的问题排序比阻塞的排序导致更快的学习[43]。当前，我们缺乏实用的，自动的方法来定量描述这些原理并将其应用于实际的进步，而我们的工作旨在做到这一点。</p>
-<h3 id="语言教育"><a href="#语言教育" class="headerlink" title="语言教育"></a>语言教育</h3><p>Krashen [42]提出要以可预测的顺序（自然顺序假设）学习概念，并且当学习者接触的语言超出了他或她所能理解的范围（输入假设）时，就会发生语言习得。 语言学习文献中有广泛的证据表明，学习者在使用语法语素[30]，动词否定[13、62]，问题[52]，所有格确定语[61、66]，相对 条款[29、38]和时间参考[48]。 我们的工作旨在创建一个平台，以评估这些理论并确定它们是否能够激发扎根的学习进展，从而促进学习和参与度的提高</p>
-<h3 id="基于跟踪的部分排序"><a href="#基于跟踪的部分排序" class="headerlink" title="基于跟踪的部分排序"></a>基于跟踪的部分排序</h3><p>Andersen提出了一种通过对要学习的过程进行静态分析来自动探索任务进度空间的技术[6]。该技术通过分析在该任务上运行过程所获得的执行跟踪来表征任务。通过将每个任务描述为基本操作的序列，可以指定排序问题难度的部分排序。实验证明，这种部分排序可以与用户在教育代数游戏中对困难的感知相匹配[6]。基于轨迹的框架已应用于数学[6]，视频游戏级设计[11]和教学泰语[5]。这项工作还使用了测试输入生成工具，例如Pex [58]和FShell [36]，它们系统地创建具有高代码覆盖率的测试用例套件，以对所有可能的跟踪（在一定范围内）产生问题。但是，此框架不能应用于非过程性主题。例如，尚不清楚如何分析人类如何理解自然语言的执行轨迹。我们在此工作的基础上提出了问题分解和组织的通用框架，该框架可以应用于非过程教育领域，例如语言学习。在此框架内，我们可以衡量学生的能力并预测学生在新问题上的表现</p>
-<h3 id="知识评估：IRT和KST"><a href="#知识评估：IRT和KST" class="headerlink" title="知识评估：IRT和KST"></a>知识评估：IRT和KST</h3><p>响应理论（IRT）为知识评估提供了一个框架[26，27，54]。 IRT认为，对某个项目做出正确反应的概率是项目参数和个人能力的函数[32]。勋爵等。提出了3PL模型[46]，该模型考虑了三个项目参数：项目难度，项目歧视和猜测概率。 Rasch [53]提出了一个更简单的模型，该模型规定正确答案的可能性仅由学生的能力和项目难度之间的差异来确定。然而，IRT模型的一个共同缺点是，它们使用一维数值分数来衡量学生的能力和项目难度[28]，这并不反映出学生可能会根据自己掌握的知识而发现各种困难的子集。衡量学生能力和捕获此类差异的问题难度之间差异的方法。我们使用从在线知识评估平台收集的用户数据验证此模型。</p>
-<p>知识空间理论（KST）是用于研究知识的层次结构和强大的知识评估工具的公认观点[23，24]。有几种基于KST的辅导系统，例如Alexs [28]，RATH [35]和一种用于学习有机化学的辅导系统[57]。根据KST，学生的知识表示为知识状态，即学生可以解决的一系列问题。问题被组织成一个知识结构，其中包含所有可能的知识状态以及这些状态之间的联系[2，40，41]。研究人员提出了构建知识结构的方法，例如查询专家[41]和贝叶斯推理[21]。由于表示知识状态的复杂性，Falmagne等人。引入了“边缘”的概念来表征学生的知识，可以通过基于“熵”的方法来计算[28]。我们在此工作的基础上提出了一种自动框架，该框架可以将问题分解成其先决条件的基本技能，并为一系列问题建立层次结构。然后，我们的框架可以通过测量学生在该结构中的能力与问题之间的关系，来预测学生在新问题上的表现。</p>
-<h2 id="非过程技能的部分排序"><a href="#非过程技能的部分排序" class="headerlink" title="非过程技能的部分排序"></a>非过程技能的部分排序</h2><p>为了选择适合每个学生的难易程度的练习问题，我们需要一个层次结构来编码问题之间的难度关系。 一种简单的方法是请专家指定这些关系。 但是，随着问题集的规模越来越大，这变得异常困难。 理想情况下，我们将具有自动组织问题的方法。</p>
-<p>在先前的工作中[6，12]，研究人员为过程任务建立了部分排序图。 这项工作使用过程执行跟踪来组织内容，并对这些跟踪进行部分排序以创建分层的内容结构。 例如，一个人可以识别出解决整数加法问题所需的至少四个基本技能：不带进位的一位数字加法（A），不带进位的一位数字加法（B），写进位（C） ，然后放下最后一个进位（D）。 例如，问题可以分解为以下基本技能</p>
-<table>
-<thead>
-<tr>
-<th>问题</th>
-<th>2+3</th>
-<th>15+18</th>
-<th>93+15</th>
-<th>298+865</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>追溯</td>
-<td>A</td>
-<td>ACB</td>
-<td>AACD</td>
-<td>ACBCBD</td>
-</tr>
-</tbody></table>
-<p>但是，在某些领域（例如语言学习）中，目标对象的知识无法轻松地建模为单个过程。要在此类领域引入层次化的知识结构，我们需要对过程领域进行泛化。为此，我们的框架利用了组合性这一概念，即可以将问题分解为较小的概念单元。在一些半程序领域，例如数学和语言学习中，对此进行了充分的研究[6，60]。</p>
-<p>例如，日语句子可以分解为语法模板，专家语言教师和语言学家认为语法单元是最重要的语法知识，并让学生实际学习语言课程。这些模板已被证明对语言学习者的文本难度评估很有帮助[60]。我们发现，语法理解日语句子的特定任务可以分解为（多个）语法模板集。例如，这是三个日语句子及其语法模板</p>
-<img src="/post/fit5152-a1-paper/image-20210112002236844.png" class="" title="image-20210112002236844">
-
-<p>我们可以看到S1只有一个语法模板：（–の）。对于日语学习者来说，S2比S1更难，因为它不仅具有（–の）而且还有另一个模板（–は）。 S3重复相同的模板（–の）两次，因此也比S1难。 这些关系无法通过[6]中的部分排序来捕获，因为尚不清楚如何程序化人类如何理解这些句子的过程。 但是，通过考虑概念的多集而不是执行跟踪，我们可以按如下方式容纳它们：</p>
-<p>**定义1a. ** 一个问题可以分解为问题所需的一系列概念（基本技能）。 由于问题可能会要求学生重复一次或多次重复某些技能，因此我们使用一组表示为p(s)的基本技能来表征问题的难度</p>
-<p><strong>定义1b</strong>。我们说，如果且仅当p（s1）⊒ p（s2）时，问题s1至少与s2一样困难，表示为s1≥s2。 这意味着，如果学生能够解决s1，那么他/她也必须能够解决s2 [6]</p>
-<p>这里⊒表示多集之间的超集关系。 如果是p（s1）⊒（s2），那么对于问题2次所需的任何概念c，也至少也需要1次。例如，AABC⊒ABC为true，而AABCC⊒ABBC为true，因为ABBC有两个“ B”，而AABCC只有一个</p>
-<p><strong>定义1c</strong>。严格偏序1&gt; s2定义为s1≥s2^s2≱s1，这意味着s1（严格来说）比s2难。</p>
-<p><strong>定义1d</strong>。如果说且仅当s1&gt; s2并且没有其他问题3使得s1&gt; s3&gt; s2，我们说问题1比s2更难</p>
-<p>使用定义1d，我们为一系列问题构建了层次结构，如下所示：</p>
-<p><strong>定义2</strong>.我们将一组问题S = {s1，s2，···}（我们称为普遍问题集）组织为偏序图G = 〈S，E〉，其中</p>
-<img src="/post/fit5152-a1-paper/image-20210112005148577.png" class="" title="image-20210112005148577">
-
-<p>即，当且仅当sj比si直接困难时，才在部分排序图中存在从问题si到sj的（定向）边。 图1显示了部分排序图的示例。</p>
-<img src="/post/fit5152-a1-paper/image-20210112005317740.png" class="" title="image-20210112005317740">
-
-<p>图一（部分排序图中的学生知识边界。 大写字母表示概念，带有字符串的节点表示问题。 学生可以解决绿色问题，而不能解决红色问题。 从每个问题到知识边界的距离以d表示。 空问题s0是一个焦虑问题，被添加来帮助我们计算距离）</p>
-<p><strong>定义3</strong>.我们用知识边界K衡量学生的能力，知识边界K是学生可以解决的最困难的问题。 形式上，如果这是学生可以解决的问题集，则</p>
-<img src="/post/fit5152-a1-paper/image-20210112172807977.png" class="" title="image-20210112172807977">
-
-<p>以图1中的偏序图为例。 假设一个学生可以解决问题A，AB，B，AABC和BCC（图中的绿色节点），而不能解决ABCB，D或ABCBD（图中的红色节点）。 然后，知识边界仅包含两个问题：AABC和BCC，因为没有其他“绿色”问题比AABC或BCC难。 知识边界不包括A，AB或B，因为存在一个“绿色”问题AABC，比所有问题都难</p>
-<h2 id="计算知识边界"><a href="#计算知识边界" class="headerlink" title="计算知识边界"></a>计算知识边界</h2><p>We present a graph coloring algorithm of calculating a stu-dent’s knowledge boundary in the partial ordering graph. Thisalgorithm is based on two properties of the partial ordering: ifa student can solve problems, he must be able to solve anyproblems′that is at most as hard as s(s≥s′); if a studentcannot solve problems, he must not be able to solve any prob-lems′that is at least as hard as s(s′≥s).  For example, if astudent can solve problem AB, he/she can also solve problemsA and B; if a student cannot solve problem ABCB, then he/she cannot solve problem ABCBD either.</p>
-<p>我们提出了一种图形着色算法，用于计算部分排序图中学生的知识边界。 该算法基于偏序的两个属性：如果一个学生能够解决问题，那么他必须能够解决至多像s(s≥s’)一样困难的任何问题。 如果学生不能解决问题，则他必须不能解决至少与 s(s’≥s) 一样困难的任何问题。 例如，如果学生可以解决问题AB，那么他/她也可以解决问题A和B； 如果学生不能解决问题ABCB，那么他/她也不能解决问题ABCBD。</p>
-<p>At the start of the algorithm, all the problems (nodes) in thepartial ordering graph are uncolored. The algorithm asks thestudent whether he/she can solve some problem s*.  If thestudent can solve s*, all the nodes that are at most as hard as s*(including s* itself) will be colored ‘solvable’; if the studentcannot solve s*, all the nodes that are at least as hard as s* (including s* it self) will be colored ‘unsolvable’.  Figure 2 shows how this coloring process works.</p>
-<p>在算法开始时，部分排序图中的所有问题（节点）都是未着色的。 该算法询问学生是否可以解决某些问题s*。 如果学生能够求解s*，则所有与s*一样难的节点（包括s*本身）将被着色为“可求解”； 如果学生不能求解s*，则所有至少s*同等困难的节点（包括s*自身）将被着色为“无法解决”。 图2显示了此着色过程的工作方式。</p>
-<p>The algorithm repeatedly selects an uncolored problem s* from the partial ordering graph, asks the student to solve it, and then updates the coloring of the graph based on the response. Thisis a greedy algorithm designed to minimize the number ofproblems that must be given to the student.  Formally, if $n^+_s$ denotes the number of the uncolored problems that are at mostas hard as $s$, and $n^-_s$denotes the number of the uncolored problems that are at least as hard as s, then we can maximize thenumber of problems that can be colored based on the student’s response by greedily selecting a problem s* as follows:</p>
-<p>该算法从偏序图中反复选择一个无色问题s*，要求学生解决它，然后根据响应更新该图的颜色。 这是一种贪心算法，旨在最大程度地减少必须给学生的问题。 形式上，如果$n^+_s$ 表示最多没有硬色问题的无色问题的数量，而 $n^-_s$表示至少至少像s一样硬的无色问题的数量，那么我们可以使可以 通过贪婪地选择问题s*，根据学生的回答进行着色：</p>
-<img src="/post/fit5152-a1-paper/image-20210112191104189.png" class="" title="image-20210112191104189">
-
-<h2 id="预测特定问题的表现"><a href="#预测特定问题的表现" class="headerlink" title="预测特定问题的表现"></a>预测特定问题的表现</h2><h3 id="到知识边界的距离-Distance-to-Knowledge-Boundary"><a href="#到知识边界的距离-Distance-to-Knowledge-Boundary" class="headerlink" title="到知识边界的距离 Distance to Knowledge Boundary"></a>到知识边界的距离 Distance to Knowledge Boundary</h3><p>In order to recommend problems at appropriate difficulty levels to the students, we need to predict students’ performanceon problems. Existing IRT studies have proposed several popular models stipulating how student performance is related tostudent ability [46, 53].  However, they measure a student’sability and the difficulty of a problem using unidimensionalnumeric scores, which is incomprehensive [28].</p>
-<p>为了向学生推荐适当难度的问题，我们需要预测学生在问题上的表现。 现有的IRT研究提出了几种流行的模型，这些模型规定了学生的表现与学生能力之间的关系[46，53]。 但是，他们使用一维数字分数来衡量学生的能力和问题的难度，这是不全面的[28]。</p>
-<p>Ideally, prediction of a student’s performance would utilizemultidimensional metrics to measure the distance between aproblem and what a student already knows. The key technicalchallenge in the design of multidimensional metrics is thatit is impossible to measure this distance without taking intoaccount the hierarchical structure of the problem space. In ourframework, we can measure this as the distance from the prob-lem to the knowledge boundary in the partial ordering graph.We use signed numbers to distinguish which ‘side’ of theknowledge boundary a problem is on: problems ‘inside’ theboundary (which the student can solve) have positive distanceswhile problems ‘outside’ the boundary (which the student can-not solve) have negative distances.  Using this distance, wecan leverage IRT models to predict a student’s performanceon new problems.</p>
-<p>理想情况下，对学生成绩的预测将利用多维指标来衡量问题和学生已经知道的知识之间的距离。 多维度量设计中的关键技术挑战是，如果不考虑问题空间的层次结构，就无法测量该距离。 在我们的框架中，我们可以用偏序图中图中从问题到知识边界的距离来衡量这个问题。 学生可以解决）的距离为正，而“超出”边界的问题（学生无法解决的）的距离为负。 利用此距离，我们可以利用IRT模型来预测学生在新问题上的表现。</p>
-<p>Here, we give the definition of this distance together with theexamples in Figure 1. Assume we have the universal problem set S, and a student can solve a subset of problems T.  For example, in Figure 1,S={A, AB, B, AABC, BCC, ABCB, D,ABCBD},T={A, AB, B, AABC, BCC}, and the knowledge boundary K={AABC, BCC}. We calculate the distance fromany problems∈Sto the knowledge boundaryK, indicated as d(s, K), following the steps below:</p>
-<p>在这里，我们给出该距离的定义以及图1中的示例。假设我们有通用问题集S，并且学生可以解决问题T的子集。例如，在图1中，S = {A，AB， B，AABC，BCC，ABCB，D，ABCBD}，T ＝ {A，AB，B，AABC，BCC}，知识边界K ＝ {AABC，BCC}。 我们按照以下步骤计算从任何问题∈S到知识边界K的距离，表示为d(s, K)：</p>
-<p><em>Step 1: Calculate distances for problems on the boundary</em></p>
-<p><em>步骤1：计算边界上问题的距离对于任何问题，</em></p>
-<p>For any problemssuch thats∈K,d(s,K) =0.</p>
-<p>对于任何问题s使得s∈K，d(s, K)= 0</p>
-<p>For example, the distance of problems AABC and BCC is 0</p>
-<p>例如，问题AABC和BCC的距离为0例如，问题AABC和BCC的距离为0</p>
-<p><em>Step 2: Calculate distances for problems inside the boundary</em></p>
-<p><em>步骤2：计算边界内问题的距离</em></p>
-<p>For any problem s such that s∈T−K, based on the definition of K, there must be one or more s′∈K such that s′≥s (otherwise, s should be contained in K) , and</p>
-<p>对于基于s的定义s∈T-K的任何问题s，必须存在一个或多个s′∈K使得s′≥s（否则s应该包含在K中），并且</p>
-<img src="/post/fit5152-a1-paper/image-20210112211143812.png" class="" title="image-20210112211143812">
-
-<p>where d is(s,s′) indicates the length of the shortest directed path from s to s′ in the partial ordering graph.  If there is no directed path from s to s′,  dis(s,s′) =∞.  Note that if  s′≥s  ,then there must exist at least one directed path from s′ to s.</p>
-<p>其中d is（s，s’）表示部分排序图中从s到s’的最短定向路径的长度。 如果没有从s到s’的定向路径，则dis（s，s’）=∞。 请注意，如果s’≥s，则必须存在至少一条从s’到s的定向路径。</p>
-<p>For example, the distance of problem AB is 1, since prob-lem AABC, which is on the knowlegde boundary, is directlyharder than AB. Similar for problem B (BCC is direclty harderthan B). The distance of problem A is 2, since the shortest di-rected path from A to any problem on the knowledge boundary(which is A→AB→AABC) has length 2</p>
-<p>例如，问题AB的距离为1，因为在知识已知边界上的问题AABC比AB直接困难。 与问题B相似（密件抄送比B硬）。 问题A的距离为2，因为从A到知识边界上任何问题的最短定向路径（A→AB→AABC）的长度为2</p>
-<p><em>Step 3:Calculate distances for problems outside the boundary</em></p>
-<p><em>步骤3：计算边界外问题的距离</em></p>
-<p>In a hierarchical knowledge structure, it follows intuitively thatproblems that are further away from the boundary will be moredifficult to the student. Therefore, for any problemssuch thats∈S−T, we define the distanced(s,K)to be shortest directedpath from any problem inTtos. Note that this distance alsohas a teaching interpretation: if easier problems should alwaysbe taught before harder problems [55], then this distance alsomeasures the number of problems that need to be taught beforeteachings.</p>
-<p>在分层的知识结构中，直观地认为，远离边界的问题对学生而言将更加困难。 因此，对于诸如s∈ST的任何问题，我们将距离（s，K）定义为距Ttos中任何问题最短的有向路径。 注意，这个距离也有一个教学上的解释：如果总是在较困难的问题之前总是先教更容易的问题[55]，那么这个距离也可以衡量在教学之前需要教的问题数量。</p>
-<p>ince there are some basic problems that have no problemseasier than them, and thus have no incoming edges in the par-tial ordering graph, there is not always a path from a probleminTtos.  For instance, there is no directed path from anyproblem inTto problemDin Figure 1.  To resolve this, weadd anull problems0, the pseudo problem with no prerequisiteconcepts, toT. For any problems∈S−T, if there is no otherproblems′such thatsis directly harder thans′(namely,shas no incoming edges), we add an edge(s0,s)to the partialordering graph</p>
-<p>由于存在一些基本问题，没有比这些问题更容易解决的问题，因此在空间排序图中没有传入的边，因此从问题中获取问题的路径并不总是那么容易。 例如，图1中没有从任何问题到问题D的直接路径。要解决此问题，我们将无问题先决条件的伪问题anull问题0添加到T。 对于任何问题∈ST，如果没有其他问题’使假设比’s’直接困难（即没有进入的边），我们将偏边（s0，s）添加到偏序图</p>
-<p>Now there is at least one directed path from the null problem s0 or some problem in T to s. We can define the distance as:</p>
-<p>现在，从空问题s0或T tos中的某个问题开始，至少有一条有向路径。 我们可以将距离定义为：</p>
-<img src="/post/fit5152-a1-paper/image-20210112234958809.png" class="" title="image-20210112234958809">
-
-<p>Note that d(s,K) is negative if and only if s is outside the knowledge boundary.For example, the distance of problem ABCB is -1, since itis directly harder than the “green” problem AB. Problem D has no incoming edges in the partial ordering graph, hence weadd an edge from the null problem s0 to D, and the distanceof problem D is -1 since the path s0→D has length 1. Lastly,the distance of problem ABCBD is -2.  Actually, there aretwo shortest paths with length 2: AB→ABCB→ABCBD ands0→D→ABCBD.</p>
-<p>请注意，当且仅当s在知识边界之外时，d(s, K)才为负。例如，问题ABCB的距离为-1，因为它比“绿色”问题AB直接困难。 问题D在偏序图中没有输入边，因此我们将零问题s0到D加上一条边，并且由于路径s0→D的长度为1，因此问题D的距离为-1。最后，问题ABCBD的距离为 -2。 实际上，有两条最短的路径，其长度为2：AB→ABCB→ABCBD和s0→D→ABCBD。</p>
-<p>The  metric  of  distance  is  dependent  on  the  density  of  thepartial-ordering graph. This is inevitable since the measure-ment is based on the hierarchical structure of the problemspace. We believe that for most well-defined problem spaces,it is a reasonable assumption that the partial ordering graph will be sufficiently dense.  We will demonstrate this metricworks well for a well-built Japanese language learning corpusin the next section</p>
-<p>距离的度量取决于偏序图的密度。 这是不可避免的，因为测量是基于问题空间的层次结构。 我们认为，对于大多数定义明确的问题空间，可以合理地假设偏序图将足够密集。 我们将在下一部分中很好地演示此度量标准，以构建完善的日语学习语料库。</p>
-<p>In the later part of this paper, we will use d to denote d(s,K) for convenience</p>
-<p>在本文的后半部分，为方便起见，我们将使用d来表示d(s, K)。</p>
-<h3 id="Adapted-Rasch-model-改编的Rasch模型"><a href="#Adapted-Rasch-model-改编的Rasch模型" class="headerlink" title="Adapted Rasch model 改编的Rasch模型"></a>Adapted Rasch model 改编的Rasch模型</h3><p>In this section, we describe how we can adapt existing uni-dimensional IRT models to build a multidimensional metricthat leverages the partial ordering graph and the distance d calculated in the previous section in order to predict studentperformance.  One of the most famous models of IRT, the Rasch model [53], stipulates that a student’s performancePis a function of the difference between the student’s ability θ and the problem’s difficulty b</p>
-<p>在本节中，我们描述如何适应现有的一维IRT模型以建立多维度量标准，该度量标准利用上一节中计算的偏序图和距离d来预测学生的表现。 Rasch模型[53]是IRT最著名的模型之一，它规定学生的表现是学生的能力θ与问题难度b之差的函数。</p>
-<img src="/post/fit5152-a1-paper/image-20210113085907577.png" class="" title="image-20210113085907577">
-
-<p>xxx</p>
-<p>In  the  next  section,  we  will  demonstrate  that  this  adaptedmodel nicely fits the data collected from our knowledge as-sessment platform</p>
-<p>在下一节中，我们将证明该适应模型非常适合从我们的知识评估平台收集的数据</p>
-<h2 id="知识评估的评价-EVALUATION-OF-KNOWLEDGE-ASSESSMENT"><a href="#知识评估的评价-EVALUATION-OF-KNOWLEDGE-ASSESSMENT" class="headerlink" title="知识评估的评价 EVALUATION OF KNOWLEDGE ASSESSMENT"></a>知识评估的评价 EVALUATION OF KNOWLEDGE ASSESSMENT</h2><p>In this section, we will the evaluate our calculation of the knowledge boundary and the distance represented in the previous section by applying it to a Japanese language learning domain.</p>
-<p>在本节中，我们将评估我们的知识边界与上一节中表示的距离的计算并把它应用到一个日语学习领域。</p>
-<h3 id="语言评估平台-J100-A-Language-Assessment-Platform"><a href="#语言评估平台-J100-A-Language-Assessment-Platform" class="headerlink" title="语言评估平台 J100: A Language Assessment Platform"></a>语言评估平台 J100: A Language Assessment Platform</h3><p>xxx</p>
-<h3 id="Reddit部署-Reddit-Deployment"><a href="#Reddit部署-Reddit-Deployment" class="headerlink" title="Reddit部署 Reddit Deployment"></a>Reddit部署 Reddit Deployment</h3><p>xxx</p>
-<h3 id="验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric"><a href="#验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric" class="headerlink" title="验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric"></a>验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric</h3><p>In order to validate our calculation of the knowledge boundaryand the distance metric, we will demonstrate that the user datacollected from J100 nicely fits the adapted Rasch Model. Wecalculate a user’s knowledge boundaryKbased on his/her responses to the problems in the assessment stage, and foreach problemsresponded in the evaluation stage, we measurethe distance from the problems to the knowledge boundary K.The user responses in the evaluation stage can be regarded as users’ self-estimation of their performance, and we score thefive possible responses uniformly from 1 to 0</p>
-<p>为了验证我们对知识边界和距离度量的计算，我们将证明从J100收集的用户数据非常适合改编的Rasch模型。 我们根据用户在评估阶段对问题的回答来计算用户的知识边界K，并针对评估阶段所回答的每个问题，测量从问题到知识边界K的距离。评估阶段中的用户响应可视为用户 对他们的表现的自我评估，我们从1到0对5个可能的回答进行了统一评分</p>
-<h2 id="过程分析-PROGRESSION-ANALYSIS"><a href="#过程分析-PROGRESSION-ANALYSIS" class="headerlink" title="过程分析 PROGRESSION ANALYSIS"></a>过程分析 PROGRESSION ANALYSIS</h2><p>良好的进步会增强学生对课程的参与度[43,56]，我们的工作旨在发现良好的进步的一般特征。 在本节中，我们将利用我们的框架来分析教育进度，并介绍良好进度的两个重要特征：组成Composition和步调Pace。 我们研究了现有课程，并证明了专家设计的课程中一些惊人的相似之处</p>
-<h3 id="组成：学习与复习的平衡-Composition-The-Balance-of-Learning-and-Review"><a href="#组成：学习与复习的平衡-Composition-The-Balance-of-Learning-and-Review" class="headerlink" title="组成：学习与复习的平衡 Composition: The Balance of Learning and Review"></a>组成：学习与复习的平衡 Composition: The Balance of Learning and Review</h3><p>在设计教育进度时，一个关键的考虑因素是应该花多少时间来增强以前引入的知识，而不是引入新知识。 另一个需要考虑的问题是，通过以新的方式将概念组合在一起，进度是否应该越来越复杂。 理想情况下，我们将能够定义可以简洁地捕获这些重要方面的进度参数空间</p>
-<p>xxx</p>
-<p>我们可以认为强化是对已学知识的回顾，引入是纯学习，重组是两者的混合。 这三种类型的比例揭示了设计师在教育进步中平衡学习和复习的策略，我们将其称为进步组成</p>
-<h3 id="步调：知识的增长率-Pace-The-Growth-Rate-of-Knowledge"><a href="#步调：知识的增长率-Pace-The-Growth-Rate-of-Knowledge" class="headerlink" title="步调：知识的增长率 Pace: The Growth Rate of Knowledge"></a>步调：知识的增长率 Pace: The Growth Rate of Knowledge</h3><p>我们想知道进度中课程（章节，单元等）的难度是否以一致的速度增长，从而使学生可以顺利学习。 我们不是通过数字来衡量每节课的难度，而是计算知识的大小，即每节课之前引入的问题总数。 这可以用通用问题集5S中的问题数量来衡量，该数量被学生的知识边界归类为强化。在掌握了从一开始到当前课程的所有知识之后。 因此，知识大小| K |就是此类问题的数量</p>
-<h2 id="进度分析的评估"><a href="#进度分析的评估" class="headerlink" title="进度分析的评估"></a>进度分析的评估</h2><h3 id="教材研究"><a href="#教材研究" class="headerlink" title="教材研究"></a>教材研究</h3><h3 id="在线语言学习工具研究"><a href="#在线语言学习工具研究" class="headerlink" title="在线语言学习工具研究"></a>在线语言学习工具研究</h3><h2 id="自动渐进合成"><a href="#自动渐进合成" class="headerlink" title="自动渐进合成"></a>自动渐进合成</h2><p>We have discussed two features of an educational progression:composition and pace.  In this section, we will demonstratethat educational progressions can be automatically synthesizedaccording to specific composition and pace parameters. To bemore precise, a progression can be characterized as three nu-meric parameters: overall pace (pace), proportion of reinforce-ment (ri), and proportion of introduction (in). The proportionof recombination (rc) is redundant since ri+rc+in=1.</p>
-<p>我们讨论了教育进步的两个特征：组成和步调。 在本节中，我们将<strong>证明可以根据特定的构成和速度参数自动合成教育进度</strong>。 更准确地说，可以将进度表示为三个数字参数：总体步速（步幅），增强比例（ri）和引入比例（输入）。 重组比例（rc）是多余的，因为ri + rc + in = 1</p>
-<p>We use a greedy algorithm to synthesize progressions.  Thealgorithm starts with an empty progression, repeatedly selectsthe next problem that minimizes the following error function and appends it to the progression:</p>
-<p>我们使用贪婪算法来合成进度。 算法以空的级数开始，重复选择下一个使后继误差函数最小化的问题，并将其附加到级数上</p>
-<img src="/post/fit5152-a1-paper/image-20210112094950772.png" class="" title="image-20210112094950772">
-
-<p>其中pace, ri, in 都是实际的渐进特性，而pace*, ri*, in*是所需的渐进参数。请注意，可能存在多个具有最小误差的问题。 在这种情况下，我们的算法会从中随机选择一个作为下一个问题</p>
-<p><strong>这种贪婪算法并不总是生成具有准确所需参数的级数</strong>。 但是，它运行得非常快。对于一个包含25个问题的通用问题集，它可以在一秒钟内合成100多个进程（每个进程有10个问题），因此，我们可以多次运行此贪婪算法以合成具有所需特征的进程</p>
-<p>表2列出了合成过程的四个例子。 我们从Genki进程中提取了以下参数：pace= 0.465，ri = 0.582，in = 0.214。 然后，我们使用这些参数（大约）来合成“ Genki Simulation”进度。 我们还生成了另外三个带有量身定制的参数的进度，这些进度偏向于加强，重组和引入。 这些结果表明，<strong>我们不仅可以利用专家级进度设计的原理并使用对大多数学生都有利的参数来综合进度，而且还可以为具有特定偏好的学生量身定制进度</strong></p>
-<img src="/post/fit5152-a1-paper/image-20210112095315867.png" class="" title="image-20210112095315867">
-
-<h2 id="结论与未来工作"><a href="#结论与未来工作" class="headerlink" title="结论与未来工作"></a>结论与未来工作</h2><p>可学习性对于HCI的许多方面都很重要：用户界面，学习工具，视频游戏和软件可用性。 在本文中，我们定义了一个框架，<strong>该框架利用自动问题分解和部分排序图构造来促进与教育相关的多个工作流程：评估学生的知识，确定和描述课程的学习策略以及设计新的学习进度</strong>。 我们以多种方式评估了该框架：通过在线部署日语评估工具，自动从现有课程中提取起搏参数，以及将问题组合成符合所需起搏特征的新项目</p>
-<p>我们希望将我们的框架用于几个教育领域，尤其是计算机辅助语言教育。 例如，我们计划利用我们的框架向第二语言学习者推荐适当的阅读材料，并改善用于语言学习的教育游戏[17，18]。 将来，我们不仅将框架应用于语法知识，还将应用于语言学习的其他方面，例如词汇和语义</p>
-<p>我们希望这些想法将有助于实现一门进行性分析的科学，在该科学中，可以从涉及多个主题的进展中提取出测序和起搏参数，以识别最佳原则。 此外，我们希望扩展此框架，以便它可以自动构建能够快速进行初始评估和进度调整的自适应学习系统</p>
-]]></content>
-      <tags>
-        <tag>done</tag>
-        <tag>UI</tag>
-        <tag>design</tag>
       </tags>
   </entry>
   <entry>
@@ -3901,6 +3759,155 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
 ]]></content>
       <tags>
         <tag>software management</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Reading paper in FIT5152: 知识评估和进展分析与设计的统一框架 A Unified Framework for Knowledge Assessment and Progression Analysis and Design</title>
+    <url>/post/fit5152-a1-paper/</url>
+    <content><![CDATA[<p>作者 Shuhan Wang, Fang He &amp; Erik Andersen</p>
+<p>论文翻译，侵删</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>设计引人入胜的学习内容固然重要，但也很困难，并且通常涉及许多手动规范。 我们提出了一个统一的框架，该框架利用<strong>自动问题分解和部分排序图的构建</strong>来简化多个工作流：知识评估以及进行性分析和设计。 我们通过在线日语评估工具对847名参与者进行了研究，结果表明我们的框架可以有效地衡量学生的能力并预测学生在特定问题上的表现。 我们还提供了对课程分析的结果，结果表明两种不同教科书的进度令人惊讶地相似，并且我们的框架可以导致发现专家进行设计的一般原理。 最后，我们演示了自动进度生成以及所需的排序和步调，允许进行进度定制以及将从一个课程中提取的参数映射到另一个课程</p>
+<span id="more"></span>
+
+<p>ACM Classification Keywords</p>
+<p>H.5.0 Information Interfaces and Presentation: General</p>
+<p>Author Keywords</p>
+<p>education; automatic problem decomposition; knowledgeassessment; progression analysis and design</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>教育中的一个关键挑战是保持学生的参与度，而首要考虑的是向特定学生展示最佳知识的顺序。 排序是一个挑战：首先应该引入哪些知识？ 另一个速度是：进步会变得越来越困难。尽管有教育和心理学等方面的指导原则[15，55，59]可以帮助设计进步，但缺乏务实和自动的方法来弥合教育理论与实践之间的差距， 尤其是整个课程的规模。 设计和优化进度的困难也限制了课程适应每个学生需求的能力</p>
+<p>在HCI中，此问题与教育软件[7、14]，视频游戏[11、22、33、37、45]和软件可学习性[25、31]的设计有关。目前，我们主要是手工设计进度，这很昂贵，并且限制了我们寻找最佳进度的实验能力。最近，在自动进度设计中已有一些工作[6，11]。尽管这项工作能够自动组织内容，但仅解决了程序性主题和视频游戏级设计。我们仍然缺乏一个通用的框架来表征能够处理一些非过程性主题（如语言学习）的教育进程。此外，我们<strong>需要一种形式上的方法来使用相同的框架来评估学生的知识</strong>，以便<strong>我们可以针对该学生量身定制学习进度和进度</strong>。理想情况下，我们将能够在不费吹灰之力的情况下针对广泛的教育领域建立适应性的进步。</p>
+<p>在本文中，我们提出了一个框架，<strong>该框架允许针对非过程性任务进行自动问题分解和部分排序图构造。该框架促进了多个工作流程</strong>。它建立在项目反应理论[53]，知识空间理论[28]和知识追踪[14]的基础之上，以创建学生知识和问题难度的多维度量，从而可以快速评估和预测绩效。它还定义了起搏和其他进度参数的参数空间，并提供了一种方法来表征和比较进度以及设计符合所需参数的新进度。</p>
+<p>我们对框架进行了多次评估。首先，我们提出了对自动问题分解和偏序图构建的理论贡献，以帮助外语学习语法，这是一个重要的非程序性主题。然后，我们讨论了一个有847名参与者的用户对日语评估工具的评估，这表明我们的自动评估算法可以根据项目响应理论准确地进行能力评估和绩效预测。我们还提供了自动分析语言学习进度的结果，显示出两本用于学习日语的教科书令人惊讶地具有相似的节奏和其他进阶特征，并且两种在线语言学习工具具有非常不同的进阶设计策略。最后，我们证明了我们的框架可以自动生成具有所需特征的进度，例如学习进度以及学习和复习的比例。这使得从进度分析中获得的见解可以直接应用于进度设计和个人进度剪裁</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><h3 id="智能辅导系统"><a href="#智能辅导系统" class="headerlink" title="智能辅导系统"></a>智能辅导系统</h3><p>有成功的适应性学习系统，例如认知母语导师[7]。其中一些工作专门针对语言学习[63，65]。认知导师通过跟踪认知模型中个体生产规则的表现来利用知识边缘跟踪[14]来跟踪知识的获取并提供量身定制的指导[14，39]。该模型已通过多种方式扩展，包括估算学生了解技能的初始概率[49]，评估帮助功能对获得概率的影响[10]以及与项目难度模型集成[ 50]。另一种方法是逻辑回归，这对于涉及多种技能的任务特别有效[64]。但是，这些方法通常不考虑起搏。取而代之的是，他们一直给问题赋予特定的生产规则，直到“隐马尔可夫模型”获得了95％的置信度，即学生已经学会了该规则，然后继续研究下一个概念。此外，认知导师很难构建。据估计，设计一个小时的内容需要多达200-300个小时的专家设计工作[3]，尽管更新的设计技术已将其减少到50-100个小时[4]。我们的工作旨在开发自动分析和优化教育进度的途径。</p>
+<h3 id="教育与心理学"><a href="#教育与心理学" class="headerlink" title="教育与心理学"></a>教育与心理学</h3><p>许多理论都支持适度的难度对于交往很重要[1，8，16，20，34，47]。当国际象棋选手的排名略高于他们时[1]，最不愉快的情况。对非竞技游戏的进展分析也支持中等难度的使用[44]。 Csikszentmihalyi的流量理论规定，当挑战既不太高又不太低时，人们最会参与其中[16]。 Vygotsky的近端发展区[59]规定，学习者可以在一定指导下获得一系列概念，而教育内容应继续以此为目标。Reigeluth和Stein的阐述理论[55]认为，简单概念的首先应教授一项任务，然后逐步讲解原始任务，然后逐步进行更复杂的任务。 Li等。通过使用机器学习代理检查问题排序来研究问题排序，发现交错的问题排序比阻塞的排序导致更快的学习[43]。当前，我们缺乏实用的，自动的方法来定量描述这些原理并将其应用于实际的进步，而我们的工作旨在做到这一点。</p>
+<h3 id="语言教育"><a href="#语言教育" class="headerlink" title="语言教育"></a>语言教育</h3><p>Krashen [42]提出要以可预测的顺序（自然顺序假设）学习概念，并且当学习者接触的语言超出了他或她所能理解的范围（输入假设）时，就会发生语言习得。 语言学习文献中有广泛的证据表明，学习者在使用语法语素[30]，动词否定[13、62]，问题[52]，所有格确定语[61、66]，相对 条款[29、38]和时间参考[48]。 我们的工作旨在创建一个平台，以评估这些理论并确定它们是否能够激发扎根的学习进展，从而促进学习和参与度的提高</p>
+<h3 id="基于跟踪的部分排序"><a href="#基于跟踪的部分排序" class="headerlink" title="基于跟踪的部分排序"></a>基于跟踪的部分排序</h3><p>Andersen提出了一种通过对要学习的过程进行静态分析来自动探索任务进度空间的技术[6]。该技术通过分析在该任务上运行过程所获得的执行跟踪来表征任务。通过将每个任务描述为基本操作的序列，可以指定排序问题难度的部分排序。实验证明，这种部分排序可以与用户在教育代数游戏中对困难的感知相匹配[6]。基于轨迹的框架已应用于数学[6]，视频游戏级设计[11]和教学泰语[5]。这项工作还使用了测试输入生成工具，例如Pex [58]和FShell [36]，它们系统地创建具有高代码覆盖率的测试用例套件，以对所有可能的跟踪（在一定范围内）产生问题。但是，此框架不能应用于非过程性主题。例如，尚不清楚如何分析人类如何理解自然语言的执行轨迹。我们在此工作的基础上提出了问题分解和组织的通用框架，该框架可以应用于非过程教育领域，例如语言学习。在此框架内，我们可以衡量学生的能力并预测学生在新问题上的表现</p>
+<h3 id="知识评估：IRT和KST"><a href="#知识评估：IRT和KST" class="headerlink" title="知识评估：IRT和KST"></a>知识评估：IRT和KST</h3><p>响应理论（IRT）为知识评估提供了一个框架[26，27，54]。 IRT认为，对某个项目做出正确反应的概率是项目参数和个人能力的函数[32]。勋爵等。提出了3PL模型[46]，该模型考虑了三个项目参数：项目难度，项目歧视和猜测概率。 Rasch [53]提出了一个更简单的模型，该模型规定正确答案的可能性仅由学生的能力和项目难度之间的差异来确定。然而，IRT模型的一个共同缺点是，它们使用一维数值分数来衡量学生的能力和项目难度[28]，这并不反映出学生可能会根据自己掌握的知识而发现各种困难的子集。衡量学生能力和捕获此类差异的问题难度之间差异的方法。我们使用从在线知识评估平台收集的用户数据验证此模型。</p>
+<p>知识空间理论（KST）是用于研究知识的层次结构和强大的知识评估工具的公认观点[23，24]。有几种基于KST的辅导系统，例如Alexs [28]，RATH [35]和一种用于学习有机化学的辅导系统[57]。根据KST，学生的知识表示为知识状态，即学生可以解决的一系列问题。问题被组织成一个知识结构，其中包含所有可能的知识状态以及这些状态之间的联系[2，40，41]。研究人员提出了构建知识结构的方法，例如查询专家[41]和贝叶斯推理[21]。由于表示知识状态的复杂性，Falmagne等人。引入了“边缘”的概念来表征学生的知识，可以通过基于“熵”的方法来计算[28]。我们在此工作的基础上提出了一种自动框架，该框架可以将问题分解成其先决条件的基本技能，并为一系列问题建立层次结构。然后，我们的框架可以通过测量学生在该结构中的能力与问题之间的关系，来预测学生在新问题上的表现。</p>
+<h2 id="非过程技能的部分排序"><a href="#非过程技能的部分排序" class="headerlink" title="非过程技能的部分排序"></a>非过程技能的部分排序</h2><p>为了选择适合每个学生的难易程度的练习问题，我们需要一个层次结构来编码问题之间的难度关系。 一种简单的方法是请专家指定这些关系。 但是，随着问题集的规模越来越大，这变得异常困难。 理想情况下，我们将具有自动组织问题的方法。</p>
+<p>在先前的工作中[6，12]，研究人员为过程任务建立了部分排序图。 这项工作使用过程执行跟踪来组织内容，并对这些跟踪进行部分排序以创建分层的内容结构。 例如，一个人可以识别出解决整数加法问题所需的至少四个基本技能：不带进位的一位数字加法（A），不带进位的一位数字加法（B），写进位（C） ，然后放下最后一个进位（D）。 例如，问题可以分解为以下基本技能</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>2+3</th>
+<th>15+18</th>
+<th>93+15</th>
+<th>298+865</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>追溯</td>
+<td>A</td>
+<td>ACB</td>
+<td>AACD</td>
+<td>ACBCBD</td>
+</tr>
+</tbody></table>
+<p>但是，在某些领域（例如语言学习）中，目标对象的知识无法轻松地建模为单个过程。要在此类领域引入层次化的知识结构，我们需要对过程领域进行泛化。为此，我们的框架利用了组合性这一概念，即可以将问题分解为较小的概念单元。在一些半程序领域，例如数学和语言学习中，对此进行了充分的研究[6，60]。</p>
+<p>例如，日语句子可以分解为语法模板，专家语言教师和语言学家认为语法单元是最重要的语法知识，并让学生实际学习语言课程。这些模板已被证明对语言学习者的文本难度评估很有帮助[60]。我们发现，语法理解日语句子的特定任务可以分解为（多个）语法模板集。例如，这是三个日语句子及其语法模板</p>
+<img src="/post/fit5152-a1-paper/image-20210112002236844.png" class="" title="image-20210112002236844">
+
+<p>我们可以看到S1只有一个语法模板：（–の）。对于日语学习者来说，S2比S1更难，因为它不仅具有（–の）而且还有另一个模板（–は）。 S3重复相同的模板（–の）两次，因此也比S1难。 这些关系无法通过[6]中的部分排序来捕获，因为尚不清楚如何程序化人类如何理解这些句子的过程。 但是，通过考虑概念的多集而不是执行跟踪，我们可以按如下方式容纳它们：</p>
+<p>**定义1a. ** 一个问题可以分解为问题所需的一系列概念（基本技能）。 由于问题可能会要求学生重复一次或多次重复某些技能，因此我们使用一组表示为p(s)的基本技能来表征问题的难度</p>
+<p><strong>定义1b</strong>。我们说，如果且仅当p（s1）⊒ p（s2）时，问题s1至少与s2一样困难，表示为s1≥s2。 这意味着，如果学生能够解决s1，那么他/她也必须能够解决s2 [6]</p>
+<p>这里⊒表示多集之间的超集关系。 如果是p（s1）⊒（s2），那么对于问题2次所需的任何概念c，也至少也需要1次。例如，AABC⊒ABC为true，而AABCC⊒ABBC为true，因为ABBC有两个“ B”，而AABCC只有一个</p>
+<p><strong>定义1c</strong>。严格偏序1&gt; s2定义为s1≥s2^s2≱s1，这意味着s1（严格来说）比s2难。</p>
+<p><strong>定义1d</strong>。如果说且仅当s1&gt; s2并且没有其他问题3使得s1&gt; s3&gt; s2，我们说问题1比s2更难</p>
+<p>使用定义1d，我们为一系列问题构建了层次结构，如下所示：</p>
+<p><strong>定义2</strong>.我们将一组问题S = {s1，s2，···}（我们称为普遍问题集）组织为偏序图G = 〈S，E〉，其中</p>
+<img src="/post/fit5152-a1-paper/image-20210112005148577.png" class="" title="image-20210112005148577">
+
+<p>即，当且仅当sj比si直接困难时，才在部分排序图中存在从问题si到sj的（定向）边。 图1显示了部分排序图的示例。</p>
+<img src="/post/fit5152-a1-paper/image-20210112005317740.png" class="" title="image-20210112005317740">
+
+<p>图一（部分排序图中的学生知识边界。 大写字母表示概念，带有字符串的节点表示问题。 学生可以解决绿色问题，而不能解决红色问题。 从每个问题到知识边界的距离以d表示。 空问题s0是一个焦虑问题，被添加来帮助我们计算距离）</p>
+<p><strong>定义3</strong>.我们用知识边界K衡量学生的能力，知识边界K是学生可以解决的最困难的问题。 形式上，如果这是学生可以解决的问题集，则</p>
+<img src="/post/fit5152-a1-paper/image-20210112172807977.png" class="" title="image-20210112172807977">
+
+<p>以图1中的偏序图为例。 假设一个学生可以解决问题A，AB，B，AABC和BCC（图中的绿色节点），而不能解决ABCB，D或ABCBD（图中的红色节点）。 然后，知识边界仅包含两个问题：AABC和BCC，因为没有其他“绿色”问题比AABC或BCC难。 知识边界不包括A，AB或B，因为存在一个“绿色”问题AABC，比所有问题都难</p>
+<h2 id="计算知识边界"><a href="#计算知识边界" class="headerlink" title="计算知识边界"></a>计算知识边界</h2><p>We present a graph coloring algorithm of calculating a stu-dent’s knowledge boundary in the partial ordering graph. Thisalgorithm is based on two properties of the partial ordering: ifa student can solve problems, he must be able to solve anyproblems′that is at most as hard as s(s≥s′); if a studentcannot solve problems, he must not be able to solve any prob-lems′that is at least as hard as s(s′≥s).  For example, if astudent can solve problem AB, he/she can also solve problemsA and B; if a student cannot solve problem ABCB, then he/she cannot solve problem ABCBD either.</p>
+<p>我们提出了一种图形着色算法，用于计算部分排序图中学生的知识边界。 该算法基于偏序的两个属性：如果一个学生能够解决问题，那么他必须能够解决至多像s(s≥s’)一样困难的任何问题。 如果学生不能解决问题，则他必须不能解决至少与 s(s’≥s) 一样困难的任何问题。 例如，如果学生可以解决问题AB，那么他/她也可以解决问题A和B； 如果学生不能解决问题ABCB，那么他/她也不能解决问题ABCBD。</p>
+<p>At the start of the algorithm, all the problems (nodes) in thepartial ordering graph are uncolored. The algorithm asks thestudent whether he/she can solve some problem s*.  If thestudent can solve s*, all the nodes that are at most as hard as s*(including s* itself) will be colored ‘solvable’; if the studentcannot solve s*, all the nodes that are at least as hard as s* (including s* it self) will be colored ‘unsolvable’.  Figure 2 shows how this coloring process works.</p>
+<p>在算法开始时，部分排序图中的所有问题（节点）都是未着色的。 该算法询问学生是否可以解决某些问题s*。 如果学生能够求解s*，则所有与s*一样难的节点（包括s*本身）将被着色为“可求解”； 如果学生不能求解s*，则所有至少s*同等困难的节点（包括s*自身）将被着色为“无法解决”。 图2显示了此着色过程的工作方式。</p>
+<p>The algorithm repeatedly selects an uncolored problem s* from the partial ordering graph, asks the student to solve it, and then updates the coloring of the graph based on the response. Thisis a greedy algorithm designed to minimize the number ofproblems that must be given to the student.  Formally, if $n^+_s$ denotes the number of the uncolored problems that are at mostas hard as $s$, and $n^-_s$denotes the number of the uncolored problems that are at least as hard as s, then we can maximize thenumber of problems that can be colored based on the student’s response by greedily selecting a problem s* as follows:</p>
+<p>该算法从偏序图中反复选择一个无色问题s*，要求学生解决它，然后根据响应更新该图的颜色。 这是一种贪心算法，旨在最大程度地减少必须给学生的问题。 形式上，如果$n^+_s$ 表示最多没有硬色问题的无色问题的数量，而 $n^-_s$表示至少至少像s一样硬的无色问题的数量，那么我们可以使可以 通过贪婪地选择问题s*，根据学生的回答进行着色：</p>
+<img src="/post/fit5152-a1-paper/image-20210112191104189.png" class="" title="image-20210112191104189">
+
+<h2 id="预测特定问题的表现"><a href="#预测特定问题的表现" class="headerlink" title="预测特定问题的表现"></a>预测特定问题的表现</h2><h3 id="到知识边界的距离-Distance-to-Knowledge-Boundary"><a href="#到知识边界的距离-Distance-to-Knowledge-Boundary" class="headerlink" title="到知识边界的距离 Distance to Knowledge Boundary"></a>到知识边界的距离 Distance to Knowledge Boundary</h3><p>In order to recommend problems at appropriate difficulty levels to the students, we need to predict students’ performanceon problems. Existing IRT studies have proposed several popular models stipulating how student performance is related tostudent ability [46, 53].  However, they measure a student’sability and the difficulty of a problem using unidimensionalnumeric scores, which is incomprehensive [28].</p>
+<p>为了向学生推荐适当难度的问题，我们需要预测学生在问题上的表现。 现有的IRT研究提出了几种流行的模型，这些模型规定了学生的表现与学生能力之间的关系[46，53]。 但是，他们使用一维数字分数来衡量学生的能力和问题的难度，这是不全面的[28]。</p>
+<p>Ideally, prediction of a student’s performance would utilizemultidimensional metrics to measure the distance between aproblem and what a student already knows. The key technicalchallenge in the design of multidimensional metrics is thatit is impossible to measure this distance without taking intoaccount the hierarchical structure of the problem space. In ourframework, we can measure this as the distance from the prob-lem to the knowledge boundary in the partial ordering graph.We use signed numbers to distinguish which ‘side’ of theknowledge boundary a problem is on: problems ‘inside’ theboundary (which the student can solve) have positive distanceswhile problems ‘outside’ the boundary (which the student can-not solve) have negative distances.  Using this distance, wecan leverage IRT models to predict a student’s performanceon new problems.</p>
+<p>理想情况下，对学生成绩的预测将利用多维指标来衡量问题和学生已经知道的知识之间的距离。 多维度量设计中的关键技术挑战是，如果不考虑问题空间的层次结构，就无法测量该距离。 在我们的框架中，我们可以用偏序图中图中从问题到知识边界的距离来衡量这个问题。 学生可以解决）的距离为正，而“超出”边界的问题（学生无法解决的）的距离为负。 利用此距离，我们可以利用IRT模型来预测学生在新问题上的表现。</p>
+<p>Here, we give the definition of this distance together with theexamples in Figure 1. Assume we have the universal problem set S, and a student can solve a subset of problems T.  For example, in Figure 1,S={A, AB, B, AABC, BCC, ABCB, D,ABCBD},T={A, AB, B, AABC, BCC}, and the knowledge boundary K={AABC, BCC}. We calculate the distance fromany problems∈Sto the knowledge boundaryK, indicated as d(s, K), following the steps below:</p>
+<p>在这里，我们给出该距离的定义以及图1中的示例。假设我们有通用问题集S，并且学生可以解决问题T的子集。例如，在图1中，S = {A，AB， B，AABC，BCC，ABCB，D，ABCBD}，T ＝ {A，AB，B，AABC，BCC}，知识边界K ＝ {AABC，BCC}。 我们按照以下步骤计算从任何问题∈S到知识边界K的距离，表示为d(s, K)：</p>
+<p><em>Step 1: Calculate distances for problems on the boundary</em></p>
+<p><em>步骤1：计算边界上问题的距离对于任何问题，</em></p>
+<p>For any problemssuch thats∈K,d(s,K) =0.</p>
+<p>对于任何问题s使得s∈K，d(s, K)= 0</p>
+<p>For example, the distance of problems AABC and BCC is 0</p>
+<p>例如，问题AABC和BCC的距离为0例如，问题AABC和BCC的距离为0</p>
+<p><em>Step 2: Calculate distances for problems inside the boundary</em></p>
+<p><em>步骤2：计算边界内问题的距离</em></p>
+<p>For any problem s such that s∈T−K, based on the definition of K, there must be one or more s′∈K such that s′≥s (otherwise, s should be contained in K) , and</p>
+<p>对于基于s的定义s∈T-K的任何问题s，必须存在一个或多个s′∈K使得s′≥s（否则s应该包含在K中），并且</p>
+<img src="/post/fit5152-a1-paper/image-20210112211143812.png" class="" title="image-20210112211143812">
+
+<p>where d is(s,s′) indicates the length of the shortest directed path from s to s′ in the partial ordering graph.  If there is no directed path from s to s′,  dis(s,s′) =∞.  Note that if  s′≥s  ,then there must exist at least one directed path from s′ to s.</p>
+<p>其中d is（s，s’）表示部分排序图中从s到s’的最短定向路径的长度。 如果没有从s到s’的定向路径，则dis（s，s’）=∞。 请注意，如果s’≥s，则必须存在至少一条从s’到s的定向路径。</p>
+<p>For example, the distance of problem AB is 1, since prob-lem AABC, which is on the knowlegde boundary, is directlyharder than AB. Similar for problem B (BCC is direclty harderthan B). The distance of problem A is 2, since the shortest di-rected path from A to any problem on the knowledge boundary(which is A→AB→AABC) has length 2</p>
+<p>例如，问题AB的距离为1，因为在知识已知边界上的问题AABC比AB直接困难。 与问题B相似（密件抄送比B硬）。 问题A的距离为2，因为从A到知识边界上任何问题的最短定向路径（A→AB→AABC）的长度为2</p>
+<p><em>Step 3:Calculate distances for problems outside the boundary</em></p>
+<p><em>步骤3：计算边界外问题的距离</em></p>
+<p>In a hierarchical knowledge structure, it follows intuitively thatproblems that are further away from the boundary will be moredifficult to the student. Therefore, for any problemssuch thats∈S−T, we define the distanced(s,K)to be shortest directedpath from any problem inTtos. Note that this distance alsohas a teaching interpretation: if easier problems should alwaysbe taught before harder problems [55], then this distance alsomeasures the number of problems that need to be taught beforeteachings.</p>
+<p>在分层的知识结构中，直观地认为，远离边界的问题对学生而言将更加困难。 因此，对于诸如s∈ST的任何问题，我们将距离（s，K）定义为距Ttos中任何问题最短的有向路径。 注意，这个距离也有一个教学上的解释：如果总是在较困难的问题之前总是先教更容易的问题[55]，那么这个距离也可以衡量在教学之前需要教的问题数量。</p>
+<p>ince there are some basic problems that have no problemseasier than them, and thus have no incoming edges in the par-tial ordering graph, there is not always a path from a probleminTtos.  For instance, there is no directed path from anyproblem inTto problemDin Figure 1.  To resolve this, weadd anull problems0, the pseudo problem with no prerequisiteconcepts, toT. For any problems∈S−T, if there is no otherproblems′such thatsis directly harder thans′(namely,shas no incoming edges), we add an edge(s0,s)to the partialordering graph</p>
+<p>由于存在一些基本问题，没有比这些问题更容易解决的问题，因此在空间排序图中没有传入的边，因此从问题中获取问题的路径并不总是那么容易。 例如，图1中没有从任何问题到问题D的直接路径。要解决此问题，我们将无问题先决条件的伪问题anull问题0添加到T。 对于任何问题∈ST，如果没有其他问题’使假设比’s’直接困难（即没有进入的边），我们将偏边（s0，s）添加到偏序图</p>
+<p>Now there is at least one directed path from the null problem s0 or some problem in T to s. We can define the distance as:</p>
+<p>现在，从空问题s0或T tos中的某个问题开始，至少有一条有向路径。 我们可以将距离定义为：</p>
+<img src="/post/fit5152-a1-paper/image-20210112234958809.png" class="" title="image-20210112234958809">
+
+<p>Note that d(s,K) is negative if and only if s is outside the knowledge boundary.For example, the distance of problem ABCB is -1, since itis directly harder than the “green” problem AB. Problem D has no incoming edges in the partial ordering graph, hence weadd an edge from the null problem s0 to D, and the distanceof problem D is -1 since the path s0→D has length 1. Lastly,the distance of problem ABCBD is -2.  Actually, there aretwo shortest paths with length 2: AB→ABCB→ABCBD ands0→D→ABCBD.</p>
+<p>请注意，当且仅当s在知识边界之外时，d(s, K)才为负。例如，问题ABCB的距离为-1，因为它比“绿色”问题AB直接困难。 问题D在偏序图中没有输入边，因此我们将零问题s0到D加上一条边，并且由于路径s0→D的长度为1，因此问题D的距离为-1。最后，问题ABCBD的距离为 -2。 实际上，有两条最短的路径，其长度为2：AB→ABCB→ABCBD和s0→D→ABCBD。</p>
+<p>The  metric  of  distance  is  dependent  on  the  density  of  thepartial-ordering graph. This is inevitable since the measure-ment is based on the hierarchical structure of the problemspace. We believe that for most well-defined problem spaces,it is a reasonable assumption that the partial ordering graph will be sufficiently dense.  We will demonstrate this metricworks well for a well-built Japanese language learning corpusin the next section</p>
+<p>距离的度量取决于偏序图的密度。 这是不可避免的，因为测量是基于问题空间的层次结构。 我们认为，对于大多数定义明确的问题空间，可以合理地假设偏序图将足够密集。 我们将在下一部分中很好地演示此度量标准，以构建完善的日语学习语料库。</p>
+<p>In the later part of this paper, we will use d to denote d(s,K) for convenience</p>
+<p>在本文的后半部分，为方便起见，我们将使用d来表示d(s, K)。</p>
+<h3 id="Adapted-Rasch-model-改编的Rasch模型"><a href="#Adapted-Rasch-model-改编的Rasch模型" class="headerlink" title="Adapted Rasch model 改编的Rasch模型"></a>Adapted Rasch model 改编的Rasch模型</h3><p>In this section, we describe how we can adapt existing uni-dimensional IRT models to build a multidimensional metricthat leverages the partial ordering graph and the distance d calculated in the previous section in order to predict studentperformance.  One of the most famous models of IRT, the Rasch model [53], stipulates that a student’s performancePis a function of the difference between the student’s ability θ and the problem’s difficulty b</p>
+<p>在本节中，我们描述如何适应现有的一维IRT模型以建立多维度量标准，该度量标准利用上一节中计算的偏序图和距离d来预测学生的表现。 Rasch模型[53]是IRT最著名的模型之一，它规定学生的表现是学生的能力θ与问题难度b之差的函数。</p>
+<img src="/post/fit5152-a1-paper/image-20210113085907577.png" class="" title="image-20210113085907577">
+
+<p>xxx</p>
+<p>In  the  next  section,  we  will  demonstrate  that  this  adaptedmodel nicely fits the data collected from our knowledge as-sessment platform</p>
+<p>在下一节中，我们将证明该适应模型非常适合从我们的知识评估平台收集的数据</p>
+<h2 id="知识评估的评价-EVALUATION-OF-KNOWLEDGE-ASSESSMENT"><a href="#知识评估的评价-EVALUATION-OF-KNOWLEDGE-ASSESSMENT" class="headerlink" title="知识评估的评价 EVALUATION OF KNOWLEDGE ASSESSMENT"></a>知识评估的评价 EVALUATION OF KNOWLEDGE ASSESSMENT</h2><p>In this section, we will the evaluate our calculation of the knowledge boundary and the distance represented in the previous section by applying it to a Japanese language learning domain.</p>
+<p>在本节中，我们将评估我们的知识边界与上一节中表示的距离的计算并把它应用到一个日语学习领域。</p>
+<h3 id="语言评估平台-J100-A-Language-Assessment-Platform"><a href="#语言评估平台-J100-A-Language-Assessment-Platform" class="headerlink" title="语言评估平台 J100: A Language Assessment Platform"></a>语言评估平台 J100: A Language Assessment Platform</h3><p>xxx</p>
+<h3 id="Reddit部署-Reddit-Deployment"><a href="#Reddit部署-Reddit-Deployment" class="headerlink" title="Reddit部署 Reddit Deployment"></a>Reddit部署 Reddit Deployment</h3><p>xxx</p>
+<h3 id="验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric"><a href="#验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric" class="headerlink" title="验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric"></a>验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric</h3><p>In order to validate our calculation of the knowledge boundaryand the distance metric, we will demonstrate that the user datacollected from J100 nicely fits the adapted Rasch Model. Wecalculate a user’s knowledge boundaryKbased on his/her responses to the problems in the assessment stage, and foreach problemsresponded in the evaluation stage, we measurethe distance from the problems to the knowledge boundary K.The user responses in the evaluation stage can be regarded as users’ self-estimation of their performance, and we score thefive possible responses uniformly from 1 to 0</p>
+<p>为了验证我们对知识边界和距离度量的计算，我们将证明从J100收集的用户数据非常适合改编的Rasch模型。 我们根据用户在评估阶段对问题的回答来计算用户的知识边界K，并针对评估阶段所回答的每个问题，测量从问题到知识边界K的距离。评估阶段中的用户响应可视为用户 对他们的表现的自我评估，我们从1到0对5个可能的回答进行了统一评分</p>
+<h2 id="过程分析-PROGRESSION-ANALYSIS"><a href="#过程分析-PROGRESSION-ANALYSIS" class="headerlink" title="过程分析 PROGRESSION ANALYSIS"></a>过程分析 PROGRESSION ANALYSIS</h2><p>良好的进步会增强学生对课程的参与度[43,56]，我们的工作旨在发现良好的进步的一般特征。 在本节中，我们将利用我们的框架来分析教育进度，并介绍良好进度的两个重要特征：组成Composition和步调Pace。 我们研究了现有课程，并证明了专家设计的课程中一些惊人的相似之处</p>
+<h3 id="组成：学习与复习的平衡-Composition-The-Balance-of-Learning-and-Review"><a href="#组成：学习与复习的平衡-Composition-The-Balance-of-Learning-and-Review" class="headerlink" title="组成：学习与复习的平衡 Composition: The Balance of Learning and Review"></a>组成：学习与复习的平衡 Composition: The Balance of Learning and Review</h3><p>在设计教育进度时，一个关键的考虑因素是应该花多少时间来增强以前引入的知识，而不是引入新知识。 另一个需要考虑的问题是，通过以新的方式将概念组合在一起，进度是否应该越来越复杂。 理想情况下，我们将能够定义可以简洁地捕获这些重要方面的进度参数空间</p>
+<p>xxx</p>
+<p>我们可以认为强化是对已学知识的回顾，引入是纯学习，重组是两者的混合。 这三种类型的比例揭示了设计师在教育进步中平衡学习和复习的策略，我们将其称为进步组成</p>
+<h3 id="步调：知识的增长率-Pace-The-Growth-Rate-of-Knowledge"><a href="#步调：知识的增长率-Pace-The-Growth-Rate-of-Knowledge" class="headerlink" title="步调：知识的增长率 Pace: The Growth Rate of Knowledge"></a>步调：知识的增长率 Pace: The Growth Rate of Knowledge</h3><p>我们想知道进度中课程（章节，单元等）的难度是否以一致的速度增长，从而使学生可以顺利学习。 我们不是通过数字来衡量每节课的难度，而是计算知识的大小，即每节课之前引入的问题总数。 这可以用通用问题集5S中的问题数量来衡量，该数量被学生的知识边界归类为强化。在掌握了从一开始到当前课程的所有知识之后。 因此，知识大小| K |就是此类问题的数量</p>
+<h2 id="进度分析的评估"><a href="#进度分析的评估" class="headerlink" title="进度分析的评估"></a>进度分析的评估</h2><h3 id="教材研究"><a href="#教材研究" class="headerlink" title="教材研究"></a>教材研究</h3><h3 id="在线语言学习工具研究"><a href="#在线语言学习工具研究" class="headerlink" title="在线语言学习工具研究"></a>在线语言学习工具研究</h3><h2 id="自动渐进合成"><a href="#自动渐进合成" class="headerlink" title="自动渐进合成"></a>自动渐进合成</h2><p>We have discussed two features of an educational progression:composition and pace.  In this section, we will demonstratethat educational progressions can be automatically synthesizedaccording to specific composition and pace parameters. To bemore precise, a progression can be characterized as three nu-meric parameters: overall pace (pace), proportion of reinforce-ment (ri), and proportion of introduction (in). The proportionof recombination (rc) is redundant since ri+rc+in=1.</p>
+<p>我们讨论了教育进步的两个特征：组成和步调。 在本节中，我们将<strong>证明可以根据特定的构成和速度参数自动合成教育进度</strong>。 更准确地说，可以将进度表示为三个数字参数：总体步速（步幅），增强比例（ri）和引入比例（输入）。 重组比例（rc）是多余的，因为ri + rc + in = 1</p>
+<p>We use a greedy algorithm to synthesize progressions.  Thealgorithm starts with an empty progression, repeatedly selectsthe next problem that minimizes the following error function and appends it to the progression:</p>
+<p>我们使用贪婪算法来合成进度。 算法以空的级数开始，重复选择下一个使后继误差函数最小化的问题，并将其附加到级数上</p>
+<img src="/post/fit5152-a1-paper/image-20210112094950772.png" class="" title="image-20210112094950772">
+
+<p>其中pace, ri, in 都是实际的渐进特性，而pace*, ri*, in*是所需的渐进参数。请注意，可能存在多个具有最小误差的问题。 在这种情况下，我们的算法会从中随机选择一个作为下一个问题</p>
+<p><strong>这种贪婪算法并不总是生成具有准确所需参数的级数</strong>。 但是，它运行得非常快。对于一个包含25个问题的通用问题集，它可以在一秒钟内合成100多个进程（每个进程有10个问题），因此，我们可以多次运行此贪婪算法以合成具有所需特征的进程</p>
+<p>表2列出了合成过程的四个例子。 我们从Genki进程中提取了以下参数：pace= 0.465，ri = 0.582，in = 0.214。 然后，我们使用这些参数（大约）来合成“ Genki Simulation”进度。 我们还生成了另外三个带有量身定制的参数的进度，这些进度偏向于加强，重组和引入。 这些结果表明，<strong>我们不仅可以利用专家级进度设计的原理并使用对大多数学生都有利的参数来综合进度，而且还可以为具有特定偏好的学生量身定制进度</strong></p>
+<img src="/post/fit5152-a1-paper/image-20210112095315867.png" class="" title="image-20210112095315867">
+
+<h2 id="结论与未来工作"><a href="#结论与未来工作" class="headerlink" title="结论与未来工作"></a>结论与未来工作</h2><p>可学习性对于HCI的许多方面都很重要：用户界面，学习工具，视频游戏和软件可用性。 在本文中，我们定义了一个框架，<strong>该框架利用自动问题分解和部分排序图构造来促进与教育相关的多个工作流程：评估学生的知识，确定和描述课程的学习策略以及设计新的学习进度</strong>。 我们以多种方式评估了该框架：通过在线部署日语评估工具，自动从现有课程中提取起搏参数，以及将问题组合成符合所需起搏特征的新项目</p>
+<p>我们希望将我们的框架用于几个教育领域，尤其是计算机辅助语言教育。 例如，我们计划利用我们的框架向第二语言学习者推荐适当的阅读材料，并改善用于语言学习的教育游戏[17，18]。 将来，我们不仅将框架应用于语法知识，还将应用于语言学习的其他方面，例如词汇和语义</p>
+<p>我们希望这些想法将有助于实现一门进行性分析的科学，在该科学中，可以从涉及多个主题的进展中提取出测序和起搏参数，以识别最佳原则。 此外，我们希望扩展此框架，以便它可以自动构建能够快速进行初始评估和进度调整的自适应学习系统</p>
+]]></content>
+      <tags>
+        <tag>done</tag>
+        <tag>UI</tag>
+        <tag>design</tag>
       </tags>
   </entry>
   <entry>
@@ -5181,7 +5188,7 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
 <ol>
 <li>接收者使用他/她的用户密钥来解密密文</li>
 </ol>
-<p>安全：<br>– 如果密文是为 <a href="mailto:&#97;&#x6c;&#105;&#x63;&#x65;&#x40;&#x61;&#98;&#x63;&#46;&#99;&#111;&#x6d;">&#97;&#x6c;&#105;&#x63;&#x65;&#x40;&#x61;&#98;&#x63;&#46;&#99;&#111;&#x6d;</a> 加密的，除了与 <a href="mailto:&#x61;&#x6c;&#x69;&#99;&#101;&#x40;&#x61;&#x62;&#x63;&#46;&#x63;&#111;&#x6d;">&#x61;&#x6c;&#x69;&#99;&#101;&#x40;&#x61;&#x62;&#x63;&#46;&#x63;&#111;&#x6d;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
+<p>安全：<br>– 如果密文是为 <a href="mailto:&#x61;&#x6c;&#x69;&#99;&#101;&#64;&#x61;&#98;&#x63;&#x2e;&#x63;&#111;&#109;">&#x61;&#x6c;&#x69;&#99;&#101;&#64;&#x61;&#98;&#x63;&#x2e;&#x63;&#111;&#109;</a> 加密的，除了与 <a href="mailto:&#x61;&#x6c;&#x69;&#99;&#x65;&#x40;&#97;&#x62;&#x63;&#46;&#x63;&#x6f;&#x6d;">&#x61;&#x6c;&#x69;&#99;&#x65;&#x40;&#97;&#x62;&#x63;&#46;&#x63;&#x6f;&#x6d;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
 <p>IBE 需要一个称为双线性配对的数学函数（基于椭圆曲线）<br>• 它是两组之间的单向映射函数：G 和 GT，使得 G 和 GT 中的离散对数很难<br>• 表示为一个映射<br>$e: G \times G →G_T$<br>它取 G 组中的两个元素并输出 $G_T$ 组中的一个元素</p>
 <p>双线性配对<br>• 假设$g$是具有群序$p$的$G$生成器（即，$G$具有$p$个元素：$|G| =p$）<br>• 我们有以下属性：<br>– Bilinear双线性：$e(g^x,g^y)=e(g,g)^{xy}$, 对于$x \in Z_p &gt; e(g^x,g)=e(g,g^x)=e(g,g)^x$<br>– Non-degenerate 非退化：$e(g,g)\neq1$</p>
 <p>第一个实用的 IBE 方案是由 Dan Boneh 和 Matthew K. Franklin 在 2001 年（我们称之为 Boneh-Franklin 计划）</p>
@@ -5213,6 +5220,20 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
 <h2 id="W9-Lightweight-Security"><a href="#W9-Lightweight-Security" class="headerlink" title="W9: Lightweight Security"></a>W9: Lightweight Security</h2><p>这周之后开始讲行业了</p>
 <h2 id="W10-DB-Security"><a href="#W10-DB-Security" class="headerlink" title="W10: DB Security"></a>W10: DB Security</h2><h2 id="W11"><a href="#W11" class="headerlink" title="W11: ?"></a>W11: ?</h2><h2 id="W12-Blockchain"><a href="#W12-Blockchain" class="headerlink" title="W12: Blockchain"></a>W12: Blockchain</h2><p>密码学集大成者</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Notes for FIT9131: Java</title>
+    <url>/post/fit9131-java-bluej-notes/</url>
+    <content><![CDATA[<p>学校要求的是使用bluej这个ide/editor。这个工具和intellij idea不同，完全是面向教学，写Java有种写script的感觉。可以拿来写各种class但是不能保存各种实例化的object。</p>
+<p>到目前（W4）为止，内容都是很简单的。</p>
+<p>到W7也還是很簡單……</p>
+<p>到W12依然还是很简单……</p>
+<p>最后考试大概是没考好，明明ASS全HD但最终只有79没拿到HD太可惜了</p>
+]]></content>
+      <tags>
+        <tag>done</tag>
+        <tag>java</tag>
+      </tags>
   </entry>
   <entry>
     <title>Notes for FIT5195: Business intelligence and data warehousing</title>
@@ -5438,20 +5459,6 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
         <tag>database</tag>
         <tag>BI</tag>
         <tag>data warehouse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Notes for FIT9131: Java</title>
-    <url>/post/fit9131-java-bluej-notes/</url>
-    <content><![CDATA[<p>学校要求的是使用bluej这个ide/editor。这个工具和intellij idea不同，完全是面向教学，写Java有种写script的感觉。可以拿来写各种class但是不能保存各种实例化的object。</p>
-<p>到目前（W4）为止，内容都是很简单的。</p>
-<p>到W7也還是很簡單……</p>
-<p>到W12依然还是很简单……</p>
-<p>最后考试大概是没考好，明明ASS全HD但最终只有79没拿到HD太可惜了</p>
-]]></content>
-      <tags>
-        <tag>done</tag>
-        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -6155,6 +6162,28 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
       </tags>
   </entry>
   <entry>
+    <title>Go Interesting</title>
+    <url>/post/go-interesting/</url>
+    <content><![CDATA[<p>这里记录一些golang使用中的小细节，每次都像cgo那样单独写一篇有点太水了。</p>
+<span id="more"></span>
+
+<h2 id="go-build"><a href="#go-build" class="headerlink" title="go:build"></a>go:build</h2><p><a href="https://stackoverflow.com/questions/68360688/whats-the-difference-between-gobuild-and-build-directives" target="_blank" rel="noopener">https://stackoverflow.com/questions/68360688/whats-the-difference-between-gobuild-and-build-directives</a></p>
+<p>起因是用vscode上编辑boltdb的代码，每次ctrl+s保存之后就会在<code>// +build xxx, xxx</code>前面加一句语义相同的<code>//go:build blahblah</code></p>
+<p><code>//go:build</code> 是 Go 1.17 中引入的新条件编译指令。</p>
+<p>它旨在替换<code>// +</code>这个build tag，因为新语法带来了一些关键改进：</p>
+<p>与其他现有 Go 指令和编译指示的一致性，<br>例如<code>//go:generate</code>支持标准布尔表达式，<br>例如<code>//go:build foo &amp;&amp; bar</code>，而旧的 <code>// +build</code> 注释的语法不太直观。例如 AND 用逗号表示 <code>// +build foo, bar</code> 和 OR 用空格 <code>// +build foo bar</code><br>go fmt 支持自动修复源文件中指令的错误位置，从而避免在指令和包语句之间不留空行的常见错误。<br>这两个构建指令将在几个 Go 版本中共存，以确保平滑过渡，如相关提案文件中所述（在 N = 17 以下，重点是我的）：</p>
+<p>Go 1.N 将开始转换。在 Go 1.N 中：</p>
+<p>构建将开始更喜欢 <code>//go:</code> 用于文件选择的构建行。如果没有 <code>// go: build</code> 在一个文件中，那么任何 <code>// +</code> 构建行仍然适用。</p>
+<p>如果Go文件包含<code>//go: build</code> 而没有 <code>// +build</code>，构建将不再失败。</p>
+<p>如果Go或程序集文件包含 <code>// go: build</code> 在文件中太过靠后，则构建将失败。 Gofmt 会将错位的 <code>//go: build</code> 和 <code>// +build</code> 行移动到文件中的正确位置。</p>
+<p>Gofmt 将使用与其他 Go 布尔表达式（所有 &amp;&amp; 和 || 运算符周围的空格）相同的规则来格式化<code>//go:build</code> lines 中的表达式。</p>
+<p>如果文件只包含<code>// +build</code>行，gofmt 将在它们上方添加一个等效的<code>//go:build</code>行。</p>
+<p>如果文件同时包含 <code>//go:build</code> 和 <code>// +build</code> 行，gofmt 将考虑 <code>//go:build</code> 的真实来源并更新 <code>// +build</code> 行以匹配，从而保持与早期版本的 Go 的兼容性。 Gofmt 也会拒绝 <code>//go:build</code> 被认为太复杂而无法转换为 <code>// +build</code> 格式的行，尽管这种情况很少见。 （注意此项目符号开头的“If”。Gofmt 不会将 <code>// +build</code>行添加到只有 <code>//go:build</code> 的文件中。）</p>
+<p>go vet中的构建标签检查将添加对<code>//go:build</code>约束的支持。当 Go 源文件包含 <code>// go:build</code> 和 <code>// +build</code> 具有不同含义时，它将失败。如果检查失败，可以运行 gofmt -w。</p>
+<p>当 Go 源文件包含<code>//go:build</code>, 但不包含<code>//+build</code>, 且它的包含模块有一个go line列出 Go 1.N 之前的版本时，构建标签检查也会失败。如果检查失败，可以添加任何<code>// +build</code>行，然后运行 ​​gofmt -w，它将用正确的行替换它。或者可以将 go.mod go 版本升级到 Go 1.N。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Notes for FIT9137: Arch and Net notes</title>
     <url>/post/fit9137-arch_and_net-notes/</url>
     <content><![CDATA[<p>虽然在定义上是个基础课，但是实际上比国内的大计基深入的不是一点点。如果不是前阵子因为cryptocurrency mining的研究一直都在钻研底层，估计还挺难消化的。即便如此，不仔细的我到现在的quiz还是没能拿到过100……</p>
@@ -6849,28 +6878,6 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
         <tag>architecture</tag>
         <tag>network</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Go Interesting</title>
-    <url>/post/go-interesting/</url>
-    <content><![CDATA[<p>这里记录一些golang使用中的小细节，每次都像cgo那样单独写一篇有点太水了。</p>
-<span id="more"></span>
-
-<h2 id="go-build"><a href="#go-build" class="headerlink" title="go:build"></a>go:build</h2><p><a href="https://stackoverflow.com/questions/68360688/whats-the-difference-between-gobuild-and-build-directives" target="_blank" rel="noopener">https://stackoverflow.com/questions/68360688/whats-the-difference-between-gobuild-and-build-directives</a></p>
-<p>起因是用vscode上编辑boltdb的代码，每次ctrl+s保存之后就会在<code>// +build xxx, xxx</code>前面加一句语义相同的<code>//go:build blahblah</code></p>
-<p><code>//go:build</code> 是 Go 1.17 中引入的新条件编译指令。</p>
-<p>它旨在替换<code>// +</code>这个build tag，因为新语法带来了一些关键改进：</p>
-<p>与其他现有 Go 指令和编译指示的一致性，<br>例如<code>//go:generate</code>支持标准布尔表达式，<br>例如<code>//go:build foo &amp;&amp; bar</code>，而旧的 <code>// +build</code> 注释的语法不太直观。例如 AND 用逗号表示 <code>// +build foo, bar</code> 和 OR 用空格 <code>// +build foo bar</code><br>go fmt 支持自动修复源文件中指令的错误位置，从而避免在指令和包语句之间不留空行的常见错误。<br>这两个构建指令将在几个 Go 版本中共存，以确保平滑过渡，如相关提案文件中所述（在 N = 17 以下，重点是我的）：</p>
-<p>Go 1.N 将开始转换。在 Go 1.N 中：</p>
-<p>构建将开始更喜欢 <code>//go:</code> 用于文件选择的构建行。如果没有 <code>// go: build</code> 在一个文件中，那么任何 <code>// +</code> 构建行仍然适用。</p>
-<p>如果Go文件包含<code>//go: build</code> 而没有 <code>// +build</code>，构建将不再失败。</p>
-<p>如果Go或程序集文件包含 <code>// go: build</code> 在文件中太过靠后，则构建将失败。 Gofmt 会将错位的 <code>//go: build</code> 和 <code>// +build</code> 行移动到文件中的正确位置。</p>
-<p>Gofmt 将使用与其他 Go 布尔表达式（所有 &amp;&amp; 和 || 运算符周围的空格）相同的规则来格式化<code>//go:build</code> lines 中的表达式。</p>
-<p>如果文件只包含<code>// +build</code>行，gofmt 将在它们上方添加一个等效的<code>//go:build</code>行。</p>
-<p>如果文件同时包含 <code>//go:build</code> 和 <code>// +build</code> 行，gofmt 将考虑 <code>//go:build</code> 的真实来源并更新 <code>// +build</code> 行以匹配，从而保持与早期版本的 Go 的兼容性。 Gofmt 也会拒绝 <code>//go:build</code> 被认为太复杂而无法转换为 <code>// +build</code> 格式的行，尽管这种情况很少见。 （注意此项目符号开头的“If”。Gofmt 不会将 <code>// +build</code>行添加到只有 <code>//go:build</code> 的文件中。）</p>
-<p>go vet中的构建标签检查将添加对<code>//go:build</code>约束的支持。当 Go 源文件包含 <code>// go:build</code> 和 <code>// +build</code> 具有不同含义时，它将失败。如果检查失败，可以运行 gofmt -w。</p>
-<p>当 Go 源文件包含<code>//go:build</code>, 但不包含<code>//+build</code>, 且它的包含模块有一个go line列出 Go 1.N 之前的版本时，构建标签检查也会失败。如果检查失败，可以添加任何<code>// +build</code>行，然后运行 ​​gofmt -w，它将用正确的行替换它。或者可以将 go.mod go 版本升级到 Go 1.N。</p>
-]]></content>
   </entry>
   <entry>
     <title>How to create a temporary NGIN network</title>
@@ -7766,24 +7773,6 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>LucidiTEE: 基于策略的规模化公平计算（摘要）</title>
-    <url>/post/luciditee/</url>
-    <content><![CDATA[<p>这个是LucidiTEE的paper的intro部分，因为知乎上有人问起所以就边看边了解边回答。这个和区块链不是一个东西，是对于硬件层面的计算可信度的保障，像我的AMD1600也有这样的可信计算功能。</p>
-<p>受大肆滥用个人信息的现状启发，我们通过将信息绑定在策略上，允许用户去控制他们个人信息的分享与使用，即便是在离线的时候。一个策略制定了一个被允许的函数，策略包含了防止对输入提供者与输出接收人的执行（基于有关该数据的所有先前计算的历史记录）和识别。为了达到这个级别的控制，我们的目标是建立一个能够确保策略与输入提供者保持一致，对输出接收方的公平和公正（即，所有一方或没有一方获取输出），而无需这些方彼此信任或与计算主机信任的计算系统。</p>
-<span id="more"></span>
-
-<p>最近，受信任的执行环境（TEE），例如英特尔SGX和Sanctum enclaves，正在敏感数据的外包计算中找到应用程序。 但是，由于TEE受到不受信任的主机托管用于存储和网络通信，因此它们无法执行依赖历史的策略或公平性。 例如，与用户只希望揭示其整个数据上的汇总函数的愿望相反，对抗主机可以在其数据集的不同子集上反复评估该汇总函数，并学习单个记录。 对手还可能串通并将输出仅传递给输出接收者的子集，从而违反了公平性。</p>
-<p>本文介绍了LucidiTEE，这是第一个使多方可以联合计算大规模私有数据的系统，同时确保即使输入提供者处于脱机状态也可以强制执行上述策略，并保证对所有输出接收者的公平性。 为此，LucidiTEE在TEE网络和共享的仅限追加的分类帐之间开发了一套新颖的协议。LucidiTEE仅使用分类帐执行策略； 它不会在账本上存储输入，输出或状态，也不会在参与者之间重复执行，这使其可以扩展到大数据和大量参与者。</p>
-<p>我们演示了几种基于策略的应用程序，包括个人理财，联合机器学习，公平N方信息交换和医疗记录中私有集之间的交集。</p>
-]]></content>
-      <tags>
-        <tag>done</tag>
-        <tag>TEE</tag>
-        <tag>paper</tag>
-        <tag>翻译</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linguaskill</title>
     <url>/post/linguaskill-notes/</url>
     <content><![CDATA[<p>記錯考試日期了，所以有了多的時間來總結</p>
@@ -7880,6 +7869,24 @@ With the respect to/Enperienced the less main reason, they xxx
         <tag>notes</tag>
         <tag>exam</tag>
         <tag>Linguaskill</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LucidiTEE: 基于策略的规模化公平计算（摘要）</title>
+    <url>/post/luciditee/</url>
+    <content><![CDATA[<p>这个是LucidiTEE的paper的intro部分，因为知乎上有人问起所以就边看边了解边回答。这个和区块链不是一个东西，是对于硬件层面的计算可信度的保障，像我的AMD1600也有这样的可信计算功能。</p>
+<p>受大肆滥用个人信息的现状启发，我们通过将信息绑定在策略上，允许用户去控制他们个人信息的分享与使用，即便是在离线的时候。一个策略制定了一个被允许的函数，策略包含了防止对输入提供者与输出接收人的执行（基于有关该数据的所有先前计算的历史记录）和识别。为了达到这个级别的控制，我们的目标是建立一个能够确保策略与输入提供者保持一致，对输出接收方的公平和公正（即，所有一方或没有一方获取输出），而无需这些方彼此信任或与计算主机信任的计算系统。</p>
+<span id="more"></span>
+
+<p>最近，受信任的执行环境（TEE），例如英特尔SGX和Sanctum enclaves，正在敏感数据的外包计算中找到应用程序。 但是，由于TEE受到不受信任的主机托管用于存储和网络通信，因此它们无法执行依赖历史的策略或公平性。 例如，与用户只希望揭示其整个数据上的汇总函数的愿望相反，对抗主机可以在其数据集的不同子集上反复评估该汇总函数，并学习单个记录。 对手还可能串通并将输出仅传递给输出接收者的子集，从而违反了公平性。</p>
+<p>本文介绍了LucidiTEE，这是第一个使多方可以联合计算大规模私有数据的系统，同时确保即使输入提供者处于脱机状态也可以强制执行上述策略，并保证对所有输出接收者的公平性。 为此，LucidiTEE在TEE网络和共享的仅限追加的分类帐之间开发了一套新颖的协议。LucidiTEE仅使用分类帐执行策略； 它不会在账本上存储输入，输出或状态，也不会在参与者之间重复执行，这使其可以扩展到大数据和大量参与者。</p>
+<p>我们演示了几种基于策略的应用程序，包括个人理财，联合机器学习，公平N方信息交换和医疗记录中私有集之间的交集。</p>
+]]></content>
+      <tags>
+        <tag>done</tag>
+        <tag>TEE</tag>
+        <tag>paper</tag>
+        <tag>翻译</tag>
       </tags>
   </entry>
   <entry>
@@ -8002,41 +8009,6 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>ngchain Serialization Selection: ngchain的序列化方案选择</title>
-    <url>/post/ngchain-serialization-selection/</url>
-    <content><![CDATA[<p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br>而我们需要的仅仅只是一个简单的blob存储/传输方案。</p>
-<span id="more"></span>
-
-<p><a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">https://ethresear.ch/t/blob-serialisation/1705</a></p>
-<h2 id="protobuf"><a href="#protobuf" class="headerlink" title="protobuf"></a>protobuf</h2><p>至于为什么会走向protobuf这个歪路，是因为真的在benchmark里它的速度太诱人了。<br>golang那个benchmark对比里它也是被推荐的。<br>那时候新版还没出，gogo的速度在一众序列化方案里简直快到爆。<br>而且protobuf序列化之后的字节也非常小。<br>所以当时就觉得这个可以有。</p>
-<p>但是随着项目一点点成型，protobuf的定位和项目需求的矛盾也越来越明显。<br>对于一个到处都是serde，到处在不顾兼容性地通过修改数据原型优化系统的一个底层应用，<br>protobuf的操作实在是过于繁琐且束缚过大</p>
-<ul>
-<li><p>protobuf没有继承关系。<br>protobuf的各种feature在和golang结合的时候会让人很难受。<br>不止是单纯的用户定义的message之间继承不了，比如说这里希望<code>message A</code>继承<code>bytes</code>，<code>message B</code>继承<code>map&lt;string, string&gt;</code>这种就都做不到。<br>而且本身protobuf的（优化）集成也很麻烦（尤其在bazel里）。其对特殊类型（any啥的）的支持在golang下让人不太敢用，尤其是apiv2之后。</p>
-</li>
-<li><p>我想要的大部分情况下只是简单的把一个list序列化，但是protobuf只处理generated code里的那些message<br>例如raw, err := proto.Marshal([][]byte{[]byte{“wasd”}})<br>就会提示cannot use ([][]byte literal) (value of type [][]byte) as protoreflect.ProtoMessage value in argument to proto.Marshal: missing method ProtoReflect。<br>正确的serde做法就是建立一个新的message，然后这个message里带一个这个bytes list类型的字段。</p>
-</li>
-<li><p>我想要序列化过程可定制，但是官方新版本不可以<br>为什么需要可定制？因为一个struct中并非全部字段需要serde。<br>一般的解决方法是将要序列化的字段public，而不需要的private，通过func来调用private内容。<br>但是这里还有个痛点：生成的代码不应该修改，我根本没法把我的私有字段加到struct里。<br>v0.0.19之前，我们是通过func直接生成值，例如GetHash()相当于每次调用都进行hash。<br>即便是sha3.256这样的简单hash，都消耗了大量资源。<br>后面v0.0.20的实践是加上对应的public字段。<br>但是hash值这样的内容导致了值和其他内容填充的步调不一：需要先有内容且确定才能得到hash，修改内容后也得重新hash。<br>v0.0.21带来了更优实践：使用自定义struct继承生成的struct。<br>这样既可以保存自定义的辅助性字段（比如hash）（在自定义struct之中），<br>又可以serde（通过父struct，即生成的）。<br>但是实际体验并没有那么美好，自定义struct即便是继承了，也不是protoreflect.ProtoMessage，没法直接serde。<br>注意这里是protoreflect.ProtoMessage，不是proto.Message，这是新版和旧版（or gogo）的区别所在。<br>然而更坑的是goland会告诉你自定义的子类可以serde……因此需要一个个排查。<br>最后来到我们的最后一个方案，为了快速排查，我们放弃了直接继承，选择了将原型作为自定义struct字段，通过GetProto()来获取原型以及LoadProto()进行serde。<br>这样改掉一堆错误之后看似安静和谐了很多，但是，我们被框架限制住了。<br>这样妥协的方式，让我们很难在types.proto之外继续利用serde来扩展。<br>很明显，protobuf是给那些有准备的人的，而我们只是到处碰运气的赌徒罢了。</p>
-</li>
-</ul>
-<h2 id="rlp"><a href="#rlp" class="headerlink" title="rlp"></a>rlp</h2><p>作为一个有在geth上debug经验的开发，我也不是第一次使用rlp。在过去golang使用还不熟练的经历里，rlp真的是不好用。<br>首先从直观来看rlp不像别的那样有Marshal和Unmarshal。<br>其次IDE上的提示（lint）也不尽如人意，经常会出现看起来啥问题都没有跑起来到处不能encode的问题。<br>同样Decode也有问题，见这里<a href="https://ethresear.ch/t/blob-serialisation/1705/5" target="_blank" rel="noopener">vb说的例子</a>。这个帖子说的序列化还在优化更新中，而prysm用的是protobuf，所以现在不适合跟上ethereum的设计。<br>再者，缺少对map的支持，不过这个很好理解，有map之后就很难deterministic，像protobuf一样可能不同的实现有着不同的deterministic规则，仅在同一语言上统一。<br>此外如果直接<code>type Uint uint</code>这样建立type（很常见，比如NetworkType，TxType等等），那么rlp是不支持把他当uint这样的原始类型看的，就需要自己实现一个Encoder+Decoder。</p>
-<p>但是首先这个数据大小很香，真的很小。根据github上benchmark来看是比protobuf要小。</p>
-<p>其次原理简洁易懂。说白了就是万物list or str。这部分根据rlp的En/Decoder来讲。</p>
-<h3 id="En-Decoder"><a href="#En-Decoder" class="headerlink" title="En/Decoder"></a>En/Decoder</h3><p>和json的返回值不同，rlp的内容是直接写入io.Writter。<br>一般我们就直接使用rlp.Encode(writter, 【自定义好的结构】)就可以</p>
-<p>前面也说到了rlp原理简单，这里就举点案例：</p>
-<p>比如说一个Nonce是个8字节的定长[]byte，需要把它encode to rlp只需要在这个8字节前面写一个prefix来描述它就可以用136（=0x80+8）来表示8这个长度。</p>
-<p>具体的rlp的规则：</p>
-<ul>
-<li>对于单个byte（char），如果值是在0x00-0x7f（127，也就是常用ascii），那么就直接放着就行</li>
-<li>此外，对于0-55长度的bytes，rlp就用<code>0x80（128）+长度</code>作为其前缀来描述后面的列表（or单byte&gt;127）。这个前缀byte值在0x80（128）-0xb7（183）</li>
-<li>如果是比55还长，那么肯定就需要不止一个byte来修饰。为了支持巨长的内容，前缀的第一个字符来描述后面&gt;55的长度。例如一个1024字节的bytes/str，会被encode成<code>[0xb9, 0x04, 0x00, byte_1, ... , byte_1024]</code>，这里0xb9=0xb7+2，这个2就表示后面有俩字节（0x04，0x00）是拿来描述长度的。而长度0x04，0x00则是1024的big-endian encode。这部分的首字节被限制在0xb8-0xbf，即最大支持8字节的长度描述，最大支持2^(8*4)字节长度的bytes</li>
-<li>另外还有个概念就是list，就相当于bytes或者其他list的一个容器，例如[[‘h’, ‘e’], [‘l’, ‘p’]]。如果这个list的总payload（子元素，包括了前缀，的长度加起来）是0-55bytes，那么就单用一个0xc0（192）来表述。</li>
-<li>和前面一样，如果超过55，那就用0xf7+长度。首字节范围在0xf8-0xff，也是最大支持2^(8*4)字节长度的bytes。</li>
-</ul>
-<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p>在翻rlp资料时候看到了eth社区提出的<a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">blob serialisation</a>。这里说下至今<br><a href="https://github.com/prysmaticlabs/prysm/pull/92" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/92</a><br><a href="https://github.com/prysmaticlabs/prysm/pull/147" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/147</a><br>现在状况就是人家折腾半天然后跑去拥抱protobuf了。</p>
-<h2 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h2><p>serde=SERializing &amp; DEserializing, rust里的framework就叫这个</p>
-]]></content>
-  </entry>
-  <entry>
     <title>New Env in msys2: msys2引入的新环境</title>
     <url>/post/new-env-in-msys2/</url>
     <content><![CDATA[<p>今天为小平板配置精简版开发环境来着，因为vscode在ngcore上一直报</p>
@@ -8132,6 +8104,14 @@ With the respect to/Enperienced the less main reason, they xxx
 ]]></content>
   </entry>
   <entry>
+    <title>PoW Algorithm Design</title>
+    <url>/post/pow-algo-design/</url>
+    <content><![CDATA[<p>首先</p>
+<p>为了减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现设备绑定。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
+<p>有两类不同的通用计算设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
+]]></content>
+  </entry>
+  <entry>
     <title>NGIN的新架構</title>
     <url>/post/new-structure-of-ngin/</url>
     <content><![CDATA[<p>重構一時爽……</p>
@@ -8157,46 +8137,38 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>PoW Algorithm Design</title>
-    <url>/post/pow-algo-design/</url>
-    <content><![CDATA[<p>首先</p>
-<p>为了减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现设备绑定。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
-<p>有两类不同的通用计算设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Profiling ngcore in go</title>
-    <url>/post/profiling-ngcore-in-go/</url>
-    <content><![CDATA[<p>因为新版本的ngcore已经把mining模块删除了，因此在空闲状态从理论上看应该是非常低调的一个p2p“哑巴”。但是实际在PC这个3600x相对高级u的环境下都能占据&gt;10%的cpu且高耗电。因此这里就开始对程序尝试调优。</p>
-<p>暂时就只关注cpu利用率的问题（高耗电在客户端上太致命了</p>
+    <title>ngchain Serialization Selection: ngchain的序列化方案选择</title>
+    <url>/post/ngchain-serialization-selection/</url>
+    <content><![CDATA[<p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br>而我们需要的仅仅只是一个简单的blob存储/传输方案。</p>
 <span id="more"></span>
 
-<p>首先通过注释掉<code>import _ &quot;net/http/pprof&quot;</code>确认了高电量不是由于引入profile导致的。</p>
-<p>然后根据profile给出的结果对几个loop都加了runtime.Goshced，并没有太大起色。</p>
-<p>profile结果全是runtime.xxx这种内部的方法。</p>
-<h2 id="go的profile"><a href="#go的profile" class="headerlink" title="go的profile"></a>go的profile</h2><p>首先肯定是需要熟练一下go自带的pprof工具。</p>
-<p>为了方便profiling，ngcore会在一个随机可用端口上建立一个http server来为pprof提供当前运行数据。<br>一般可以使用<code>go tool pprof http://localhost:[port]</code>来开启命令行模式，如果带<code>-http=:[another_port]</code>参数就可以在another_port上建一个网页来展示diagrams</p>
-<p>下面说一下在命令行模式下的一些命令</p>
-<h3 id="topNN"><a href="#topNN" class="headerlink" title="topNN"></a>topNN</h3><p>NN可以换成任何数字，比如top10就profile（CPU）前十的func。</p>
-<p>go的blog上示例明显老旧了，这里我拿go1.16下的结果讲解一下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(pprof) top10</span><br><span class="line">Showing nodes accounting for 15330ms, 54.15% of 28310ms total</span><br><span class="line">Dropped 151 nodes (cum &lt;= 141.55ms)</span><br><span class="line">Showing top 10 nodes out of 86</span><br><span class="line">显示节点占15330ms，占28310ms总数的54.15% （pprof标识的有效样本时间，和总样本时间）</span><br><span class="line">删除了 151 个节点（cum &lt;= 141.55ms，意思就是这151个剩余的加起来不超过141ms）</span><br><span class="line">显示 86 个节点中的前 10 个节点（即top10）</span><br><span class="line"></span><br><span class="line">      flat  flat%   sum%        cum   cum%</span><br><span class="line">    3530ms 12.47% 12.47%     8150ms 28.79%  runtime.selectgo</span><br><span class="line">    2920ms 10.31% 22.78%     2930ms 10.35%  runtime.stdcall1</span><br><span class="line">    1660ms  5.86% 28.65%     1700ms  6.00%  runtime.unlock2</span><br><span class="line">    1320ms  4.66% 33.31%    11930ms 42.14%  runtime.schedule</span><br><span class="line">    1310ms  4.63% 37.94%     1310ms  4.63%  runtime.stdcall2</span><br><span class="line">    1270ms  4.49% 42.42%     3300ms 11.66%  runtime.lock2</span><br><span class="line">     960ms  3.39% 45.81%     9160ms 32.36%  github.com/ngchain/ngcore/consensus.(*PoWork).eventLoop</span><br><span class="line">     920ms  3.25% 49.06%     6950ms 24.55%  runtime.findrunnable</span><br><span class="line">     850ms  3.00% 52.07%     3230ms 11.41%  runtime.checkTimers</span><br><span class="line">     590ms  2.08% 54.15%     1630ms  5.76%  runtime.sellock</span><br></pre></td></tr></table></figure>
+<p><a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">https://ethresear.ch/t/blob-serialisation/1705</a></p>
+<h2 id="protobuf"><a href="#protobuf" class="headerlink" title="protobuf"></a>protobuf</h2><p>至于为什么会走向protobuf这个歪路，是因为真的在benchmark里它的速度太诱人了。<br>golang那个benchmark对比里它也是被推荐的。<br>那时候新版还没出，gogo的速度在一众序列化方案里简直快到爆。<br>而且protobuf序列化之后的字节也非常小。<br>所以当时就觉得这个可以有。</p>
+<p>但是随着项目一点点成型，protobuf的定位和项目需求的矛盾也越来越明显。<br>对于一个到处都是serde，到处在不顾兼容性地通过修改数据原型优化系统的一个底层应用，<br>protobuf的操作实在是过于繁琐且束缚过大</p>
 <ul>
-<li>flat：样本中running时间（不包含waiting for a called function to return，默认按此排序）</li>
-<li>flat%：占总样本时间百分比</li>
-<li>sum：即从上往下sum(flat%)</li>
-<li>cum：func出现（包括running<strong>或waiting for a called function to return</strong>）的样本时间（用-cum就用它排序）</li>
-<li>cum%：占总百分比</li>
+<li><p>protobuf没有继承关系。<br>protobuf的各种feature在和golang结合的时候会让人很难受。<br>不止是单纯的用户定义的message之间继承不了，比如说这里希望<code>message A</code>继承<code>bytes</code>，<code>message B</code>继承<code>map&lt;string, string&gt;</code>这种就都做不到。<br>而且本身protobuf的（优化）集成也很麻烦（尤其在bazel里）。其对特殊类型（any啥的）的支持在golang下让人不太敢用，尤其是apiv2之后。</p>
+</li>
+<li><p>我想要的大部分情况下只是简单的把一个list序列化，但是protobuf只处理generated code里的那些message<br>例如raw, err := proto.Marshal([][]byte{[]byte{“wasd”}})<br>就会提示cannot use ([][]byte literal) (value of type [][]byte) as protoreflect.ProtoMessage value in argument to proto.Marshal: missing method ProtoReflect。<br>正确的serde做法就是建立一个新的message，然后这个message里带一个这个bytes list类型的字段。</p>
+</li>
+<li><p>我想要序列化过程可定制，但是官方新版本不可以<br>为什么需要可定制？因为一个struct中并非全部字段需要serde。<br>一般的解决方法是将要序列化的字段public，而不需要的private，通过func来调用private内容。<br>但是这里还有个痛点：生成的代码不应该修改，我根本没法把我的私有字段加到struct里。<br>v0.0.19之前，我们是通过func直接生成值，例如GetHash()相当于每次调用都进行hash。<br>即便是sha3.256这样的简单hash，都消耗了大量资源。<br>后面v0.0.20的实践是加上对应的public字段。<br>但是hash值这样的内容导致了值和其他内容填充的步调不一：需要先有内容且确定才能得到hash，修改内容后也得重新hash。<br>v0.0.21带来了更优实践：使用自定义struct继承生成的struct。<br>这样既可以保存自定义的辅助性字段（比如hash）（在自定义struct之中），<br>又可以serde（通过父struct，即生成的）。<br>但是实际体验并没有那么美好，自定义struct即便是继承了，也不是protoreflect.ProtoMessage，没法直接serde。<br>注意这里是protoreflect.ProtoMessage，不是proto.Message，这是新版和旧版（or gogo）的区别所在。<br>然而更坑的是goland会告诉你自定义的子类可以serde……因此需要一个个排查。<br>最后来到我们的最后一个方案，为了快速排查，我们放弃了直接继承，选择了将原型作为自定义struct字段，通过GetProto()来获取原型以及LoadProto()进行serde。<br>这样改掉一堆错误之后看似安静和谐了很多，但是，我们被框架限制住了。<br>这样妥协的方式，让我们很难在types.proto之外继续利用serde来扩展。<br>很明显，protobuf是给那些有准备的人的，而我们只是到处碰运气的赌徒罢了。</p>
+</li>
 </ul>
-<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><p><code>web</code>命令就是在网页显示stack trace。命令行打开的web不如直接host在http。</p>
-<p>通过trace就可以看到是主要哪里call了这个在前面疯狂running的func。</p>
-<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><code>list Func</code>会给你打印Func这个func的源码，并且在每行的左边显示对应的flat和cum</p>
-<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>从上面的可以看出来其实是eventLoop里的select导致了selectgo的大量调用。</p>
-<p>在这个函数里我用了两个case的for-select结构，两个case都是从channel里接受内容。</p>
-<p>尝试了下把for-select-<code>&lt;- ch</code>分解成了两个for-<code>&lt;- ch</code>（不影响业务），cpu占用瞬间变成1-2%（而且是平板上）可以说是相当显著。</p>
-<p>有关这个for-select性能的讨论</p>
-<p><a href="https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485" target="_blank" rel="noopener">https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485</a></p>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://blog.golang.org/pprof" target="_blank" rel="noopener">https://blog.golang.org/pprof</a></p>
-<p><a href="https://github.com/dgryski/go-perfbook/blob/master/performance.md" target="_blank" rel="noopener">https://github.com/dgryski/go-perfbook/blob/master/performance.md</a></p>
+<h2 id="rlp"><a href="#rlp" class="headerlink" title="rlp"></a>rlp</h2><p>作为一个有在geth上debug经验的开发，我也不是第一次使用rlp。在过去golang使用还不熟练的经历里，rlp真的是不好用。<br>首先从直观来看rlp不像别的那样有Marshal和Unmarshal。<br>其次IDE上的提示（lint）也不尽如人意，经常会出现看起来啥问题都没有跑起来到处不能encode的问题。<br>同样Decode也有问题，见这里<a href="https://ethresear.ch/t/blob-serialisation/1705/5" target="_blank" rel="noopener">vb说的例子</a>。这个帖子说的序列化还在优化更新中，而prysm用的是protobuf，所以现在不适合跟上ethereum的设计。<br>再者，缺少对map的支持，不过这个很好理解，有map之后就很难deterministic，像protobuf一样可能不同的实现有着不同的deterministic规则，仅在同一语言上统一。<br>此外如果直接<code>type Uint uint</code>这样建立type（很常见，比如NetworkType，TxType等等），那么rlp是不支持把他当uint这样的原始类型看的，就需要自己实现一个Encoder+Decoder。</p>
+<p>但是首先这个数据大小很香，真的很小。根据github上benchmark来看是比protobuf要小。</p>
+<p>其次原理简洁易懂。说白了就是万物list or str。这部分根据rlp的En/Decoder来讲。</p>
+<h3 id="En-Decoder"><a href="#En-Decoder" class="headerlink" title="En/Decoder"></a>En/Decoder</h3><p>和json的返回值不同，rlp的内容是直接写入io.Writter。<br>一般我们就直接使用rlp.Encode(writter, 【自定义好的结构】)就可以</p>
+<p>前面也说到了rlp原理简单，这里就举点案例：</p>
+<p>比如说一个Nonce是个8字节的定长[]byte，需要把它encode to rlp只需要在这个8字节前面写一个prefix来描述它就可以用136（=0x80+8）来表示8这个长度。</p>
+<p>具体的rlp的规则：</p>
+<ul>
+<li>对于单个byte（char），如果值是在0x00-0x7f（127，也就是常用ascii），那么就直接放着就行</li>
+<li>此外，对于0-55长度的bytes，rlp就用<code>0x80（128）+长度</code>作为其前缀来描述后面的列表（or单byte&gt;127）。这个前缀byte值在0x80（128）-0xb7（183）</li>
+<li>如果是比55还长，那么肯定就需要不止一个byte来修饰。为了支持巨长的内容，前缀的第一个字符来描述后面&gt;55的长度。例如一个1024字节的bytes/str，会被encode成<code>[0xb9, 0x04, 0x00, byte_1, ... , byte_1024]</code>，这里0xb9=0xb7+2，这个2就表示后面有俩字节（0x04，0x00）是拿来描述长度的。而长度0x04，0x00则是1024的big-endian encode。这部分的首字节被限制在0xb8-0xbf，即最大支持8字节的长度描述，最大支持2^(8*4)字节长度的bytes</li>
+<li>另外还有个概念就是list，就相当于bytes或者其他list的一个容器，例如[[‘h’, ‘e’], [‘l’, ‘p’]]。如果这个list的总payload（子元素，包括了前缀，的长度加起来）是0-55bytes，那么就单用一个0xc0（192）来表述。</li>
+<li>和前面一样，如果超过55，那就用0xf7+长度。首字节范围在0xf8-0xff，也是最大支持2^(8*4)字节长度的bytes。</li>
+</ul>
+<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p>在翻rlp资料时候看到了eth社区提出的<a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">blob serialisation</a>。这里说下至今<br><a href="https://github.com/prysmaticlabs/prysm/pull/92" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/92</a><br><a href="https://github.com/prysmaticlabs/prysm/pull/147" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/147</a><br>现在状况就是人家折腾半天然后跑去拥抱protobuf了。</p>
+<h2 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h2><p>serde=SERializing &amp; DEserializing, rust里的framework就叫这个</p>
 ]]></content>
   </entry>
   <entry>
@@ -8285,6 +8257,41 @@ With the respect to/Enperienced the less main reason, they xxx
         <tag>edx</tag>
         <tag>blockchain</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Profiling ngcore in go</title>
+    <url>/post/profiling-ngcore-in-go/</url>
+    <content><![CDATA[<p>因为新版本的ngcore已经把mining模块删除了，因此在空闲状态从理论上看应该是非常低调的一个p2p“哑巴”。但是实际在PC这个3600x相对高级u的环境下都能占据&gt;10%的cpu且高耗电。因此这里就开始对程序尝试调优。</p>
+<p>暂时就只关注cpu利用率的问题（高耗电在客户端上太致命了</p>
+<span id="more"></span>
+
+<p>首先通过注释掉<code>import _ &quot;net/http/pprof&quot;</code>确认了高电量不是由于引入profile导致的。</p>
+<p>然后根据profile给出的结果对几个loop都加了runtime.Goshced，并没有太大起色。</p>
+<p>profile结果全是runtime.xxx这种内部的方法。</p>
+<h2 id="go的profile"><a href="#go的profile" class="headerlink" title="go的profile"></a>go的profile</h2><p>首先肯定是需要熟练一下go自带的pprof工具。</p>
+<p>为了方便profiling，ngcore会在一个随机可用端口上建立一个http server来为pprof提供当前运行数据。<br>一般可以使用<code>go tool pprof http://localhost:[port]</code>来开启命令行模式，如果带<code>-http=:[another_port]</code>参数就可以在another_port上建一个网页来展示diagrams</p>
+<p>下面说一下在命令行模式下的一些命令</p>
+<h3 id="topNN"><a href="#topNN" class="headerlink" title="topNN"></a>topNN</h3><p>NN可以换成任何数字，比如top10就profile（CPU）前十的func。</p>
+<p>go的blog上示例明显老旧了，这里我拿go1.16下的结果讲解一下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(pprof) top10</span><br><span class="line">Showing nodes accounting for 15330ms, 54.15% of 28310ms total</span><br><span class="line">Dropped 151 nodes (cum &lt;= 141.55ms)</span><br><span class="line">Showing top 10 nodes out of 86</span><br><span class="line">显示节点占15330ms，占28310ms总数的54.15% （pprof标识的有效样本时间，和总样本时间）</span><br><span class="line">删除了 151 个节点（cum &lt;= 141.55ms，意思就是这151个剩余的加起来不超过141ms）</span><br><span class="line">显示 86 个节点中的前 10 个节点（即top10）</span><br><span class="line"></span><br><span class="line">      flat  flat%   sum%        cum   cum%</span><br><span class="line">    3530ms 12.47% 12.47%     8150ms 28.79%  runtime.selectgo</span><br><span class="line">    2920ms 10.31% 22.78%     2930ms 10.35%  runtime.stdcall1</span><br><span class="line">    1660ms  5.86% 28.65%     1700ms  6.00%  runtime.unlock2</span><br><span class="line">    1320ms  4.66% 33.31%    11930ms 42.14%  runtime.schedule</span><br><span class="line">    1310ms  4.63% 37.94%     1310ms  4.63%  runtime.stdcall2</span><br><span class="line">    1270ms  4.49% 42.42%     3300ms 11.66%  runtime.lock2</span><br><span class="line">     960ms  3.39% 45.81%     9160ms 32.36%  github.com/ngchain/ngcore/consensus.(*PoWork).eventLoop</span><br><span class="line">     920ms  3.25% 49.06%     6950ms 24.55%  runtime.findrunnable</span><br><span class="line">     850ms  3.00% 52.07%     3230ms 11.41%  runtime.checkTimers</span><br><span class="line">     590ms  2.08% 54.15%     1630ms  5.76%  runtime.sellock</span><br></pre></td></tr></table></figure>
+<ul>
+<li>flat：样本中running时间（不包含waiting for a called function to return，默认按此排序）</li>
+<li>flat%：占总样本时间百分比</li>
+<li>sum：即从上往下sum(flat%)</li>
+<li>cum：func出现（包括running<strong>或waiting for a called function to return</strong>）的样本时间（用-cum就用它排序）</li>
+<li>cum%：占总百分比</li>
+</ul>
+<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><p><code>web</code>命令就是在网页显示stack trace。命令行打开的web不如直接host在http。</p>
+<p>通过trace就可以看到是主要哪里call了这个在前面疯狂running的func。</p>
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><code>list Func</code>会给你打印Func这个func的源码，并且在每行的左边显示对应的flat和cum</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>从上面的可以看出来其实是eventLoop里的select导致了selectgo的大量调用。</p>
+<p>在这个函数里我用了两个case的for-select结构，两个case都是从channel里接受内容。</p>
+<p>尝试了下把for-select-<code>&lt;- ch</code>分解成了两个for-<code>&lt;- ch</code>（不影响业务），cpu占用瞬间变成1-2%（而且是平板上）可以说是相当显著。</p>
+<p>有关这个for-select性能的讨论</p>
+<p><a href="https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485" target="_blank" rel="noopener">https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485</a></p>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://blog.golang.org/pprof" target="_blank" rel="noopener">https://blog.golang.org/pprof</a></p>
+<p><a href="https://github.com/dgryski/go-perfbook/blob/master/performance.md" target="_blank" rel="noopener">https://github.com/dgryski/go-perfbook/blob/master/performance.md</a></p>
+]]></content>
   </entry>
   <entry>
     <title>RandomX Design</title>
@@ -8517,61 +8524,6 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>rfc6979: ECDSA和DSA的确定性用法</title>
-    <url>/post/rfc6979/</url>
-    <content><![CDATA[<p>本文档定义了确定性数字签名生成程序。<br>此类签名与标准数字签名算法 (DSA) 和椭圆曲线数字签名算法 (ECDSA) 数字签名兼容，并且可以使用未经修改的验证器进行处理，无需了解其中描述的过程。<br>确定性签名保留了与数字签名相关的加密安全功能，但可以更轻松地在各种环境中实现，因为它们不需要访问高质量的随机源。</p>
-<p>DSA [FIPS-186-4] 和 ECDSA [X9.62] 是两种标准的数字签名方案。 它们在各种协议中提供数据完整性和可验证的真实性。</p>
-<p>DSA 和 ECDSA 的一个特点是它们需要为每个签名生成生成一个新的随机值（以下称为 k）。 为了有效的安全性，必须使用加密安全过程从一组模整数中随机且一致地选择 k。 在这个过程中即使是轻微的偏斜也可能变成对签名方案的攻击。</p>
-<p>对加密安全随机源的需求已被公认是在某些架构中部署 DSA 和 ECDSA 签名方案的障碍，其中安全随机数生成具有挑战性，特别是嵌入式系统，如智能卡。 在这些系统中，RSA 签名算法，如公钥密码标准 (PKCS) #1 [RFC3447]（使用“类型 1”填充，而不是概率签名方案 (PSS)）和 ISO 9796-2 [ISO-9796-2]，通常是首选，即使它在计算上更昂贵，因为 RSA（具有此类填充方案）是确定性的，因此不需要随机源。</p>
-<p>DSA 和 ECDSA 的随机特性也使得实现更难测试。自动化测试无法可靠地检测实现是否使用了足够高质量的随机源。 这使得实施过程更容易受到灾难性故障的影响，通常在系统部署并成功攻击后发现。</p>
-<p>通过使用确定性过程生成“随机”值 k，可以将 DSA 和 ECDSA 转化为确定性方案。 该过程必须满足一些密码学特征，以保持签名方案所期望的可验证性和不可伪造性； 即，对于不知道签名私钥的人，从输入消息到相应 k 值的映射必须在计算上与随机且统一选择的函数（从消息集到可能的 k 值集）将返回的内容没有区别。</p>
-<p>本文档描述了这样一个过程。 它具有以下特点：</p>
-<ul>
-<li>生成的签名与普通 DSA 和 ECDSA 保持完全兼容。 验证签名的实体不需要更改，甚至不需要知道用于生成 k 的过程。</li>
-<li>密钥对生成没有改变。 现有的私钥可以与确定性 DSA 和 ECDSA 一起使用。</li>
-<li>使用确定性 DSA 和 ECDSA 意味着没有任何秘密或公共价值的额外存储要求。</li>
-<li>确定性 DSA 和 ECDSA 可以应用于与普通 DSA 和 ECDSA 相同的输入，即对要签名的消息计算的哈希值，具有加密安全的哈希函数。</li>
-</ul>
-<p>在本文档中指定的确定性 (EC)DSA 的定义中采取了一些相对随意的选择。<br>这样做是为了使其尽可能普遍适用，从而最大限度地提高包含的测试向量的有用性。 有关一些可能的变体的讨论，请参见第 3.6 节。</p>
-<p>需要注意的是，密钥对的生成仍然需要一个随机源。<br>在随机性存在问题的嵌入式系统中，通常可以安排在更可控的条件下生成密钥对（例如，在特殊的智能卡初始化过程中或在宣誓代理的物理控制下）；<br>或者甚至可以在其他地方生成密钥并导入到设备中。<br>确定性 DSA 和 ECDSA 仅处理签名生成时对随机性的需求。</p>
-<p>1.1. 需求语言</p>
-<p>本文档中的关键词“必须”、“不得”、“需要”、“应该”、“不应”、“应该”、“不应该”、“推荐”、“可以”和“可选”是 按照 RFC 2119 [RFC2119] 中的描述进行解释。</p>
-<ol start="2">
-<li>DSA 和 ECDSA 符号</li>
-</ol>
-<p>在本节中，我们将简要描述 DSA 和 ECDSA 并定义我们的符号。 DSA 和 ECDSA 的完整规范可以分别在 [FIPS-186-4] 和 [X9.62] 中找到。</p>
-<p>2.1. 关键参数</p>
-<p>DSA 和 ECDSA 工作在一个大的素数范围上，其中群运算很容易计算，但是离散对数在现有和可预见的技术下在计算上是不可行的。 组的定义称为“关键参数”。 密钥参数可以在不同的密钥对之间共享，不会对安全产生不良影响； 这尤其是 ECDSA 的常见情况。</p>
-<p>DSA 使用以下关键参数：</p>
-<ul>
-<li><strong>p</strong>：一个大素数（至少 1024 位）</li>
-<li><strong>q</strong>：一个足够大的质数（至少 160 位），它也是 p-1 的除数</li>
-<li><strong>g</strong>： 整数模 p 的 q 阶乘法子群的生成器</li>
-</ul>
-<p>计算 DSA 的组由值 ‘g^j mod p’ 组成，其中 ‘^’ 表示求幂，j 的范围从 0 到 q-1（含）。组的大小是 q。</p>
-<p>ECDSA 使用以下关键参数：</p>
-<ul>
-<li><strong>E</strong> 椭圆曲线，定义在给定的有限域上</li>
-<li><strong>q</strong> 一个足够大的素数（至少 160 位），它是曲线阶数的除数</li>
-<li><strong>G</strong>：点 E的 q 阶乘</li>
-</ul>
-<p>将计算 ECDSA 的组由曲线点 jG（点 G 乘以整数 j）组成，其中 j 的范围从 0 到 q-1。 G 使得 qG = 0（曲线 E 上的“无穷远点”）。<br>组的大小是 q。请注意，这些符号与 [X9.62] 中描述的符号略有不同；<br>我们使用它们是为了匹配用于 DSA 的那些。</p>
-<p>2.2. 密钥对</p>
-<p>DSA 或 ECDSA 私钥是一个整数 x 取模 q。 相关标准规定x不得为0； 因此，x 是 [1, q-1] 范围内的整数。</p>
-<p>DSA 或 ECDSA 公钥由私钥 x 和密钥参数计算得出：</p>
-<ul>
-<li>对于 DSA，公钥是整数：y = g^x mod p</li>
-<li>对于 ECDSA，公钥是曲线点：U = xG</li>
-</ul>
-<p>2.3. 整数转换</p>
-<p>设 qlen 为 q 的二进制长度。 qlen 是使 q 小于 2^qlen 的最小整数。 这是没有符号位的 q 的二进制表示的大小（请注意，q 是一个大素数，是奇数，因此避免了关于任何等于 2 的幂的整数的长度的任何歧义）。 我们定义了五个转换函数，它们处理位串、八位组和整数模 q。 qlen 是这些转换的主要参数。</p>
-<p>在以下小节中，我们使用另外两个长度，称为 blen 和 rlen。 rlen 等于 qlen，四舍五入到下一个 8 的倍数（如果 qlen 已经是 8 的倍数，则 rlen 等于 qlen；否则，rlen 稍大，最多为 qlen+7）。 请注意，rlen 与值 r（生成的签名的前半部分）无关。 blen 是输入位序列的长度（以位为单位），可能因调用而异。 blen 可能小于、等于或大于 qlen。</p>
-<p>2.3.1. 二进制位和八进制位</p>
-<p>形式上，所有操作都定义在位序列上。 一个序列是有序的； 第一位是最左边的，而最后一位是最右边的。</p>
-<p>在大多数软件系统上，（每8个）位被编排分组为八进制位（八位序列）。<br>二进制数据，例如散列函数的输出，可用作八位字节序列。 在适用的情况下，我们认为八位字节中的位按从最重要到最不重要的顺序排列：八位字节中的第一个（最左侧）位的数值为 128，而最后一个（最右侧）的数值为 1。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>消息的签名与验证 —— 证明BTC地址的所有权</title>
     <url>/post/sign-and-verify-messages/</url>
     <content><![CDATA[<p>译：众所周知，本人现在正在开发一个新型的区块链架构NGIN。最近看到Schnorr签名算法很热门就在NG上部署了。但是部署完之后就陷入了更深层的思考——如何更好的利用Schnorr的MultiSig（多重签名）机制？现在我构思将Account也转为利用Schnorr来判定所有权。但是发现如此设计的话Account结构中不包含PublicKey，将很难通过anonymous表来搜索账户余额。故希望从本文中获得启发。</p>
@@ -8630,6 +8582,61 @@ With the respect to/Enperienced the less main reason, they xxx
         <tag>ecdsa</tag>
         <tag>address</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>rfc6979: ECDSA和DSA的确定性用法</title>
+    <url>/post/rfc6979/</url>
+    <content><![CDATA[<p>本文档定义了确定性数字签名生成程序。<br>此类签名与标准数字签名算法 (DSA) 和椭圆曲线数字签名算法 (ECDSA) 数字签名兼容，并且可以使用未经修改的验证器进行处理，无需了解其中描述的过程。<br>确定性签名保留了与数字签名相关的加密安全功能，但可以更轻松地在各种环境中实现，因为它们不需要访问高质量的随机源。</p>
+<p>DSA [FIPS-186-4] 和 ECDSA [X9.62] 是两种标准的数字签名方案。 它们在各种协议中提供数据完整性和可验证的真实性。</p>
+<p>DSA 和 ECDSA 的一个特点是它们需要为每个签名生成生成一个新的随机值（以下称为 k）。 为了有效的安全性，必须使用加密安全过程从一组模整数中随机且一致地选择 k。 在这个过程中即使是轻微的偏斜也可能变成对签名方案的攻击。</p>
+<p>对加密安全随机源的需求已被公认是在某些架构中部署 DSA 和 ECDSA 签名方案的障碍，其中安全随机数生成具有挑战性，特别是嵌入式系统，如智能卡。 在这些系统中，RSA 签名算法，如公钥密码标准 (PKCS) #1 [RFC3447]（使用“类型 1”填充，而不是概率签名方案 (PSS)）和 ISO 9796-2 [ISO-9796-2]，通常是首选，即使它在计算上更昂贵，因为 RSA（具有此类填充方案）是确定性的，因此不需要随机源。</p>
+<p>DSA 和 ECDSA 的随机特性也使得实现更难测试。自动化测试无法可靠地检测实现是否使用了足够高质量的随机源。 这使得实施过程更容易受到灾难性故障的影响，通常在系统部署并成功攻击后发现。</p>
+<p>通过使用确定性过程生成“随机”值 k，可以将 DSA 和 ECDSA 转化为确定性方案。 该过程必须满足一些密码学特征，以保持签名方案所期望的可验证性和不可伪造性； 即，对于不知道签名私钥的人，从输入消息到相应 k 值的映射必须在计算上与随机且统一选择的函数（从消息集到可能的 k 值集）将返回的内容没有区别。</p>
+<p>本文档描述了这样一个过程。 它具有以下特点：</p>
+<ul>
+<li>生成的签名与普通 DSA 和 ECDSA 保持完全兼容。 验证签名的实体不需要更改，甚至不需要知道用于生成 k 的过程。</li>
+<li>密钥对生成没有改变。 现有的私钥可以与确定性 DSA 和 ECDSA 一起使用。</li>
+<li>使用确定性 DSA 和 ECDSA 意味着没有任何秘密或公共价值的额外存储要求。</li>
+<li>确定性 DSA 和 ECDSA 可以应用于与普通 DSA 和 ECDSA 相同的输入，即对要签名的消息计算的哈希值，具有加密安全的哈希函数。</li>
+</ul>
+<p>在本文档中指定的确定性 (EC)DSA 的定义中采取了一些相对随意的选择。<br>这样做是为了使其尽可能普遍适用，从而最大限度地提高包含的测试向量的有用性。 有关一些可能的变体的讨论，请参见第 3.6 节。</p>
+<p>需要注意的是，密钥对的生成仍然需要一个随机源。<br>在随机性存在问题的嵌入式系统中，通常可以安排在更可控的条件下生成密钥对（例如，在特殊的智能卡初始化过程中或在宣誓代理的物理控制下）；<br>或者甚至可以在其他地方生成密钥并导入到设备中。<br>确定性 DSA 和 ECDSA 仅处理签名生成时对随机性的需求。</p>
+<p>1.1. 需求语言</p>
+<p>本文档中的关键词“必须”、“不得”、“需要”、“应该”、“不应”、“应该”、“不应该”、“推荐”、“可以”和“可选”是 按照 RFC 2119 [RFC2119] 中的描述进行解释。</p>
+<ol start="2">
+<li>DSA 和 ECDSA 符号</li>
+</ol>
+<p>在本节中，我们将简要描述 DSA 和 ECDSA 并定义我们的符号。 DSA 和 ECDSA 的完整规范可以分别在 [FIPS-186-4] 和 [X9.62] 中找到。</p>
+<p>2.1. 关键参数</p>
+<p>DSA 和 ECDSA 工作在一个大的素数范围上，其中群运算很容易计算，但是离散对数在现有和可预见的技术下在计算上是不可行的。 组的定义称为“关键参数”。 密钥参数可以在不同的密钥对之间共享，不会对安全产生不良影响； 这尤其是 ECDSA 的常见情况。</p>
+<p>DSA 使用以下关键参数：</p>
+<ul>
+<li><strong>p</strong>：一个大素数（至少 1024 位）</li>
+<li><strong>q</strong>：一个足够大的质数（至少 160 位），它也是 p-1 的除数</li>
+<li><strong>g</strong>： 整数模 p 的 q 阶乘法子群的生成器</li>
+</ul>
+<p>计算 DSA 的组由值 ‘g^j mod p’ 组成，其中 ‘^’ 表示求幂，j 的范围从 0 到 q-1（含）。组的大小是 q。</p>
+<p>ECDSA 使用以下关键参数：</p>
+<ul>
+<li><strong>E</strong> 椭圆曲线，定义在给定的有限域上</li>
+<li><strong>q</strong> 一个足够大的素数（至少 160 位），它是曲线阶数的除数</li>
+<li><strong>G</strong>：点 E的 q 阶乘</li>
+</ul>
+<p>将计算 ECDSA 的组由曲线点 jG（点 G 乘以整数 j）组成，其中 j 的范围从 0 到 q-1。 G 使得 qG = 0（曲线 E 上的“无穷远点”）。<br>组的大小是 q。请注意，这些符号与 [X9.62] 中描述的符号略有不同；<br>我们使用它们是为了匹配用于 DSA 的那些。</p>
+<p>2.2. 密钥对</p>
+<p>DSA 或 ECDSA 私钥是一个整数 x 取模 q。 相关标准规定x不得为0； 因此，x 是 [1, q-1] 范围内的整数。</p>
+<p>DSA 或 ECDSA 公钥由私钥 x 和密钥参数计算得出：</p>
+<ul>
+<li>对于 DSA，公钥是整数：y = g^x mod p</li>
+<li>对于 ECDSA，公钥是曲线点：U = xG</li>
+</ul>
+<p>2.3. 整数转换</p>
+<p>设 qlen 为 q 的二进制长度。 qlen 是使 q 小于 2^qlen 的最小整数。 这是没有符号位的 q 的二进制表示的大小（请注意，q 是一个大素数，是奇数，因此避免了关于任何等于 2 的幂的整数的长度的任何歧义）。 我们定义了五个转换函数，它们处理位串、八位组和整数模 q。 qlen 是这些转换的主要参数。</p>
+<p>在以下小节中，我们使用另外两个长度，称为 blen 和 rlen。 rlen 等于 qlen，四舍五入到下一个 8 的倍数（如果 qlen 已经是 8 的倍数，则 rlen 等于 qlen；否则，rlen 稍大，最多为 qlen+7）。 请注意，rlen 与值 r（生成的签名的前半部分）无关。 blen 是输入位序列的长度（以位为单位），可能因调用而异。 blen 可能小于、等于或大于 qlen。</p>
+<p>2.3.1. 二进制位和八进制位</p>
+<p>形式上，所有操作都定义在位序列上。 一个序列是有序的； 第一位是最左边的，而最后一位是最右边的。</p>
+<p>在大多数软件系统上，（每8个）位被编排分组为八进制位（八位序列）。<br>二进制数据，例如散列函数的输出，可用作八位字节序列。 在适用的情况下，我们认为八位字节中的位按从最重要到最不重要的顺序排列：八位字节中的第一个（最左侧）位的数值为 128，而最后一个（最右侧）的数值为 1。</p>
+]]></content>
   </entry>
   <entry>
     <title>软件工程道德规范和专业实践 Software Engineering Code of Ethics and Professional Practice</title>
@@ -9170,6 +9177,191 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
+    <title>WASM 2Master</title>
+    <url>/post/wasm-2-master/</url>
+    <content><![CDATA[<p>因为NGIN的缘故，所以相当于是加入了wasmtime这个坑里。</p>
+<p>虽然名义上bytecodealliance算是正规军但是有一说一至少这个wasmtime-go做的稀烂啊……</p>
+<p>这里就拿rust(写&amp;编译wasm)+wasmtime-go(调用)来介绍。</p>
+<span id="more"></span>
+
+<h2 id="Beginning"><a href="#Beginning" class="headerlink" title="Beginning"></a>Beginning</h2><p>首先得推荐一个工具<a href="https://webassembly.github.io/wabt/demo/wasm2wat/" target="_blank" rel="noopener">wasm2wat</a>。既然是想耍wasm那肯定听说过wat，因为现在各个语言对wasm的支持都一言难尽，所以个人经验来说是有事没事转成wat看看挺好的。</p>
+<p>然后就是一些基本概念</p>
+<p>基本上都在<a href="https://webassembly.github.io/spec/core/" target="_blank" rel="noopener">官方文档</a>里</p>
+<h3 id="值"><a href="#值" class="headerlink" title="值"></a>值</h3><p>WASM底层内部就四种值：字节(Bytes),整数(Integers),浮点数(Floating-Point),还有命名(Names，基本上可以理解为string)</p>
+<p>这里的值和后面类型里的值是不一样的，这里是底层实现上的，类型的偏应用上。</p>
+<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>值做开发时候一般没啥感知，但是类型就不一样了，处处受它制约。</p>
+<p>WASM有这样几个类型：值，结果，函数，约束，内存，表，全局，导出。</p>
+<p>好像约束是最近多出来的以前好像没见过(</p>
+<h4 id="值-1"><a href="#值-1" class="headerlink" title="值"></a>值</h4><p>就四种值：i32，i64，f32，f64。其中i表示整型，f表示浮点，32，64就是位，比如f64就是等价于其他语言类型的float64。</p>
+<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><p>表示一系列指令或者函数执行后的结果</p>
+<p>结果本质上是一个值(上面那个i32这样的)的队列</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>函数类型对函数的签名进行分类，将参数映射到结果。</p>
+<p>还用于对指令的输入和输出进行分类。</p>
+<p>就类似C语言头文件里那个对函数的预定义，就写个名字，参数(类型)和结果(类型)</p>
+<h4 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h4><p>约束对与内存和表关联的可调整大小的存储的大小范围进行分类。</p>
+<p>如果没有给出最大值，则相应的存储可以增长到任何大小。</p>
+<p>换句话说就是把WASM沙箱当虚拟机client，约束就控制它的内存存储防止它把host资源用了</p>
+<h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p>内存是个线性的存储器，可以用约束对它进行限制，以页面大小为单位。</p>
+<h4 id="表"><a href="#表" class="headerlink" title="表"></a>表</h4><p>表就相当于一些语言里的hashMap或者Array。</p>
+<p>像内存一样，表格的最小和最大大小也受到约束，单位是条目数。</p>
+<p>其中元素类型funcref是所有函数的无限并集。因此，有这个类型的表就相当于包含对函数的引用。</p>
+<h4 id="全局"><a href="#全局" class="headerlink" title="全局"></a>全局</h4><p>就修饰其他值说明其为全局变量，可变也行不可变也ok。</p>
+<h4 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h4><p>导出是修饰其他值来说明其可外部访问/调用。</p>
+<h4 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h4><p>也很可能加别的类型，请告知我更新</p>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>WebAssembly代码由指令序列组成。它的计算模型基于堆栈计算机，其中指令在隐式操作数堆栈上操纵值，消耗（pop）参数值并生成或返回（push）结果值。</p>
+<p>除了来自堆栈的动态操作数外，某些指令还具有静态直接变量，通常是索引或类型注释，它们是指令本身的一部分。</p>
+<p>一些指令的结构形式是，它们将嵌套的指令序列括起来。</p>
+<p>指令里包括： 数值，参数，变量，内存，控制，表达式</p>
+<p>简单点讲就是对不同的类型的不同使用方式罢了</p>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>个人觉得这个很重点，经常考。</p>
+<p>WebAssembly中的代码的可分发，可加载和可执行单元称为模块。 </p>
+<p>在运行时，可以使用一组导入值实例化一个模块以生成一个实例，该实例是一个不可变的元组，引用了正在运行的模块可访问的所有状态。 </p>
+<p>多个模块实例可以访问相同的共享状态，这是WebAssembly中动态链接(dynamic linking)的基础。 WebAssembly模块还可以在将来与ES6模块集成</p>
+<p>一个模块包含以下部分：</p>
+<ul>
+<li>导入</li>
+<li>导出</li>
+<li>程序开始函数</li>
+<li>全局</li>
+<li>内存</li>
+<li>数据</li>
+<li>表</li>
+<li>元素</li>
+<li>函数和代码</li>
+</ul>
+<p>一个模块还定义了几个索引空间，这些索引空间由模块中的各种运算符和section字段静态索引：</p>
+<ul>
+<li>函数索引空间</li>
+<li>全局索引空间</li>
+<li>线性内存索引空间</li>
+<li>表索引空间</li>
+</ul>
+<h4 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h4><p>一个模块可以声明一系列导入，这些导入在实例化时由宿主机环境提供。有这样几种：</p>
+<ul>
+<li>函数导入，可以由<code>call</code>函数在模块内部调用；</li>
+<li>全局导入，可以由全局操作在模块内部访问；</li>
+<li>线性内存导入，可以由内存操作在模块内部访问；和</li>
+<li>表导入，将来可以通过call_indirect和其他表运算符在模块内部访问。</li>
+</ul>
+<p>将来可能会增加其他的导入。导入的目的是在允许模块共享代码和数据情况下，同时允许单独的编译和缓存。</p>
+<p>所有导入都包括两个显性名称：模块名称和导入名称，必须是有效的UTF-8。这些名称的解释取决于宿主机环境，但旨在允许宿主机环境（如Web）支持两级命名空间。</p>
+<p>每种特定的导入类型都定义了额外字段：</p>
+<p>函数导入包括用于模块内部导入函数的签名。主机环境定义了针对模块外部导入功能的签名检查。但是，如果导入的函数是WebAssembly函数，则如果签名不匹配，则宿主机环境必须触发实例化时间错误。</p>
+<p>全局变量导入包括全局变量的值类型和可变性。这些字段的含义与“全局”部分中的含义相同。在最简化实现中，全局变量导入必须是不可变的。</p>
+<p>线性内存导入包括“线性存储器”部分中定义的相同字段集：初始长度和可选的最大长度。主机环境必须仅允许导入WebAssembly线性内存，这些内存的初始长度大于或等于导入中声明的初始长度，并且最大长度&lt;=导入中声明的最大长度。这样可以确保可以进行单独的编译：在声明的初始长度以下的内存访问始终是入站的，在声明的最大长度以上的内存访问始终是越界的，如果初始等于最大值，则该长度是固定的。在最简实现中，每个内存都是默认内存，因此至多可以有一个线性内存导入或线性内存定义。</p>
+<p>表导入包括“表”部分中定义的相同字段集：元素类型，初始长度和可选的最大长度。与线性内存部分一样，主机环境必须确保仅导入具有完全匹配的元素类型，初始长度等于或大于最大长度，或等于或小于等于最大长度的WebAssembly表。在MVP中，每个表都是默认表，因此最多可以有一个表导入或表定义。</p>
+<p>由于WebAssembly规范未定义如何解释导入名称：</p>
+<ul>
+<li>Web环境将名称定义为UTF8编码的字符串；</li>
+<li>宿主机环境可以将模块名称解释为文件路径，URL，一组固定的内置模块中的密钥，或者主机环境可以调用用户定义的挂钩将模块名称解析为其中之一；</li>
+<li>模块名称不需要解析为WebAssembly模块；它可以解析为内置模块（由主机环境实现）或以其他兼容语言编写的模块；和</li>
+<li>调用导入函数的含义是宿主机定义的。</li>
+</ul>
+<p>模块导入的开放性使得它们可以用于向WebAssembly代码公开任意宿主机环境里的函数，类似于本机syscall。例如，一个shell环境可以定义一个带有内置stdio模块<code>puts</code>的导出。</p>
+<h4 id="导出-1"><a href="#导出-1" class="headerlink" title="导出"></a>导出</h4><p>模块可以声明一系列导出，这些导出在实例化时返回给主机环境。每个导出都有三个字段：一个名称（必须是有效的UTF-8），其名称由主机环境定义；一个类型（用于说明导出是函数，全局，内存还是表），以及指向类型对应索引空间的索引。</p>
+<p>所有定义都是可导出的：函数，全局变量，线性内存和表。导出了的定义的实际含义由宿主机环境定义。但是，如果另一个WebAssembly实例导入该定义，则两个实例将共享相同的定义，并且共享了关联的状态（全局变量值，线性内存字节，表元素）。</p>
+<p>导出名称必须唯一。</p>
+<p>在最小实现中，只能导出不可变的全局变量。</p>
+<h4 id="模块启动函数"><a href="#模块启动函数" class="headerlink" title="模块启动函数"></a>模块启动函数</h4><p>如果模块已定义起始节点，则在实例实例初始化之后，包括通过“数据”和“元素”部分的“内存”和“表”，以及可调用导出的函数之前，加载器应调用它引用的函数。</p>
+<ul>
+<li>start函数不能接受任何参数或返回任何内容</li>
+<li>该功能由功能索引标识，可以是导入的，也可以导出的</li>
+<li>每个模块最多只能有一个起始节点</li>
+</ul>
+<p>例如，模块中的起始节点将是：</p>
+<p><code>(start $start_function)</code></p>
+<p>要么</p>
+<p><code>(start 42)</code></p>
+<p>在这第一个示例中，预期环境在调用任何其他模块函数之前先调用函数$start_function。在第二种情况下，预期环​​境将调用索引为42的模块函数。该数字是从0开始的函数索引（与导出相同）。</p>
+<p>一个模块可以：</p>
+<ul>
+<li>最多只有一个起始节点</li>
+<li>如果模块包含起始节点，则必须在模块中定义功能</li>
+<li>在加载模块之后且对模块函数的任何调用完成之前，将调用start函数</li>
+</ul>
+<h4 id="全局部分"><a href="#全局部分" class="headerlink" title="全局部分"></a>全局部分</h4><p>全局部分提供了零或数个全局变量的内部定义。</p>
+<p>每个全局变量内部定义都声明其类型（值类型），可变性（布尔标志）和初始值设定项（初始值设定项表达式）。</p>
+<h4 id="线性内存部分"><a href="#线性内存部分" class="headerlink" title="线性内存部分"></a>线性内存部分</h4><p>线性内存部分提供了一个线性内存的内部定义。在最小实现中，每个内存都是默认内存，并且最多可以有一个线性内存导入或线性内存定义。</p>
+<p>每个线性内存部分都声明一个初始内存大小（随后可以通过grow_memory增加）和一个可选的最大内存大小。</p>
+<p>如果尝试增长超过声明的最大值，grow_memory将确保失败。 声明后，实现应（非规范性的）尝试保留最大大小的虚拟内存。 分配初始内存大小失败是运行时错误，而保留最大内存失败则不是。 如果未声明最大内存大小，则在虚拟地址空间有限的体系结构上，引擎应仅分配初始大小并按需重新分配。</p>
+<h4 id="数据部分"><a href="#数据部分" class="headerlink" title="数据部分"></a>数据部分</h4><p>线性存储器的初始内容为零。</p>
+<p>数据节包含一个可能为空的数据段数组，这些数据段指定给定内存的固定（偏移，长度）范围的初始内容，该内容由其线性内存索引指定。</p>
+<p>数据部分类似于原生可执行文件的<code>.data</code>部分。</p>
+<p>长度是一个整数常数值（定义给定段的长度）。偏移量是一个初始化表达式。</p>
+<h4 id="表部分"><a href="#表部分" class="headerlink" title="表部分"></a>表部分</h4><p>表格部分包含零或数个不同表格的定义。在最小实现中，每个表都是默认表，并且至多一个表导入或表定义。</p>
+<p>每个表定义都声明一个元素类型，初始长度和可选的最大长度。</p>
+<p>在最小实现中，唯一有效的元素类型是<code>anyfunc</code>，但将来，可能会添加更多元素类型。</p>
+<p>在最小实现中，只能通过宿主机定义的API（例如JavaScript的<code>WebAssembly.Table.prototype.grow</code>）来调整表的大小。将来可能会添加一个grow_table。</p>
+<p>在任何一种情况下，如果试图增长到声明的最大值以上，表增长都会失败。与线性内存一样，当声明最大值时，实现应（非规范）尝试将虚拟内存保留为最大大小。分配初始内存大小失败是运行时错误，而保留最大内存失败则不是。如果未声明最大内存大小，则在虚拟地址空间有限的体系结构上，引擎应仅分配初始大小并按需重新分配。</p>
+<h4 id="元素部分"><a href="#元素部分" class="headerlink" title="元素部分"></a>元素部分</h4><p>表中元素的初始内容是个标记值（如果被调用，则会被捕获）。 </p>
+<p>元素部分允许模块使用模块中的任何其他定义初始化（在实例化时）任何导入的或内部定义的表的元素。这与数据部分允许模块初始化任何已导入或已定义存储器的字节对称。</p>
+<p>元素部分包含元素段的可能为空的数组，这些元素段指定给定表的固定（偏移，长度）范围的初始内容，该范围由表索引指定。</p>
+<p>长度是一个整数常数值（定义给定段的长度）。偏移量是一个初始化表达式。元素由它们在相应索引空间中的索引指定。</p>
+<h4 id="功能和代码部分"><a href="#功能和代码部分" class="headerlink" title="功能和代码部分"></a>功能和代码部分</h4><p>一个逻辑功能定义由以下两个部分决定</p>
+<ul>
+<li>函数部分声明模块中每个内部函数定义的签名</li>
+<li>代码部分包含功能部分声明的每个函数的函数主体</li>
+</ul>
+<p>此拆分通过将构成模块大部分字节大小的函数主体放在结尾处来帮助进行流式编译，以便在编译开始之前可以使用递归模块加载和并行编译所需的所有元数据。</p>
+<h4 id="功能索引空间"><a href="#功能索引空间" class="headerlink" title="功能索引空间"></a>功能索引空间</h4><p>函数索引空间对所有导入的和内部定义的函数定义建立索引，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，函数导入（如果有），然后是模块内定义的函数。</p>
+<p>函数索引空间由以下部分使用：</p>
+<ul>
+<li>调用，以识别直接调用的被调用函数。</li>
+<li>元素。</li>
+<li>导出，以确定哪些功能公开给嵌入器。</li>
+<li>启动函数，以确定实例完全初始化后调用哪个函数。</li>
+</ul>
+<h4 id="全局索引空间"><a href="#全局索引空间" class="headerlink" title="全局索引空间"></a>全局索引空间</h4><p>全局索引空间对所有导入的和内部定义的全局定义进行索引，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，首先是全局导入（如果有），然后是模块内定义的全局。</p>
+<p>全局索引空间用于：</p>
+<ul>
+<li>全局变量访问运算符，标识要读取/写入的全局变量</li>
+<li>数据段，以将数据段的偏移量（在线性存储器中）定义为全局变量的值</li>
+<li>线性内存索引空间</li>
+<li>线性内存索引空间索引所有导入的和内部定义的线性内存定义，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，首先是内存导入（如果有），然后是模块内定义的内存。</li>
+</ul>
+<p>线性内存的索引空间仅由数据部分使用。在最小实现中，最多只有一个线性内存，因此该索引空间只是当可以有多个内存时使用的占位符。</p>
+<h4 id="表索引空间"><a href="#表索引空间" class="headerlink" title="表索引空间"></a>表索引空间</h4><p>表索引空间为所有导入的和内部定义的表定义建立索引，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，首先是表导入（如果有），然后是模块中定义的表。</p>
+<p>表索引空间仅由元素部分使用。在最小实现中，最多有一个表，因此该索引空间只是可以存在多个表时的占位符。</p>
+<h3 id="初始化程序表达式"><a href="#初始化程序表达式" class="headerlink" title="初始化程序表达式"></a>初始化程序表达式</h3><p>初始化程序表达式在实例化时进行执行，现在用于：</p>
+<ul>
+<li>定义全局变量的初始值</li>
+<li>定义数据段或元素段的偏移量</li>
+</ul>
+<p>一个初始化程序表达式是纯WebAssembly表达式，其编码与WebAssembly表达式相同。并不是所有的WebAssembly运算符都可以或不应该在初始化表达式中得到支持。初始化表达式表示WebAssembly表达式的最小纯子集。</p>
+<p>在最小实现中，为了使事情简单，同时仍支持动态链接的基本需求，初始化器表达式仅限于以下空运算符：</p>
+<ul>
+<li>四个常量运算符</li>
+<li><code>get_global</code>，其中全局索引必须引用不可变的导入。</li>
+</ul>
+<p>将来，可以添加诸如<code>i32.add</code>之类的运算符，以实现更具表现力的base + offset耗时计算。</p>
+<h3 id="Tricks-基本操作"><a href="#Tricks-基本操作" class="headerlink" title="Tricks 基本操作"></a>Tricks 基本操作</h3><p>很明显哈，wasm半点都没提到string或者bytes，那么在使用嵌入式的WASM模块时候我们怎么输入string和bytes(Uint8Array)？</p>
+<p>先从非语言相关角度看，由于没法传数组没法传不定参数，所以我们需要一个起点和一个长度来定位需要导入的string。因此就直接发送指针位置和长度两个值作为i32到WASM就充当了string。</p>
+<p>就相当于，宿主机往内存写入数据，然后把位置和长度告诉WASM，WASM再从内存上取出来。</p>
+<p>这里有个增强WASM的rust库，wasm-bindgen，基本上能帮忙把东西都给实现了</p>
+<p>【吐槽一下基本上每个WASM相关rust库都能看到alexcrichton在回答issue……劳模啊……</p>
+<p>做WASM开发的时候可以把<code>.wasm</code>看作是一个dll，so或者out，面向的是WASM这个系统，所以就可以意识到为啥内置没string这些高级的类型了【不让你写0101已经很不错了。</p>
+<p>那么这么来看wat就是汇编语言了:-)</p>
+<h2 id="例"><a href="#例" class="headerlink" title="例"></a>例</h2><figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no_mangle表示不会为函数进行函数名混淆，保证FFI名字不变</span></span><br><span class="line"><span class="meta">#[no_mangle]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">extern</span> <span class="function"><span class="keyword">fn</span> <span class="title">string</span></span>() -&gt;  *<span class="keyword">const</span> <span class="built_in">u8</span> &#123;</span><br><span class="line">    <span class="string">b&quot;Hello, World!\0&quot;</span>.as_ptr()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么我们可以通过<code>instance.GetExport(&quot;memory&quot;).Memory().UnsafeData()</code>获取<code>Hello, World!</code>?</p>
+<p>因为编译的时候这个Hello world就被写进了wasm里面，是·个·常·量！初始化之后就理所当然进了线性内存(liner memory)里。call string的时候本质就是string乖乖把<strong>在WASM上的</strong>内存地址给返回了。</p>
+<p>也就是说相当于</p>
+<figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> HELLO: &amp;<span class="symbol">&#x27;static</span> <span class="built_in">str</span> = <span class="string">&quot;Hello, World!&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="WASI"><a href="#WASI" class="headerlink" title="WASI"></a>WASI</h2><p>WASI 是个很有趣的东西，他就直接把WASM带到了系统上</p>
+<p>在<a href="https://github.com/WebAssembly/WASI/issues/223%EF%BC%8C" target="_blank" rel="noopener">https://github.com/WebAssembly/WASI/issues/223，</a> 有个回答很精妙：At an application level though, the direction WASI is heading is away from “A passes B a string, then then B opens the resource”, and toward “A opens the resource and passes B a handle”. 这其实也就是WASM工作的原理。</p>
+<h2 id="NGIN"><a href="#NGIN" class="headerlink" title="NGIN"></a>NGIN</h2><p>在链上应用我需要的是其对链上信息(block, tx etc)做出反应。</p>
+<p>例如，子网币的发行针对主网矿工，那么其应当在WASM中维护一个account balances，然后对block的事件侦听来实现分发，对tx事件侦听实现交易。</p>
+<p>那么换句话说，我们只需要把外部信息(结构体)传递到WASM沙箱中作为事件，然后再加点getter。</p>
+<p>当然我们也要提供好存储。</p>
+]]></content>
+      <tags>
+        <tag>wasm</tag>
+        <tag>wasi</tag>
+        <tag>todo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>WebAssembly核心标准：WebAssembly Core Specification</title>
     <url>/post/wasm-core-1/</url>
     <content><![CDATA[<p>细枝末节略，无关内容略。</p>
@@ -9672,191 +9864,6 @@ With the respect to/Enperienced the less main reason, they xxx
         <tag>wasm</tag>
         <tag>todo</tag>
         <tag>specification</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>WASM 2Master</title>
-    <url>/post/wasm-2-master/</url>
-    <content><![CDATA[<p>因为NGIN的缘故，所以相当于是加入了wasmtime这个坑里。</p>
-<p>虽然名义上bytecodealliance算是正规军但是有一说一至少这个wasmtime-go做的稀烂啊……</p>
-<p>这里就拿rust(写&amp;编译wasm)+wasmtime-go(调用)来介绍。</p>
-<span id="more"></span>
-
-<h2 id="Beginning"><a href="#Beginning" class="headerlink" title="Beginning"></a>Beginning</h2><p>首先得推荐一个工具<a href="https://webassembly.github.io/wabt/demo/wasm2wat/" target="_blank" rel="noopener">wasm2wat</a>。既然是想耍wasm那肯定听说过wat，因为现在各个语言对wasm的支持都一言难尽，所以个人经验来说是有事没事转成wat看看挺好的。</p>
-<p>然后就是一些基本概念</p>
-<p>基本上都在<a href="https://webassembly.github.io/spec/core/" target="_blank" rel="noopener">官方文档</a>里</p>
-<h3 id="值"><a href="#值" class="headerlink" title="值"></a>值</h3><p>WASM底层内部就四种值：字节(Bytes),整数(Integers),浮点数(Floating-Point),还有命名(Names，基本上可以理解为string)</p>
-<p>这里的值和后面类型里的值是不一样的，这里是底层实现上的，类型的偏应用上。</p>
-<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>值做开发时候一般没啥感知，但是类型就不一样了，处处受它制约。</p>
-<p>WASM有这样几个类型：值，结果，函数，约束，内存，表，全局，导出。</p>
-<p>好像约束是最近多出来的以前好像没见过(</p>
-<h4 id="值-1"><a href="#值-1" class="headerlink" title="值"></a>值</h4><p>就四种值：i32，i64，f32，f64。其中i表示整型，f表示浮点，32，64就是位，比如f64就是等价于其他语言类型的float64。</p>
-<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><p>表示一系列指令或者函数执行后的结果</p>
-<p>结果本质上是一个值(上面那个i32这样的)的队列</p>
-<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>函数类型对函数的签名进行分类，将参数映射到结果。</p>
-<p>还用于对指令的输入和输出进行分类。</p>
-<p>就类似C语言头文件里那个对函数的预定义，就写个名字，参数(类型)和结果(类型)</p>
-<h4 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h4><p>约束对与内存和表关联的可调整大小的存储的大小范围进行分类。</p>
-<p>如果没有给出最大值，则相应的存储可以增长到任何大小。</p>
-<p>换句话说就是把WASM沙箱当虚拟机client，约束就控制它的内存存储防止它把host资源用了</p>
-<h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p>内存是个线性的存储器，可以用约束对它进行限制，以页面大小为单位。</p>
-<h4 id="表"><a href="#表" class="headerlink" title="表"></a>表</h4><p>表就相当于一些语言里的hashMap或者Array。</p>
-<p>像内存一样，表格的最小和最大大小也受到约束，单位是条目数。</p>
-<p>其中元素类型funcref是所有函数的无限并集。因此，有这个类型的表就相当于包含对函数的引用。</p>
-<h4 id="全局"><a href="#全局" class="headerlink" title="全局"></a>全局</h4><p>就修饰其他值说明其为全局变量，可变也行不可变也ok。</p>
-<h4 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h4><p>导出是修饰其他值来说明其可外部访问/调用。</p>
-<h4 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h4><p>也很可能加别的类型，请告知我更新</p>
-<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>WebAssembly代码由指令序列组成。它的计算模型基于堆栈计算机，其中指令在隐式操作数堆栈上操纵值，消耗（pop）参数值并生成或返回（push）结果值。</p>
-<p>除了来自堆栈的动态操作数外，某些指令还具有静态直接变量，通常是索引或类型注释，它们是指令本身的一部分。</p>
-<p>一些指令的结构形式是，它们将嵌套的指令序列括起来。</p>
-<p>指令里包括： 数值，参数，变量，内存，控制，表达式</p>
-<p>简单点讲就是对不同的类型的不同使用方式罢了</p>
-<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>个人觉得这个很重点，经常考。</p>
-<p>WebAssembly中的代码的可分发，可加载和可执行单元称为模块。 </p>
-<p>在运行时，可以使用一组导入值实例化一个模块以生成一个实例，该实例是一个不可变的元组，引用了正在运行的模块可访问的所有状态。 </p>
-<p>多个模块实例可以访问相同的共享状态，这是WebAssembly中动态链接(dynamic linking)的基础。 WebAssembly模块还可以在将来与ES6模块集成</p>
-<p>一个模块包含以下部分：</p>
-<ul>
-<li>导入</li>
-<li>导出</li>
-<li>程序开始函数</li>
-<li>全局</li>
-<li>内存</li>
-<li>数据</li>
-<li>表</li>
-<li>元素</li>
-<li>函数和代码</li>
-</ul>
-<p>一个模块还定义了几个索引空间，这些索引空间由模块中的各种运算符和section字段静态索引：</p>
-<ul>
-<li>函数索引空间</li>
-<li>全局索引空间</li>
-<li>线性内存索引空间</li>
-<li>表索引空间</li>
-</ul>
-<h4 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h4><p>一个模块可以声明一系列导入，这些导入在实例化时由宿主机环境提供。有这样几种：</p>
-<ul>
-<li>函数导入，可以由<code>call</code>函数在模块内部调用；</li>
-<li>全局导入，可以由全局操作在模块内部访问；</li>
-<li>线性内存导入，可以由内存操作在模块内部访问；和</li>
-<li>表导入，将来可以通过call_indirect和其他表运算符在模块内部访问。</li>
-</ul>
-<p>将来可能会增加其他的导入。导入的目的是在允许模块共享代码和数据情况下，同时允许单独的编译和缓存。</p>
-<p>所有导入都包括两个显性名称：模块名称和导入名称，必须是有效的UTF-8。这些名称的解释取决于宿主机环境，但旨在允许宿主机环境（如Web）支持两级命名空间。</p>
-<p>每种特定的导入类型都定义了额外字段：</p>
-<p>函数导入包括用于模块内部导入函数的签名。主机环境定义了针对模块外部导入功能的签名检查。但是，如果导入的函数是WebAssembly函数，则如果签名不匹配，则宿主机环境必须触发实例化时间错误。</p>
-<p>全局变量导入包括全局变量的值类型和可变性。这些字段的含义与“全局”部分中的含义相同。在最简化实现中，全局变量导入必须是不可变的。</p>
-<p>线性内存导入包括“线性存储器”部分中定义的相同字段集：初始长度和可选的最大长度。主机环境必须仅允许导入WebAssembly线性内存，这些内存的初始长度大于或等于导入中声明的初始长度，并且最大长度&lt;=导入中声明的最大长度。这样可以确保可以进行单独的编译：在声明的初始长度以下的内存访问始终是入站的，在声明的最大长度以上的内存访问始终是越界的，如果初始等于最大值，则该长度是固定的。在最简实现中，每个内存都是默认内存，因此至多可以有一个线性内存导入或线性内存定义。</p>
-<p>表导入包括“表”部分中定义的相同字段集：元素类型，初始长度和可选的最大长度。与线性内存部分一样，主机环境必须确保仅导入具有完全匹配的元素类型，初始长度等于或大于最大长度，或等于或小于等于最大长度的WebAssembly表。在MVP中，每个表都是默认表，因此最多可以有一个表导入或表定义。</p>
-<p>由于WebAssembly规范未定义如何解释导入名称：</p>
-<ul>
-<li>Web环境将名称定义为UTF8编码的字符串；</li>
-<li>宿主机环境可以将模块名称解释为文件路径，URL，一组固定的内置模块中的密钥，或者主机环境可以调用用户定义的挂钩将模块名称解析为其中之一；</li>
-<li>模块名称不需要解析为WebAssembly模块；它可以解析为内置模块（由主机环境实现）或以其他兼容语言编写的模块；和</li>
-<li>调用导入函数的含义是宿主机定义的。</li>
-</ul>
-<p>模块导入的开放性使得它们可以用于向WebAssembly代码公开任意宿主机环境里的函数，类似于本机syscall。例如，一个shell环境可以定义一个带有内置stdio模块<code>puts</code>的导出。</p>
-<h4 id="导出-1"><a href="#导出-1" class="headerlink" title="导出"></a>导出</h4><p>模块可以声明一系列导出，这些导出在实例化时返回给主机环境。每个导出都有三个字段：一个名称（必须是有效的UTF-8），其名称由主机环境定义；一个类型（用于说明导出是函数，全局，内存还是表），以及指向类型对应索引空间的索引。</p>
-<p>所有定义都是可导出的：函数，全局变量，线性内存和表。导出了的定义的实际含义由宿主机环境定义。但是，如果另一个WebAssembly实例导入该定义，则两个实例将共享相同的定义，并且共享了关联的状态（全局变量值，线性内存字节，表元素）。</p>
-<p>导出名称必须唯一。</p>
-<p>在最小实现中，只能导出不可变的全局变量。</p>
-<h4 id="模块启动函数"><a href="#模块启动函数" class="headerlink" title="模块启动函数"></a>模块启动函数</h4><p>如果模块已定义起始节点，则在实例实例初始化之后，包括通过“数据”和“元素”部分的“内存”和“表”，以及可调用导出的函数之前，加载器应调用它引用的函数。</p>
-<ul>
-<li>start函数不能接受任何参数或返回任何内容</li>
-<li>该功能由功能索引标识，可以是导入的，也可以导出的</li>
-<li>每个模块最多只能有一个起始节点</li>
-</ul>
-<p>例如，模块中的起始节点将是：</p>
-<p><code>(start $start_function)</code></p>
-<p>要么</p>
-<p><code>(start 42)</code></p>
-<p>在这第一个示例中，预期环境在调用任何其他模块函数之前先调用函数$start_function。在第二种情况下，预期环​​境将调用索引为42的模块函数。该数字是从0开始的函数索引（与导出相同）。</p>
-<p>一个模块可以：</p>
-<ul>
-<li>最多只有一个起始节点</li>
-<li>如果模块包含起始节点，则必须在模块中定义功能</li>
-<li>在加载模块之后且对模块函数的任何调用完成之前，将调用start函数</li>
-</ul>
-<h4 id="全局部分"><a href="#全局部分" class="headerlink" title="全局部分"></a>全局部分</h4><p>全局部分提供了零或数个全局变量的内部定义。</p>
-<p>每个全局变量内部定义都声明其类型（值类型），可变性（布尔标志）和初始值设定项（初始值设定项表达式）。</p>
-<h4 id="线性内存部分"><a href="#线性内存部分" class="headerlink" title="线性内存部分"></a>线性内存部分</h4><p>线性内存部分提供了一个线性内存的内部定义。在最小实现中，每个内存都是默认内存，并且最多可以有一个线性内存导入或线性内存定义。</p>
-<p>每个线性内存部分都声明一个初始内存大小（随后可以通过grow_memory增加）和一个可选的最大内存大小。</p>
-<p>如果尝试增长超过声明的最大值，grow_memory将确保失败。 声明后，实现应（非规范性的）尝试保留最大大小的虚拟内存。 分配初始内存大小失败是运行时错误，而保留最大内存失败则不是。 如果未声明最大内存大小，则在虚拟地址空间有限的体系结构上，引擎应仅分配初始大小并按需重新分配。</p>
-<h4 id="数据部分"><a href="#数据部分" class="headerlink" title="数据部分"></a>数据部分</h4><p>线性存储器的初始内容为零。</p>
-<p>数据节包含一个可能为空的数据段数组，这些数据段指定给定内存的固定（偏移，长度）范围的初始内容，该内容由其线性内存索引指定。</p>
-<p>数据部分类似于原生可执行文件的<code>.data</code>部分。</p>
-<p>长度是一个整数常数值（定义给定段的长度）。偏移量是一个初始化表达式。</p>
-<h4 id="表部分"><a href="#表部分" class="headerlink" title="表部分"></a>表部分</h4><p>表格部分包含零或数个不同表格的定义。在最小实现中，每个表都是默认表，并且至多一个表导入或表定义。</p>
-<p>每个表定义都声明一个元素类型，初始长度和可选的最大长度。</p>
-<p>在最小实现中，唯一有效的元素类型是<code>anyfunc</code>，但将来，可能会添加更多元素类型。</p>
-<p>在最小实现中，只能通过宿主机定义的API（例如JavaScript的<code>WebAssembly.Table.prototype.grow</code>）来调整表的大小。将来可能会添加一个grow_table。</p>
-<p>在任何一种情况下，如果试图增长到声明的最大值以上，表增长都会失败。与线性内存一样，当声明最大值时，实现应（非规范）尝试将虚拟内存保留为最大大小。分配初始内存大小失败是运行时错误，而保留最大内存失败则不是。如果未声明最大内存大小，则在虚拟地址空间有限的体系结构上，引擎应仅分配初始大小并按需重新分配。</p>
-<h4 id="元素部分"><a href="#元素部分" class="headerlink" title="元素部分"></a>元素部分</h4><p>表中元素的初始内容是个标记值（如果被调用，则会被捕获）。 </p>
-<p>元素部分允许模块使用模块中的任何其他定义初始化（在实例化时）任何导入的或内部定义的表的元素。这与数据部分允许模块初始化任何已导入或已定义存储器的字节对称。</p>
-<p>元素部分包含元素段的可能为空的数组，这些元素段指定给定表的固定（偏移，长度）范围的初始内容，该范围由表索引指定。</p>
-<p>长度是一个整数常数值（定义给定段的长度）。偏移量是一个初始化表达式。元素由它们在相应索引空间中的索引指定。</p>
-<h4 id="功能和代码部分"><a href="#功能和代码部分" class="headerlink" title="功能和代码部分"></a>功能和代码部分</h4><p>一个逻辑功能定义由以下两个部分决定</p>
-<ul>
-<li>函数部分声明模块中每个内部函数定义的签名</li>
-<li>代码部分包含功能部分声明的每个函数的函数主体</li>
-</ul>
-<p>此拆分通过将构成模块大部分字节大小的函数主体放在结尾处来帮助进行流式编译，以便在编译开始之前可以使用递归模块加载和并行编译所需的所有元数据。</p>
-<h4 id="功能索引空间"><a href="#功能索引空间" class="headerlink" title="功能索引空间"></a>功能索引空间</h4><p>函数索引空间对所有导入的和内部定义的函数定义建立索引，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，函数导入（如果有），然后是模块内定义的函数。</p>
-<p>函数索引空间由以下部分使用：</p>
-<ul>
-<li>调用，以识别直接调用的被调用函数。</li>
-<li>元素。</li>
-<li>导出，以确定哪些功能公开给嵌入器。</li>
-<li>启动函数，以确定实例完全初始化后调用哪个函数。</li>
-</ul>
-<h4 id="全局索引空间"><a href="#全局索引空间" class="headerlink" title="全局索引空间"></a>全局索引空间</h4><p>全局索引空间对所有导入的和内部定义的全局定义进行索引，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，首先是全局导入（如果有），然后是模块内定义的全局。</p>
-<p>全局索引空间用于：</p>
-<ul>
-<li>全局变量访问运算符，标识要读取/写入的全局变量</li>
-<li>数据段，以将数据段的偏移量（在线性存储器中）定义为全局变量的值</li>
-<li>线性内存索引空间</li>
-<li>线性内存索引空间索引所有导入的和内部定义的线性内存定义，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，首先是内存导入（如果有），然后是模块内定义的内存。</li>
-</ul>
-<p>线性内存的索引空间仅由数据部分使用。在最小实现中，最多只有一个线性内存，因此该索引空间只是当可以有多个内存时使用的占位符。</p>
-<h4 id="表索引空间"><a href="#表索引空间" class="headerlink" title="表索引空间"></a>表索引空间</h4><p>表索引空间为所有导入的和内部定义的表定义建立索引，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，首先是表导入（如果有），然后是模块中定义的表。</p>
-<p>表索引空间仅由元素部分使用。在最小实现中，最多有一个表，因此该索引空间只是可以存在多个表时的占位符。</p>
-<h3 id="初始化程序表达式"><a href="#初始化程序表达式" class="headerlink" title="初始化程序表达式"></a>初始化程序表达式</h3><p>初始化程序表达式在实例化时进行执行，现在用于：</p>
-<ul>
-<li>定义全局变量的初始值</li>
-<li>定义数据段或元素段的偏移量</li>
-</ul>
-<p>一个初始化程序表达式是纯WebAssembly表达式，其编码与WebAssembly表达式相同。并不是所有的WebAssembly运算符都可以或不应该在初始化表达式中得到支持。初始化表达式表示WebAssembly表达式的最小纯子集。</p>
-<p>在最小实现中，为了使事情简单，同时仍支持动态链接的基本需求，初始化器表达式仅限于以下空运算符：</p>
-<ul>
-<li>四个常量运算符</li>
-<li><code>get_global</code>，其中全局索引必须引用不可变的导入。</li>
-</ul>
-<p>将来，可以添加诸如<code>i32.add</code>之类的运算符，以实现更具表现力的base + offset耗时计算。</p>
-<h3 id="Tricks-基本操作"><a href="#Tricks-基本操作" class="headerlink" title="Tricks 基本操作"></a>Tricks 基本操作</h3><p>很明显哈，wasm半点都没提到string或者bytes，那么在使用嵌入式的WASM模块时候我们怎么输入string和bytes(Uint8Array)？</p>
-<p>先从非语言相关角度看，由于没法传数组没法传不定参数，所以我们需要一个起点和一个长度来定位需要导入的string。因此就直接发送指针位置和长度两个值作为i32到WASM就充当了string。</p>
-<p>就相当于，宿主机往内存写入数据，然后把位置和长度告诉WASM，WASM再从内存上取出来。</p>
-<p>这里有个增强WASM的rust库，wasm-bindgen，基本上能帮忙把东西都给实现了</p>
-<p>【吐槽一下基本上每个WASM相关rust库都能看到alexcrichton在回答issue……劳模啊……</p>
-<p>做WASM开发的时候可以把<code>.wasm</code>看作是一个dll，so或者out，面向的是WASM这个系统，所以就可以意识到为啥内置没string这些高级的类型了【不让你写0101已经很不错了。</p>
-<p>那么这么来看wat就是汇编语言了:-)</p>
-<h2 id="例"><a href="#例" class="headerlink" title="例"></a>例</h2><figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="comment">// no_mangle表示不会为函数进行函数名混淆，保证FFI名字不变</span></span><br><span class="line"><span class="meta">#[no_mangle]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">extern</span> <span class="function"><span class="keyword">fn</span> <span class="title">string</span></span>() -&gt;  *<span class="keyword">const</span> <span class="built_in">u8</span> &#123;</span><br><span class="line">    <span class="string">b&quot;Hello, World!\0&quot;</span>.as_ptr()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为什么我们可以通过<code>instance.GetExport(&quot;memory&quot;).Memory().UnsafeData()</code>获取<code>Hello, World!</code>?</p>
-<p>因为编译的时候这个Hello world就被写进了wasm里面，是·个·常·量！初始化之后就理所当然进了线性内存(liner memory)里。call string的时候本质就是string乖乖把<strong>在WASM上的</strong>内存地址给返回了。</p>
-<p>也就是说相当于</p>
-<figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> HELLO: &amp;<span class="symbol">&#x27;static</span> <span class="built_in">str</span> = <span class="string">&quot;Hello, World!&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="WASI"><a href="#WASI" class="headerlink" title="WASI"></a>WASI</h2><p>WASI 是个很有趣的东西，他就直接把WASM带到了系统上</p>
-<p>在<a href="https://github.com/WebAssembly/WASI/issues/223%EF%BC%8C" target="_blank" rel="noopener">https://github.com/WebAssembly/WASI/issues/223，</a> 有个回答很精妙：At an application level though, the direction WASI is heading is away from “A passes B a string, then then B opens the resource”, and toward “A opens the resource and passes B a handle”. 这其实也就是WASM工作的原理。</p>
-<h2 id="NGIN"><a href="#NGIN" class="headerlink" title="NGIN"></a>NGIN</h2><p>在链上应用我需要的是其对链上信息(block, tx etc)做出反应。</p>
-<p>例如，子网币的发行针对主网矿工，那么其应当在WASM中维护一个account balances，然后对block的事件侦听来实现分发，对tx事件侦听实现交易。</p>
-<p>那么换句话说，我们只需要把外部信息(结构体)传递到WASM沙箱中作为事件，然后再加点getter。</p>
-<p>当然我们也要提供好存储。</p>
-]]></content>
-      <tags>
-        <tag>wasm</tag>
-        <tag>wasi</tag>
-        <tag>todo</tag>
       </tags>
   </entry>
   <entry>
