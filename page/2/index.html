@@ -185,7 +185,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/post/design-of-contracts/">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/post/ecdsa-sign/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -199,7 +199,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/post/design-of-contracts/" class="post-title-link" itemprop="url">Design of Contracts</a>
+            <a href="/post/ecdsa-sign/" class="post-title-link" itemprop="url">ECDSA签名及验证</a>
         </h2>
 
         <div class="post-meta">
@@ -223,12 +223,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>说实话其实一开始压根没想做合约，就只是想做个chain。</p>
-<p>但是后来发现你不做DAPP你的chain都没人看，那些做coin的也都在往DAPP靠。就有种被逼上梁山的感觉。不过还好现在有个去华山的路（WASM），可以考虑上了华山再往梁山飞。</p>
-<p>其实我也不算是第一个选择华山飞梁山的，cosmos和eth2.0也选，不过人家有现成地图，我只能凭感觉乱飘。而且我们不是一个山头起飞的，他们选了更早被人发现的山头（wasmer），我选了个看起来粗大(?)一点的新山头（wasmtime）。</p>
+          <p>ECDSA私钥是取q为模后得到的整数x。相关标准规定x不得为0。 因此，x是在[1，q-1]范围内的整数。qlen为q的二进制长度。</p>
+<p>签名的生成使用了密码学哈希函数H和输入的消息m。消息首先由H处理，产生值H(m)即消息m的hash，它是长度为hlen的二进制序列。通常，选择H使其输出长度hlen大致等于qlen，因为签名方案的总体安全性取决于hlen和qlen之间的最小值；但是，相关标准支持hlen和qlen的所有组合。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/post/design-of-contracts/#more" rel="contents">
+              <a class="btn" href="/post/ecdsa-sign/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -355,7 +354,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-14 08:27:25" itemprop="dateModified" datetime="2021-10-14T08:27:25+08:00">2021-10-14</time>
+                <time title="Modified: 2021-10-14 13:26:18" itemprop="dateModified" datetime="2021-10-14T13:26:18+08:00">2021-10-14</time>
               </span>
 
           
