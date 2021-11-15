@@ -70,7 +70,7 @@
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20211115200422317.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20211115024145749.png">
 <meta property="article:published_time" content="2021-08-01T23:31:57.000Z">
-<meta property="article:modified_time" content="2021-11-15T16:35:21.581Z">
+<meta property="article:modified_time" content="2021-11-15T16:36:42.303Z">
 <meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210904214224475.png">
@@ -263,7 +263,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-16 00:35:21" itemprop="dateModified" datetime="2021-11-16T00:35:21+08:00">2021-11-16</time>
+                <time title="Modified: 2021-11-16 00:36:42" itemprop="dateModified" datetime="2021-11-16T00:36:42+08:00">2021-11-16</time>
               </span>
 
           
@@ -1144,7 +1144,7 @@
 <ol>
 <li>接收者使用他/她的用户密钥来解密密文</li>
 </ol>
-<p>安全性：<br>– 如果密文是为 <a href="mailto:&#x61;&#x6c;&#105;&#99;&#101;&#x40;&#x61;&#98;&#99;&#x2e;&#x63;&#111;&#x6d;">&#x61;&#x6c;&#105;&#99;&#101;&#x40;&#x61;&#98;&#99;&#x2e;&#x63;&#111;&#x6d;</a> 加密的，除了与 <a href="mailto:&#x61;&#x6c;&#x69;&#99;&#x65;&#64;&#97;&#98;&#x63;&#x2e;&#99;&#x6f;&#x6d;">&#x61;&#x6c;&#x69;&#99;&#x65;&#64;&#97;&#98;&#x63;&#x2e;&#99;&#x6f;&#x6d;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
+<p>安全性：<br>– 如果密文是为 <a href="mailto:&#x61;&#108;&#x69;&#x63;&#x65;&#x40;&#97;&#x62;&#x63;&#x2e;&#99;&#111;&#109;">&#x61;&#108;&#x69;&#x63;&#x65;&#x40;&#97;&#x62;&#x63;&#x2e;&#99;&#111;&#109;</a> 加密的，除了与 <a href="mailto:&#97;&#x6c;&#105;&#x63;&#x65;&#x40;&#97;&#x62;&#x63;&#46;&#x63;&#111;&#109;">&#97;&#x6c;&#105;&#x63;&#x65;&#x40;&#97;&#x62;&#x63;&#46;&#x63;&#111;&#109;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
 <p>IBE 需要一个称为双线性配对的数学函数（基于椭圆曲线）<br>• 它是两组之间的单向映射函数：G 和 GT，使得 G 和 GT 中的离散对数很难<br>• 表示为一个映射<br>$e: G \times G →G_T$<br>它取 G 组中的两个元素并输出 $G_T$ 组中的一个元素</p>
 <p>双线性配对<br>• 假设$g$是具有群序$p$的$G$生成器（即，$G$具有$p$个元素：$|G| =p$）<br>• 我们有以下属性：<br>– Bilinear双线性：$e(g^x,g^y)=e(g,g)^{xy}$, 对于$x \in Z_p &gt; e(g^x,g)=e(g,g^x)=e(g,g)^x$<br>– Non-degenerate 非退化：$e(g,g)\neq1$</p>
 <p>第一个实用的 IBE 方案是由 Dan Boneh 和 Matthew K. Franklin 在 2001 年（我们称之为 Boneh-Franklin 计划）</p>
@@ -1697,7 +1697,7 @@
 <h3 id="攻击模型-1"><a href="#攻击模型-1" class="headerlink" title="攻击模型"></a>攻击模型</h3><p>安全设备存储和处理机密信息。<br>主要的秘密是私钥或公钥<br>密码学是安全应用程序（硬件或软件）中的关键点</p>
 <p>目标：<br>查找使用的密钥<br>通过检索会话密钥来利用安全协议</p>
 <h4 id="Non-invasive-attacks-low-cost-非侵入式攻击（低成本）"><a href="#Non-invasive-attacks-low-cost-非侵入式攻击（低成本）" class="headerlink" title="Non-invasive attacks (low-cost) 非侵入式攻击（低成本）"></a>Non-invasive attacks (low-cost) 非侵入式攻击（低成本）</h4><p>• 观察或操作设备，<strong>无需物理修改</strong><br>• <strong>不留下篡改证据</strong>——难以发现<br>• 只需要中等复杂的设备和知识即可实施<br>• 示例：功率分析攻击power analysis attacks、时序攻击 timing attack</p>
-<h4 id="Invasive-attacks-expensive-侵入性攻击（昂贵）"><a href="#Invasive-attacks-expensive-侵入性攻击（昂贵）" class="headerlink" title="Invasive attacks (expensive) 侵入性攻击（昂贵）"></a>Invasive attacks (expensive) 侵入性攻击（昂贵）</h4><p>• 几乎无限的能力从芯片中提取信息并了解其功能<br>• 需要直接访问设备的内部组件<br>• 通常需要昂贵的设备、知识渊博的攻击者和时间<br>• 示例：微探测microprobing</p>
+<h4 id="Invasive-attacks-expensive-侵入性攻击（昂贵）"><a href="#Invasive-attacks-expensive-侵入性攻击（昂贵）" class="headerlink" title="Invasive attacks (expensive) 侵入性攻击（昂贵）"></a>Invasive attacks (expensive) 侵入性攻击（昂贵）</h4><p>• 几乎无限的能力从芯片中提取信息并了解其功能<br>• 需要直接访问设备的内部组件<br>• 通常需要昂贵的设备、知识渊博的攻击者和时间<br>• 示例：微测 microprobing</p>
 <h4 id="Semi-invasive-attacks-affordable-半侵入式攻击（经济实惠）"><a href="#Semi-invasive-attacks-affordable-半侵入式攻击（经济实惠）" class="headerlink" title="Semi-invasive attacks (affordable) 半侵入式攻击（经济实惠）"></a><strong>Semi-invasive attacks (affordable) 半侵入式攻击（经济实惠）</strong></h4><p>• 我们可以在计算过程中注入故障并观察故障结果。 系统内部结构<strong>保持完整</strong><br>• 填补了非侵入性和侵入性类型之间的空白，既便宜又易于重复</p>
 <h3 id="抗侵入性攻击（防篡改antitampering）"><a href="#抗侵入性攻击（防篡改antitampering）" class="headerlink" title="抗侵入性攻击（防篡改antitampering）"></a>抗侵入性攻击（防篡改antitampering）</h3><p>• 将整个安全核心包裹在细粒度的电子网格中<br>• 将核心包裹在环氧树脂中<br>• 光敏二极管、温度传感器、篡改传感器<br>• 检测电压和电流变化的传感器<br>• 当检测到攻击时，芯片应用数据归零，或者芯片变得无用</p>
 <p>防篡改级别：<br>• 零级<br>• 级别低<br>• 关卡模型<br>• 关卡模组<br>• 级别模式<br>• 级别高</p>
@@ -1714,7 +1714,7 @@
 <p>Address leakage 地址泄露</p>
 <p>• 缓存是共享资源：<br>• 缓存大小有限：L1 缓存限制在 8 KB 到 64 KB 之间<br>• 进程/线程争夺缓存<br>• 缓存状态影响并受所有进程/线程的影响，导致进程/线程之间的串扰<br>• 缓存数据受内存保护……<br>• 未受攻击<br>• 但是“元数据”会泄露有关内存访问模式的信息：正在访问哪些地址。</p>
 <h5 id="差分侧信道攻击"><a href="#差分侧信道攻击" class="headerlink" title="差分侧信道攻击"></a>差分侧信道攻击</h5><p>• DPA 统计原理<br>– 收购程序<br>– 选择和预测<br>– 微分运算符和曲线<br>– 使用 DPA 指标进行逆向工程</p>
-<p>微分功耗攻击的步骤</p>
+<p>案例：微分功耗攻击的步骤</p>
 <ol>
 <li>在设备上随机消息的正常加密/解密过程中收集电源跟踪</li>
 <li>对Key进行假设，并基于该假设密钥上的已知功率模型收集功率轨迹</li>
@@ -1724,7 +1724,7 @@
 </ol>
 <h5 id="半侵入式攻击（故障注入）"><a href="#半侵入式攻击（故障注入）" class="headerlink" title="半侵入式攻击（故障注入）"></a>半侵入式攻击（故障注入）</h5><p>紧急故障Glitch Faults<br>• 时钟<br>• 电压<br>• 数据损坏<br>激光束、聚焦离子束等<br>目标：<br>• 随机字节或位翻转<br>• 字节中的特定位<br>• 在选定的时间内随机或特定位或字节翻转</p>
 <p>故障注入安全错误</p>
-<p>蒙哥马利电力梯故障注入安全错误</p>
+<p>蒙哥马利功耗梯故障注入安全错误</p>
 <h3 id="对策"><a href="#对策" class="headerlink" title="对策"></a>对策</h3><h4 id="SCA测信道攻击对策"><a href="#SCA测信道攻击对策" class="headerlink" title="SCA测信道攻击对策"></a>SCA测信道攻击对策</h4><p>• 算法变异对策<br>– 掩蔽/致盲 → 随机化可与敏感信息相关联的数据<br>– 提供最终消除盲区的方法（在算法内）。</p>
 <p>• 基于实施的对策<br>– 隐藏：使泄漏跟踪独立于中间值和执行的操作。<br>– 使泄漏迹线无法与噪声区分开来<br>– 使泄漏跟踪恒定（例如双轨逻辑、预充电逻辑、互补电路）</p>
 <h4 id="故障注入攻击对策"><a href="#故障注入攻击对策" class="headerlink" title="故障注入攻击对策"></a>故障注入攻击对策</h4><p>• 故障检测机制<br>– 面向实现（类似于防篡改）<br>– 面向算法（观察中间值数学或二进制值的一致性）<br>– 时间冗余<br>– 硬件冗余<br>– 信息冗余</p>

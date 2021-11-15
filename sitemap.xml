@@ -317,14 +317,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/fit5046-a2-paper/</loc>
+    <loc>https://c0mm4nd.com/post/environmental_monitoring_system_based_on_blockchain/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/environmental_monitoring_system_based_on_blockchain/</loc>
+    <loc>https://c0mm4nd.com/post/fit5046-a2-paper/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -359,6 +359,13 @@
   </url>
   
   <url>
+    <loc>https://c0mm4nd.com/post/bulletproof-paper/</loc>
+    
+    <lastmod>2021-10-11</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://c0mm4nd.com/post/build-wasm-runtime/</loc>
     
     <lastmod>2021-10-11</lastmod>
@@ -374,13 +381,6 @@
   
   <url>
     <loc>https://c0mm4nd.com/post/chain-scaling/</loc>
-    
-    <lastmod>2021-10-11</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/post/bulletproof-paper/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -592,6 +592,13 @@
   </url>
   
   <url>
+    <loc>https://c0mm4nd.com/tags/project-management/</loc>
+    <lastmod>2021-11-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://c0mm4nd.com/tags/android/</loc>
     <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
@@ -606,28 +613,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/project-management/</loc>
-    <lastmod>2021-11-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/tags/research/</loc>
-    <lastmod>2021-11-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/software-management/</loc>
-    <lastmod>2021-11-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/database/</loc>
     <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -648,7 +634,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/java/</loc>
+    <loc>https://c0mm4nd.com/tags/software-management/</loc>
+    <lastmod>2021-11-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/database/</loc>
     <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -663,6 +656,13 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/data-warehouse/</loc>
+    <lastmod>2021-11-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/java/</loc>
     <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
