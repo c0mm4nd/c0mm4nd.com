@@ -114,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/regenerate-cgo-definitions/</loc>
+    <loc>https://c0mm4nd.com/post/rfc6979/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/rfc6979/</loc>
+    <loc>https://c0mm4nd.com/post/regenerate-cgo-definitions/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -156,14 +156,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/ngchain-serialization-selection/</loc>
+    <loc>https://c0mm4nd.com/post/pow-algo-design/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/pow-algo-design/</loc>
+    <loc>https://c0mm4nd.com/post/ngchain-serialization-selection/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -366,7 +366,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/chain-on-enterprise-view/</loc>
+    <loc>https://c0mm4nd.com/post/chain-scaling/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -380,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/chain-scaling/</loc>
+    <loc>https://c0mm4nd.com/post/chain-on-enterprise-view/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -466,14 +466,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/blockchain/</loc>
+    <loc>https://c0mm4nd.com/tags/edx/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/edx/</loc>
+    <loc>https://c0mm4nd.com/tags/blockchain/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -627,6 +627,13 @@
   </url>
   
   <url>
+    <loc>https://c0mm4nd.com/tags/software-management/</loc>
+    <lastmod>2021-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://c0mm4nd.com/tags/UI/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
@@ -635,13 +642,6 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/design/</loc>
-    <lastmod>2021-11-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/software-management/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -683,6 +683,13 @@
   </url>
   
   <url>
+    <loc>https://c0mm4nd.com/tags/p2p/</loc>
+    <lastmod>2021-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://c0mm4nd.com/tags/architecture/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
@@ -691,13 +698,6 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/network/</loc>
-    <lastmod>2021-11-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/p2p/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
