@@ -77,7 +77,7 @@
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20211115024145749.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20211116234057460.png">
 <meta property="article:published_time" content="2021-08-01T23:31:57.000Z">
-<meta property="article:modified_time" content="2021-11-16T16:14:53.984Z">
+<meta property="article:modified_time" content="2021-11-16T16:19:57.409Z">
 <meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://c0mm4nd.com/post/fit5163-sec-notes/image-20210904214224475.png">
@@ -270,7 +270,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-17 00:14:53" itemprop="dateModified" datetime="2021-11-17T00:14:53+08:00">2021-11-17</time>
+                <time title="Modified: 2021-11-17 00:19:57" itemprop="dateModified" datetime="2021-11-17T00:19:57+08:00">2021-11-17</time>
               </span>
 
           
@@ -1186,7 +1186,7 @@
 <ol>
 <li>接收者使用他/她的用户密钥来解密密文</li>
 </ol>
-<p>安全性：<br>– 如果密文是为 <a href="mailto:&#x61;&#x6c;&#105;&#99;&#101;&#x40;&#x61;&#x62;&#99;&#46;&#x63;&#111;&#x6d;">&#x61;&#x6c;&#105;&#99;&#101;&#x40;&#x61;&#x62;&#99;&#46;&#x63;&#111;&#x6d;</a> 加密的，除了与 <a href="mailto:&#x61;&#x6c;&#x69;&#x63;&#101;&#x40;&#97;&#x62;&#99;&#x2e;&#99;&#x6f;&#109;">&#x61;&#x6c;&#x69;&#x63;&#101;&#x40;&#97;&#x62;&#99;&#x2e;&#99;&#x6f;&#109;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
+<p>安全性：<br>– 如果密文是为 <a href="mailto:&#97;&#108;&#105;&#99;&#x65;&#64;&#97;&#98;&#x63;&#x2e;&#99;&#111;&#109;">&#97;&#108;&#105;&#99;&#x65;&#64;&#97;&#98;&#x63;&#x2e;&#99;&#111;&#109;</a> 加密的，除了与 <a href="mailto:&#x61;&#108;&#105;&#99;&#x65;&#64;&#x61;&#98;&#99;&#x2e;&#99;&#x6f;&#x6d;">&#x61;&#108;&#105;&#99;&#x65;&#64;&#x61;&#98;&#99;&#x2e;&#99;&#x6f;&#x6d;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
 <p>IBE 需要一个称为双线性配对的数学函数（基于椭圆曲线）<br>• 它是两组之间的单向映射函数：G 和 GT，使得 G 和 GT 中的离散对数很难<br>• 表示为一个映射<br>$e: G \times G →G_T$<br>它取 G 组中的两个元素并输出 $G_T$ 组中的一个元素</p>
 <p>双线性配对<br>• 假设$g$是具有群序$p$的$G$生成器（即，$G$具有$p$个元素：$|G| =p$）<br>• 我们有以下属性：<br>– Bilinear双线性：$e(g^x,g^y)=e(g,g)^{xy}$, 对于$x \in Z_p &gt; e(g^x,g)=e(g,g^x)=e(g,g)^x$<br>– Non-degenerate 非退化：$e(g,g)\neq1$</p>
 <p>第一个实用的 IBE 方案是由 Dan Boneh 和 Matthew K. Franklin 在 2001 年（我们称之为 Boneh-Franklin 计划）</p>
@@ -1896,7 +1896,7 @@
 <h2 id="Exam"><a href="#Exam" class="headerlink" title="Exam"></a>Exam</h2><p>• 20道选择题（共10分，每道0.5分）<br>• 6-8 道小作文题（共 50 分）<br>• 2 小时 + 10 分钟</p>
 <p>哪种密码块操作模式（ECB 或 <strong>CBC</strong>）更常用？ 给出使用 CBC 优于 ECB 的一项优势和使用 CBC 优于 ECB 的一项劣势。</p>
 <p>回想一下，对称密钥密码系统由三个函数组成：密钥生成器 G、加密函数 E 和解密函数 D。对于任意一对用户，例如 Alice (A) 和 Bob (B)，G 将 a 作为输入 随机位串并产生共享密钥 KAB 作为输出。 Alice 或 Bob 都可以获取明文消息 x 并产生密文消息 y ← E(x, KAB)。 密文 y 可以通过不安全的通道发送，接收者可以恢复 x ← D(y, KAB)。</p>
-<p>a) 简要说明此类系统安全的三个基本要求。（可能是安全服务3目标，也可能是MAC部分提到的三原型<br>b) 为什么对称密钥密码学不足以作为安全互联网通信的基础，尤其是安全的基于 Web 的商务？</p>
+<p>a) 简要说明此类系统安全的三个基本要求。（可能是安全服务3目标，也可能是MAC部分提到的三原型<br>b) 为什么对称密钥密码学不足以作为安全互联网通信的基础，尤其是安全的基于 Web 的商务？（W5&amp;W6开头有写对称的缺点</p>
 <p>Mock里最后一题有点难，估计会出类似题目（换公式</p>
 <img src="/post/fit5163-sec-notes/image-20211116234057460.png" class="">
 
@@ -1905,7 +1905,7 @@
 <p>解决方案:<br>接收方执行以下操作，协议 A：<br>• 使用k1 解密并获得x||H(k2||x)。 提取 x。<br>• 散列k2||x 并与H(k2||x) 进行比较。<br>对于协议 B（完全有缺陷）：<br>• 使用k_priv 解密并获得H(x)。 提取 x。<br>• 散列 x 并与 H(x) 进行比较</p>
 <p>(b) 说明是否有以下安全服务：<br>• 保密<br>• 正直<br>• 不可否认性<br>为前一问题中给出的两个协议中的每一个给出。</p>
 <p>解决方案:<br>在协议 A 的情况下：<br>• 保密性 - 是通过加密<br>• 完整性 - 是通过散列<br>• 不可否认性——双方都不能声称对方已经创建了消息。<br>在协议 B 的情况下：<br>• 机密性 - 不，没有加密<br>• 完整性 - 不，因为任何人都可以替换消息并计算散列<br>• 不可否认性- 没有人可以创建这样的消息。</p>
-<p>（原题答案应该B是三性都有的</p>
+<p>（原题答案应该B是三性都有的，本质就是类似 AES_共有密钥(原文+签名)</p>
 
     </div>
 

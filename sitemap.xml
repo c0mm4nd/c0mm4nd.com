@@ -114,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/rfc6979/</loc>
+    <loc>https://c0mm4nd.com/post/regenerate-cgo-definitions/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/regenerate-cgo-definitions/</loc>
+    <loc>https://c0mm4nd.com/post/rfc6979/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -156,14 +156,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/pow-algo-design/</loc>
+    <loc>https://c0mm4nd.com/post/ngchain-serialization-selection/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/ngchain-serialization-selection/</loc>
+    <loc>https://c0mm4nd.com/post/pow-algo-design/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -177,14 +177,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/multi-addr-wallet-design/</loc>
+    <loc>https://c0mm4nd.com/post/merkling-in-ethereum/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/merkling-in-ethereum/</loc>
+    <loc>https://c0mm4nd.com/post/multi-addr-wallet-design/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -219,14 +219,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/how-to-create-a-temp-ngin-network/</loc>
+    <loc>https://c0mm4nd.com/post/go-interesting/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/go-interesting/</loc>
+    <loc>https://c0mm4nd.com/post/how-to-create-a-temp-ngin-network/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -366,13 +366,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/chain-scaling/</loc>
-    
-    <lastmod>2021-10-11</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/post/bulletproof-paper/</loc>
     
     <lastmod>2021-10-11</lastmod>
@@ -381,6 +374,13 @@
   
   <url>
     <loc>https://c0mm4nd.com/post/chain-on-enterprise-view/</loc>
+    
+    <lastmod>2021-10-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/post/chain-scaling/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -466,14 +466,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/edx/</loc>
+    <loc>https://c0mm4nd.com/tags/blockchain/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/blockchain/</loc>
+    <loc>https://c0mm4nd.com/tags/edx/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -592,13 +592,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/project-management/</loc>
-    <lastmod>2021-11-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/tags/android/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
@@ -613,14 +606,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/research/</loc>
+    <loc>https://c0mm4nd.com/tags/project-management/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/database/</loc>
+    <loc>https://c0mm4nd.com/tags/research/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -642,6 +635,13 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/design/</loc>
+    <lastmod>2021-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/database/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -683,13 +683,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/p2p/</loc>
-    <lastmod>2021-11-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/tags/architecture/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
@@ -698,6 +691,13 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/network/</loc>
+    <lastmod>2021-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/p2p/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -767,14 +767,14 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/wallet/</loc>
+    <loc>https://c0mm4nd.com/tags/ethereum/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/ethereum/</loc>
+    <loc>https://c0mm4nd.com/tags/wallet/</loc>
     <lastmod>2021-11-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
