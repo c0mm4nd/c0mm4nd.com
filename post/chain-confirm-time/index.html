@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -20,15 +20,19 @@
     var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Talkless">
-<meta property="og:url" content="https://c0mm4nd.com/archives/2021/page/4/index.html">
+  <meta name="description" content="汇总一些实践上各链上交易的确认时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chain-confirm-time">
+<meta property="og:url" content="https://c0mm4nd.com/post/chain-confirm-time/index.html">
 <meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="汇总一些实践上各链上交易的确认时间">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-16T17:24:18.000Z">
+<meta property="article:modified_time" content="2022-02-16T19:36:48.204Z">
 <meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://c0mm4nd.com/archives/2021/page/4/">
+<link rel="canonical" href="https://c0mm4nd.com/post/chain-confirm-time/">
 
 
 <script id="page-configurations">
@@ -36,12 +40,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | Talkless</title>
+  <title>chain-confirm-time | Talkless</title>
   
 
 
@@ -116,7 +120,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">55</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">57</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -179,120 +183,145 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">Nice! 55 posts in total. Keep on posting.</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/post/chain-confirm-time/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          chain-confirm-time
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-02-17 01:24:18 / Modified: 03:36:48" itemprop="dateCreated datePublished" datetime="2022-02-17T01:24:18+08:00">2022-02-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+        <p>汇总一些<em>实践上</em>各链上交易的确认时间</p>
+<span id="more"></span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-07-10T16:44:38+08:00"
-              content="2021-07-10">
-          07-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/profiling-ngcore-in-go/" itemprop="url">
-            <span itemprop="name">Profiling ngcore in go</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-07-03T02:00:28+08:00"
-              content="2021-07-03">
-          07-03
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/new-env-in-msys2/" itemprop="url">
-            <span itemprop="name">New Env in msys2: msys2引入的新环境</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-28T01:52:54+08:00"
-              content="2021-06-28">
-          06-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/ngchain-serialization-selection/" itemprop="url">
-            <span itemprop="name">ngchain Serialization Selection: ngchain的序列化方案选择</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-18T19:24:39+08:00"
-              content="2021-06-18">
-          06-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/post/rfc6979/" itemprop="url">
-            <span itemprop="name">rfc6979: ECDSA和DSA的确定性用法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在对链上数据进行多线程录入(即同步到数据库)的过程中,这些确认时间可以作为线程数以防止出现对账户之类状态的deadlock</p>
+<h2 id="确认数"><a href="#确认数" class="headerlink" title="确认数"></a>确认数</h2><table>
+<thead>
+<tr>
+<th align="left">链</th>
+<th align="right">确认数(交易后区块高度)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">BTC</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="left">ETH</td>
+<td align="right">20</td>
+</tr>
+<tr>
+<td align="left">LTC</td>
+<td align="right">12</td>
+</tr>
+<tr>
+<td align="left">XMR</td>
+<td align="right">15</td>
+</tr>
+<tr>
+<td align="left">EOS</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">XRP</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">SOL</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">LSK</td>
+<td align="right">303</td>
+</tr>
+<tr>
+<td align="left">DOT</td>
+<td align="right">25</td>
+</tr>
+<tr>
+<td align="left">FIL</td>
+<td align="right">200</td>
+</tr>
+<tr>
+<td align="left">TRON</td>
+<td align="right">20</td>
+</tr>
+</tbody></table>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>表中为实践上的确认数,必大于理论上确认数(例如,ETH理论为7,为设计时预计的5min)</p>
+<p>实际的确认时间=确认数 * 预计区块时间</p>
+<p>预计区块时间可以在源码或Wiki里找到</p>
+<p>Token的确认时间=Token所在链的交易确认时间</p>
+<p>有些家大业大有矿池的交易所(如OK,币安),为了提高客户体验,会减少BTC等”利益一致”币的确认时间</p>
+<h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p><a href="https://support.kraken.com/hc/en-us/articles/203325283-Cryptocurrency-deposit-processing-times" target="_blank" rel="noopener">kraken交易所</a><br><a href="https://www.reddit.com/r/ethereum/comments/4eplsv/how_many_confirms_is_considered_safe_in_ethereum/" target="_blank" rel="noopener">How many confirms is considered ‘safe’ in Ethereum?</a><br><a href="https://developers.circle.com/docs/confirmations" target="_blank" rel="noopener">Circle钱包</a><br><a href="https://www.okex.com/support/hc/en-us/articles/360000205532-Token-Confirmation-Requirements-Blockchain-Explorers" target="_blank" rel="noopener">OKEX交易所</a></p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/sth-on-ngin/" rel="prev" title="Something on NGIN: 一些隨筆">
+      <i class="fa fa-chevron-left"></i> Something on NGIN: 一些隨筆
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2021/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/2021/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2021/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
+  
+  
 
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -339,6 +368,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">确认数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%86%85%E5%AE%B9"><span class="nav-number">4.</span> <span class="nav-text">参考内容</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -352,7 +382,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -407,7 +437,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -556,6 +586,25 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : '5315ec08ed3cb2d1ce38d1eddf45a6a3',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
