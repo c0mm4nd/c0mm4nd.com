@@ -128,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/wasm-core-1/</loc>
+    <loc>https://c0mm4nd.com/post/wasm-2-master/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/wasm-2-master/</loc>
+    <loc>https://c0mm4nd.com/post/wasm-core-1/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -164,15 +164,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/software-engineering-code-of-ethics/</loc>
-    
-    <lastmod>2021-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/post/standardizing-wasi-a-webassembly-system-interface/</loc>
     
     <lastmod>2021-10-11</lastmod>
@@ -182,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/rfc6979/</loc>
+    <loc>https://c0mm4nd.com/post/software-engineering-code-of-ethics/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -200,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/sign-and-verify-messages/</loc>
+    <loc>https://c0mm4nd.com/post/rfc6979/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -209,7 +200,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/public-blockchain-research-report/</loc>
+    <loc>https://c0mm4nd.com/post/sign-and-verify-messages/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -227,7 +218,25 @@
   </url>
   
   <url>
+    <loc>https://c0mm4nd.com/post/public-blockchain-research-report/</loc>
+    
+    <lastmod>2021-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://c0mm4nd.com/post/new-structure-of-ngin/</loc>
+    
+    <lastmod>2021-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/post/ngchain-serialization-selection/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -246,15 +255,6 @@
   
   <url>
     <loc>https://c0mm4nd.com/post/profiling-ngcore-in-go/</loc>
-    
-    <lastmod>2021-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/post/ngchain-serialization-selection/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -299,15 +299,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/luciditee/</loc>
-    
-    <lastmod>2021-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/post/linguaskill-notes/</loc>
     
     <lastmod>2021-10-11</lastmod>
@@ -317,7 +308,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/post/how-to-create-a-temp-ngin-network/</loc>
+    <loc>https://c0mm4nd.com/post/luciditee/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -327,6 +318,15 @@
   
   <url>
     <loc>https://c0mm4nd.com/post/go-interesting/</loc>
+    
+    <lastmod>2021-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/post/how-to-create-a-temp-ngin-network/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -621,27 +621,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/edx/</loc>
-    <lastmod>2022-03-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/scaling/</loc>
-    <lastmod>2022-03-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/tps/</loc>
-    <lastmod>2022-03-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/tags/crunchbase/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -657,6 +636,27 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/data-gathering/</loc>
+    <lastmod>2022-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/edx/</loc>
+    <lastmod>2022-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/scaling/</loc>
+    <lastmod>2022-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/tps/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -691,20 +691,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/ECDSA/</loc>
-    <lastmod>2022-03-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/cryptography/</loc>
-    <lastmod>2022-03-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/tags/cryptomining/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -713,6 +699,20 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/%E7%BF%BB%E8%AF%91/</loc>
+    <lastmod>2022-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/ECDSA/</loc>
+    <lastmod>2022-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/cryptography/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -754,13 +754,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/project-management/</loc>
-    <lastmod>2022-03-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/tags/android/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -769,6 +762,13 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/distributed-system/</loc>
+    <lastmod>2022-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/project-management/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -789,6 +789,13 @@
   </url>
   
   <url>
+    <loc>https://c0mm4nd.com/tags/database/</loc>
+    <lastmod>2022-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://c0mm4nd.com/tags/UI/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -797,13 +804,6 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/design/</loc>
-    <lastmod>2022-03-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/database/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -901,6 +901,13 @@
   </url>
   
   <url>
+    <loc>https://c0mm4nd.com/tags/Linguaskill/</loc>
+    <lastmod>2022-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://c0mm4nd.com/tags/TEE/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -909,13 +916,6 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/paper/</loc>
-    <lastmod>2022-03-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/Linguaskill/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -964,6 +964,13 @@
   </url>
   
   <url>
+    <loc>https://c0mm4nd.com/tags/software-engineering/</loc>
+    <lastmod>2022-03-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://c0mm4nd.com/tags/ecdsa/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -972,13 +979,6 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/address/</loc>
-    <lastmod>2022-03-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/software-engineering/</loc>
     <lastmod>2022-03-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
