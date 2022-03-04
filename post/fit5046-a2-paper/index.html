@@ -17,15 +17,15 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="FIT5046 要求做PPT演讲的paper Authors:   概要在大型公共场所中，基于WiFi的室内定位的实际部署很少，而且相差甚远，因为大多数最新解决方案都需要客户端或基础架构方面的更改。因此，即使这些解决方案可以实现较高的定位精度，但由于成本和&#x2F;或客户采用原因，它们并不实用。大多数公共场所都使用商业控制器管理的WLAN解决方案，该解决方案既不允许客户更改，也不允许基础架构更改。实际上，">
+  <meta name="description" content="FIT5046 要求做PPT演讲的paper Authors:   概要在大型公共场所中，基于WiFi的室内定位的实际部署很少，而且相差甚远，因为大多数最新解决方案都需要客户端或基础架构方面的更改。因此，即使这些解决方案可以实现较高的定位精度，但由于成本和&#x2F;或客户采用原因，它们并不实用。大多数公共场所都使用商业控制器管理的WLAN解决方案，该解决方案既不允许客户更改，也不允许基础架构更改">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用现有基础架构进行服务器端WiFi室内定位的经验与挑战 Experiences &amp; Challenges with Server-Side WiFi Indoor Localization Using Existing Infrastructure">
 <meta property="og:url" content="https://c0mm4nd.com/post/fit5046-a2-paper/index.html">
 <meta property="og:site_name" content="Talkless">
-<meta property="og:description" content="FIT5046 要求做PPT演讲的paper Authors:   概要在大型公共场所中，基于WiFi的室内定位的实际部署很少，而且相差甚远，因为大多数最新解决方案都需要客户端或基础架构方面的更改。因此，即使这些解决方案可以实现较高的定位精度，但由于成本和&#x2F;或客户采用原因，它们并不实用。大多数公共场所都使用商业控制器管理的WLAN解决方案，该解决方案既不允许客户更改，也不允许基础架构更改。实际上，">
+<meta property="og:description" content="FIT5046 要求做PPT演讲的paper Authors:   概要在大型公共场所中，基于WiFi的室内定位的实际部署很少，而且相差甚远，因为大多数最新解决方案都需要客户端或基础架构方面的更改。因此，即使这些解决方案可以实现较高的定位精度，但由于成本和&#x2F;或客户采用原因，它们并不实用。大多数公共场所都使用商业控制器管理的WLAN解决方案，该解决方案既不允许客户更改，也不允许基础架构更改">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5046-a2-paper/image-20210412225148141.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5046-a2-paper/image-20210414081339575.png">
@@ -136,7 +136,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -244,7 +244,7 @@
 <p>Authors:</p>
 <img src="/post/fit5046-a2-paper/image-20210412225148141.png" class="" title="image-20210412225148141">
 
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>在大型公共场所中，基于WiFi的室内定位的实际部署很少，而且相差甚远，因为大多数最新解决方案都需要客户端或基础架构方面的更改。因此，即使这些解决方案可以实现较高的定位精度，但由于成本和/或客户采用原因，它们并不实用。大多数公共场所都使用商业控制器管理的WLAN解决方案，该解决方案既不允许客户更改，也不允许基础架构更改。实际上，对于这样的场所，我们已经观察到高度异构的设备，客户端应用的采用率非常低。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>在大型公共场所中，基于WiFi的室内定位的实际部署很少，而且相差甚远，因为大多数最新解决方案都需要客户端或基础架构方面的更改。因此，即使这些解决方案可以实现较高的定位精度，但由于成本和&#x2F;或客户采用原因，它们并不实用。大多数公共场所都使用商业控制器管理的WLAN解决方案，该解决方案既不允许客户更改，也不允许基础架构更改。实际上，对于这样的场所，我们已经观察到高度异构的设备，客户端应用的采用率非常低。</p>
 <p>在本文中，我们介绍了在此类场所部署可扩展位置系统的经验。我们证明服务器端定位并非易事，并且提出了与此方法相关的两个独特挑战，即基数不匹配和高客户端扫描延迟。 “不匹配”挑战导致在离线阶段和在线阶段报告客户端的一组接入点（AP）之间严重不匹配，而“延迟”挑战导致报告任何特定客户端的AP报告数据的数量较少。我们从已经部署了四年以上的WiFi设置中收集了三周的详细地面真相数据（≈200个地标），以提供证据证明这些问题的严重程度并了解这些问题的影响。我们提出启发式方法来减轻它们。我们还总结了实际部署面临的挑战和陷阱，这些挑战和陷阱会影响定位的准确性。</p>
 <span id="more"></span>
 
@@ -252,7 +252,7 @@
 <p>以人为中心的计算→遍及移动计算的实证研究</p>
 <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>基于WiFi的室内定位研究已有很长的历史[1-3、6、9、12、13、15、18-20、22、23、27-30、32、33、35， 36，39，42–47，49，50]。但是，尽管取得了一些突破，但在公共场所中几乎没有基于WiFi的室内定位系统的实际部署。造成这种情况的原因有很多，最常见的三个原因是：（a）部署成本高，（b）可以说是缺乏令人信服的业务使用，以及（c）现有解决方案无法无缝工作与所有设备。实际上，当前的解决方案在通用性，准确性和能量之间进行了折衷，例如，将基于惯性的跟踪与WiFi扫描相结合的基于客户端的解决方案可提供更高的准确性，但需要一种移动应用程序，这可能会更快地消耗能量并降低能耗。只有少数访问者可以下载[53]。</p>
 <p>在本文中，我们介绍了在亚洲一所小型大学的整个校园中部署和运行基于WiFi的室内定位系统的经验。值得注意的是，大约有10,000名学生和1,500名教职员工密集地占据了环境。该系统已投入生产四年以上。它部署在多个场所，包括两所大学（新加坡管理大学，马萨诸塞大学，阿默斯特大学）和四个不同的公共场所（购物中心，会议中心，机场和圣淘沙度假胜地）[21，40]。这些场所使用定位系统进行各种实时分析，例如组检测，占用检测和队列检测，同时还要注意用户的隐私。</p>
-<p>我们的目标是突出挑战并提出易于集成的解决方案，以构建通用的室内定位系统-该系统可以对园区中所有支持WiFi的设备进行定位，而无需进行客户端或基础设施方面的任何修改。这种实际环境的规模和性质带来了一系列独特的挑战–（a）基础架构，即控制器和AP不允许进行任何更改，（b）设备无法以任何方式进行修改，即，不明确/隐式参与数据生成，不允许应用程序下载，也不允许芯片组更改，并且（c）仅可用数据是来自AP的RSSI测量，这些数据由控制器使用实时定位服务（RTLS）接口进行集中控制[8] 。值得注意的是，面对这些挑战，我们必须排除更复杂的最新方案，例如细粒度的CSI测量[28]，到达角[9]，时间间隔-Flight [29]，SignalSLAM [37]或Inertial Sensing [14]。</p>
+<p>我们的目标是突出挑战并提出易于集成的解决方案，以构建通用的室内定位系统-该系统可以对园区中所有支持WiFi的设备进行定位，而无需进行客户端或基础设施方面的任何修改。这种实际环境的规模和性质带来了一系列独特的挑战–（a）基础架构，即控制器和AP不允许进行任何更改，（b）设备无法以任何方式进行修改，即，不明确&#x2F;隐式参与数据生成，不允许应用程序下载，也不允许芯片组更改，并且（c）仅可用数据是来自AP的RSSI测量，这些数据由控制器使用实时定位服务（RTLS）接口进行集中控制[8] 。值得注意的是，面对这些挑战，我们必须排除更复杂的最新方案，例如细粒度的CSI测量[28]，到达角[9]，时间间隔-Flight [29]，SignalSLAM [37]或Inertial Sensing [14]。</p>
 <p>面对挑战，我们采用基于指纹的离线方法来计算每个设备的位置。事实证明，在人群密集的空间中，指纹比基于模型的方法更准确[26]，因此受到广泛青睐。我们的定位软件使用众所周知的“经典”基于指纹的技术来处理RSSI更新[36]。鉴于这种方法的广泛使用，我们的经验和结果适用于大多数定位算法。</p>
 <p>我们的主要贡献是详细介绍这种常规方法成功与失败的情况。我们重点介绍了使该方法在当前的大规模WiFi网络中起作用的相关挑战，然后开发适当的解决方案来克服已观察到的挑战。我们在大规模部署中收集了三周的详细地面真相数据（约200个地标），精心构建了一组实验研究，以显示两个独特的挑战-基数不匹配和与服务器端定位方法相关的高客户端扫描延迟。这三周的数据代表了我们四年的数据。</p>
 <p>（a）基数不匹配：我们将基数定义为针对位于特定地标的客户端的一组AP报告。我们首先表明，在线阶段的基数通常与离线阶段的基数有很大不同。注意，这种差异存在于报告AP的集合中，而不仅仅是RSSI向量值的不匹配。直观上，这颠覆了基于指纹的系统的前提，即在离线和在线阶段，在任何界标处看到的基数都是相同的。这种现象是由所有商业级WiFi网络（例如，Aruba，Cisco和其他供应商提供的网络）中的集中控制器执行的动态电源和客户端管理所产生的，以实现以下目的：</p>
@@ -263,7 +263,7 @@
 <p>这些现象在过去的试点研究中经常使用的小规模部署中不存在，在这些部署中，每个AP都是独立配置的。在大规模部署中，使用带有大量设备的控制器管理的WLAN相当普遍，这些现象在很大程度上不可避免地持续存在。为了举例说明，在我们的部署中，我们注意到2.4 GHz时有57.30％的基数不匹配，而5 GHz时有30.60％的基数不匹配。我们看到客户端扫描间隔的90％为20分钟。在此类环境中使用基于指纹的解决方案进行定位时，这些现象会导致最少或什至更糟的是没有匹配的AP，从而导致客户端位置更新和客户端“跨位置”传送之间的大量延迟。</p>
 <p>重要的是要注意，这些算法的时间表不仅是不确定的，而且它们在离线和在线阶段的分发也是不确定的。这归因于以下基本事实：WiFi网络的动态（例如负载和干扰）在大多数情况下是不确定的，并且控制器算法对我们来说是一个黑匣子。此外，2.4和5 GHz信号传播和扫描行为的差异也导致了这些问题。我们相信，我们是第一个提出服务器端定位挑战及其缓解方法的人。我们的建议与设备无关，简单易用，可与任何大规模WiFi部署轻松集成，以高效地定位设备</p>
 <h3 id="Key-Contributions"><a href="#Key-Contributions" class="headerlink" title="Key Contributions:"></a>Key Contributions:</h3><ul>
-<li><strong>我们确定并描述了与服务器端定位框架相关的两个新颖的基本问题</strong>。特别是，我们为（i）“基数不匹配”和（ii）“高客户端扫描延迟” 问题提供了证据，解释了为什么这些问题在商业WiFi部署中变得越来越重要。我们讨论了在不允许客户端/基础架构方面的挑战的情况下解决这些问题的重要性的原因。我们的整个分析都是针对–2.4和5 GHz两个频段。</li>
+<li><strong>我们确定并描述了与服务器端定位框架相关的两个新颖的基本问题</strong>。特别是，我们为（i）“基数不匹配”和（ii）“高客户端扫描延迟” 问题提供了证据，解释了为什么这些问题在商业WiFi部署中变得越来越重要。我们讨论了在不允许客户端&#x2F;基础架构方面的挑战的情况下解决这些问题的重要性的原因。我们的整个分析都是针对–2.4和5 GHz两个频段。</li>
 <li><strong>我们基于三个星期内收集的200个地标的地面真相数据进行了广泛的评估，从而提供了有关这些问题成因的宝贵见解</strong>。面对这些问题，我们提出启发式方法来提高定位的准确性。我们看到从最低的35.40％改善到最高的100％。与SignalSLAM [37]相比，我们在更高的百分位数上显示出改进。这表明我们的经验教训具有改进现有定位算法的潜力。</li>
 <li>我们描述了我们在部署，管理和改进基于指纹的WiFi定位系统方面的经验，该系统自2013年以来一直在新加坡管理大学的整个校园中投入运营。我们不仅关注使用RTLS数据馈送的最终“最佳解决方案”，而且还讨论了多年来遇到的挑战和陷阱。</li>
 </ul>
@@ -312,7 +312,7 @@
 <p>我们知道每个AP的位置。我们使用此信息从在线指纹中选择AP。该算法首先选择一个楼层，然后将位于同一楼层的所有AP入围。我们使用入围的AP查找具有脱机指纹的匹配项。为了选择下限，我们探索了三种启发式方法：（a）最大AP数-最高AP向其报告客户端的地板；</p>
 <p>（b）具有最大RSSI的AP-从中接收最强RSSI的地板，以及</p>
 <p>（c）关联AP-客户端当前与之关联的AP的下限。</p>
-<p><strong>表3</strong>显示了针对85％百分数的三种启发式方法的定位误差的变化情况。<strong>对于同一楼层和不同楼层的错误，显然都有改进</strong>。<strong>具有最大数量的AP的楼层检测所带来的改进最少</strong>。实际上，直到基数为4时，它的表现都比基准差。这背后的原因是，距离较长的AP（特别是在2.4 GHz中具有更长的传输距离）会响应，因此定位错误会增加。接下来，是具有最大RSSI的AP和关联AP的楼层检测。具有最大RSSI的AP或关联的AP通常最接近客户端，除非控制器进行负载平衡和发射功率控制时。 5 GHz略有改善。由于<strong>表3</strong>仅显示了第85个百分位数的数据，因此对于2.4 GHz，在<strong>图8</strong>中针对基数= 1绘制了误差CDF。我们看到，所有百分位数的误差都减小了。对于其他基数，我们会看到类似的结果，但是由于篇幅所限，我们不将其包括在内。</p>
+<p><strong>表3</strong>显示了针对85％百分数的三种启发式方法的定位误差的变化情况。<strong>对于同一楼层和不同楼层的错误，显然都有改进</strong>。<strong>具有最大数量的AP的楼层检测所带来的改进最少</strong>。实际上，直到基数为4时，它的表现都比基准差。这背后的原因是，距离较长的AP（特别是在2.4 GHz中具有更长的传输距离）会响应，因此定位错误会增加。接下来，是具有最大RSSI的AP和关联AP的楼层检测。具有最大RSSI的AP或关联的AP通常最接近客户端，除非控制器进行负载平衡和发射功率控制时。 5 GHz略有改善。由于<strong>表3</strong>仅显示了第85个百分位数的数据，因此对于2.4 GHz，在<strong>图8</strong>中针对基数&#x3D; 1绘制了误差CDF。我们看到，所有百分位数的误差都减小了。对于其他基数，我们会看到类似的结果，但是由于篇幅所限，我们不将其包括在内。</p>
 <p>我们将结果与Signal SLAM [37]进行比较，Signal SLAM [37]部署在购物中心等公共场所，因为我们也进行了类似的部署。我们在其他场所也有类似的观察。我们发现他们使用现有基础架构进行服务器端WiFi室内定位</p>
 <p>第90个百分位数约为15米。我们执行类似。实际上，他们的AP可见性算法具有24.3米的90％百分位。我们在5 GHz上的表现要比这更好。考虑到Signal SLAM包含的算法的复杂性和所需的感应量，我们认为即使精度达到几米，我们的方法也会更好。特别是因为它简单且可扩展。</p>
 <h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2><p>现在，我们讨论了在实际部署中定位客户端时遇到的实际挑战以及我们解决方案的局限性。</p>
@@ -324,7 +324,7 @@
 <p>gigahertz</p>
 <p>Hello, This is Qian’ang Mao. Let me show the evaluation for the solution which Randy has just said. </p>
 <p>The table shows how the localization errors vary for the three heuristics for 85th percentile values. It is clearly that having an improvement for both Same Floor and Different Floor errors. And Floor detection with Max Number of APs gives the Least improvement. The reason behind this is that the distant APs respond, and thus localization errors increase.</p>
-<p>Since the Previous Table only showed data for 85th percentile, this Diagram shows Cumulative Distribution Function values of the error for cardinality=1 and 2.4 GHz. From the this, we can see that the Error reduces for all the percentiles. And the researchers inffered that there are Similar results for other cardinalities.</p>
+<p>Since the Previous Table only showed data for 85th percentile, this Diagram shows Cumulative Distribution Function values of the error for cardinality&#x3D;1 and 2.4 GHz. From the this, we can see that the Error reduces for all the percentiles. And the researchers inffered that there are Similar results for other cardinalities.</p>
 <p>They have also compared their solution whith the signal SLAM by deploying in public as signal SLAM did. They got 90th percentile is about 15 meters which is similar to signalSLAM in theory. But AP visibility of signalSLAM has 90th percentile as 24.3 meters in fact.  in 5 GHz, Solution performs better than Signal SLAM. Researchers believe even with few meters of accuracy the solution is better because its simple and scalable</p>
 <p>The last part is the analysis to the work.</p>
 <p>increase signal variations </p>
@@ -350,12 +350,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/post/fit5057-pm-notes/" rel="prev" title="Notes for FIT5057: Project management">
-      <i class="fa fa-chevron-left"></i> Notes for FIT5057: Project management
+    <a href="/post/fit5046-mobi-notes/" rel="prev" title="Notes for FIT5046: Mobile and distributed computing systems">
+      <i class="fa fa-chevron-left"></i> Notes for FIT5046: Mobile and distributed computing systems
     </a></div>
       <div class="post-nav-item">
-    <a href="/post/fit5046-mobi-notes/" rel="next" title="Notes for FIT5046: Mobile and distributed computing systems">
-      Notes for FIT5046: Mobile and distributed computing systems <i class="fa fa-chevron-right"></i>
+    <a href="/post/fit5057-pm-notes/" rel="next" title="Notes for FIT5057: Project management">
+      Notes for FIT5057: Project management <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -437,7 +437,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

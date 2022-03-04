@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪……">
@@ -32,11 +32,11 @@
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/image-20210111002948496.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/image-20210111003647783.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/image-20210111003924868.png">
-<meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/fit5195-bi-notes/image-20210119153311615.png">
-<meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/fit5195-bi-notes/image-20210119153321174.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5195-bi-notes/image-20210119153311615.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5195-bi-notes/image-20210119153321174.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/image-20210223222154124.png">
-<meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/fit5195-bi-notes/image-20210223223650881.png">
-<meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/fit5195-bi-notes/image-20210223223700052.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5195-bi-notes/image-20210223223650881.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5195-bi-notes/image-20210223223700052.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/image-20210223223251503.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/image-20210223225111085.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5195-bi-notes/image-20210223225107357.png">
@@ -154,7 +154,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -326,7 +326,7 @@
 <h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><ol>
 <li>先建立各个维度表</li>
 <li>将各个维度的行写入维度表</li>
-<li>建立tempfact表：select where A.id=B.id将各个事实表<strong>源</strong>的列 as到tempfact表（即完成表建立又同时数据转移）</li>
+<li>建立tempfact表：select where A.id&#x3D;B.id将各个事实表<strong>源</strong>的列 as到tempfact表（即完成表建立又同时数据转移）</li>
 <li>增加与源数据类型不同的列到tempfact表（例如源中DATE，事实表中NUMBER）</li>
 <li>为4中的新列写入数据</li>
 <li>最后建立fact表：使用group by从tempfact里把需要的列取出</li>
@@ -351,7 +351,7 @@
 <li>无效值和缺失值的处理</li>
 </ol>
 <h2 id="S4-Multifact"><a href="#S4-Multifact" class="headerlink" title="S4 Multifact"></a>S4 Multifact</h2><p>就讲讲怎么在一个DW里放多个Fact来更好地表达measure</p>
-<p><img src="fit5195-bi-notes/image-20210119153311615.png" alt="image-20210119153311615" loading="lazy"><img src="fit5195-bi-notes/image-20210119153321174.png" alt="image-20210119153321174" loading="lazy"></p>
+<p><img src="/fit5195-bi-notes/image-20210119153311615.png" alt="image-20210119153311615" loading="lazy"><img src="/fit5195-bi-notes/image-20210119153321174.png" alt="image-20210119153321174" loading="lazy"></p>
 <p>我们需要在Fact表中存放一个avg参数么？NO： Average of an Average</p>
 <p>在FACT中存放平均值不是个好主意，那我们应该如何处理这些问题？</p>
 <p>我们可以存放<strong>总数</strong>（total xxx）以及<strong>数量</strong>（number of xxx）</p>
@@ -371,7 +371,7 @@
 <img src="/post/fit5195-bi-notes/image-20210223222154124.png" class="" title="image-20210223222154124">
 
 <p>如果Book和BookPrice是1：1关系那就可以并到一起</p>
-<p>例如<img src="fit5195-bi-notes/image-20210223223650881.png" alt="image-20210223223650881" loading="lazy">变<img src="fit5195-bi-notes/image-20210223223700052.png" alt="image-20210223223700052" loading="lazy"></p>
+<p>例如<img src="/fit5195-bi-notes/image-20210223223650881.png" alt="image-20210223223650881" loading="lazy">变<img src="/fit5195-bi-notes/image-20210223223700052.png" alt="image-20210223223700052" loading="lazy"></p>
 <h3 id="Temporal-Attributes"><a href="#Temporal-Attributes" class="headerlink" title="Temporal Attributes"></a>Temporal Attributes</h3><p>Temporal attribute是一个属性，其值具有生命周期</p>
 <p>例如，每个书价都有生命期（即时间限制），即BookPriceDIM表中的StartDate和EndDate</p>
 <h3 id="Temporal-Dimensions"><a href="#Temporal-Dimensions" class="headerlink" title="Temporal Dimensions"></a>Temporal Dimensions</h3><p>Temporal Dimensions是其中具有特定生命周期的维度表</p>
@@ -581,7 +581,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

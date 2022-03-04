@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="区块链不仅仅构造了数字货币，作为可信底层架构，区块链通过保存历史信息提供了可追溯的功能。该功能在获得用户信任基础上，保证了产品可信度，降低业务审查、清算等会计成本。状态区块链是一种比传统区块链更加激进的区块链底层架构，它选择了不保存所有历史，而是选择通过总结来归纳出每个可信区段中所有账户的状态，从而实现在现有可信基础上更加灵活的应用部署，彻底摆脱了原本对每个节点存储空间的苛刻要求。工程建设过程中随">
@@ -143,7 +143,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -253,20 +253,20 @@
 
 <p><strong>论文<a href="/state-chain-on-pm-paper.pdf">PDF标准版下载</a></strong></p>
 <h2 id="区块链中存储的成本"><a href="#区块链中存储的成本" class="headerlink" title="区块链中存储的成本"></a>区块链中存储的成本</h2><p>首先，随着技术的提高，假定存储数据的成本呈指数级下降。我们则可得到一个这样的模型</p>
-<p>$$c(t)=Ae^{-kt}$$</p>
+<p>$$c(t)&#x3D;Ae^{-kt}$$</p>
 <p>c(t)是在任何给定年份t中存储1GB数据的成本。</p>
-<p>A是当前按存储1GB1年的成本。通过Amazon Elastic File System进行定价。使用EFS，全年存储1GB数据的6个副本的成本为每年21.60美元。即A=21.60美元。</p>
+<p>A是当前按存储1GB1年的成本。通过Amazon Elastic File System进行定价。使用EFS，全年存储1GB数据的6个副本的成本为每年21.60美元。即A&#x3D;21.60美元。</p>
 <p>k是存储成本随着时间推移下降的速度。k越大，价格越快降低。根据过去35年的历史数据，k约为0.2502，但对未来存储成本的预测表明未来这种变化率会下降。</p>
 <p>这可以得出我们在任何一年内将要花费的存储容量。现在我们可以计算我们的存储总成本。</p>
 <p>每年我们必须为当年收到的新数据支付费用，并继续存储前几年的所有数据。所以每年的存储成本为：</p>
-<p>$$S(t)=c(t)\sum_{T=0}^nPredictedGB(t)$$</p>
+<p>$$S(t)&#x3D;c(t)\sum_{T&#x3D;0}^nPredictedGB(t)$$</p>
 <p>由于众所周知的区块链扩容，比如比特币从1MB过渡到2MB，模型中的Predicted_GB本质也是在逐年增加的值。随着数字货币与区块链逐步被越来越多的人所认可，区块容量(BuiltinSize)增加的步伐也越来越快。作为激进的比特币分叉，比特币现金，已经分叉至32MB。从市场来看，越是热门的区块链产品的信息存储量增速越快。而热门程度我们可以根据其代币的交易量来判断。</p>
-<p>$$PredictedGB(t)=\sum_{d=0}^{365}BuiltinSize \times Volume(t,d)$$</p>
+<p>$$PredictedGB(t)&#x3D;\sum_{d&#x3D;0}^{365}BuiltinSize \times Volume(t,d)$$</p>
 <p>那么最终的每年存储成本即为：</p>
-<p>$$S(t)=Ae^{-kt}\sum_{T=0}^n\sum_{d=0}^{365}BuiltinSize \times Volume(t,d)$$</p>
+<p>$$S(t)&#x3D;Ae^{-kt}\sum_{T&#x3D;0}^n\sum_{d&#x3D;0}^{365}BuiltinSize \times Volume(t,d)$$</p>
 <p>总而言之，通过该模型，我们可以清晰地看出，这通过优化后的区块链存储成本模型，最终其是递增膨胀，还是逼近指数下降，取决于科技发展的k值（&lt;1）与年存储量，也可以说是k值与产品热度之间的博弈。作为跑赢市场的明星产品，例如Ethereum，必面临存储量爆炸的问题。当然从一般角度来看，<strong>服务器</strong>硬盘的发展是完全超越一般的区块链增长的。</p>
 <p>但是在特定环境，尤其是分布式的物联网环境，区块链上为了实现分布式与数据可信，设备往往分散且数量可观。因此，实际在物联网或多节点等正常区块链环境下，当区块链应用全网设备数为DeviceNum时，存储成本为：</p>
-<p>$$S(t)=DeviceNum \times Ae^{-kt}\sum_{T=0}^n\sum_{d=0}^{365}BuiltinSize \times Volume(t,d)$$</p>
+<p>$$S(t)&#x3D;DeviceNum \times Ae^{-kt}\sum_{T&#x3D;0}^n\sum_{d&#x3D;0}^{365}BuiltinSize \times Volume(t,d)$$</p>
 <p>也因此，为了节约成本，项目往往选择具有较少的存储空间的设备，这就更进一步限制了区块链存储不能无限制地膨胀。因此，换句话来说，在存储成本较低基础之上，倘若能够限制住区块链数据存储的膨胀，区块链产品则能够部署于更广泛的领域。</p>
 <h3 id="区块链在工程管理中的应用"><a href="#区块链在工程管理中的应用" class="headerlink" title="区块链在工程管理中的应用"></a>区块链在工程管理中的应用</h3><p>到目前为止，区块链在建造行业中的实际使用并不常见。有些人正在使用它结合物联网来存储建筑物的传感器数据。还有人认为类似以太坊的分布式平台可以托管BIM应用程序。也有人提到区块链在合建项目中的应用，因为它可以提供一个有用的工具，通过使用智能合约，监控各方在整个设计和施工阶段管理和记录上对BIM模型的更改，即通过编辑和存储建筑模型的所有修改记录到不可变的公共记录中（区块）。</p>
 <p>首先，众所周知的是，区块链可以作为数字账簿的存在，如hyperledger，中文名超级账簿。</p>
@@ -286,7 +286,7 @@
 
 <p>在UTXO中，比如比特币，抛去了状态的概念，其中账户（即地址）的余额通过与它相关的事务来进行判断，例如某个地址在区块链中的出现是先通过工作证明获得了100货币单位，然后在其之后8个区块时间后它将88个货币单位转移到另一个地址中，其后没有任何相关交易。这样在当一个节点遍历完所有区块之后就可以计算出该地址余额为12个货币单位。</p>
 <p>这样的产品设计，虽说要求了节点必须下载并遍历整个区块才能分析出地址余额这样累赘的工作，但是也的确非常成功地解除了他人尤其是非技术人员对区块链的怀疑——至少让区块链概念更加通俗易懂。</p>
-<p>可是区块链的不断增长使得这个下载与遍历操作越来越困难。比特币核心开发者团队意识到了这个问题的严肃性。在2016年初bitcoin的区块就已经超过60G，开发者团队在新核心钱包中针对节点新加了区块链存储的修剪模式（prune）。全节点钱包，即核心钱包的使用者通过在个人目录中bitcoin.conf配置文件中，输入“prune=1024”并保存，重启钱包后即可打开节点的修剪模式。通过该模式，节点可以将60多G的存储不断删减直至你设定的值（1024mb），且相比以前能更加快速地打开钱包。但是这个模式仍有局限性——及其耗时且耗计算的同步过程：它需要先从p2p网络上下载这所有的区块，再对已下载的区块逐个进行散列计算生成散列值，并校对散列值的树结构，以此保证所下载区块的完整与安全——这样的下载过程中耗费数G的带宽流量以及堪比数字货币挖矿的计算任务依旧非个人电脑，或者非一般的服务器所能承受。尤其是在用户重新导入一个新私钥后，为了获取这个私钥对应地址的余额信息，节点必须再重复一遍上述所有操作。</p>
+<p>可是区块链的不断增长使得这个下载与遍历操作越来越困难。比特币核心开发者团队意识到了这个问题的严肃性。在2016年初bitcoin的区块就已经超过60G，开发者团队在新核心钱包中针对节点新加了区块链存储的修剪模式（prune）。全节点钱包，即核心钱包的使用者通过在个人目录中bitcoin.conf配置文件中，输入“prune&#x3D;1024”并保存，重启钱包后即可打开节点的修剪模式。通过该模式，节点可以将60多G的存储不断删减直至你设定的值（1024mb），且相比以前能更加快速地打开钱包。但是这个模式仍有局限性——及其耗时且耗计算的同步过程：它需要先从p2p网络上下载这所有的区块，再对已下载的区块逐个进行散列计算生成散列值，并校对散列值的树结构，以此保证所下载区块的完整与安全——这样的下载过程中耗费数G的带宽流量以及堪比数字货币挖矿的计算任务依旧非个人电脑，或者非一般的服务器所能承受。尤其是在用户重新导入一个新私钥后，为了获取这个私钥对应地址的余额信息，节点必须再重复一遍上述所有操作。</p>
 <p>随着时代的发展，在2016年开始行业进入了基于区块链的链上应用，即分布式应用（decentralized application，简称DApp）的时代。简单来说，DApp和普通的App原理一样，除了他们是完全去中心化的。由底层区块链网络自己的节点来运作的DApp，不依赖于任何中心化的服务器。虽然DApp是去中心化的，可以完全自动地运行，但是依然也有可能性会被入侵。为了要能够很好地使用这些DApp，就需要定制的入口。例如其中较为著名的就是Augur，一个基于以太坊的去中心化市场预测平台，完全不需要通过任何第三方服务器。目前来看，由于以太坊EVM的健壮，大部分分布式应用都是基于以太坊。</p>
 <p>但是，从现状来看，如今很多区块链产品中的“永久存储”特性却仅仅只是一个吸引投资人和购买者的华丽噱头，或者说是一个非常普遍的对当下区块链模式的一种妥协现象：想要让人可信就必须永久存储所有事务。毕竟，在以太坊平台上就已经拥有了在链上存储的功能，无需再多费手脚即可拥有。</p>
 <p>但是从产品设计的角度来看，在许多的特定环境下，区块链产品本质上其实并不需求永久的存储——例如游戏、匿名货币以及数据存储等。拿游戏作为例子来看，基于区块链的互联网游戏本身就是在飞速信息交换，在存储和带宽以及共识的限制下，这个交换的成本被无限放大。</p>
@@ -326,8 +326,8 @@
 <img src="/post/state-chain-on-pm-paper/WithBIM.png" class="" title="WithBIM.png">
 
 <p>用公式表示原始方案与改进方案的存储量如下</p>
-<p>原始方案即为直接对区块的存储。StorageSize为总存储规模，blockHeight为区块高度（个数），BlockSize为内置的区块大小，例如Bitcoin初始为1M。<br>$$ StorageSize(blockHeight) = BlockSize \times blockHeight $$</p>
-<p>而在针对存储内容优化的新方案中，去除了极大部分的区块，引入了新的”状态区块”Generation来存储每个时间段账户信息。其中，StorageSize为总存储规模，blockHeight为区块高度（个数），GenerationSize为单个“状态区块”的大小，为了安全我们本地需要两个状态区块来保证安全性。CredibleHeight为可信高度，在PascalCoin中该高度被固定设定为100个区块。BuiltinTxNum为单个区块中的事务（交易）个数。<br>$$ StorageSize(blockHeight) = BlockSize \times (blockHeight \bmod CredibleHeight) + GenerationSize(blockHeight) + GenerationSize(\lfloor \frac{blockHeight}{CredibleHeight} \rfloor ) $$</p>
+<p>原始方案即为直接对区块的存储。StorageSize为总存储规模，blockHeight为区块高度（个数），BlockSize为内置的区块大小，例如Bitcoin初始为1M。<br>$$ StorageSize(blockHeight) &#x3D; BlockSize \times blockHeight $$</p>
+<p>而在针对存储内容优化的新方案中，去除了极大部分的区块，引入了新的”状态区块”Generation来存储每个时间段账户信息。其中，StorageSize为总存储规模，blockHeight为区块高度（个数），GenerationSize为单个“状态区块”的大小，为了安全我们本地需要两个状态区块来保证安全性。CredibleHeight为可信高度，在PascalCoin中该高度被固定设定为100个区块。BuiltinTxNum为单个区块中的事务（交易）个数。<br>$$ StorageSize(blockHeight) &#x3D; BlockSize \times (blockHeight \bmod CredibleHeight) + GenerationSize(blockHeight) + GenerationSize(\lfloor \frac{blockHeight}{CredibleHeight} \rfloor ) $$</p>
 <p>$$ GenerationSize(blockHeight) \approx \frac{BlockSize \times blockHeight}{BuiltinTxNum} $$</p>
 <p>从数学模型可见，该方案除了删除了大部分冗余数据以外，还限制住了数据量体积，可以有效防止数据量的无限扩张。</p>
 <h3 id="为什么该方案依旧安全可信"><a href="#为什么该方案依旧安全可信" class="headerlink" title="为什么该方案依旧安全可信"></a>为什么该方案依旧安全可信</h3><p>Bitcoin从Merkle树，即默克尔树出发来保证区块安全。如上所述，在进行区块“压缩”、“删减”过程之中链的默克尔树实际上是被破坏了——无法从创世区块重新递推至最新块。</p>
@@ -341,11 +341,11 @@
 <p>其次，尽可能地删除不必要的旧区块。在过了可信高度，即几乎所有节点的区块链存储都高于某一高度一定高度之后，区块链系统完全可以将某一高度前的区块进行删除来达到节省存储空间的目的。因为首先数据我们是选择存储在各个账户状态之中，换句话说就是即便删除了历史的区块也不会造成信息的损失。其次我们所有节点都在这“某一高度”上方，我们在这“某一高度”上达成了共识，即每个节点在“某一高度”之前的区块都是完全相同的，之后的区块的merkle树或trie树都可以在这“某一高度”开始进行，不必强制从创世区块开始。对于这之前的区块，已经无特别重要的作用，当然对于存储空间足够的设备来说依然可以保留这些区块，但是对于空间较小或者更加集约的环境下，将这之前的区块删除应当是最为正确的操作。</p>
 <p>再者，必须限制账户、事务的膨胀。首先，区块的大小和事务数量有直接关系，因此中本聪利用了fee也就是手续费概念，fee的竞争以及区块打包交易上限增加了事务进入系统的成本，以此来防止事务的过度或恶意的膨胀。</p>
 <p>其次由于新的区块链中选择将信息存储于账户之中，因此在打包账户时账户数量和使用存储量有直接的正比关系</p>
-<p>$$ StorageSize = kAccountNum $$</p>
+<p>$$ StorageSize &#x3D; kAccountNum $$</p>
 <p>倘若不限制账户数量，依旧和比特币一样提供无限的基于私钥与ECDSA椭圆曲线数字签名算法生成的账户地址，那么存储量很容易脱离监管。例如可能有人恶意地通过给许多未在网络出现的地址发送事务，强制增加了许多新的账户，那么在该网络下：</p>
-<p>$$ NewAccountNum = TransactionNum $$</p>
+<p>$$ NewAccountNum &#x3D; TransactionNum $$</p>
 <p>而为了交易的速度，我们往往在一个区块中打包许多事务。如比特币中，一般一个交易（事务）在250字节左右，扩容前1M大概就能容纳4000多笔。</p>
-<p>$$ NewAccuntNum =  TransactionNum = 4000 $$<br>$$ AccountNum = OriginalAccountNum + NewAccuntNum $$<br>$$ StorageSize = kOriginalAccountNum + 4000k = OriginalStorage + 4000k $$</p>
+<p>$$ NewAccuntNum &#x3D;  TransactionNum &#x3D; 4000 $$<br>$$ AccountNum &#x3D; OriginalAccountNum + NewAccuntNum $$<br>$$ StorageSize &#x3D; kOriginalAccountNum + 4000k &#x3D; OriginalStorage + 4000k $$</p>
 <p>即每次都需要增加整整4000k大小存储空间，而由于在攻击下，大部分账户不具有真实性，并不真正被他人使用，即很可能这4000k大小将是无用的。随着时间推移以及区块高度增加，在攻击之下的真实账户所占空间增长缓慢，无用账户所占空间却越来越多，最终和改良前无用区块冗余的状态一致。即无法达到限制膨胀，无法将其应用于多设备尤其是类似物联网的场景之中。可见限制账户与事务非常有必要。</p>
 <!-- 另外，更切实的智能合约。结合工程详情 -->
 
@@ -489,7 +489,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

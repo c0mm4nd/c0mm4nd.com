@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="说实话其实一开始压根没想做合约，就只是想做个chain。 但是后来发现你不做DAPP你的chain都没人看，那些做coin的也都在往DAPP靠。就有种被逼上梁山的感觉。不过还好现在有个去华山的路（WASM），可以考虑上了华山再往梁山飞。 其实我也不算是第一个选择华山飞梁山的，cosmos和eth2.0也选，不过人家有现成地图，我只能凭感觉乱飘。而且我们不是一个山头起飞的，他们选了更早被人发现的山头">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -247,7 +247,7 @@
 <p>+-x÷是都没有问题，问题在于和链的互动，和rpc的互动，以及事件的侦听。</p>
 <h1 id="ngVM"><a href="#ngVM" class="headerlink" title="ngVM"></a>ngVM</h1><h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p>上传至链上的wasm需要为<a href="https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md" target="_blank" rel="noopener">binary格式</a></p>
 <h3 id="数据类型-data-type"><a href="#数据类型-data-type" class="headerlink" title="数据类型 data type"></a>数据类型 data type</h3><ul>
-<li>i32: 返回code，&gt;0为正常，&lt;=异常 </li>
+<li>i32: 返回code，&gt;0为正常，&lt;&#x3D;异常 </li>
 <li>i64: 指针</li>
 <li>u64: 账户</li>
 <li>bytes: 底层mem</li>
@@ -267,18 +267,18 @@
 <h3 id="log-debug-msg-ptr-i64-msg-len-i64"><a href="#log-debug-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::debug(msg_ptr i64, msg_len i64)"></a>log::debug(msg_ptr i64, msg_len i64)</h3><h3 id="log-info-msg-ptr-i64-msg-len-i64"><a href="#log-info-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::info(msg_ptr i64, msg_len i64)"></a>log::info(msg_ptr i64, msg_len i64)</h3><h3 id="log-error-msg-ptr-i64-msg-len-i64"><a href="#log-error-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::error(msg_ptr i64, msg_len i64)"></a>log::error(msg_ptr i64, msg_len i64)</h3><h3 id="log-warn-msg-ptr-i64-msg-len-i64"><a href="#log-warn-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::warn(msg_ptr i64, msg_len i64)"></a>log::warn(msg_ptr i64, msg_len i64)</h3><p>打印输出，默认关闭。</p>
 <h3 id="account-get-host-gt-num-i64"><a href="#account-get-host-gt-num-i64" class="headerlink" title="account::get_host() -&gt; num i64"></a>account::get_host() -&gt; num i64</h3><p>获取vm自身account num(uint64)</p>
 <h3 id="account-get-owner-size-account-num-uint64-gt-owner-ptr-i64"><a href="#account-get-owner-size-account-num-uint64-gt-owner-ptr-i64" class="headerlink" title="account::get_owner_size(account_num uint64) -&gt; owner_ptr i64"></a>account::get_owner_size(account_num uint64) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address的长度（当前肯定是35）</p>
-<h3 id="account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64"><a href="#account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64" class="headerlink" title="account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64"></a>account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address (length = 35 bytes)，并将其写入ptr指针处。返回值为成功写入的字节数。</p>
+<h3 id="account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64"><a href="#account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64" class="headerlink" title="account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64"></a>account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address (length &#x3D; 35 bytes)，并将其写入ptr指针处。返回值为成功写入的字节数。</p>
 <h3 id="account-get-contract-len-ptr-i64-gt-contract-ptr-i64"><a href="#account-get-contract-len-ptr-i64-gt-contract-ptr-i64" class="headerlink" title="account::get_contract(len_ptr i64) -&gt; contract_ptr i64"></a>account::get_contract(len_ptr i64) -&gt; contract_ptr i64</h3><p>已删除</p>
 <p>原：获取vm自身合约代码</p>
 <p>现：由于获取全部二进制内容毫无意义，而且会占用较多内存，所以废弃此内容。<br><del>作为替代，将来提供get_contract_hash函数来帮助开发者做对线上内容的快速double check。</del><br>不能在内容里对内容hash……</p>
 <p>如果是需要读取其他account下的contract内容，暂时感觉也没必要。</p>
 <h3 id="account-get-context-account-num-u64-ptr-u32-gt-u32"><a href="#account-get-context-account-num-u64-ptr-u32-gt-u32" class="headerlink" title="account::get_context(account_num u64, ptr u32) -&gt; u32"></a>account::get_context(account_num u64, ptr u32) -&gt; u32</h3><p>获取可持续存储内容</p>
 <p>可持续存储读取</p>
-<h3 id="context-alloc-len-u64"><a href="#context-alloc-len-u64" class="headerlink" title="context::alloc(len: u64)"></a>context::alloc(len: u64)</h3><p>为可持续存储分配空间<br>//TODO: 收费</p>
+<h3 id="context-alloc-len-u64"><a href="#context-alloc-len-u64" class="headerlink" title="context::alloc(len: u64)"></a>context::alloc(len: u64)</h3><p>为可持续存储分配空间<br>&#x2F;&#x2F;TODO: 收费</p>
 <h3 id="context-write-src-ptr-i64-dst-ptr-i64-len-u64"><a href="#context-write-src-ptr-i64-dst-ptr-i64-len-u64" class="headerlink" title="context::write(src_ptr: i64, dst_ptr: i64, len: u64)"></a>context::write(src_ptr: i64, dst_ptr: i64, len: u64)</h3><p>可持续存储写入</p>
 <h3 id="coin-transfer-to-u64-value-ptr-i64-gt-i32"><a href="#coin-transfer-to-u64-value-ptr-i64-gt-i32" class="headerlink" title="coin::transfer(to: u64, value_ptr: i64) -&gt; i32"></a>coin::transfer(to: u64, value_ptr: i64) -&gt; i32</h3><p>类似于eth里的<code>seller.send(price)</code></p>
 <p>原来叫create_transaction，表示由wasm_vm主动创建一个事务tx让chain通过处理tx方式修改state</p>
-<p>通过此函数，vm能够提供例如bank/token的基础资金转移功能。</p>
+<p>通过此函数，vm能够提供例如bank&#x2F;token的基础资金转移功能。</p>
 <p>但是遇到一个之前忽略掉的问题——从vm里发出的交易该怎么sign？</p>
 <p>根据ETH的方法，调用都会被算为是由tx的call触发，因此这些变化都是由原tx负责。</p>
 <p>换句话说，变动的只有state，并不会出现由contract主动触发的tx。</p>
@@ -290,7 +290,7 @@
 <h3 id="tx-get-participant-index-u64-gt-account-ptr-i64"><a href="#tx-get-participant-index-u64-gt-account-ptr-i64" class="headerlink" title="tx::get_participant(index: u64) -&gt; account_ptr i64"></a>tx::get_participant(index: u64) -&gt; account_ptr i64</h3><p>获取transaction的参与人，需要用account namespace的api处理</p>
 <h3 id="tx-get-values-len-gt-len-u64"><a href="#tx-get-values-len-gt-len-u64" class="headerlink" title="tx::get_values_len() -&gt; len u64"></a>tx::get_values_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
 <h3 id="tx-get-value-index-u64-gt-value-ptr-i64"><a href="#tx-get-value-index-u64-gt-value-ptr-i64" class="headerlink" title="tx::get_value(index: u64) -&gt; value_ptr i64"></a>tx::get_value(index: u64) -&gt; value_ptr i64</h3><p>获取transacation的对应value(uint256)</p>
-<h3 id="state-get-balance-addr-i64-gt-balance-ptr-i64"><a href="#state-get-balance-addr-i64-gt-balance-ptr-i64" class="headerlink" title="state::get_balance(addr: i64) -&gt; balance_ptr i64"></a>state::get_balance(addr: i64) -&gt; balance_ptr i64</h3><p>balance 长度 8*4 = 24 </p>
+<h3 id="state-get-balance-addr-i64-gt-balance-ptr-i64"><a href="#state-get-balance-addr-i64-gt-balance-ptr-i64" class="headerlink" title="state::get_balance(addr: i64) -&gt; balance_ptr i64"></a>state::get_balance(addr: i64) -&gt; balance_ptr i64</h3><p>balance 长度 8*4 &#x3D; 24 </p>
 <h3 id="state-get-owner-num-u64-gt-addr-ptr-i64"><a href="#state-get-owner-num-u64-gt-addr-ptr-i64" class="headerlink" title="state::get_owner(num: u64) -&gt; addr_ptr i64"></a>state::get_owner(num: u64) -&gt; addr_ptr i64</h3><p>addr 长度 33</p>
 <h2 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h2><p>Assign &amp; Append tx</p>
 <h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>WASM的发布分为两种: Web or Wasm.</p>
@@ -418,7 +418,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

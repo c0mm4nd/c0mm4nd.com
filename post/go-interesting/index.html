@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="这里记录一些golang使用中的小细节，每次都像cgo那样单独写一篇有点太水了。">
@@ -130,7 +130,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -241,7 +241,7 @@
 <p>起因是用vscode上编辑boltdb的代码，每次ctrl+s保存之后就会在<code>// +build xxx, xxx</code>前面加一句语义相同的<code>//go:build blahblah</code></p>
 <p><code>//go:build</code> 是 Go 1.17 中引入的新条件编译指令。</p>
 <p>它旨在替换<code>// +</code>这个build tag，因为新语法带来了一些关键改进：</p>
-<p>与其他现有 Go 指令和编译指示的一致性，<br>例如<code>//go:generate</code>支持标准布尔表达式，<br>例如<code>//go:build foo &amp;&amp; bar</code>，而旧的 <code>// +build</code> 注释的语法不太直观。例如 AND 用逗号表示 <code>// +build foo, bar</code> 和 OR 用空格 <code>// +build foo bar</code><br>go fmt 支持自动修复源文件中指令的错误位置，从而避免在指令和包语句之间不留空行的常见错误。<br>这两个构建指令将在几个 Go 版本中共存，以确保平滑过渡，如相关提案文件中所述（在 N = 17 以下，重点是我的）：</p>
+<p>与其他现有 Go 指令和编译指示的一致性，<br>例如<code>//go:generate</code>支持标准布尔表达式，<br>例如<code>//go:build foo &amp;&amp; bar</code>，而旧的 <code>// +build</code> 注释的语法不太直观。例如 AND 用逗号表示 <code>// +build foo, bar</code> 和 OR 用空格 <code>// +build foo bar</code><br>go fmt 支持自动修复源文件中指令的错误位置，从而避免在指令和包语句之间不留空行的常见错误。<br>这两个构建指令将在几个 Go 版本中共存，以确保平滑过渡，如相关提案文件中所述（在 N &#x3D; 17 以下，重点是我的）：</p>
 <p>Go 1.N 将开始转换。在 Go 1.N 中：</p>
 <p>构建将开始更喜欢 <code>//go:</code> 用于文件选择的构建行。如果没有 <code>// go: build</code> 在一个文件中，那么任何 <code>// +</code> 构建行仍然适用。</p>
 <p>如果Go文件包含<code>//go: build</code> 而没有 <code>// +build</code>，构建将不再失败。</p>
@@ -353,7 +353,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="因为NGIN的contract系统也就是智能合约上需要嵌入的wasm engine支持fee cost on opcode(instr)，因此需要从wasmtime迁移到其他引擎。 虽然说找到了life完全符合我们的需要，但毕竟是人家的项目而且在host func嵌入的方面不如wasmtime顺手。 既然是从头做起(from scratch)的项目，那么再多做个wasm runtime应该也不过分">
@@ -134,7 +134,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -243,7 +243,7 @@
 <p>既然是从头做起(from scratch)的项目，那么再多做个wasm runtime应该也不过分。</p>
 <span id="more"></span>
 
-<h2 id="Compilation-Execution-modes"><a href="#Compilation-Execution-modes" class="headerlink" title="Compilation/Execution modes"></a>Compilation/Execution modes</h2><p>从<a href="https://github.com/appcypher/awesome-wasm-runtimes" target="_blank" rel="noopener">awesome-wasm-runtimes</a>的项目介绍里可以看到life的编译/执行模式是Interpreted，而wasmtime是JIT。</p>
+<h2 id="Compilation-x2F-Execution-modes"><a href="#Compilation-x2F-Execution-modes" class="headerlink" title="Compilation&#x2F;Execution modes"></a>Compilation&#x2F;Execution modes</h2><p>从<a href="https://github.com/appcypher/awesome-wasm-runtimes" target="_blank" rel="noopener">awesome-wasm-runtimes</a>的项目介绍里可以看到life的编译&#x2F;执行模式是Interpreted，而wasmtime是JIT。</p>
 <p>其实还有个叫AOT的，像Lucet这个引擎就是用的AOT。</p>
 <p>Interpreted顾名思义就是被“解释”，就类似脚本语言那样一句一句地输入并执行。换句话说就是引擎会读取源码或IR（介于高级语言和二进制机器码之间的中间表达，比如bytecode，wasm binary可以认为是IR）并立即把这些语句执行掉。</p>
 <p>JIT一边读取源代码或IR，一边对已读取内容飞速编译再执行，即在执行时编译。可以认为是JIT是对内容与当前执行环境做了优化之后再进行执行。</p>
@@ -253,7 +253,7 @@
 <h2 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h2><p>这里我们选择的是<a href="https://www.w3.org/TR/wasm-core-1/" target="_blank" rel="noopener">w3c的wasm标准</a>，也就是version1。</p>
 <p>其中的Values，Modules等内容在别的wasm内容中也提过了所以不多说。</p>
 <p>最为关键的在于如何将一个Module给实例化为Instance且通过Call一个mainFunc的方式跑起来。</p>
-<h2 id="Compile-Interpret"><a href="#Compile-Interpret" class="headerlink" title="Compile/Interpret"></a>Compile/Interpret</h2><p>本质上就是需要将wasm解释为机械码然后跑起来。</p>
+<h2 id="Compile-x2F-Interpret"><a href="#Compile-x2F-Interpret" class="headerlink" title="Compile&#x2F;Interpret"></a>Compile&#x2F;Interpret</h2><p>本质上就是需要将wasm解释为机械码然后跑起来。</p>
 <p>在将module实力化之前，我们需要对module中内容进行解析，构建出一个索引空间，用来快速访问我们需要的内容（其实也就function，global，table，memory）。这个内容也可能是外部module提供的，因此也需要提供externModules。</p>
 
     </div>
@@ -342,7 +342,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compilation-Execution-modes"><span class="nav-number">1.</span> <span class="nav-text">Compilation&#x2F;Execution modes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">基本内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-Interpret"><span class="nav-number">3.</span> <span class="nav-text">Compile&#x2F;Interpret</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compilation-x2F-Execution-modes"><span class="nav-number">1.</span> <span class="nav-text">Compilation&#x2F;Execution modes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">基本内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-x2F-Interpret"><span class="nav-number">3.</span> <span class="nav-text">Compile&#x2F;Interpret</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -363,7 +363,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

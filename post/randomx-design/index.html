@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="原文https:&#x2F;&#x2F;github.com&#x2F;tevador&#x2F;RandomX&#x2F;blob&#x2F;master&#x2F;doc&#x2F;design.md 为了最大限度地减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现设备绑定。这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。 有两类不同的通用处理设备：中央处理单元 (CPU) 和图形处理单元 (GPU)">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -316,7 +316,7 @@
 <p>为了保持恒定的内存时间乘积，最大的快速模式内存要求是：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8 * 256 MiB = 2048 MiB</span><br></pre></td></tr></table></figure>
 
-<p>这可以进一步增加，因为光照模式需要额外的芯片面积用于 SuperscalarHash 函数（参见规范的第 3.4 章和第 6 章）。假设保守估计每个 SuperscalarHash 核心0.2 mm 2和 DRAM 密度为 0.149 Gb/mm 2 [ 20 ]，额外的内存为：</p>
+<p>这可以进一步增加，因为光照模式需要额外的芯片面积用于 SuperscalarHash 函数（参见规范的第 3.4 章和第 6 章）。假设保守估计每个 SuperscalarHash 核心0.2 mm 2和 DRAM 密度为 0.149 Gb&#x2F;mm 2 [ 20 ]，额外的内存为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8 * 0.2 * 0.149 * 1024 / 8 = 30.5 MiB</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
@@ -326,7 +326,7 @@
 <p>2.1.1 指令复杂度<br>VM 是一个复杂的指令集机器，允许寄存器和内存寻址操作数。然而，每条 RandomX 指令只能转换为 1-7 条 x86 指令（平均 1.8 条）。保持指令复杂度相对较低以最小化具有定制指令集的专用硬件的效率优势非常重要。</p>
 <p>2.2 程序<br>VM 执行的程序具有循环的形式，由 256 条随机指令组成。</p>
 <ul>
-<li>256条指令足够长，可以提供大量可能的程序和足够的分支空间。可以生成的不同程序的数量限制为 2 512 = 1.3e+154，这是随机生成器可能的种子值的数量。</li>
+<li>256条指令足够长，可以提供大量可能的程序和足够的分支空间。可以生成的不同程序的数量限制为 2 512 &#x3D; 1.3e+154，这是随机生成器可能的种子值的数量。</li>
 <li>256 条指令足够短，因此高性能 CPU 可以在与从 DRAM 中获取数据所需的时间相似的时间内执行一次迭代。这是有利的，因为它允许同步数据集访问并完全可预取（参见第 2.9 章）。</li>
 <li>由于程序是一个循环，它可以利用一些 x86 CPU 中存在的 μop 缓存 [ 6 ]。从 μop 缓存运行循环允许 CPU 关闭 x86 指令解码器的电源，这应该有助于平衡 x86 和具有简单指令解码的体系结构之间的功率效率。</li>
 </ul>
@@ -334,11 +334,11 @@
 <p>2.4 整数运算<br>RandomX 使用所有具有高输出熵的原始整数运算：加法（IADD_RS、IADD_M）、减法（ISUB_R、ISUB_M、INEG_R）、乘法（IMUL_R、IMUL_M、IMULH_R、IMULH_M、ISMULH_R、ISMULH_M、IMULR_RIXOR） IXOR_M) 和旋转 (IROR_R, IROL_R)。</p>
 <p>2.4.1 IADD_RS<br>IADD_RS 指令利用 CPU 的地址计算逻辑，大多数 CPU（x86 lea、arm add）都可以在单个硬件指令中执行。</p>
 <p>2.4.2 IMUL_RCP<br>因为整数除法在 CPU 中没有完全流水线化，在 ASIC 中可以做得更快，所以 IMUL_RCP 指令每个程序只需要一个除法来计算倒数。这迫使 ASIC 包含硬件分频器，而不会在程序执行期间给它们带来性能优势。</p>
-<p>2.4.3 IROR_R/IROL_R<br>旋转指令分为右旋转和左旋转，比例为 4:1。向右旋转具有更高的频率，因为某些架构（如 ARM）本身不支持向左旋转（必须使用向右旋转来模拟）。</p>
-<p>2.4.4 ISWAP_R<br>支持寄存器重命名/移动消除的 CPU 可以有效地执行此指令。</p>
+<p>2.4.3 IROR_R&#x2F;IROL_R<br>旋转指令分为右旋转和左旋转，比例为 4:1。向右旋转具有更高的频率，因为某些架构（如 ARM）本身不支持向左旋转（必须使用向右旋转来模拟）。</p>
+<p>2.4.4 ISWAP_R<br>支持寄存器重命名&#x2F;移动消除的 CPU 可以有效地执行此指令。</p>
 <p>2.5 浮点运算<br>RandomX 使用双精度浮点运算，大多数 CPU 都支持这种运算，并且需要比单精度更复杂的硬件。所有操作都作为 128 位向量操作执行，所有主要 CPU 架构也支持这种操作。</p>
 <p>RandomX 使用 IEEE 754 标准保证的五种运算来提供正确的舍入结果：加法、减法、乘法、除法和平方根。使用标准定义的所有 4 种舍入模式。</p>
-<p>2.5.1 浮点寄存器组<br>浮点运算的域分为使用寄存器组 F 的“加法”运算和使用寄存器组 E 的“乘法”运算。这样做是为了防止加法/减法在添加少量数字时变为空操作到大量。由于 F 组寄存器的范围限制在 左右±3.0e+14，因此对绝对值大于 1 的浮点数进行加减运算总是至少改变 5 个小数位。</p>
+<p>2.5.1 浮点寄存器组<br>浮点运算的域分为使用寄存器组 F 的“加法”运算和使用寄存器组 E 的“乘法”运算。这样做是为了防止加法&#x2F;减法在添加少量数字时变为空操作到大量。由于 F 组寄存器的范围限制在 左右±3.0e+14，因此对绝对值大于 1 的浮点数进行加减运算总是至少改变 5 个小数位。</p>
 <p>由于 F 组寄存器的有限范围将允许使用更有效的定点表示（80 位数字），因此 FSCAL 指令操纵浮点格式的二进制表示，使这种优化更加困难。</p>
 <p>E 组寄存器限制为正值，以避免出现NaN结果（例如负数的平方根或0 * ∞）。除法仅使用内存源操作数，以避免被优化为常数倒数的乘法。E组内存操作数的指数设置为-255和0之间的值，以避免除以0和乘以0并增加可以获得的数字范围。可能基团E的寄存器值的近似范围为1.7E-77至infinity。</p>
 <p>每个程序循环结束时浮点寄存器值的近似分布如下图所示（左 - F组，右 - E组）：</p>
@@ -353,7 +353,7 @@
 <h3 id="2-6-分支"><a href="#2-6-分支" class="headerlink" title="2.6 分支"></a>2.6 分支</h3><p>现代 CPU 投入大量芯片面积和精力来处理分支。这包括：</p>
 <ul>
 <li>分支预测器单元 <a href="https://en.wikipedia.org/wiki/Branch_predictor" target="_blank" rel="noopener">Branch predictor</a></li>
-<li>检查点/回滚状态，允许 CPU 在分支预测错误的情况下恢复。</li>
+<li>检查点&#x2F;回滚状态，允许 CPU 在分支预测错误的情况下恢复。</li>
 </ul>
 <p>为了利用推测设计，随机程序应该包含分支。但是，如果分支预测失败，则推测执行的指令将被丢弃，这导致每次错误预测都会浪费一定的能量。因此，我们的目标应该是尽量减少错误预测的数量。</p>
 <p>此外，代码中的分支是必不可少的，因为它们显着减少了可以进行的静态优化的数量。例如，考虑以下 x86 指令序列：</p>
@@ -367,7 +367,7 @@
 <li>分支条件取决于运行时值以禁用静态分支优化。</li>
 </ol>
 <h4 id="2-6-1-分支预测"><a href="#2-6-1-分支预测" class="headerlink" title="2.6.1 分支预测"></a>2.6.1 分支预测</h4><p>不幸的是，我们还没有找到如何在 RandomX 中利用分支预测的方法。因为 RandomX 是一个共识协议，所以所有的规则都必须提前制定，包括分支规则。完全可预测的分支不能依赖于任何 VM 寄存器的运行时值（因为寄存器值是伪随机且不可预测的），因此它们必须是静态的，因此可以通过专用硬件轻松优化。</p>
-<h4 id="2-6-2-CBRANCH-指令"><a href="#2-6-2-CBRANCH-指令" class="headerlink" title="2.6.2 CBRANCH 指令"></a>2.6.2 CBRANCH 指令</h4><p>因此，RandomX 使用跳跃概率为 1/256 的随机分支和依赖于整数寄存器值的分支条件。这些分支将被 CPU 预测为“未采用”。这些分支在大多数 CPU 设计中是“免费的”，除非它们被采用。虽然这没有利用分支预测器，但与非推测分支处理相比，推测设计将显着提高性能 - 有关更多信息，请参阅附录 B。</p>
+<h4 id="2-6-2-CBRANCH-指令"><a href="#2-6-2-CBRANCH-指令" class="headerlink" title="2.6.2 CBRANCH 指令"></a>2.6.2 CBRANCH 指令</h4><p>因此，RandomX 使用跳跃概率为 1&#x2F;256 的随机分支和依赖于整数寄存器值的分支条件。这些分支将被 CPU 预测为“未采用”。这些分支在大多数 CPU 设计中是“免费的”，除非它们被采用。虽然这没有利用分支预测器，但与非推测分支处理相比，推测设计将显着提高性能 - 有关更多信息，请参阅附录 B。</p>
 <p>分支条件和跳转目标的选择方式使得 RandomX 代码中的无限循环是不可能的，因为控制分支的寄存器永远不会在重复代码块中被修改。每条 CBRANCH 指令最多可以连续跳转两次。使用谓词执行 [<a href="https://en.wikipedia.org/wiki/Predication_(computer_architecture)" target="_blank" rel="noopener">22</a>] 处理 CBRANCH 是不切实际的，因为大部分时间都不采用分支。</p>
 <h3 id="2-7-指令级并行"><a href="#2-7-指令级并行" class="headerlink" title="2.7 指令级并行"></a>2.7 指令级并行</h3><p>CPU 使用几种利用执行代码的指令级并行性的技术来提高其性能。这些技术包括：</p>
 <ul>
@@ -414,7 +414,7 @@
 <p>因此，RandomX 每次程序迭代仅对“L3”Scratchpad 执行 2 次随机访问（规范第 4.6.2 章中的第 2 步和第 3 步）。来自给定迭代的寄存器值被写入它们从中加载的相同位置，这保证了所需的缓存线已移动到更快的 L1 或 L2 缓存中。</p>
 <p>此外，从固定地址读取的整数指令也使用整个“L3”暂存器（规范的表 5.1.4），因为重复访问将确保缓存线将放置在 CPU 的 L1 缓存中。这表明 Scratchpad 级别并不总是直接对应于相同的 CPU 缓存级别。</p>
 <h3 id="2-9-数据集"><a href="#2-9-数据集" class="headerlink" title="2.9 数据集"></a>2.9 数据集</h3><p>由于 Scratchpad 通常存储在 CPU 缓存中，因此只有数据集访问使用内存控制器。</p>
-<p>RandomX 每次程序迭代从数据集随机读取一次（每个哈希结果 16384 次）。由于数据集必须存储在 DRAM 中，因此它提供了一个自然的并行化限制，因为 DRAM 每个存储体组每秒不能进行超过约 2500 万次随机访问。每个可单独寻址的银行组允许大约 1500 H/s 的吞吐量。</p>
+<p>RandomX 每次程序迭代从数据集随机读取一次（每个哈希结果 16384 次）。由于数据集必须存储在 DRAM 中，因此它提供了一个自然的并行化限制，因为 DRAM 每个存储体组每秒不能进行超过约 2500 万次随机访问。每个可单独寻址的银行组允许大约 1500 H&#x2F;s 的吞吐量。</p>
 <p>所有数据集访问读取一个 CPU 缓存行（64 字节）并完全预取。执行规范第 4.6.2 章中描述的一个程序迭代的时间与典型的 DRAM 访问延迟（50-100 ns）大致相同。</p>
 <h4 id="2-9-1-缓存"><a href="#2-9-1-缓存" class="headerlink" title="2.9.1 缓存"></a>2.9.1 缓存</h4><p>用于光照验证和Dataset构建的Cache，比Dataset小8倍左右。为了保持恒定的区域时间乘积，每个数据集项都由 8 次随机缓存访问构成。</p>
 <p>由于 256 MiB 足够小，可以包含在芯片上，RandomX 使用自定义的高延迟、高功率混合函数（“SuperscalarHash”），这抵消了使用低延迟内存的好处，并且计算 SuperscalarHash 所需的能量变得轻巧模式非常低效的挖矿（见第 3.4 章）。</p>
@@ -429,10 +429,10 @@
 <p>有关 Scratchpad 熵的分析，请参见附录 D。</p>
 <h4 id="2-8-3-读写比例"><a href="#2-8-3-读写比例" class="headerlink" title="2.8.3 读写比例"></a>2.8.3 读写比例</h4><p>程序每次程序迭代平均对便笺簿进行 39 次读取（指令 IADD_M、ISUB_M、IMUL_M、IMULH_M、ISMULH_M、IXOR_M、FADD_M、FSUB_M、FDIV_M）和 16 次写入（指令 ISTORE）。额外的 128 个字节被隐式读取和写入以初始化和存储寄存器值。每次迭代从 Dataset 中读取 64 字节的数据。总共：</p>
 <ul>
-<li>每次程序迭代从内存读取的平均数据量为：39 * 8 + 128 + 64 = <strong>504 字节</strong>。</li>
-<li>每次程序迭代写入内存的平均数据量为：16 * 8 + 128 = <strong>256 字节</strong>。</li>
+<li>每次程序迭代从内存读取的平均数据量为：39 * 8 + 128 + 64 &#x3D; <strong>504 字节</strong>。</li>
+<li>每次程序迭代写入内存的平均数据量为：16 * 8 + 128 &#x3D; <strong>256 字节</strong>。</li>
 </ul>
-<p>这接近于 2:1 的读/写比，这是 CPU 优化的。</p>
+<p>这接近于 2:1 的读&#x2F;写比，这是 CPU 优化的。</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2>
     </div>
 
@@ -535,7 +535,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

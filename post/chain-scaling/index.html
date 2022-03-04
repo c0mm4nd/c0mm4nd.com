@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="原文自edX上伯克利大学课程Blockchain Technology。本文是对课程内部分内容的总结与修改。 虽然现在的公链生态已经获得成功，但是其反受繁荣现状的掣肘。尤其是比特币和以太坊，存在严重的可扩展性问题。从其成为能够支持全球规模交易量的全球网络的目标来看，目前两者都在交易吞吐量(tps)方面表现不佳。 从根本上讲，扩展解决方案可以增加交易量或减少交易时间。这也是理所当然的，因为可缩放性是">
@@ -31,8 +31,8 @@
 <meta property="article:modified_time" content="2021-10-11T09:21:35.798Z">
 <meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
 <meta property="article:tag" content="done">
-<meta property="article:tag" content="blockchain">
 <meta property="article:tag" content="edx">
+<meta property="article:tag" content="blockchain">
 <meta property="article:tag" content="scaling">
 <meta property="article:tag" content="tps">
 <meta name="twitter:card" content="summary">
@@ -135,7 +135,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -246,7 +246,7 @@
 <span id="more"></span>
 
 <h2 id="纵向缩放"><a href="#纵向缩放" class="headerlink" title="纵向缩放"></a>纵向缩放</h2><p>正常情况下，tps算法如下</p>
-<p>$$tps = BlockSize\times AvgTxSize\div BlockTime$$</p>
+<p>$$tps &#x3D; BlockSize\times AvgTxSize\div BlockTime$$</p>
 <p>因此我们可以给出如下几种优化方案</p>
 <h3 id="减少区块时间"><a href="#减少区块时间" class="headerlink" title="减少区块时间"></a>减少区块时间</h3><p>我们不能简单地减少区块时间，因为那样会导致自然产生的分叉率更高，从而降低了系统安全性。因为在减少块时间的同时，网络中广播新区块的时间是依旧不变的。</p>
 <p>以太坊一直通过采用GHOST（Greedy Heaviest Observed SubTree，贪婪的最高权重的被观测子树）协议来解决这个问题。使用GHOST协议，矿工并不会简单地同意最长的链条（比特币方案），而是“重量”最大的链条。这个“重量”是由一条链的长度和其叔块数计算得出的一个值。</p>
@@ -319,8 +319,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/done/" rel="tag"># done</a>
-              <a href="/tags/blockchain/" rel="tag"># blockchain</a>
               <a href="/tags/edx/" rel="tag"># edx</a>
+              <a href="/tags/blockchain/" rel="tag"># blockchain</a>
               <a href="/tags/scaling/" rel="tag"># scaling</a>
               <a href="/tags/tps/" rel="tag"># tps</a>
           </div>
@@ -418,7 +418,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

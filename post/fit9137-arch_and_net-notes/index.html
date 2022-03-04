@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="虽然在定义上是个基础课，但是实际上比国内的大计基深入的不是一点点。如果不是前阵子因为cryptocurrency mining的研究一直都在钻研底层，估计还挺难消化的。即便如此，不仔细的我到现在的quiz还是没能拿到过100……">
@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -264,7 +264,7 @@
 <p>LAN: 1Gbps</p>
 <p>BN: 10Gbps</p>
 <p>光纤: Tbps</p>
-<h5 id="层级（Layers）与协议（Protocols）"><a href="#层级（Layers）与协议（Protocols）" class="headerlink" title="层级（Layers）与协议（Protocols）"></a>层级（Layers）与协议（Protocols）</h5><p>TCP/IP模型</p>
+<h5 id="层级（Layers）与协议（Protocols）"><a href="#层级（Layers）与协议（Protocols）" class="headerlink" title="层级（Layers）与协议（Protocols）"></a>层级（Layers）与协议（Protocols）</h5><p>TCP&#x2F;IP模型</p>
 <table>
 <thead>
 <tr>
@@ -302,11 +302,11 @@
 <li><p>Bit</p>
 </li>
 </ol>
-<p>每一层都对数据会进行调制/解调（en/decapsulate），就类似tcp conn里套socks5再套ss/ssr一样</p>
+<p>每一层都对数据会进行调制&#x2F;解调（en&#x2F;decapsulate），就类似tcp conn里套socks5再套ss&#x2F;ssr一样</p>
 <p>模块化设计</p>
 <p>优秀的协议栈有三种特征：</p>
 <p>低耦合（Low Coupling）高聚合（High Cohesive）无信息（Information Hiding）</p>
-<h3 id="Physical-DataLink-Layer"><a href="#Physical-DataLink-Layer" class="headerlink" title="Physical/DataLink Layer"></a>Physical/DataLink Layer</h3><p>Intro</p>
+<h3 id="Physical-x2F-DataLink-Layer"><a href="#Physical-x2F-DataLink-Layer" class="headerlink" title="Physical&#x2F;DataLink Layer"></a>Physical&#x2F;DataLink Layer</h3><p>Intro</p>
 <p>物理层：直接连接设备</p>
 <p>数据链接层：管理俩设备间的物理连接</p>
 <p>物理层：主要焦点于如何将bits转换为信号以及转回bits</p>
@@ -329,8 +329,8 @@
 </li>
 </ul>
 <p>通过使用Modem来将数字信号转换成模拟信号</p>
-<p>Modem（<strong>Mo</strong>dulator/<strong>Dem</strong>odulator）</p>
-<p>这里我们都使用正弦（sin）波。y = A * sin(f*2πX+φ) 波具有三个属性：</p>
+<p>Modem（<strong>Mo</strong>dulator&#x2F;<strong>Dem</strong>odulator）</p>
+<p>这里我们都使用正弦（sin）波。y &#x3D; A * sin(f*2πX+φ) 波具有三个属性：</p>
 <ul>
 <li>振幅A</li>
 <li>频率f</li>
@@ -343,7 +343,7 @@
 <li>定义与网络层的接口</li>
 </ul>
 <h4 id="媒体访问控制（MAC）"><a href="#媒体访问控制（MAC）" class="headerlink" title="媒体访问控制（MAC）"></a>媒体访问控制（MAC）</h4><ul>
-<li>在与物理层符号和frame之间编码/解码</li>
+<li>在与物理层符号和frame之间编码&#x2F;解码</li>
 <li>错误检测</li>
 <li>当设备传输时控制</li>
 </ul>
@@ -412,7 +412,7 @@
 <p>连接到电脑</p>
 <ul>
 <li>通常内置于主板</li>
-<li>或者通过USB/PCI-Express等接口连接</li>
+<li>或者通过USB&#x2F;PCI-Express等接口连接</li>
 </ul>
 <h5 id="Network-Cables网线"><a href="#Network-Cables网线" class="headerlink" title="Network Cables网线"></a>Network Cables网线</h5><p>网络设备间的物理连接</p>
 <p>不同的类别：</p>
@@ -437,7 +437,7 @@
 <tbody><tr>
 <td>10BASE-T</td>
 <td>10Mbps</td>
-<td>UTP cat3 / cat5，三类线五类线</td>
+<td>UTP cat3 &#x2F; cat5，三类线五类线</td>
 </tr>
 <tr>
 <td>100BASE-T</td>
@@ -460,8 +460,8 @@
 <td>UTP cat6，ca7，光纤</td>
 </tr>
 <tr>
-<td>40GbE/100GbE</td>
-<td>40Gbps/100Gbps</td>
+<td>40GbE&#x2F;100GbE</td>
+<td>40Gbps&#x2F;100Gbps</td>
 <td>光纤</td>
 </tr>
 </tbody></table>
@@ -532,7 +532,7 @@
 <li>没有被避免，但是可容忍可检测</li>
 <li>在小型和中型网络里非常高效</li>
 </ul>
-<p>媒体获取控制（Media Access Control）：CSMA/CD</p>
+<p>媒体获取控制（Media Access Control）：CSMA&#x2F;CD</p>
 <ul>
 <li>事件感知（CS）：在线路上侦听，只在没有其他型号被感知时传输</li>
 <li>多重获取（MA）：多个设备访问同一个介质</li>
@@ -584,9 +584,9 @@
 <li>Manually updated when the network changes</li>
 <li>Used in simple networks that don’t change a lot</li>
 </ul>
-<h2 id="IP-subnets"><a href="#IP-subnets" class="headerlink" title="IP subnets"></a>IP subnets</h2><p>mask 计算方式就是bin对比，比如/20表示<code>&quot;1&quot;*20+&quot;0&quot;*(32-20)</code>，mask则是取ip（每个数字分开LE encode，从右往左写）与这个的&amp;值（即上下都是1就取1否则0）</p>
+<h2 id="IP-subnets"><a href="#IP-subnets" class="headerlink" title="IP subnets"></a>IP subnets</h2><p>mask 计算方式就是bin对比，比如&#x2F;20表示<code>&quot;1&quot;*20+&quot;0&quot;*(32-20)</code>，mask则是取ip（每个数字分开LE encode，从右往左写）与这个的&amp;值（即上下都是1就取1否则0）</p>
 <p>要看清楚到底是ip还是mask。X.X.0.0这种就是mask，因为可以作为一个subnet的Network(gateway) address。作为mask的ip可能不带<code>/20</code>这样的后缀（因为人家能表达了）</p>
-<p>X.X.X.X(/XX)在mask /XX（或者X.X.X.X）有几个subnet？先算前面那个的<code>/XX</code>比如20。再算后面那个的那比如24。那么subnet个数就是2^(24-20) = 16个。每个subnet里的ip数就是2^(32-24)=256，其中host ip数就是256-2 = 254</p>
+<p>X.X.X.X(&#x2F;XX)在mask &#x2F;XX（或者X.X.X.X）有几个subnet？先算前面那个的<code>/XX</code>比如20。再算后面那个的那比如24。那么subnet个数就是2^(24-20) &#x3D; 16个。每个subnet里的ip数就是2^(32-24)&#x3D;256，其中host ip数就是256-2 &#x3D; 254</p>
 <h2 id="错题集！"><a href="#错题集！" class="headerlink" title="错题集！"></a>错题集！</h2><blockquote>
 <p>Q: An access point ensures that all computers within range of the access point can communicate with each other</p>
 <p>A: T</p>
@@ -654,22 +654,22 @@
 <p>How many bits are required to sample an incoming signal 4000 times per second using 64 different amplitude levels?</p>
 <p>A: 6</p>
 </blockquote>
-<p>写了是64的我一脸懵逼。现在来复盘一下。先用Acrobat定位了一下知识点在W6。$s(t) = A sin(2\pi ft + \phi)$。这里$f$已经确定了是个常量<em>4000 times per second</em>，$\phi$没提到，变的应该只有A，有64个不同的值。<del>首先已知了我们64错了。</del></p>
+<p>写了是64的我一脸懵逼。现在来复盘一下。先用Acrobat定位了一下知识点在W6。$s(t) &#x3D; A sin(2\pi ft + \phi)$。这里$f$已经确定了是个常量<em>4000 times per second</em>，$\phi$没提到，变的应该只有A，有64个不同的值。<del>首先已知了我们64错了。</del></p>
 <img src="/post/fit9137-arch_and_net-notes/image-20210212012622535.png" class="" title="image-20210212012622535">
 
-<p>题目说了有64个amplitude的值，另外求的是可以代表bit的数量。意思应该就是64个值可以用几个bit概括？一个bit可以表示0，1。两个就是00，01，10，11四个，以此类推就是n个bit代表$2^n$个。$64 = 2^6$。所以是6。（要注意审题啊完全没意识到是bit）</p>
+<p>题目说了有64个amplitude的值，另外求的是可以代表bit的数量。意思应该就是64个值可以用几个bit概括？一个bit可以表示0，1。两个就是00，01，10，11四个，以此类推就是n个bit代表$2^n$个。$64 &#x3D; 2^6$。所以是6。（要注意审题啊完全没意识到是bit）</p>
 <blockquote>
 <p>Which of the following is <strong>not</strong> a controlled access method of media access control?</p>
 <p>Select one:</p>
-<p>a. CSMA/CD</p>
+<p>a. CSMA&#x2F;CD</p>
 <p>b. hub polling</p>
 <p>c. roll call polling</p>
 <p>d. Token passing</p>
 <p>e. polling</p>
-<p>A: a. CSMA/CD</p>
+<p>A: a. CSMA&#x2F;CD</p>
 </blockquote>
-<p>相关知识忘得差不多了，只记得CSMA/CD是和Media有关的。CSMA/CD也是W6（LAN&amp;WLAN）的内容。</p>
-<p>CSMA/CD是一个Media Access Control。</p>
+<p>相关知识忘得差不多了，只记得CSMA&#x2F;CD是和Media有关的。CSMA&#x2F;CD也是W6（LAN&amp;WLAN）的内容。</p>
+<p>CSMA&#x2F;CD是一个Media Access Control。</p>
 <ul>
 <li>Carrier Sense (CS):<br>listen on bus, only transmit if no other signal is “sensed”</li>
 <li>Multiple Access (MA):<br>several devices access the same medium</li>
@@ -679,11 +679,11 @@
 </ul>
 </li>
 </ul>
-<p>CSMA/CD limits size of collision domain</p>
+<p>CSMA&#x2F;CD limits size of collision domain</p>
 <p>而那些Polling是W5（Physical &amp; DataLink Layer）的内容。</p>
 <ol>
 <li>Roll Call Polling （类hub）</li>
-<li> Hub Polling / Token Passing （P2P）</li>
+<li>Hub Polling &#x2F; Token Passing （P2P）</li>
 </ol>
 <p>人家都叫Controlled Access。</p>
 <blockquote>
@@ -726,18 +726,18 @@
 <img src="/post/fit9137-arch_and_net-notes/image-20210212020527545.png" class="" title="image-20210212020527545">
 
 <p><strong>acknowledgement</strong> (<strong>ACK</strong>) <strong>negative-acknowledgement</strong> (<strong>NAK</strong> or <strong>NACK</strong>)</p>
-<p>这里干脆吧<a href="https://en.wikipedia.org/wiki/Automatic_repeat_request" target="_blank" rel="noopener">ARQ（Automatic Repeat Request/automatic repeat query)</a>也看掉。ARQ是一种用于数据传输的错误控制方法，它使用确认（接收方发送的消息，表明它已正确接收到一个数据包）和超时（在接收确认之前经过了指定的时间段）来实现可靠的数据传输 通过不可靠的通信渠道。 如果发送方在超时之前未收到确认，则通常会重新传输数据包，直到发送方收到确认或超过预定义的重传次数为止。（就等于是一直ping你直到ping通或者次数到</p>
+<p>这里干脆吧<a href="https://en.wikipedia.org/wiki/Automatic_repeat_request" target="_blank" rel="noopener">ARQ（Automatic Repeat Request&#x2F;automatic repeat query)</a>也看掉。ARQ是一种用于数据传输的错误控制方法，它使用确认（接收方发送的消息，表明它已正确接收到一个数据包）和超时（在接收确认之前经过了指定的时间段）来实现可靠的数据传输 通过不可靠的通信渠道。 如果发送方在超时之前未收到确认，则通常会重新传输数据包，直到发送方收到确认或超过预定义的重传次数为止。（就等于是一直ping你直到ping通或者次数到</p>
 <blockquote>
 <p>A _____ is a user’s connection into a packet switched service.</p>
 <p>Select one:</p>
-<p>a. packet asynchronous/discrete device</p>
-<p>b. packet asymmetric/data transmission device</p>
-<p>c. packet analyzer/decoder device</p>
-<p>d. packet assembly/disassembly device</p>
-<p>e. packet analog/digital device</p>
-<p>A: d. packet assembly/disassembly device</p>
+<p>a. packet asynchronous&#x2F;discrete device</p>
+<p>b. packet asymmetric&#x2F;data transmission device</p>
+<p>c. packet analyzer&#x2F;decoder device</p>
+<p>d. packet assembly&#x2F;disassembly device</p>
+<p>e. packet analog&#x2F;digital device</p>
+<p>A: d. packet assembly&#x2F;disassembly device</p>
 </blockquote>
-<p>W11(Backbones MAN WAN)里WAN Packet Switched Services讲到的packet assembly/disassembly （简称PAD）。如图，背一背吧</p>
+<p>W11(Backbones MAN WAN)里WAN Packet Switched Services讲到的packet assembly&#x2F;disassembly （简称PAD）。如图，背一背吧</p>
 <img src="/post/fit9137-arch_and_net-notes/image-20210212021401150.png" class="" title="image-20210212021401150">
 
 
@@ -759,7 +759,7 @@
 <p>Web-based e-mail like Hotmail is an example of three-tier client-server architecture that provides access to e-mail messages.</p>
 <p>A: T</p>
 </blockquote>
-<p>想的是B/S，通过<em>three-tier client-server architecture</em>关键词查了下看见<a href="https://en.wikipedia.org/wiki/Multitier_architecture#Three-tier_architecture" target="_blank" rel="noopener">Wikipedia</a>里说: <em>In the <a href="https://en.wikipedia.org/wiki/Web_development" target="_blank" rel="noopener">web development</a> field, three-tier is often used to refer to <a href="https://en.wikipedia.org/wiki/Website" target="_blank" rel="noopener">websites</a>, commonly <a href="https://en.wikipedia.org/wiki/Electronic_commerce" target="_blank" rel="noopener">electronic commerce</a> websites</em></p>
+<p>想的是B&#x2F;S，通过<em>three-tier client-server architecture</em>关键词查了下看见<a href="https://en.wikipedia.org/wiki/Multitier_architecture#Three-tier_architecture" target="_blank" rel="noopener">Wikipedia</a>里说: <em>In the <a href="https://en.wikipedia.org/wiki/Web_development" target="_blank" rel="noopener">web development</a> field, three-tier is often used to refer to <a href="https://en.wikipedia.org/wiki/Website" target="_blank" rel="noopener">websites</a>, commonly <a href="https://en.wikipedia.org/wiki/Electronic_commerce" target="_blank" rel="noopener">electronic commerce</a> websites</em></p>
 <blockquote>
 <p>In unix or Linux Operating System, the most common types of files are ____________.</p>
 <p>Select one:</p>
@@ -809,9 +809,9 @@
 <blockquote>
 <p>An interrupt is a signal to the processor to suspend its current tasks and deal with whatever caused the interrupt. Which of the following method cannot be classified as Interrupts?</p>
 <p>Select one:</p>
-<p>a. Program/Software triggered</p>
+<p>a. Program&#x2F;Software triggered</p>
 <p>b. Timer triggered</p>
-<p>c. I/O operation triggered</p>
+<p>c. I&#x2F;O operation triggered</p>
 <p>d. Other Hardware triggered</p>
 <p>e. Page fault triggered</p>
 <p>A: e</p>
@@ -876,7 +876,7 @@
 <p>d. 1.544 Mbps</p>
 <p>e. 100 Mbps</p>
 </blockquote>
-<p>OC-X = X * 51.84 Mbps</p>
+<p>OC-X &#x3D; X * 51.84 Mbps</p>
 <blockquote>
 <p>Both the _____ layer perform error checking.</p>
 <p>Select one:</p>
@@ -901,7 +901,7 @@
 
 <p>直接拿来覆盖范围的，就好像学校到处有的校园网</p>
 <blockquote>
-<p>Which of the following is not true about CSMA/CD?</p>
+<p>Which of the following is not true about CSMA&#x2F;CD?</p>
 <p>Select one:</p>
 <p>a. It is used in token ring protocol LANs</p>
 <p>b. It is a contention-based media access control technique</p>
@@ -910,7 +910,7 @@
 <p>e. The acronym refers to Carrier Sense Multiple Access with Collision Detection</p>
 <p>A: a. It is used in token ring protocol LANs</p>
 </blockquote>
-<p>CSMA/CD是W6 Ethernet内容</p>
+<p>CSMA&#x2F;CD是W6 Ethernet内容</p>
 <p>前面只有hub，hub的逻辑拓扑是shared bus，物理拓扑是star</p>
 <blockquote>
 <p>The probability of detecting an error, provided that one has occurred, using cyclic redundancy checking is about</p>
@@ -1021,7 +1021,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-number">1.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network"><span class="nav-number">2.</span> <span class="nav-text">Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E7%9A%84%E4%BC%A0%E8%BE%93"><span class="nav-number">2.1.1.</span> <span class="nav-text">消息的传输</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E9%80%9F%E7%8E%87%EF%BC%9A"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">传输速率：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%82%E7%BA%A7%EF%BC%88Layers%EF%BC%89%E4%B8%8E%E5%8D%8F%E8%AE%AE%EF%BC%88Protocols%EF%BC%89"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">层级（Layers）与协议（Protocols）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Physical-DataLink-Layer"><span class="nav-number">2.2.</span> <span class="nav-text">Physical&#x2F;DataLink Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">数字信号与模拟信号</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E6%8E%A5%E5%B1%82"><span class="nav-number">2.3.</span> <span class="nav-text">数据链接层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E9%93%BE%E6%8E%A5%E6%8E%A7%E5%88%B6%EF%BC%88LLC%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">逻辑链接控制（LLC）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AA%92%E4%BD%93%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%88MAC%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">媒体访问控制（MAC）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LAN-amp-WLAN"><span class="nav-number">2.4.</span> <span class="nav-text">LAN &amp; WLAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LAN%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.4.1.</span> <span class="nav-text">LAN的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80LAN%E7%BB%84%E4%BB%B6"><span class="nav-number">2.4.2.</span> <span class="nav-text">基础LAN组件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#NIC%E7%BD%91%E5%8D%A1"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">NIC网卡</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Network-Cables%E7%BD%91%E7%BA%BF"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">Network Cables网线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NOS%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.4.2.3.</span> <span class="nav-text">NOS网络操作系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%EF%BC%8C%E9%9B%86%E7%BA%BF%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-number">2.5.</span> <span class="nav-text">以太网，集线器与交换机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W8"><span class="nav-number">3.</span> <span class="nav-text">W8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-subnets"><span class="nav-number">4.</span> <span class="nav-text">IP subnets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E9%A2%98%E9%9B%86%EF%BC%81"><span class="nav-number">5.</span> <span class="nav-text">错题集！</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-number">1.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network"><span class="nav-number">2.</span> <span class="nav-text">Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E7%9A%84%E4%BC%A0%E8%BE%93"><span class="nav-number">2.1.1.</span> <span class="nav-text">消息的传输</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E9%80%9F%E7%8E%87%EF%BC%9A"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">传输速率：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B1%82%E7%BA%A7%EF%BC%88Layers%EF%BC%89%E4%B8%8E%E5%8D%8F%E8%AE%AE%EF%BC%88Protocols%EF%BC%89"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">层级（Layers）与协议（Protocols）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Physical-x2F-DataLink-Layer"><span class="nav-number">2.2.</span> <span class="nav-text">Physical&#x2F;DataLink Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">数字信号与模拟信号</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E6%8E%A5%E5%B1%82"><span class="nav-number">2.3.</span> <span class="nav-text">数据链接层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E9%93%BE%E6%8E%A5%E6%8E%A7%E5%88%B6%EF%BC%88LLC%EF%BC%89"><span class="nav-number">2.3.1.</span> <span class="nav-text">逻辑链接控制（LLC）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AA%92%E4%BD%93%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%88MAC%EF%BC%89"><span class="nav-number">2.3.2.</span> <span class="nav-text">媒体访问控制（MAC）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LAN-amp-WLAN"><span class="nav-number">2.4.</span> <span class="nav-text">LAN &amp; WLAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LAN%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.4.1.</span> <span class="nav-text">LAN的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80LAN%E7%BB%84%E4%BB%B6"><span class="nav-number">2.4.2.</span> <span class="nav-text">基础LAN组件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#NIC%E7%BD%91%E5%8D%A1"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">NIC网卡</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Network-Cables%E7%BD%91%E7%BA%BF"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">Network Cables网线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NOS%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.4.2.3.</span> <span class="nav-text">NOS网络操作系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%EF%BC%8C%E9%9B%86%E7%BA%BF%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-number">2.5.</span> <span class="nav-text">以太网，集线器与交换机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W8"><span class="nav-number">3.</span> <span class="nav-text">W8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-subnets"><span class="nav-number">4.</span> <span class="nav-text">IP subnets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E9%A2%98%E9%9B%86%EF%BC%81"><span class="nav-number">5.</span> <span class="nav-text">错题集！</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1042,7 +1042,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

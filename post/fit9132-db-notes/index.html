@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="整体难度不大，tutor也很给面子（要是我自己给自己打分肯定更低 建议尽早摘抄知识点并且在Tut&#x2F;Ass时候就用起来，别像我一样前面拍脑子考前总结才发现都在PPT里。">
@@ -144,7 +144,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -249,7 +249,7 @@
 
       
         <p>整体难度不大，tutor也很给面子（要是我自己给自己打分肯定更低</p>
-<p>建议尽早摘抄知识点并且在Tut/Ass时候就用起来，别像我一样前面拍脑子考前总结才发现都在PPT里。</p>
+<p>建议尽早摘抄知识点并且在Tut&#x2F;Ass时候就用起来，别像我一样前面拍脑子考前总结才发现都在PPT里。</p>
 <span id="more"></span>
 
 <h2 id="W1"><a href="#W1" class="headerlink" title="W1"></a>W1</h2><p>回顾历史DB发展以及名人</p>
@@ -257,7 +257,7 @@
 <p>因为是chow’s foot图，所以复合（1：1）、多值（1：N）属性记得加个实体来表述会更直观</p>
 <h3 id="理论模型设计"><a href="#理论模型设计" class="headerlink" title="理论模型设计"></a>理论模型设计</h3><p>开发企业数据模型。</p>
 <ul>
-<li>对应于ANSI / SPARC体系结构的概念级别。</li>
+<li>对应于ANSI &#x2F; SPARC体系结构的概念级别。</li>
 <li>独立于所有物理实施注意事项（要使用的数据库类型）。</li>
 <li>可以采用各种设计方法，例如UML，ER（实体关系）。</li>
 <li>ER由实体之间的<strong>实体</strong>和<strong>关系</strong>组成</li>
@@ -315,14 +315,14 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>`</td>
-<td>o`</td>
-<td>`o</td>
+<td>&#96;</td>
+<td>o&#96;</td>
+<td>&#96;o</td>
 </tr>
 <tr>
-<td>`</td>
+<td>&#96;</td>
 <td></td>
-<td>`</td>
+<td>&#96;</td>
 </tr>
 <tr>
 <td><code>&#125;o</code></td>
@@ -330,9 +330,9 @@
 <td>零或多个 (无上限)</td>
 </tr>
 <tr>
-<td>`}</td>
-<td>`</td>
-<td>`</td>
+<td>&#96;}</td>
+<td>&#96;</td>
+<td>&#96;</td>
 </tr>
 </tbody></table>
 <pre class="mermaid">erDiagram
@@ -365,7 +365,7 @@
 <li>属性不能多值</li>
 <li>所有属性值应当来自同一个域</li>
 <li>必须有主键</li>
-<li>relations 之间的 Logical (not physical) connections 通过primary/foreign keys表示</li>
+<li>relations 之间的 Logical (not physical) connections 通过primary&#x2F;foreign keys表示</li>
 </ul>
 <h2 id="W4-Normalisation"><a href="#W4-Normalisation" class="headerlink" title="W4 Normalisation"></a>W4 Normalisation</h2><p>归一化</p>
 <ul>
@@ -489,14 +489,14 @@
 <h2 id="W7-SQL"><a href="#W7-SQL" class="headerlink" title="W7 SQL"></a>W7 SQL</h2><p>主要讲的就是select和where</p>
 <p>限定词：</p>
 <ul>
-<li>=, !=, &lt;&gt;, &lt;, &gt;, &gt;=, &lt;=</li>
+<li>&#x3D;, !&#x3D;, &lt;&gt;, &lt;, &gt;, &gt;&#x3D;, &lt;&#x3D;</li>
 <li>between</li>
 </ul>
 <p>NOTE: between aaa and bbb时候aaa和bbb<strong>都</strong>是被包括进去的</p>
 <ul>
 <li>in (‘aaa’, ‘bbb’ …)</li>
 <li>like: %表示0+个字符, _表示单字符</li>
-<li>is null, is not null (判断null时候不能用=或!=)</li>
+<li>is null, is not null (判断null时候不能用&#x3D;或!&#x3D;)</li>
 <li>any, all</li>
 <li>exists</li>
 </ul>
@@ -513,8 +513,8 @@
 <p>SELECT DISTINCT 去重复行</p>
 <p>JOIN</p>
 <blockquote>
-<p>from aaa JOIN bbb ON aaa.a = bbb.b</p>
-<p>from aaa JOIN bbb ON aaa.key = bbb.key </p>
+<p>from aaa JOIN bbb ON aaa.a &#x3D; bbb.b</p>
+<p>from aaa JOIN bbb ON aaa.key &#x3D; bbb.key </p>
 <p>from aaa JOIN bbb USING (key) </p>
 <p>from aaa NATURAL JOIN bbb</p>
 </blockquote>
@@ -527,7 +527,7 @@
 
 
 <h2 id="W8-DML"><a href="#W8-DML" class="headerlink" title="W8  DML"></a>W8  DML</h2><p>Update, Delete and Transaction Management</p>
-<p>记得每个insert/update 都要commit！</p>
+<p>记得每个insert&#x2F;update 都要commit！</p>
 <h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><p>主要讲事务上的读写锁S（shared lock）和X（exclusive lock）</p>
 <p>当一个新Tx，</p>
 <ul>
@@ -601,8 +601,8 @@
 <h5 id="full-outer-join"><a href="#full-outer-join" class="headerlink" title="full outer join"></a>full outer join</h5><p>两边对应不上的都保留</p>
 <img src="/post/fit9132-db-notes/image-20210218213524538.png" class="" title="image-20210218213524538">
 
-<p>如图，左边的id=3没对应所以右边空null，右边4没对应所以左边空null</p>
-<h5 id="left-right-outer-join"><a href="#left-right-outer-join" class="headerlink" title="left/right outer join"></a>left/right outer join</h5><p>left只保证左边的都有对应，因此只保留右边的null</p>
+<p>如图，左边的id&#x3D;3没对应所以右边空null，右边4没对应所以左边空null</p>
+<h5 id="left-x2F-right-outer-join"><a href="#left-x2F-right-outer-join" class="headerlink" title="left&#x2F;right outer join"></a>left&#x2F;right outer join</h5><p>left只保证左边的都有对应，因此只保留右边的null</p>
 <p>right只保证右边的都有对应，因此只留左边的null。</p>
 <p>另外左右是根据join关键词的左边右边决定的，比如上面的full就是<code>id_name full outer join id_subj_mark</code></p>
 <h3 id="Set-Operators"><a href="#Set-Operators" class="headerlink" title="Set Operators"></a>Set Operators</h3><p>大前提：列能对的上</p>
@@ -617,7 +617,7 @@
 <p>JSON_ARRAYAGG(JSON_OBJECT(), JSON_OBJECT())</p>
 <p>MongoDB</p>
 <p>insertOne(), insertMany([])</p>
-<p>find({})或者find(匹配, 需要的列)，例如find({_id: 2}, {name: 1})只取id=2那列的name</p>
+<p>find({})或者find(匹配, 需要的列)，例如find({_id: 2}, {name: 1})只取id&#x3D;2那列的name</p>
 <p>op: </p>
 <p>{$and: [{}, {}]}</p>
 <p>{$or: [{}, {}]}</p>
@@ -639,7 +639,7 @@
 <ol>
 <li>insert，alter还有update</li>
 <li>简单select + 巨难的left outer join</li>
-<li>又是left outer join再配合having count(distinct ) + select subquery </li>
+<li>又是left outer join再配合having count(distinct ) + select subquery</li>
 </ol>
 <h4 id="Big-Data-and-No-SQL-10"><a href="#Big-Data-and-No-SQL-10" class="headerlink" title="Big Data and No SQL 10"></a>Big Data and No SQL 10</h4><ol>
 <li><p>json和mongodb</p>
@@ -657,7 +657,7 @@
 <img src="/post/fit9132-db-notes/image-20210219224938123.png" class="" title="image-20210219224938123">
 
 <p>就这部分内容</p>
-<p>后面BigData部分，mongodb直接要求写find和insertOne，find有点难因为是在一个list/array里找匹配的object。问题没有根据预测考NoSQL，考的是Volume的内容</p>
+<p>后面BigData部分，mongodb直接要求写find和insertOne，find有点难因为是在一个list&#x2F;array里找匹配的object。问题没有根据预测考NoSQL，考的是Volume的内容</p>
 <img src="/post/fit9132-db-notes/image-20210219225409532.png" class="" title="image-20210219225409532">
 
 <p>checkpoint也变名词解释Write Through和Deferred Write</p>
@@ -746,7 +746,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#W1"><span class="nav-number">1.</span> <span class="nav-text">W1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W2-Conceptual-Modelling"><span class="nav-number">2.</span> <span class="nav-text">W2 Conceptual Modelling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">理论模型设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%BC%B1%E5%AE%9E%E4%BD%93"><span class="nav-number">2.2.</span> <span class="nav-text">强弱实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">2.3.</span> <span class="nav-text">属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ERD"><span class="nav-number">3.</span> <span class="nav-text">ERD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W3-Relational-Model"><span class="nav-number">4.</span> <span class="nav-text">W3 Relational Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W4-Normalisation"><span class="nav-number">5.</span> <span class="nav-text">W4 Normalisation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W5-Logical-Model"><span class="nav-number">6.</span> <span class="nav-text">W5 Logical Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%AE%BE%E8%AE%A1%EF%BC%881b%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">逻辑设计（1b）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%98%A0%E5%B0%84%E5%B8%B8%E8%A7%84%EF%BC%88%E5%BC%BA%EF%BC%89%E5%AE%9E%E4%BD%93"><span class="nav-number">6.2.</span> <span class="nav-text">1. 映射常规（强）实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%98%A0%E5%B0%84%E5%BC%B1%E5%AE%9E%E4%BD%93"><span class="nav-number">6.3.</span> <span class="nav-text">2. 映射弱实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%98%A0%E5%B0%84%E4%BA%8C%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">6.4.</span> <span class="nav-text">3. 映射二元关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-M"><span class="nav-number">6.4.1.</span> <span class="nav-text">1:M</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M-N"><span class="nav-number">6.4.2.</span> <span class="nav-text">M:N</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%98%A0%E5%B0%84%E5%85%B3%E8%81%94%E5%AE%9E%E4%BD%93"><span class="nav-number">6.5.</span> <span class="nav-text">4. 映射关联实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%98%A0%E5%B0%84%E4%B8%80%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">6.6.</span> <span class="nav-text">5. 映射一元关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%98%A0%E5%B0%84%E4%B8%89%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">6.7.</span> <span class="nav-text">6. 映射三元关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W6-DDL"><span class="nav-number">7.</span> <span class="nav-text">W6 DDL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W7-SQL"><span class="nav-number">8.</span> <span class="nav-text">W7 SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W8-DML"><span class="nav-number">9.</span> <span class="nav-text">W8  DML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock"><span class="nav-number">9.1.</span> <span class="nav-text">Lock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CheckPoint"><span class="nav-number">9.2.</span> <span class="nav-text">CheckPoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W9-Aggregate-Functions"><span class="nav-number">10.</span> <span class="nav-text">W9 Aggregate Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W10-Advanced-SQL"><span class="nav-number">11.</span> <span class="nav-text">W10 Advanced SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CASE"><span class="nav-number">11.1.</span> <span class="nav-text">CASE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subquery"><span class="nav-number">11.2.</span> <span class="nav-text">Subquery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nested"><span class="nav-number">11.2.1.</span> <span class="nav-text">nested</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#correlated"><span class="nav-number">11.2.2.</span> <span class="nav-text">correlated</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inline"><span class="nav-number">11.2.3.</span> <span class="nav-text">inline</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Views"><span class="nav-number">11.3.</span> <span class="nav-text">Views</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Joins"><span class="nav-number">11.4.</span> <span class="nav-text">Joins</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#self-join"><span class="nav-number">11.4.1.</span> <span class="nav-text">self join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#outer-join"><span class="nav-number">11.4.2.</span> <span class="nav-text">outer join</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#full-outer-join"><span class="nav-number">11.4.2.1.</span> <span class="nav-text">full outer join</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#left-right-outer-join"><span class="nav-number">11.4.2.2.</span> <span class="nav-text">left&#x2F;right outer join</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Operators"><span class="nav-number">11.5.</span> <span class="nav-text">Set Operators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle-Functions"><span class="nav-number">11.6.</span> <span class="nav-text">Oracle Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W11-BigData"><span class="nav-number">12.</span> <span class="nav-text">W11 BigData</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W12"><span class="nav-number">13.</span> <span class="nav-text">W12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E9%A2%98"><span class="nav-number">14.</span> <span class="nav-text">错题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exam"><span class="nav-number">15.</span> <span class="nav-text">Exam</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample"><span class="nav-number">15.1.</span> <span class="nav-text">Sample</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Relational-Model-10"><span class="nav-number">15.1.1.</span> <span class="nav-text">Relational Model 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Database-Design-20"><span class="nav-number">15.1.2.</span> <span class="nav-text">Database Design 20</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Normalisation-10"><span class="nav-number">15.1.3.</span> <span class="nav-text">Normalisation 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-40"><span class="nav-number">15.1.4.</span> <span class="nav-text">SQL 40</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Big-Data-and-No-SQL-10"><span class="nav-number">15.1.5.</span> <span class="nav-text">Big Data and No SQL 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Transaction-10"><span class="nav-number">15.1.6.</span> <span class="nav-text">Transaction 10</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exam-1"><span class="nav-number">16.</span> <span class="nav-text">Exam</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#W1"><span class="nav-number">1.</span> <span class="nav-text">W1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W2-Conceptual-Modelling"><span class="nav-number">2.</span> <span class="nav-text">W2 Conceptual Modelling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">理论模型设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%BC%B1%E5%AE%9E%E4%BD%93"><span class="nav-number">2.2.</span> <span class="nav-text">强弱实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">2.3.</span> <span class="nav-text">属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ERD"><span class="nav-number">3.</span> <span class="nav-text">ERD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W3-Relational-Model"><span class="nav-number">4.</span> <span class="nav-text">W3 Relational Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W4-Normalisation"><span class="nav-number">5.</span> <span class="nav-text">W4 Normalisation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W5-Logical-Model"><span class="nav-number">6.</span> <span class="nav-text">W5 Logical Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%AE%BE%E8%AE%A1%EF%BC%881b%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">逻辑设计（1b）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%98%A0%E5%B0%84%E5%B8%B8%E8%A7%84%EF%BC%88%E5%BC%BA%EF%BC%89%E5%AE%9E%E4%BD%93"><span class="nav-number">6.2.</span> <span class="nav-text">1. 映射常规（强）实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%98%A0%E5%B0%84%E5%BC%B1%E5%AE%9E%E4%BD%93"><span class="nav-number">6.3.</span> <span class="nav-text">2. 映射弱实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%98%A0%E5%B0%84%E4%BA%8C%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">6.4.</span> <span class="nav-text">3. 映射二元关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-M"><span class="nav-number">6.4.1.</span> <span class="nav-text">1:M</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M-N"><span class="nav-number">6.4.2.</span> <span class="nav-text">M:N</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%98%A0%E5%B0%84%E5%85%B3%E8%81%94%E5%AE%9E%E4%BD%93"><span class="nav-number">6.5.</span> <span class="nav-text">4. 映射关联实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%98%A0%E5%B0%84%E4%B8%80%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">6.6.</span> <span class="nav-text">5. 映射一元关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%98%A0%E5%B0%84%E4%B8%89%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">6.7.</span> <span class="nav-text">6. 映射三元关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W6-DDL"><span class="nav-number">7.</span> <span class="nav-text">W6 DDL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W7-SQL"><span class="nav-number">8.</span> <span class="nav-text">W7 SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W8-DML"><span class="nav-number">9.</span> <span class="nav-text">W8  DML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock"><span class="nav-number">9.1.</span> <span class="nav-text">Lock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CheckPoint"><span class="nav-number">9.2.</span> <span class="nav-text">CheckPoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W9-Aggregate-Functions"><span class="nav-number">10.</span> <span class="nav-text">W9 Aggregate Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W10-Advanced-SQL"><span class="nav-number">11.</span> <span class="nav-text">W10 Advanced SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CASE"><span class="nav-number">11.1.</span> <span class="nav-text">CASE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subquery"><span class="nav-number">11.2.</span> <span class="nav-text">Subquery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nested"><span class="nav-number">11.2.1.</span> <span class="nav-text">nested</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#correlated"><span class="nav-number">11.2.2.</span> <span class="nav-text">correlated</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inline"><span class="nav-number">11.2.3.</span> <span class="nav-text">inline</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Views"><span class="nav-number">11.3.</span> <span class="nav-text">Views</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Joins"><span class="nav-number">11.4.</span> <span class="nav-text">Joins</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#self-join"><span class="nav-number">11.4.1.</span> <span class="nav-text">self join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#outer-join"><span class="nav-number">11.4.2.</span> <span class="nav-text">outer join</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#full-outer-join"><span class="nav-number">11.4.2.1.</span> <span class="nav-text">full outer join</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#left-x2F-right-outer-join"><span class="nav-number">11.4.2.2.</span> <span class="nav-text">left&#x2F;right outer join</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Operators"><span class="nav-number">11.5.</span> <span class="nav-text">Set Operators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle-Functions"><span class="nav-number">11.6.</span> <span class="nav-text">Oracle Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W11-BigData"><span class="nav-number">12.</span> <span class="nav-text">W11 BigData</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W12"><span class="nav-number">13.</span> <span class="nav-text">W12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E9%A2%98"><span class="nav-number">14.</span> <span class="nav-text">错题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exam"><span class="nav-number">15.</span> <span class="nav-text">Exam</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample"><span class="nav-number">15.1.</span> <span class="nav-text">Sample</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Relational-Model-10"><span class="nav-number">15.1.1.</span> <span class="nav-text">Relational Model 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Database-Design-20"><span class="nav-number">15.1.2.</span> <span class="nav-text">Database Design 20</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Normalisation-10"><span class="nav-number">15.1.3.</span> <span class="nav-text">Normalisation 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-40"><span class="nav-number">15.1.4.</span> <span class="nav-text">SQL 40</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Big-Data-and-No-SQL-10"><span class="nav-number">15.1.5.</span> <span class="nav-text">Big Data and No SQL 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Transaction-10"><span class="nav-number">15.1.6.</span> <span class="nav-text">Transaction 10</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exam-1"><span class="nav-number">16.</span> <span class="nav-text">Exam</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -767,7 +767,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

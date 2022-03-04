@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="首先在各种公开消息来源上都说这个是刷分水课来着。再加上本身自己在设计上想要有点提高（怎么说也算当过艺术生的），又经常有需要设计的场景（项目别太多）。现在也是前端更火热，所以掌握这个是很有价值的。  总算总结完了，感觉这门课可以改名叫UI Guidelines了……太tm多了这内容">
@@ -31,8 +31,8 @@
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5152-ui-design-notes/image-20210220115139022.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5152-ui-design-notes/image-20210221101807538.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5152-ui-design-notes/image-20210222203134223.png">
-<meta property="og:image" content="https://c0mm4nd.com/post/fit5152-ui-design-notes/fit5152-ui-design-notes/image-20210222222651518.png">
-<meta property="og:image" content="https://c0mm4nd.com/post/fit5152-ui-design-notes/fit5152-ui-design-notes/image-20210222222656487.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5152-ui-design-notes/image-20210222222651518.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5152-ui-design-notes/image-20210222222656487.png">
 <meta property="og:image" content="https://c0mm4nd.com/post/fit5152-ui-design-notes/image-20210222223934093.png">
 <meta property="article:published_time" content="2020-11-04T12:36:00.000Z">
 <meta property="article:modified_time" content="2021-10-11T09:21:35.871Z">
@@ -141,7 +141,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -264,7 +264,7 @@
 <li>我们如何构造？Prototyping</li>
 <li>我们如何评估？Evaluation</li>
 </ul>
-<h3 id="Design："><a href="#Design：" class="headerlink" title="Design："></a>Design：</h3><p>获取数据及定义需求-&gt; 用户分析，任务分析，环境/域分析，数据收集方式：采访，问卷，目标组或观察</p>
+<h3 id="Design："><a href="#Design：" class="headerlink" title="Design："></a>Design：</h3><p>获取数据及定义需求-&gt; 用户分析，任务分析，环境&#x2F;域分析，数据收集方式：采访，问卷，目标组或观察</p>
 <p>Conceptual Design：</p>
 <p>描述系统该做什么以及长啥样</p>
 <p>Physical Design：</p>
@@ -355,10 +355,10 @@
 <p>应该最小化用户需要记忆的内容</p>
 <p>通过外部认知能过减小load</p>
 <p>– Externalising 外部化<br>• Transforming knowledge into external representations, e.g. using a calendar or diary (birthdays, appointments)<br>– Computational offloading 计算方面减负<br>• e.g. a calculator<br>– Annotating and cognitive tracing 注记或者认知追踪<br>• such as Word Track Changes</p>
-<h2 id="S3-Requirement-Gathering-Task-Analysis"><a href="#S3-Requirement-Gathering-Task-Analysis" class="headerlink" title="S3 Requirement Gathering, Task Analysis"></a>S3 Requirement Gathering, Task Analysis</h2><h3 id="Data-gathering"><a href="#Data-gathering" class="headerlink" title="Data gathering"></a>Data gathering</h3><p>首先需要收集 user, tasks, the context of use, the environment/domain and if any constraints</p>
+<h2 id="S3-Requirement-Gathering-Task-Analysis"><a href="#S3-Requirement-Gathering-Task-Analysis" class="headerlink" title="S3 Requirement Gathering, Task Analysis"></a>S3 Requirement Gathering, Task Analysis</h2><h3 id="Data-gathering"><a href="#Data-gathering" class="headerlink" title="Data gathering"></a>Data gathering</h3><p>首先需要收集 user, tasks, the context of use, the environment&#x2F;domain and if any constraints</p>
 <h4 id="techniques"><a href="#techniques" class="headerlink" title="techniques"></a>techniques</h4><ul>
 <li>Studying existing documentation</li>
-<li>Researching similar systems/products</li>
+<li>Researching similar systems&#x2F;products</li>
 </ul>
 <p>就多看书or多抄</p>
 <p>或者S1里Design里那些</p>
@@ -399,7 +399,7 @@
 </ul>
 </li>
 <li>Adaptive navigation<ul>
-<li>E.g. the links change based on what the site visitors do/select</li>
+<li>E.g. the links change based on what the site visitors do&#x2F;select</li>
 </ul>
 </li>
 </ul>
@@ -490,23 +490,23 @@
 <li>Help and documentation</li>
 </ol>
 <h3 id="Shneiderman’s-Eight-Golden-Rules"><a href="#Shneiderman’s-Eight-Golden-Rules" class="headerlink" title="Shneiderman’s Eight Golden Rules"></a>Shneiderman’s Eight Golden Rules</h3><ol>
-<li>Strive for consistency (=N#4)</li>
-<li>   Cater to universal usability (=N#4)</li>
-<li>   Offer informative feedback (=N#9,)</li>
-<li>   Design dialogs to yield closure</li>
-<li>   Prevent errors</li>
-<li>   Permit easy reversal of actions (undo)</li>
-<li>   Support internal ‘locus of control’</li>
-<li>   Reduce short term memory</li>
+<li>Strive for consistency (&#x3D;N#4)</li>
+<li>Cater to universal usability (&#x3D;N#4)</li>
+<li>Offer informative feedback (&#x3D;N#9,)</li>
+<li>Design dialogs to yield closure</li>
+<li>Prevent errors</li>
+<li>Permit easy reversal of actions (undo)</li>
+<li>Support internal ‘locus of control’</li>
+<li>Reduce short term memory</li>
 </ol>
 <h2 id="S7-Prototyping"><a href="#S7-Prototyping" class="headerlink" title="S7 Prototyping"></a>S7 Prototyping</h2><p>成功UI的四支柱Four pillars：</p>
 <img src="/post/fit5152-ui-design-notes/image-20210222203134223.png" class="" title="image-20210222203134223">
 
 <ol>
-<li>   User interface requirements<br>§    Right and complete requirements are key</li>
-<li>   Guidelines documents and processes<br>§    Design principles that must be adopted within the design</li>
-<li>   User-Interface software tools and prototyping<br>§    To give users a clearer idea of design and its implications</li>
-<li>   Expert reviews and usability testing<br>§    To evaluate the design</li>
+<li>User interface requirements<br>§    Right and complete requirements are key</li>
+<li>Guidelines documents and processes<br>§    Design principles that must be adopted within the design</li>
+<li>User-Interface software tools and prototyping<br>§    To give users a clearer idea of design and its implications</li>
+<li>Expert reviews and usability testing<br>§    To evaluate the design</li>
 </ol>
 <h3 id="Prototyping-1"><a href="#Prototyping-1" class="headerlink" title="Prototyping"></a>Prototyping</h3><p>重要性</p>
 <p>–    test their ideas,<br>–    test possible alternatives,<br>–    clarify requirements,<br>–    validate requirements,<br>–    solicit feedback<br>–    identify problems<br>–    and improve the final product</p>
@@ -527,7 +527,7 @@
 <p>disadv</p>
 <p>•    It is not as cheap as low-fidelity prototypes.<br>•    It is not as fast as low-fidelity prototypes.<br>•    It cannot be taken anywhere easily like low-fidelity prototypes.<br>•    It cannot be refined as easy as low-fidelity prototypes.</p>
 <h2 id="S8-UI-Design-and-Usability-Graphics-and-Visual-Design"><a href="#S8-UI-Design-and-Usability-Graphics-and-Visual-Design" class="headerlink" title="S8 UI Design and Usability - Graphics and Visual Design"></a>S8 UI Design and Usability - Graphics and Visual Design</h2><h3 id="Visual-Design"><a href="#Visual-Design" class="headerlink" title="Visual Design"></a>Visual Design</h3><p>视觉设计</p>
-<p>▪    Line<br>▪    Shape<br>▪    Size and volume<br>▪    Position<br>▪    Negative/white space<br>▪    Colour<br>▪    Basic visual elements are used to create text, images, icons, textures, and animation</p>
+<p>▪    Line<br>▪    Shape<br>▪    Size and volume<br>▪    Position<br>▪    Negative&#x2F;white space<br>▪    Colour<br>▪    Basic visual elements are used to create text, images, icons, textures, and animation</p>
 <p>【感觉就像SVG</p>
 <h4 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h4><p>Guidelines</p>
 <p>•    Select colors carefully<br>•    Minimize number of colors<br>•    Reduce eye strain instead of increasing it<br>•    Follow conventions: e.g. link colors<br>•    Be aware of accessibility rules<br>–    Be aware of color blindness<br>–    Provide sufficient contrast between foreground and background<br>–    Don’t use color alone to convey information</p>
@@ -550,9 +550,9 @@
 <h3 id="Direct-Manipulation"><a href="#Direct-Manipulation" class="headerlink" title="Direct Manipulation"></a>Direct Manipulation</h3><p>直接操作</p>
 <p>其实就是UI点点点这样的</p>
 <p>。。。</p>
-<h3 id="Fitts’s-Law"><a href="#Fitts’s-Law" class="headerlink" title="Fitts’s Law"></a>Fitts’s Law</h3><p>建议移动到目标区域所需的时间是考虑到<strong>目标的距离</strong>以及<strong>目标的宽度/大小</strong>的函数</p>
+<h3 id="Fitts’s-Law"><a href="#Fitts’s-Law" class="headerlink" title="Fitts’s Law"></a>Fitts’s Law</h3><p>建议移动到目标区域所需的时间是考虑到<strong>目标的距离</strong>以及<strong>目标的宽度&#x2F;大小</strong>的函数</p>
 <p>它是一种预测模型，可用于确定UI元素（如按钮）的正确<strong>大小</strong>和正确<strong>位置</strong></p>
-<p><img src="fit5152-ui-design-notes/image-20210222222651518.png" alt="image-20210222222651518" loading="lazy"><img src="fit5152-ui-design-notes/image-20210222222656487.png" alt="image-20210222222656487" loading="lazy"></p>
+<p><img src="/fit5152-ui-design-notes/image-20210222222651518.png" alt="image-20210222222651518" loading="lazy"><img src="/fit5152-ui-design-notes/image-20210222222656487.png" alt="image-20210222222656487" loading="lazy"></p>
 <h3 id="Hick’s-Law"><a href="#Hick’s-Law" class="headerlink" title="Hick’s Law"></a>Hick’s Law</h3><p>用户做出决定所需的时间取决于可能的选择数量</p>
 <p>菜单中包含的选择越多，用户做出决定所花费的时间就越长</p>
 <p>不确定和不熟悉会增加决策时间</p>
@@ -600,8 +600,8 @@
 <li>use abbreviations and acronyms only when they are widely understood and are significantly shorter than full-text.</li>
 </ul>
 </li>
-<li>For displaying content in tables and lists in a report <strong>表格/列表</strong><ul>
-<li>all columns and/or rows should have meaningful labels 都要有标签</li>
+<li>For displaying content in tables and lists in a report <strong>表格&#x2F;列表</strong><ul>
+<li>all columns and&#x2F;or rows should have meaningful labels 都要有标签</li>
 <li>labels should be separated from other content by using highlighting 标签从内容里拎出来且高亮</li>
 <li>redisplay labels when the data extend beyond a single screen or page. 别超出屏幕</li>
 <li>sort in a meaningful order 排序</li>
@@ -616,7 +616,7 @@
 <li>Use <strong>line graph</strong> to track <strong>changes</strong> over <strong>a period of time</strong></li>
 <li>Use <strong>bar graph</strong> when <strong>comparing</strong> things between different <strong>groups</strong> or when tracking <strong>changes</strong> over <strong>a period of time</strong></li>
 <li>Use <strong>pie chart</strong> when <strong>comparing</strong> different <strong>parts of a whole.</strong></li>
-<li>If there is a lot of data to display in a report that requires scrolling, apply filters and make use of hierarchies/drill-downs.</li>
+<li>If there is a lot of data to display in a report that requires scrolling, apply filters and make use of hierarchies&#x2F;drill-downs.</li>
 </ul>
 </li>
 </ul>
@@ -744,7 +744,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

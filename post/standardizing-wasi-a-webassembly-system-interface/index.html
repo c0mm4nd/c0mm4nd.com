@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="今天，我们宣布一项新标准化工作的开始——WASI，即WebAssembly系统接口。">
@@ -155,7 +155,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -396,7 +396,7 @@
 <p>WASI为我们提供了进一步扩展此安全性的方法。它从基于功能的安全性中引入了更多概念。</p>
 <p>传统上，如果代码需要打开文件，则使用字符串（路径名）调用open。然后，操作系统会检查代码是否具有权限（基于启动程序的用户）。</p>
 <p>使用WASI，如果要调用需要访问文件的函数，则必须传入文件描述符，该描述符具有附加的权限。这可以用于文件本身，也可以用于包含文件的目录。</p>
-<p>这样，您就不会拥有随机要求打开/etc/passwd的代码。相反，代码只能在传递给它的目录上操作。</p>
+<p>这样，您就不会拥有随机要求打开&#x2F;etc&#x2F;passwd的代码。相反，代码只能在传递给它的目录上操作。</p>
 <img src="/post/standardizing-wasi-a-webassembly-system-interface/05-06-openat-path-1-500x192.png" class="" title="openat-path">
 
 <p>这使得可以安全地给沙盒代码更多地访问不同的系统调用的权限，因为这些系统调用的功能可能受到限制。</p>
@@ -411,7 +411,7 @@
 <h3 id="接下来做什么"><a href="#接下来做什么" class="headerlink" title="接下来做什么"></a>接下来做什么</h3><p>我们认为wasi-core是一个好的开始。它保留了WebAssembly的可移植性和安全性，为生态系统奠定了坚实的基础。</p>
 <p>但是，在wasi-core完全标准化之后，我们仍然需要解决一些问题。这些问题包括：</p>
 <ul>
-<li>异步I/O</li>
+<li>异步I&#x2F;O</li>
 <li>文件监控</li>
 <li>文件锁定</li>
 </ul>
@@ -523,7 +523,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

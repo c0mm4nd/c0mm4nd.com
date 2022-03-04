@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="作者 Shuhan Wang, Fang He &amp; Erik Andersen 论文翻译，侵删 摘要设计引人入胜的学习内容固然重要，但也很困难，并且通常涉及许多手动规范。 我们提出了一个统一的框架，该框架利用自动问题分解和部分排序图的构建来简化多个工作流：知识评估以及进行性分析和设计。 我们通过在线日语评估工具对847名参与者进行了研究，结果表明我们的框架可以有效地衡量学生的能力并预测学生">
@@ -144,7 +144,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -293,12 +293,12 @@
 
 <p>我们可以看到S1只有一个语法模板：（–の）。对于日语学习者来说，S2比S1更难，因为它不仅具有（–の）而且还有另一个模板（–は）。 S3重复相同的模板（–の）两次，因此也比S1难。 这些关系无法通过[6]中的部分排序来捕获，因为尚不清楚如何程序化人类如何理解这些句子的过程。 但是，通过考虑概念的多集而不是执行跟踪，我们可以按如下方式容纳它们：</p>
 <p>**定义1a. ** 一个问题可以分解为问题所需的一系列概念（基本技能）。 由于问题可能会要求学生重复一次或多次重复某些技能，因此我们使用一组表示为p(s)的基本技能来表征问题的难度</p>
-<p><strong>定义1b</strong>。我们说，如果且仅当p（s1）⊒ p（s2）时，问题s1至少与s2一样困难，表示为s1≥s2。 这意味着，如果学生能够解决s1，那么他/她也必须能够解决s2 [6]</p>
+<p><strong>定义1b</strong>。我们说，如果且仅当p（s1）⊒ p（s2）时，问题s1至少与s2一样困难，表示为s1≥s2。 这意味着，如果学生能够解决s1，那么他&#x2F;她也必须能够解决s2 [6]</p>
 <p>这里⊒表示多集之间的超集关系。 如果是p（s1）⊒（s2），那么对于问题2次所需的任何概念c，也至少也需要1次。例如，AABC⊒ABC为true，而AABCC⊒ABBC为true，因为ABBC有两个“ B”，而AABCC只有一个</p>
 <p><strong>定义1c</strong>。严格偏序1&gt; s2定义为s1≥s2^s2≱s1，这意味着s1（严格来说）比s2难。</p>
 <p><strong>定义1d</strong>。如果说且仅当s1&gt; s2并且没有其他问题3使得s1&gt; s3&gt; s2，我们说问题1比s2更难</p>
 <p>使用定义1d，我们为一系列问题构建了层次结构，如下所示：</p>
-<p><strong>定义2</strong>.我们将一组问题S = {s1，s2，···}（我们称为普遍问题集）组织为偏序图G = 〈S，E〉，其中</p>
+<p><strong>定义2</strong>.我们将一组问题S &#x3D; {s1，s2，···}（我们称为普遍问题集）组织为偏序图G &#x3D; 〈S，E〉，其中</p>
 <img src="/post/fit5152-a1-paper/image-20210112005148577.png" class="" title="image-20210112005148577">
 
 <p>即，当且仅当sj比si直接困难时，才在部分排序图中存在从问题si到sj的（定向）边。 图1显示了部分排序图的示例。</p>
@@ -309,9 +309,9 @@
 <img src="/post/fit5152-a1-paper/image-20210112172807977.png" class="" title="image-20210112172807977">
 
 <p>以图1中的偏序图为例。 假设一个学生可以解决问题A，AB，B，AABC和BCC（图中的绿色节点），而不能解决ABCB，D或ABCBD（图中的红色节点）。 然后，知识边界仅包含两个问题：AABC和BCC，因为没有其他“绿色”问题比AABC或BCC难。 知识边界不包括A，AB或B，因为存在一个“绿色”问题AABC，比所有问题都难</p>
-<h2 id="计算知识边界"><a href="#计算知识边界" class="headerlink" title="计算知识边界"></a>计算知识边界</h2><p>We present a graph coloring algorithm of calculating a stu-dent’s knowledge boundary in the partial ordering graph. Thisalgorithm is based on two properties of the partial ordering: ifa student can solve problems, he must be able to solve anyproblems′that is at most as hard as s(s≥s′); if a studentcannot solve problems, he must not be able to solve any prob-lems′that is at least as hard as s(s′≥s).  For example, if astudent can solve problem AB, he/she can also solve problemsA and B; if a student cannot solve problem ABCB, then he/she cannot solve problem ABCBD either.</p>
-<p>我们提出了一种图形着色算法，用于计算部分排序图中学生的知识边界。 该算法基于偏序的两个属性：如果一个学生能够解决问题，那么他必须能够解决至多像s(s≥s’)一样困难的任何问题。 如果学生不能解决问题，则他必须不能解决至少与 s(s’≥s) 一样困难的任何问题。 例如，如果学生可以解决问题AB，那么他/她也可以解决问题A和B； 如果学生不能解决问题ABCB，那么他/她也不能解决问题ABCBD。</p>
-<p>At the start of the algorithm, all the problems (nodes) in thepartial ordering graph are uncolored. The algorithm asks thestudent whether he/she can solve some problem s*.  If thestudent can solve s*, all the nodes that are at most as hard as s*(including s* itself) will be colored ‘solvable’; if the studentcannot solve s*, all the nodes that are at least as hard as s* (including s* it self) will be colored ‘unsolvable’.  Figure 2 shows how this coloring process works.</p>
+<h2 id="计算知识边界"><a href="#计算知识边界" class="headerlink" title="计算知识边界"></a>计算知识边界</h2><p>We present a graph coloring algorithm of calculating a stu-dent’s knowledge boundary in the partial ordering graph. Thisalgorithm is based on two properties of the partial ordering: ifa student can solve problems, he must be able to solve anyproblems′that is at most as hard as s(s≥s′); if a studentcannot solve problems, he must not be able to solve any prob-lems′that is at least as hard as s(s′≥s).  For example, if astudent can solve problem AB, he&#x2F;she can also solve problemsA and B; if a student cannot solve problem ABCB, then he&#x2F;she cannot solve problem ABCBD either.</p>
+<p>我们提出了一种图形着色算法，用于计算部分排序图中学生的知识边界。 该算法基于偏序的两个属性：如果一个学生能够解决问题，那么他必须能够解决至多像s(s≥s’)一样困难的任何问题。 如果学生不能解决问题，则他必须不能解决至少与 s(s’≥s) 一样困难的任何问题。 例如，如果学生可以解决问题AB，那么他&#x2F;她也可以解决问题A和B； 如果学生不能解决问题ABCB，那么他&#x2F;她也不能解决问题ABCBD。</p>
+<p>At the start of the algorithm, all the problems (nodes) in thepartial ordering graph are uncolored. The algorithm asks thestudent whether he&#x2F;she can solve some problem s*.  If thestudent can solve s*, all the nodes that are at most as hard as s*(including s* itself) will be colored ‘solvable’; if the studentcannot solve s*, all the nodes that are at least as hard as s* (including s* it self) will be colored ‘unsolvable’.  Figure 2 shows how this coloring process works.</p>
 <p>在算法开始时，部分排序图中的所有问题（节点）都是未着色的。 该算法询问学生是否可以解决某些问题s*。 如果学生能够求解s*，则所有与s*一样难的节点（包括s*本身）将被着色为“可求解”； 如果学生不能求解s*，则所有至少s*同等困难的节点（包括s*自身）将被着色为“无法解决”。 图2显示了此着色过程的工作方式。</p>
 <p>The algorithm repeatedly selects an uncolored problem s* from the partial ordering graph, asks the student to solve it, and then updates the coloring of the graph based on the response. Thisis a greedy algorithm designed to minimize the number ofproblems that must be given to the student.  Formally, if $n^+_s$ denotes the number of the uncolored problems that are at mostas hard as $s$, and $n^-_s$denotes the number of the uncolored problems that are at least as hard as s, then we can maximize thenumber of problems that can be colored based on the student’s response by greedily selecting a problem s* as follows:</p>
 <p>该算法从偏序图中反复选择一个无色问题s*，要求学生解决它，然后根据响应更新该图的颜色。 这是一种贪心算法，旨在最大程度地减少必须给学生的问题。 形式上，如果$n^+_s$ 表示最多没有硬色问题的无色问题的数量，而 $n^-_s$表示至少至少像s一样硬的无色问题的数量，那么我们可以使可以 通过贪婪地选择问题s*，根据学生的回答进行着色：</p>
@@ -321,12 +321,12 @@
 <p>为了向学生推荐适当难度的问题，我们需要预测学生在问题上的表现。 现有的IRT研究提出了几种流行的模型，这些模型规定了学生的表现与学生能力之间的关系[46，53]。 但是，他们使用一维数字分数来衡量学生的能力和问题的难度，这是不全面的[28]。</p>
 <p>Ideally, prediction of a student’s performance would utilizemultidimensional metrics to measure the distance between aproblem and what a student already knows. The key technicalchallenge in the design of multidimensional metrics is thatit is impossible to measure this distance without taking intoaccount the hierarchical structure of the problem space. In ourframework, we can measure this as the distance from the prob-lem to the knowledge boundary in the partial ordering graph.We use signed numbers to distinguish which ‘side’ of theknowledge boundary a problem is on: problems ‘inside’ theboundary (which the student can solve) have positive distanceswhile problems ‘outside’ the boundary (which the student can-not solve) have negative distances.  Using this distance, wecan leverage IRT models to predict a student’s performanceon new problems.</p>
 <p>理想情况下，对学生成绩的预测将利用多维指标来衡量问题和学生已经知道的知识之间的距离。 多维度量设计中的关键技术挑战是，如果不考虑问题空间的层次结构，就无法测量该距离。 在我们的框架中，我们可以用偏序图中图中从问题到知识边界的距离来衡量这个问题。 学生可以解决）的距离为正，而“超出”边界的问题（学生无法解决的）的距离为负。 利用此距离，我们可以利用IRT模型来预测学生在新问题上的表现。</p>
-<p>Here, we give the definition of this distance together with theexamples in Figure 1. Assume we have the universal problem set S, and a student can solve a subset of problems T.  For example, in Figure 1,S={A, AB, B, AABC, BCC, ABCB, D,ABCBD},T={A, AB, B, AABC, BCC}, and the knowledge boundary K={AABC, BCC}. We calculate the distance fromany problems∈Sto the knowledge boundaryK, indicated as d(s, K), following the steps below:</p>
-<p>在这里，我们给出该距离的定义以及图1中的示例。假设我们有通用问题集S，并且学生可以解决问题T的子集。例如，在图1中，S = {A，AB， B，AABC，BCC，ABCB，D，ABCBD}，T ＝ {A，AB，B，AABC，BCC}，知识边界K ＝ {AABC，BCC}。 我们按照以下步骤计算从任何问题∈S到知识边界K的距离，表示为d(s, K)：</p>
+<p>Here, we give the definition of this distance together with theexamples in Figure 1. Assume we have the universal problem set S, and a student can solve a subset of problems T.  For example, in Figure 1,S&#x3D;{A, AB, B, AABC, BCC, ABCB, D,ABCBD},T&#x3D;{A, AB, B, AABC, BCC}, and the knowledge boundary K&#x3D;{AABC, BCC}. We calculate the distance fromany problems∈Sto the knowledge boundaryK, indicated as d(s, K), following the steps below:</p>
+<p>在这里，我们给出该距离的定义以及图1中的示例。假设我们有通用问题集S，并且学生可以解决问题T的子集。例如，在图1中，S &#x3D; {A，AB， B，AABC，BCC，ABCB，D，ABCBD}，T ＝ {A，AB，B，AABC，BCC}，知识边界K ＝ {AABC，BCC}。 我们按照以下步骤计算从任何问题∈S到知识边界K的距离，表示为d(s, K)：</p>
 <p><em>Step 1: Calculate distances for problems on the boundary</em></p>
 <p><em>步骤1：计算边界上问题的距离对于任何问题，</em></p>
-<p>For any problemssuch thats∈K,d(s,K) =0.</p>
-<p>对于任何问题s使得s∈K，d(s, K)= 0</p>
+<p>For any problemssuch thats∈K,d(s,K) &#x3D;0.</p>
+<p>对于任何问题s使得s∈K，d(s, K)&#x3D; 0</p>
 <p>For example, the distance of problems AABC and BCC is 0</p>
 <p>例如，问题AABC和BCC的距离为0例如，问题AABC和BCC的距离为0</p>
 <p><em>Step 2: Calculate distances for problems inside the boundary</em></p>
@@ -335,8 +335,8 @@
 <p>对于基于s的定义s∈T-K的任何问题s，必须存在一个或多个s′∈K使得s′≥s（否则s应该包含在K中），并且</p>
 <img src="/post/fit5152-a1-paper/image-20210112211143812.png" class="" title="image-20210112211143812">
 
-<p>where d is(s,s′) indicates the length of the shortest directed path from s to s′ in the partial ordering graph.  If there is no directed path from s to s′,  dis(s,s′) =∞.  Note that if  s′≥s  ,then there must exist at least one directed path from s′ to s.</p>
-<p>其中d is（s，s’）表示部分排序图中从s到s’的最短定向路径的长度。 如果没有从s到s’的定向路径，则dis（s，s’）=∞。 请注意，如果s’≥s，则必须存在至少一条从s’到s的定向路径。</p>
+<p>where d is(s,s′) indicates the length of the shortest directed path from s to s′ in the partial ordering graph.  If there is no directed path from s to s′,  dis(s,s′) &#x3D;∞.  Note that if  s′≥s  ,then there must exist at least one directed path from s′ to s.</p>
+<p>其中d is（s，s’）表示部分排序图中从s到s’的最短定向路径的长度。 如果没有从s到s’的定向路径，则dis（s，s’）&#x3D;∞。 请注意，如果s’≥s，则必须存在至少一条从s’到s的定向路径。</p>
 <p>For example, the distance of problem AB is 1, since prob-lem AABC, which is on the knowlegde boundary, is directlyharder than AB. Similar for problem B (BCC is direclty harderthan B). The distance of problem A is 2, since the shortest di-rected path from A to any problem on the knowledge boundary(which is A→AB→AABC) has length 2</p>
 <p>例如，问题AB的距离为1，因为在知识已知边界上的问题AABC比AB直接困难。 与问题B相似（密件抄送比B硬）。 问题A的距离为2，因为从A到知识边界上任何问题的最短定向路径（A→AB→AABC）的长度为2</p>
 <p><em>Step 3:Calculate distances for problems outside the boundary</em></p>
@@ -366,22 +366,22 @@
 <p>在本节中，我们将评估我们的知识边界与上一节中表示的距离的计算并把它应用到一个日语学习领域。</p>
 <h3 id="语言评估平台-J100-A-Language-Assessment-Platform"><a href="#语言评估平台-J100-A-Language-Assessment-Platform" class="headerlink" title="语言评估平台 J100: A Language Assessment Platform"></a>语言评估平台 J100: A Language Assessment Platform</h3><p>xxx</p>
 <h3 id="Reddit部署-Reddit-Deployment"><a href="#Reddit部署-Reddit-Deployment" class="headerlink" title="Reddit部署 Reddit Deployment"></a>Reddit部署 Reddit Deployment</h3><p>xxx</p>
-<h3 id="验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric"><a href="#验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric" class="headerlink" title="验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric"></a>验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric</h3><p>In order to validate our calculation of the knowledge boundaryand the distance metric, we will demonstrate that the user datacollected from J100 nicely fits the adapted Rasch Model. Wecalculate a user’s knowledge boundaryKbased on his/her responses to the problems in the assessment stage, and foreach problemsresponded in the evaluation stage, we measurethe distance from the problems to the knowledge boundary K.The user responses in the evaluation stage can be regarded as users’ self-estimation of their performance, and we score thefive possible responses uniformly from 1 to 0</p>
+<h3 id="验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric"><a href="#验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric" class="headerlink" title="验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric"></a>验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric</h3><p>In order to validate our calculation of the knowledge boundaryand the distance metric, we will demonstrate that the user datacollected from J100 nicely fits the adapted Rasch Model. Wecalculate a user’s knowledge boundaryKbased on his&#x2F;her responses to the problems in the assessment stage, and foreach problemsresponded in the evaluation stage, we measurethe distance from the problems to the knowledge boundary K.The user responses in the evaluation stage can be regarded as users’ self-estimation of their performance, and we score thefive possible responses uniformly from 1 to 0</p>
 <p>为了验证我们对知识边界和距离度量的计算，我们将证明从J100收集的用户数据非常适合改编的Rasch模型。 我们根据用户在评估阶段对问题的回答来计算用户的知识边界K，并针对评估阶段所回答的每个问题，测量从问题到知识边界K的距离。评估阶段中的用户响应可视为用户 对他们的表现的自我评估，我们从1到0对5个可能的回答进行了统一评分</p>
 <h2 id="过程分析-PROGRESSION-ANALYSIS"><a href="#过程分析-PROGRESSION-ANALYSIS" class="headerlink" title="过程分析 PROGRESSION ANALYSIS"></a>过程分析 PROGRESSION ANALYSIS</h2><p>良好的进步会增强学生对课程的参与度[43,56]，我们的工作旨在发现良好的进步的一般特征。 在本节中，我们将利用我们的框架来分析教育进度，并介绍良好进度的两个重要特征：组成Composition和步调Pace。 我们研究了现有课程，并证明了专家设计的课程中一些惊人的相似之处</p>
 <h3 id="组成：学习与复习的平衡-Composition-The-Balance-of-Learning-and-Review"><a href="#组成：学习与复习的平衡-Composition-The-Balance-of-Learning-and-Review" class="headerlink" title="组成：学习与复习的平衡 Composition: The Balance of Learning and Review"></a>组成：学习与复习的平衡 Composition: The Balance of Learning and Review</h3><p>在设计教育进度时，一个关键的考虑因素是应该花多少时间来增强以前引入的知识，而不是引入新知识。 另一个需要考虑的问题是，通过以新的方式将概念组合在一起，进度是否应该越来越复杂。 理想情况下，我们将能够定义可以简洁地捕获这些重要方面的进度参数空间</p>
 <p>xxx</p>
 <p>我们可以认为强化是对已学知识的回顾，引入是纯学习，重组是两者的混合。 这三种类型的比例揭示了设计师在教育进步中平衡学习和复习的策略，我们将其称为进步组成</p>
 <h3 id="步调：知识的增长率-Pace-The-Growth-Rate-of-Knowledge"><a href="#步调：知识的增长率-Pace-The-Growth-Rate-of-Knowledge" class="headerlink" title="步调：知识的增长率 Pace: The Growth Rate of Knowledge"></a>步调：知识的增长率 Pace: The Growth Rate of Knowledge</h3><p>我们想知道进度中课程（章节，单元等）的难度是否以一致的速度增长，从而使学生可以顺利学习。 我们不是通过数字来衡量每节课的难度，而是计算知识的大小，即每节课之前引入的问题总数。 这可以用通用问题集5S中的问题数量来衡量，该数量被学生的知识边界归类为强化。在掌握了从一开始到当前课程的所有知识之后。 因此，知识大小| K |就是此类问题的数量</p>
-<h2 id="进度分析的评估"><a href="#进度分析的评估" class="headerlink" title="进度分析的评估"></a>进度分析的评估</h2><h3 id="教材研究"><a href="#教材研究" class="headerlink" title="教材研究"></a>教材研究</h3><h3 id="在线语言学习工具研究"><a href="#在线语言学习工具研究" class="headerlink" title="在线语言学习工具研究"></a>在线语言学习工具研究</h3><h2 id="自动渐进合成"><a href="#自动渐进合成" class="headerlink" title="自动渐进合成"></a>自动渐进合成</h2><p>We have discussed two features of an educational progression:composition and pace.  In this section, we will demonstratethat educational progressions can be automatically synthesizedaccording to specific composition and pace parameters. To bemore precise, a progression can be characterized as three nu-meric parameters: overall pace (pace), proportion of reinforce-ment (ri), and proportion of introduction (in). The proportionof recombination (rc) is redundant since ri+rc+in=1.</p>
-<p>我们讨论了教育进步的两个特征：组成和步调。 在本节中，我们将<strong>证明可以根据特定的构成和速度参数自动合成教育进度</strong>。 更准确地说，可以将进度表示为三个数字参数：总体步速（步幅），增强比例（ri）和引入比例（输入）。 重组比例（rc）是多余的，因为ri + rc + in = 1</p>
+<h2 id="进度分析的评估"><a href="#进度分析的评估" class="headerlink" title="进度分析的评估"></a>进度分析的评估</h2><h3 id="教材研究"><a href="#教材研究" class="headerlink" title="教材研究"></a>教材研究</h3><h3 id="在线语言学习工具研究"><a href="#在线语言学习工具研究" class="headerlink" title="在线语言学习工具研究"></a>在线语言学习工具研究</h3><h2 id="自动渐进合成"><a href="#自动渐进合成" class="headerlink" title="自动渐进合成"></a>自动渐进合成</h2><p>We have discussed two features of an educational progression:composition and pace.  In this section, we will demonstratethat educational progressions can be automatically synthesizedaccording to specific composition and pace parameters. To bemore precise, a progression can be characterized as three nu-meric parameters: overall pace (pace), proportion of reinforce-ment (ri), and proportion of introduction (in). The proportionof recombination (rc) is redundant since ri+rc+in&#x3D;1.</p>
+<p>我们讨论了教育进步的两个特征：组成和步调。 在本节中，我们将<strong>证明可以根据特定的构成和速度参数自动合成教育进度</strong>。 更准确地说，可以将进度表示为三个数字参数：总体步速（步幅），增强比例（ri）和引入比例（输入）。 重组比例（rc）是多余的，因为ri + rc + in &#x3D; 1</p>
 <p>We use a greedy algorithm to synthesize progressions.  Thealgorithm starts with an empty progression, repeatedly selectsthe next problem that minimizes the following error function and appends it to the progression:</p>
 <p>我们使用贪婪算法来合成进度。 算法以空的级数开始，重复选择下一个使后继误差函数最小化的问题，并将其附加到级数上</p>
 <img src="/post/fit5152-a1-paper/image-20210112094950772.png" class="" title="image-20210112094950772">
 
 <p>其中pace, ri, in 都是实际的渐进特性，而pace*, ri*, in*是所需的渐进参数。请注意，可能存在多个具有最小误差的问题。 在这种情况下，我们的算法会从中随机选择一个作为下一个问题</p>
 <p><strong>这种贪婪算法并不总是生成具有准确所需参数的级数</strong>。 但是，它运行得非常快。对于一个包含25个问题的通用问题集，它可以在一秒钟内合成100多个进程（每个进程有10个问题），因此，我们可以多次运行此贪婪算法以合成具有所需特征的进程</p>
-<p>表2列出了合成过程的四个例子。 我们从Genki进程中提取了以下参数：pace= 0.465，ri = 0.582，in = 0.214。 然后，我们使用这些参数（大约）来合成“ Genki Simulation”进度。 我们还生成了另外三个带有量身定制的参数的进度，这些进度偏向于加强，重组和引入。 这些结果表明，<strong>我们不仅可以利用专家级进度设计的原理并使用对大多数学生都有利的参数来综合进度，而且还可以为具有特定偏好的学生量身定制进度</strong></p>
+<p>表2列出了合成过程的四个例子。 我们从Genki进程中提取了以下参数：pace&#x3D; 0.465，ri &#x3D; 0.582，in &#x3D; 0.214。 然后，我们使用这些参数（大约）来合成“ Genki Simulation”进度。 我们还生成了另外三个带有量身定制的参数的进度，这些进度偏向于加强，重组和引入。 这些结果表明，<strong>我们不仅可以利用专家级进度设计的原理并使用对大多数学生都有利的参数来综合进度，而且还可以为具有特定偏好的学生量身定制进度</strong></p>
 <img src="/post/fit5152-a1-paper/image-20210112095315867.png" class="" title="image-20210112095315867">
 
 <h2 id="结论与未来工作"><a href="#结论与未来工作" class="headerlink" title="结论与未来工作"></a>结论与未来工作</h2><p>可学习性对于HCI的许多方面都很重要：用户界面，学习工具，视频游戏和软件可用性。 在本文中，我们定义了一个框架，<strong>该框架利用自动问题分解和部分排序图构造来促进与教育相关的多个工作流程：评估学生的知识，确定和描述课程的学习策略以及设计新的学习进度</strong>。 我们以多种方式评估了该框架：通过在线部署日语评估工具，自动从现有课程中提取起搏参数，以及将问题组合成符合所需起搏特征的新项目</p>
@@ -494,7 +494,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="赋能跨链交易：一项分布式的加密货币交易协议  摘要：受比特币的启发，市场上出现了多种基于区块链技术的加密货币。由于区块链的特殊结构，传统货币与加密货币之间或不同类型加密货币之间的直接交易被认为是不可能的。通常，不同货币之间的交易是通过一个中心化的第三方平台进行的。但是，它存在单点故障的问题，容易受到攻击，从而影响交易的安全性。在本文中，我们提出了一种分布式加密货币交易方案来解决中心化交易所的问题，">
@@ -144,7 +144,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">66</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -255,7 +255,7 @@
 
 <h2 id="I-简介"><a href="#I-简介" class="headerlink" title="I. 简介"></a>I. 简介</h2><p>比特币 [1] 是目前最受欢迎的加密货币，自 2009 年部署以来一直运行良好。与传统货币不同，比特币不依赖中央发行人进行管理，而是运行在 P2P（点对点）网络之上，这意味着没有中央机构可以完全控制比特币。<br>它的交易数据并不存储在中央数据库中，而是写入一个名为区块链blockchian的分布式哈希链中。近年来，受比特币的启发，出现了各种基于区块链的加密货币，例如莱特币 [2] 和以太坊 [3]。为了帮助用户管理不同种类的加密货币，最近的一些工作中通常使用基于可信第三方的中心化交换，例如[4]-[8]。</p>
 <p>一方面，通过利用不同的区块链技术，不同种类的加密货币被部署在不同的区块链中。 相同货币之间的交易可以通过区块链客户端直接在网络上进行。 但是，部署在不同区块链上的加密货币不能直接相互交易。 此外，如果用户想使用传统货币购买某种加密货币或将其加密货币转换为现金，则用户只能与第三方进行兑换。 在这种情况下，基于可信第三方的交易所是有帮助的，它可以充当中介，帮助用户在不同类型的加密货币之间进行交易。</p>
-<p>另一方面，加密货币的所有者通常通过绑定到始终存储在他/她的私人设备中的一对密钥的地址来管理他/她的资产。 在这种情况下，一旦设备出现故障、丢失甚至被针对加密货币的恶意软件攻击，用户就会遭受财产损失。<br>因此需要一个中央组织来帮助用户管理他们的财产。 中心化交易所扮演着这个角色，它不仅可以作为加密货币交易的平台，还可以为用户提供一个存放财产的地方。 就像银行一样，中心化交易所为用户提供了管理资金和进行交易的便利。 现在世界上有 4,000 多个中心化交易所，例如韩国的 Bithumb [9]，每天交易超过 10 亿美元的加密货币。</p>
+<p>另一方面，加密货币的所有者通常通过绑定到始终存储在他&#x2F;她的私人设备中的一对密钥的地址来管理他&#x2F;她的资产。 在这种情况下，一旦设备出现故障、丢失甚至被针对加密货币的恶意软件攻击，用户就会遭受财产损失。<br>因此需要一个中央组织来帮助用户管理他们的财产。 中心化交易所扮演着这个角色，它不仅可以作为加密货币交易的平台，还可以为用户提供一个存放财产的地方。 就像银行一样，中心化交易所为用户提供了管理资金和进行交易的便利。 现在世界上有 4,000 多个中心化交易所，例如韩国的 Bithumb [9]，每天交易超过 10 亿美元的加密货币。</p>
 <p>中心化交易所虽然为用户交易提供了便利，但也带来了一些安全隐患。 一旦用户将自己的财产存放在一个中心化的交易平台中，就意味着该交易平台是系统的“阿喀琉斯之踵”，可能会导致用户的财产和交易信息被恶意利用。此外，作为中央机构[10]、[11]，总会存在单点故障。 解决这个问题最好的办法是采用分布式加密货币交换方案，这也符合加密货币去中心化的思想。</p>
 <p>智能合约（Smart Contract） [12]、[13] 是可以在区块链上部署和执行的代码。 通过智能合约，我们能够实现各种去中心化的应用程序。 目前，以太坊是支持部署智能合约的最大和最受欢迎的区块链平台。用户可以通过交易将他们的智能合约代码发送到以太坊网络，然后由矿工验证并添加到区块链中。保存在区块链中的任何智能合约代码都可以被满足一定条件的用户调用（通过transaction call合约内的方法）。在本文中，我们考虑使用基于以太坊的智能合约来实现一种去中心化的跨加密货币交换方案，该方案可以验证不同用户发送的不同类型的加密货币交易。我们不仅解决单个用户之间的交易，还考虑了多个用户之间进行交易的情况。</p>
 <p>在本文中，我们做出了以下主要贡献：</p>
@@ -264,18 +264,18 @@
 </li>
 <li><p>在我们的方案中，通过工作量证明（PoW, Proof of Work）和存款证明（Proof of Deposit），随机选择不受信任的自愿用户来组织验证委员会。此外，通过使用智能合约收集验证委员会成员的判断结果，我们的方案可以通过以太坊网络验证任何两种不同类型的加密货币之间的交易。进一步分析表明，我们方案的功能性和事务原子性可以通过选择验证委员会的协议设计来保证。</p>
 </li>
-<li><p>我们在以太坊测试网络上实施和部署我们提出的方案，并在我们的本地机器上评估合约各部分的运行成本。我们的方案优化了多个用户之间同类型加密货币的执行性能。实验结果表明，我们方案的本地运营成本仅受参与者数量的影响，与每个用户的交易数量无关。我们的跨币种交易方案确保部署成本和执行成本在用户可接受的范围内。 </p>
+<li><p>我们在以太坊测试网络上实施和部署我们提出的方案，并在我们的本地机器上评估合约各部分的运行成本。我们的方案优化了多个用户之间同类型加密货币的执行性能。实验结果表明，我们方案的本地运营成本仅受参与者数量的影响，与每个用户的交易数量无关。我们的跨币种交易方案确保部署成本和执行成本在用户可接受的范围内。</p>
 </li>
 </ul>
 <p>我们论文的其余部分组织如下。<br><strong>第二节</strong>介绍了与我们的方案相关的一系列工作。<br><strong>第三节</strong>中介绍了技术预备知识。<br><strong>第四节</strong>介绍我们的系统和安全模型之后，<br><strong>第五节</strong>详细介绍了我们的交叉加密货币交易方案。<br><strong>第六节</strong>提供了我们方案的安全性分析。<br><strong>第七节</strong>展示了我们方案的详细部署和相关的性能分析。<br><strong>第八节</strong>最后总结了我们的工作。</p>
 <h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>在本节中，我们将介绍去中心化加密货币交易方案的现有工作，这些方案旨在解决中心化交易所中的单点故障问题。</p>
-<p>Metronome 项目 [14] 提出了一种称为 MTN 的加密货币，可以跨不同的区块链进行交易。 当用户销毁源链上的代币时，他/她会收到一份exit收据证明，可在目标区块链上使用来获得其他链上的货币。 但是，Metronome 只能在支持智能合约的区块链中实现，不支持智能合约的加密货币因此无法交换。</p>
+<p>Metronome 项目 [14] 提出了一种称为 MTN 的加密货币，可以跨不同的区块链进行交易。 当用户销毁源链上的代币时，他&#x2F;她会收到一份exit收据证明，可在目标区块链上使用来获得其他链上的货币。 但是，Metronome 只能在支持智能合约的区块链中实现，不支持智能合约的加密货币因此无法交换。</p>
 <p>KyberNetwork [15] 是一种高度流动的链协议，为目前部署在以太坊上的数字资产和加密货币提供即时交易和赎回服务。在 KyberNetwork 网络中，用户通过与智能合约交互将其代币存储在存储库中。 用户还可以通过由合约或第三方机构创建的存储库访问其他类型的加密货币。 第三方机构创建的存储库中的资金来自资金提供者，储备经理维护存储库，确定汇率，并将比率反馈给 KyberNetwork。 网络中预留实体的添加和删除由 KyberNetwork 运营商负责。 KyberNetwork 依靠区块链中继技术（如 BTCRelay [16]）来实现跨链确认，因此在支持多币种方面存在缺陷。</p>
 <p>ERC-20 [17] 是以太坊区块链上代币的标准接口。一些实现，例如 [18]-[21]，试图解决以太坊上的 ERC-20 代币和比特币之间的交易。但这些作品只服务于以太坊上的 ERC-20 代币，具有很大的局限性。<br>Republic [22] 是跨不同区块链的加密货币对之间的去中心化暗池项目。暗池提供了一个隐藏的订单簿，其中金融资产和工具通过建立在多方计算协议上的引擎进行交易和匹配。<br>Dogethereum [23] 是一种运行智能合约的点对点互联网货币，可以将狗狗币（Doge）兑换成等值的以太坊代币，反之亦然。<br>然而，Republic 和 Dogethereum 只提供有限种类的代币和以太坊之间的交换。但是，在我们的方案中，我们在以太坊上使用智能合约通过从中间节点中选择的验证委员会来验证其他类型的加密货币，因此我们的方案能够支持任何类型的加密货币之间的交易。</p>
 <p>Cosmos [24] 和 Polkadot [25] 都在努力解决区块链的互操作性，使用 Tendermint [26] 的共识算法。<br>Cosmos 网络中的区块链采用中心辐射模型：处于中心的是“Hub”，它管理着多个称为“Zone”的独立区块链，并跟踪所有区域的状态。每个Zone都有义务通过将新Block信息（即，打包上链的txs）报告回 Hub 来自我持续生产。<br>同样的，维护 Polkadot 网络有四个基本角色：collators、fisherman、nominator 和 validator。 他们构建了一系列通过merkle证明强制执行状态的子区块链。<br>但是这两个作品都只支持与其兼容的区块链网络，并且都需要有新网络发行的新代币，这增加了交易负担。</p>
 <p>XCLAIM [27] 是用于实现不受信任和高效的加密货币跨链互换（Swap）的通用框架。 缺点是发行区块链上的货币需要支持某些功能的合约。所以比特币等容量有限的脚本语言不支持这种操作。<br>Tesseract [28] 描述了如何使用可信执行环境 (TEE) 标记现有的加密货币以启用跨链交易，而 TEE 则遭受其自身的安全问题，例如回滚rollback [29] 和侧信道攻击side-channel attacks [30]。</p>
-<p>原子跨链交换（ACCS）[31]、[32]基于时间hash锁或签名锁[33]-[36]，实现了安全的跨链交换，但在实用性上存在限制。 这种 ACCS 方案是交互式的，依赖于同步假设。这样，在传输过程中往往会产生较长的等待时间。 与他们的想法不同，我们的协议依赖于弱/部分的同步假设，在多个交易参与者的情况下可以取得良好的性能。</p>
-<h2 id="III-初步准备"><a href="#III-初步准备" class="headerlink" title="III 初步准备"></a>III 初步准备</h2><h3 id="A-区块链中的共识算法"><a href="#A-区块链中的共识算法" class="headerlink" title="A. 区块链中的共识算法"></a>A. 区块链中的共识算法</h3><p>在区块链系统中，用来保证分布式节点一致性的技术称为共识算法。 目前常用的共识算法主要分为两类。 第一个是基于证明的共识，如 PoW [1]、PoS [37]、DPoS [38]、GHOST [39] 等，它要求用户向网络提交一个难题的解决方案。 只有经过网络验证的节点才能发布区块，这也是加密货币中常用的共识。<br>另一种是解决拜占庭问题的传统分布式网络算法，包括PBFT[40]、[41]、RAFT[42]等。 在授权/许可区块链（联盟链）的设计中经常使用传统的分布式网络算法</p>
+<p>原子跨链交换（ACCS）[31]、[32]基于时间hash锁或签名锁[33]-[36]，实现了安全的跨链交换，但在实用性上存在限制。 这种 ACCS 方案是交互式的，依赖于同步假设。这样，在传输过程中往往会产生较长的等待时间。 与他们的想法不同，我们的协议依赖于弱&#x2F;部分的同步假设，在多个交易参与者的情况下可以取得良好的性能。</p>
+<h2 id="III-初步准备"><a href="#III-初步准备" class="headerlink" title="III 初步准备"></a>III 初步准备</h2><h3 id="A-区块链中的共识算法"><a href="#A-区块链中的共识算法" class="headerlink" title="A. 区块链中的共识算法"></a>A. 区块链中的共识算法</h3><p>在区块链系统中，用来保证分布式节点一致性的技术称为共识算法。 目前常用的共识算法主要分为两类。 第一个是基于证明的共识，如 PoW [1]、PoS [37]、DPoS [38]、GHOST [39] 等，它要求用户向网络提交一个难题的解决方案。 只有经过网络验证的节点才能发布区块，这也是加密货币中常用的共识。<br>另一种是解决拜占庭问题的传统分布式网络算法，包括PBFT[40]、[41]、RAFT[42]等。 在授权&#x2F;许可区块链（联盟链）的设计中经常使用传统的分布式网络算法</p>
 <h3 id="B-智能合约中的-Gas"><a href="#B-智能合约中的-Gas" class="headerlink" title="B. 智能合约中的 Gas"></a>B. 智能合约中的 Gas</h3><p>使用gas的概念限制了以太坊上部署的智能合约的长度，这也防止了恶意用户故意部署包含无限循环的合约，避免以太坊网络崩溃。Gas 用于衡量智能合约代码中每个步骤的成本。每笔交易都需要包含一个gas限制，即交易消耗的最大gas量，以及用户为每单位gas支付的以太币数量。矿工有权选择先打包哪个交易。支付的交易费用越多，矿工就越有可能打包您的交易，交易得到确认的速度也就越快。 Gas limit 是用户最多需要支付的交易费用，它限制了智能合约不受限制地执行的能力。<br>在本文中，我们将我们的合约部署到基于以太坊的测试网络，测量每笔交易所需的 gas，并根据当前汇率计算真实的部署和运营成本。</p>
 <h2 id="IV-系统模型、安全模型和设计目标"><a href="#IV-系统模型、安全模型和设计目标" class="headerlink" title="IV. 系统模型、安全模型和设计目标"></a>IV. 系统模型、安全模型和设计目标</h2><p>文中符号定义</p>
 <table>
@@ -313,19 +313,19 @@
 <h3 id="A-系统模型"><a href="#A-系统模型" class="headerlink" title="A. 系统模型"></a>A. 系统模型</h3><p>我们的系统模型中有四个主要组件，详细描述如下：</p>
 <ul>
 <li>付款人。付款人是想要将加密货币转移给另一个用户的用户。</li>
-<li>付款人。收款人是需要转入的用户，但付款人方面没有他/她需要的加密货币类型。</li>
+<li>付款人。收款人是需要转入的用户，但付款人方面没有他&#x2F;她需要的加密货币类型。</li>
 <li>中介。中介是拥有以太坊账户和另一种加密货币账户的用户，并在这些账户中拥有足够的财产用于进行交易。中介机构通过智能合约连接付款人和收款人。中介机构需要加入验证委员会才能参与交易验证过程，这将在第 V-D 节中介绍。</li>
 <li>区块链。我们方案的每次执行都涉及三个区块链，其中两个区块链支持付款人和收款人分别使用的加密货币。第三个区块链是以太坊区块链，我们的智能合约是在它上面设计和部署的。</li>
 </ul>
-<p>假设我们在以太坊上部署了智能合约，我们进一步假设所有参与我们计划的用户都需要拥有自己的以太坊账户，并且只需要少量的以太币来支付调用合约的费用。同时，在我们的方案中，付款人/收款人不需要有足够的以太币来直接支持他们的交易。对于只需要参与我们方案中的交易的用户，他/她可以作为 SPV（简化支付验证）节点加入区块链网络 [1]。我们认为，要找到一个可以同时支持两种加密货币交易所需的两种加密货币的中介并不容易。<br>即使存在这样的中介，我们也可以将其视为我们方案中提到的两个中介。<br>因此，我们使用两个合适的中介，例如 C1 和 C2，分别实现 A 和 B 之间的加密货币交易。此外，每个中介都可以通过钱包、区块链浏览器等工具验证不同种类的加密货币交易。由于需要中介来验证交易，它可以是全节点或 SPV 节点。</p>
-<p>在我们的方案中，我们采用弱同步/部分同步的时间假设，这意味着保证消息在一定的时间限制后被传递。 在完全异步的网络中，很难区分正常节点和超时传输的恶意节点。<br>因此，在我们的方案中，将在智能合约中设置一个计时器，以防止恶意节点拒绝提供验证结果，从而区分正常节点和传输超时的恶意节点。</p>
+<p>假设我们在以太坊上部署了智能合约，我们进一步假设所有参与我们计划的用户都需要拥有自己的以太坊账户，并且只需要少量的以太币来支付调用合约的费用。同时，在我们的方案中，付款人&#x2F;收款人不需要有足够的以太币来直接支持他们的交易。对于只需要参与我们方案中的交易的用户，他&#x2F;她可以作为 SPV（简化支付验证）节点加入区块链网络 [1]。我们认为，要找到一个可以同时支持两种加密货币交易所需的两种加密货币的中介并不容易。<br>即使存在这样的中介，我们也可以将其视为我们方案中提到的两个中介。<br>因此，我们使用两个合适的中介，例如 C1 和 C2，分别实现 A 和 B 之间的加密货币交易。此外，每个中介都可以通过钱包、区块链浏览器等工具验证不同种类的加密货币交易。由于需要中介来验证交易，它可以是全节点或 SPV 节点。</p>
+<p>在我们的方案中，我们采用弱同步&#x2F;部分同步的时间假设，这意味着保证消息在一定的时间限制后被传递。 在完全异步的网络中，很难区分正常节点和超时传输的恶意节点。<br>因此，在我们的方案中，将在智能合约中设置一个计时器，以防止恶意节点拒绝提供验证结果，从而区分正常节点和传输超时的恶意节点。</p>
 <h3 id="B-安全模型"><a href="#B-安全模型" class="headerlink" title="B. 安全模型"></a>B. 安全模型</h3><p>我们系统中的恶意用户可能会设置大量账户作为付款人、收款人或中介，发送大量垃圾交易来破坏我们的计划。所有恶意用户都可能通过欺诈合同来串通以获得额外的利益。 它们可能的恶意行为如下所示。</p>
 <ul>
 <li>恶意付款人或中间人可能会向合约发送欺骗性消息，而不会进行转账或双重支付。</li>
 <li>恶意收款人或中间人可以在收到转账后通过诈骗合同来赚取额外的补偿费用。</li>
 <li>参与验证委员会的恶意节点（在第 V-D 节中描述）可能会发布错误信息以破坏共识过程。</li>
 </ul>
-<p>与恶意节点不同，受信任节点将遵守我们协议的条款来强制执行其行为，以实现跨加密货币交易或通过我们的方案赚取交易费用。 由于验证委员会是通过工作量证明选举产生的，我们假设对于想要加入验证委员会的节点，恶意节点的组合算力在任何时候都应该小于总算力的 1/4 .</p>
+<p>与恶意节点不同，受信任节点将遵守我们协议的条款来强制执行其行为，以实现跨加密货币交易或通过我们的方案赚取交易费用。 由于验证委员会是通过工作量证明选举产生的，我们假设对于想要加入验证委员会的节点，恶意节点的组合算力在任何时候都应该小于总算力的 1&#x2F;4 .</p>
 <p>否则会引入自私挖矿攻击。 这种攻击将使恶意节点更有可能产生更多超过自身算力的区块，从而使他们获得比其在验证委员会中拥有的算力百分比更多的席位。</p>
 <h3 id="C-设计目标"><a href="#C-设计目标" class="headerlink" title="C. 设计目标"></a>C. 设计目标</h3><p>我们的目标是在不同类型的加密货币之间设计一个分散的安全传输方案。 具体来说，我们的设计目标包括：</p>
 <ul>
@@ -349,7 +349,7 @@
 
 <center>图1：方案概述</center>
 
-<p>在合约部署阶段，大量合约部署在网络中。 然后交易发生在交易阶段。中介机构需要分别支持通过比特币和莱特币进行交易。<br>首先，A 将 x 莱特币转移到 C1。 C1收到转账后，将等价的ethers转账给C2，然后C2将y个比特币转账给B。这样，我们就以ether的转账作为桥梁，实现了两个用户之间不同加密货币的转账。 用户作为中介参与我们合约的动机是他/她可以通过这个过程获得交易费用。</p>
+<p>在合约部署阶段，大量合约部署在网络中。 然后交易发生在交易阶段。中介机构需要分别支持通过比特币和莱特币进行交易。<br>首先，A 将 x 莱特币转移到 C1。 C1收到转账后，将等价的ethers转账给C2，然后C2将y个比特币转账给B。这样，我们就以ether的转账作为桥梁，实现了两个用户之间不同加密货币的转账。 用户作为中介参与我们合约的动机是他&#x2F;她可以通过这个过程获得交易费用。</p>
 <p>需要注意的是，以太坊除了以太币的转账，还有比特币和莱特币的转账。 虽然无法通过以太坊智能合约直接验证这两种货币的交易，但我们通过选择一组用户作为验证委员会来提供验证结果来找到解决方案。 在交易验证阶段，合约将整合委员会的判断结果并得出最终结论。 正如工作[43]中总结的那样，没有可信的第三方就不可能进行跨链通信，而由分布式节点组成的验证委员会在我们的方案中扮演着这样的角色。</p>
 <p>除了上面提到的单用户交易场景，我们还考虑了多用户交易场景。 在这种情况下，有多个付款人想要将加密货币转移给一个或多个收款人。 我们的合同可以将需要转移相同类型加密货币的付款人与需要不同类型加密货币的收款人结合起来。 我们完整提案的细节将在第 V-C.1 至 V-C.2 节中描述。</p>
 <h3 id="B-合约部署阶段"><a href="#B-合约部署阶段" class="headerlink" title="B. 合约部署阶段"></a>B. 合约部署阶段</h3><p>在我们的方案中，使用以太坊的 Solidity 语言编写了三种类型的智能合约。</p>
@@ -394,7 +394,7 @@
 </tr>
 </tbody></table>
 <p>在合约部署阶段，这三类合约在全网大量部署。<br>用户和中介可以自由选择不超过gas limit的合约进行交易。 一旦网络中的交易需求超过合约数量，任何中介也可以进一步部署额外的交易合约和委员会合约。 用户可以在中介合约中查询的中介交易信息包括中介机构部署的合约的交易合约地址。 一个中介可以部署多个合约。 任何中介都可以加入其他合约作为交易所需的两个中介之一。 通过不同合约的交易并行发生，因此网络中的交易合约越多，在固定用户数下交易效率就越高</p>
-<h3 id="C-交易阶段"><a href="#C-交易阶段" class="headerlink" title="C. 交易阶段"></a>C. 交易阶段</h3><h4 id="1）单用户交易阶段"><a href="#1）单用户交易阶段" class="headerlink" title="1）单用户交易阶段"></a>1）单用户交易阶段</h4><p>在交易阶段，我们首先介绍单用户交易方案。 单用户交易方案表示参与交易的双方都是个人。 该方案还包括用户与他/她自己的货币兑换（例如，Alice 将她的比特币转换为以太币）。 为了清楚起见，我们假设 coin1 和 ether 之间的汇率以及 coin2 和 ether 之间的汇率都是“1”。 在实际场景中，非“1”汇率的问题只需要将汇率乘以相应的放大倍数即可。 单用户交易方案的主要流程如算法1所示。</p>
+<h3 id="C-交易阶段"><a href="#C-交易阶段" class="headerlink" title="C. 交易阶段"></a>C. 交易阶段</h3><h4 id="1）单用户交易阶段"><a href="#1）单用户交易阶段" class="headerlink" title="1）单用户交易阶段"></a>1）单用户交易阶段</h4><p>在交易阶段，我们首先介绍单用户交易方案。 单用户交易方案表示参与交易的双方都是个人。 该方案还包括用户与他&#x2F;她自己的货币兑换（例如，Alice 将她的比特币转换为以太币）。 为了清楚起见，我们假设 coin1 和 ether 之间的汇率以及 coin2 和 ether 之间的汇率都是“1”。 在实际场景中，非“1”汇率的问题只需要将汇率乘以相应的放大倍数即可。 单用户交易方案的主要流程如算法1所示。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 算法1</span><br><span class="line">输入: 双方及中介的账户地址; 交易金额 x; 汇率; 时间阈值 T;</span><br><span class="line"></span><br><span class="line">if 中间人 C1 和 C2 都存入了 Ether</span><br><span class="line">then</span><br><span class="line">    付款人 A 将 x 个 coin1 转给中间人 C1;</span><br><span class="line">    </span><br><span class="line">    if 转账确认成功 then</span><br><span class="line">    	中介C2将xcoin2转给收款人B;</span><br><span class="line">    	</span><br><span class="line">    	if 转账确认成功 then</span><br><span class="line">    		Return 中介C2给自己的押金;</span><br><span class="line">    	else if 超时或确认失败 then</span><br><span class="line">    		将中介C2的押金转给B;</span><br><span class="line">		end</span><br><span class="line">	</span><br><span class="line">		将中介C1的押金转移到C2;</span><br><span class="line"></span><br><span class="line">	else if 超时或确认失败 then</span><br><span class="line">		退还中介C1和C2的押金;</span><br><span class="line">	end</span><br><span class="line">	</span><br><span class="line">else if C1 或 C2 没有在时间 T 内提供存款</span><br><span class="line">then</span><br><span class="line">	Return 存入 C1 或 C2 然后终止;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 
 
@@ -422,15 +422,15 @@
 <h3 id="B-可移植性"><a href="#B-可移植性" class="headerlink" title="B. 可移植性"></a>B. 可移植性</h3><p>在我们的跨链加密货币交易方案中，我们支持多种类型的加密货币之间的交易。对于以太坊以外的其他加密货币的交易，我们都采用V-D节所述的方法，通过选择验证委员会来验证交易并将验证结果提供给合约。在协议的验证阶段，验证委员会中可能存在恶意节点，他们可能会提供错误的验证结果来干扰我们协议的执行。</p>
 <p>在我们的方案中，验证委员会是通过工作量证明选择的，并要求用户提供足够的押金。而在我们的方案中，这两部分是不可或缺的。一方面，PoW 用于在一段时间内动态选择节点参与验证委员会。如果我们的方案设计为仅依赖于基于存款数量的绝对参与验证委员会的能力，那么用户可以轻松地将其存款分配到不同的账户来参与验证委员会，以及用户在验证委员会中的比例委员会仅与用户的存款有关。这样，拥有大量存款的用户会随着时间的推移积累更多的财富。一旦这种趋势持续下去，使得用户的财富积累足够，仅仅依靠存款证明并不能阻止用户完全掌握验证委员会的共识结果。同时，也没有任何有效的机制来阻止拥有足够存款账户的用户参与验证委员会。因此，我们还引入了工作量证明机制，该机制要求每时每刻只有计算出相应工作量证明谜题的节点才能参与验证委员会。它不仅保证了我们选择的验证委员会成员依赖于他们拥有的存款数量，而且还防止了权益的积累。它还可以防止具有大量存款的节点控制共识结果。</p>
 <p>另一方面，如果我们这里只用工作量证明来做判断，普通用户也没有动力加入验证委员会，正确报告验证结果。即使报告了错误的结果，用户也不会受到任何惩罚，只能被踢出委员会。验证委员会中的每个用户都需要提供押金，作为对报告正确验证结果的诚实用户的奖励，以及对报告错误验证结果的恶意用户的惩罚。恶意用户的押金也作为对正确举报用户的奖励，以激发其诚实行为。</p>
-<p>我们假设对于想要加入验证委员会的节点，恶意节点的总算力在任何时候都应该小于总算力的 1/4。 否则，就会出现自私挖矿攻击[44]。 假设总共选择了 w个节点 加入验证委员会。 如果我们要求来自多数规则的最终验证结果的计数超过 a，则意味着验证委员会中恶意节点的百分比被强制要求小于 $t = (w-a) / w$。我们假设 X 是一个随机变量，代表我们在验证委员会中选择拜占庭节点的次数。 这样，恶意节点的最大数量 c 等于 $w\times{t}$ 。 我们可以使用累积二项分布来计算w节点委员会中恶意节点比例小于t时的概率P[45]。 </p>
-<p>$$$<br>P[X\leq c]=\sum_{k=0}^{c}{\binom{w}{k}p^k(1-p)^{w-k}}<br>$$$</p>
-<p>表III第一列表示委员会中恶意节点的比例不超过t，第一行代表委员会中的节点数。数据表明，在确定验证委员会的节点数时，恶意节点的比例不超过t的概率。当委员会中的恶意节点数量不超过 t 时，恶意节点提供的错误验证结果的比例不会超过 t，因为正常节点肯定会提供正确的验证结果。这样，一旦合约收集的验证结果超过t的比例，就可以将结果视为最终的正确结果。例如，当我们取 10 个验证委员会成员时，恶意节点的数量不超过总数的 1/2 的概率为 0.99。这意味着，如果智能合约得到半数以上的验证委员会成员一致的判断，当恶意节点的比例不超过 1/2 时，就可以认为这个结果是正确的。由于正常节点肯定会提供正确的验证结果，因此合约收集到的错误验证结果不会超过委员会中恶意节点数量的比例。从表中也可以看出，验证委员会的成员人数越多，合约在收集到足够多的验证后得到正确判断结果的概率就越大。然而，即使验证委员会的成员数量很少，该方案在我们的假设中仍然是安全的。</p>
+<p>我们假设对于想要加入验证委员会的节点，恶意节点的总算力在任何时候都应该小于总算力的 1&#x2F;4。 否则，就会出现自私挖矿攻击[44]。 假设总共选择了 w个节点 加入验证委员会。 如果我们要求来自多数规则的最终验证结果的计数超过 a，则意味着验证委员会中恶意节点的百分比被强制要求小于 $t &#x3D; (w-a) &#x2F; w$。我们假设 X 是一个随机变量，代表我们在验证委员会中选择拜占庭节点的次数。 这样，恶意节点的最大数量 c 等于 $w\times{t}$ 。 我们可以使用累积二项分布来计算w节点委员会中恶意节点比例小于t时的概率P[45]。 </p>
+<p>$$$<br>P[X\leq c]&#x3D;\sum_{k&#x3D;0}^{c}{\binom{w}{k}p^k(1-p)^{w-k}}<br>$$$</p>
+<p>表III第一列表示委员会中恶意节点的比例不超过t，第一行代表委员会中的节点数。数据表明，在确定验证委员会的节点数时，恶意节点的比例不超过t的概率。当委员会中的恶意节点数量不超过 t 时，恶意节点提供的错误验证结果的比例不会超过 t，因为正常节点肯定会提供正确的验证结果。这样，一旦合约收集的验证结果超过t的比例，就可以将结果视为最终的正确结果。例如，当我们取 10 个验证委员会成员时，恶意节点的数量不超过总数的 1&#x2F;2 的概率为 0.99。这意味着，如果智能合约得到半数以上的验证委员会成员一致的判断，当恶意节点的比例不超过 1&#x2F;2 时，就可以认为这个结果是正确的。由于正常节点肯定会提供正确的验证结果，因此合约收集到的错误验证结果不会超过委员会中恶意节点数量的比例。从表中也可以看出，验证委员会的成员人数越多，合约在收集到足够多的验证后得到正确判断结果的概率就越大。然而，即使验证委员会的成员数量很少，该方案在我们的假设中仍然是安全的。</p>
 <center>表III：拜占庭节点在所有委员会成员中的比例的二项分布（BINOMIAL DISTRIBUTION）</center>
 
 <table>
 <thead>
 <tr>
-<th>t/w</th>
+<th>t&#x2F;w</th>
 <th>10</th>
 <th>20</th>
 <th>50</th>
@@ -474,23 +474,23 @@
 </tr>
 </tbody></table>
 <h3 id="C-公平性"><a href="#C-公平性" class="headerlink" title="C. 公平性"></a>C. 公平性</h3><p>如第 V-C.1 节和第 V-C.2 节所述，在我们的协议过程中，无论 C1 或 C2 未能在规定时间内提供押金，或付款人的转账超时或失败，合约都将退还C1 或 C2 并终止协议。因此，诚实行为的参与者在这个过程中不会有任何损失。我们不能保证中介被选中后是完全可靠的，但可以保证即使中介出现恶意行为，也不会对跨链交易双方造成任何损失。</p>
-<p>一方面，对于中介C1来说，他/她唯一能做的恶意行为就是在获得A的转账后，假装转账失败，从而终止合约，获得A的转账。但是在我们的协议中，A 和 C1 之间的转账交易的验证结果是由验证委员会来保证的。一旦C1提供了与A交易的保证金和账户地址，他/她的行为就完全受合约控制。如果合约从验证委员会收到转账成功的验证结果，将自动执行后续操作。否则，如果转账结果失败或超出定时器范围，合约将退还两个中介的押金并终止操作。</p>
-<p>另一方面，如果C1是诚实的，而C2是恶意的，没有转给B，合约就会把C2的押金转给B。因为我们要求无论是C1还是C2，合约中的实际押金金额不小于 A 和 B 实际转移的金额。因此，在将 C2 的存款转给 B 后，B 也可以使用这笔存款通过我们的方案兑换他/她需要的加密货币。在这种情况下，A 已成功将加密货币转移到 C1。因此，为了防止 A 在这个过程中获得额外的加密货币，我们选择将 C1 的存款发送给 C2。这样，A就完成了正常的计划流程，并没有损失任何收益。总的来说，我们的跨币种交易方案已经针对A和C1进行了成功。对于 C2，智能合约中记录了异常交易。但是对于Bit来说，完成从存款到他/她需要的其他类型货币的转换是必要的。与正常流程相比，这确实带来了额外的开销。但是可以保证程序正常进行。如果该计划终止，将带来不低于现有计划的成本。由于 A 转给 C1 的加密货币不再退还，我们不能仅通过结束程序来保证安全。一种可能的解决方案是将 C1 的押金退还给 A，但这也会带来不少于我们现有解决方案的额外开销。</p>
+<p>一方面，对于中介C1来说，他&#x2F;她唯一能做的恶意行为就是在获得A的转账后，假装转账失败，从而终止合约，获得A的转账。但是在我们的协议中，A 和 C1 之间的转账交易的验证结果是由验证委员会来保证的。一旦C1提供了与A交易的保证金和账户地址，他&#x2F;她的行为就完全受合约控制。如果合约从验证委员会收到转账成功的验证结果，将自动执行后续操作。否则，如果转账结果失败或超出定时器范围，合约将退还两个中介的押金并终止操作。</p>
+<p>另一方面，如果C1是诚实的，而C2是恶意的，没有转给B，合约就会把C2的押金转给B。因为我们要求无论是C1还是C2，合约中的实际押金金额不小于 A 和 B 实际转移的金额。因此，在将 C2 的存款转给 B 后，B 也可以使用这笔存款通过我们的方案兑换他&#x2F;她需要的加密货币。在这种情况下，A 已成功将加密货币转移到 C1。因此，为了防止 A 在这个过程中获得额外的加密货币，我们选择将 C1 的存款发送给 C2。这样，A就完成了正常的计划流程，并没有损失任何收益。总的来说，我们的跨币种交易方案已经针对A和C1进行了成功。对于 C2，智能合约中记录了异常交易。但是对于Bit来说，完成从存款到他&#x2F;她需要的其他类型货币的转换是必要的。与正常流程相比，这确实带来了额外的开销。但是可以保证程序正常进行。如果该计划终止，将带来不低于现有计划的成本。由于 A 转给 C1 的加密货币不再退还，我们不能仅通过结束程序来保证安全。一种可能的解决方案是将 C1 的押金退还给 A，但这也会带来不少于我们现有解决方案的额外开销。</p>
 <h3 id="D-稳定性"><a href="#D-稳定性" class="headerlink" title="D. 稳定性"></a>D. 稳定性</h3><p>在第 IV-B 节中描述的安全假设下，我们的协议可以很好地抵御区块链网络中的常见攻击。</p>
 <p>1）Double-Spend Attack：在我们的方案中，存在付款人委托两个不同的中介同时向不同用户进行相同支付的情况。或者在委托中介过程中，付款人可以在其他场合进行同样的付款。为了防止双花攻击[46]，我们的方案要求验证者遵守加密货币本身的验证方法。例如，如果付款人以比特币支付，则验证者必须在交易后等待 6 个以上的区块才能将其判断发送到合约。我们的方案不会对所涉及的加密货币进行任何更改，以确保加密货币交易的安全性。</p>
 <p>2）女巫攻击Sybil Attack：任何用户都可以发送交易请求，即使用户在向合约发送应用程序后没有进行后续转账。在这种情况下，只会损失少量的以太坊交易费用。在此过程中，恶意用户可能会发送大量的小额交易请求，甚至可能会在请求发出后拒绝发起交易。但是，在我们的方案中，允许中介在收到用户的交易请求后进行选择。也就是说，中介可以通过用户的账户地址来确认账户有足够的余额。如果转账金额太小，中介将移除用户请求，从而确保用户不是 Sybil 节点 [47]。</p>
 <p>3）DoS 攻击：恶意节点可能会伪造大量账号试图加入验证委员会或冒充中间人，通过 DoS 攻击破坏正常的协议进程。但是，我们的方案不会受到这些恶意行为的影响，因为我们有两个预防措施。首先，验证委员会的每个成员都应该支付一些以太币作为保证金。其次，每个节点都需要提交 PoW 难题的解决方案，才能被认可为验证委员会的成员。因此，恶意节点无法轻易伪造身份加入验证委员会而无需支付任何费用。同样，恶意节点也不能充当中介，因为中介节点需要有加入验证委员会的记录。</p>
 <h3 id="E-原子性"><a href="#E-原子性" class="headerlink" title="E. 原子性"></a>E. 原子性</h3><p>交易的原子性要求跨链交易必须要么完全成功要么完全失败。在我们的方案中，不会出现一方付款而另一方没有收到转账的情况。我们的方案通过基于智能合约和超时判断的协议设计来实现这一目标。</p>
-<p>在我们的方案中，如果所有参与者都正常遵守协议，交易将被正确执行。如果一些联盟偏离了协议，在正常执行中不会对参与者造成任何损失。并且协议将被终止或违反操作将受到惩罚。如图 3 所示，我们的协议具有三个执行判断。第一个是中介需要在开始时提供足够的押金，并在智能合约上设置哈希时间锁。然后，A 可以转移到 C1。这里我们依靠验证委员会来判断交易结果，并在合约中设置时间锁定，以防止转账超时。如果传输失败，则交易终止。最后，需要中介C2向B转账，验证委员会也验证交易结果并设置哈希时间锁，防止转账超时。如果C2恶意不转账给B，合约会将C2的保证金转账给B，因此B会收到不少于他/她到期价值的转账货币。在这种情况下，遵守协议的一方不会遭受损失，恶意方也不会从中获得任何好处。因此，恶意方没有动机偏离我们的协议。</p>
+<p>在我们的方案中，如果所有参与者都正常遵守协议，交易将被正确执行。如果一些联盟偏离了协议，在正常执行中不会对参与者造成任何损失。并且协议将被终止或违反操作将受到惩罚。如图 3 所示，我们的协议具有三个执行判断。第一个是中介需要在开始时提供足够的押金，并在智能合约上设置哈希时间锁。然后，A 可以转移到 C1。这里我们依靠验证委员会来判断交易结果，并在合约中设置时间锁定，以防止转账超时。如果传输失败，则交易终止。最后，需要中介C2向B转账，验证委员会也验证交易结果并设置哈希时间锁，防止转账超时。如果C2恶意不转账给B，合约会将C2的保证金转账给B，因此B会收到不少于他&#x2F;她到期价值的转账货币。在这种情况下，遵守协议的一方不会遭受损失，恶意方也不会从中获得任何好处。因此，恶意方没有动机偏离我们的协议。</p>
 <img src="/post/enabling-x-chain-txs/image-20211014012244488.png" class="" title="image-20211014012244488">
 
 <center>图3：协议状态转移图</center>
 
 <h3 id="F-安全性和活力"><a href="#F-安全性和活力" class="headerlink" title="F. 安全性和活力"></a>F. 安全性和活力</h3><p>安全性：诚实（非拜占庭）节点同意相同的值。</p>
-<p><strong>证明</strong>：如果所有诚实节点都同意交易验证的相同结果，则提议的协议提供安全性。<br>为了实现这一点，利用多数规则来确定最终的验证结果。对于要验证的交易 tx，每个验证节点 Pi 将给出以下两个结果之一： <code>Validation(tx, Pi ) = true</code> 或 <code>Validation(tx, Pi) = false</code> 。冲突的验证结果将验证节点分为两组：<code>True(tx) = &#123; Pi, Validation(tx, Pi ) = true&#125;</code> 和 <code>False( tx) = &#123; Pj , Validation(tx, Pj ) = false &#125;</code>。通过使用多数规则，如果|True(tx)|&gt;|False(tx)|，则最终验证结果为真；否则，即如果 |False(tx)|&gt;|True(tx)|，它将为 false 。根据我们的安全假设，委员会中拜占庭节点的数量少于 1/4，给出最终验证结果的节点是诚实的，其他的都是拜占庭节点。我们选择通过反证法来证明这个特征。我们要表明，根据多数规则，委员会不可能同时承认真假。对于最终结果为真的认可，必须是委员会中半数以上的节点都认可了“真”。同时，对于最终结果为false的认可，必须是“false”也得到了委员会半数以上节点的认可。然而，这意味着 ||True(tx)| + |False(tx)||大于委员会成员总数，这是不可能的。因此，这就产生了矛盾，因为这两个结果都不能同时被委员会中超过一半的节点认可。换句话说，诚实节点不同意这两种不同的结果，从而证明我们的协议实现了安全性。</p>
+<p><strong>证明</strong>：如果所有诚实节点都同意交易验证的相同结果，则提议的协议提供安全性。<br>为了实现这一点，利用多数规则来确定最终的验证结果。对于要验证的交易 tx，每个验证节点 Pi 将给出以下两个结果之一： <code>Validation(tx, Pi ) = true</code> 或 <code>Validation(tx, Pi) = false</code> 。冲突的验证结果将验证节点分为两组：<code>True(tx) = &#123; Pi, Validation(tx, Pi ) = true&#125;</code> 和 <code>False( tx) = &#123; Pj , Validation(tx, Pj ) = false &#125;</code>。通过使用多数规则，如果|True(tx)|&gt;|False(tx)|，则最终验证结果为真；否则，即如果 |False(tx)|&gt;|True(tx)|，它将为 false 。根据我们的安全假设，委员会中拜占庭节点的数量少于 1&#x2F;4，给出最终验证结果的节点是诚实的，其他的都是拜占庭节点。我们选择通过反证法来证明这个特征。我们要表明，根据多数规则，委员会不可能同时承认真假。对于最终结果为真的认可，必须是委员会中半数以上的节点都认可了“真”。同时，对于最终结果为false的认可，必须是“false”也得到了委员会半数以上节点的认可。然而，这意味着 ||True(tx)| + |False(tx)||大于委员会成员总数，这是不可能的。因此，这就产生了矛盾，因为这两个结果都不能同时被委员会中超过一半的节点认可。换句话说，诚实节点不同意这两种不同的结果，从而证明我们的协议实现了安全性。</p>
 <p><strong>活力</strong>：事务最终会中止或提交。</p>
-<p>证明：在我们的方案中，我们采用弱同步/部分同步的时间假设，这意味着保证消息在一定的时间限制后被传递。我们方案的设计也是基于这个假设。因此，我们的方案将在智能合约中设置一个计时器，以防止恶意节点拒绝提供验证结果。在这种弱/部分同步时间假设下，按照执行顺序，合约中有五种请求：R1（C1&amp;C2存款）、R2（付款人转账）、R3（付款人确认）、R4（收款人转账）和R5 （收款人确认）。因此，有六个有效状态：S0（开始）、S1（中介存款）、S2（付款人转移）、S3（付款人确认）、S4（收款人转移）、S5（收款人确认）。在每个状态 Si ，合约等待相应的请求 Ri+1。如果成功，则合约转移到下一个状态 Si+1；否则，如果失败或超时，则合约终止并宣布交易失败。如果合约成功遍历了有效的状态转换序列，即“S0→R1→S1→R2→S2→R3→S3→R4→S4→R5→S5”，则交易成功完成。总之，合约总是在进步，永远不会在任何状态下无限期地阻塞。因此，我们的协议实现了活力。</p>
-<h2 id="VII-性能分析"><a href="#VII-性能分析" class="headerlink" title="VII 性能分析"></a>VII 性能分析</h2><p>为了评估我们方案的部署成本，我们在以太坊的官方测试网络 Ropsten [48] 上部署了我们的合约。 Gas 用于衡量智能合约代码中每一步的成本。表 IV 中概述了第 V-B 部分中描述的每个功能的 Gas 和财务成本。我们使用 1 以太币 = 130 美元的兑换率和 0.000000003 以太币的gas价格（即 2020 年 4 月的实际成本）估算了以美元（美元）为单位的成本。中间人计算 PoW 难题的代码未包含在合约，因为用户可以在他们的本地机器上执行这部分并将结果发送到合约。</p>
+<p>证明：在我们的方案中，我们采用弱同步&#x2F;部分同步的时间假设，这意味着保证消息在一定的时间限制后被传递。我们方案的设计也是基于这个假设。因此，我们的方案将在智能合约中设置一个计时器，以防止恶意节点拒绝提供验证结果。在这种弱&#x2F;部分同步时间假设下，按照执行顺序，合约中有五种请求：R1（C1&amp;C2存款）、R2（付款人转账）、R3（付款人确认）、R4（收款人转账）和R5 （收款人确认）。因此，有六个有效状态：S0（开始）、S1（中介存款）、S2（付款人转移）、S3（付款人确认）、S4（收款人转移）、S5（收款人确认）。在每个状态 Si ，合约等待相应的请求 Ri+1。如果成功，则合约转移到下一个状态 Si+1；否则，如果失败或超时，则合约终止并宣布交易失败。如果合约成功遍历了有效的状态转换序列，即“S0→R1→S1→R2→S2→R3→S3→R4→S4→R5→S5”，则交易成功完成。总之，合约总是在进步，永远不会在任何状态下无限期地阻塞。因此，我们的协议实现了活力。</p>
+<h2 id="VII-性能分析"><a href="#VII-性能分析" class="headerlink" title="VII 性能分析"></a>VII 性能分析</h2><p>为了评估我们方案的部署成本，我们在以太坊的官方测试网络 Ropsten [48] 上部署了我们的合约。 Gas 用于衡量智能合约代码中每一步的成本。表 IV 中概述了第 V-B 部分中描述的每个功能的 Gas 和财务成本。我们使用 1 以太币 &#x3D; 130 美元的兑换率和 0.000000003 以太币的gas价格（即 2020 年 4 月的实际成本）估算了以美元（美元）为单位的成本。中间人计算 PoW 难题的代码未包含在合约，因为用户可以在他们的本地机器上执行这部分并将结果发送到合约。</p>
 <center>表IV：每个操作所花费Gas值</center>
 
 <table>
@@ -575,7 +575,7 @@
 <p>[2] C. Lee. (2011). Litecoin. Accessed: Apr. 2021. [Online]. Available:<br><a href="https://litecoin.org/" target="_blank" rel="noopener">https://litecoin.org/</a></p>
 <p>[3] G. Wood. (2017). Ethereum: A Secure Decentralised Generalised Trans-<br>action Ledger EIP-150 REVISION (759dccd-2017-08-07), Ethereum<br>Project Yellow Paper. Accessed: Apr. 2021. [Online]. Available:<br><a href="https://ethereum.github.io/yellowpaper/paper.pdf" target="_blank" rel="noopener">https://ethereum.github.io/yellowpaper/paper.pdf</a></p>
 <p>[4] P2PB2B. Accessed: Apr. 2021. [Online]. Available: <a href="https://p2pb2b.io/" target="_blank" rel="noopener">https://p2pb2b.io</a></p>
-<p>[5] MXC. Accessed: Apr. 2021. [Online]. Available: <a href="https://mxc-exchange/" target="_blank" rel="noopener">https://mxc-exchange</a>.<br>zendesk.com/hc/zh-cn</p>
+<p>[5] MXC. Accessed: Apr. 2021. [Online]. Available: <a href="https://mxc-exchange/" target="_blank" rel="noopener">https://mxc-exchange</a>.<br>zendesk.com&#x2F;hc&#x2F;zh-cn</p>
 <p>[6] BKEX. Accessed: Apr. 2021. [Online]. Available: <a href="https://www.bkex.co/" target="_blank" rel="noopener">https://www.bkex.co</a></p>
 <p>[7] Bilaxy. Accessed: Apr. 2021. [Online]. Available: <a href="https://bilaxy.com/" target="_blank" rel="noopener">https://bilaxy.com</a></p>
 <p>[8] LBank. Accessed: Apr. 2021. [Online]. Available: <a href="https://www.lbank/" target="_blank" rel="noopener">https://www.lbank</a>.<br>info</p>
@@ -583,19 +583,19 @@
 <p>[10] R. Khalil, A. Gervais, and G. Felley. (2019). TEX-A Securely Scalable<br>Trustless Exchange, Cryptology ePrint Archive. [Online]. Available:<br><a href="https://eprint.iacr.org/2019/265" target="_blank" rel="noopener">https://eprint.iacr.org/2019/265</a></p>
 <p>[11] E. Heilman, S. Lipmann, and S. Goldberg, “The Arwen trading proto-<br>cols,” in Proc. Int. Conf. Financial Cryptogr. Data Secur. (FC). Berlin,<br>Germany: Springer, 2020, pp. 156–173.</p>
 <p>[12] L. Luu, D.-H. Chu, H. Olickel, P. Saxena, and A. Hobor, “Making smart<br>contracts smarter,” in Proc. ACM SIGSAC Conf. Comput. Commun.<br>Secur. (CCS), 2016, pp. 254–269.</p>
-<p>[13] V. Buterin. (2014). A Next-Generation Smart Contract and Decentralized<br>Application Platform. Accessed: Apr. 2021. [Online]. Available: https://<br>cryptorating.eu/whitepapers/Ethereum/Ethereum_white_paper.pdf</p>
+<p>[13] V. Buterin. (2014). A Next-Generation Smart Contract and Decentralized<br>Application Platform. Accessed: Apr. 2021. [Online]. Available: https:&#x2F;&#x2F;<br>cryptorating.eu&#x2F;whitepapers&#x2F;Ethereum&#x2F;Ethereum_white_paper.pdf</p>
 <p>[14] Metronome. Accessed: Apr. 2021. [Online]. Available: <a href="https://www/" target="_blank" rel="noopener">https://www</a>.<br>metronome.io</p>
 <p>[15] Y. V. L. Luu. (2018). Kybernetwork: A Trustless Decentralized Exchange<br>and Payment Service. Accessed: Apr. 2021. [Online]. Available:<br><a href="https://whitepaper.io/document/43/kyber-network-whitepaper" target="_blank" rel="noopener">https://whitepaper.io/document/43/kyber-network-whitepaper</a></p>
-<p>[16] J. Chow. BTC Relay. Accessed: Apr. 2021. [Online]. Available: https://<br>github.com/ethereum/btcrelay</p>
-<p>[17] F. Vogelsteller and V. Buterin. (2015). EIP 20: ERC-20 Token Stan-<br>dard. Accessed: Apr. 2021. [Online]. Available: <a href="https://eips.ethereum/" target="_blank" rel="noopener">https://eips.ethereum</a>.<br>org/EIPS/eip-20</p>
+<p>[16] J. Chow. BTC Relay. Accessed: Apr. 2021. [Online]. Available: https:&#x2F;&#x2F;<br>github.com&#x2F;ethereum&#x2F;btcrelay</p>
+<p>[17] F. Vogelsteller and V. Buterin. (2015). EIP 20: ERC-20 Token Stan-<br>dard. Accessed: Apr. 2021. [Online]. Available: <a href="https://eips.ethereum/" target="_blank" rel="noopener">https://eips.ethereum</a>.<br>org&#x2F;EIPS&#x2F;eip-20</p>
 <p>[18] W. Warren and A. Bandeali. (2017). 0x: An Open Protocol for Decen-<br>tralized Exchange on the Ethereum Blockchain. Accessed: Apr. 2021.<br>[Online]. Available: <a href="https://github.com/0xProject/whitepaper" target="_blank" rel="noopener">https://github.com/0xProject/whitepaper</a></p>
 <p>[19] EtherDelta. Accessed: Apr. 2021. [Online]. Available: <a href="https://etherdelta/" target="_blank" rel="noopener">https://etherdelta</a>.<br>com</p>
 <p>[20] IDEX. Accessed: Apr. 2021. [Online]. Available: <a href="https://idex.market/" target="_blank" rel="noopener">https://idex.market</a></p>
-<p>[21] (2019). TBTC: A Decentralized Redeemable BTC-Backed ERC-20<br>Token. Accessed: Apr. 2021. [Online]. Available: <a href="https://docs.keep/" target="_blank" rel="noopener">https://docs.keep</a>.<br>network/tbtc/index.pdf<br>[22] T. Zhang and L. Wang. (2017). Republic Protocol. Accessed: Apr. 2021.<br>[Online]. Available: <a href="https://republicprotocol.github.io/whitepaper/" target="_blank" rel="noopener">https://republicprotocol.github.io/whitepaper/</a><br>republic-whitepaper.pdf</p>
+<p>[21] (2019). TBTC: A Decentralized Redeemable BTC-Backed ERC-20<br>Token. Accessed: Apr. 2021. [Online]. Available: <a href="https://docs.keep/" target="_blank" rel="noopener">https://docs.keep</a>.<br>network&#x2F;tbtc&#x2F;index.pdf<br>[22] T. Zhang and L. Wang. (2017). Republic Protocol. Accessed: Apr. 2021.<br>[Online]. Available: <a href="https://republicprotocol.github.io/whitepaper/" target="_blank" rel="noopener">https://republicprotocol.github.io/whitepaper/</a><br>republic-whitepaper.pdf</p>
 <p>[23] J. Teutsch, M. Straka, and D. Boneh, “Retrofitting a two-way peg<br>between blockchains,” 2019, arXiv:1908.03999. [Online]. Available:<br><a href="http://arxiv.org/abs/1908.03999" target="_blank" rel="noopener">http://arxiv.org/abs/1908.03999</a></p>
-<p>[24] J. Kwon and E. Buchman. (2016). Cosmos: A Network of Distrib-<br>uted Ledgers. Accessed: Apr. 2021. [Online]. Available: <a href="https://cosmos/" target="_blank" rel="noopener">https://cosmos</a>.<br>network/whitepaper</p>
-<p>[25] G. Wood. (2016). Polkadot: Vision for a Heterogeneous Multi-<br>Chain Framework. Accessed: Apr. 2021. [Online]. Available: https://<br>github.com/w3f/polkadot-white-paper/raw/master/PolkaDotPaper.pdf</p>
-<p>[26] J. Kwon. (2014). Tendermint: Consensus Without Mining, Draft<br>V.0.6. Accessed: Apr. 2021. [Online]. Available: <a href="https://tendermint/" target="_blank" rel="noopener">https://tendermint</a>.<br>com/docs/tendermint.pdf</p>
+<p>[24] J. Kwon and E. Buchman. (2016). Cosmos: A Network of Distrib-<br>uted Ledgers. Accessed: Apr. 2021. [Online]. Available: <a href="https://cosmos/" target="_blank" rel="noopener">https://cosmos</a>.<br>network&#x2F;whitepaper</p>
+<p>[25] G. Wood. (2016). Polkadot: Vision for a Heterogeneous Multi-<br>Chain Framework. Accessed: Apr. 2021. [Online]. Available: https:&#x2F;&#x2F;<br>github.com&#x2F;w3f&#x2F;polkadot-white-paper&#x2F;raw&#x2F;master&#x2F;PolkaDotPaper.pdf</p>
+<p>[26] J. Kwon. (2014). Tendermint: Consensus Without Mining, Draft<br>V.0.6. Accessed: Apr. 2021. [Online]. Available: <a href="https://tendermint/" target="_blank" rel="noopener">https://tendermint</a>.<br>com&#x2F;docs&#x2F;tendermint.pdf</p>
 <p>[27] A. Zamyatin, D. Harz, J. Lind, P. Panayiotou, A. Gervais, and<br>W. Knottenbelt, “XCLAIM: Trustless, interoperable, cryptocurrency-<br>backed assets,” in Proc. IEEE Symp. Secur. Privacy (S&amp;P), May 2019,<br>pp. 193–210.</p>
 <p>[28] I. Bentov, Y. Ji, F. Zhang, L. Breidenbach, P. Daian, and A. Juels,<br>“Tesseract: Real-time cryptocurrency exchange using trusted hardware,”<br>in Proc. ACM SIGSAC Conf. Comput. Commun. Secur. (CCS), 2019,<br>pp. 1521–1538.</p>
 <p>[29] S. Matetic, M. Ahmed, K. Kostiainen, A. Dhar, D. Sommer, and<br>A. Gervais, “ROTE: Rollback protection for trusted execution,” in Proc.<br>26th USENIX Secur. Symp. (USENIX Security), 2017, pp. 1289–1306.</p>
@@ -606,7 +606,7 @@
 <p>[34] E. Tairi, P. Moreno-Sanchez, and M. Maffei (2019). A2L: Anony-<br>mous Atomic Locks for Scalability and Interoperability in Pay-<br>ment Channel Hubs, Cryptology ePrint Archive. [Online]. Available:<br><a href="https://eprint.iacr.org/2019/589.pdf" target="_blank" rel="noopener">https://eprint.iacr.org/2019/589.pdf</a></p>
 <p>[35] P. Moreno-Sanchez, A. Blue, D. V. Le, S. Noether, B. Goodell, and<br>A. Kate, “DLSAG: Non-interactive refund transactions for interoperable<br>payment channels in Monero,” in Proc. Int. Conf. Financial Cryptogr.<br>Data Secur. (FC), 2019, pp. 325–345.</p>
 <p>[36] C. Egger, P. Moreno-Sanchez, and M. Maffei, “Atomic multi-channel<br>updates with constant collateral in Bitcoin-compatible payment-channel<br>networks,” in Proc. ACM SIGSAC Conf. Comput. Commun. Secur.<br>(CCS), 2019, pp. 801–815.</p>
-<p>[37] S. King and S. Nadal. (2012). PPCoin: Peer-to-Peer Crypto-<br>Currency With Proof-of-Stake. Accessed: Apr. 2021. [Online]. Available:<br><a href="https://peercoin.net/assets/paper/peercoin-paper.pdf" target="_blank" rel="noopener">https://peercoin.net/assets/paper/peercoin-paper.pdf</a><br>[38] (2018). EOS.IO Technical White Paper V2. Accessed: Apr. 2021.<br>[Online]. Available: <a href="https://github.com/EOSIO/Documentation/blob/" target="_blank" rel="noopener">https://github.com/EOSIO/Documentation/blob/</a><br>master/TechnicalWhitePaper.md</p>
+<p>[37] S. King and S. Nadal. (2012). PPCoin: Peer-to-Peer Crypto-<br>Currency With Proof-of-Stake. Accessed: Apr. 2021. [Online]. Available:<br><a href="https://peercoin.net/assets/paper/peercoin-paper.pdf" target="_blank" rel="noopener">https://peercoin.net/assets/paper/peercoin-paper.pdf</a><br>[38] (2018). EOS.IO Technical White Paper V2. Accessed: Apr. 2021.<br>[Online]. Available: <a href="https://github.com/EOSIO/Documentation/blob/" target="_blank" rel="noopener">https://github.com/EOSIO/Documentation/blob/</a><br>master&#x2F;TechnicalWhitePaper.md</p>
 <p>[39] Y. Sompolinsky and A. Zohar, “Secure high-rate transaction processing<br>in Bitcoin,” in Proc. Int. Conf. Financial Cryptogr. Data Secur. (FC).<br>Springer, 2015, pp. 507–527.</p>
 <p>[40] M. Castro and B. Liskov, “Practical byzantine fault tolerance,” in Proc.<br>3rd Symp. Operating Syst. Design Implement. (OSDI), 1999, vol. 99,<br>no. 1999, pp. 173–186.</p>
 <p>[41] M. Castro and B. Liskov, “Practical Byzantine fault tolerance and proac-<br>tive recovery,” ACM Trans. Comput. Syst., vol. 20, no. 4, pp. 398–461,<br>2002.</p>
@@ -723,7 +723,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
