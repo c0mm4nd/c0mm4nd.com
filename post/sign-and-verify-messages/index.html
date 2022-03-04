@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="译：众所周知，本人现在正在开发一个新型的区块链架构NGIN。最近看到Schnorr签名算法很热门就在NG上部署了。但是部署完之后就陷入了更深层的思考——如何更好的利用Schnorr的MultiSig（多重签名）机制？现在我构思将Account也转为利用Schnorr来判定所有权。但是发现如此设计的话Account结构中不包含PublicKey，将很难通过anonymous表来搜索账户余额。故希望从">
@@ -309,12 +310,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/post/start-job/" rel="prev" title="近来半年工作的思考">
-      <i class="fa fa-chevron-left"></i> 近来半年工作的思考
+    <a href="/post/standardizing-wasi-a-webassembly-system-interface/" rel="prev" title="标准化WASI: 一个网页外运行WebAssembly的系统接口">
+      <i class="fa fa-chevron-left"></i> 标准化WASI: 一个网页外运行WebAssembly的系统接口
     </a></div>
       <div class="post-nav-item">
-    <a href="/post/standardizing-wasi-a-webassembly-system-interface/" rel="next" title="标准化WASI: 一个网页外运行WebAssembly的系统接口">
-      标准化WASI: 一个网页外运行WebAssembly的系统接口 <i class="fa fa-chevron-right"></i>
+    <a href="/post/new-structure-of-ngin/" rel="next" title="NGIN的新架構">
+      NGIN的新架構 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -468,6 +469,8 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="本文档定义了确定性数字签名生成程序。此类签名与标准数字签名算法 (DSA) 和椭圆曲线数字签名算法 (ECDSA) 数字签名兼容，并且可以使用未经修改的验证器进行处理，无需了解其中描述的过程。确定性签名保留了与数字签名相关的加密安全功能，但可以更轻松地在各种环境中实现，因为它们不需要访问高质量的随机源。 DSA [FIPS-186-4] 和 ECDSA [X9.62] 是两种标准的数字签名方案。">
@@ -299,8 +300,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/post/fit5152-a1-paper/" rel="prev" title="Reading paper in FIT5152: 知识评估和进展分析与设计的统一框架 A Unified Framework for Knowledge Assessment and Progression Analysis and Design">
-      <i class="fa fa-chevron-left"></i> Reading paper in FIT5152: 知识评估和进展分析与设计的统一框架 A Unified Framework for Knowledge Assessment and Progression Analysis and Design
+    <a href="/post/fit5152-ui-design-notes/" rel="prev" title="Notes for FIT5152: UI Design">
+      <i class="fa fa-chevron-left"></i> Notes for FIT5152: UI Design
     </a></div>
       <div class="post-nav-item">
     <a href="/post/ngchain-serialization-selection/" rel="next" title="ngchain Serialization Selection: ngchain的序列化方案选择">
@@ -457,6 +458,8 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
