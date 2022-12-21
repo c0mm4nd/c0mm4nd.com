@@ -4,6 +4,8 @@
     <title>区块链理论知识标准</title>
     <url>/post/blockchain-knowledge-standards/</url>
     <content><![CDATA[<p>自己仰仗着自己实战经验丰富，对一些理论定义上的想法总是天马行空。因此在这里收集一些我认可的标准，以便未来与他人在交流中达成共识。</p>
+<span id="more"></span>
+
 <h1 id="区块链理论知识标准"><a href="#区块链理论知识标准" class="headerlink" title="区块链理论知识标准"></a>区块链理论知识标准</h1><h2 id="区块链的分层"><a href="#区块链的分层" class="headerlink" title="区块链的分层"></a>区块链的分层</h2><p>分为 <strong>三层</strong></p>
 <img src="/post/blockchain-knowledge-standards/blockchainLayers.png" class="">
 
@@ -11792,6 +11794,742 @@ With the respect to/Enperienced the less main reason, they xxx
         <tag>notes</tag>
         <tag>BigData</tag>
         <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>schnorr-signature-improvements</title>
+    <url>/post/schnorr-signature-improvements/</url>
+    <content><![CDATA[<p>今天想实现在schnorr类似ECDSA那样从文本hash与签名反推公钥，查找了资历后发现行不通。而且schnorr本身也并不支持m-of-n形式的签名（只能n-of-n）。因此这里在这里收集与思考一些在schnorr上的改进方案（主要BTC）</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>以太坊链上分析</title>
+    <url>/post/ethereum-onchain-analysis/</url>
+    <content><![CDATA[<h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><p>以太坊(-like)平台异常交易</p>
+<span id="more"></span>
+
+<p>异常：</p>
+<ul>
+<li>诈骗</li>
+<li>跑路</li>
+<li>勒索</li>
+<li>黑客攻击</li>
+<li>洗钱</li>
+<li>恐怖主义</li>
+<li>反动</li>
+<li>…</li>
+</ul>
+<p>希望做到：</p>
+<ul>
+<li>识别、检测</li>
+<li>监控</li>
+<li>预防</li>
+</ul>
+<h2 id="以太坊"><a href="#以太坊" class="headerlink" title="以太坊"></a>以太坊</h2><p>简单说明区块链生态相关应用以及其中图模型</p>
+<h3 id="链上"><a href="#链上" class="headerlink" title="链上"></a>链上</h3><h4 id="普通交易"><a href="#普通交易" class="headerlink" title="普通交易"></a>普通交易</h4><p>目前大部分GNN做的分析部分，基于etherscan的<a href="https://etherscan.io/labelcloud" target="_blank" rel="noopener">label</a></p>
+<p>关系：</p>
+<ul>
+<li>地址 -[交易]- 地址</li>
+</ul>
+<h4 id="代币交易"><a href="#代币交易" class="headerlink" title="代币交易"></a>代币交易</h4><p>代币主要指代符合ERC20标准的合约中定义的可交易的资产，包含了普通代币以及稳定币（USDT、USDC）</p>
+<p>图同普通交易</p>
+<h4 id="DeFi"><a href="#DeFi" class="headerlink" title="DeFi"></a>DeFi</h4><p>DeFi&#x3D;Decentralized Finance去中心化金融。主要以去中心化交易所为主，可以实现借贷、杠杆。<br>所有交易对之间交易需要架设流动池作为基础，所有人都可参与流动池建设，可获得fee。<br>存在项目方挤兑社区流动池跑路现象rugpull</p>
+<p>关系：</p>
+<ul>
+<li>交易者视角</li>
+<li>构建者视角</li>
+</ul>
+<h4 id="NFT"><a href="#NFT" class="headerlink" title="NFT"></a>NFT</h4><p>NFT&#x3D;Non-Fungible Token，符合ERC721标准，是一种特殊的代币，每个代币都是独一无二的。一般与图片等媒体元素绑定。<br>新安全热点：杰伦NFT被偷</p>
+<p>关系：</p>
+<ul>
+<li>NFT的mint(“开采”)</li>
+<li>私下转移</li>
+<li>OpenSea交易平台上授权交易</li>
+</ul>
+<h4 id="DAO"><a href="#DAO" class="headerlink" title="DAO"></a>DAO</h4><p>DAO&#x3D;decentralized autonomous organization去中心化自治组织<br>目前基本借用链外工具，在后续说明</p>
+<h4 id="PoW-gt-PoS"><a href="#PoW-gt-PoS" class="headerlink" title="PoW -&gt; PoS"></a>PoW -&gt; PoS</h4><p>上个月以太坊完成The Merge升级。之前以太坊产出都源自于“挖矿”（以太坊供应量是无限的，没有衰减</p>
+<p>关系（“挖卖提”）：</p>
+<ul>
+<li>矿池 - 矿工 [- 交易所 …]</li>
+</ul>
+<p>现状：以太坊现在已经经过The Merge更新转为了一个基于PoS共识的区块链。</p>
+<p><a href="https://mp.weixin.qq.com/s/rwIkZuRPZtoOKPisCOobEQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/rwIkZuRPZtoOKPisCOobEQ</a></p>
+<p>质押带来的新生态</p>
+<p>关系：</p>
+<ul>
+<li>质押提供者 - 质押账户 - 收益接受者</li>
+<li>质押提供者 - 质押池 - 收益接收者</li>
+<li>质押提供者 - 质押DApp - 收益接收者 （多对多）</li>
+</ul>
+<h3 id="链下"><a href="#链下" class="headerlink" title="链下"></a>链下</h3><h4 id="Twitter"><a href="#Twitter" class="headerlink" title="Twitter"></a>Twitter</h4><p>基本上功能&#x3D;微博</p>
+<ul>
+<li><a href="https://twitterscan.com/" target="_blank" rel="noopener">twitterscan</a></li>
+</ul>
+<p>关系：</p>
+<ul>
+<li>#topic </li>
+<li>follow</li>
+<li>star（点赞）、retweet（转发）</li>
+</ul>
+<h4 id="Discord"><a href="#Discord" class="headerlink" title="Discord"></a>Discord</h4><p>流行的社区建设平台（以前也有用Slack），比较松散的群聊</p>
+<p><a href="https://discord.com/" target="_blank" rel="noopener">https://discord.com/</a></p>
+<p><a href="https://daohaus.club/" target="_blank" rel="noopener">https://daohaus.club/</a></p>
+<p>在实际处理proposal时会有较正规审批流程（基于合约）</p>
+<p>关系：</p>
+<ul>
+<li>channel</li>
+<li>@Mention</li>
+<li>上下文</li>
+<li>点击emoji</li>
+<li>链上request、offering、review…</li>
+</ul>
+<h4 id="Reddit-bitcointalk-…"><a href="#Reddit-bitcointalk-…" class="headerlink" title="Reddit, bitcointalk …"></a>Reddit, bitcointalk …</h4><p>论坛形式的交流社区（现在流行用discourse</p>
+<p><a href="https://app.daohaus.club/" target="_blank" rel="noopener">https://app.daohaus.club/</a></p>
+<ul>
+<li>Topics &amp; replies</li>
+<li>Likes</li>
+</ul>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><p>Misttrack: </p>
+<ul>
+<li>1000k+ labeled</li>
+<li>2000k+ nolabel</li>
+</ul>
+<h2 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h2><!-- 关注原因：账户模型下，带有异常标签的账户产生的集合产生交易为异常交易 -->
+
+<h3 id="etherclust"><a href="#etherclust" class="headerlink" title="etherclust"></a>etherclust</h3><p><a href="https://dl.acm.org/doi/10.1007/978-3-030-51280-4_33" target="_blank" rel="noopener">Address Clustering Heuristics for Ethereum</a></p>
+<p>由于比特币和以太坊在交易模式上的区别，现有的用于比特币的地址聚类方法不适用于以太坊的交易模型</p>
+<ol>
+<li>向同一存款地址发送资金的多个地址可能属于同一实体</li>
+<li>用户通常会将空投获得的所有token汇总到一个账户，可以利用这个模式来识别多次接收token的单个实体。</li>
+<li>用户使用approve函数授权自身拥有的其他地址，自授权</li>
+</ol>
+<p>（写的不如<a href="https://jjzhou012.github.io/blog/2021/03/20/Summary-cluster-in-bitcoin.html" target="_blank" rel="noopener">别人</a></p>
+<h3 id="社区检测"><a href="#社区检测" class="headerlink" title="社区检测"></a>社区检测</h3><p><a href="https://doi.org/10.23919/JCIN.2021.9387705" target="_blank" rel="noopener">Community Detection in Blockchain Social Networks</a><br>In this work, we focus on the smart contract transactions and define the Ethereum social network as a bipartite social graph.<br>Particularly, we are interested in those smart contract transactions specific for initial coin offering (ICO) events. Based on their bipartite graph, we introduce an effective community detection algorithm for low-rank signals to group users into different clusters</p>
+<p>As a blockchain network, Ethereum is different from Bitcoin in many aspects. Particularly, Ethereum is not only a platform for providing ETH coin transactions, but also a programming language that enables users to build and publish distributed applications via the smart contract. In Ethereum, each user generates a pair of asymmetrically encrypted public key and private key to join the network. Each public key could be considered as a node in our Ethereum social network. In Ethereum, there are two types of accounts: EoAs and CAs. EoAs are considered as individual users in the external world while CAs are the contracts that could connect EoA users. Both EoAs and CAs are presented by unique hash addresses</p>
+<p>在本文 中，我们使用ICO事件和代币交易额作为特征来定义二方图，而实际上它可以是任何其他类型的智能合约，连接EoA节点。<br>A. 算法和策略 现在，我们的目的是在这个二方图上进行社区检测， 并将所有的EoA节点归入群组。在本小节中，我们采用 Community detection from low-rank excitations of a graph filter 中的低等级社区检测算法，对双联图中的EoA节 点进行聚类。文献中的低等级社区检测算法来对双子图中的EoA节点进行聚类。这个想法是假设所有的EoA节点 形成一个低等级的社会子图，其中一些领先的EoA节点 将决定其他节点对CA节点的关注。本着这种精神，我们 将二方图的EoA节点集划分为具有高边缘密度的子集。 这可以通过在EoA节点观察到的图信号的低等级输出协 方差马三上应用聚类算法来实现。为了进行 它，我们把这个社区检测问题看作是一个GSP问题，其 中图$z \in R^R$  是在EoA主导节点（见图）且其将通过一个过滤器$H(S)$	$$ H(S) &#x3D; \sum_{l&#x3D;0}^{L-1}h_lS^l&#x3D;V(\sum_{l&#x3D;0}^{L-1}h_l)Λ^l)V^H$$<br>其中，S是图的拉普拉斯矩阵，L是滤波器的度数，R是主导节点的数量。滤波器，R是主导节点的数量。输出信号 x∈R N被定义在所有的EoA节点上，它的生成方式是<br>$$x &#x3D; H(S)z$$<br>在此，V和Λ来自SVD分解的S。上述公式意味着，在我们的图模型中，EoA领导节点的意见 的意见决定了所有节点的状态。基于 上述模型，在所有EoA节点观察到的图信号 可以表示为</p>
+<hr>
+<h2 id="DL"><a href="#DL" class="headerlink" title="DL"></a>DL</h2><h3 id="PD-SECR"><a href="#PD-SECR" class="headerlink" title="PD-SECR"></a>PD-SECR</h3><h4 id="基于PD-SECR的以太坊庞氏骗局检测"><a href="#基于PD-SECR的以太坊庞氏骗局检测" class="headerlink" title="基于PD-SECR的以太坊庞氏骗局检测"></a>基于PD-SECR的以太坊庞氏骗局检测</h4><p>Ethereum Ponzi Scheme Detection Based on PD-SECR<br><a href="https://doi.org/10.1155/2022/2316310" target="_blank" rel="noopener">https://doi.org/10.1155/2022/2316310</a></p>
+<p>庞氏骗局的几个特点。<br>(i) 在项目网站上对区块链的功能有轰炸式的描述（如果有的话）。利用高回报无风险的虚假广告来吸引投资者，而不提供重要信息，如项目运营商。<br>(ii) <strong>投资者的回报主要由新投资者投入的资本来支持，没有真正的项目技术支持。</strong><br>(iii) <strong>以太坊合约代码包含一个层次结构，即新投资者向早期投资者支付费用的回报机制。（击鼓传花</strong></p>
+<img src="/post/ethereum-onchain-analysis/2022-11-03-16-06-57.png" class="">
+
+<p>PD-SECR （CNN-RF联合检测方法：融合不平衡数据和预处理算法）</p>
+<p>卷积神经网络和随机森林模型的有效融合 CNN_RF Fusion</p>
+<p>从Ethereum.io获得交易信息和<strong>合约编译的字节码</strong><br>通过相关计算，从交易信息中提取相应的特征。<br>使用反编译器将字节码分解为操作码（opcode），并通过计算操作代码的调用频率建立代码特征。</p>
+<p>由于样本数据的严重不平衡，为了解决这个问题，引入了 SMTOE_ENN数据不平衡处理算法。<br>SMOTE_ENN不仅可以处理数据不平衡问题，而且可以避免数据的重复性。<br>然后将处理后的数据按 4:1 的比例分为训练集和测试集。</p>
+<p>首先，构建了一个由三个卷积层和两个全连接层组成的CNN特征提取模型，从数据集中提取关键数据特征。<br>CNN提取的数据特征输入到RF模型，用于训练分类模型。<br>训练完成后，测试集评估模型的性能。<br>Precision、Recall和F1 score评估模型。</p>
+<img src="/post/ethereum-onchain-analysis/2022-11-03-17-53-58.png" class="">
+
+<img src="/post/ethereum-onchain-analysis/2022-11-03-17-53-46.png" class="">
+
+<img src="/post/ethereum-onchain-analysis/2022-11-03-16-44-05.png" class="">
+
+<h5 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h5><p>研究选择了16个特征，其中包括9个操作码特征和7个账户特征，这些特征有利于庞氏骗局的合同识别。</p>
+<h6 id="opcode-features"><a href="#opcode-features" class="headerlink" title="opcode features"></a>opcode features</h6><p>如果满足默认的执行条件，一个以太坊智能合约可以被强制执行。因此，在庞氏骗局合约的代码结构中，往往包含了一个欺诈机制。操作码也表征了合约的基本问题。<br>为了有效区分现实世界中的庞氏骗局合同和正常合同，本文分析了合同操作代码的类型和频率，并从合同代码中提取特征。本文将智能合约中不同操作码出现的频率计为操作码特征。</p>
+<p>如图3所示，在不考虑 PUSH、DUP和SWAP等出现频率最高的操作码的情况 下，庞氏骗局智能合约与正常合约操作码之间存在着明显的差异。<br>最关键的区别：庞氏骗局合约比正常合约包含更多的威胁性功能代码（如CALLER、EXP等）。</p>
+<!-- 上述分析表明，操作码特征对于检测庞氏骗局可能是可行的 -->
+
+<img src="/post/ethereum-onchain-analysis/2022-11-03-16-10-15.png" class="">
+
+<h6 id="account-features"><a href="#account-features" class="headerlink" title="account features"></a>account features</h6><p>以太坊上的庞氏骗局合约与普通合约相比，在账户交易特征上有一些不同之处。特别是，在合约交易中，以太币的流通过程有明显的差异。<br>通过人工验证，账户特征可以总结为以下几点:</p>
+<ul>
+<li>只有少数早期合约参与者获得了高比例的回报，几乎所有的回报都集中在前两个合约参与者。具体来说，智能合约的创建者获得的回报最高。</li>
+<li>在许多庞氏骗局的智能合约中保持低余额与正常的智能合约相比，一般采取快速分配投资所得的操作</li>
+</ul>
+<p>以太坊账户分为外部和内部账户（地址）；例如，当用户创建一个地址时，它被称为外部地址，因为它是用来从外部访问区块链的。<br>当我们在以太坊上部署一个智能合约时，我们会生成一个内部地址，作为运行的区块链程序（部署的智能合约）的指针。<br>我们可以在外部将其定位为一个要调用的功能，或在内部，使另一个部署的合同可以在部署的合同上调用该功能。<br>因此，我们从外部和内部账户交易中提取七个代表性特征，作为识别庞氏骗局合约的另一种方式。</p>
+<img src="/post/ethereum-onchain-analysis/2022-11-03-16-56-03.png" class="">
+
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Rr</td>
+<td>合约付款前已投资的收款人百分比</td>
+</tr>
+<tr>
+<td>A_bal</td>
+<td>合约余额</td>
+</tr>
+<tr>
+<td>Investments_num</td>
+<td>每份合同收到的投资数量。</td>
+</tr>
+<tr>
+<td>Payments_num</td>
+<td>每份合约的交易支出数。</td>
+</tr>
+<tr>
+<td>Pr</td>
+<td>至少收到一笔款项的投资者百分比</td>
+</tr>
+<tr>
+<td>Maxpay</td>
+<td>一个合同账户支付给同一个收款人账户的最大交易数量</td>
+</tr>
+<tr>
+<td>D_ind</td>
+<td>合约中所有参与者支付和投资之间的量化差异。</td>
+</tr>
+</tbody></table>
+<!-- 
+##### 基于SMOTE_ENN的数据准备
+
+SMOTE（Synthetic Minority Oversampling Technique），合成少数类过采样技术．它是基于随机过采样算法的一种改进方案。
+由于随机过采样采取简单复制样本的策略来增加少数类样本，这样容易产生模型过拟合的问题，即使得模型学习到的信息过于特别(Specific)而不够泛化(General)。
+SMOTE算法的基本思想是对少数类样本进行分析并根据少数类样本人工合成新样本添加到数据集中
+
+Edited Nearest Neighbor (ENN)：
+ENN 方法的工作原理是首先找到每个观测值的 K 最近邻，然后检查观测值的 k 最近邻中的多数类是否与观测值的类相同。 
+如果观测的 K-最近邻的多数类和观测的类不同，则从数据集中删除观测及其 K-最近邻。 
+默认情况下，ENN 中使用的最近邻数为 K=3。
+ -->
+
+
+<hr>
+<h2 id="GNN"><a href="#GNN" class="headerlink" title="GNN"></a>GNN</h2><ul>
+<li>GNN数据内容全在transaction，无transfer</li>
+</ul>
+<h3 id="EH-GCN"><a href="#EH-GCN" class="headerlink" title="EH-GCN"></a>EH-GCN</h3><p><a href="https://ieeexplore.ieee.org/abstract/document/9739752" target="_blank" rel="noopener">Ethereum Account Classification Based on Graph Convolutional Network</a></p>
+<p>利用图卷积网络（GCN）来解决以太坊中的账户分类问题：</p>
+<ul>
+<li>将以太坊交易记录建模为一个大型交易网络，发现该网络具有高异质性，其中具有不同特征和不同标签的帐户相互连接。</li>
+<li>提出了一种基于GCN的模型，称为EH-GCN，证明实现了最先进的分类性能</li>
+</ul>
+<img src="/post/ethereum-onchain-analysis/2022-10-13-00-19-55.png" class="">
+
+<p>同质比表示连接相同Node的edge的百分比。可以观察到，与这三个基准相比，以太坊交易网络非常大且稀疏。</p>
+<h4 id="数据来源"><a href="#数据来源" class="headerlink" title="数据来源"></a>数据来源</h4><p>从Etherscan获得816个带有真实标签的帐户，这些账户参与六个不同的业务。收集其与Etherscan提供的API的1级和2级交易关系。最后，将剩余的交易关系和涉及的账户抽象为具有140万个节点和281万条边的事务网络。</p>
+<p>（从816只靠1、2级就带出了140w和281w，肯定是挖到Exchange和Mining老家了</p>
+<img src="/post/ethereum-onchain-analysis/2022-10-13-00-26-58.png" class="">
+
+<p>从交易记录中提取：12个节点特征（例如，余额，交易金额，交易频率等）。</p>
+<img src="/post/ethereum-onchain-analysis/2022-10-17-18-34-55.png" class="">
+
+<p>训练&#x2F;验证&#x2F;测试拆分为7&#x2F;1&#x2F;2</p>
+<h4 id="方法设计"><a href="#方法设计" class="headerlink" title="方法设计"></a>方法设计</h4><h5 id="抽样策略"><a href="#抽样策略" class="headerlink" title="抽样策略"></a>抽样策略</h5><p>基于网络的采样策略如图1(a)所示</p>
+<p>在采样策略中，考虑了三角形graphlet结构和度来搜索高阶节点，以保持与目标节点的相关性。</p>
+<img src="/post/ethereum-onchain-analysis/2022-10-13-15-11-06.png" class="">
+
+<p>Graphlets是复杂网络的小型连接诱导子图，已被广泛认为是从微观角度分析节点之间关系的工具。我们使用的三角形图显示了三个节点之间的紧密关系。</p>
+<p>我们推导三角形图形集TG 和关系集GL(v)和NG(v)节点数v 在图表上：</p>
+<p>$TG&#x3D;{(v, u, x) | v, u, x \in V, e_{vu}, e_{vx}, e_{ux} \in E}$</p>
+<p>$GL(v)&#x3D;{u | u \in V, x \in V, (v, u, x) \in TG}$</p>
+<p>$NG(v, u)&#x3D;{x | x \in V, (v, u, x) \in TG}$</p>
+<p>GL(v) 是一组出现在三角形图形中的节点，NG(v,u)是一组出现在有v和u的三角形graphlet中的节点。</p>
+<p>给定一个目标节点v，在采样过程开始时，候选节点集C(v)被初始化为一个包含v的一阶邻居的集合。为了在一个具有异质性的大规模网络中获得采样节点集S(v)，我们首先考虑每个目标节点的小图，这有助于保持其相关性。我们将GL(v)初始化为所有与目标节点v有三角形小图的节点。</p>
+<p>为了在抽样程序中保留更多的结构信息，我们使用X(v)来维护小图中出现的候选节点的集合，将X(v)设置为GL(v)∩C(v)。如果X(v)不是空的，我们就用基于小图的概率质量函数从其中抽取一个新节点u。</p>
+<p>$p(u|u \in X(v)) &#x3D; \frac {|NG(v,u)|}{\sum _{u\in X(v)} |NG(v,u)|}$</p>
+<p>degree(⋅) 返回输入节点的度。-&gt; <strong>具有较高程度中心性的节点往往对其他节点有更大的影响。</strong></p>
+<p>之后，C(v)将通过添加u的一级邻居（S(v)中的节点除外）进行扩展，以便下一次采样。通过重复上述过程M次，可以得到一个抽样的节点集S(v)。这里M表示每个目标节点的抽样节点数，是所提方法的一个超参数。</p>
+<p>这种抽样策略可以利用网络结构，<strong>收集更多有价值的节点。</strong></p>
+<h4 id="Mix-Grained-Aggregators-混合粒度聚合器"><a href="#Mix-Grained-Aggregators-混合粒度聚合器" class="headerlink" title="Mix-Grained Aggregators 混合粒度聚合器"></a>Mix-Grained Aggregators 混合粒度聚合器</h4><p>为了聚合来自高阶邻域的信息：可以以细粒度的方式聚合一阶邻域信息，并以粗粒度的方式收集高阶信息。</p>
+<ul>
+<li>Fine-grained aggregator 细粒度聚合器: 细粒度聚合器用于收集目标节点的所有一阶邻居的信息。</li>
+<li>Coarse-grained aggregator 粗粒度聚合器: 这个聚合器将只集中在已采样的节点上，以减少计算和时间的复杂性。</li>
+</ul>
+<h4 id="一阶和高阶嵌入的组合"><a href="#一阶和高阶嵌入的组合" class="headerlink" title="一阶和高阶嵌入的组合"></a>一阶和高阶嵌入的组合</h4><p>由细粒度和粗粒度聚合器分别得到的一阶和高阶嵌入可以收集不同位置的信息，并且很可能是不一样的。因此，为了<strong>明确捕捉节点表示中的局部和全局信息</strong>，我们建议在最后一层结合每个节点的中间嵌入。</p>
+<p>$Z_{v}^{l} &#x3D; concat(q_{v}^{1}, q_{v}^{2},\ldots, q_{v}^{l}),q \in {g, r}$</p>
+<p>l是模型的层级，$Z^l_v$是节点v的最终表示。在实现中，我们使用连接法来捕捉局部和全局信息。</p>
+<h4 id="EH-GCN-1"><a href="#EH-GCN-1" class="headerlink" title="EH-GCN"></a>EH-GCN</h4><p>接下来，将描述如何在上述三个关键设计的基础上建立起建议的模型。</p>
+<ul>
+<li>模型的第一层通过使用细粒度的聚合器来聚合所有的一阶信息：</li>
+</ul>
+<p>$g_{v}^{1} &#x3D; \sigma (f(H_{v}^{0}, {H_{u}^{0}, \forall u\in N(v)})\cdot W^{0})$</p>
+<p>其中$H^0_v$ 是节点v的给定输入特征。</p>
+<p>此外，使用抽样策略得到高阶节点，并使用粗粒度聚合器在第二层<strong>聚合高阶信息</strong>，其结果显示为:</p>
+<p>$r_{v}^{2} &#x3D; \sigma (f(g_{v}^{1},{g_{u}^{1}, \forall u\in S(v) })\cdot W^{1})$</p>
+<p>值得注意的是，S(v)中的高阶节点可以在第二层被聚合。在最极端的情况下，M阶邻居可以被聚集起来。</p>
+<p>最后，我们在网络的最后一层结合一阶嵌入和高阶嵌入。</p>
+<h4 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h4><img src="/post/ethereum-onchain-analysis/2022-10-13-19-16-53.png" class="">
+
+<p>模型在以太坊数据集上的出色结果可能要归功于采样策略和混合粒度聚合器，它们聚合了EH-GCN模型中只有两层的高阶邻居。</p>
+<p>相反，GCN和GAT在以太坊中的准确性相当低，GAT的准确性甚至低于MLP。这种现象也可以归咎于与目标节点非常不同的低阶邻居的噪声。</p>
+<p>此外，在以太坊中，具有邻域采样机制的两种方法，即GraphSAGE和FastGCN，可以达到比GCN更高的精度，这进一步证明聚合一些低阶邻居甚至对异质设置下的性能产生负面影响。</p>
+<p>H2GCN是最近为异质网络设计的方法，还收集高阶邻域信息。H2GCN-1可以在以太坊数据集中实现相对较高的精度，但会出现“内存不足”问题。（聚合所有单跳和双跳节点并保留所有中间嵌入）</p>
+<p>为了评价所提出模型在同亲性设置下的泛化能力，在均质比相对较大的基准上进行了实验。如表III所示，Cora、Citeseer和PubMed的结果表明，所提出的方法在同亲条件下具有竞争性。这应该主要归功于我们的细粒度和粗粒度聚合器，它们在采样中选择更有价值的相邻节点。</p>
+<img src="/post/ethereum-onchain-analysis/2022-10-13-19-21-58.png" class="">
+
+<p>在采样策略中采样大小M 在 EH-GCN 中的影响：可以看出，EH-GCN在以下情况下获得最佳结果：M 为 5、5、4 和 7。</p>
+<p>随着抽样规模的增加，总体准确率首先增加，然后下降。这表明，当M相对较低时，模型不能从高阶邻域提取足够的信息，因此准确率随着M的增加而增加。而当邻域信息充足时，信息冗余导致精度随着M的增加而降低。</p>
+<h3 id="FA-GNN"><a href="#FA-GNN" class="headerlink" title="FA-GNN"></a>FA-GNN</h3><p><a href="https://ieeexplore.ieee.org/document/9756314" target="_blank" rel="noopener">FA-GNN: Filter and Augment Graph Neural Networks for Account Classification in Ethereum</a></p>
+<img src="/post/ethereum-onchain-analysis/2022-10-13-14-57-47.png" class="">
+
+<img src="/post/ethereum-onchain-analysis/2022-10-13-14-58-01.png" class="">
+
+<p>数据重用了</p>
+<p>目标：通过开发一个 GCN 模型对图中的每个节点进行分类</p>
+<h4 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h4><p>FA-GNN 的框架如图所示，它包含三个主要组成部分，包括邻居过滤，特征增强和网络嵌入。</p>
+<img src="/post/ethereum-onchain-analysis/2022-10-30-20-38-54.png" class="">
+
+<ol>
+<li>Neighbor Filtering 邻居过滤: 在事务网络中，一对连接节点之间的关系与事务量等事务特征和程度等网络特征有关。为了去除邻居带来的冗余信息，我们设计了这个组件，并通过不同的偏好策略滤除一定比例的邻居。</li>
+<li>Feature Augmentation 特征增强: 针对网络嵌入学习过程中的高阶信息，提出一种特征增强组件，通过聚合高阶信息为每个节点生成增强特征。</li>
+<li>Node Representation Learning 节点表示学习: 以增广的节点特征为输入，节点表示学习组件通过两层神经网络为网络中的每个节点学习一个低维表示向量。然后，将得到的表示向量作为下游以太网事务网络分析任务的输入。</li>
+</ol>
+<h4 id="Neighbor-Filtering"><a href="#Neighbor-Filtering" class="headerlink" title="Neighbor Filtering"></a>Neighbor Filtering</h4><p>与传统的网络数据(如 Cora)相比，以太网交易网络中的连接节点之间在节点特征方面存在显著差异。这是因为以太网事务网络中的节点倾向于与其他类中的节点交互。<br>该方法不使用完全邻居集合的信息，而是通过邻居滤波后得到的邻居集合中每个节点的邻居搜索，通过探索邻居节点的重要性来识别更有效的邻居信息。</p>
+<h4 id="帐户分类结果-RQ1"><a href="#帐户分类结果-RQ1" class="headerlink" title="帐户分类结果 (RQ1)"></a>帐户分类结果 (RQ1)</h4><p>我们首先比较了 FA-GNN 和基线方法在以太帐户分类任务中的性能。由于邻域保持率 λ、深度 k 和邻域滤波偏好 p 是可调参数，本文以Macro F1为主要度量，通过对 λ ∈{0.1,0.2，… ，0.9} ，k ∈{1,2，… ，10}和 p ∈{1,2,3}进行网格搜索，得到了在最佳参数下的平均结果。从表 VI 和表 VII 所显示的结果可以明显看出，在不同的数据集分割中，所提出的 FA-GNN 优于基线方法。具体而言，在分割1中，我们比基线方法获得的最高Macro F1评分获得8.93% 的增益，交易量为优先级(p &#x3D; 1) ，邻居保留率 λ &#x3D; 0.2，聚集深度 k &#x3D; 4。在分割2中，以交易时间为优先级(p &#x3D; 2) ，邻居保留率 λ &#x3D; 0.1，聚集深度 k &#x3D; 6，我们比基线的最佳Macro F1评分获得7.82% 的增益。在分割3中，通过聚合最高度(p &#x3D; 3，λ &#x3D; 0.1，k &#x3D; 1)的前10% 单跳邻居的信息，我们获得了最佳性能，比基线方法获得的最佳Marco F1评分提供了1.53% 的增益。</p>
+<h4 id="敏感度分析-λ-amp-k-RQ2"><a href="#敏感度分析-λ-amp-k-RQ2" class="headerlink" title="敏感度分析 λ &amp; k (RQ2)"></a>敏感度分析 λ &amp; k (RQ2)</h4><h4 id="过滤偏好的评估-RQ3"><a href="#过滤偏好的评估-RQ3" class="headerlink" title="过滤偏好的评估 (RQ3)"></a>过滤偏好的评估 (RQ3)</h4><h4 id="合并策略的评估-RQ4"><a href="#合并策略的评估-RQ4" class="headerlink" title="合并策略的评估 (RQ4)"></a>合并策略的评估 (RQ4)</h4><h4 id="Ablation-Study-消融研究-RQ5"><a href="#Ablation-Study-消融研究-RQ5" class="headerlink" title="Ablation Study 消融研究 (RQ5)"></a>Ablation Study 消融研究 (RQ5)</h4><h3 id="Heterogeneous"><a href="#Heterogeneous" class="headerlink" title="Heterogeneous"></a>Heterogeneous</h3><p><a href="https://arxiv.org/abs/2203.12363" target="_blank" rel="noopener">Ethereum Fraud Detection with Heterogeneous Graph Neural Networks</a></p>
+<img src="/post/ethereum-onchain-analysis/2022-11-14-18-11-18.png" class="">
+
+<img src="/post/ethereum-onchain-analysis/2022-11-14-18-11-56.png" class="">
+
+
+
+<!-- ### TSGN
+
+中山大学吴老师他们组的最新模型
+->被建议看新模型 -->
+
+<h1 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h1><h2 id="白皮书-GNN"><a href="#白皮书-GNN" class="headerlink" title="白皮书+GNN"></a>白皮书+GNN</h2><p>北航博士发在Journal of Parallel and Distributed Computing</p>
+<p>对白皮书的分析是全面评价区块链产品的重要途径<br><strong>目的</strong>是探索一种更有效的方法，用于白皮书中复杂信息的特征提取，并将其用于文本分类和聚类。</p>
+<ul>
+<li>提出了一个新颖的区块链白皮书自动分析框架<ul>
+<li>介绍了区块链产品的多类要素</li>
+<li>为白皮书设计了一个元架构</li>
+<li>定义了一个基于元路径实例的白皮书之间的相似度测量</li>
+</ul>
+</li>
+<li>探讨了基于GCN和GAT的异质图神经网络（GNN）</li>
+<li>利用异质图网络生成白皮书的聚合嵌入，并将学到的白皮书特征应用于聚类和分类任务</li>
+</ul>
+<p>本文使用异质图神经网络（Heterogeneous GNN）来分析区块链白皮书。<br>首先，第3.1节使用NLP工具提取实体和关系，<br>并在第3.2节中使用它们来构建HIN。<br>然后，在第3.3节中，人们可以根据HIN中的元实例和定义的相似性指标得到加权相邻矩阵，并利用Doc2vec技术 学习文本特征。<br>最后我们可以让流行的图神经网络，包括图卷积网络 和 图注意力网络，将结构信息和节点特征都整合到白皮书嵌入中。</p>
+<p><strong>NLP</strong></p>
+<img src="/post/ethereum-onchain-analysis/2022-11-18-11-20-22.png" class="">
+
+<p>区块链白皮书是一份产品描述文件，介绍项目的技术框架、商业模式和发展前景。一般包括产品的主要功能和性能，以及涉及的核心技术特点和优势，还有行业内的应用案例。<br>与传统的文本挖掘技术不同，区块链产品白皮书涵盖了特定的主题和实体。例如，区块链技术由共识机制、账户和交易行为、智能合约、密码学、分布式存储协议、跨链和交换、经济和激励、和治理技术等组成。</p>
+<p>图中这些元素之间有各种关系，其中包括共识机制、跨链和交换技术、密码器、智能合约之间的关系。</p>
+<p><strong>HIN</strong></p>
+<img src="/post/ethereum-onchain-analysis/2022-11-18-11-23-45.png" class="">
+
+<img src="/post/ethereum-onchain-analysis/2022-11-18-11-24-03.png" class="">
+
+<img src="/post/ethereum-onchain-analysis/2022-11-18-14-29-27.png" class="">
+
+<p>A. 设计目标：白皮书的设计目标是提供多领域的应用和技术支持（图4）。</p>
+<p>  前者主要涵盖金融产品体系的创建（数字资产、加密货币交易、金融服务、智能经济）、权利管理、虚拟物品娱乐、商业等领域。<br>  后者包括为开发者提供整体服务，简化开发流程和架构，数据保护和促进互操作性和标准化。<br>  区块链白皮书的一般类型包括基本链、加密货币、智能合约、应用或服务平台和共识算法。<br>  详细来说，这些白皮书涉及项目设计目标、共识机制、智能合约、密码学、账户和交易、经济模式和激励措施以及应用。<br>  以下是关键点的细节。</p>
+<p>B. 共识机制<br>C. 应用<br>D. 智能合约</p>
+<p>  白皮书涉及三种类型的智能合约系统：</p>
+<ul>
+<li>原始智能合约（Viacoin, Stellar, Verge, Zcash, Nuls），</li>
+<li>基于比特币协议的智能合约（Komodo）</li>
+<li>基于以太坊的智能合约 （ Iconomi, Golem, FunFair, Status, Smart- Cash, Decentraland, MOAC）。</li>
+</ul>
+<p>E. 分布式存储协议<br>F. 账户和交易<br>G. 跨链和交换技术<br>H. 加密算法</p>
+<p><strong>相似性</strong></p>
+<img src="/post/ethereum-onchain-analysis/2022-11-18-11-34-56.png" class="">
+
+<p>Oi, Oj &#x3D; 俩白皮书<br>Pk &#x3D; 一组元路径<br>Path_Count_p 计算俩白皮书之间元路径实例数<br>形成 (Blockchain whitepaper) – [Element] – (Blockchain whitepaper) 图 -&gt; 邻接矩阵</p>
+<p><strong>GNN</strong></p>
+<img src="/post/ethereum-onchain-analysis/2022-11-18-11-40-08.png" class="">
+
+<p>采用Hold-Out法和10倍交叉验证法分别得到模型的输出结果</p>
+<p><strong>数据</strong></p>
+<img src="/post/ethereum-onchain-analysis/2022-11-18-14-15-52.png" class="">
+
+<p><strong>结果</strong></p>
+<p><em>分类</em></p>
+<img src="/post/ethereum-onchain-analysis/2022-11-18-11-41-15.png" class="">
+<p>使用Hold-Out方法的分类任务性能在F1分数方面的表现。</p>
+<img src="/post/ethereum-onchain-analysis/2022-11-18-11-41-40.png" class="">
+<p>使用10倍交叉验证的分类任务F1分数</p>
+<img src="/post/ethereum-onchain-analysis/2022-11-18-11-41-49.png" class="">
+<p>使用Hold-Out方法在Micro-F1和Macro-F1方面的分类任务表现</p>
+<img src="/post/ethereum-onchain-analysis/2022-11-18-11-44-32.png" class="">
+<p>使用10倍交叉验证的Micro-F1和Macro-F1的分类任务性能</p>
+<p><em>聚类</em></p>
+<img src="/post/ethereum-onchain-analysis/2022-11-18-11-44-48.png" class="">
+<p>使用Hold-Out方法的聚类任务表现。</p>
+<h1 id=""><a href="#" class="headerlink" title="?"></a>?</h1><p>Token的异常交易检测<br>现在的特征-&gt;账户eth余额&#x3D;&#x3D;&#x3D;&#x3D;&gt;token balance！</p>
+<h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><pre class="mermaid" style="text-align: center;">
+            flowchart LR
+            A[Mongodb] -->|Cypher| B(Neo4J)
+B -->|graphml| C{networkx}
+C -->|utils.convert.from_networkx| D[PyG]
+C -->|load| E[Gephi]
+          </pre>
+
+<p>异常检测：BitGCN</p>
+<p>—–841<br>not 研究技术 - 指南 达到xxx的方法</p>
+<p>标准规范<br>原型系统 - 证明规范 -<br>3 验证1问题</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>fit5147-data-vis</title>
+    <url>/post/fit5147-data-vis/</url>
+    <content><![CDATA[<p>这门课因为当时已经开始准备博士申请了，因此没有时间好好做整理，这里就单纯分享一下一些上课原文内容。</p>
+<p>总体来说，这门课非常有趣且实用，无论是未来做HCI人机交互的研究还是大厂里做运营或产品都能用上，从作业的R、D3(js)就能看出来。给分也和网上说的一样很慷慨。</p>
+<span id="more"></span>
+
+<h1 id="W1"><a href="#W1" class="headerlink" title="W1"></a>W1</h1><h2 id="1-Introduction-to-data-exploration-and-visualisation-Overview"><a href="#1-Introduction-to-data-exploration-and-visualisation-Overview" class="headerlink" title="1. Introduction to data exploration and visualisation: Overview"></a>1. Introduction to data exploration and visualisation: Overview</h2><h3 id="1-1-Aims-of-this-module"><a href="#1-1-Aims-of-this-module" class="headerlink" title="1.1. Aims of this module"></a>1.1. Aims of this module</h3><p>After completing this module you will:</p>
+<ul>
+<li>Understand the important roles that visualisation plays in data science: data checking and cleaning, exploration and discovery, and the presentation and communication of results;</li>
+<li>Introduce visual analytics and the complementary roles of visualisation and data analysis in data science;</li>
+<li>Appreciate that data visualisation is not (just) about making cool looking InfoGraphics, it is about really showing the data in all of its messy detail;</li>
+<li>Know a little about the history of data visualisation and how it has been shaped by factors such as: presentation technology, human cognitive abilities and limits, societal needs, data availability and the invention of different kinds of information graphics;</li>
+<li>Have first-hand experience in data exploration and visualisation with easy-to-use visual analytics tools like Tableau and with programming languages like R.</li>
+<li>Know about the What-Why-How framework for understanding data visualisation design</li>
+<li>Have first-hand experience using the five design sheet methodology for designing data visualisations</li>
+</ul>
+<h2 id="1-2-How-to-study-for-this-module"><a href="#1-2-How-to-study-for-this-module" class="headerlink" title="1.2. How to study for this module"></a>1.2. How to study for this module</h2><p>In this module, we draw on material in the public domain, including journal articles and quite a few videos.</p>
+<p>In this module, there is one assessment activity: creating an interactive data visualisation with Tableau Public.</p>
+<p>You should also start your data exploration project. By the end of the module, you should have identified what you want to investigate and where you are going to get your data from.</p>
+<p>Good general introductions to data visualisation and visual analytics are:</p>
+<ul>
+<li>Munzner, Tamara. Visualization Analysis and Design. CRC Press, 2014.</li>
+<li>Ward, Matthew O., Georges Grinstein, and Daniel Keim. Interactive data visualization: foundations, techniques, and applications (2nd Ed). CRC Press, 2015.<br>Other more specific references will be mentioned throughout the course.</li>
+</ul>
+<h2 id="1-2-Data-Visualisation"><a href="#1-2-Data-Visualisation" class="headerlink" title="1.2. Data Visualisation"></a>1.2. Data Visualisation</h2><p>The human visual system is amazing, almost half the human brain is devoted to vision. It is our primary sense for understanding the world. To “see” something is to understand it. In this module you will learn that interactive visualisation is one of the most important tools in the data scientists’ workbench, helping them to both understand their data and then to communicate what they have discovered to other people.</p>
+<p>Data visualisation isn’t about creating cool InfoGraphics, it’s about creating visualisations that really allow you to understand the data. If you have a strong emotional reaction to the data visualisation it should be because of the underlying data, not the visual representation. To get a feel for the kind of visualisations we will be interested in take a look at the following two TED talks:</p>
+<p>The first is by the late Hans Rosling The best stats you’ve ever seen (20 mins) and has become a classic in the data visualisation field. Bill Gates credits one of Rosling’s talks for convincing him to give billions of dollars to healthcare projects in developing countries (see Hans Rosling: the man who makes statistics sing).<br>Another great TED talk The beauty of data visualization (20 minutes) is by David McCandless<br>And spend some time looking at data visualisations developed by Tableau and Spotfire users</p>
+<p><a href="https://public.tableau.com/s/gallery" target="_blank" rel="noopener">https://public.tableau.com/s/gallery</a><br><a href="http://spotfire.tibco.com/demos/" target="_blank" rel="noopener">http://spotfire.tibco.com/demos/</a><br>Think about what you like in these visualisation and start to think about whether they are effective in allowing you to understand the underlying data. If they are then try and understand why are they effective. If not, what could be done to improve them.</p>
+<h2 id="1-3-可视化分析和数据可视化的作用"><a href="#1-3-可视化分析和数据可视化的作用" class="headerlink" title="1.3. 可视化分析和数据可视化的作用"></a>1.3. 可视化分析和数据可视化的作用</h2><p>数据可视化是理解数据的一种非常有效的方式。可视化与统计、数据挖掘和其他类型的计算分析的结合通常被称为可视化分析。这个术语是由 James Thomas 和 Kristin Cook 在 2001 年 9 月 11 日美国发生恐怖袭击后创造的。视觉分析最初的重点是帮助安全分析师和应急响应服务，但现在它被广泛用于商业智能和科学用于数据分析。</p>
+<p>在 A Visual Analytics Agenda 中，Thomas 和 Cook 将可视化分析定义为“由交互式可视界面促进的分析推理科学”。它旨在“检测预期并发现意外”。</p>
+<p>可视化分析就是在进行数据分析时将人置于循环中。如果您确切知道要测试的内容，则不需要人工，您只需运行分析即可。然而，如果你不确定你在寻找什么——这在数据科学中最常见——那么可视化分析支持对数据的交互式探索：</p>
+<p>可视化数据，<br>做一些初步的假设，<br>运行适当的分析并可视化结果。<br>重复这个直到你找到你需要的东西。<br>可视化有效的一个原因是它们可以包含大量信息。标准统计度量，例如平均值、中位数、标准差或相关性，仅使用几个数字即可汇总数据。信息图形可能提供有关数据的更多信息，因为它可以显示数千（甚至数百万）个图形元素，每个图形元素都可以使用位置、颜色、图案或形状来编码有关数据的信息。</p>
+<p>1973 年，统计学家 Francis Anscombe 构建了四个数据集来展示图形数据的重要性以及异常值对常用汇总统计的影响。这些组合被称为 Anscombe 四重奏。四组中的 x 和 y 值经过精心挑选，使得 x 值具有几乎相同的均值和方差，y 值具有几乎相同的均值和方差，并且它们具有相同的线性回归和相同的相关性。如果您不更仔细地查看数据，您会认为它们非常相似。然而，当数据被绘制成图表时，很明显数据集是不同的，并且它们具有非常不同的特征。</p>
+<p>数据可视化有效的另一个原因是人类视觉系统。我们的大部分视觉处理都是预先注意的，并且是并行发生的。这意味着通过精心设计的可视化，我们可以非常快速地看到模式、异常和趋势——我们不必逐行阅读数据。我们立即从 Anscombe 的四重奏的散点图中看到不同的数据集是如何以完全不同的模式分组的。</p>
+<p>活动<br>您可以使用此交互式散点图 （使用 R 和 Shiny 制作）探索数据集分组如何影响统计数据，例如平均值、标准差和相关系数 。</p>
+<p>此散点图允许您通过单击添加数据点 - 您可以创建自己的数据集形状。当您添加点时，回归线、相关系数和 X 和 Y 的均值会动态更新。</p>
+<p>添加数据点并观察各种形状的散点图对每个变量的均值和相关系数的影响。尝试重现 Anscombe 的四重奏的四个数据集形状，并尝试构建三个不同形状的散点图，每个散点图都与系数值 r&#x3D;0.8 呈正相关。通过将大多数数据点聚集成一个圆形图案（观察相关系数的值）来探索异常值的影响 - 然后将一个点放在远处（尝试不同的位置）。观察相关系数如何仅受一个这样的“异常值”影响。</p>
+<h2 id="3-可视化分析和数据可视化的作用"><a href="#3-可视化分析和数据可视化的作用" class="headerlink" title="3. 可视化分析和数据可视化的作用"></a>3. 可视化分析和数据可视化的作用</h2><h3 id="3-1。数据可视化在数据科学中的作用"><a href="#3-1。数据可视化在数据科学中的作用" class="headerlink" title="3.1。数据可视化在数据科学中的作用"></a>3.1。数据可视化在数据科学中的作用</h3><p>数据可视化在数据科学中用于三个主要目的。</p>
+<p>数据检查和清理。当您第一次获取数据时，您应该对各个特征进行一些快速绘图，以检查没有明显的错误并了解值的分布。</p>
+<p>探索和发现。根据 Mike Lourdes（什么是数据科学？），世界领先的数据科学家之一希拉里·梅森（Hilary Mason）说，当她获得一个新数据集时，她会先绘制十几个或更多散点图，试图了解什么是可能很有趣。可视化揭示了可能的联系和模式，然后可以使用其他类型的分析来确认（或不确认）。可视化在理解任何类型的空间数据方面也起着关键作用。</p>
+<p>结果的展示和交流。 可视化的另一个重要用途是呈现分析结果。这有两个主要目的：(1) 帮助您和其他建模者&#x2F;分析师了解结果，以及 (2) 将结果传达给其他利益相关者。</p>
+<h3 id="3-2-数据检查和清理"><a href="#3-2-数据检查和清理" class="headerlink" title="3.2. 数据检查和清理"></a>3.2. 数据检查和清理</h3><p>每当您第一次获得一些数据时，检查它是一个非常好的主意。这可以揭示简单的输入错误，如额外的 0、缺失值或数据中的奇怪模式，如 20% 的产品价格为 99.99 美元。这可能是正确的，也可能是数据错误。</p>
+<p>以下是每个属性的快速检查列表：</p>
+<p>看一些随机记录<br>计算数据的平均值、中位数和四分位数。看看这些的箱线图。<br>确定缺失值和无效值 (NaN) 的数量，特殊值（如 0）的数量。<br>确定不同值的数量以及它们是否真的不同。<br>绘制值的频率分布。这可能是直方图或密度图。您应该尝试选择 bin 宽度，因为这可以平滑数据。<br>检查分布的对称性（偏度）和平坦度&#x2F;尖峰度（“峰度”，注意 platykurtic &#x3D; 具有低峰的平坦分布，leptokurtic &#x3D; 平均值附近的尖峰）。<br>查看异常值并检查它们是否应该被舍弃（修剪）向上或向下舍入（Winsorised）。例如，对于第 5 个和第 95 个百分位数之外的数据，可以这样做。<br>检查日期格式，确保它们处于可比较的时区。<br>在地图上绘制纬度和经度以检查它们是否合理。<br>检查文本是否有奇怪的字符或编码</p>
+<p>如果您正在使用需要正态分布的统计测试，请检查数据是否看起来是正态分布的。有一些统计测试可以做到这一点，但它们可能非常挑剔。更好的方法是实际绘制数据并以图形方式测试正态性。</p>
+<p>有两种方法可以做到这一点。首先是查看数据分布的直方图或密度图，看看它是否看起来像在均值附近输入的正态分布。另一种检验正态性的方法是使用 QQ 图。这在表格数据中的趋势和模式分析中进行了更全面的讨论</p>
+<h3 id="3-3-探索与发现"><a href="#3-3-探索与发现" class="headerlink" title="3.3. 探索与发现"></a>3.3. 探索与发现</h3><p>数据科学的核心是探索数据并发现模式和趋势。可视化在这个过程中起着核心作用。散点图、时间序列、数据图、标签云和您将在本单元后面看到的许多其他类型的图形使数据科学家能够了解他们的数据及其之间的联系。作为此过程的一部分，可视化用于了解分析结果，例如聚类或曲线拟合。可视化对计算分析起着补充作用：它是分析结果如何呈现给数据科学家的方式，以便他们看到所有细节并“确认预期”或看到“意外”。</p>
+<p>探索本质上是渐进的。一个可视化导致一个假设，该假设导致另一个可视化，看看这是否得到数据的支持，也许还有一些对假设的验证性统计测试。这反过来可能导致另一个假设。作为此过程的一部分，数据融合了来自不同来源的数据，并且该过程可能确定必须收集或找到新数据。探索期间的典型任务是：</p>
+<p>搜索满足某些属性的元素（如果存在）。这可能是定位已知数据点、过滤数据或查找异常值。<br>识别单个数据项的属性<br>比较或排列元素<br>直观地识别某些元素子集中的模式。示例包括趋势、相关性、集群或类别。<br>计算最初不在数据中的派生属性。这些可能是数据转换、数据聚合或可能是统计属性，例如回归线或聚类<br>在本单元的许多活动中，您将探索数据并发现模式和趋势。我把最后一句话留给伟大的数学家 John W. Tukey：</p>
+<p>图片的最大价值在于它迫使我们注意到我们从未期望看到的东西。JW图基。探索性数据分析，1977 年。</p>
+<p>Tukey 发明了箱线图，根据维基百科，他还发明了“位”和“软件”这两个词。</p>
+<h3 id="3-4-结果介绍"><a href="#3-4-结果介绍" class="headerlink" title="3.4. 结果介绍"></a>3.4. 结果介绍</h3><p>数据科学中可视化的另一个常见用途是传达分析结果。</p>
+<p>这种交流可能是针对其他处理相同问题的分析师。在这种情况下，可视化通常是那些用于探索和发现的可视化，可能会稍微清理一下。</p>
+<p>需要付出更多努力来准备图形和可视化，以便将结果传达给非数据科学家的利益相关者。在教育项目的情况下，这些人可能是经理、政策制定者或学生，在记者的情况下可能是公众。</p>
+<p>这些类型的可视化需要相当长的时间来准备。它们通常用于传达特定的信息或叙述。需要设计图形以清楚地向读者传达该信息。生产价值也非常高：标准绘图包生成的绘图和图形通常使用 Adob​​e Illustrator 或 Inkscape 等图形编辑工具进行修饰。</p>
+<p>一旦这些演示图形是静态的，通常打印在光面纸上或显示在 PowerPoint 演示文稿中。如今，它们通常是交互式的并在 Web 上发布。</p>
+<p>在为演示开发数据可视化时，不要试图创建一个看起来很酷的 InfoGraphic。您需要仔细考虑呈现数据和故事的最佳方式，并确保它有效地传达它，并且不会通过隐藏复杂性来过度简化故事。</p>
+<h3 id="3-5-概括"><a href="#3-5-概括" class="headerlink" title="3.5. 概括"></a>3.5. 概括</h3><p>可视化在数据科学中用于三个重要目的：</p>
+<p>初始数据检查和清理，<br>探索和发现，<br>和结果的介绍。<br>可视化是有效的，因为人类视觉系统允许并行感知大量信息。可视化分析是交互式可视化与统计、数据挖掘和其他类型分析相结合的名称。</p>
+<h2 id="4-数据可视化简史"><a href="#4-数据可视化简史" class="headerlink" title="4. 数据可视化简史"></a>4. 数据可视化简史</h2><p>我们的现代世界充斥着信息图形；地图、计划、时间表、图表和图表。我们认为它们是理所当然的，是帮助我们交流和了解世界的工具。情况并非总是这样：很少有信息图形超过一千年，这表明它们在此之前相对罕见。</p>
+<p>通过了解为什么信息图形和数据可视化变得司空见惯，我们可以更好地了解它们在数据科学中的作用以及它们在未来可能发生的变化。在本模块中，我们将介绍数据可视化的简史及其兴起的主要原因。我认为有四种原因：</p>
+<p>用于生成和呈现图形的改进技术。 没有纸就不可能广泛使用信息图形，没有计算机就不可能实现打印和交互式数据可视化。<br>社会需求和对图形的态度的变化。 科学革命需要科学和医学插图，探索时代需要地图，工业革命需要工程图纸，而 21 世纪需要交互式数据可视化。<br>数据的可用性。 详细的地图需要准确的调查，而显示人口或财富分布的图表需要人口普查数据。<br>图形符号和交互技术的发明。 这些允许以有用的方式显示数据，满足社会的需求。它们形成一种视觉语言。<br>我们可以将数据可视化的历史分为四个主要时期。我们依次看这些。</p>
+<h3 id="4-1。史前史"><a href="#4-1。史前史" class="headerlink" title="4.1。史前史"></a>4.1。史前史</h3><p>人们普遍认为，示意图和宇宙图等信息图形已在传统的狩猎采集和自给农业社会中使用了数千年。然而，这方面的证据有些不确定，因为其中大多数可能是在沙子、树皮等短暂材料上产生的，甚至是在人体上绘制的。</p>
+<p>澳大利亚土著人有着使用示意图和宇宙图的悠久传统。他们被认为是世界上现存最古老的文化之一，并在澳大利亚居住了 60,000 多年。他们的大部分艺术作品都展示了与地方的联系，并通过梦想时间的存在穿越土地。西部沙漠的岩画和版画可能是已知最古老的地图。这些显示了代表水洞的圆圈，连接线代表水洞之间的旅程。</p>
+<h3 id="4-2-早期文明"><a href="#4-2-早期文明" class="headerlink" title="4.2. 早期文明"></a>4.2. 早期文明</h3><p>公元前 3500 年左右，最早的文明出现在美索不达米亚和埃及的尼罗河谷。随后是大约公元前 2500 年印度印度河流域的文明和大约公元前 2000 年在中国黄河（黄河）附近的文明。文明也在美洲独立出现，首先是在公元前 500 年左右的中美洲，然后在南美洲。据信，当人口增长或气候变化给生活在被干旱土地包围的河谷或洪泛平原的维持生计水平的农民带来压力时，所有这些都出现了。由于周围的土地不适合耕种，增加粮食产量的唯一方法是建造大规模的灌溉和排水工程，这可以显着提高耕地的生产力，使其能够养活更多的人口。</p>
+<p>在大多数这些早期文明中，我们发现了信息图形的证据。虽然古代美索不达米亚和埃及之间有接触，但其他文明之间几乎没有或根本没有接触，因此它们对信息图形的使用很可能是独立进化的。</p>
+<p>这也许并不令人惊讶。早期文明也有类似的问题，因此提出了类似的解决方案。集中的政治权力需要记录土地所有权及其边界的方法——这导致了详细的地图记录财产边界（这些被称为地籍图）。计算税收和土地面积的需要导致了几何和几何图；计划军事行动、城镇和建筑物的需要导致了计划；而预测季节和其他周期性事件的需要导致了星图。了解一个人在世界上的位置的需要产生了象征性的宇宙学地图。</p>
+<h3 id="4-3-印刷和纸张"><a href="#4-3-印刷和纸张" class="headerlink" title="4.3. 印刷和纸张"></a>4.3. 印刷和纸张</h3><p>虽然一些信息图形可以从史前时代或早期文明中幸存下来，但它们很少见。造成这种情况的主要原因之一是很难准确地再现图形。在印刷发明之前，所有的副本都必须手工完成。这是耗时且极易出错的。</p>
+<p>在欧洲文艺复兴时期，这一切都发生了变化。中国发明的纸张和木刻版画通过伊斯兰世界传入欧洲。纸张大约在 12 世纪问世，紧随其后的是印刷术。起初，木版印刷被用于生产塔罗牌和扑克牌等物品。它也被用于印刷书籍，尽管它不太适合这一点，因为文字所需的精细细节很难雕刻且耗时。大约在 1440 年，Johannes Gensfleisch zur Laden zum Gutenberg 发明了印刷机和可移动的金属活字。这彻底改变了书籍的生产，很快木版插图与印刷相结合，允许生产插图书籍。</p>
+<p>在接下来的五个世纪里，印刷技术不断进步。铜版印刷可以提供更精细的细节，而 19 世纪后期的平版印刷首次提供了廉价的高质量彩色印刷品。</p>
+<p>到 20 世纪初，信息图形无处不在。教育和参考书籍以及报纸和杂志等流行媒体包含各种各样的图表和地图，街道地图和地图集普遍使用，图形广泛用于科学、医学、建筑和工程以及商业和政府. 我们现在看看这些不同种类的图形是什么时候开发的。</p>
+<h3 id="4-4-信息图形的兴起"><a href="#4-4-信息图形的兴起" class="headerlink" title="4.4. 信息图形的兴起"></a>4.4. 信息图形的兴起</h3><p>现代科技绘图技术起源于欧洲文艺复兴时期。它们为现代科学、医学、工程和建筑的出现奠定了基础。草图是建筑师和工程师用于设计的主要工具，他们通过查看现有建筑物和机器的图纸和计划来学习他们的技能，并使用图纸和计划与客户沟通并向建筑商指定最终设计。</p>
+<p>文艺复兴时期的一项重大发现是以线性和平行透视绘制建筑物和机器的规则，以及使用测量平面和多视图正交投影来精确指定其尺寸的规则。随着建筑师和工程师成为独立的职业，并且建筑工艺方法被设计和施工之间的分离所取代，这些都是必要的。</p>
+<p>绘图和图表对现代科学和医学同样重要。这些依赖于科学家分享他们的观察和理论。如果没有插图，早期科学家就不可能分享他们对自然、人体解剖学、早期欧洲探险家遇到的新型动植物以及通过望远镜和显微镜可见的新世界的观察。</p>
+<p>插图不仅对于记录观察很重要，它们还允许科学家交流新的实验设备和设计。对于许多科学家来说，图表和心理图像是让他们了解自然并将由此产生的理论有力地传达给其他科学家的工具。</p>
+<p>在文艺复兴时期，地图也变得更加重要。葡萄牙探险家沿着非洲海岸一路前行，最终绕过非洲底部到达印度尼西亚的“香料群岛”或摩鹿加群岛，克里斯托弗·哥伦布前往美国，尽管他坚持认为自己实际上已经到达了亚洲。</p>
+<p>水手们需要准确的地图，地图制作技术迅速提高。经纬度以及精确的比例尺成为标准。印刷使公众能够看到这些新发现的地图，世界上第一本地图集于 1570 年印刷。</p>
+<p>直到 17 世纪和 18 世纪，更多抽象材料的图表才变得普遍。在此之前，表格是显示抽象信息的常用方式。例如，许多从古代美索不达米亚幸存下来的泥板都包含由新手抄写员完成的数学练习表。人们几乎可以听到小男孩（当然没有女孩）的呻吟声，因为他们被迫记住以 20 和 60 为基数的数字系统所需的非常大的乘法表。</p>
+<p>信息图形的一个关键思想是使用平面上的位置来表示二维数值数据—— 笛卡尔平面。这概括了地图中使用的纬度和经度。Rene Descarte 和 Pierre de Fermat 在 1600 年之后独立发明了这个基本思想。 1686 年，Edmund Halley 是第一个使用笛卡尔图进行数据分析的人，通过将双曲线曲线拟合到气压与海拔的关系，但曲线拟合的散点图并不常用直到19世纪。</p>
+<p>通常我们希望用其他类型的信息覆盖地图。Edmund Halley 也开创了这种信息图形。这些 地图被制图师称为专题地图 ，但我更喜欢使用 Edward Tufte 的名字，即 数据地图。哈雷在 1686 年创建了第一张显示风向的数据图，并在 1701 年使用显示磁变化的等值线创建了另一张数据图。同样值得注意的是 1607 年 Jodocus Hondius 绘制的地图，显示了宗教的分布</p>
+<p>认知研究表明我们使用空间推理来思考时间。这可能就是为什么英语（和许多其他语言）隐含地使用空间隐喻来表示时间：一个事件发生在另一个事件之前或之后。一个事件比另一个事件花费更长的时间。因此，令人惊讶的是，时间线的发明花了多长时间。Joseph Priestly 于 1769 年介绍了他们：见他 的传记图表。在此之前，表格是组织时间数据的标准方式：国王和王后列表等。William Playfair 在 1786 年建立在 Priestly 的思想基础上，发明了 折线图、 条形图 和 饼图。</p>
+<p>从那时起，各种图表、图表和图形的发明迅速而激烈，用于显示各种数据。这并没有停止，有数百种不同的图形。我们将在接下来的三个模块中介绍其中最有用的部分。</p>
+<h3 id="4-5-交互式数据可视化"><a href="#4-5-交互式数据可视化" class="headerlink" title="4.5. 交互式数据可视化"></a>4.5. 交互式数据可视化</h3><p>20 世纪上半叶信息图形的广泛使用是由于纸张和印刷的发明而成为可能的。在 20 世纪中叶，还有另一项发明，它对数据可视化的影响不亚于纸张和印刷。这当然是电脑。</p>
+<p>像 Ivan Sutherland 这样有远见的人看到计算机可以允许以完全不同的方式与图形交互。一种以交互方式使用计算机创建新图形的方法。Sutherland 在 1960 年代初为他在 MIT 攻读博士学位编写了一个革命性的计算机程序 Sketchpad。Sketchpad 是第一个交互式图形编辑器。它介绍了计算机图形学的基本算法和技术，是现代 CAD 系统的祖先。它还介绍了一种简单的面向对象编程。Sutherland 因这项研究于 1988 年获得图灵奖。以下视频显示了 Ivan Sutherland 在 1962 年左右展示 Sketchpad 的早期电影剪辑。评论由 GUI 研究的另一位先驱 Alan Kay 提供。</p>
+<p>同样在 1960 年代，Roger Tomlinson 创建了第一批 GIS 系统之一，即加拿大地理信息系统 (CGIS)。在 AT&amp;T 贝尔实验室工作的 Edward Fowlkes 创建了一个早期的交互式统计包，该包使用刷亮来选择异常值，以便在多部分显示中删除和链接点。</p>
+<p>这些系统是第一个支持计算机介导的数据可视化的系统，用户可以在其中交互式地探索和可视化数据。它们导致了几个不同的研究领域： 地理信息系统 (GIS)，它捕获、存储、操作、分析、管理和呈现地理数据；科学可视化 (SciVis)，关注可视化具有固有空间表示的科学数据；信息可视化（InfoVis），用于可视化更抽象的数据；用于设计建筑物和机器的 CAD&#x2F;CAM 系统。</p>
+<p>计算机技术的变化正在继续推动数据可视化的创新。网络的兴起意味着演示图形现在发布在网络上而不是纸上，这可能允许读者与图形进行交互。Oculus Rift、HTC Vive 或 Microsoft HoloLens 等新型虚拟现实 (VR) 和增强现实 (AR) 设备看起来将再次彻底改变数据可视化。</p>
+<h3 id="4-6-概括"><a href="#4-6-概括" class="headerlink" title="4.6. 概括"></a>4.6. 概括</h3><p>我们已经看到数据可视化如何使用了数千年。它的历史受到社会需求、数据可用性以及基础生产和演示技术的影响：纸张和印刷，然后是计算机。我们今天认为理所当然的大部分信息图形，例如地形图、测量平面图，甚至散点图和条形图，都是在过去六百年中精心开发的。他们的发明是现代世界的伟大成就之一。</p>
+<h2 id="5-数据探索和可视化工具"><a href="#5-数据探索和可视化工具" class="headerlink" title="5. 数据探索和可视化工具"></a>5. 数据探索和可视化工具</h2><p>数据科学家使用各种不同的工具进行数据探索和可视化。它们分为三个主要类别。</p>
+<h3 id="5-1。介绍"><a href="#5-1。介绍" class="headerlink" title="5.1。介绍"></a>5.1。介绍</h3><h4 id="5-1-1-通用编程语言"><a href="#5-1-1-通用编程语言" class="headerlink" title="5.1.1 通用编程语言"></a>5.1.1 通用编程语言</h4><p>使用了两种主要的编程语言</p>
+<p>用于数据可视化和探索的最广泛使用的语言可能 是R。虽然我发现 R 是一种难以使用的语言，但它具有令人难以置信的数据分析和可视化库。 Hadley Wickham的ggplot2是最好的图形库 之一。</p>
+<p>下一个最常见的选择是 Python。这是一种更好的语言，但没有太多的分析包选择。它是数据处理的理想选择，Python 通常用于数据的抓取和融合，然后 R 用于探索和可视化。</p>
+<p>为 Web 创建交互式演示图形的一种越来越流行的选择是</p>
+<p> 带有 D3 数据可视化库的JavaScript 。它通常不被数据科学家用于其他目的。<br>编程语言方法的最大优点是原则上你可以做任何事情。</p>
+<h4 id="5-1-2-通用可视化分析工具"><a href="#5-1-2-通用可视化分析工具" class="headerlink" title="5.1.2 通用可视化分析工具"></a>5.1.2 通用可视化分析工具</h4><p>提供了许多易于使用的数据分析和可视化工具。例子包括</p>
+<p>SAS Visual Analytics 是许多 SAS 分析工具的可视化前端。<br>Tableau 是一种易于使用的可视化分析工具，商业智能通常使用它来交互式探索表格数据。它允许在网络上发布交互式图形。它有一个商业版本和一个名为 Tableau Public 的免费限量产品。<br>Qlik 是另一种广泛用于商业智能的可视化分析工具。</p>
+<h4 id="5-1-3-应用特定的可视化分析工具"><a href="#5-1-3-应用特定的可视化分析工具" class="headerlink" title="5.1.3 应用特定的可视化分析工具"></a>5.1.3 应用特定的可视化分析工具</h4><p>第三类工具是为帮助特定应用领域的数据分析而设计的系统。其中有很多。作为一个例子看</p>
+<p>国家地图 旨在在澳大利亚地图上显示澳大利亚政府数据</p>
+<p>Scaffold Hunter 旨在分析生命科学中的数据，重点是药物发现。</p>
+<h3 id="5-2-活动：使用-Tableau-Public-探索和可视化数据"><a href="#5-2-活动：使用-Tableau-Public-探索和可视化数据" class="headerlink" title="5.2. 活动：使用 Tableau Public 探索和可视化数据"></a>5.2. 活动：使用 Tableau Public 探索和可视化数据</h3><p>略</p>
+<h3 id="5-3-活动：使用-R-探索和可视化数据"><a href="#5-3-活动：使用-R-探索和可视化数据" class="headerlink" title="5.3. 活动：使用 R 探索和可视化数据"></a>5.3. 活动：使用 R 探索和可视化数据</h3><h4 id="5-3-1-R-地图上的数据"><a href="#5-3-1-R-地图上的数据" class="headerlink" title="5.3.1  R 地图上的数据"></a>5.3.1  R 地图上的数据</h4><p>您将需要 R 和 RStudio，还需要安装以下库（和依赖项）：</p>
+<ul>
+<li>ggmap</li>
+<li>ggplot2</li>
+<li>maps</li>
+<li>mapproj<br>如果您不确定如何执行此操作并想探索一些有关 R 的基础知识。</li>
+</ul>
+<p>看看：</p>
+<ul>
+<li>RStudio 教育</li>
+<li>Torfs &amp; Brauer 的“R 的 A（非常）简短介绍”[pdf]</li>
+</ul>
+<p>第1步<br>运行 RStudio，安装库，尝试以下代码（复制、粘贴、运行）：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">library<span class="punctuation">(</span>ggmap<span class="punctuation">)</span> </span><br><span class="line">library<span class="punctuation">(</span>ggplot2<span class="punctuation">)</span> </span><br><span class="line">library<span class="punctuation">(</span>maps<span class="punctuation">)</span> </span><br><span class="line">library<span class="punctuation">(</span>mapproj<span class="punctuation">)</span> </span><br><span class="line"><span class="comment"># or you can try e.g. require(maps) </span></span><br><span class="line"><span class="comment"># map(&quot;usa&quot;) </span></span><br><span class="line">map<span class="punctuation">(</span><span class="string">&#x27;state&#x27;</span><span class="punctuation">)</span> <span class="comment"># not necessary, just checking we can draw a map</span></span><br></pre></td></tr></table></figure>
+<p>您应该看到美国各州的基本地图</p>
+<p>如果错误显示为“Plot region too large”。</p>
+<p>您只需将 RStudio 的 右下 部分调大。</p>
+<p>步骤 2 读取修改后的数据文件（已添加状态名称和代码）。<br>在 Household-heat-by-State-2008.csv 下载文件，并将其放入您的工作目录。</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">data <span class="operator">&lt;-</span> read.csv<span class="punctuation">(</span><span class="string">&quot;Household-heating-by-State-2008.csv&quot;</span><span class="punctuation">,</span> header<span class="operator">=</span><span class="built_in">T</span><span class="punctuation">)</span> </span><br><span class="line">head<span class="punctuation">(</span>data<span class="punctuation">)</span> </span><br><span class="line"><span class="built_in">names</span><span class="punctuation">(</span>data<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>Step 3 名字有点多，简化一下我们感兴趣的：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="built_in">names</span><span class="punctuation">(</span>data<span class="punctuation">)</span><span class="punctuation">[</span><span class="number">4</span><span class="punctuation">]</span> <span class="operator">&lt;-</span> <span class="string">&quot;MobileHomes&quot;</span></span><br><span class="line"><span class="built_in">names</span><span class="punctuation">(</span>data<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>第 4 步现在按州对 Mobile Home 数据进行分组，计算平均值：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">ag <span class="operator">&lt;-</span> aggregate<span class="punctuation">(</span>MobileHomes <span class="operator">~</span> States<span class="punctuation">,</span> FUN <span class="operator">=</span> mean<span class="punctuation">,</span> data <span class="operator">=</span> data<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>查看骨料的参数。</p>
+<p><code>MobileHomes ~ States</code> 表示按州对移动房屋数据进行分组</p>
+<p><code>FUN = mean</code> 意味着计算它们的平均值，</p>
+<p>应该有多少个州？</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">head<span class="punctuation">(</span>ag<span class="punctuation">)</span> </span><br><span class="line"><span class="built_in">dim</span><span class="punctuation">(</span>ag<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>暂时不用担心第一个“#N&#x2F;A”状态，如果你愿意，可以删除它</p>
+<p>Step 5 获取地图数据（ggplot2包内置地图数据）</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">m.usa <span class="operator">&lt;-</span> map_data<span class="punctuation">(</span><span class="string">&quot;state&quot;</span><span class="punctuation">)</span> <span class="comment"># we want the states </span></span><br><span class="line">head<span class="punctuation">(</span>m.usa<span class="punctuation">)</span> </span><br><span class="line"><span class="built_in">dim</span><span class="punctuation">(</span>m.usa<span class="punctuation">)</span> <span class="comment"># more info than we need</span></span><br></pre></td></tr></table></figure>
+<p>第 6 步强制我们的状态为小写以匹配地图，同时保留一列数据</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">df <span class="operator">&lt;-</span> data.frame<span class="punctuation">(</span></span><br><span class="line">  region <span class="operator">=</span> tolower<span class="punctuation">(</span>ag<span class="operator">$</span>States<span class="punctuation">)</span><span class="punctuation">,</span> </span><br><span class="line">  MobileHomes <span class="operator">=</span> ag<span class="operator">$</span>MobileHomes<span class="punctuation">,</span></span><br><span class="line">  stringsAsFactors <span class="operator">=</span> <span class="built_in">F</span></span><br><span class="line"><span class="punctuation">)</span> </span><br><span class="line"><span class="built_in">dim</span><span class="punctuation">(</span>df<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+<p>50个州？</p>
+<p>第 7 步现在将其绘制在地图上（查看所有这些图层……）</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Create a empty canvas</span></span><br><span class="line">ggplot<span class="punctuation">(</span>df<span class="punctuation">,</span> aes<span class="punctuation">(</span>map_id <span class="operator">=</span> region<span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">+</span>   </span><br><span class="line">  <span class="comment"># draw the grid</span></span><br><span class="line">  expand_limits<span class="punctuation">(</span>x <span class="operator">=</span> m.usa<span class="operator">$</span>long<span class="punctuation">,</span> y <span class="operator">=</span> m.usa<span class="operator">$</span>lat<span class="punctuation">)</span> <span class="operator">+</span>    </span><br><span class="line">  <span class="comment"># draw a us map, fill = MobileHomes means color the map according to MobileHomes property</span></span><br><span class="line">  geom_map<span class="punctuation">(</span>aes<span class="punctuation">(</span>fill <span class="operator">=</span> MobileHomes<span class="punctuation">)</span><span class="punctuation">,</span> map <span class="operator">=</span> m.usa<span class="punctuation">)</span> <span class="operator">+</span>  </span><br><span class="line">  <span class="comment"># fix the ratio of the x and y axises, to match a map</span></span><br><span class="line">  coord_map<span class="punctuation">(</span><span class="punctuation">)</span>                        </span><br></pre></td></tr></table></figure>
+
+<h3 id="5-4-活动：使用-D3-探索和可视化数据"><a href="#5-4-活动：使用-D3-探索和可视化数据" class="headerlink" title="5.4. 活动：使用 D3 探索和可视化数据"></a>5.4. 活动：使用 D3 探索和可视化数据</h3><p>在本活动中，您将使用 D3 构建等值线图。</p>
+<p>别担心，它会比你想象的更容易……</p>
+<h4 id="5-4-1-简介"><a href="#5-4-1-简介" class="headerlink" title="5.4.1 简介"></a>5.4.1 简介</h4><p>D3。( Data-Driven Documents ) 是一个基于 HTML5&#x2F;SVG + JavaScript 的数据可视化工具包。它允许您创建可以在 Web 浏览器中查看的动态和交互式数据可视化。D3 是一个 JavaScript 库。JavaScript 是一种用于网页的编程语言。它用于从动态内容创建网页并根据用户交互进行更改。与 HTML 和 CSS 一起，它是现代网页设计的支柱之一。</p>
+<p>D3 起源于 Protovis。D3 非常强大，可以让您创建几乎任何您能想象到的可视化。您可以查看一些示例：  https :&#x2F;&#x2F;github.com&#x2F;mbostock&#x2F;d3&#x2F;wiki&#x2F;Gallery</p>
+<p>如果您查看代码，您会发现这种能力是有代价的：D3 相当复杂并且依赖于几个不同的概念。但是，在此活动中，我们不会深入探讨所有细节。相反，您可以有一些使用 D3 的实践经验。稍后在本单元中，您将了解有关 D3 的更多信息。或者，如果您迫不及待，这里有免费的 D3 综合在线教程：</p>
+<p>Scott Murray 的 D3 教程</p>
+<p>如果您不熟悉 JavaScript，您可能想查看有关 JavaScript 的 W3C 教程 <a href="https://www.w3schools.com/js/" target="_blank" rel="noopener">https://www.w3schools.com/js/</a></p>
+<h4 id="5-4-2-准备"><a href="#5-4-2-准备" class="headerlink" title="5.4.2 准备"></a>5.4.2 准备</h4><p>下载 地图文件。<br>该文件包含美国不同州地图的详细信息。基本上，它保存地理形状的记录，如线、点等。<br>（可选）查看 <a href="http://geojson.org/" target="_blank" rel="noopener">http://geojson.org/</a> 了解更多详细信息。</p>
+<p>下载 数据<br>许可：CC Attribution 4.0 International (CC BY 4.0)</p>
+<p>为了保持一致，我们将使用我们在 R 活动中使用的相同数据。D3（甚至 JavaScript）都不是数据处理的理想工具，所以这里我们使用由 总计的 R中的函数。</p>
+<p>设置静态web服务器<br>出于安全考虑，浏览器不能直接访问本地文件，所以需要设置静态web服务器，让我们的D3脚本加载数据。最 简单的方法 是下载 Microsoft 的Visual Studio Code（适用于 Windows、Mac 和 Linux）。这是一个具有实时预览功能的文本编辑器，当您想使用实时预览查看时，可以通过安装“Live Server”扩展并使用“使用 Live Server 打开”来访问它。第 0 周提供了有关安装的更多信息。或者，如果您已经知道如何设置静态 Web 服务器，则可以使用您喜欢的文本编辑器并跳过此步骤。</p>
+<p>（可选）如果您更喜欢启动静态服务器，您可以这样做：</p>
+<p>安装 Python（在 Windows 上，大多数 Linux 和 Mac OS 应默认安装 Python）<br>将 Python 添加到系统路径（在 Windows 上）<br>使用终端（命令行）进入您的项目目录&#x2F;文件夹（使用 cd 命令）<br>运行命令：<br>对于 python 2：<br><code>python -m SimpleHTTPServer 8000</code><br>对于 python 3：<br><code>python -m http.server 8000</code><br>然后您可以在浏览器中打开 <a href="http://localhost:8000/" target="_blank" rel="noopener">http://localhost:8000/</a> 以访问您的 D3 可视化。</p>
+<h4 id="5-4-3-设置-HTML-页面"><a href="#5-4-3-设置-HTML-页面" class="headerlink" title="5.4.3 设置 HTML 页面"></a>5.4.3 设置 HTML 页面</h4><p>使用菜单 文件 -&gt; 新建 要创建一个空文件，请将其保存到保存所有下载数据的文件夹中，名称为 us-map.html（如果您不喜欢，当然可以更改名称）。</p>
+<p>让我们创建一个基本的 HTML 页面：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>US Mobile Homes choropleth map<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果您使用的是 Brackets，请单击右侧的“闪电”图标以查看这个全新的网页。</p>
+<p>正如预期的那样，您将看到一个空白页面，但是，如果您足够小心，您会发现浏览器选项卡上的文本是“US Mobile Homes choropleth map”。</p>
+<h4 id="5-4-4-初始化-svg-画布"><a href="#5-4-4-初始化-svg-画布" class="headerlink" title="5.4.4 初始化 svg 画布"></a>5.4.4 初始化 svg 画布</h4><p>我们需要一个画布来绘制我们的可视化。</p>
+<p>幸运的是，我们已经定义了我们的 svg HTML 中的元素。（SVG 是矢量图形的 HTML5 标准）</p>
+<p>我们将利用 D3 的优势</p>
+<p>选择 访问 svg 元素的函数<br>属性 修改svg元素属性的函数，以及<br>风格 修改svg元素样式的函数<br>首先，我们需要在我们的网页中引用 D3 库，添加</p>
+<p><code>&lt;script src=&quot;https://d3js.org/d3.v4.min.js&quot;&gt;&lt;/script&gt;</code><br>到我们 HTML 的正文部分。</p>
+<p>为我们自己的 JavaScript 代码创建另一个脚本部分，并初始化 svg 元素。整个 HTML 应如下所示：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>US Mobile Homes choropleth map<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://d3js.org/d3.v4.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> width = <span class="number">960</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> height = <span class="number">500</span>;</span></span><br><span class="line"><span class="language-javascript">            </span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> svg = d3.<span class="title function_">select</span>(<span class="string">&quot;svg&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                .<span class="title function_">attr</span>(<span class="string">&quot;width&quot;</span>, width)</span></span><br><span class="line"><span class="language-javascript">                .<span class="title function_">attr</span>(<span class="string">&quot;height&quot;</span>, height)</span></span><br><span class="line"><span class="language-javascript">                .<span class="title function_">style</span>(<span class="string">&quot;border&quot;</span>, <span class="string">&quot;1px solid&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在浏览器中刷新网页：您现在应该可以看到我们的画布了。</p>
+<p>当然，如果你有 web 开发经验，你知道这个过程可以在没有 javascript 的情况下完成，你可以简单地编写 SVG 代码</p>
+<p>这里我们要演示D3的一些基本功能。</p>
+<h4 id="5-4-5-读取数据"><a href="#5-4-5-读取数据" class="headerlink" title="5.4.5 读取数据"></a>5.4.5 读取数据</h4><p>我们将利用 D3 的请求函数来加载数据。（可选）更多详情请访问：  https :&#x2F;&#x2F;github.com&#x2F;d3&#x2F;d3&#x2F;blob&#x2F;master&#x2F;API.md#requests-d3-request</p>
+<p>我们可以用 d3.json 和 d3.csv 函数分别加载我们的地图和数据。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>US Mobile Homes choropleth map<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://d3js.org/d3.v4.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> width = <span class="number">960</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> height = <span class="number">500</span>;</span></span><br><span class="line"><span class="language-javascript">            </span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> svg = d3.<span class="title function_">select</span>(<span class="string">&quot;svg&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                .<span class="title function_">attr</span>(<span class="string">&quot;width&quot;</span>, width)</span></span><br><span class="line"><span class="language-javascript">                .<span class="title function_">attr</span>(<span class="string">&quot;height&quot;</span>, height)</span></span><br><span class="line"><span class="language-javascript">                .<span class="title function_">style</span>(<span class="string">&quot;border&quot;</span>, <span class="string">&quot;1px solid&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            </span></span><br><span class="line"><span class="language-javascript">            d3.<span class="title function_">json</span>(<span class="string">&quot;us-states.txt&quot;</span>, <span class="keyword">function</span>(<span class="params">mapData</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                d3.<span class="title function_">csv</span>(<span class="string">&quot;MobileHomes.csv&quot;</span>, <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    </span></span><br><span class="line"><span class="language-javascript">                &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-4-6-绘制地图"><a href="#5-4-6-绘制地图" class="headerlink" title="5.4.6 绘制地图"></a>5.4.6 绘制地图</h4><p>让我们首先关注地图。</p>
+<p>地图文件为 GeoJson 格式，包含纯地理信息。</p>
+<p>要绘制地图，我们需要将地理信息（纬度、经度）转换为屏幕的二维坐标 （x 、y ）(X,是的).</p>
+<p>这个过程称为 地图投影，您将在本单元中学习（很多）更多细节。</p>
+<p>D3提供了很多不同的地图投影！可能是 Javascript 中可用的最全面的集合。（可选）  <a href="https://github.com/d3/d3-geo-projection" target="_blank" rel="noopener">https://github.com/d3/d3-geo-projection</a></p>
+<p>我们使用下面的代码来定义我们稍后要使用的地图投影。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Map projection</span></span><br><span class="line"><span class="keyword">var</span> projection = d3.<span class="title function_">geoAlbersUsa</span>()</span><br><span class="line">  <span class="comment">// move the center of the map to the center of our canvas</span></span><br><span class="line">  .<span class="title function_">translate</span>([width / <span class="number">2</span>, height / <span class="number">2</span>]) </span><br><span class="line">  <span class="comment">// scale things down so see entire US</span></span><br><span class="line">  .<span class="title function_">scale</span>([<span class="number">1000</span>]); </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Define path generator</span></span><br><span class="line"><span class="comment">// path generator that will convert GeoJSON to SVG paths</span></span><br><span class="line"><span class="keyword">var</span> path = d3.<span class="title function_">geoPath</span>() </span><br><span class="line">  <span class="comment">// tell path generator to use the previous map projection</span></span><br><span class="line">  .<span class="title function_">projection</span>(projection); </span><br></pre></td></tr></table></figure>
+<p>在此之后，绘制地图非常容易：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> states = svg.<span class="title function_">selectAll</span>(<span class="string">&quot;path&quot;</span>)</span><br><span class="line">  <span class="comment">// bind the geographic data to svg elements</span></span><br><span class="line">  .<span class="title function_">data</span>(mapData.<span class="property">features</span>) </span><br><span class="line">  <span class="comment">// create one &quot;path&quot; svg element for each datum</span></span><br><span class="line">  .<span class="title function_">enter</span>().<span class="title function_">append</span>(<span class="string">&quot;path&quot;</span>) </span><br><span class="line">  <span class="comment">// using the map projection to convert geographic information to screen coordinates</span></span><br><span class="line">  .<span class="title function_">attr</span>(<span class="string">&quot;d&quot;</span>, path) </span><br><span class="line">  <span class="comment">// change the style properties for the svg </span></span><br><span class="line">  .<span class="title function_">style</span>(<span class="string">&quot;stroke&quot;</span>, <span class="string">&quot;black&quot;</span>) </span><br><span class="line">  .<span class="title function_">style</span>(<span class="string">&quot;stroke-width&quot;</span>, <span class="string">&quot;1&quot;</span>)</span><br><span class="line">  .<span class="title function_">style</span>(<span class="string">&quot;fill&quot;</span>, <span class="string">&quot;white&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>现在，刷新您的网页，向美国地图问好。</p>
+<p>如果你什么都看不到，可能这又是一个关于工作目录的把戏。</p>
+<p>请使用顶部的菜单“文件 &#x3D;&gt; 打开文件夹”，然后选择您保存所有文件的目录。</p>
+<p>然后再次尝试“闪电”按钮。</p>
+<h4 id="5-4-7-给地图上色"><a href="#5-4-7-给地图上色" class="headerlink" title="5.4.7 给地图上色"></a>5.4.7 给地图上色</h4><p>我们首先需要一点数据处理。</p>
+<p>为了使不同状态的颜色与其值成正比，我们需要知道：</p>
+<p>每个状态的值<br>所有状态的最小值和最大值<br>这可以通过以下方式实现：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> country2value = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> minValue = <span class="title class_">Infinity</span>;</span><br><span class="line"><span class="keyword">var</span> maxValue = -<span class="number">1</span>;</span><br><span class="line">data.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">d</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> thisValue = d[<span class="string">&quot;MobileHomes&quot;</span>];</span><br><span class="line">    country2value[d[<span class="string">&quot;States&quot;</span>]] = thisValue;</span><br><span class="line">    </span><br><span class="line">    minValue = <span class="title class_">Math</span>.<span class="title function_">min</span>(minValue, thisValue);</span><br><span class="line">    maxValue = <span class="title class_">Math</span>.<span class="title function_">max</span>(maxValue, thisValue);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我们还需要一个颜色映射来将值映射到颜色。</p>
+<p>一个不错的选择是使用 d3-scale-chromatic 图书馆。<br>（可选）  <a href="https://github.com/d3/d3-scale-chromatic" target="_blank" rel="noopener">https://github.com/d3/d3-scale-chromatic</a></p>
+<p>我们先引用这个库：<br><code>&lt;script src=&quot;https://d3js.org/d3-scale-chromatic.v1.min.js&quot;&gt;&lt;/script&gt;</code><br>在这里，为了制作用于比较值的等值线图，我们要将连续值映射到 顺序的 颜色。</p>
+<p>这种颜色映射接受从 0 到 1 的数字参数并将它们映射到相关颜色。</p>
+<p>通常浅色代表小值，深色代表大值。</p>
+<p>需要创建两个映射：</p>
+<p>将值映射到 0-1 的范围<br>将上述输出映射到颜色<br>var value2range &#x3D; d3.scaleLinear()<br>    .domain([minValue, maxValue])<br>    .range([0, 1])<br>var range2color &#x3D; d3.interpolateBlues;<br>感谢您的耐心等待，现在是时候完成几行代码了。</p>
+<p>states.style(“fill”, function(d){<br>    return range2color(value2range(country2value[d.properties.name]));<br>});</p>
+<p>整个网页应如下所示：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>US Mobile Homes choropleth map<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://d3js.org/d3.v4.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://d3js.org/d3-scale-chromatic.v1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> width = <span class="number">960</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> height = <span class="number">500</span>;</span></span><br><span class="line"><span class="language-javascript">            </span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> svg = d3.<span class="title function_">select</span>(<span class="string">&quot;svg&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                .<span class="title function_">attr</span>(<span class="string">&quot;width&quot;</span>, width)</span></span><br><span class="line"><span class="language-javascript">                .<span class="title function_">attr</span>(<span class="string">&quot;height&quot;</span>, height)</span></span><br><span class="line"><span class="language-javascript">                .<span class="title function_">style</span>(<span class="string">&quot;border&quot;</span>, <span class="string">&quot;1px solid&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            </span></span><br><span class="line"><span class="language-javascript">             <span class="comment">// Map projection</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> projection = d3.<span class="title function_">geoAlbersUsa</span>()</span></span><br><span class="line"><span class="language-javascript">              <span class="comment">// move the center of the map to the center of our canvas</span></span></span><br><span class="line"><span class="language-javascript">              .<span class="title function_">translate</span>([width / <span class="number">2</span>, height / <span class="number">2</span>]) </span></span><br><span class="line"><span class="language-javascript">              <span class="comment">// scale things down so see entire US</span></span></span><br><span class="line"><span class="language-javascript">              .<span class="title function_">scale</span>([<span class="number">1000</span>]); </span></span><br><span class="line"><span class="language-javascript">            </span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// Define path generator</span></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// path generator that will convert GeoJSON to SVG paths</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> path = d3.<span class="title function_">geoPath</span>() </span></span><br><span class="line"><span class="language-javascript">              <span class="comment">// tell path generator to use the previous map projection</span></span></span><br><span class="line"><span class="language-javascript">              .<span class="title function_">projection</span>(projection); </span></span><br><span class="line"><span class="language-javascript">                </span></span><br><span class="line"><span class="language-javascript">            </span></span><br><span class="line"><span class="language-javascript">            d3.<span class="title function_">json</span>(<span class="string">&quot;us-states.txt&quot;</span>, <span class="keyword">function</span>(<span class="params">mapData</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">               </span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> states = svg.<span class="title function_">selectAll</span>(<span class="string">&quot;path&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                  <span class="comment">// bind the geographic data to svg elements</span></span></span><br><span class="line"><span class="language-javascript">                  .<span class="title function_">data</span>(mapData.<span class="property">features</span>) </span></span><br><span class="line"><span class="language-javascript">                  <span class="comment">// create one &quot;path&quot; svg element for each datum</span></span></span><br><span class="line"><span class="language-javascript">                  .<span class="title function_">enter</span>().<span class="title function_">append</span>(<span class="string">&quot;path&quot;</span>) </span></span><br><span class="line"><span class="language-javascript">                  <span class="comment">// using the map projection to convert geographic </span></span></span><br><span class="line"><span class="language-javascript">                  <span class="comment">// information to screen coordinates</span></span></span><br><span class="line"><span class="language-javascript">                  .<span class="title function_">attr</span>(<span class="string">&quot;d&quot;</span>, path) </span></span><br><span class="line"><span class="language-javascript">                  <span class="comment">// change the style properties for the svg </span></span></span><br><span class="line"><span class="language-javascript">                  .<span class="title function_">style</span>(<span class="string">&quot;stroke&quot;</span>, <span class="string">&quot;black&quot;</span>) </span></span><br><span class="line"><span class="language-javascript">                  .<span class="title function_">style</span>(<span class="string">&quot;stroke-width&quot;</span>, <span class="string">&quot;1&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                  .<span class="title function_">style</span>(<span class="string">&quot;fill&quot;</span>, <span class="string">&quot;white&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">                </span></span><br><span class="line"><span class="language-javascript">                d3.<span class="title function_">csv</span>(<span class="string">&quot;MobileHomes.csv&quot;</span>, <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    </span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">var</span> country2value = &#123;&#125;;</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">var</span> minValue = <span class="title class_">Infinity</span>;</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">var</span> maxValue = -<span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript">                    data.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">d</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="keyword">var</span> thisValue = d[<span class="string">&quot;MobileHomes&quot;</span>];</span></span><br><span class="line"><span class="language-javascript">                        country2value[d[<span class="string">&quot;States&quot;</span>]] = thisValue;</span></span><br><span class="line"><span class="language-javascript">                        </span></span><br><span class="line"><span class="language-javascript">                        minValue = <span class="title class_">Math</span>.<span class="title function_">min</span>(minValue, thisValue);</span></span><br><span class="line"><span class="language-javascript">                        maxValue = <span class="title class_">Math</span>.<span class="title function_">max</span>(maxValue, thisValue);</span></span><br><span class="line"><span class="language-javascript">                    &#125;);</span></span><br><span class="line"><span class="language-javascript">                    </span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">var</span> value2range = d3.<span class="title function_">scaleLinear</span>()</span></span><br><span class="line"><span class="language-javascript">                        .<span class="title function_">domain</span>([minValue, maxValue])</span></span><br><span class="line"><span class="language-javascript">                        .<span class="title function_">range</span>([<span class="number">0</span>, <span class="number">1</span>])</span></span><br><span class="line"><span class="language-javascript">                    </span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">var</span> range2color = d3.<span class="property">interpolateBlues</span>;</span></span><br><span class="line"><span class="language-javascript">                    </span></span><br><span class="line"><span class="language-javascript">                    states.<span class="title function_">style</span>(<span class="string">&quot;fill&quot;</span>, <span class="keyword">function</span>(<span class="params">d</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="keyword">return</span> <span class="title function_">range2color</span>(</span></span><br><span class="line"><span class="language-javascript">                          <span class="title function_">value2range</span>(country2value[d.<span class="property">properties</span>.<span class="property">name</span>])</span></span><br><span class="line"><span class="language-javascript">                        );</span></span><br><span class="line"><span class="language-javascript">                    &#125;);</span></span><br><span class="line"><span class="language-javascript">                &#125;);</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-设计数据可视化"><a href="#6-设计数据可视化" class="headerlink" title="6. 设计数据可视化"></a>6. 设计数据可视化</h2><p>Tamara Munzner 开发了用于理解数据可视化设计和评估的最广泛使用的框架之一。这包括三个部分：</p>
+<p> 要可视化的数据类型是什么？<br>为什么 要可视化数据——用户希望执行什么任务？<br>数据如何 可视化表示以及提供了哪些交互<br>问题来自应用程序，并不关心 如何 （起初）。</p>
+<h3 id="6-1。什么：数据种类"><a href="#6-1。什么：数据种类" class="headerlink" title="6.1。什么：数据种类"></a>6.1。什么：数据种类</h3><p>不同类型的可视化适用于不同类型的数据。我将对不同类型的数据集和不同类型的数据使用以下分类。在本单元中，我们将主要对四种数据集感兴趣：</p>
+<p>表格数据集：我的意思是概念上组织成表格的数据，每一行对应一个不同的数据点或项目，每一列对应于数据的不同属性。这是传统统计学可以处理的数据类型，R 就是为这种数据设计的。<br>网络数据集：这是由节点或项目以及这些节点之间的链接组成的数据，这些节点代表不同类型的抽象关系，例如“reports-to”或“is-married-to”。项目可以包含属性。层次结构 是一种网络数据集。<br>空间数据集：这是其中项目与地理位置或区域相关联的数据，此地理键是组织和理解数据的自然方式。<br>文本数据集：这种数据集由单词序列和标点符号组成。<br>这些不是组织数据的唯一方式，但它们是数据科学和数据可视化中最常用的数据集类型。在科学可视化中使用的另一种组织数据的方法  field 是从连续的、概念上无限的域中采样数据。组织为字段的数据的一个示例是 X 射线图像。</p>
+<p>数据项中的属性是可以测量或记录的简单值。他们可以</p>
+<p>分类：没有固有顺序的数据。它通常被组织成一个层次结构。示例包括名称。<br>Ordered：可以排序或排序的数据。它有两个亚型<br>Ordinal：可以排序但项目之间的差异没有算术意义的数据。示例包括衣服尺寸（小、中、大）和调查响应量表，例如允许受访者从 5 点量表中进行选择，例如“强烈反对”、“不同意”、“中立”、“同意”、“强烈同意’。<br>定量的：具有支持算术比较的量级的数据。例如身高或体重。这可以是整数或实数。时间是定量数据的一个重要例子。有时定量数据分为 区间数据 和 比率 数据，但这种区别通常并不那么重要。不同之处在于比率数据具有自然 0，而区间数据则没有。因此，长度是比率数据的示例，而日期是间隔数据的示例。<br>有序数据既可以是 连续的，在这种情况下有最小值和最大值， 也可以是发散 的，在这种情况下可以理解为两个方向相反的序列，例如 从 -5 到 5 的喜欢&#x2F;不喜欢比例在中性值 0 附近发散。有序数据也可以是循环的，其中值环绕。时间测量通常是循环的，例如一年中的几个月。</p>
+<p>显示的数据不仅是原始数据，还可能是从原始数据计算得出的数据，例如统计值。</p>
+<h3 id="6-2-为什么：任务"><a href="#6-2-为什么：任务" class="headerlink" title="6.2. 为什么：任务"></a>6.2. 为什么：任务</h3><p>在设计可视化时，了解它需要支持的高级目标和任务是至关重要的。这些有很多分类。</p>
+<p>发现：分析师想要完成的基本任务是从数据中获得洞察力或知识。期望的结果可能是制定假设（“发现意外”）或检验假设（“确认预期”）。假设可以采取因果关系、趋势、相关性或集群的形式。</p>
+<p>展示：这个目标是指向某些目标受众展示已经发现的洞察力或知识。</p>
+<p>享受：这个目标是指创建旨在吸引临时用户参与数据的数据可视化。例如，这可能是一个有吸引力的信息图或像 Name Voyager这样的可视化 ，它显示了儿童名字的演变。</p>
+<p>我们将专注于发现任务。这依赖于执行一系列分析任务：</p>
+<p>搜索 满足某些属性的元素（如果存在）。这可能是定位已知数据点、过滤数据或查找异常值。<br>识别 单个数据项的属性<br>比较 或 排列 元素<br>直观 地识别某些元素子集中的模式。示例包括趋势、相关性、集群或类别。<br>计算  最初不在数据中的派生属性。这些可能是数据转换、数据聚合或可能是统计属性，例如回归线或聚类<br>分析任务依赖于演示任务：</p>
+<p> 通过将元素及其属性映射到可视变量来创建视图来进行可视化<br> 通过导航和选择元素子集来操作（或配置）视图<br>还有其他支持分析任务的用户任务</p>
+<p>用文本或图形元素注释 视觉元素<br>记录 可视化元素，以便可以在分析工具之外保存和访问它们。例如，Tableau 记录了一个图形历史记录，其中包含显示当前可视化是如何达到的快照<br>重新访问 早期的可视化或重新定位分析师先前发现的元素或模式</p>
+<h3 id="6-3-How-vis术语"><a href="#6-3-How-vis术语" class="headerlink" title="6.3. How: vis术语"></a>6.3. How: vis术语</h3><p>一旦你知道 你 想要可视化什么以及 为什么 要可视化，你需要决定 如何 最好地可视化它。Munzner 将其分为：</p>
+<p>(Visual) Encoding（视觉）编码：数据如何映射到每个视图中的视觉和空间变量；<br>Manipulate：用户如何与可视化和数据交互<br>Facet：如何排列和组合不同的视图<br>Reduction and Statistical Analysis缩减和统计分析：对数据进行聚合、过滤和统计分析的不同方式。</p>
+<h3 id="6-4-概括"><a href="#6-4-概括" class="headerlink" title="6.4. 概括"></a>6.4. 概括</h3><p>在本主题中，我们介绍了 Munzner 的 What-Why-How 框架，用于理解数据可视化设计。在随后的模块中，我们将更详细地研究不同类型数据的常见视觉编码和分析。</p>
+<h2 id="7-活动：五个设计表方法论"><a href="#7-活动：五个设计表方法论" class="headerlink" title="7. 活动：五个设计表方法论"></a>7. 活动：五个设计表方法论</h2><p>设计有效的数据可视化并不容易。与建筑、平面设计或软件设计等其他类型的设计活动一样，一个好的方法是生成、探索和评估各种不同的设计解决方案。草图和低保真原型让设计师可以快速探索想法，而不会陷入技术细节的困境。</p>
+<p>引入了 五张设计表方法 (FdS)  ，作为将这种设计方法形式化的一种方式，并用于向新的数据可视化设计师教授设计。正如您可能从 FdS 的名称所期望的那样，设计人员需要制作 5 个设计表。它以客户为中心，依靠与客户的初步讨论来了解需求，然后与客户讨论设计理念（表 2、3、4）。</p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>确定 要 可视化的数据类型以及 为什么 要可视化。准备好纸、尺子、彩色钢笔和铅笔，开始设计并弄清楚 如何设计。</p>
+<h3 id="表-1：想法表"><a href="#表-1：想法表" class="headerlink" title="表 1：想法表"></a>表 1：想法表</h3><p>这是最初的头脑风暴表。考虑设计的不同可能想法并将它们记下来。放松，在这个阶段没有任何想法是坏的。目的是充分探索设计空间，</p>
+<p>产生尽可能多的 想法 ，大约在 10 到 20 个之间。这可以单独完成，也可以在小组中完成。在纸上画出设计图。在这个阶段，它们将是迷你想法、半生不熟的解决方案。</p>
+<p>下一步是 过滤 小想法，删除重复和不相关或不可能的概念。</p>
+<p>将小创意分组到 类别中。想想是否有一些缺失的类别。</p>
+<p>将小创意组合并提炼 成更完整的解决方案。想想哪些可视化是相互补充的。</p>
+<p>质疑 并反思你创造的东西。这些设计是否解决了最初的问题？它们的优点和缺点是什么？确定在表 2,3 和 4 中将更详细地探讨哪 3 个想法。选择最好的想法和两个同样不错但完全不同的设计。</p>
+<h3 id="表-2、3-和-4：替代设计"><a href="#表-2、3-和-4：替代设计" class="headerlink" title="表 2、3 和 4：替代设计"></a>表 2、3 和 4：替代设计</h3><p>现在细化工作表 1 中确定的三个设计。为每个设计制作一个包含 5 个面板的工作表</p>
+<p>信息：适当的元信息，例如标题、作者和数据<br>布局：绘制最终的可视化或界面<br>操作：列出可视化界面使用 Action -&gt; Result 对支持的操作。<br>Focus&#x2F;Parti：详细说明可视化或界面中的核心概念<br>讨论：讨论设计的优点、缺点、可行性。这可能与客户一起完成</p>
+<h3 id="表-5：实现"><a href="#表-5：实现" class="headerlink" title="表 5：实现"></a>表 5：实现</h3><p>这是设计师的最终设计，详细说明了要交付的概念。这包含足够的关于设计、功能和交互的信息，以便实现它。它可能包括</p>
+<p> 主要设计模式、算法或数据结构和参考的描述<br>设计中使用的基础 数学 和计算，例如布局尺寸<br>软件 需求、依赖关系等<br> 成本、时间等估算<br>所需的任何 其他 要求或资源。<br>有关 FdS 的更多信息，请查看设计表 网站 和介绍它的论文 JCRoberts、CJHeadleand、PDRitsos，“使用五个设计表方法论绘制设计草图”， 可视化和计算机图形学交易，IEEE，22(1)， 2016 年 1 月。</p>
+<h1 id="W2-amp-W3"><a href="#W2-amp-W3" class="headerlink" title="W2 &amp; W3"></a>W2 &amp; W3</h1><h2 id="1-理解表格数据：概述"><a href="#1-理解表格数据：概述" class="headerlink" title="1. 理解表格数据：概述"></a>1. 理解表格数据：概述</h2><p>这是 FIT5147 数据探索和可视化单元中的第二个模块。在本模块中，您将了解用于显示表格数据的常用图形。这些是统计中常见的图形。</p>
+<h3 id="1-1。本模块的目标"><a href="#1-1。本模块的目标" class="headerlink" title="1.1。本模块的目标"></a>1.1。本模块的目标</h3><p>完成本模块后，您将拥有：</p>
+<p>查看用于显示表格数据的许多标准可视化（折线图、条形图、频率分布、时间序列数据等）并知道何时使用它们；</p>
+<p>查看多元表格数据（小倍数、MDS 等）的标准可视化，并知道何时使用它们；</p>
+<p>使用这些可视化来理解数据分布、测试假设（如正态性）和指导数据转换的能力；</p>
+<p>熟悉数据的曲线和曲面拟合；</p>
+<p>了解数据聚类技术；</p>
+<p>对 R 和图形包ggplot2 有第一手经验 </p>
+<p>读取、检查、清理和转换数据；</p>
+<p>为表格数据、曲线拟合、数据聚类和理解数据分布构建标准可视化；</p>
+<p>使用包 Shiny创建交互式可视化。</p>
+<h3 id="1-2-如何学习这个模块"><a href="#1-2-如何学习这个模块" class="headerlink" title="1.2. 如何学习这个模块"></a>1.2. 如何学习这个模块</h3><p>在这个模块中，我们利用公共领域的材料，包括期刊文章和不少视频。我们还采访了一些数据可视化专家</p>
+<h2 id="2-可视化表格数据"><a href="#2-可视化表格数据" class="headerlink" title="2. 可视化表格数据"></a>2. 可视化表格数据</h2><h3 id="2-1。基本统计图形"><a href="#2-1。基本统计图形" class="headerlink" title="2.1。基本统计图形"></a>2.1。基本统计图形</h3><p>各种简单的统计图形用于显示二维表格数据。这些图形显示了单个属性的数据分布和计数，或者一个属性相对于另一个属性如何变化，包括时间。此类图形仅显示单个属性的值或两个属性之间的关系。我们提供了最常见的简要回顾。</p>
+<p>对于表格数据，通常有一个 键 （又名 因子），这是一个独立的属性，充当数据的索引，而从属属性称为 值。关键属性可以是分类的或有序的，并且可以按层次组织。关键属性的不同值通常称为 级别。值属性可以是任何类型的属性：分类的、有序的或定量的。最常见的图形如下：</p>
+<ul>
+<li>Scatter plots 散点图 是应用最广泛的统计图形之一。它们显示了两个定量值变量，并且可以揭示变量之间的线性或曲线关系、变量之间的相关性以及极值（异常值）的存在。</li>
+<li>Bar charts 条形图 和 polar area charts极区图 显示键的定量值。条形图更易于阅读。</li>
+<li>Pie charts 饼图 或 normalised stacked bar chart 标准化堆积条形图 显示部分对整体的相对贡献。一般来说，饼图和其他径向布局比直线布局更难阅读。</li>
+<li>Line charts 折线图 或 dot charts 点图 显示有序关键属性的一个定量值。如果在值之间进行插值有意义，则使用折线图。通常用于显示时变数据。</li>
+<li>Histograms 直方图 （如bar chart条形图）和 density plots 密度图 （如line chart折线图）通常用于显示单个属性的数据值的频率。</li>
+<li>Box-and-whisker plots 盒须图 或 violin plots 小提琴图 提供了频率分布的简明摘要。</li>
+<li>Heat maps 热图 通常用于显示具有两个键的单个值属性。可以对行或列进行重新排序和聚类，以便具有相似数据值的键相邻。</li>
+<li>Tree maps 树图 可用于显示分层组织键的定量数据。</li>
+</ul>
+<h3 id="2-2-多元数据-Multivariate-data"><a href="#2-2-多元数据-Multivariate-data" class="headerlink" title="2.2. 多元数据 Multivariate data"></a>2.2. 多元数据 Multivariate data</h3><p>在大多数现实世界的数据科学应用程序中，表格数据是 多变量的：它具有两个以上的属性，通常更多。所以问题是，我们如何才能在二维（或至多三维）表面上显示两个以上的属性。Edward Tufte 将此称为离开 平地的问题。幸运的是，已经发明了许多用于显示多变量数据的巧妙图形，并且是数据科学家可视化库的重要组成部分。</p>
+<h3 id="2-3-显示-3D"><a href="#2-3-显示-3D" class="headerlink" title="2.3. 显示 3D"></a>2.3. 显示 3D</h3><p>最简单的情况是当我们只为我们的问题添加一个维度并希望可视化三个变量的值时。在这种情况下，我们可以使用在 科学可视化中开发的技术 来显示物理对象，例如建筑物、晶体或生物，或者我们 3D 世界中的流体、场或气体的行为。</p>
+<p>一种方法是在 2D 表面上显示第三个变量的轮廓 - 轮廓：<br>另一种是用三维扩展常见的 2D 图形，并使用 WebGL 等 3D 图形格式以 3D 形式呈现生成的 3D 对象、点云或表面。例如，通常在 3D 散点图中绘制数据点并使用金属丝网表面显示拟合曲线。</p>
+<p>我们还可以使用动画来展示额外的维度，展示二维图形在不同时间点是如何变化的。当要可视化的额外维度实际上是时间时，这是最有意义的。</p>
+<p>当然，以下任何用于多元可视化的更通用技术都可以用于三个变量的特定情况。</p>
+<h3 id="2-4-额外的视觉属性"><a href="#2-4-额外的视觉属性" class="headerlink" title="2.4. 额外的视觉属性"></a>2.4. 额外的视觉属性</h3><p>图形和图表由不同种类的几何对象组成：点、线和多边形。它们具有位置、形状，即一个点可能是十字形或圆形、多边形或条形、大小和视觉但非空间特征，例如颜色、纹理、阴影、线条粗细和样式、填充颜色，模糊等。其中一些特征，如颜色或纹理，可以进一步分解。例如色调、饱和度和亮度是颜色的独立属性。</p>
+<p>这种过多的空间和视觉特征可用于编码多个数据属性。因此，虽然图形乍一看是二维的，但实际上由于这些附加属性，它实际上是多维的。</p>
+<p>然而，虽然这可能非常有用，但生成的图形可能难以理解，可能难以感知不同属性之间的关系，并且在选择如何将数据属性映射到不同的空间和视觉特征时必须小心特征适合于对不同类型的数据进行编码。</p>
+<p>赫尔曼·切尔诺夫（Herman Chernoff）设计了一种显示多变量数据的更不寻常的方法。人类视觉系统的一部分专门用于人脸识别。为此拥有一个专门的组件具有进化意义，因为能够快速识别手持长矛接近的人的脸非常重要，这样您就知道是应该拥抱他们还是开始跑步。切尔诺夫发明了小卡通面孔的使用，现在称为 切尔诺夫面孔，其形状、耳朵大小、鼻子、眼睛、颜色以及眼睛和嘴巴的角度等特征都可以编码一个单独的数据属性。我个人觉得它们很可爱，但很难阅读。</p>
+<h3 id="2-5-多个图表"><a href="#2-5-多个图表" class="headerlink" title="2.5. 多个图表"></a>2.5. 多个图表</h3><p>处理多变量数据的一种方法是简单地使用多个图形。最常见的方法之一是选择一个变量，并为此变量的每个值（或如果有太多的选定值）创建一个图表，然后使用通用比例将生成的图表放置在网格、列或行中这样您就可以轻松地比较图表之间的值。塔夫特称这些 小倍数。每个图表显示数据的一个切片或横截面。</p>
+<p>另一种常见的方法是使用 scatter plot matrix 散点图矩阵 或 SPLOM 。顾名思义，这是一个二维散点图数组。每个维度都有一行和一列， 第 x 行 和 第y 列的条目显示了( x , y ) 的散点图 (X,是的) 价值观。这种图表有时被称为 绘图员显示 ，因为它显示了多维数据的正交投影，类似于由建筑师和工程师使用的地面平面、立面和立面组成的多视图正交平面图。</p>
+<p>一种相关的方法是使用包括多个简单图表的 coordinated display 协调显示 ，这些图表可能是不同种类的。每个都显示数据的不同方面，并将它们放在一个大显示器中。刷亮 和 过滤等用户交互技术  使查看者能够了解每个图表中的数据属性是如何链接在一起的。例如，当用户将鼠标悬停在一个图表中的某个点上时，对应于同一数据点的所有元素将在其他图表中突出显示。</p>
+<h3 id="2-6-叠加图形元素"><a href="#2-6-叠加图形元素" class="headerlink" title="2.6. 叠加图形元素"></a>2.6. 叠加图形元素</h3><p>另一种方法是通过将几个二维图形中的图形元素基本上重叠或并列以形成单个图表来创建多维图形。这类似于小倍数，但不是创建一个图表网格，一个图表对应某个选定变量的每个值，而是将这些不同图表中的显着图形元素组合成一个图表。</p>
+<p>复合条形图 和 堆积 条形图就是很好的例子。复合条形图将简单条形图中的条形并列放置，将它们并排放置，而堆叠条形图将它们放在彼此的顶部。根据记录，如果比较总数很重要，则堆叠条形图优于复合条形图，而如果您希望比较不同值的大小，则复合条形图更好。配对条形图是并列条形图的另一个特殊示例。</p>
+<p>多维表格、 面积图 和 多折线图以及 圆环图 是简单表格、折线图和饼图的多维等价物。 流图 类似于面积图，但不是堆叠在公共基线上。像饼图一样，应该避免使用圆环图。</p>
+<h3 id="2-7-平行坐标"><a href="#2-7-平行坐标" class="headerlink" title="2.7. 平行坐标"></a>2.7. 平行坐标</h3><p>还有一种方法是使用 平行坐标。在这里，一系列等距的垂直线，每个维度一个，为数据提供轴。通过在每个轴上绘制一个与该维度的数据点属性值相对应的点并通过直线连接相邻点来在这些轴上绘制一个数据点。与更常见的笛卡尔坐标相比，平行坐标具有很大的优势，它可以自然地缩放到任意数量的维度。</p>
+<p>轴之间的线交叉可以揭示相关性。如果两个相邻属性正相关，则它们之间的线段不会交叉，但如果它们负相关，它们将交叉。</p>
+<p>要注意的一件事是轴的顺序很重要，因此在探索数据时，您需要查看不同顺序的平行坐标，例如，每对维度至少在一个维度中彼此相邻的地块。</p>
+<p>蜘蛛图 是平行坐标的径向版本。像大多数圆形情节一样，我还不确定它们的用处。</p>
+<h3 id="2-8-降维"><a href="#2-8-降维" class="headerlink" title="2.8. 降维"></a>2.8. 降维</h3><p>最后一种方法是通过将多维数据投影到二维或三个维度来减少数据的维度。有两种常见的方法可以做到这一点。</p>
+<p>一种方法称为 多维缩放 或 MDS。这里的想法是在 2D 空间中为每个数据点找到一个位置，以便其属性具有相似值的点靠得很近，而具有不同值的点则相距更远。因此，可视化将相似的数据点聚集在一起。</p>
+<p>如果 x  和 _  是两个数据点和 x ‘  和 ‘ _  是它们在二维图中的位置，然后多维缩放试图使 d i s t ( x ′ , y ′ )  尽可能接近 d i s t ( x , y )  其中 d 我t ( u , v ) _  是二维或 n 维空间中两点之间的距离。通常不可能使这些距离完全相等，因此多维缩放会找到一个试图最小化距离之间的整体差异的位置。</p>
+<p>例如，如果我们有 4 个具有 4 个属性的数据点 ：( 0 , 0 , 0 , 1 )(0,0,0,1),  ( 0 , 0 , 1 , 0 ),  ( 0 ,1 ,0, 0 ), (1 , 0 ,0, 0 )   则每对点之间的欧几里得距离为 √ 2 （如果我们加上对应属性之间的距离）但是没有办法放置 4  点在一张纸上，使它们等距：最好是把它们放在一个正方形的图案中。</p>
+<p>另一种减少维度的常用方法是 主成分分析 或 PCA。这种方法找到正交维度，在其上投影数据点，在某种意义上最能解释数据的方差。更准确地说，如果您投影到二维 PCA 首先找到线 L 1  当数据投影到它上面时方差最大，然后是线 L 2  与 L 1正交  并且最大化剩余方差。数据绘制在散点图上，其中 x 和 y 值是每个点在 L 1上的投影  和 L 2 . 虽然 PCA 听起来很难计算，但实际上它很容易使用数据协方差或相关矩阵的特征值分解来计算。如果您有兴趣，请参阅 维基百科了解更多详细信息，并且这里 有一个使用 Iris 数据集的 PCA 示例 </p>
+<p>第三种在概念上类似于 MDS 的方法是 自组织图 (SOM)。这是一种神经网络。它不像 MDS 或 PCA 那样广泛使用。</p>
+<h3 id="2-9。概括"><a href="#2-9。概括" class="headerlink" title="2.9。概括"></a>2.9。概括</h3><p>在本模块中，我们回顾了基本的统计图形，然后查看了为显示多变量数据而发明的各种不同图形。虽然生成的图形对于理解多维数据非常宝贵，但它们需要一些解释技巧，因此必须谨慎使用。</p>
+<h2 id="3-趋势和模式分析"><a href="#3-趋势和模式分析" class="headerlink" title="3. 趋势和模式分析"></a>3. 趋势和模式分析</h2><p>尽管散点图、折线图或条形图有助于探索和理解数据，但很难判断总体趋势或模式是什么。分析可以通过汇总数据来帮助实现这一点。添加数据摘要或 “平滑器” 可以使查看全局模式变得更加容易。平滑是探索和理解数据的重要方式。也可以理解为一种模型拟合。另一种汇总数据的方法是使用聚类对相似的数据项进行分组。</p>
+<h3 id="3-1。简单线性回归"><a href="#3-1。简单线性回归" class="headerlink" title="3.1。简单线性回归"></a>3.1。简单线性回归</h3><p>平滑数据的最简单方法是简单地拟合一条直线。这称为 线性回归。线性回归找到一条尽可能接近所有点的“最佳拟合”线。</p>
+<p>我们也可以将线性回归理解为一种简单的模型拟合。给定一些数据点 ( x i , y i ) 我们想找到一个允许我们预测 y i值的线性模型 从 x我. 换句话说 ， _ 是自变量，  y i 是我们试图从 x i预测的因变量.</p>
+<p>我们的线性模型是方程 y i &#x3D; ( a + b x i ) + ϵ i是的一世&#x3D;(一种+bX一世)+ε一世 其中 a 和 b 给出最佳拟合线的系数：这只是 y &#x3D; ( a + b x )是的&#x3D;(一种+bX) 其中 一个 是 y 拦截和 bb 是线的梯度。项方程 ϵ i 称为残差：这是线预测 y i的值之间的差异 将和它的实际值。</p>
+<p>线性回归找到最适合数据的线（或更准确地说是系数 a 和 b）。这是通过最小化残差平方和来找到的。统计学家通过计算称为R 2的东西来计算线对数据的解释程度 R2. 这是模型解释的总变异的比例。接近 1 的值是好的，接近​​ 0 的值意味着模型解释得很少。</p>
+<p>在拟合数据时，绘制数据和最佳拟合线以了解残差非常重要。不要简单地使用 stats 包来计算最佳拟合线和 R 2R2 并假设一切都很好，如果 R 2R2 不太接近 0。请记住 Anscombe 的数据四重奏，其中四个非常不同的数据集具有相同的最佳拟合线和相同的 R 2值R2. 需要进行可视化分析才能看到最佳拟合线在左上角的数据集中是合适的，但在其他三个数据集中不合适。在右上角，这种关系显然不是线性的，需要一个非线性模型，而在底部的两个数据集中，一个异常值已经扭曲了最佳拟合线。</p>
+<p>事实上，绘制残差本身是一个好主意，因为这确实可以让您理解模型 没有 解释的内容。查看残差可以让您了解可以添加到模型中以更好地拟合数据的其他内容。</p>
+<h3 id="3-2-检查正态"><a href="#3-2-检查正态" class="headerlink" title="3.2. 检查正态"></a>3.2. 检查正态</h3><p>绘制残差的另一个原因是，它允许您检查作为回归和相关统计基础的假设：残差是均值为 0 的随机正态分布变量。请注意，只有残差需要正态分布，而不是原始值。</p>
+<p>有两种方法可以绘制数据来检查它是否是正态分布的。<br>首先是查看数据分布的直方图或密度图，看看它是否看起来像以均值为中心的正态分布。</p>
+<p>另一种检验正态性的方法是使用 QQ 图。QQ 图比较两个概率分布。它绘制了一个分布的分位数与另一个分布的分位数。因此名称，QQ 代表分位数 - 分位数图。如果图中的点位于 y &#x3D; x是的&#x3D;X 线那么两个概率分布是相同的。如果它们位于一条直线上，那么它们除了缩放和平移之外是相同的。</p>
+<p>要测试正态性，您只需将数据分布分位数与标准分布的分位数进行对比。如果四分位数位于一条合理的直线上，则数据分布是正态的。</p>
+<p>解释 QQ 图</p>
+<p>完全正态分布的残差将沿着恒等线 (y&#x3D;x) 对齐。<br>短尾线将水平转向。<br>长尾巴会垂直偏离线。<br>预计会有一些变化，即使是正常的残差！</p>
+<h3 id="3-3-数据转换"><a href="#3-3-数据转换" class="headerlink" title="3.3. 数据转换"></a>3.3. 数据转换</h3><p>如果数据（例如残差）不是正态分布的，那么有很多方法可以处理这个问题。一种方法是使用不依赖于正态假设的稳健或非参数测试。这些通常依赖于修剪数据以减少异常值的影响，或者简单地使用值的相对等级，而不是它们的精确数量。</p>
+<p>另一种方法是统一变换观察结果以消除峰态或偏斜。一些有用的转换（来自 Field et al,  Discovering Statistics Using R , 2012）是</p>
+<p>对数变换 ( l o g ( X )l○G(X)) . 这会挤压分布的右尾，并可以纠正分布之间的正偏斜和不等方差。不过要小心，因为它只对正数有意义，所以您可能需要先向数据添加一个常数。<br>平方根变换 ( s q r t ( X )sqr吨(X)) . 这与对数转换的效果相似，但没有那么严重。同样，数据必须是积极的。<br>倒数变换 ( 1 &#x2F; X1&#x2F;X) . 这也减少了大分数的影响。要小心，因为它会颠倒分数的排名来解决这个问题，你可以使用 1 &#x2F; ( X m a x − X )1&#x2F;(X米一种X-X)<br>反向分数转换：为了克服负偏度的影响，您可以通过例如应用转换 ( X m a x - X )来简单地反转分数(X米一种X-X) 然后应用上述转换之一。</p>
+<h3 id="3-4-其他类型的曲线拟合"><a href="#3-4-其他类型的曲线拟合" class="headerlink" title="3.4. 其他类型的曲线拟合"></a>3.4. 其他类型的曲线拟合</h3><p>在线性回归中，我们使用一个变量作为预测变量将一条直线拟合到数据中。当然，还有很多更复杂的曲线和曲面可以拟合到因变量，所有这些都是一种模型，可以让我们从自变量中预测因变量的值。一些更常见的包括</p>
+<p>多元（线性） 回归：其中因数据由多个自变量解释。在这种情况下，我们仍然为数据拟合一条线，但它对每个自变量都有一个梯度系数。<br>多项式回归：我们可以将更复杂的多项式拟合到数据中。<br>LOESS：局部加权多项式回归。这将低次多项式拟合到每个数据点周围的数据子集。<br>无论拟合的曲线类型如何，绘制残差总是有用的，以便更好地理解模型的作用和未解释的内容。</p>
+<p>到目前为止，我们假设独立值的值是完全已知的，或者实际上我们有独立变量和因变量。如果我们想同等对待这两种变量，那么我们必须使用 总最小二乘法。总体而言，残差测量数据点与拟合曲线上最近点之间的距离。</p>
+<h3 id="3-5-不确定"><a href="#3-5-不确定" class="headerlink" title="3.5. 不确定"></a>3.5. 不确定</h3><p>然而，最佳拟合线的简单可视化存在一个潜在问题：很难理解其预测能力的不确定性水平。鉴于残差是正态分布的，可以计算最佳拟合线周围的区域，其中实际数据值的概率为 80% 或 90%。</p>
+<p>如果可以的话，在数据可视化中以视觉方式指示不确定性非常重要，以便读者了解他们对数据或模型的信任程度。如果不这样做，很容易相信可视化是完全准确的：眼见为实。</p>
+<h3 id="3-6-聚类"><a href="#3-6-聚类" class="headerlink" title="3.6. 聚类"></a>3.6. 聚类</h3><p>另一种汇总数据或查看模式的方法是使用聚类。聚类尝试将“相似”的数据项组合在一起。它是数据科学的核心部分，在课程的其他单元中有更详细的介绍。有大量的聚类方法，例如参见 Cluster Analysis (wikipedia)。聚类技术可以分为</p>
+<ul>
+<li>硬聚类 或 软聚类：在硬聚类中，一个项目要么属于一个聚类，要么不属于一个聚类，而在软聚类或模糊聚类中，一个项目有一定的属于一个聚类的可能性</li>
+<li>严格 或 重叠分区：在严格分区中，一个项目恰好属于一个集群，而在重叠分区中，它可以属于多个</li>
+<li>层次聚类：集群形成层次结构，即属于子集群的项目也属于父集群。<br>没有单一的最佳聚类算法，它们都有局限性。这意味着可视化结果并查看聚类是否合理或比较不同的聚类非常重要。例如，在以下取自 wikimedia 的示例中，我们看到 k-means 聚类给出了与 EM 聚类完全不同的结果。<br>K-means Clustering 迭代地计算每个集群的质心，而 EM（期望最大化）算法 迭代地优化集群的高斯分布模型的未知参数，并在每一步计算每个项目属于特定集群的可能性。在这种情况下，EM 算法的性能更好，给出的结果更接近左侧所示的已知聚类。</li>
+</ul>
+<p>聚类分析的基本步骤是</p>
+<ol>
+<li>如有必要，对数据进行规范化。最常见的方法是使用 z 分数。</li>
+<li>决定如何衡量项目之间的相似性。在上面的示例中，我们使用了欧几里德距离，但还有许多其他选择。</li>
+<li>选择聚类方法，如果需要，选择聚类数。</li>
+<li>可视化集群并尝试确定它们是否有意义以及它们的含义。</li>
+</ol>
+<h3 id="3-7-层次聚类"><a href="#3-7-层次聚类" class="headerlink" title="3.7. 层次聚类"></a>3.7. 层次聚类</h3><p>基于连通性的聚类 是一种直观简单且常用的聚类方法。它们通过迭代地连接两个最相似的集群以形成一个新的父集群来创建一个层次集群。最初，每个项目形成自己的集群。例如，考虑将 UPGMA（使用算术平均值的未加权对组方法）方法应用于具有两个属性的 5 个项目的假设数据集。</p>
+<p>最初，每个观察被分配到它自己的集群。为了测量两个集群之间的相似性，我们使用两个集群成员之间的平均欧几里得距离。</p>
+<p>将它们之间平均距离最小的两个簇合并形成一个新的簇。在这种情况下，观察 1 和 2 合并形成新的集群 1-2。<br>我们重复这个过程：接下来的观察 4 和 5 被合并<br>现在最后两个集群合并了。</p>
+<p>层次聚类的结果通常使用树状图显示。在此图中，一棵树显示了集群层次结构，其中父节点的位置显示了两个集群的相似程度。例如，在我们的示例中，它显示集群 1 和 2 的平均欧几里得距离为 5，而集群 3 和 1-2 的平均距离为 12.35。</p>
+<p>cophenetic相关系数 可用于检查层次聚类对数据的解释程度。这测量了每对项目之间的原始相似性与树状图中给出的相似性之间的相关性。例如，在我们的示例中，1 和 3 之间的原始相似度为 12.04，但树状图中的相似度为 12.35，因为这是与集群 1-2-3 相关联的平均欧几里德距离，该集群是包含 1 和 3 的最小集群。更复杂的分析也是可能的。 </p>
+<h3 id="3-8-概括"><a href="#3-8-概括" class="headerlink" title="3.8. 概括"></a>3.8. 概括</h3><p>曲线拟合和聚类是两种常用的汇总表格数据的统计技术。曲线拟合可平滑数据并在对相似项目进行聚类时揭示趋势。在这两种情况下，使用可视化对结果进行“健全性检查”都很重要。尝试不同的“平滑”和聚类方法也很重要，因为没有一种最好的方法，不同的方法可以给出完全不同的结果。</p>
+<h2 id="4-活动：使用-R-的高级绘图"><a href="#4-活动：使用-R-的高级绘图" class="headerlink" title="4. 活动：使用 R 的高级绘图"></a>4. 活动：使用 R 的高级绘图</h2><h3 id="4-1-ggplot2介绍"><a href="#4-1-ggplot2介绍" class="headerlink" title="4.1  ggplot2介绍"></a>4.1  ggplot2介绍</h3><p>库是 ggplot2，函数是 ggplot——注意这一点。</p>
+<p>基于第 4.4 章。“Introducing ggplot2” in “Discovering Statistics Using R”、Andy Field、Jeremy Miles 和 Zoë Field (2012) 以及“ggplot 备忘单”，例如</p>
+<p>ggplot2 备忘单</p>
+<h4 id="4-1-1-理念"><a href="#4-1-1-理念" class="headerlink" title="4.1.1 理念"></a>4.1.1 理念</h4><p>ggplot2 是 Hadley Wickham 的著名文章“A Layered Grammar of Graphics”的实现。</p>
+<p>它旨在创建结构良好的 统计图形 （按层）。</p>
+<h4 id="4-1-2-层"><a href="#4-1-2-层" class="headerlink" title="4.1.2 层"></a>4.1.2 层</h4><p>在 ggplot2 中，图形由一系列 层组成。</p>
+<p>您可以将图层想象成一个透明的，上面印有一些东西。那个“东西”可能是</p>
+<ul>
+<li>积分</li>
+<li>线条</li>
+<li>bar</li>
+<li>符号（数据点的圆圈、正方形）<br>还可能是：</li>
+<li>legend</li>
+<li>轴标题</li>
+<li>轴刻度</li>
+<li>等等<br>为了制作最终的plot，这些透明胶片被放置在彼此的顶部。<br>可以看出，每一层都包含条形、点、文本等视觉对象。视觉元素在 ggplot2 中称为 geoms  （“几何对象”的缩写）。因此，当我们定义一个层时，我们必须告诉 R 我们想要在该层上显示什么几何图形（我们想要一个条形、线、点等吗？）。</li>
+</ul>
+<p>4.1.3 美学 Aesthetics<br>这些几何图形还具有决定它们的外观和绘制位置的美学属性（我们想要红色条还是绿色条？我们希望我们的数据点是三角形还是正方形？等等）。</p>
+<p>这些美学（简称aes()  ）控制图形元素的外观（例如，它们的颜色、大小、样式和位置）。</p>
+<p>美学可以为整个地块定义，也可以为特定层单独定义。它们控制几何或图层中元素的外观。</p>
+<p>美学指定如何从数据属性映射到视觉或几何属性。</p>
+<p>4.1.4 几何对象（geoms）<br>有多种几何函数可以确定在图层上打印哪种几何对象。以下是您可能使用的一些更常见的列表（完整列表请参见 ggplot2 网站 <a href="http://ggplot2.tidyverse.org/reference/" target="_blank" rel="noopener">http://ggplot2.tidyverse.org/reference/</a> 或者您可以让 R 告诉您，见下文）：</p>
+<ul>
+<li>geom_bar()：创建一个带有代表不同统计属性的条的层。</li>
+<li>geom_point()：创建一个显示数据点的图层（就像您在散点图上看到的那样）。</li>
+<li>geom_line()：创建一个用直线连接数据点的层。</li>
+<li>geom_smooth()：创建一个包含“平滑”的层（即，将数据汇总为一个整体而不是连接单个数据点的线）。</li>
+<li>geom_histogram()：创建一个带有直方图的图层。</li>
+<li>geom_boxplot()：创建一个带有盒须图的层。</li>
+<li>geom_text()：创建一个带有文本的图层。</li>
+<li>geom_density(): 创建一个带有密度图的层。</li>
+<li>geom_errorbar()：创建一个显示错误栏的图层。</li>
+<li>geom_hline(), geom_vline()：直线</li>
+</ul>
+<p>首先加载 ggplot 库，使用以下代码：</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">require<span class="punctuation">(</span>ggplot2<span class="punctuation">)</span> <span class="comment"># load ggplot2 first</span></span><br></pre></td></tr></table></figure>
+<p>这是 ggplot 的语法（不是真正的代码）：<br><code>myGraph &lt;- ggplot(myData, aes(variable for x axis, variable for y axis))</code></p>
+<p>我们首先需要有数据。在这里，我们来看一个内置的数据集 mtcars。<br><code>help(mtcars)</code><br>如果您不了解 R 中的某些内容，请尝试使用该 help 功能。</p>
+<p>通常，你会很幸运。输出将在 RStudio 的 右下角 。</p>
+<p>现在，我们使用这个数据集并让 x &amp; y 为 mpg 和 hp</p>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">myGraph <span class="operator">&lt;-</span> ggplot<span class="punctuation">(</span>data <span class="operator">=</span> mtcars<span class="punctuation">,</span> aes<span class="punctuation">(</span>x <span class="operator">=</span> mpg<span class="punctuation">,</span> y <span class="operator">=</span> hp<span class="punctuation">)</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-ggplot2-可视化"><a href="#4-2-ggplot2-可视化" class="headerlink" title="4.2. ggplot2 可视化"></a>4.2. ggplot2 可视化</h3><p>让我们用 ggplot2 做一些真正的可视化。</p>
+<p><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf" target="_blank" rel="noopener">ggplot 备忘单</a><br>实际上有两种方法可以使用 ggplot2 进行绘图：</p>
+<p>使用 qplot() 函数进行快速绘图；和<br>使用 ggplot() 函数逐层构建绘图。<br>毫无疑问， qplot() 函数会让你更快地开始；然而，ggplot() 函数提供了更大的通用性。</p>
+<h2 id="5-活动：使用-R-的交互式图表"><a href="#5-活动：使用-R-的交互式图表" class="headerlink" title="5. 活动：使用 R 的交互式图表"></a>5. 活动：使用 R 的交互式图表</h2><h3 id="5-1。Shiny"><a href="#5-1。Shiny" class="headerlink" title="5.1。Shiny"></a>5.1。Shiny</h3><p>Shiny 是一个 R 包，可以轻松地直接从 R 构建交互式 Web 应用程序（应用程序）。如果您尚未安装 Shiny 包，请打开 RStudio。并按照模块 1 第 5.3 节中的说明安装 “shiny” 软件包。</p>
+<p>它有一些内置的例子。让我们尝试其中之一：</p>
+<h3 id="5-2-其他方法"><a href="#5-2-其他方法" class="headerlink" title="5.2. 其他方法"></a>5.2. 其他方法</h3><p>还有许多其他方法可以在 R 中制作交互式图形。 ggvis 来自 ggplot 的制造商。它旨在使构建交互式图形以进行探索性数据分析变得容易。与 Shiny 类似，您需要安装 ggvis 包。安装后，运行以下命令（在新文件中，根据需要命名）：<br>在幕后，交互式绘图是使用 shiny构建的，您目前在给定的 R 会话中一次只能运行一个。然而，看起来 ggvis 不再被开发。</p>
+<p>Shiny 的替代方案是 plotly：</p>
+<p>“Plotly 是使用 Python 和 Django 框架构建的，前端使用 JavaScript 和可视化库 D3.js、  HTML 和 CSS。文件托管在 Amazon S3上”—— 非常值得一看，有用于 R &amp; Python 的 API，还有库，还有转换绘图的工具。</p>
+<h3 id="6-活动：使用-R-进行聚类"><a href="#6-活动：使用-R-进行聚类" class="headerlink" title="6. 活动：使用 R 进行聚类"></a>6. 活动：使用 R 进行聚类</h3><p>在本活动中，我们使用 iris 数据集和一些板球数据来研究 R 中的聚类和聚类可视化。</p>
+<p><a href="https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html" target="_blank" rel="noopener">https://cran.r-project.org/web/packages/dendextend/vignettes/Cluster_Analysis.html</a></p>
+]]></content>
+      <tags>
+        <tag>data</tag>
+        <tag>visualization</tag>
       </tags>
   </entry>
 </search>
