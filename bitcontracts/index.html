@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"c0mm4nd.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":null,"show_result":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Bitcontracts：传统区块链上支持智能合约摘要：在本文中，我们提出了 Bitcontracts，这是一种新颖的解决方案，可以在未修改的传统加密货币（如原生不支持合约的比特币）之上安全高效地执行通用智能合约。我们解决方案的出发点是一个链下执行模型，其中合约的发行者指定一组服务提供商来执行合约的代码。如果法定数量的服务提供商报告相同的结果，并且客户可以自由选择他们信任和使用哪些此类合约，则合约">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bitcontracts: Supporting Smart Contracts in Legacy Blockchains">
+<meta property="og:url" content="https://c0mm4nd.com/bitcontracts/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="Bitcontracts：传统区块链上支持智能合约摘要：在本文中，我们提出了 Bitcontracts，这是一种新颖的解决方案，可以在未修改的传统加密货币（如原生不支持合约的比特币）之上安全高效地执行通用智能合约。我们解决方案的出发点是一个链下执行模型，其中合约的发行者指定一组服务提供商来执行合约的代码。如果法定数量的服务提供商报告相同的结果，并且客户可以自由选择他们信任和使用哪些此类合约，则合约">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-10T19:20:25.000Z">
+<meta property="article:modified_time" content="2021-10-26T05:37:12.000Z">
+<meta property="article:author" content="Command M">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://c0mm4nd.com/bitcontracts/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://c0mm4nd.com/bitcontracts/","path":"/bitcontracts/","title":"Bitcontracts: Supporting Smart Contracts in Legacy Blockchains"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Bitcontracts: Supporting Smart Contracts in Legacy Blockchains | Talkless</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Talkless</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">72</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">70</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bitcontracts%EF%BC%9A%E4%BC%A0%E7%BB%9F%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%8A%E6%94%AF%E6%8C%81%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6"><span class="nav-number">1.</span> <span class="nav-text">Bitcontracts：传统区块链上支持智能合约</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E5%BC%95%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">I. 引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-%E9%97%AE%E9%A2%98%E9%99%88%E8%BF%B0"><span class="nav-number">1.2.</span> <span class="nav-text">II. 问题陈述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.2.1.</span> <span class="nav-text">A. 动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-%E5%85%88%E5%89%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">1.2.2.</span> <span class="nav-text">B. 先前解决方案的局限性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-Bitcontracts-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.</span> <span class="nav-text">III. Bitcontracts 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-%E6%89%A7%E8%A1%8C%E5%92%8C%E4%BF%A1%E4%BB%BB%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">A. 执行和信任模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-%E6%8C%91%E6%88%98"><span class="nav-number">1.3.2.</span> <span class="nav-text">B. 挑战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-Bitcontracts%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">C. Bitcontracts概述</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-%E5%90%88%E7%BA%A6%E9%83%A8%E7%BD%B2"><span class="nav-number">1.3.3.</span> <span class="nav-text">B. 合约部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E5%90%88%E5%90%8C%E6%89%A7%E8%A1%8C"><span class="nav-number">1.3.4.</span> <span class="nav-text">C. 合同执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-%E5%90%88%E7%BA%A6%E4%BE%9D%E8%B5%96"><span class="nav-number">1.3.5.</span> <span class="nav-text">D. 合约依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-%E9%A2%84%E8%A8%80%E6%9C%BA%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.6.</span> <span class="nav-text">E. 预言机的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V-%E5%B1%9E%E6%80%A7%E5%88%86%E6%9E%90"><span class="nav-number">1.4.</span> <span class="nav-text">V. 属性分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-%E4%BB%BB%E6%84%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8"><span class="nav-number">1.4.1.</span> <span class="nav-text">A. 任意数据的存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-%E5%A4%9A%E6%96%B9%E6%8E%88%E6%9D%83"><span class="nav-number">1.4.2.</span> <span class="nav-text">B. 多方授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E7%8A%B6%E6%80%81%E7%9B%B8%E5%85%B3%E4%BA%A4%E6%98%93%E6%9C%89%E6%95%88%E6%80%A7"><span class="nav-number">1.4.3.</span> <span class="nav-text">C. 状态相关交易有效性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-%E5%8E%9F%E5%AD%90%E6%80%A7%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.4.4.</span> <span class="nav-text">D. 原子性事务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VI%E3%80%81%E5%A5%96%E5%8A%B1"><span class="nav-number">1.5.</span> <span class="nav-text">VI、奖励</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VII-%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90"><span class="nav-number">1.6.</span> <span class="nav-text">VII. 安全分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VIII-%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.7.</span> <span class="nav-text">VIII. 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Python-%E5%BA%93"><span class="nav-number">1.7.1.</span> <span class="nav-text">A. Python 库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-%E5%9F%BA%E4%BA%8E%E7%B1%BB%E6%AF%94%E7%89%B9%E5%B8%81%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="nav-number">1.7.2.</span> <span class="nav-text">B. 基于类比特币数字货币的实例化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IX%E3%80%82%E8%AF%84%E4%BC%B0"><span class="nav-number">1.8.</span> <span class="nav-text">IX。评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-%E4%BC%A0%E7%BB%9F%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E7%9A%84Bitcontracts"><span class="nav-number">1.8.1.</span> <span class="nav-text">A. 传统加密货币的Bitcontracts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-Bitcontracts%E4%B8%8A%E6%B5%81%E8%A1%8C%E7%9A%84%E4%BB%A5%E5%A4%AA%E5%9D%8A%E5%90%88%E7%BA%A6"><span class="nav-number">1.8.2.</span> <span class="nav-text">B. Bitcontracts上流行的以太坊合约</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X%E3%80%81%E7%BB%93%E8%AE%BA"><span class="nav-number">1.9.</span> <span class="nav-text">X、结论</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://ngchain.org/" title="https:&#x2F;&#x2F;ngchain.org" rel="noopener" target="_blank">ngchain</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/bitcontracts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Bitcontracts: Supporting Smart Contracts in Legacy Blockchains | Talkless">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Bitcontracts: Supporting Smart Contracts in Legacy Blockchains
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-10-11 03:20:25" itemprop="dateCreated datePublished" datetime="2021-10-11T03:20:25+08:00">2021-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-10-26 13:37:12" itemprop="dateModified" datetime="2021-10-26T13:37:12+08:00">2021-10-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Bitcontracts：传统区块链上支持智能合约"><a href="#Bitcontracts：传统区块链上支持智能合约" class="headerlink" title="Bitcontracts：传统区块链上支持智能合约"></a>Bitcontracts：传统区块链上支持智能合约</h1><p><strong>摘要：</strong>在本文中，我们提出了 Bitcontracts，这是一种新颖的解决方案，可以在未修改的传统加密货币（如原生不支持合约的比特币）之上安全高效地执行通用智能合约。我们解决方案的出发点是一个链下执行模型，其中合约的发行者指定一组服务提供商来执行合约的代码。如果法定数量的服务提供商报告相同的结果，并且客户可以自由选择他们信任和使用哪些此类合约，则合约的执行结果被接受。本文的主要技术贡献是如何在不修改底层区块链的情况下安全高效地实现这样的信任模型。我们还确定了区块链系统必须支持的一组通用属性，以便可以安全地添加富有表现力的智能合约，并根据这些标准分析流行的现有区块链。</p>
+<span id="more"></span>
+
+<h2 id="I-引言"><a href="#I-引言" class="headerlink" title="I. 引言"></a>I. 引言</h2><p>由以太坊 [48] 等系统推广的智能合约允许在没有受信任的第三方的情况下实现几乎任意的业务逻辑。智能合约是代码和执行结果记录在链上的程序。典型的合约使合约参与者能够将资金加载到由合约代码控制的地址或帐户，该代码定义了稍后如何将加载的资金从合约中移出。</p>
+<p>将合约添加到货币中。虽然智能合约的概念已经显示出巨大的前景，但许多当前流行的加密货币，例如比特币 [36]、莱特币、瑞波币 [2] 或<br>Stellar [3]，本身不支持它们。因此，调查是否可以将合同执行功能添加到此类区块链变得很重要。由于这样的区块链平台已经吸引了大量的投资、用户和开发者，通常最好通过合约执行来扩展这些平台，而不是尝试将现有用户、资产和投资迁移到其他平台。</p>
+<p>使用新的合约执行能力扩展现有区块链的另一个原因是，即使某些现有平台支持合约，但可以在这些系统上实施的合约类型可能会受到严重限制。例如，以太坊使用图灵完备的编程语言，但由于内置区块 gas 限制，可以实现为合约的计算复杂度非常有限</p>
+<p>在本文中，我们的主要目标是设计一种解决方案，将富有表现力的智能合约执行支持作为子系统添加到现有的传统区块链系统中。我们解决方案的主要用途是增强像比特币这样没有内置智能合约功能的系统。次要用途是扩展像以太坊这样支持合约但对允许计算的复杂度有严重限制的平台的合约执行能力</p>
+<p><strong>之前的工作</strong>。最近的研究探索了为区块链添加合约执行功能的不同方法。例如，Arbitrum [25] 和 ACE [50] 使用链下执行模型，其中合约发行者指定一组负责执行合约并将结果传达回链的经理。 Hyperledger Fabric [5] 在具有执行-订单-验证架构的许可设置中使用类似的模型，在该架构中，交易在排序之前执行。这种解决方案的主要缺点是它们是专门构建的新系统，因此在不修改底层区块链的情况下，此类系统无法部署在遗留系统上。</p>
+<p>另一个提案 FastKitten [16] 依赖于飞地执行和抵押品，但仅支持仅限于已知参与者的短期合约。此外，这样的系统不能容忍飞地妥协。最近发现的攻击 [11]、[45]、[29]、[13]、[44] 表明 TEE 妥协是一个相关的威胁。我们在第 II-B 节中更详细地讨论了先前解决方案的局限性。</p>
+<p><strong>我们的解决方案</strong>。在本文中，我们提出了一个新的系统，称为<br>Bitcontracts 为传统加密货币添加了富有表现力的智能合约执行功能，而不需要对传统系统进行协议更改，并克服了以前解决方案的主要限制</p>
+<p>我们解决方案的起点是一个链下执行模型，类似于之前的系统，如 Arbitrum、ACE 或 Fabric。在 Bitcontracts 中，合约发行者指定一组执行合约代码的服务提供者。指定的执行集与合约代码一起记录在链上，合约参与者可以自由选择是否接受该集。与要求所有服务提供商就执行结果达成一致（如 Arbitrum 中所做的那样）或完全信任执行环境（如 FastKitten 中所要求的）不同，我们利用了类似于 ACE 的更灵活的基于仲裁的信任模型，其中执行结果当 n 个服务提供商中的 t 个报告相同的结果时被接受。这样的模型可以提供强大的安全性（最多 t-1 个服务提供商可能会受到损害）和良好的可用性（最多 n-t 个服务提供商可能没有响应）。</p>
+<p>我们解决的主要技术挑战是如何安全高效地实现这种信任模型，而不需要对底层的传统区块链平台进行任何修改。为了实现这一点，Bitcontracts 利用了以下两个想法。我们的第一个观察是，通过将每个合约的状态存储在链上，服务提供者可以保持无状态，这降低了协议的复杂性并简化了部署，因为服务提供者不需要彼此通信并且不必运行昂贵的（在通信条款）共识协议，以就合同的当前状态达成一致，这使我们的解决方案高效。我们的第二个观察是，通过将每个执行结果的有效性绑定到链的最新有效状态，我们可以启用任意仲裁大小并防止竞争条件，即对手为影响同一合约的不同执行结果获得两个可接受的仲裁。由于这些观察，Bitcontracts 没有实例化新的共识协议。相反，Bitcontracts 是有目的地设计的，它通过利用底层遗留区块链的现有共识协议来保证执行完整性和可序列化性。我们使用执行顺序模型来做到这一点，该模型确保（在排序时）只有可序列化的交易才能包含在链中。这是与 Hyperledger Fabric 的 order-execute-validate 架构的一个关键区别，它需要一个额外的验证步骤，如果没有协议更改，则无法将其改装到传统区块链中。我们在第 II-B 节中更详细地讨论了这一点。</p>
+<p>Bitcontracts 不需要更改底层的传统区块链，只要它支持四个通用属性。第一个属性是辅助存储，用于在链上存储合约状态。通过将数据编码为遗留事务，可以实现辅助存储。第二种是集体授权，大多数区块链都支持作为多重签名交易。第三个是状态依赖，它确保我们的解决方案中的可序列化。所有基于 UTXO 的系统都隐式支持状态依赖性，并且可以在大多数基于帐户的系统中明确强制执行。第四个属性是事务原子性，它使合约能够安全地执行复杂的操作。</p>
+<p>我们分析了流行的加密货币，包括比特币、莱特币、Zcash、以太坊、Ripple 和 Stellar，并表明大多数流行的区块链部署都支持这些属性。在少数情况下，当缺少其中一个属性时，我们会解释如何轻松添加它们。</p>
+<p>最后，我们从三个方面分析Bitcontracts 。首先，我们解释了如何在像 Bitcontracts 这样的解决方案中通过执行费用和订阅模型等标准手段来激励合约执行。其次，我们证明了 Bitcontracts 在我们选择的灵活信任模型下提供了强大的安全性和活性保证。第三，我们实现了一个 Bitcontracts 原型，它在未修改的比特币和其他传统加密货币之上运行 Python 合约，并表明所涉及的交易费用很小（例如，每次调用合约只需几美分）。我们还通过从 13 万个以太坊区块中抓取数据并利用 100 个最受欢迎的以太坊合约中的合约调用交易来评估Bitcontracts 与以太坊的交易规模和成本。我们得出的结论是，在 Bitcontracts 中运行流行的智能合约是实用的——而且通常比在以太坊中更便宜。</p>
+<p><strong>贡献和路线图</strong>。 总而言之，在本文中，我们做出了以下贡献：</p>
+<ul>
+<li>新解决方案：我们提出Bitcontracts，在未经修改的传统加密货币上实现安全、高效和富有表现力的智能合约（第三和第四部分）。</li>
+<li>需求分析：我们确定区块链需要提供的最小属性集以允许表达智能合约并基于此标准分析现有区块链（第 V 部分）。</li>
+<li>Bitcontracts 分析：我们解释了如何在Bitcontracts 中添加激励措施（第六部分）； 我们证明了 Bitcontracts 提供了安全性和活跃性（第 VII 节）； 我们提供与比特币兼容的 Bitcontracts 实现（第 VIII 节）； 我们评估了 Bitcontracts 在流行区块链平台上的执行成本，并分析了 Bitcontracts 中执行流行的现实世界智能合约的成本（第 IX 节）。</li>
+</ul>
+<h2 id="II-问题陈述"><a href="#II-问题陈述" class="headerlink" title="II. 问题陈述"></a>II. 问题陈述</h2><p>在本节中，我们激励我们的工作并解释以前解决方案的局限性。</p>
+<h3 id="A-动机"><a href="#A-动机" class="headerlink" title="A. 动机"></a>A. 动机</h3><p>区块链技术吸引了大量的商业兴趣，主要集中在智能合约及其应用上（有关简要背景，请参阅附录 A）。</p>
+<p>存在部署智能合约的三个基本选项：第一个是使用现有的区块链平台，如提供内置合约支持的以太坊。二是打造新的区块链平台。第三个选项——我们在本文中研究的——是将合约执行能力改造为现有的和未修改的遗留区块链。</p>
+<p>使用新的合约执行功能增强现有平台的原因有很多。</p>
+<p>第一个原因是像比特币这样的平台已经聚集了大量的投资和用户群。例如，在撰写本文时（2020 年 6 月），比特币的市值占整个区块链市场的一半以上 [1]。将所有投资资金和现有用户迁移到新平台既昂贵又复杂。</p>
+<p>第二个原因是成功推出一个新的区块链平台很难。一个功能齐全的区块链平台需要一个完整的生态系统，包括开发者、工具、矿工、投资者、用户、客户等。从头开始引导所有这些非常昂贵并且可能会失败。</p>
+<p>第三个原因是现有的支持智能合约的区块链平台对可以实现的计算类型有很大的限制。例如，以太坊的 gas 限制将合约限制为非常简单和简短的计算。在许多商业用例中，运行比以太坊目前允许的更复杂的计算是可取的。</p>
+<p>第四，现有的智能合约平台基于专用（通常是利基）编程语言。比如以太坊在实践中需要使用 Solidity 或者 Vyper hat 可以编译成 EVM 字节码1。大多数开发人员更熟悉 Python 或 Java 等通用语言。如果开发人员可以使用他们最喜欢的编程语言来编写智能合约，并且如果可以在不同的智能合约平台上重复使用相同的合约代码，他们就会受益。</p>
+<p>鉴于这些原因，我们在本文中的主要目标是为现有的传统区块链添加富有表现力的智能合约执行功能，其次要目标是使开发人员能够使用他们喜欢的编程语言编写合约。</p>
+<p>我们专注于启用以太坊风格的智能合约，这可能是“智能合约”一词最常见的定义。在附录 A 中，我们讨论了以太坊风​​格的智能合约与其他类型的链上计算（例如对私有数据进行操作的计算）的比较。</p>
+<h3 id="B-先前解决方案的局限性"><a href="#B-先前解决方案的局限性" class="headerlink" title="B. 先前解决方案的局限性"></a>B. 先前解决方案的局限性</h3><p><strong>侧链执行</strong>。使用附加功能扩展传统货币的一种已知方法是使用侧链。存在一些针对不同用例的侧链机制建议。例如，Liquid [19] 旨在实现快速资产转移，但不提供富有表现力的智能合约。 Rootstock (RSK) [30] 使用基于与比特币价值挂钩的自有货币 (RBTC) 的侧链为比特币启用智能合约。这是通过仅在先前在多重签名条件下将相同数量的 BTC 锁定到一组阈值可信方时才发行一定数量的 RBTC 来实现的。然后可以在 RSK 侧链上运行智能合约并使用 RBTC 执行付款。侧链——无论其目的如何——通常需要对一组固定的各方（甚至单个受信方）进行信任 [41]，而不是允许合约参与者在每个合约的基础上接受信任假设。这意味着只有用户信任同一组参与者的合约才能在同一侧链上共存，并且不同链上的合约之间不可能进行交互。另外，就使用而言，侧链相当于将资金转移到一个单独的区块链系统中，除了（通常）两个系统的货币之间的汇率是固定的。想要在侧链上使用合约的用户首先需要将资金转移到侧链并等待足够的确认通过才能使用合约。执行后，如果他们想将资金保留在主链上，则需要将资金移回主链。单个合约执行总共需要五笔交易（主链和侧链各两笔用于来回移动资金，另外一笔用于合同执行）。</p>
+<p><strong>链下执行</strong>。另一种方法是在几个选定的执行节点中运行链下合约代码。 Arbitrum [25]、ACE [50] 和 Yoda [17] 遵循这种方法。在 Arbitrum 中，合约发行者指定一组负责执行合约的“经理”。一旦合约调用完成，管理人员将执行结果发送给矿工，只有当所有管理人员报告相同的执行结果时，矿工才会接受（否则系统将退回到昂贵的争议解决协议）。由于合约的执行与共识过程脱钩，ACE、Arbitrum 和 Yoda 等系统可以在不减慢共识过程的情况下执行复杂的合约。然而，此类解决方案的主要缺点是它们需要对矿工进行更改，因此如果不对区块链协议进行修改，则此类解决方案无法部署到传统区块链。</p>
+<p>状态通道 [33]、[21]、[22]、[32] 构成了另一种将智能合约的链上执行移出链的方法。然而，这种结构需要依赖于链上执行的回退机制和加入程序。因此，状态通道仅限于已经支持表达性智能合约的区块链.</p>
+<p><strong>执行顺序验证模型</strong>。链下执行的一个特定变体是 Hyperledger Fabric [5] 中使用的执行-订单-验证模型。 Fabric 是一种流行的许可区块链系统，其中一组特定于合同的背书人独立于共识过程执行交易。已执行的交易被发送到排序服务，该服务在它们上建立总顺序并将它们组装成包含合约执行的读取集和写入集（即状态更改）的块。之后，区块被广播给节点（粗略地说，节点对应于矿工等系统参与者）。为了确保交易的可序列化性，Fabric 需要一个验证步骤，在该步骤中，对于每个交易，对等点顺序检查存储在交易读取集中的值，并检查它们是否仍然与其本地分类帐当前状态中的值相同。否则，交易无效并且不会应用其状态更改。</p>
+<p>这种验证步骤对于确保 Fabric 中的可序列化性是必要的。由于背书者在订购之前执行交易，因此他们根据最新提交的状态执行它们。也就是说，背书人可能大致同时收到两笔交易，TxA 和 TxB，并因此基于相同的状态执行。考虑一个简单的例子，假设合约包含一个状态变量 x（在两个交易执行之前 x &#x3D; 0）并且两个交易都将这个值加一。两个读&#x2F;写集现在都包含 x &#x3D; 0 的读取和 x &#x3D; 1 的写入<br>背书。例如，在 TxB 之前对 TxA 进行排序之后，我们对 TxB 写入 x &#x3D; 1，而不是写入 x &#x3D; 2，因为在顺序执行 TxA 和 TxB 时应该如此。验证步骤通过使 TxB 无效来解决这个问题。</p>
+<p>执行-订单-验证模型适用于区块链系统的新部署，其中基本协议可以规定所有对等方（即矿工等系统参与者）执行交易验证。我们在本文中的目标是添加智能合约执行功能，作为在未修改的传统加密货币之上运行的子系统。在这方面，execute-order-validate 模型不适合这样的子系统，因为如果 read-&#x2F;writesets 验证仅由子系统参与者执行，那么子系统中的转账与转账规则不一致在传统加密货币中。</p>
+<p>我们用一个例子来说明这个问题。再次考虑同一块中的两个冲突事务，TxA 和 TxB。假设交易是由运行在未修改比特币之上的子系统创建的。现在考虑在执行这两个交易之前，合约有 1 个硬币的余额，TxB 将此硬币发送给其他方。给定执行顺序验证模型，即使 TxB 已包含在块中，子系统参与者也将使其无效。也就是说，从子系统的角度来看<br>参与者，合约仍然有 1 个硬币的余额，可以在未来的交易中使用。但是，传统加密货币的所有参与者都将遵守比特币协议，并且不会使此交易无效。因此，从他们的角度来看，与合约关联的账户余额为 0。子系统的客户端发送的任何会导致合约余额减少的交易，将因此被这些其他方拒绝，包括矿工，即使它们在子系统内是有效的。</p>
+<p><strong>飞地执行Enclaved execution</strong>（內飛地enclave：意指某個國家境內有塊土地，其主權屬於另外一個國家，則該地區稱為此國家的內飛地）。下一个已知的方法是将合约执行外包到 SGX enclave 等可信执行环境 (TEE) 中。 Ekiden [14] 是一个遵循这种方法的示例系统。这种解决方案的主要问题是，如果对手破坏了执行合约的飞地，他可以任意破坏其完整性，例如窃取所有合约控制的资金。最近对 SGX 侧信道 [11]、[45]、[29] 和微架构攻击 [13]、[44] 的研究表明，TEE 妥协是一种应考虑的实际威胁。</p>
+<p><strong>区块链多方计算</strong>。最近的研究还探讨了如何在区块链上运行安全多方计算 (MPC)。此类工作的主要目标是提高现有 MPC 协议的公平性，而不是将合约执行添加到传统区块链中，但此类方案也可以被视为特定类型的智能合约。</p>
+<p>在 MPC 中，一组参与方提供私人输入并共同评估对它们的功能。一个常见的挑战是恶意方一旦学习到函数输出就可以停止参与，并阻止其他方学习输出从而违反公平。 Cleve [15] 的一个不可能的结果证明，没有诚实的多数，任何 MPC 协议都不可能是公平的。最近的研究表明，使用区块链可以在一定程度上缓解这种公平性问题。 Andrychowicz 等人。是第一个展示如何在比特币上实施公平的 2 方彩票 [6]。这个结果被扩展到 n 方彩票 [9]、玩扑克 [28] 和其他 MPC 协议 [26]。在这种方案中，每一方都必须在区块链上存入一笔存款。如果参与者停止参与，他将失去他的存款（即，这些系统创建了针对违反公平的货币激励措施，但不能完全阻止它）。</p>
+<p>如果将此类 MPC 协议视为智能合约，则它们有几个功能限制。首先，这些解决方案是针对非常具体的计算而定制的，并且很难将相同的想法扩展到任意业务合同和应用程序。其次，必须提前知道所有合约参与者和合约期限，这对于以太坊等系统中的许多智能合约而言并非如此。第三，其中一些解决方案需要对底层区块链进行修改，例如向脚本语言添加新指令 [28]。</p>
+<p><strong>飞地多方计算</strong>。最近一项名为 FastKitten [16] 的工作结合了 Ekiden [14] 和基于区块链的 MPC [6]、[9]、[28]、[26] 的技术，以在未修改的比特币之上实现类似合约的计算。与 Ekiden 类似，FastKitten 也使用 SGX 飞地来执行智能合约。与 MPC 计划类似，所有参与者都必须在执行前在合约中存入保证金。此外，TEE 的运营商必须缴纳一笔等于所有用户押金总和的押金。如果协议失败（因为一个用户行为不端），除了行为不端之外的所有各方都会收回他们的初始存款。</p>
+<p>从功能的角度来看，FastKitten 与 MPC 方案存在相同的问题（合约必须有固定的参与者和有限的生命周期），因此 FastKitten 启用的合约比以太坊中的限制要多得多，以太坊允许无限的生命周期和动态参与者列表。 FastKitten 也存在安全问题。一个例子是多个参与者串通的攻击。例如，如果从执行到最后一轮，很明显 Bob 和 Charlie 将失去他们所有的押金给 Alice，那么前两个可以串通以致 Bob 停止发送消息。虽然 Bob 仍然会失去他的存款，但 Charlie 将收回他的全部抵押品，而 Alice 被骗了她的收益。因此，FastKitten 中的智能合约在恶意行为下并不能完全自我执行。最后，FastKitten 很容易受到类似于 Ekiden 的 TEE 攻击。</p>
+<h2 id="III-Bitcontracts-概述"><a href="#III-Bitcontracts-概述" class="headerlink" title="III. Bitcontracts 概述"></a>III. Bitcontracts 概述</h2><p>在本节中，我们概述了我们的解决方案 Bitcontracts。首先，我们描述我们的执行模型并讨论实现它的挑战。之后，我们解释了Bitcontracts 的主要思想，并定义了区块链必须提供的共同属性来支持它。</p>
+<h3 id="A-执行和信任模型"><a href="#A-执行和信任模型" class="headerlink" title="A. 执行和信任模型"></a>A. 执行和信任模型</h3><p>我们工作的出发点是一个链下执行模型，其中合约的执行与共识过程分离。一个明显的方法是在几个服务提供商之间分配信任，这样一个人共同信任一组服务提供商，就像在 Arbitrum [25]、Fabric [5] 或 ACE [50] 等系统中所做的那样。这种模式中的服务提供商可以是信誉良好的公司或非营利组织。在 Bitcontracts 中，我们也遵循这种方法。</p>
+<p>但是，与 Arbitrum 的所有服务提供商必须一致同意合约执行结果不同，我们采用了类似于 ACE 和 Fabric 的<em>更灵活的信任模型</em>，其中合约创建者可以选择每个合约可接受的执行结果的要求。即，合约的创建者选择由 n 个服务提供者和所需授权阈值 t 组成的集合  $\mathcal{E}$。如果提交结果的交易至少得到了执行集  $\mathcal{E}$ 的 t 个成员的授权，则由合约调用引起的状态转换被认为是有效的。同意 $\mathcal{E}$ 中少于 t 个成员是恶意的假设。注意，为了同时保证安全和活跃， $\mathcal{E}$ 中的大多数服务提供者需要诚实，即使阈值 t 较低。否则，恶意多数可能会签署错误的结果（如果 $t ≤ n&#x2F;2$）或违反活性（如果 $t &gt; n&#x2F;2$）。</p>
+<p>然而，可以自由选择 t 以便能够优先考虑安全性或活性仍然是有价值的。这种模型允许根据用例的要求灵活使用。例如，如果需要强完整性，但高可用性并不重要，则可以选择一个大的 $\mathcal{E}$，t 接近 $n &#x3D; \abs{\mathcal{E}}$。另一方面，如果选择  $\mathcal{E}$ 使得所有成员都是可信的并且需要高可用性，则可以选择一个低阈值，例如 t &#x3D; 1。预期长期处于活动状态的合约可以指定条件替换合同本身中的服务提供者，如 [50] 中所述。</p>
+<p>我们的信任模型稍微修改了智能合约系统的典型信任假设。 在以太坊中，智能合约的规范由其代码定义（参见附录 A）。 在我们的系统中，规范还包括一组服务提供者和阈值。 重要的是，所有用户决定他们是否信任并同意此规范。 他们可以通过自己执行尽职调查或信任其他方为他们执行尽职调查来做出这个决定，类似于检查以太坊中合约代码的可信度，但他们不需要信任合约创建者。 最后，也和以太坊类似，他们只需要信任自己参与的合约的规范，不受其他合约执行的影响。 例如，如果一个合约的执行集遭到破坏，其他合约仍然是安全的。</p>
+<h3 id="B-挑战"><a href="#B-挑战" class="headerlink" title="B. 挑战"></a>B. 挑战</h3><p>我们解决的主要技术挑战是如何安全有效地实现上述执行和信任模型，以便在传统区块链上执行合约。 接下来，我们讨论为什么简单的解决方案不能解决问题。</p>
+<p>在哪里存储状态？我们首先考虑合约状态的存储。第一个可能的选择是将每个合约的状态存储在服务提供商的链外。由于我们基于仲裁的执行授权，并非每个服务提供商都需要参与每个合约调用，因此某些服务提供商可能没有合约的最新状态。因此，在这种方法中，服务提供者需要在他们之间运行共识协议，以确保合约状态的一致性。这是一个代价高昂的过程，给服务提供者增加了不必要的开销，并且会限制仲裁的大小，因为在给定 n 个服务提供者的情况下，它需要超过 $\frac{2}{3}n$。虽然可以通过将当前状态的哈希存储在区块链上来简化共识过程（从而部分利用区块链共识），但服务提供商仍然需要确保他们所有人都拥有最新状态。如果系统应该能够在同一个区块中包含涉及同一个合约的多个交易，它们仍然需要确保一致性，从而进行协调以确保它们最终不会处于不同的状态。</p>
+<p>第二种选择是将每个合约的状态存储在链上，即将其发布在底层加密货币的区块链上。该选项利用了底层加密货币的共识机制，而不是要求服务提供者需要单独运行昂贵且复杂的^2共识协议，并确保各方都可以访问最新状态。这也允许客户端单独验证每个执行结果的正确性。将完整状态存储在链上的另一个优点是服务提供者本身可以保持完全无状态，不需要与其他服务提供者或区块链通信，即他们只需要与客户端通信，不需要持久存储合约状态。</p>
+<p>如何保证一致性？似乎将状态存储在区块链上足以确保服务提供商之间的一致性，从而确保他们执行的智能合约的完整性，但事实并非如此。我们用一个简单的示例攻击来说明这一点。</p>
+<p>假设一个理想化的区块链，其中交易无法重组，并且每个创建的区块都是最终区块。还假设合约的发行者将授权阈值设置为 t &#x3D; 2 3 n 并且对手控制了 1 3 n 个服务提供商。对手向两组不同的诚实服务提供者触发了两个不同的合同调用，每组大小为 1 3 n。两组都根据存储在链上的合约的当前状态授权合约调用。然后，攻击者向他控制的 1 3 n 个服务提供商授权两个合约调用，因此两个合约调用都具有所需的 t &#x3D; 2 3 n 个授权。然后，对手发布更新合约状态的第一个执行结果，例如，将资金转出合约。在那之后，<br>对手发布第二个执行结果，该结果根据之前的陈旧状态更新合约的状态，这意味着第一个合约调用的结果将被恢复，除了它们的副作用（例如汇款）。</p>
+<p>这个问题的一个简单解决方案是要求阈值 t 必须始终足够大以防止这种攻击，即 t &gt; 2 3 n。这个简单的解决方案有两个问题。首先，它阻止了应该使用低阈值以获得最佳可用性的部署。其次，它不会阻止上述区块链中的攻击，因为临时分叉是可能的（例如，所有基于 PoW 共识的旧区块链）。</p>
+<p>在 Fabric 和 ACE（它们具有与 Bitcontracts 类似的信任模型并利用链下执行）中，这个问题以不同的方式解决。 ACE 使用 order-execute-commit 模型，而 Fabric 使用 execute-order-validate 方法。因此，两个系统在订购交易后都需要额外的步骤。但是，如第 II-B 部分所述，在传统加密货币中进行排序会产生副作用，例如汇款，因此需要在排序阶段之前或期间解决潜在的不一致问题。因此，我们面临的挑战之一是如何确保子系统（增加合约执行功能）和传统加密货币中的交易可串行化，而无需在订购后执行额外步骤。换句话说，我们的解决方案需要与执行顺序架构兼容。</p>
+<h4 id="C-Bitcontracts概述"><a href="#C-Bitcontracts概述" class="headerlink" title="C. Bitcontracts概述"></a>C. Bitcontracts概述</h4><p>接下来，我们解释了 Bitcontracts 背后的主要思想，并介绍了启用它的传统加密货币所需的属性 (1-4)。 图 1 显示了概览。</p>
+<p><strong>现有的区块链系统</strong>。 Bitcontracts 使用智能合约扩展现有的区块链系统。现有实体，例如区块链客户端和矿工（或权益证明系统中的利益相关者），以及 P2P 基础设施与 Bitcontracts 无关，因此不需要修改。 </p>
+<p><strong>Bitcontracts 客户端</strong>是智能合约的参与者和创建者。他们连接到区块链的 P2P 网络和他们参与的合同的服务提供商。Bitcontracts 客户端可以通过创建一个交易来创建智能合约，该交易为合约设置初始状态和初始资金，并指定负责的服务提供商并将此交易广播到区块链 P2P 网络。</p>
+<p><strong>服务供应商</strong>。一组称为提供者集 (P) 的服务提供者，可以执行智能合约。服务提供者是无状态的，不一定需要连接到区块链。服务提供者根据给定的状态从客户端获取执行合约的请求，执行该合约并将结果发送回客户端。每个提供者创建一个密钥对，用于在初始化时接收和发送交易并发布公钥。这可以通过多种方式完成；提供商可以将其发布在区块链上，他可以在某些公开网站上访问，或者他可以直接将其发送给客户端。</p>
+<h3 id="B-合约部署"><a href="#B-合约部署" class="headerlink" title="B. 合约部署"></a>B. 合约部署</h3><p>我们系统中的智能合约由一段用任意语言编写的代码、一些资金和作为键值存储存储在区块链上的合约状态组成，它允许在合约执行期间轻松检索状态。智能合约账户可以看作是由一群可以共同授权交易的服务提供商管理的账户。</p>
+<p>为了部署智能合约，客户端选择一个任意大小为 n 的执行子集 E⊆P 和一个 t-out-of-n 信任模型，该模型描述了集合 E 中的哪些提供商 t 必须证明智能合约执行的正确性。请注意，该集合对于合约执行结果是集体信任的，因此所选的服务提供者通常是已知（而非匿名）实体。负责执行合同的一组服务提供者是合同规范的一部分，因此特定于合同而不是交易。客户端然后创建一个交易 Tx，其接收者是一个由 E 共同管理的新账户，即 E 的大小为 t 的子集可以授权来自该账户的交易。例如，在基于 UTXO 的货币中，这将对应于 t-out-of-n 多签输出。除了进入合约账户的任何初始资金外，该交易还包含合约代码的散列、其初始状态的散列以及其辅助存储中的初始状态本身。这是在使用“append_data”接口广播之前由客户端添加到事务中的。然后，客户端广播交易并将代码提供给应该能够与智能合约交互的任何其他方。如果合约应该是公开的，他甚至可以在合约创建交易中发布合约代码。或者，他可以在一些公开网站上发布。</p>
+<h3 id="C-合同执行"><a href="#C-合同执行" class="headerlink" title="C. 合同执行"></a>C. 合同执行</h3><p>要执行智能合约，客户端必须联系合约执行集合 E 中的 n 个供应商中的至少 t 个来执行智能合约。如果联系的提供者之一没有回应，他需要联系另外一个。合约调用和执行的时序图如图 2 所示。</p>
+<p>1 客户端首先通过浏览合约过去的交易并从存储在其中的所有状态更改组合状态，从区块链中获取合约的当前状态。这不需要每次都完全重复；客户端可以持续更新他们的本地状态，或者他们甚至可以依赖为他们提供最新状态的服务（他们可以使用存储在最近交易中的状态哈希来检查），类似于当前的轻量级区块链客户端。</p>
+<p>2 向每个联系的提供商，客户端然后发送当前状态、之前的合约交易 $Tx_{prev}$、智能合约代码、智能合约执行的任何输入以及从客户端向智能合约发送资金所需的任何信息（例如来自客户端的 UTXO）。服务提供者也可以存储代码，但这里描述的设计允许服务提供者完全无状态。</p>
+<p>3 每个提供者 Pk 然后如下进行</p>
+<p>i) 提供者计算合约代码的哈希值，使用 read_data 接口从 $Tx_{prev}$ 检索合约代码的哈希值并比较两个值。如果值匹配，他继续，否则他中止。</p>
+<p>(ii) 提供者对状态执行相同的操作，即他从 $Tx_{prev}$ 检索状态散列，将其与从客户端接收到的状态的计算散列进行比较，如果值不匹配则中止。</p>
+<p>(iii) 给定状态、参数和附加输入，提供者执行智能合约。这个合约的执行可以改变合约的状态，并且可以发起资金转移到其他地址。</p>
+<p>(iv) 服务提供者创建一个原始交易 $Tx$ 并使用 Tx.require_previous($Tx_{prev}$.id) 使其依赖于先前的交易。<br>(v) 提供者对新状态进行散列，并使用 append_data 接口将合约代码的散列和状态散列附加到交易中。</p>
+<p>(vi) 提供者计算从先前状态到新状态的状态更改列表，序列化此列表并使用 append_data 接口将其附加到事务存储中。</p>
+<p>(vii) 如果智能合约从客户端收到资金或执行导致资金转移到另一个地址，服务提供者使用 add_transfer 接口将转移添加到交易 Tx。</p>
+<p>(viii) 最后，服务提供者 Pk 在交易上创建一个签名为 σPk &#x3D; sign(Tx)，并将交易和签名发送回客户端。</p>
+<p>4 客户端从每个提供商 Pk 接收交易 $Tx$ 以及签名 σPk。 由于合约执行是确定性的，每个提供者都会创建相同的交易并为其提供签名。 客户端然后从所有接收到的签名 σP1,…,σPt 组装多方签名 Σ。 如果客户向合约发送资金（或提供资金支付费用），他还提供<br>他自己在 $Tx$ 上的签名 σC。</p>
+<p>5 最后，客户端广播签名的交易（Tx,Σ,σC），它可以被包含在区块链中。</p>
+<h3 id="D-合约依赖"><a href="#D-合约依赖" class="headerlink" title="D. 合约依赖"></a>D. 合约依赖</h3><p>对于调用其他智能合约的合约，我们需要<br>确保 (i) 整个调用（包括子调用）以原子方式执行，以及 (ii) 在给定每个合约的所选信任模型的情况下保证执行完整性。这要求所有合约的状态更改都通过由每个涉及的智能合约的执行集的法定人数签署的交易（或原子执行的交易序列）来提交。为了使用子调用执行合约调用，客户端首先在本地运行合约调用以确定涉及的合约集，然后将所有涉及的合约的状态、最新交易和代码，连同合约调用的输入。然后，服务提供者执行上面第 IV-C 节中列出的相同步骤，检查每个涉及的合约的代码和状态哈希并执行完整的调用链。由于生成的交易只有在满足所有相关合约的多重签名条件时才能包含在链中，因此这确保了只有在达到所有法定人数时才应用所有状态更改。</p>
+<h3 id="E-预言机的使用"><a href="#E-预言机的使用" class="headerlink" title="E. 预言机的使用"></a>E. 预言机的使用</h3><p>由于这种方式，Bitcontracts 被构建，服务提供商可以在许多用例中本地充当预言机，因为合约代码可以直接连接到外部网站或数据源。例如，如果 Alice 和 Bob 建立了一个合约来赌除夕是否会下雨，并且他们都信任相同的天气数据提要，那么他们可以编写一个合约，在其中锁定一些资金，例如：使用 https 直接访问此提要，检查新年前夜的天气数据是否可用，然后支付给赌注的赢家。然后，投注的获胜者可以在元旦调用该合同。由于访问此提要并检查是否下雨的结果应该与执行此操作的诚实服务提供者无关，因此不需要外部预言机。</p>
+<h2 id="V-属性分析"><a href="#V-属性分析" class="headerlink" title="V. 属性分析"></a>V. 属性分析</h2><p>在本节中，我们分析流行的区块链系统并解释它们如何提供 Bitcontracts 所需的属性。 表 I 总结了我们的分析。</p>
+<h3 id="A-任意数据的存储"><a href="#A-任意数据的存储" class="headerlink" title="A. 任意数据的存储"></a>A. 任意数据的存储</h3><p>一些基于账户的加密货币，例如 Stellar 和 Ripple，提供了存储任意数据的显式机制。 其他人，如以太坊和 EOS，通过他们的智能合约系统支持这一点，因为任意数据可以简单地作为参数发送到合约调用。 在 Ripple 中，使用将数据添加到交易的 Memos 字段支持这一点，而 Stellar 允许使用 Manage Data 操作（op）写入帐户的键值存储。</p>
+<p>大多数比特币分叉币支持仅使用 OP_RETURN 指令存储数据的特定输出。 这允许每个事务仅存储少量数据，因为每个事务最多可以使用使用此指令的一个输出。 对于支持比特币脚本的货币，存在几种解决方法，允许在每个交易中存储更多数据，并有一些开销 [42]。 我们在第 VIII-B 节中解释了其中之一。 通常，任意数据通常可以存储在为地址保留的交易字段中，因为地址通常类似于随机字符串并且没有可以检查的约束。 例如，在门罗币中，要在交易中存储超过 32 字节的数据（可以存储为支付 ID），必须创建虚拟输出，将数据存储在隐身地址的字段中。 然而，这有相当大的开销，因为它需要为每 32 字节数据提供 2kB [40] 的范围证明。</p>
+<h3 id="B-多方授权"><a href="#B-多方授权" class="headerlink" title="B. 多方授权"></a>B. 多方授权</h3><p>通常需要多方授权机制，例如对于来自公司的钱包，以提高安全性，因此通常支持加密货币。大多数基于 UTXO 的加密货币，例如 Litecoin、Zcash 和 Dash，都是比特币协议的分支，并且还支持比特币脚本，可以实现多重签名。请注意，本文中的“多重签名”是指需要多方单独签名的交易授权。它不是指通常需要签名者之间的协议来共同产生一个单一签名的多重签名方案。尽管 Cardano 不是比特币的分叉，但它也支持脚本并允许多重签名。 Stellar 和 Ripple（使用账户模型）以不同的方式实现多重签名，但仍然支持它们，而以太坊和 EOS 已经支持可以而且必须用于实现多方授权的表达性智能合约。</p>
+<p>Monero 是一个特例，因为它不明确支持多重签名帐户（我咋记得是有multisig的？？？）。相反，必须通过在多方之间拆分密钥并运行交互式签名协议来创建多方签名。此外，它们在软件中没有得到很好的支持，这使得它们创建起来很麻烦 [4]、[31]。虽然这足以与我们的系统兼容，但它需要服务提供者之间进行交互，而不仅仅是与客户端通信。</p>
+<h3 id="C-状态相关交易有效性"><a href="#C-状态相关交易有效性" class="headerlink" title="C. 状态相关交易有效性"></a>C. 状态相关交易有效性</h3><p>在 UTXO 模型中，状态相关的交易有效性是该模型的隐含结果，因为交易的输入必须是先前交易的未花费输出，这使得交易的有效性直接依赖于先前的交易。因此，所有基于 UTXO 的加密货币都支持此属性。</p>
+<p>在基于账户的加密货币中，必须明确支持此类策略。例如，在 Ripple 中就是这种情况，它提供了一种特殊机制，允许在交易的 AccountTxnID 字段中指定来自帐户的前一交易的哈希值。如果此值是该帐户的最新交易的哈希值，则该交易只会被分类帐接受。 Stellar 中没有这样的机制，但可以很容易地以相同的方式添加，以支持 Bitcontracts。作为另一种可能性，状态相关的交易有效性可以在现有的智能合约系统中实现，就像以太坊和 EOS 的情况一样，通过创建一个智能合约来存储最近的状态哈希，并且只有在之前的状态被引用时才接受状态更新更新对应于存储的值</p>
+<h3 id="D-原子性事务"><a href="#D-原子性事务" class="headerlink" title="D. 原子性事务"></a>D. 原子性事务</h3><p>与状态相关的交易有效性一样，所有基于 UTXO 的加密货币都支持原子交易作为模型的隐含结果：交易必须支持多个输入和输出，否则交易不可能有可变金额。在支持智能合约的货币中，例如以太坊和 EOS，这再次通过智能合约系统得到支持。</p>
+<p>Stellar 允许向交易添加多笔付款。如果付款来自与发送账户不同的来源，则相应的账户也需要签署交易。 Ripple 本身不支持具有多个源和目的地的原子交易，但可以轻松添加本地支持，类似于 Stellar。即使没有本地支持，也可以使用 PathJoin 协议 [35] 在 Ripple 之上添加一种形式的原子支付。然而，为了使用这个协议来确保交易原子性，服务提供者需要相互交互并且需要跟踪分类帐状态。</p>
+<h2 id="VI、奖励"><a href="#VI、奖励" class="headerlink" title="VI、奖励"></a>VI、奖励</h2><p>第 IV 节中描述的 Bitcontracts 规范隐含地假设服务提供商将执行客户端事务。在本节中，我们将解释如何激励交易执行以及如何保护服务提供商和客户免受彼此的侵害。我们专注于已成为激励区块链系统工作的常见方式的交易费，但我们强调，服务提供商也可以通过其他（链下）方式获得激励，例如类似于云计算服务的订阅费。</p>
+<p>除了通过交易费用增加的明确激励之外，不当行为也会通过声誉损失而隐含地被抑制，因为客户通常会选择已知的、有信誉的实体而不是匿名方。 Bitcontracts 提供了不可否认的不当行为证据，例如签署错误的状态转换，这会损害服务的声誉。但是，明确的负面激励措施，例如对不当行为的经济处罚，需要通过某种形式的受信任方来执行。在没有原生智能合约的遗留系统中，这样的可信方是不可用的。负激励可以在 Bitcontracts 合约本身内实施，但不会很有用，因为它们将依赖于不被违反的信任模型（在这种情况下，不当行为没有任何好处）。</p>
+<p>如图 1 所示，Bitcontracts 支持服务提供商与区块链完全断开的部署。在这种部署中，激励必须在链下处理（例如，订阅模型）。当使用交易费用等链上激励机制时，服务提供商需要能够检查区块链。</p>
+<p><strong>引入手续费</strong>。将手续费直接应用于 Bitcontracts 系统如下。在调用 Bitcontracts 合约时（第 IV-C 部分的第 2 步），客户指定他愿意支付给服务提供商的费用。客户包括用于向合同调用请求分别为每个服务提供商支付此费用的资金。如果服务提供商发现包含的交易费用可以接受，他们就会执行合约调用，将客户资金支付的费用包含在同一笔交易中，并将签名结果返回给客户（步骤 3 和 4）。通过签署 Bitcontracts 交易并将其发布在传统区块链上（步骤 5），费用的所有权有效地从客户转移到服务提供商。</p>
+<p>这种费用机制部署简单且高效，因为它不会为合约调用处理增加额外的延迟。但是，它有两个小缺点。第一个缺点是恶意客户端无法签署和发布最终交易（即跳过第 5 步），从而导致服务提供商执行无偿合约调用。客户不会从这种不当行为中获得任何好处，因此理性的客户没有动机像这样滥用服务提供商。与其他 DoS 和资源耗尽攻击类似，服务提供商可以通过已知机制来保护自己，例如在负载繁重的时候要求客户解决密码难题 [20]、[24]、[7] 或通过要求总体上略高的费用来补偿偶尔的无偿执行工作。</p>
+<p>第二个缺点是，一些服务商可以选择“搭便车（free-ride）”而不执行呼叫，希望其他服务商完成工作并获得报酬。这个缺点可以通过合约创建者来解决，他们可以选择信誉良好的实体作为服务提供商。</p>
+<p><strong>关于公平性</strong>。理想的交易费用机制将提供服务提供商和客户之间的公平性。服务提供商只有在保证收取费用的情况下才会执行合约调用执行工作。客户只有在知道服务提供商将执行并签署合同呼叫时才会付款。这个问题接近公平交换的概念 [38]，其中卖方只有在保证收到匹配付款时才会向买方发布产品，例如某些计算的输出。</p>
+<p>不幸的是，由于两个主要原因，现有的公平交易协议不适用于我们的环境。首先，现有的与遗留链兼容的公平交换协议，如零知识或有支付（ZKCP）[8]、[47]、[12] 保护像计算结果一样的数字“产品”，但它们不保护任务计算本身。因此，如果我们采用现有的 ZKCP 协议之一，恶意客户端仍然可以将无偿工作强加给服务提供商。其次，现有的公平交易协议通常考虑一个单一买家的一对一设置，而我们的执行模型有 n 个卖家（即 n 个服务提供商）。</p>
+<p>因为公平交换的经典概念不适用于我们的环境，所以我们的目标略有不同。我们的目标是为服务提供商提供执行激励，同时保护他们免受恶意客户的侵害（尽可能）。更准确地说，应该激励服务提供者快速执行交易，不鼓励搭便车，并且客户不应该在不支付费用的情况下将执行工作强加给服务提供者。</p>
+<p><strong>激励机制示例</strong>。接下来，我们将描述实现这些目标的示例激励机制。客户将交易费用支付给由服务提供商共同控制的 t-out-of-n 多重签名账户。这种支付可以在链上完成（或者在客户端经常与智能合约交互的情况下通过支付渠道）。服务提供商然后在执行合同之前检查他们是否收到了付款。如果是这种情况，他们会照常进行。</p>
+<p>在某个固定的时间间隔（例如，一个月）之后，服务提供商从他们的多重签名帐户中共同创建一个交易，该交易根据带有签名的合约交易（出现在链上）的数量的比例向每个服务提供商支付份额来自相应的服务提供商。由于服务提供者在执行合约调用之前检查他们是否收到了付款，因此保证他们是集体支付，并且由于少于 t 的服务提供者可能是恶意的，因此保证根据服务提供商参与的合同交易。这也激励了服务提供商的快速响应，因为他们更有可能被包含在链上，并且显然不鼓励搭便车。</p>
+<p>这样的示例激励机制有两个小缺点。首先，它略微增加了合同调用处理延迟，因为服务提供商需要等到他们收到付款后才能执行合同。其次，恶意客户端仍然可以通过选择性地选择将哪些签名包含在最终交易中来偏爱某些服务提供商。我们认为，为计算工作的一个买方和法定数量的卖方提供完美公平的激励机制的发展是一个有趣的开放问题，超出了本文的范围（并且可能具有独立利益）。</p>
+<h2 id="VII-安全分析"><a href="#VII-安全分析" class="headerlink" title="VII. 安全分析"></a>VII. 安全分析</h2><p>在本节中，我们从安全性和活性保证方面分析Bitcontracts 。</p>
+<p><strong>安全</strong>。 像 Bitcontracts 这样的合约执行系统需要提供的主要安全或保障条件是每个合约都被正确执行。 如果出现在链中的对该合约的所有调用都是可序列化的，并且每个调用都提供基于所有调用序列化之前的调用结果状态的控制流完整性，我们就说系统为特定合约提供了执行正确性。 基于这个定义，我们提出以下主张：</p>
+<p><strong>声明 1.</strong> 给定合约A 的规范，它定义了一个由 $n_A$个服务提供者和仲裁大小 $t_A$ 组成的执行集  $\mathcal{E}_A$，以下成立：如果来自 $\mathcal{E}$的服务提供者少于 $t_A$ 个被破坏，则合约提供执行正确性，即可序列化性 和控制流完整性。</p>
+<p><strong>证明</strong>。 我们考虑以下情况：</p>
+<ol>
+<li><p>正确的客户输入。假设客户端提供的合约代码和状态是正确的，所有诚实的服务提供者只会在包含的状态转换正确的情况下签署交易，即新的状态是智能合约执行的正确结果，给定他们收到的状态作为输入。因此，如果少于 $t_A$ 的服务提供者受到损害，则包含错误状态转换的交易无法获得合约 A 的法定人数，因此无法提交到区块链，即我们具有基于客户端提供的状态的执行完整性。</p>
+</li>
+<li><p>客户提供的虚假先前状态或合同。对于这种情况，我们假设客户端提供了正确的先前交易 $Tx_{prev}$。尽管我们从上面知道状态转换本身必须是正确的，但它们基于客户端提供的状态和合约代码。因此，客户端可以发送伪造状态作为输入状态。但是，导致此状态的先前交易 $Tx_{prev}$ 包含状态和合约的哈希值。服务提供者检查所提供的状态和合约是否与这些散列对应，如果不是这种情况，则中止，即基于不匹配状态或合约代码的状态转换无法达到 A 的法定人数。</p>
+</li>
+<li><p>客户提供的虚假或过时的先前交易。以上并未考虑到客户端也可能提供伪造或过时的先前交易 $Tx_{prev}$。即使没有攻击，交易也可能过时，因为两个客户端几乎同时调用合约。然而，我们的系统需要确保没有基于这种过时状态的状态转换被提交到链，以防止竞争条件，特别是 TOCTOU 漏洞。在对结果交易 $Tx$ 进行签名并将其发送回客户端之前，服务提供商会在 $Tx_{prev}$ 上确定新交易 $Tx$ 的有效性，即只有当 $Tx_{prev}$ 提交到区块链时才会接受 Tx，并且它是最近的交易合约账户。这确保即使基于过时（或虚假）先前交易的交易可能达到法定人数，也无法提交到区块链，因为未满足矿工检查的有效性标准。</p>
+</li>
+</ol>
+<p>因此，具有法定人数签名的交易必须提供控制流完整性，直接引用单个有效的先前状态，并且如果它被接受到链中，则是唯一引用此状态的此类交易，从而确保唯一的序列化。由于涉及多个合约的合约调用需要每个涉及合约的法定人数，并且最终交易的有效性基于所有涉及合约的先前状态，因此上述适用于所有合约调用，而与它们是否涉及其他合约无关，并且独立于客户端行为，即即使客户端行为不端或与恶意服务提供商勾结。</p>
+<p>最后，我们注意到我们的系统对未参与合约的各方没有任何安全影响，即使该合约具有恶意的法定人数。这直接源于 Bitcontracts 不会更改底层加密货币的协议这一事实。</p>
+<p><strong>活性</strong>。像 Bitcontracts 这样的系统应该确保的主要活跃条件是，来自诚实客户的每笔交易都不会与另一笔交易（即包含相同合约并基于相同状态的交易）发生冲突，并且可以提交给区块链。基于这个定义，我们提出以下主张：</p>
+<p><strong>声明 2</strong>. 给定来自诚实用户的合约调用 T，涉及 k 个合约 $C_i (1 \leq i \leq k)$，该合约定义了具有法定人数 ti 的执行集 $\mathcal{E}{C_i}$，以下成立：如果合约调用与其他合约调用不冲突，并且一个诚实的合约调用在 ECi 中可以达到大小为 ti 的法定人数（对于所有 1 ≤ i ≤ k），事务 T 的活性得到保证，即 T 最终将被执行和提交。</p>
+<p><strong>证明</strong>。由于客户端是诚实的，他最终将合约调用发送给 ECi 中至少 ti 个诚实且可达的服务提供商（对于所有 1 ≤i ≤k），他们执行合约调用并将结果返回给客户端。一旦客户端收到足够的响应（即每个合约的法定人数），他就会为基础加密货币组装和广播交易。由于没有冲突的交易，这笔交易最终会被提交到链上。</p>
+<h2 id="VIII-实现"><a href="#VIII-实现" class="headerlink" title="VIII. 实现"></a>VIII. 实现</h2><p>在本节中，我们将描述一个用于创建和运行智能合约的 Bitcontracts Python 库，该库可与支持第 III-D 节中列出的要求的任意加密货币的后端实现一起使用。 我们还描述了与比特币脚本兼容的加密货币的 Bitcontracts 后端。</p>
+<h3 id="A-Python-库"><a href="#A-Python-库" class="headerlink" title="A. Python 库"></a>A. Python 库</h3><p>我们的 Python 库提供了一个基类，所有智能合约类都必须从该基类派生出来。一旦部署，智能合约就是一个序列化存储在区块链上的对象。当合约在服务提供者上运行时，库（在检查代码和状态哈希后）首先根据客户端提供的状态重新实例化合约对象，然后使用客户端在此对象上指定的方法调用提供的输入。一旦方法终止，库会创建一个从前一个状态到新状态的状态更改列表，将它们序列化，并将它们存储在一个事务中，然后服务提供者签署该事务。</p>
+<p>该库还提供了智能合约的 API。在我们的原型中，此 API 仅限于基本功能，例如获取智能合约余额、创建资金转移或调用其他智能合约，以及允许将函数声明为私有的装饰器（即只能由该函数的其他函数调用）合同）或公开（即任何人都可以调用）。附录 B 中显示了一个示例合约及其执行的分步说明。 其他 API 功能，例如可以轻松添加一些原语，例如获取调用者身份。以太坊支持的其他功能，例如检索当前区块哈希或矿工身份，需要底层加密货币的支持，并且不能为比特币添加。</p>
+<p>对于智能合约的执行，设置了单独的执行环境。在我们的原型中，这是目前一个简单的子流程。但是，在生产环境中，合约执行需要在沙盒环境中执行，例如通过在 Docker 容器中运行代码，因为服务提供者不信任合约代码。为确保所有合约调用都能达到服务提供者的法定人数，应采取措施确保合约代码的确定性执行，例如通过控制沙箱可用的随机源和禁止多线程。</p>
+<h3 id="B-基于类比特币数字货币的实例化"><a href="#B-基于类比特币数字货币的实例化" class="headerlink" title="B. 基于类比特币数字货币的实例化"></a>B. 基于类比特币数字货币的实例化</h3><p>基于 UTXO 的加密货币中的交易由多个输入和多个输出组成（稍后可以再次成为交易的输入）。由合约部署和不同调用产生的三个交易链如图 3 所示。使用 Bitcontracts 执行合约产生的交易具有以下描述的组件。</p>
+<p><strong>合同输入</strong>。合约输入是先前合约调用的输出。我们在下面更详细地描述它。合约创建交易没有任何合约输入。</p>
+<p><strong>客户端输入</strong>。任何 Bitcontracts 交易都可以有零个或多个客户端输入。这些输入用于向合约发送资金。</p>
+<p><strong>合约输出</strong>。此输出保存智能合约的余额，并由指定多重签名条件的比特币脚本锁定。我们使用 P2SH 输出和包含 m-out-of-n-multisig 条件的赎回脚本。参数 m 和 n 以及其中包含的公钥由智能合约的创建者选择，并由供应商在整个调用过程中维护。比特币和相关加密货币的标准交易规则允许在此类赎回脚本中 n ≤ 15（这有效地将执行集的最大大小限制为 |E|&#x3D; 15）。赎回脚本还包含代码的哈希值和智能合约当前状态的哈希值。这些值被推送到堆栈并丢弃，因此不需要额外的努力来赎回余额输出。他们仍然必须包括在内，s.t.提供商可以根据其中包含的哈希检查与先前交易一起收到的智能合约的代码和状态。</p>
+<p><strong>状态输出</strong>。这些输出保存了合约调用的状态变化，即在此执行期间更改的状态中的所有变量。状态更改存储为从变量名称到其新值的键值映射。使用比特币的 OP_RETURN 操作码，最多 80 个字节可以存储在标记为不可赎回的输出中，即不存储在比特币客户端的 UTXO 集中。然而，由于比特币交易传播规则，每笔交易只允许一个 OP_RETURN 输出，这是相当有限的。</p>
+<p>已知有几种解决此限制的方法，Sward 等人对此进行了讨论。 [42]。我们的实现使用带有三个包含我们数据的假公钥的多重签名输出。比特币允许在标准多重签名输出（即非 P2SH）中最多存储三个公钥（每个 65 字节），这允许存储 195 个字节，每个输出的开销为 15 个字节。通过连续排列状态输出，数据恢复是直截了当的，并且不会产生额外的开销来指定数据位置。比特币的最大交易大小为 100KB，我们可以存储多达 92KB 的状态更新。请注意，虽然这限制了合约初始化时存在的命名合约字段的数量，但状态大小本身不受限制，例如使用列表或字典的合约可以增长到任意大小。</p>
+<p><strong>客户端输出</strong>。这些产出支付给客户的钱。它们可以是智能合约的支出，也可以是使用大于客户打算发送给合约的价值的输入更改客户的输出。</p>
+<p>为了创建智能合约，客户使用他的一个或多个 UTXO 作为交易的输入，该交易具有带有初始合约资金的合约输出、包含初始状态的状态输出和客户端输出，例如客户端的更改输出。在左侧的图 3 中，我们展示了一个示例交易，其中 Bob 创建并资助了一个 Bitcontracts 合约。</p>
+<p>要调用智能合约，客户端首先必须组装合约状态。他通过迭代合约交易并应用每个交易的状态更新来做到这一点。请注意，这甚至可以使用轻量级客户端来完成，即客户端不需要下载底层加密货币的完整链。状态组装完成后，他通过联系服务提供商来调用智能合约，如第 IV-C 部分所述和图 2 所示。服务提供商执行所需的检查（例如匹配合约和状态哈希），执行合约，然后组装交易。交易再次包含如上所述的合约输出、包含状态变化的状态输出和潜在的客户端输出。中间的图 3 显示了一个示例，其中 Charlie 向智能合约发送了一些资金，这导致向 Alice 和 Bob 支付款项，并向 Charlie 返还一些零钱。</p>
+<p>智能合约调用可能包括对其他智能合约的子调用。在这种情况下，客户端向服务提供商提供所有涉及的智能合约所需的所有信息，并从所有执行集联系必要的服务提供商（参见第 IV-D 部分）。服务提供者如上所述执行合约，并在组装交易时确保合约和状态输出按合约出现在调用链中的顺序排序。例如，在图 3 合约的最后一笔交易中<br>B 被合约 A 调用，因此合约 A 的输出列在最前面。</p>
+<h2 id="IX。评估"><a href="#IX。评估" class="headerlink" title="IX。评估"></a>IX。评估</h2><p>在本节中，我们首先评估在流行的传统区块链平台上运行的 Bitcontracts（第 IX-A 节）。之后，我们在 Bitcontracts 之上评估流行的现实世界智能合约的存储和成本（第 IX-B 节）。</p>
+<h3 id="A-传统加密货币的Bitcontracts"><a href="#A-传统加密货币的Bitcontracts" class="headerlink" title="A. 传统加密货币的Bitcontracts"></a>A. 传统加密货币的Bitcontracts</h3><p>对于我们的第一次评估，我们考虑在 6 种流行的传统加密货币（比特币、比特币现金、莱特币、达世币、狗狗币、Zcash）上运行 Bitcontracts，并比较数据更改的成本以及数据量方面的吞吐量改为以太坊。以太坊遵循大致相似的资源管理模型，其中交易费用取决于计算复杂性和状态变化存储。我们还单独讨论了其他系统（例如 EOS）中执行不同费用模型的智能合约的成本。</p>
+<p><strong>可扩展性</strong>。如上所述，比特币和相关加密货币的多重签名功能使执行设置达到|E|&#x3D; 15 个服务提供商的规模。</p>
+<p><strong>密钥管理开销</strong>。服务提供商的密钥管理开销在存储、计算和通信方面很低。每个服务提供商只需要存储一个私钥，他可以将其用于他负责的所有合同。每个服务提供者只需为每个合约执行生成一个签名，服务提供者之间不需要通信。</p>
+<p><strong>计算</strong>。我们工作的主要焦点是合约调用，其计算类似于今天在以太坊中看到的计算，即以毫秒为单位。然而，没有什么可以限制系统运行更复杂的合约，类似于 ACE [50]、Arbitrum [25] 或 Yoda [17] 支持的合约。我们不提供智能合约执行速度的详细评估，因为合约调用只是 Python 程序执行，因此测量它们的执行速度不会提供任何新的见解，并且合约执行的成本主要由链上存储主导费用描述如下。</p>
+<p>为了说明这一点，我们将以太坊合约中快速排序的执行成本与在 AWS t2.micro 实例上执行类似的 Python 实现的成本进行了比较。为了对 2048 个整数元素进行排序，以太坊实现需要 650 万气体（接近区块气体限制），成本约为 59 美元（基于 2020-06-08 的费用价格），而在 t2.micro 实例上， Python 实现的执行时间不到 6 毫秒，这对应于不到 3 美元·10−7 美元的有效总执行成本，如果我们假设这在最大大小为 15 的执行集中的每个服务提供者上执行（当然，这并不意味着在实践中费用会这么低，因为服务提供商需要盈利，因此实践中的费用将由市场决定并且难以预测，但它表明在Bitcontracts 中执行通常很便宜）</p>
+<p><strong>通信</strong>。通信成本低，因为每次调用只需要查询每个涉及的服务提供商（最大 |E| &#x3D; 15）及其响应。客户端从服务提供商收到响应之前的延迟包括一个 Internet 往返时间加上数据传输所需的时间，这取决于状态更改的大小。对于大多数合约，对于状态变化很多的合约，这将是几毫秒或最多几秒的数量级。我们不会通过实验来评估这一点，因为互联网通信延迟已经在其他地方进行了广泛的研究。区块中交易确认的延迟与底层区块链中其他交易的延迟相同（例如在比特币中平均为 10 分钟）。请注意，与其他交易一样，Bitcontracts 合约调用也可以基于未确认的交易执行，即同一合约的多个 Bitcontracts 交易可以包含在同一个区块中。</p>
+<p><strong>存储成本</strong>。 Bitcontracts 的第一个有趣的评估指标是其存储成本。在表二中，我们首先展示了流行区块链平台中当前的交易费用（下一个区块包含截至 2020 年 6 月 8 日）以供参考。之后，我们展示了相同区块链平台每 KB 状态变化的 Bitcontracts 存储成本。从表中可以看出，Bitcontracts 带来的存储成本开销非常小。</p>
+<p>我们还将比特合约的存储成本与以太坊进行了比较。从表 II 中可以看出，存储 1KB 数据的以太坊合约的成本在 1.44 美元（如果没有值从零变为非零）和 5.75 美元（如果所有更改的值都从零变为非零）之间，这不不包括任何计算。与此相比，Bitcontracts 的链上存储费用要小得多（0.80 美元或更少）。</p>
+<p><strong>最大存储量</strong>。第二个相关评估指标是每个事务可以存储的最大数据量（即状态变化）。表二显示，在比特币、比特币现金、莱特币、达世币和狗狗币中，每 210 字节输出可以存储 195 字节，因此每笔交易的最大存储量限制为最多 92KB，因为它们的标准规则不会传播交易大于 100KB。在 Zcash 中，最大交易大小仅为<br>受最大块大小 (2MB) 的限制，允许每个事务最多存储 1.86MB 的数据。我们注意到，这些限制并不限制合约状态的整体大小，而只是限制每次合约调用的状态更改次数。此外，这些限制还受到交易其他部分的影响。例如，如果一笔交易有大量的客户端输入或输出，则数据存储的限制会相应减少。</p>
+<p>相比之下，从表 II 中可以看出，在给定当前区块 gas 限制的情况下，当前的以太坊合约在一笔交易中只能在 16 到 63 KB 的存储空间之间变化（取决于值是否设置为从零到非零）。这样的交易将完全填满一个区块。在以太坊上使用比特合约可以增加这个限制。由于 Bitcontracts 不需要将状态转换存储在存储中，只需要它们在交易中可见，它们可以简单地作为交易数据发送，这需要更少的气体，因此理论上允许存储高达 625KB 的数据每个交易。在实践中，这会稍微少一些，具体取决于仲裁大小和由此产生的签名验证成本。</p>
+<p><strong>吞吐量</strong>。 Bitcontracts 的另一个有意义的评估指标是吞吐量。我们通过测量系统每秒可以处理的状态更新数据量来评估吞吐量。该吞吐量值取决于区块间隔和底层区块链平台每个区块的最大存储量。如表二所示，就可能的更改数据量而言，在原生不支持合约的传统平台上使用 Bitcontracts 执行智能合约与以太坊的吞吐量相比具有优势。</p>
+<p><strong>不同收费模式下的成本</strong>。一些加密货币，例如 EOS，遵循不同的收费模式。 EOS 股权基金的参与者不是直接为计算和状态变化付费，即他们将它们锁定一段时间，作为回报，他们可以使用与其抵押资金成比例的一小部分计算和带宽资源。因此，交易的主要成本来自不使用质押资金的机会成本。存储（在 EOS 中称为“RAM”）是购买的（并且可以交易），但与以太坊和比特合约不同，因为参与者不为状态变化付费，而是为拥有 RAM 付费。 EOS 中 1KB 存储的成本为 0.15 美元（截至 2020 年 6 月 8 日），这比在 Bitcontracts 中新分配存储（比特币除外）的成本更高，但更改已分配的存储是免费的。</p>
+<h3 id="B-Bitcontracts上流行的以太坊合约"><a href="#B-Bitcontracts上流行的以太坊合约" class="headerlink" title="B. Bitcontracts上流行的以太坊合约"></a>B. Bitcontracts上流行的以太坊合约</h3><p>在评估的第二部分中，我们分析了流行的现实世界智能合约的存储要求和交易成本，如果它们是在 Bitcontracts 中执行的。我们通过爬取以太坊区块链数周（2020 年 10 月&#x2F;11 月）获得了我们的评估数据集，并从 13 万个区块中收集了智能合约执行数据，我们从中提取了最受欢迎的 100 个合约的所有交易的交易信息（基于交易数数）。这产生了一个包含 1000 万个合约调用交易的数据集。对于每笔交易，我们收集了状态变化的数量和大小、涉及的合约数量、收到资金的客户数量和以太坊天然气成本。<br>然后，我们使用此信息来计算由 Bitcontracts 中潜在的类似合约执行所产生的交易规模，并根据此规模，计算不同链（例如比特币）上的成本。 Bitcontracts 中的合约交易规模取决于所涉及合约的数量、其执行集的规模、从合约中获得资金的客户数量以及状态输出的数量和规模（参见第 VIII-B 部分），这是从状态更改的数量和更改的存储大小得出的。这允许直接计算结果交易的规模和成本。</p>
+<p><strong>交易规模</strong>。图 4 显示了在 Bitcontracts 中执行合约调用与执行大小为 5 和仲裁大小为 3 的合约调用时产生的交易大小的比较。 Bitcontracts 中交易的交易大小分布显示在左侧的大小分布旁边以太坊中的相同交易。<br>Bitcontracts 中的交易大小中位数为 693 字节，仅约为具有一个输入和两个输出（226 字节）的基本比特币交易的 3 倍。比特合约中的交易通常比以太坊中的交易大（其交易大小中位数为 174 字节），这是预期的，因为基于法定人数的链下执行需要交易中的额外签名，并为每个涉及的合约增加一些额外的开销，即合同输入和输出。图 4 右侧比较了 Bitcontracts 和 Ethereum 之间的交易数据大小。在比特合约中，交易数据大小包括状态变化输出。在以太坊中，交易数据大小由交易输入组成，例如函数参数。我们的分析表明，基本成本（很大程度上独立于执行的合约）占交易规模的大部分，并且在链上存储状态变化并不是规模差异的主要贡献者。实际上，与以太坊相比，Bitcontracts 中的大多数交易中的交易数据更小，数据大小中位数分别为 39 字节和 68 字节，因为函数参数等输入不需要存储在 Bitcontracts 中。这表明，与其输入参数的大小相比，许多合约仅更改了少量存储数据。</p>
+<p><strong>吞吐量</strong>。 仅考虑合约执行（即不包括纯货币转移），根据收集的交易数据，如果在比特币上运行，Bitcontracts 可以支持每秒 1.8 笔交易（tps）的吞吐量，在 Litecoin 上运行时为 7.0 tps，在 Litecoin 上运行时为 9.6 tps 比特币现金（前两个有，后一个没有 SegWit）。 以太坊，对于同一组交易，支持 10.2 tps 的吞吐量，这表明 Bitcontracts 可以在传统加密货币（莱特币和比特币现金）之上实现合约调用的吞吐量与通过 专门为支持智能合约而构建的平台。 比特币之上的 Bitcontracts 的吞吐量较低，但这是意料之中的，因为即使对于平均 3.7 tps 的正常交易，比特币的吞吐量也更加有限。</p>
+<p><strong>交易成本</strong>。图 5 显示了我们收集的 100 个最流行合约的合约调用集中交易的交易成本（以美元为单位）。该图比较了在比特币、莱特币和比特币现金之上的比特合约中这些交易的成本与以太坊中相同交易的成本（基于 2020 年 6 月 8 日的交易费用数据）。我们看到比特币上的 Bitcontracts 的交易成本分布（中位成本 0.35 美元）与以太坊中相同交易的成本分布（中位成本 0.51 美元）具有相似的范围，同时在其他传统加密货币（例如莱特币）之上执行它们（ LTC) 或比特币现金 (BCH) 便宜得多（中位数分别为 0.03 美元和 0.004 美元）。请注意，这是链上交易成本，即不包括服务提供商费用。然而，如第 IX-A 节所述，计算时间（以及因此执行费用）相对便宜，并且链上交易费用可能是主要的成本因素。</p>
+<h2 id="X、结论"><a href="#X、结论" class="headerlink" title="X、结论"></a>X、结论</h2><p>在本文中，我们介绍了一个新系统 Bitcontracts，它使用以太坊风格的智能合约扩展了比特币等传统区块链，而无需更改基本协议。 Bitcontracts 通过使用基于仲裁的信任模型在服务提供商中执行智能合约并利用底层区块链的共识协议来实现这一点。 比特合约只需要底层区块链提供四个基本属性——大多数流行的区块链系统都支持这些属性。 我们的实施和评估表明，在传统区块链之上运行智能合约在实践中是可行且具有成本效益的。</p>
+<p>[WIP] TODO: 尚未插入图片及整理排版与通读</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/enabling-x-chain-txs/" rel="prev" title="Enabling Cross-Chain Transactions: A Decentralized Cryptocurrency Exchange Protocol">
+                  <i class="fa fa-chevron-left"></i> Enabling Cross-Chain Transactions: A Decentralized Cryptocurrency Exchange Protocol
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/detection-of-encrypted-cryptomining-malware-conn-with-ml-and-dl/" rel="next" title="Detection of Encrypted Cryptomining Malware Connections With Machine and Deep Learning">
+                  Detection of Encrypted Cryptomining Malware Connections With Machine and Deep Learning <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments giscus-container">
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.11/pdfobject.min.js","integrity":"sha256-N6JtCNwaYm6kizuG92UtOOXamRHPwu+V1yF10g3bu/c="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":"forest","js":{"url":"//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+
+<script>
+document.addEventListener('page:loaded', () => {
+  if (!CONFIG.page.comments) return;
+
+  NexT.utils.loadComments('.giscus-container')
+    .then(() => NexT.utils.getScript('https://giscus.app/client.js', {
+      attributes: {
+        async                   : true,
+        crossOrigin             : 'anonymous',
+        'data-repo'             : CONFIG.giscus.repo,
+        'data-repo-id'          : CONFIG.giscus.repo_id,
+        'data-category'         : CONFIG.giscus.category,
+        'data-category-id'      : CONFIG.giscus.category_id,
+        'data-mapping'          : CONFIG.giscus.mapping,
+        'data-reactions-enabled': CONFIG.giscus.reactions_enabled,
+        'data-emit-metadata'    : CONFIG.giscus.emit_metadata,
+        'data-theme'            : CONFIG.giscus.theme,
+        'data-lang'             : CONFIG.giscus.lang,
+        'data-input-position'   : CONFIG.giscus.input_position,
+        'data-loading'          : CONFIG.giscus.loading
+      },
+      parentNode: document.querySelector('.giscus-container')
+    }));
+});
+</script>
+
+</body>
+</html>

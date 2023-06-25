@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"c0mm4nd.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":null,"show_result":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="因为ng的整个P2P都是依赖于libp2p的，所以这里记录一下使用libp2p的一些经验。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="libp2p notes">
+<meta property="og:url" content="https://c0mm4nd.com/libp2p-notes/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="因为ng的整个P2P都是依赖于libp2p的，所以这里记录一下使用libp2p的一些经验。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-15T06:27:51.000Z">
+<meta property="article:modified_time" content="2022-02-16T20:08:02.000Z">
+<meta property="article:author" content="Command M">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://c0mm4nd.com/libp2p-notes/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://c0mm4nd.com/libp2p-notes/","path":"/libp2p-notes/","title":"libp2p notes"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>libp2p notes | Talkless</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Talkless</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">72</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">70</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">核心库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">网络层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="nav-number">3.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E9%80%9A%E9%81%93"><span class="nav-number">4.</span> <span class="nav-text">加密通道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C"><span class="nav-number">5.</span> <span class="nav-text">私有网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E5%A4%8D%E7%94%A8%E5%99%A8-Mux"><span class="nav-number">6.</span> <span class="nav-text">流复用器 Mux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAT%E7%A9%BF%E9%80%8F"><span class="nav-number">7.</span> <span class="nav-text">NAT穿透</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Peer%E5%AD%98%E5%82%A8"><span class="nav-number">8.</span> <span class="nav-text">Peer存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86"><span class="nav-number">9.</span> <span class="nav-text">连接管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1"><span class="nav-number">10.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E8%AF%86"><span class="nav-number">11.</span> <span class="nav-text">共识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pubsub"><span class="nav-number">12.</span> <span class="nav-text">Pubsub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPC"><span class="nav-number">13.</span> <span class="nav-text">RPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7-x2F-%E6%9D%82%E9%A1%B9"><span class="nav-number">14.</span> <span class="nav-text">工具&#x2F;杂项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">15.</span> <span class="nav-text">测试</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://ngchain.org/" title="https:&#x2F;&#x2F;ngchain.org" rel="noopener" target="_blank">ngchain</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/libp2p-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="libp2p notes | Talkless">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          libp2p notes
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-12-15 14:27:51" itemprop="dateCreated datePublished" datetime="2021-12-15T14:27:51+08:00">2021-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-17 04:08:02" itemprop="dateModified" datetime="2022-02-17T04:08:02+08:00">2022-02-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>因为ng的整个P2P都是依赖于libp2p的，所以这里记录一下使用libp2p的一些经验。</p>
+<span id="more"></span>
+
+<p>先这边记录一下各类子库，因为我这边是用go的,所以都是根据<a href="https://github.com/libp2p/go-libp2p" target="_blank" rel="noopener">go的库</a>来介绍</p>
+<h2 id="核心库"><a href="#核心库" class="headerlink" title="核心库"></a>核心库</h2><p><code>go-libp2p</code> 作为整个libp2p的进入点，没多少代码，但是主要的函数都在；<code>go-libp2p-core</code>核心库，包含了核心接口、类型和抽象。其他所有内容都得跟着这两个库（尤其是core）一起更新，否则依赖会出现问题<br><code>go-libp2p-blankhost</code>是host的最小实现不包含任何身份识别，转发或NAT遍历代码。一般测试才用。</p>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p><code>go-libp2p-swarm</code> 是使用给定libp2p网络的“低级”接口。它可以在系统的各个方面提供更细的控制。大多数应用程序不需要这种访问级别，因此Swarm通常被抽象包装在Host里以提供更友好的接口。</p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p><code>go-ws-transport</code> WS<br><code>go-tcp-transport</code> TCP<br><code>go-libp2p-quic-transport</code> QUIC<br><code>go-udp-transport</code> UDP<br><code>go-utp-transport</code> 这里utp指的是uTorrent transport<br><code>go-libp2p-circuit</code> relay传输<br><code>go-libp2p-transport-upgrader</code> 将multiaddr-net的连接升级到完整的libp2p传输<br><code>go-reuseport-transport</code> 为自动（智能地）重用 TCP 端口提供了基本的传输层</p>
+<h2 id="加密通道"><a href="#加密通道" class="headerlink" title="加密通道"></a>加密通道</h2><p><code>go-libp2p-noise</code> 基于<a href="https://noiseprotocol.org/" target="_blank" rel="noopener">noise协议</a>的加密通道。这个暂时我还未使用过，github介绍也说没在生产环境试过（<br><code>go-libp2p-tls</code> tls<br><code>go-conn-security-multistream</code> 为mux stream提供加密通道，目前支持tls和secio<br><code>go-libp2p-secio</code> <strong>官方不建议用了</strong>，以前是标配</p>
+<h2 id="私有网络"><a href="#私有网络" class="headerlink" title="私有网络"></a>私有网络</h2><p><code>go-libp2p-pnet</code> 简易的private net实现，需要一个go-libp2p-core&#x2F;pnet.PSK才能加入网络建立Conn。</p>
+<h2 id="流复用器-Mux"><a href="#流复用器-Mux" class="headerlink" title="流复用器 Mux"></a>流复用器 Mux</h2><p><code>go-libp2p-yamux</code> <a href="https://github.com/hashicorp/yamux" target="_blank" rel="noopener">YAMUX</a>是hashicorp做的一个muxer<br><code>go-libp2p-mplex</code> <a href="https://github.com/libp2p/specs/tree/master/mplex" target="_blank" rel="noopener">MPLEX</a>是libp2p自己做的一个muxer</p>
+<h2 id="NAT穿透"><a href="#NAT穿透" class="headerlink" title="NAT穿透"></a>NAT穿透</h2><p><code>go-libp2p-nat</code> 本质上是用了github.com&#x2F;fd&#x2F;go-nat，在github.com&#x2F;libp2p&#x2F;go-libp2p&#x2F;p2p&#x2F;host&#x2F;basic的NATManager里被引入。在host里有个看起来很像的<code>go-libp2p-autonat</code>，但是并不是做穿透的，而是通过同样用AutoNAT的Peer使用测试回拨来确定他们的 NAT 可拨情况。</p>
+<h2 id="Peer存储"><a href="#Peer存储" class="headerlink" title="Peer存储"></a>Peer存储</h2><p><code>go-libp2p-peerstore</code> peer管理器，一般没用(因为host自带有简易的存储了)</p>
+<h2 id="连接管理"><a href="#连接管理" class="headerlink" title="连接管理"></a>连接管理</h2><p><code>go-libp2p-connmgr</code> pubsub的test里有用到</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p><code>go-libp2p-record</code> 路由记录<br><code>go-libp2p-kad-dht</code> 类Kademlia的路由实现,非常的重,但是在公网寻址上<strong>必用</strong><br><code>go-libp2p-kbucket</code> 为<code>go-libp2p-kad-dht</code>提供类型<br><code>go-libp2p-coral-dht</code> Coral DHT,<strong>官方弃坑</strong><br><code>go-libp2p-pubsub-router</code> 利用pubsub请求路由,当前ipfs用这个做IPNS</p>
+<h2 id="共识"><a href="#共识" class="headerlink" title="共识"></a>共识</h2><p><code>go-libp2p-consensus</code> 共识抽象层<br><code>go-libp2p-raft</code> 用的hashicorp家的raft库<code>github.com/hashicorp/raft</code></p>
+<h2 id="Pubsub"><a href="#Pubsub" class="headerlink" title="Pubsub"></a>Pubsub</h2><p><code>go-libp2p-pubsub</code> p2p网络上<a href="https://zh.wikipedia.org/wiki/%E5%8F%91%E5%B8%83/%E8%AE%A2%E9%98%85" target="_blank" rel="noopener">Pub&#x2F;Sub</a>消息范式的实现</p>
+<h2 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h2><p><code>go-libp2p-gorpc</code> 等于<code>net/rpc</code>放到p2p</p>
+<h2 id="工具-x2F-杂项"><a href="#工具-x2F-杂项" class="headerlink" title="工具&#x2F;杂项"></a>工具&#x2F;杂项</h2><p>许多实用的小功能实现,值得学习但是需要注意依赖版本</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><code>go-libp2p-testing</code> 官方自己用的套件,没用过且不建议用(没文档)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/how-xmr-pick-fake-inputs/" rel="prev" title="How does Monero pick fake inputs?">
+                  <i class="fa fa-chevron-left"></i> How does Monero pick fake inputs?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/chain-confirm-time/" rel="next" title="chain confirm time">
+                  chain confirm time <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments giscus-container">
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.11/pdfobject.min.js","integrity":"sha256-N6JtCNwaYm6kizuG92UtOOXamRHPwu+V1yF10g3bu/c="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":"forest","js":{"url":"//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+
+<script>
+document.addEventListener('page:loaded', () => {
+  if (!CONFIG.page.comments) return;
+
+  NexT.utils.loadComments('.giscus-container')
+    .then(() => NexT.utils.getScript('https://giscus.app/client.js', {
+      attributes: {
+        async                   : true,
+        crossOrigin             : 'anonymous',
+        'data-repo'             : CONFIG.giscus.repo,
+        'data-repo-id'          : CONFIG.giscus.repo_id,
+        'data-category'         : CONFIG.giscus.category,
+        'data-category-id'      : CONFIG.giscus.category_id,
+        'data-mapping'          : CONFIG.giscus.mapping,
+        'data-reactions-enabled': CONFIG.giscus.reactions_enabled,
+        'data-emit-metadata'    : CONFIG.giscus.emit_metadata,
+        'data-theme'            : CONFIG.giscus.theme,
+        'data-lang'             : CONFIG.giscus.lang,
+        'data-input-position'   : CONFIG.giscus.input_position,
+        'data-loading'          : CONFIG.giscus.loading
+      },
+      parentNode: document.querySelector('.giscus-container')
+    }));
+});
+</script>
+
+</body>
+</html>

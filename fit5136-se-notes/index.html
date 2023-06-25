@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"c0mm4nd.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":null,"show_result":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="FIT5136个人感觉应该是S1这学期里理论知识上收获最大的一门课（实践最多的是FIT5046安卓开发）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes for FIT5136: Software engineering">
+<meta property="og:url" content="https://c0mm4nd.com/fit5136-se-notes/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="FIT5136个人感觉应该是S1这学期里理论知识上收获最大的一门课（实践最多的是FIT5046安卓开发）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210312074837106.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210620225755060.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210620230134919.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210620230707043.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210620231849874.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210621001052151.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210621173206972.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210621192500797.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210621193132111.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210621193622094.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210623104202889.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/use_case_scenario.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622000449925.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622002135841.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622161130304.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622003949552.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622004514973.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622005501542.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622005809093.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622010247509.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622010532394.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622010710153.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622011659902.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622012028916.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622012055988.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622235848762.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622012608569.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622012553688.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622013437939.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622015305163.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622075518208.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622082040975.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622210717116.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622213225241.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622163528781.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622202634687.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210623000050998.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622235717947.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210622235402270.png">
+<meta property="og:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210623000819346.png">
+<meta property="article:published_time" content="2022-12-08T08:02:11.239Z">
+<meta property="article:modified_time" content="2021-10-11T09:21:36.000Z">
+<meta property="article:author" content="Command M">
+<meta property="article:tag" content="software management">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://c0mm4nd.com/fit5136-se-notes/image-20210312074837106.png">
+
+
+<link rel="canonical" href="https://c0mm4nd.com/fit5136-se-notes/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://c0mm4nd.com/fit5136-se-notes/","path":"/fit5136-se-notes/","title":"Notes for FIT5136: Software engineering"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Notes for FIT5136: Software engineering | Talkless</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Talkless</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">72</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">70</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#W1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">W1: Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code-and-fix"><span class="nav-number">1.1.</span> <span class="nav-text">Code-and-fix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Waterfall"><span class="nav-number">1.2.</span> <span class="nav-text">Waterfall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rapid-prototype-%E5%BF%AB%E9%80%9F%E5%8E%9F%E5%9E%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">Rapid prototype 快速原型生命周期模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F%E5%BC%80%E5%8F%91"><span class="nav-number">1.4.</span> <span class="nav-text">增量开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91"><span class="nav-number">1.5.</span> <span class="nav-text">敏捷开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6"><span class="nav-number">1.5.1.</span> <span class="nav-text">框架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Kanban"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">Kanban</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Scrum"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">Scrum</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E6%B5%81%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.6.</span> <span class="nav-text">统一流程模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91"><span class="nav-number">1.7.</span> <span class="nav-text">开源软件开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W2-%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">W2 需求工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">需求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text">需求的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E7%A1%AE%E6%80%A7"><span class="nav-number">2.1.2.</span> <span class="nav-text">准确性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Functional-requirements"><span class="nav-number">2.1.3.</span> <span class="nav-text">Functional requirements</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Non-functional-requirements"><span class="nav-number">2.1.4.</span> <span class="nav-text">Non-functional requirements</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">需求工程过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#elicitation-and-analysis-%E9%9C%80%E6%B1%82%E5%90%AF%E5%8F%91%E5%92%8C%E5%88%86%E6%9E%90"><span class="nav-number">2.2.1.</span> <span class="nav-text">elicitation and analysis 需求启发和分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E9%9C%80%E6%B1%82%EF%BC%88%E9%9C%80%E6%B1%82%E9%AA%8C%E8%AF%81%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">确定需求（需求验证）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">步骤：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%9F"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">业务模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E6%94%B6%E9%9B%86%E6%8A%80%E6%9C%AFRequirements-gathering-techniques"><span class="nav-number">2.3.</span> <span class="nav-text">需求收集技术Requirements gathering techniques</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E8%A7%84%E8%8C%83"><span class="nav-number">2.4.</span> <span class="nav-text">需求规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%E5%9B%BE"><span class="nav-number">2.5.</span> <span class="nav-text">用例图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-stories-%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B"><span class="nav-number">2.6.</span> <span class="nav-text">User stories 用户故事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Acceptance-criteria-%E9%AA%8C%E6%94%B6%E6%A0%87%E5%87%86"><span class="nav-number">2.7.</span> <span class="nav-text">Acceptance criteria 验收标准</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W3-%E5%88%86%E6%9E%90%E4%B8%8EOOP%E7%90%86%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">W3 分析与OOP理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%BB%BA%E6%A8%A1"><span class="nav-number">3.1.</span> <span class="nav-text">系统建模</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#perspective-and-viewpoints-%E7%B3%BB%E7%BB%9F%E8%A7%86%E8%A7%92%E5%92%8C%E8%A7%82%E7%82%B9%E2%80%A6%E2%80%A6"><span class="nav-number">3.1.1.</span> <span class="nav-text">perspective and viewpoints 系统视角和观点……</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UML"><span class="nav-number">3.1.2.</span> <span class="nav-text">UML</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">3.2.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%8A%9F%E8%83%BD%E5%BB%BA%E6%A8%A1-%E7%94%A8%E4%BE%8B%E5%9C%BA%E6%99%AF"><span class="nav-number">3.3.</span> <span class="nav-text">第一步：功能建模 - 用例场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BE%8B%E5%9C%BA%E6%99%AF%E6%A8%A1%E6%9D%BF"><span class="nav-number">3.3.1.</span> <span class="nav-text">用例场景模板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82%E8%A7%84%E8%8C%83"><span class="nav-number">3.3.2.</span> <span class="nav-text">软件需求规范</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E4%BD%BF%E7%94%A8%E7%B1%BB%E5%9B%BE%E8%BF%9B%E8%A1%8C%E7%B1%BB%E5%BB%BA%E6%A8%A1"><span class="nav-number">3.4.</span> <span class="nav-text">第二步：使用类图进行类建模</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OOP%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A6%82%E5%BF%B5%E4%BF%AE%E8%AE%A2"><span class="nav-number">3.4.1.</span> <span class="nav-text">OOP面向对象的概念修订</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81"><span class="nav-number">3.4.2.</span> <span class="nav-text">继承与多态</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Polymorphism-%E5%A4%9A%E6%80%81"><span class="nav-number">3.4.2.1.</span> <span class="nav-text">Polymorphism 多态</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">3.4.2.1.1.</span> <span class="nav-text">抽象类</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W4-%E5%9B%A2%E9%98%9F%E5%90%88%E4%BD%9C%EF%BC%8C%E7%BB%9F%E4%B8%80%E6%B5%81%E7%A8%8B%EF%BC%8C%E6%9B%B4%E5%A4%9A%E5%85%B3%E4%BA%8E%E6%95%8F%E6%8D%B7%E3%80%81VCS"><span class="nav-number">4.</span> <span class="nav-text">W4 团队合作，统一流程，更多关于敏捷、VCS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%A2%E9%98%9F"><span class="nav-number">4.1.</span> <span class="nav-text">团队</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%81%E9%99%90%E7%BC%96%E7%A8%8B%E5%9B%A2%E9%98%9F"><span class="nav-number">4.1.1.</span> <span class="nav-text">极限编程团队</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scrum-%E5%9B%A2%E9%98%9F"><span class="nav-number">4.1.2.</span> <span class="nav-text">Scrum 团队</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E5%9B%A2%E9%98%9F"><span class="nav-number">4.1.3.</span> <span class="nav-text">开源团队</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%A2%E9%98%9F%E9%97%AE%E9%A2%98"><span class="nav-number">4.2.</span> <span class="nav-text">团队问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Unified-Process-%E7%BB%9F%E4%B8%80%E6%B5%81%E7%A8%8B"><span class="nav-number">4.3.</span> <span class="nav-text">The Unified Process 统一流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%8C%83%E5%BC%8F%E4%B8%AD%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%92%8C%E5%A2%9E%E9%87%8F"><span class="nav-number">4.3.1.</span> <span class="nav-text">面向对象范式中的迭代和增量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OOP"><span class="nav-number">4.3.2.</span> <span class="nav-text">+OOP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%EF%BC%88%E5%9E%82%E7%9B%B4%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">工作流（垂直）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">4.4.1.</span> <span class="nav-text">需求工作流</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">4.4.1.1.</span> <span class="nav-text">分析工作流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Software-Project-Management-Plan-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%AE%A1%E5%88%92"><span class="nav-number">4.4.1.2.</span> <span class="nav-text">Software Project Management Plan 软件项目管理计划</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">4.4.1.3.</span> <span class="nav-text">设计工作流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">4.4.1.4.</span> <span class="nav-text">实现工作流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%AF%E8%BF%BD%E6%BA%AF%E6%80%A7"><span class="nav-number">4.4.1.5.</span> <span class="nav-text">可追溯性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">4.4.1.6.</span> <span class="nav-text">测试工作流</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%EF%BC%88%E6%B0%B4%E5%B9%B3%EF%BC%89"><span class="nav-number">4.5.</span> <span class="nav-text">阶段（水平）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E9%98%B6%E6%AE%B5"><span class="nav-number">4.5.1.</span> <span class="nav-text">初始阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%86%E5%8C%96%E9%98%B6%E6%AE%B5"><span class="nav-number">4.5.2.</span> <span class="nav-text">细化阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%BD%E5%B7%A5%E9%98%B6%E6%AE%B5"><span class="nav-number">4.5.3.</span> <span class="nav-text">施工阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E6%B8%A1%E9%98%B6%E6%AE%B5"><span class="nav-number">4.5.4.</span> <span class="nav-text">过渡阶段</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BB%B4-%E4%B8%8E-2-%E7%BB%B4%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.6.</span> <span class="nav-text">1 维 与 2 维生命周期模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Scrum-%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%E6%95%8F%E6%8D%B7"><span class="nav-number">4.6.1.</span> <span class="nav-text">使用 Scrum 框架实现敏捷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%9C%8B%E6%9D%BF%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0%E6%95%8F%E6%8D%B7"><span class="nav-number">4.6.2.</span> <span class="nav-text">使用看板框架实现敏捷</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%8F%E6%8D%B7%E8%BF%87%E7%A8%8B"><span class="nav-number">4.7.</span> <span class="nav-text">敏捷过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Version-Control-Systems-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.7.1.</span> <span class="nav-text">Version Control Systems 版本管理系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W5-%E5%88%86%E6%9E%90%EF%BC%88%E7%BB%AD%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">W5 分析（续）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UML-%E7%B1%BB%E5%9B%BE"><span class="nav-number">5.1.</span> <span class="nav-text">UML 类图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Associations-%E5%85%B3%E8%81%94"><span class="nav-number">5.1.1.</span> <span class="nav-text">Associations 关联</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%92%E5%8C%96%E5%85%B3%E7%B3%BB"><span class="nav-number">5.2.</span> <span class="nav-text">归化关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%9A%E5%90%88"><span class="nav-number">5.2.1.</span> <span class="nav-text">聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%8D%E5%90%88"><span class="nav-number">5.2.2.</span> <span class="nav-text">复合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">5.2.3.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%86%E5%88%AB%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.2.3.1.</span> <span class="nav-text">识别类和对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%86%E5%88%AB%E6%8A%BD%E8%B1%A1%EF%BC%88%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%EF%BC%89%E7%9A%84%E8%A7%92%E8%89%B2%E5%92%8C%E8%81%8C%E8%B4%A3"><span class="nav-number">5.2.3.2.</span> <span class="nav-text">识别抽象（类和对象）的角色和职责</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E6%B8%85%E9%99%A4"><span class="nav-number">5.2.3.3.</span> <span class="nav-text">模式清除</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%B1%BB"><span class="nav-number">5.3.</span> <span class="nav-text">三种类型的类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E7%B1%BB"><span class="nav-number">5.3.1.</span> <span class="nav-text">实体类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%B9%E7%95%8C%E7%B1%BB"><span class="nav-number">5.3.2.</span> <span class="nav-text">边界类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E7%B1%BB"><span class="nav-number">5.3.3.</span> <span class="nav-text">控制类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E4%BA%A4%E4%BA%92"><span class="nav-number">5.4.</span> <span class="nav-text">类的交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interaction-Diagrams-%E4%BA%A4%E4%BA%92%E5%9B%BE"><span class="nav-number">5.5.</span> <span class="nav-text">Interaction Diagrams 交互图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UML-Sequence-Diagram-%E5%BA%8F%E5%88%97%E5%9B%BE"><span class="nav-number">5.5.1.</span> <span class="nav-text">UML Sequence Diagram 序列图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UML-state-charts-%E7%8A%B6%E6%80%81%E8%A1%A8"><span class="nav-number">5.5.2.</span> <span class="nav-text">UML state charts 状态表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W6-%E8%AE%BE%E8%AE%A1%EF%BC%9A%E4%BB%8E%E6%A8%A1%E5%9D%97%E5%88%B0%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.</span> <span class="nav-text">W6 设计：从模块到对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9D%97%EF%BC%9F"><span class="nav-number">6.1.</span> <span class="nav-text">什么是模块？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">6.1.1.</span> <span class="nav-text">模块的操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E9%80%BB%E8%BE%91"><span class="nav-number">6.1.2.</span> <span class="nav-text">模块的逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%9A"><span class="nav-number">6.1.3.</span> <span class="nav-text">模块的上下文：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E9%85%8D%E7%BB%99%E6%A8%A1%E5%9D%97%E7%9A%84%E5%90%8D%E7%A7%B0%EF%BC%8C%E5%8D%B3%E5%85%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">6.1.4.</span> <span class="nav-text">分配给模块的名称，即其操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%86%85%E8%81%9A-Cohesion"><span class="nav-number">6.2.</span> <span class="nav-text">模块内聚 Cohesion</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Coincidental-Cohesion-%E7%A2%B0%E5%B7%A7%E5%86%85%E8%81%9A"><span class="nav-number">6.2.1.</span> <span class="nav-text">Coincidental Cohesion 碰巧内聚</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Logical-Cohesion-%E9%80%BB%E8%BE%91%E5%86%85%E8%81%9A"><span class="nav-number">6.2.2.</span> <span class="nav-text">Logical Cohesion 逻辑内聚</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%EF%BC%88%E7%BB%8F%E5%85%B8%EF%BC%89%E5%86%85%E8%81%9A"><span class="nav-number">6.2.3.</span> <span class="nav-text">时间（经典）内聚</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Procedural-%E8%BF%87%E7%A8%8B%E5%86%85%E8%81%9A"><span class="nav-number">6.2.4.</span> <span class="nav-text">Procedural 过程内聚</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Communication-%E9%80%9A%E4%BF%A1%E5%86%85%E8%81%9A"><span class="nav-number">6.2.5.</span> <span class="nav-text">Communication 通信内聚</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Functional-%E5%8A%9F%E8%83%BD%E5%86%85%E8%81%9A"><span class="nav-number">6.2.6.</span> <span class="nav-text">Functional 功能内聚</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E5%86%85%E8%81%9A"><span class="nav-number">6.2.7.</span> <span class="nav-text">信息内聚</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E8%80%A6%E5%90%88"><span class="nav-number">6.3.</span> <span class="nav-text">模块耦合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E8%80%A6%E5%90%88"><span class="nav-number">6.3.1.</span> <span class="nav-text">内容耦合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%85%B1%E8%80%A6%E5%90%88"><span class="nav-number">6.3.2.</span> <span class="nav-text">公共耦合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%80%A6%E5%90%88"><span class="nav-number">6.3.3.</span> <span class="nav-text">控制耦合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E8%80%A6%E5%90%88"><span class="nav-number">6.3.4.</span> <span class="nav-text">标记耦合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%80%A6%E5%90%88"><span class="nav-number">6.3.5.</span> <span class="nav-text">数据耦合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%81%9A-%E8%80%A6%E5%90%88"><span class="nav-number">6.4.</span> <span class="nav-text">内聚+耦合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UML%E7%9A%84%E5%AF%BC%E5%90%91%E6%80%A7"><span class="nav-number">6.5.</span> <span class="nav-text">UML的导向性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="nav-number">6.6.</span> <span class="nav-text">伪代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1"><span class="nav-number">7.</span> <span class="nav-text">W7 软件设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.1.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MVC-pattern"><span class="nav-number">7.1.1.</span> <span class="nav-text">MVC pattern</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Layered-architecture-pattern-%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="nav-number">7.1.2.</span> <span class="nav-text">Layered architecture pattern 分层架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Repository-architecture-%E5%AD%98%E5%82%A8%E5%BA%93%E6%9E%B6%E6%9E%84"><span class="nav-number">7.1.3.</span> <span class="nav-text">Repository architecture 存储库架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-x2F-S-architecture-%E5%AE%A2%E6%88%B7%E7%AB%AF-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E6%9E%84"><span class="nav-number">7.1.4.</span> <span class="nav-text">C&#x2F;S architecture 客户端-服务器架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OO%E8%AE%BE%E8%AE%A1"><span class="nav-number">7.2.</span> <span class="nav-text">OO设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W8-%E9%81%93%E5%BE%B7%E8%A7%84%E8%8C%83-amp-%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%EF%BC%88IP%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">W8 道德规范 &amp; 知识产权（IP）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W9-%E5%AE%9E%E7%8E%B0%E4%B8%8A%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">9.</span> <span class="nav-text">W9 实现上的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W10-%E8%B4%A8%E9%87%8F%E5%92%8C%E6%B5%8B%E8%AF%95"><span class="nav-number">10.</span> <span class="nav-text">W10 质量和测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W11-%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95"><span class="nav-number">11.</span> <span class="nav-text">W11 软件测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%89%E6%95%88%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-number">11.0.1.</span> <span class="nav-text">等效性测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%B9%E5%80%BC%E5%88%86%E6%9E%90"><span class="nav-number">11.0.2.</span> <span class="nav-text">边值分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95"><span class="nav-number">11.1.</span> <span class="nav-text">黑盒测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Functional-Testing-%E5%8A%9F%E8%83%BD%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-number">11.1.1.</span> <span class="nav-text">Functional Testing 功能性测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%BB%E7%92%83%E7%9B%92%E6%B5%8B%E8%AF%95"><span class="nav-number">11.2.</span> <span class="nav-text">玻璃盒测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Statement-coverage"><span class="nav-number">11.2.1.</span> <span class="nav-text">Statement coverage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Branch-coverage"><span class="nav-number">11.2.2.</span> <span class="nav-text">Branch coverage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Path-Coverage"><span class="nav-number">11.2.3.</span> <span class="nav-text">Path Coverage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#All-Definition-Use-Path-Coverage-%E6%89%80%E6%9C%89%E5%AE%9A%E4%B9%89%E4%BD%BF%E7%94%A8%E8%B7%AF%E5%BE%84%E8%A6%86%E7%9B%96"><span class="nav-number">11.2.4.</span> <span class="nav-text">All-Definition-Use-Path Coverage 所有定义使用路径覆盖</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%80%83%E7%82%B9"><span class="nav-number">11.3.</span> <span class="nav-text">考点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W12-%E4%BA%A4%E4%BB%98%E5%90%8E%E7%BB%B4%E6%8A%A4"><span class="nav-number">12.</span> <span class="nav-text">W12 交付后维护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mock-Exam"><span class="nav-number">13.</span> <span class="nav-text">Mock Exam</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-1"><span class="nav-number">13.1.</span> <span class="nav-text">Part 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-2"><span class="nav-number">13.2.</span> <span class="nav-text">Part 2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1"><span class="nav-number">13.2.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2"><span class="nav-number">13.2.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3"><span class="nav-number">13.2.3.</span> <span class="nav-text">Q3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-3"><span class="nav-number">13.3.</span> <span class="nav-text">Part 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-4"><span class="nav-number">13.4.</span> <span class="nav-text">Part 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-5"><span class="nav-number">13.5.</span> <span class="nav-text">Part 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-6"><span class="nav-number">13.6.</span> <span class="nav-text">Part 6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-7"><span class="nav-number">13.7.</span> <span class="nav-text">[Part 7]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-8"><span class="nav-number">13.8.</span> <span class="nav-text">[Part 8]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E8%80%83%E8%AF%95"><span class="nav-number">14.</span> <span class="nav-text">实际考试</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://ngchain.org/" title="https:&#x2F;&#x2F;ngchain.org" rel="noopener" target="_blank">ngchain</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/fit5136-se-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Notes for FIT5136: Software engineering | Talkless">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes for FIT5136: Software engineering
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-12-08 16:02:11" itemprop="dateCreated datePublished" datetime="2022-12-08T16:02:11+08:00">2022-12-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-10-11 17:21:36" itemprop="dateModified" datetime="2021-10-11T17:21:36+08:00">2021-10-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>FIT5136个人感觉应该是S1这学期里理论知识上收获最大的一门课（实践最多的是FIT5046安卓开发）</p>
+<span id="more"></span>
+
+<h2 id="W1-Introduction"><a href="#W1-Introduction" class="headerlink" title="W1: Introduction"></a>W1: Introduction</h2><p>SE: 一门工程学科，涉及从最初的概念到操作和维护的软件生产的所有方面。</p>
+<p>CS vs SE：计算机科学侧重于理论和基础； 软件工程关注开发和交付有用的软件的实用性</p>
+<p>重要性：</p>
+<p>• 本身就是一门学科<br>• 越来越多的系统由软件控制，因此正确设计软件并不是一个坏主意<br>• 所有发达国家的经济都依赖于软件<br>• 软件成本通常在计算机系统成本中占主导地位<br>• 延迟和失败的项目需要更多的成本、时间和资源<br>• 需要能够经济快速地生产可靠且值得信赖的 (!) 系统<br>• 从长远来看，为软件系统使用软件工程技术和方法比仅仅为编程项目编写程序更便宜<br>• 尽管它很重要，但仍然没有一个明确的定义！</p>
+<p>好软件的属性：</p>
+<ul>
+<li><strong>可维护性</strong>：软件应该以这样的方式编写，以便它可以发展以满足客户不断变化的需求。</li>
+<li><strong>可靠性和安全性</strong>：不应在系统故障时造成物理或经济损失。 恶意用户不应能够访问或损坏系统。</li>
+<li><strong>效率</strong>：不应浪费系统资源，例如内存和处理器周期——响应能力、处理时间、内存利用率等。</li>
+<li><strong>可接受性</strong>：必须能够被其设计的用户类型所接受。 必须易于理解、可用并与他们使用的其他系统兼容。</li>
+</ul>
+<p>囊括：</p>
+<ul>
+<li>人：Team， Client， Users</li>
+<li>围绕软件生命周期的过程：Agile， Waterfall</li>
+<li>技术：例如platforms，object-oriented design&#x2F;models，languages，methods (testing)，tools (IDE)</li>
+</ul>
+<p>Software Engineering Body of Knowledge (SWEBOK6)</p>
+<p>软件工程师需要了解以下大部分（如果不是全部）：<br>• 软件要求<br>• 软件设计和构建<br>• 软件质量和测试<br>• 软件维护<br>• 软件配置管理<br>• 软件工程管理<br>• 软件工程模型和方法<br>• 软件工程专业实践<br>• 软件工程经济学<br>• 计算、数学和工程方面的基础知识</p>
+<p>经济角度：</p>
+<ul>
+<li>软件成本通常高于硬件成本</li>
+<li>软件的维护成本高于开发成本<ul>
+<li>对于长寿命系统，维护成本可能是开发成本的几倍。</li>
+</ul>
+</li>
+<li>软件工程关注具有成本效益的软件开发</li>
+</ul>
+<p>软件过程：</p>
+<p>• 开发软件系统所需的一组结构化活动<br>• 将任务分解为更小的步骤<br>• 许多不同类型的软件过程，但所有过程都涉及以下活动：</p>
+<ol>
+<li>需求和分析（规范）——定义系统应该做什么</li>
+<li>设计和实现——定义系统应该如何做，组织制度和执行制度</li>
+<li>系统验证和确认——检查它是否符合客户的要求</li>
+<li>革新（维护）——改变系统以响应不断变化的需求</li>
+</ol>
+<p>付出和成本</p>
+<ul>
+<li>糟糕的软件只能运行一次<ul>
+<li>不能重复使用、回收或进化。</li>
+<li>对团队和公司不利</li>
+</ul>
+</li>
+<li>好的软件会进化，成为更大系统的一部分，更容易集成到另一个系统<ul>
+<li>可维持 10、20 年以上！</li>
+<li>可以轻松应对需求的变化</li>
+<li>可以轻松完成技术（例如数据库）的更改</li>
+</ul>
+</li>
+<li>大部分成本用于在软件投入使用后对其进行更改（扩展和增强）。</li>
+<li>在生命周期的早期修复故障更容易、更便宜</li>
+<li>软件的维护成本高于开发成本，尤其是对于寿命较长的系统。</li>
+</ul>
+<p>过程模型</p>
+<ul>
+<li><strong>计划驱动</strong>的流程<ul>
+<li><strong>Waterfall 瀑布生命周期模型</strong> <img src="/fit5136-se-notes/image-20210312074837106.png" class="" title="image-20210312074837106"></li>
+<li>Rapid prototype 快速原型生命周期模型</li>
+</ul>
+</li>
+<li>增量开发 </li>
+<li><strong>敏捷方法论</strong> -&gt;有staff支持，有iteration</li>
+<li>统一流程模型 <strong>The unified process model</strong> </li>
+<li>同步和稳定模型</li>
+<li>螺旋 Spiral  生命周期模型</li>
+<li>开源软件开发</li>
+</ul>
+<h3 id="Code-and-fix"><a href="#Code-and-fix" class="headerlink" title="Code-and-fix"></a>Code-and-fix</h3><p>（也就是solo）的弊端</p>
+<p>• 生命周期后期的变更成本要高得多<br>• 无需求、分析、设计阶段——在实施或维护期间捕获所有错误<br>• 没有规范或设计文件，维护极其困难，更容易出现回归故障<br>• 仅适用于有限的情况</p>
+<h3 id="Waterfall"><a href="#Waterfall" class="headerlink" title="Waterfall"></a>Waterfall</h3><img src="/fit5136-se-notes/image-20210620225755060.png" class="" title="image-20210620225755060">
+
+<p>• 在计划驱动的流程中，所有活动都已计划好，并根据该计划衡量进度。<br>• 瀑布生命周期模型需要有具体的计划来完成项目。 当需求被很好地理解时，可以保证在设计过程中更改是有限的。<br>• 流程没有对错之分，然而，瀑布模型为变化或频繁的客户交互留下了有限的空间。<br>• 对于在多个地点开发系统的大型系统工程项目，瀑布模型的计划驱动性质有助于协调工作。<br>• 移动目标问题使得使用瀑布模型难以保持正轨<br>• 在进入下一阶段之前必须完成一个阶段<br>•（Schach 第 52 页）“一般来说，规范文档很长、很详细，而且坦率地说读起来很无聊”</p>
+<p>（就是照本宣科）</p>
+<p>不能适应由于公司变更、扩张，客户更改，Feature creep（就不断要求feature）导致的moving-target问题</p>
+<p>对软件所做的任何更改都可能导致回归故障（软件明显不相关部分的故障）</p>
+<img src="/fit5136-se-notes/image-20210620230134919.png" class="" title="image-20210620230134919">
+
+<p>加个带反馈的。</p>
+<p>但是仍然不能解决问题</p>
+<p>• 在每个阶段结束时，将生成技术文档——例如 UML 图<br>• 这些客户难以理解<br>• 在每个阶段，它没有显示成品将如何工作以及它的外观……<br>• 结果，当客户看到最终产品时……</p>
+<h3 id="Rapid-prototype-快速原型生命周期模型"><a href="#Rapid-prototype-快速原型生命周期模型" class="headerlink" title="Rapid prototype 快速原型生命周期模型"></a>Rapid prototype 快速原型生命周期模型</h3><p>原型是系统的初始版本，用于演示概念和尝试设计选项。可用于</p>
+<ul>
+<li>需求工程（W2</li>
+<li>开发 UI 设计的设计流程（W7</li>
+<li>在测试中运行黑盒测试（W11</li>
+</ul>
+<p>快速原型制作 &#x3D; 在功能上等同于产品子集的工作模型</p>
+<p>它是面向客户的，客户可以在继续之前就原型提供反馈</p>
+<img src="/fit5136-se-notes/image-20210620230707043.png" class="" title="image-20210620230707043">
+
+<p>moving-target问题解法：</p>
+<ul>
+<li>“没有已知的解决方案”<ul>
+<li>但是，为更改制作文档将有助于团队和向客户收费</li>
+</ul>
+</li>
+<li>变化是不可避免的<ul>
+<li>成长中的公司总是会改变</li>
+<li>即便呼吁变革的个人有足够的影响力，依然无能为力</li>
+</ul>
+</li>
+</ul>
+<h3 id="增量开发"><a href="#增量开发" class="headerlink" title="增量开发"></a>增量开发</h3><p>大纲描述：概述系统要求</p>
+<p>所有活动都相互<strong>交错</strong>，而不是分开，跨活动快速反馈。</p>
+<ul>
+<li>需求和分析（规范）</li>
+<li>设计和实施（开发）</li>
+<li>验证（测试）</li>
+</ul>
+<p>初始版本：开发初始实施</p>
+<p>中间版本：从客户和用户那里获得反馈并通过版本改进软件直到系统开发</p>
+<p>每个“增量”包括客户端请求的一些功能。</p>
+<p>好处</p>
+<ul>
+<li>降低适应变化的成本</li>
+<li>更容易获得客户对已完成开发工作的反馈</li>
+<li>可以更快速地向客户交付和部署有用的软件</li>
+</ul>
+<p>问题</p>
+<ul>
+<li>进程不可见。 管理人员需要定期交付成果来衡量进度。 如果系统开发得很快，那么生成反映系统每个版本的文档并不划算。</li>
+<li>随着新增量的增加，系统结构趋于退化。 除非将时间和金钱花在重构以改进软件上，否则定期更改往往会破坏其结构，合并进一步的软件更改变得越来越困难且成本高昂。</li>
+</ul>
+<h3 id="敏捷开发"><a href="#敏捷开发" class="headerlink" title="敏捷开发"></a>敏捷开发</h3><ul>
+<li>基于<strong>增量开发</strong>，敏捷于 1990 年代后期出现，以减少工作软件系统的<strong>交付时间</strong></li>
+<li>适用于客户不确定系统规格的情况</li>
+<li>快速开发和交付至关重要。 软件必须快速发展以反映不断变化的业务需求。</li>
+<li>渐进式发展：<br>o 程序规范、设计和实现是交错的<br>o 客户和用户参与版本规范和评估的一系列版本或增量</li>
+<li>广泛的工具支持：例如 自动化测试工具，Trello</li>
+<li>最少的文档——专注于工作代码</li>
+</ul>
+<h4 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h4><h5 id="Kanban"><a href="#Kanban" class="headerlink" title="Kanban"></a>Kanban</h5><ul>
+<li>看板就是关于<strong>可视化</strong>您的工作、限制正在进行的工作和最大限度地提高效率。</li>
+<li>看板团队专注于减少项目从开始到结束所花费的时间。</li>
+</ul>
+<h5 id="Scrum"><a href="#Scrum" class="headerlink" title="Scrum"></a>Scrum</h5><ul>
+<li>Scrum 是帮助团队合作开发、交付和维持复杂产品的框架</li>
+<li>一切都分为<strong>时间</strong>框架</li>
+</ul>
+<h3 id="统一流程模型"><a href="#统一流程模型" class="headerlink" title="统一流程模型"></a>统一流程模型</h3><p>The Unified Process 重点</p>
+<img src="/fit5136-se-notes/image-20210620231849874.png" class="" title="image-20210620231849874">
+
+<ul>
+<li>一个迭代的、增量的、面向对象的流程模型</li>
+<li>对于 FIT5136，我们专注于<strong>统一流程</strong>：（好家伙我到期末一直都以为是用的agile<ul>
+<li>学习敏捷概念（右倾</li>
+<li>制作一些用于学期内评估的文件（左倾</li>
+</ul>
+</li>
+</ul>
+<h3 id="开源软件开发"><a href="#开源软件开发" class="headerlink" title="开源软件开发"></a>开源软件开发</h3><p>略：No standard lifecycle model</p>
+<h2 id="W2-需求工程"><a href="#W2-需求工程" class="headerlink" title="W2 需求工程"></a>W2 需求工程</h2><p>基于 IEEE 软件工程术语表</p>
+<ol>
+<li>用户解决问题或实现目标所需的条件或能力。</li>
+<li>系统或系统组件为满足合同、标准、规范或其他正式强制文件而必须满足或拥有的条件或能力。</li>
+<li>(1) 或 (2) 中的条件或能力的书面表示。</li>
+</ol>
+<ul>
+<li>定义、记录和维护需求的过程</li>
+<li>软件工程过程的一部分</li>
+<li>建立客户从系统中要求的服务及其运行和开发的约束的过程。</li>
+<li>系统需求是对需求工程过程中产生的系统服务和约束的描述。</li>
+<li>客户提供的系统需求通常是非正式的和简短的，因此找到系统详细需求的过程就是需求工程</li>
+</ul>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><h4 id="需求的类型"><a href="#需求的类型" class="headerlink" title="需求的类型"></a>需求的类型</h4><ul>
+<li>业务：业务需要系统做什么</li>
+<li>用户：用户（或客户）要求系统做什么。 用户可以是利益相关者。</li>
+<li><strong>Functional 功能性</strong>：系统在功能上应该做什么</li>
+<li><strong>Non-functional 非功能性</strong>：系统需要提供的服务质量</li>
+<li>约束：系统应该禁止用户做的事情</li>
+<li>实现：系统的平台等要求</li>
+</ul>
+<p>• <strong>完整</strong>需求：  它们应包括实现功能所需的所有设施的描述。<br>• 持续需求：描述中不应有冲突或矛盾。</p>
+<p>在实践中，由于系统和环境的复杂性，不可能产生<strong>完整</strong>且<strong>一致</strong>的需求文档。</p>
+<h4 id="准确性"><a href="#准确性" class="headerlink" title="准确性"></a>准确性</h4><ul>
+<li><p><strong>需求</strong>不得含糊不清、不完整和不一致</p>
+</li>
+<li><p>当<strong>功能性需求</strong>没有被准确表述时就会出现问题。</p>
+</li>
+<li><p>开发人员和用户可能以不同的方式解释不明确的需求。</p>
+<p>例如：考虑“用户应该能够搜索所有郊区的房产。”</p>
+<ul>
+<li>一种解释：在所有郊区搜索特定的房产。</li>
+<li>另一种解释：搜索特定郊区的房产。 用户选择郊区然后搜索。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Functional-requirements"><a href="#Functional-requirements" class="headerlink" title="Functional requirements"></a>Functional requirements</h4><p>描述<strong>功能</strong>或<strong>系统服务</strong></p>
+<p>描述<strong>系统</strong>应如何对特定输入做出反应以及<strong>系统</strong>在特定情况下应如何运行</p>
+<p>表示为<strong>输入</strong>和<strong>输出</strong></p>
+<p>例子：</p>
+<ul>
+<li>用户应能够搜索所有郊区的房产。</li>
+<li>每月月底，系统应生成已售或出租的物业清单</li>
+<li>每个房地产经纪人都应由他或她的 8 位员工编号唯一标识。</li>
+</ul>
+<h4 id="Non-functional-requirements"><a href="#Non-functional-requirements" class="headerlink" title="Non-functional requirements"></a>Non-functional requirements</h4><p>• 可用于判断系统运行情况的<strong>特定标准</strong>，而不是特定行为<br>• 系统提供的<strong>服务</strong>或<strong>功能的细节</strong>。 <strong>使系统质量更好的要求</strong>。<br>• 例如，允许的客户数量、密码要求、响应时间、存储要求、I&#x2F;O 设备能力等。</p>
+<p>重要性：</p>
+<ul>
+<li>通常适用于整个系统而不是单个特征或功能。</li>
+<li>非功能性需求可能比功能性需求更重要。</li>
+<li>如果不满足，则系统可能无法使用。</li>
+</ul>
+<p>例如</p>
+<p>• 物业管理系统应在正常工作时间（周一至周五，08：30-17：30）提供给所有物业代理。<br>• 任何一天内正常工作时间内的停机时间不得超过五秒。<br>• 客户必须使用他们的驾驶执照进行身份验证。<br>• 收到检验请求后，系统必须在 10 秒内回复电子邮件进行确认。<br>• 流程要求，例如 强制要求特定的 IDE、编程语言或开发方法。<br>• 在某些情况下，如果客户不确定，他们希望您推荐</p>
+<p>实现</p>
+<p>• 非功能性需求通常影响系统的整体架构而不是单个组件。<br>• 例如，为确保满足性能要求，“设计”系统以尽量减少组件之间的通信。<br>• 单个非功能性需求，例如安全性需求，可能会生成多个相关的功能性需求，这些需求定义了所需的系统服务</p>
+<h3 id="需求工程过程"><a href="#需求工程过程" class="headerlink" title="需求工程过程"></a>需求工程过程</h3><ul>
+<li>用于 RE 的过程因应用领域、涉及的人员和制定需求的组织而异。但是，所有流程都有许多通用活动<ul>
+<li>需求启发；</li>
+<li>需求分析;</li>
+<li>需求验证；</li>
+<li>需求管理。</li>
+</ul>
+</li>
+</ul>
+<p>在实践中，RE 是一种<strong>迭代</strong>活动，其中这些过程是<strong>交错</strong>的。</p>
+<h4 id="elicitation-and-analysis-需求启发和分析"><a href="#elicitation-and-analysis-需求启发和分析" class="headerlink" title="elicitation and analysis 需求启发和分析"></a>elicitation and analysis 需求启发和分析</h4><img src="/fit5136-se-notes/image-20210621001052151.png" class="" title="image-20210621001052151">
+
+<p>• 发现客户的要求：• 需求获取（或需求收集）• 方法包括访谈和调查<br>• 完善和扩展初始要求：• 需求分析<br>• 让技术人员与客户&#x2F;客户一起工作，以了解有关应用领域、系统应提供的服务以及系统的操作限制的更多信息。<br>• 可能涉及利益相关者——最终用户、经理、参与维护的工程师、领域专家、工会等。</p>
+<h4 id="确定需求（需求验证）"><a href="#确定需求（需求验证）" class="headerlink" title="确定需求（需求验证）"></a>确定需求（需求验证）</h4><p>• 很难将软件产品及其功能可视化：从客户角度，可视化问题要更加严重<br>• 需要从客户那里获取适当信息的技巧<br>• 客户是此信息的唯一来源</p>
+<p>解决方案：<br>• 从客户端获取初始信息<br>• 将此初始信息用作软件工程过程的输入<br>• 按照步骤确定客户的真实需求</p>
+<h5 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h5><p>一、了解应用领域（或简称领域）<br>• 目标产品运行的特定环境<br>二、构建商业模式<br>• 为客户的业务流程建模<br>三、用商业模式来确定客户的需求</p>
+<p>重复上述步骤</p>
+<h5 id="域"><a href="#域" class="headerlink" title="域"></a>域</h5><p>开发团队的每个成员都必须完全熟悉应用程序领域<br>• 正确的术语terminology至关重要</p>
+<p>构建词汇表glossary<br>• 领域中使用的技术词及含义的列表</p>
+<h5 id="业务模型"><a href="#业务模型" class="headerlink" title="业务模型"></a>业务模型</h5><p>业务模型是对组织业务流程的描述</p>
+<h3 id="需求收集技术Requirements-gathering-techniques"><a href="#需求收集技术Requirements-gathering-techniques" class="headerlink" title="需求收集技术Requirements gathering techniques"></a>需求收集技术Requirements gathering techniques</h3><p>• 采访<br>• 问卷<br>• 现有文件和系统<br>• 研讨会<br>• 领域专家<br>• 直接观察<br>• “驾驭卡车”——了解业务<br>• 原型制作</p>
+<p>具体介绍略</p>
+<h3 id="需求规范"><a href="#需求规范" class="headerlink" title="需求规范"></a>需求规范</h3><p>在需求文档中写下用户和系统需求的过程。<br>• 没有技术背景的最终用户和客户必须能够理解用户要求。<br>• 系统要求是更详细的要求，可能包括更多的技术信息。<br>• 要求可能是系统开发合同的一部分<br>• 因此，尽可能完整是很重要的。</p>
+<h3 id="用例图"><a href="#用例图" class="headerlink" title="用例图"></a>用例图</h3><p>用例（用户案例）对软件产品本身与该软件产品的用户（即Actor）之间的交互进行建模</p>
+<ul>
+<li>使您对需求的理解正式化的工具。</li>
+<li>捕获一些用户可见的功能或行为。</li>
+<li>Actor和用例之间的关系</li>
+</ul>
+<p>用例图不是：</p>
+<ul>
+<li>流程图！</li>
+<li>用例的描述。</li>
+<li>定义用例的一系列步骤</li>
+</ul>
+<p>用例图应该很简单！<br>迭代和递增，直到你做对了！</p>
+<p>Note：<br>请遵循这些幻灯片中描述的用例图 UML 语法。 参考书 Satzinger et al。 使用不同的语法。</p>
+<p>定义<img src="/fit5136-se-notes/image-20210621173206972.png" class="" title="image-20210621173206972"></p>
+<ul>
+<li>Actor是软件产品之外的世界的成员</li>
+<li>通常很容易识别Actor<ul>
+<li>Actor通常是软件产品的用户</li>
+<li>大多数软件都有不止一种类型的Actor</li>
+</ul>
+</li>
+<li>一般来说，参与者在软件产品方面发挥作用。 一个Actor：<ul>
+<li>作为发起人：通常是发起用例的参与者；放置在用例图的<strong>左侧</strong></li>
+<li>作为参与者：通常是参与用例的参与者；放置在用例图的<strong>右侧</strong>；一个Actor可以参与多个用例</li>
+<li>作为在用例中扮演关键角色的人</li>
+<li>作为扮演多个角色的人。 例如。 工作人员可以是讲师和助教</li>
+</ul>
+</li>
+</ul>
+<p>Actor不必是人</p>
+<ul>
+<li>注意：这个系统永远不能是一个Actor。 其他系统可以。<br>示例：电子商务信息系统必须与信用卡公司信息系统交互</li>
+<li>从电子商务信息系统的角度来看，信用卡公司信息系统是一个Actor</li>
+<li>信用卡公司是电子商务系统用例图中的参与者。</li>
+<li>从信用卡公司信息系统的角度来看，电子商务信息系统是一个Actor</li>
+<li>电子商务系统是信用卡系统用例图中的参与者。</li>
+</ul>
+<p>Overlapping Actor（Actor泛化）</p>
+<p>或者：<br>• 如果两个参与者以相同的方式与同一组用例进行通信，我们可以将其表示为对另一个（可能是抽象的）参与者的泛化。<br>• 泛化（继承&#x2F;类型）</p>
+<img src="/fit5136-se-notes/image-20210621192500797.png" class="" title="image-20210621192500797">
+
+<p>包含和扩展</p>
+<p>包含：<br>• &lt;&lt;Include&gt;&gt;<br>• 包含是用例的强制性部分。<br>• 包含用例永远不会单独存在。 它始终包括包含的用例</p>
+<img src="/fit5136-se-notes/image-20210621193132111.png" class="" title="image-20210621193132111">
+
+<p>扩展：<br>• &lt;&lt;Extend&gt;&gt; 用于将可选行为与强制性行为分开<br>行为。<br>• 扩展用例可能是独立的，但在某些条件下，它可能会被另一个用例扩展。	</p>
+<img src="/fit5136-se-notes/image-20210621193622094.png" class="" title="image-20210621193622094">
+
+<p>good solution</p>
+<img src="/fit5136-se-notes/image-20210623104202889.png" class="" title="image-20210623104202889">
+
+<h3 id="User-stories-用户故事"><a href="#User-stories-用户故事" class="headerlink" title="User stories 用户故事"></a>User stories 用户故事</h3><p>• 当团队使用<strong>敏捷</strong>方法开发系统时编写用户故事。<br>• 用户故事应该非常简短，并从客户的角度编写——它们通常需要放在索引卡上。<br>• 由于它们是根据需要来表述的，因此通常很容易为它们编写测试。<br>• 这些用户故事应以客户的语言编写，并使用适合其业务的术语。<br>• 客户了解用户故事很重要，因为敏捷方法通常涉及客户反复选择接下来要实施的用户故事。<br>• 对于每个用户故事，需要包括对实现所需功能或用户故事大小或与难度或优先级相关的故事点所需的时间的估计。</p>
+<p>例如：</p>
+<ul>
+<li>作为调查参与者，我希望获得进度指示，以便我知道我还有多少要完成</li>
+<li>作为一个 wiki 用户，想上传一个文件到 wiki 以便我可以与我的同事共享</li>
+<li>作为客户，我希望系统不会损坏数据库。</li>
+</ul>
+<p>使用 INVEST 助记符是制作优秀用户故事的便捷指南：</p>
+<ul>
+<li>Independent 独立：用户故事应该是独立的。</li>
+<li>Negotiable 可协商：用户故事应该能够轻松修改或替换，例如使用满足相同结果的不同用户故事。</li>
+<li>Valuable 有价值：用户故事必须对最终用户有益。</li>
+<li>Estimable 可估算的：用户故事应该对应于可以估算实施工作量的功能。</li>
+<li>Small 小：用户故事必须足够小，以便独立考虑和安排。</li>
+<li>Testable 可测试：用户故事必须提供足够的信息来验证它已被令人满意地实施。 某些任务或要求可能与以用户为中心的功能无关。 您可以根据用户来描述这些内容，将它们写为开发人员故事，或者只是在内部跟踪它们。</li>
+</ul>
+<p>你需要利益来评估</p>
+<ul>
+<li>Negotiable 可协商：在 不知道结果（收益）的情况下难以协商</li>
+<li>Valuable  有价值：如果不知道用户故事给用户带来什么好处，就无法知道用户故事的价值</li>
+<li>Testable 可测试：有时可以通过解释进行测试，但我们不想将其留给假设</li>
+</ul>
+<h3 id="Acceptance-criteria-验收标准"><a href="#Acceptance-criteria-验收标准" class="headerlink" title="Acceptance criteria 验收标准"></a>Acceptance criteria 验收标准</h3><p><strong>验收标准</strong>定义了<strong>用户故事的边界</strong>，用于确认软件何时按预期工作，即故事何时完成。简单来说，就是测试用户故事是否按预期实施的标准。</p>
+<ul>
+<li>对于智能家居应用程序，其中一个用户故事可能是：“作为房主，我希望能够调暗或调亮单个灯泡，这样我就可以创造出理想的照明。”， 此用户故事的验收标准可能是：</li>
+<li>用户将选择一个地球仪，然后看到这个视图；</li>
+<li>此视图应使用滑块控件，以便用户拥有可用的全部亮度级别；</li>
+<li>打开此视图时，初始滑块位置应反映所选地球的当前亮度；</li>
+<li>光球响应用户更改的时间不应超过 1 秒。</li>
+</ul>
+<h2 id="W3-分析与OOP理论"><a href="#W3-分析与OOP理论" class="headerlink" title="W3 分析与OOP理论"></a>W3 分析与OOP理论</h2><h3 id="系统建模"><a href="#系统建模" class="headerlink" title="系统建模"></a>系统建模</h3><p>开发一个系统的抽象模型，每个模型代表该系统的不同视图或视角。<br>• 使用图形符号表示系统，例如统一建模语言 (UML)。<br>• 使用系统建模<br>• 在需求工程期间了解系统的功能并与客户沟通。<br>• 在设计期间向实施系统的工程师描述系统<br>• 用例图是系统建模的一个例子。</p>
+<h4 id="perspective-and-viewpoints-系统视角和观点……"><a href="#perspective-and-viewpoints-系统视角和观点……" class="headerlink" title="perspective and viewpoints 系统视角和观点……"></a>perspective and viewpoints 系统视角和观点……</h4><p>• 外部视角——对系统的上下文或环境进行建模。<br>• 交互视角——对系统与其环境之间或系统组件之间的交互进行建模。<br>• 结构视角——对系统的组织或系统处理的数据结构进行建模。<br>• 行为视角——对系统的动态行为及其对事件的响应方式进行建模。</p>
+<h4 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h4><p>UML 是一种标准语言，用于指定、可视化、构建和记录软件系统的人工制品，以及用于业务建模和其他非软件系统。</p>
+<p>分类：</p>
+<ul>
+<li>结构图，根据构成系统的组件及其关系显示系统的组织。<ul>
+<li>静态图，显示系统设计的结构，或</li>
+<li>动态图，显示系统执行时的组织结构。</li>
+</ul>
+</li>
+<li>行为图，显示系统中对象的动态行为。例如，不同组件如何相互通信以执行任务。</li>
+</ul>
+<p>类别</p>
+<ol>
+<li>用例图，显示系统与其环境之间的交互，以及提供更多交互细节的用例场景。</li>
+<li>类图，显示系统中的对象类以及这些类之间的关联。</li>
+<li>交互图，显示参与者与系统之间以及系统组件之间的交互。<br>• 序列图<br>• 通讯图<br>• 以前称为协作图。</li>
+<li>状态图，显示系统如何对内部和外部事件做出反应。</li>
+<li>活动图，显示流程或数据处理中涉及的活动。 （本课程未涵盖）</li>
+</ol>
+<p>作为促进关于现有或提议系统的讨论的一种方式<br>• 不完整和不正确的模型都可以，因为它们的作用是支持讨论。</p>
+<p>记录现有系统<br>• 模型应该是系统的准确表示，但不必是完整的。</p>
+<p>作为可用于生成系统实现的详细系统描述<br>• 模型必须正确且完整。</p>
+<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>目的：</p>
+<ol>
+<li>对需求有<strong>更深入的了解</strong></li>
+<li><strong>系统建模</strong></li>
+<li>以可维护的<strong>设计</strong>和<strong>实现</strong>的方式<strong>描述</strong>它们</li>
+</ol>
+<p><strong>增量和迭代</strong>地执行以下三个步骤</p>
+<ol>
+<li>功能建模：所有用例的当前场景（一个场景是一个用例的实例）</li>
+<li>类建模：确定<strong>实体类</strong>及其属性；实体类之间的<strong>相互关系和相互作用</strong>；以<strong>类图</strong>的形式呈现这些信息</li>
+<li>动态建模：确定由或对每个<strong>实体类</strong>执行的<strong>操作</strong>；以<strong>状态图</strong>的形式呈现此信息</li>
+</ol>
+<p>• 面向对象分析 (OOA) 是面向对象范式的半形式分析技术。<br>• 它是用例驱动的<br>• 在分析期间，类被提取</p>
+<h3 id="第一步：功能建模-用例场景"><a href="#第一步：功能建模-用例场景" class="headerlink" title="第一步：功能建模 - 用例场景"></a>第一步：功能建模 - 用例场景</h3><p>所有用例的呈现场景</p>
+<ul>
+<li>场景 &#x3D; 用例的描述</li>
+<li>场景可以是“ 正常”和“例外”</li>
+</ul>
+<p><strong>正常情况</strong>：用户和系统之间的一组交互，对应于我们理解系统应该如何用于实现目标的方式。</p>
+<p><strong>异常场景</strong>：描述如何处理不希望发生的事件的场景，即干扰目标进展的事件。或者作为干扰正常场景的异常条件的结果的场景。</p>
+<h4 id="用例场景模板"><a href="#用例场景模板" class="headerlink" title="用例场景模板"></a>用例场景模板</h4><p>Use Case Name 用例名称：简短的描述性动词短语；<br>Scenario： 捕捉用例本质（功能）的句子；<br>Trigger 触发器：实际触发用例的参与者；<br>Brief description 简要描述：描述用例目标的段落；<br>Actors 参与者： 用例中涉及的参与者（发起者和参与者参与者）；<br>Related use cases 相关用例：该用例是否与其他用例有任何关系 - 包含&#x2F;排除&#x2F;泛化？<br>Preconditions 先决条件：在用例可以执行之前必须为真的事情——它们是对系统状态的约束；<br>Postconditions 后置条件： 在用例结束时必须为真的事情；<br>Flow of events 事件流：用例中的步骤（如果一切顺利——没有错误、中断）；<br>Exception conditions 异常条件： 主要流程的替代列表（捕获错误，中断主要流程）。</p>
+<img src="/fit5136-se-notes/use_case_scenario.png" class="" title="use_case_scenario">
+
+<h4 id="软件需求规范"><a href="#软件需求规范" class="headerlink" title="软件需求规范"></a>软件需求规范</h4><p>不在考试范围</p>
+<p>• 软件需求规范(SRS) 是对要开发的软件系统及其功能和非功能需求的详细描述。<br>• SRS 是根据客户与您之间的协议制定的。<br>• 它可能包括用户将如何与软件系统交互的用例。<br>• 软件需求规范文档与项目开发所需的所有必要需求一致。<br>• 要开发软件系统，我们应该对软件系统有清晰的认识。<br>• 为实现这一目标，我们需要与客户持续沟通以收集所有需求。</p>
+<p>• 一个好的 SRS 定义了软件系统如何与所有内部模块、硬件、与其他程序的通信以及人类用户与广泛的现实生活场景交互。<br>• 使用 QA 主管的软件需求规范 (SRS) 文档，管理人员创建测试计划。<br>• 测试人员必须清楚本文档中指定的每个细节，以避免测试用例及其预期结果中的错误，这一点非常重要。<br>• 强烈建议在开始编写测试用例和制定任何测试计划之前查看或测试 SRS 文档。 让我们看看如何测试 SRS 以及测试时要记住的重点。</p>
+<ol>
+<li>应检查SRS的正确性</li>
+<li>应避免歧义</li>
+<li>要求要完整</li>
+<li>一致的要求</li>
+<li>预期结果的验证</li>
+<li>测试环境</li>
+<li>安全和性能标准</li>
+<li>应避免假设</li>
+</ol>
+<h3 id="第二步：使用类图进行类建模"><a href="#第二步：使用类图进行类建模" class="headerlink" title="第二步：使用类图进行类建模"></a>第二步：使用类图进行类建模</h3><p>• 类图用于开发面向对象的系统模型以显示系统中的类以及这些类之间的关联。<br>• 对象类可以被认为是一种系统对象的一般定义。<br>• 当您在软件工程过程的早期阶段开发模型时，对象代表现实世界中的某些事物，例如患者、处方、食谱、医生、讲师、学生等。</p>
+<p>UML类图内必要元素</p>
+<ul>
+<li>类</li>
+<li>属性</li>
+<li>操作</li>
+<li>关系</li>
+<li>联系<ul>
+<li>归化</li>
+<li>组合&#x2F;聚合</li>
+<li>依赖</li>
+</ul>
+</li>
+<li>约束规则和注意事项</li>
+</ul>
+<h4 id="OOP面向对象的概念修订"><a href="#OOP面向对象的概念修订" class="headerlink" title="OOP面向对象的概念修订"></a>OOP面向对象的概念修订</h4><p>对象通常来自以下来源之一（最初由 Shlaer 和 Mellor 提供，后来由 Booch 转述，并在此处进一步改编）<br>• 有形的或“现实世界的东西”：书、记事本、小册子；<br>• 角色：图书馆成员、学生、教育主任；<br>• 事件：到达、离开、请求；<br>• 互动 ： 会议、交集。</p>
+<p>• 它们类似于现实生活中的“对象”<br>• 描述对象的数据（成为它的属性&#x2F;特性）<br>• 可以由&#x2F;在对象上执行的操作&#x2F;方法。</p>
+<p>一个类描述了一组对象<br>• 相似的属性（属性），<br>• 常见行为（操作），<br>• 与其他对象的共同关系，<br>• 和普通含义（“语义”）。</p>
+<p>一个类有<br>• 数据属性&#x2F;属性：与其实例相关的信息<br>• 操作&#x2F;方法：对象支持的功能<br>• 类是对个人共同点的描述。<br>• 对象是具有不同价值观的个人。</p>
+<p>UML作图略</p>
+<p>• 一个类用 UML 符号表示为一个带有三个隔间的盒子<br>• 类属性：是我们想要捕获的关于类的信息！<br>• 例如，在现实世界中，当我们谈论一个人时，我们通常谈论<br>• 他们的姓名、地址、生日……<br>• 请注意，根据不同的域，我们可能需要捕获不同的属性！</p>
+<p>描述类<br>• 绘制类时，不必在每个图中都显示属性和操作</p>
+<p>问题域中的类<br>• 需要先确定类别！<br>他们之间的关系<br>• “Collaborates with”（association关联）<br>• “is-a”（inheritance or generalisation 继承或泛化）<br>• “has-a”（aggregation or composition 聚合或组合）</p>
+<p>（后面的内容）</p>
+<h4 id="继承与多态"><a href="#继承与多态" class="headerlink" title="继承与多态"></a>继承与多态</h4><p>继承略</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_">Shape</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Polymorphism-多态"><a href="#Polymorphism-多态" class="headerlink" title="Polymorphism 多态"></a>Polymorphism 多态</h5><p>源自希腊语 Poly &#x3D;&gt; many 和 morph &#x3D;&gt; form, shape。 所以多态意味着以许多不同的形式出现<br>• 多态性是对象具有多种形式的能力。<br>• 当使用父类引用来引用子类对象时，OOP 中多态性的最常见用途发生。</p>
+<p>• 多态性使您能够“在一般情况下编程”而不是“在特定情况下编程”。<br>• 多态性使您能够编写直接或间接处理共享相同超类的对象的程序<br>• 实现可扩展性 Extensibility<br>• 只要新类是程序一般处理的继承层次结构的一部分，就可以在对程序的一般部分稍加修改或不修改的情况下添加新类。</p>
+<p>• 依靠每个对象知道如何“做正确的事”（即，做适合该类型对象的事情）以响应相同的方法调用是多态的关键概念。 发送到各种对象的相同消息（在这种情况下，声音）具有多种形式的结果——因此术语多态性。<br>• 在运行时自动选择合适的方法称为动态绑定。</p>
+<p>• 回忆：对象使用方法相互通信。<br>例如。 另一个对象可以执行以下代码与 <code>aCircle</code> 通信<br>使用 <code>calcArea()</code> 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Circle</span> <span class="variable">aCircle</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Circle</span>(<span class="number">5</span>);</span><br><span class="line">area = aCircle.calcArea();</span><br></pre></td></tr></table></figure>
+
+<p>• 可以通过调用相同的方法将相同的消息（您需要计算面积）发送到不同的对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aSquare.calcArea();</span><br><span class="line">aRectangle.calcArea();</span><br><span class="line">aCircle.calcArea();</span><br></pre></td></tr></table></figure>
+<p>• 每个对象以不同的方式“响应”同一消息。<br>• 这称为多态性。</p>
+<h6 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h6><p>• 当我们想到一个类时，我们假设程序将创建该类型的对象。 有时声明类（称为抽象类）很有用，您从未打算为其创建对象。<br>• 抽象超类过于笼统，无法创建真正的对象——它们只指定子类之间的共同点<br>• 抽象类的主要目的是提供一个合适的超类，其他类可以从该超类继承并因此共享共同的设计。<br>• 一个抽象类通常包含一个或多个抽象方法，如果它们是具体的，子类必须覆盖这些方法。<br>• 抽象类不完整<br>• 抽象方法不提供实现。</p>
+<p>• Java 中的抽象方法没有方法的body，并在声明后以分号终止。<br>• 具有至少一种抽象方法的类必须声明为抽象的。<br>• 来自超类的抽象方法必须在子类中实现，否则Java 将给出错误消息。<br>• Shape 抽象类中的两个方法都必须在 Circle 和 Rectangle 子类中具有主体（或声明为抽象）。</p>
+<h2 id="W4-团队合作，统一流程，更多关于敏捷、VCS"><a href="#W4-团队合作，统一流程，更多关于敏捷、VCS" class="headerlink" title="W4 团队合作，统一流程，更多关于敏捷、VCS"></a>W4 团队合作，统一流程，更多关于敏捷、VCS</h2><h3 id="团队"><a href="#团队" class="headerlink" title="团队"></a>团队</h3><p>• 它包含在澳大利亚工程师第一阶段的能力中<br>• 团队合作是澳大利亚工作文化的重要组成部分。<br>• 大多数软件产品对于单个程序员来说太大了（在可用时间内）<br>• 如果软件组件由不同的人编写，则该软件可以满足更多人群的需求<br>• 不仅在 IT，还有 Coles、Kmart 等商店<br>• 你们争论但也互相学习<br>• 您将学习如何管理您的工作和您的团队<br>• 您将学习如何处理复杂的情况<br>• 您将学习如何与来自不同文化和经历的人一起工作</p>
+<p>类型：</p>
+<ol>
+<li>民主党队</li>
+<li>首席编程团队</li>
+<li>现代编程团队</li>
+<li>同步和稳定团队</li>
+<li><strong>极限编程团队</strong></li>
+<li><strong>Scrum 团队</strong></li>
+<li><strong>开源编程团队</strong></li>
+</ol>
+<h4 id="极限编程团队"><a href="#极限编程团队" class="headerlink" title="极限编程团队"></a>极限编程团队</h4><p>敏捷软件开发技术</p>
+<ul>
+<li>所有代码由共享一台计算机的两个程序员编写，“结对编程”<ul>
+<li>驱动者：编写代码</li>
+<li>导航者：检查或查看代码</li>
+</ul>
+</li>
+<li>测试用例由团队中的一名成员起草，但测试由另一名成员完成。</li>
+<li>如果一名程序员离开，知识不会全部丢失</li>
+<li>没有经验的程序员可以学习（向有经验的程序员学习）</li>
+</ul>
+<h4 id="Scrum-团队"><a href="#Scrum-团队" class="headerlink" title="Scrum 团队"></a>Scrum 团队</h4><p>•（可以说）民主模式的变体。<br>• 7 +&#x2F;- 2 人 团队</p>
+<p>角色</p>
+<ul>
+<li><p>“Scrum Master”：确保团队遵循Scrum 规则；保护团队免受外部障碍的影响</p>
+</li>
+<li><p>“Product Owner 产品拥有者”， 一个人，客户&#x2F;顾客代表。负责将要开发的内容和顺序。</p>
+</li>
+<li><p>“开发团队”：负责确定如何交付产品所有者所要求的产品。</p>
+</li>
+</ul>
+<p>• 敏捷方法——固定长度的“迭代”<br>• 民主地同意在迭代中完成多少工作<br>• 团队成员在迭代（Sprint）内注册任务<br>• 问责机制的数量<br>• 客户&#x2F;客户在每个 Sprint 结束时都能看到进展！<br>• 每个人都看到其他人在做什么<br>• 燃尽图跟踪 Sprint 中的进度<br>• 它显示了在 Sprint 中还有多少任务需要完成。</p>
+<img src="/fit5136-se-notes/image-20210622000449925.png" class="" title="image-20210622000449925">
+
+<p>• 许多团队声称使用 Scrum<br>• 根据我们的经验，大多数团队需要任命领导者，因为他们需要指导<br>• Scrum 旨在自组织，不依赖于领导者<br>• 可能与经验丰富、积极主动的全职开发人员合作良好<br>• 全栈开发人员喜欢它<br>• 如果一家 IT 公司想要改变他们的团队模式，他们将与敏捷大师一起举办研讨会</p>
+<p>敏捷过程中的团队合作</p>
+<p>• <strong>接受整个团队的责任</strong>：团队应该对产品的各个方面负责<br>• <strong>依赖专家，但要谨慎</strong>：使用彼此的才能、技能和品质，但要谨慎<br>• <strong>每件事都做一点点</strong>：这就是学习的方式。 实习就是这样设计的。<br>• <strong>促进团队学习</strong>：不要自满。 总是有改进的机会<br>• <strong>通过承诺鼓励合作</strong>：重振精神并专注于共同的目标<br>• <strong>现在齐心协力</strong>：建立正确的团队合作意识，但它具有挑战性</p>
+<p>成功的变革并不完全是……<br>• 自上而下：组织跟随领导者 (CEO) 实现愿景 没有人能够制定正确的愿景，将其传达给大量人员，消除所有关键障碍，产生 短期获胜，领导和管理数十个变革项目，并在组织文化的深处扎根新方法。 (1996, 51-52)<br>• 自下而上：一个团队或一些个人决定需要改变，并着手实现它。<br>• 您可能会看到“稍后请求原谅”的态度，违反规则并尽可能长时间地躲避雷达<br>• 大多数成功的变革，尤其是对像 Scrum 这样的敏捷框架的变革，都必须包含两者的要素。<br>• 你想做一场运动，就需要得到高层的支持，否则坚持不了太久。</p>
+<p>最终状态不可预测<br>• Scrum 转换中的结束状态是不正确的，在需要持续改进的过程中不可能有结束状态。<br>• 您能做的最好的事情就是找出我们现在所处的位置与改进的中间状态之间的差距。<br>• 但我们仍然需要找到关闭它们的方法。<br>• 很难（有时甚至不可能）预测人们将如何应对较小的变化以变得敏捷。<br>• 所以你摇晃着等待回应。<br>• 这些戳戳和刺激不是随机的，而是根据经验、智慧和直觉精心阐述的，以推动成功过渡到 Scrum</p>
+<p>Scrum 无处不在<br>• 孤立的变化更容易引入组织。 例如：改变一个特定的例程<br>• 现在，考虑一个过渡到 Scrum 的开发人员<br>• 必须一次处理一个功能的较小部分，以便在每个时间盒冲刺结束时完成某项工作。<br>• 她可能必须编写自动化测试来处理每一段新代码。<br>• 可能不得不交替进行称为 TDD 的短时间测试和编码<br>• 配对编程，无需耳机<br>• 这些是根本性的变化，您正在改变开发人员工作日的一切。</p>
+<p>阻力会更大，因为影响更大！ 无孔不入！</p>
+<p>Scrum 完全不同<br>• 许多变化与他们过去的大部分训练背道而驰。<br>• 例如：<br>• 传统上，程序员已经接受过在开始任何编码之前深入分析问题并设计完美解决方案的培训。<br>• Scrum 说，在开始编码之前并不总是需要经过充分考虑的设计。<br>• 传统上，测试人员了解到他们的工作是测试是否符合规范。<br>• Scrum 说，测试人员了解到测试也与用户需求的一致性有关。</p>
+<p>最佳实践是危险的<br>• 有人找出了做某事的正确或最佳方式，我们将其作为“最佳实践”与大家分享<br>• 然而，在过渡到 Scrum 时，收集最佳实践可能很危险。<br>• 最佳实践诱使我们放松并停止对 Scrum 至关重要的持续改进的努力。<br>• 虽然，您应该与您的团队分享好主意，但让我们抵制将它们编入一组最佳实践的冲动。<br>• 让我们不要规定您何时运行每日 Scrum。 这是不必要的微观管理。</p>
+<p>这是值得的。 为什么？…<br>• 更高的生产力<br>• 更低的花费<br>• 提高员工敬业度和工作满意度 (!)<br>• 更快的上市时间<br>• 更高质量<br>• 提高利益相关者的满意度<br>• 我们一直在做的事情不再奏效</p>
+<h4 id="开源团队"><a href="#开源团队" class="headerlink" title="开源团队"></a>开源团队</h4><p>无偿、异步沟通、没有团队会议、没有经理、没有规范、没有设计、几乎没有文档</p>
+<p>开源项目之所以成功，是因为</p>
+<ul>
+<li>完成“有价值”任务的纯粹享受——志愿者想要学习新技能以获得晋升或更好的工作机会</li>
+<li>目标产品的性质：你希望任何人和每个人都参与进来</li>
+<li>煽动者的个性</li>
+<li>核心组成员的才能</li>
+</ul>
+<h3 id="团队问题"><a href="#团队问题" class="headerlink" title="团队问题"></a>团队问题</h3><ul>
+<li><p>会议是一种开销<br>• 会议不应超过 45 分钟<br>• 如果是，则您正在进行不相关的讨论和无效的会议</p>
+</li>
+<li><p>团队成员不理解 彼此；彼此的情况；彼此的符号、模型等：<br>• 有同理心<br>• 尝试相互了解<br>• 力所能及的地方提供帮助</p>
+</li>
+<li><p>任务分配：分工的优势 - 交流</p>
+</li>
+</ul>
+<ol>
+<li>更短的“上市时间”</li>
+<li>质量提升（其他人可以检查）</li>
+<li>更有效（通过使用专家）</li>
+</ol>
+<ul>
+<li>缺乏生产力： 了解可以并行执行的操作以及必须执行的操作<br>依次<br>• 优先级！</li>
+</ul>
+<h3 id="The-Unified-Process-统一流程"><a href="#The-Unified-Process-统一流程" class="headerlink" title="The Unified Process 统一流程"></a>The Unified Process 统一流程</h3><p>统一过程不是构建软件产品的一系列步骤<br>• 不存在这种单一的“一刀切”方法<br>• 有多种不同类型的软件</p>
+<p>统一流程是一种适应性强的方法论<br>• 必须针对要开发的特定软件产品和开发团队进行修改</p>
+<h4 id="面向对象范式中的迭代和增量"><a href="#面向对象范式中的迭代和增量" class="headerlink" title="面向对象范式中的迭代和增量"></a>面向对象范式中的迭代和增量</h4><p>在实践中<br>• 一个工件是一块一块地构造的（增量）<br>和<br>• 每个增量都经过多个版本（迭代）</p>
+<img src="/fit5136-se-notes/image-20210622002135841.png" class="" title="image-20210622002135841">
+
+
+
+<p>项目分解为一系列瀑布式迷你流程<br>每个小项目都扩展了<br>• 需求工件<br>• 分析工件<br>• 设计工件<br>• 实施工件<br>• 测试工件<br>最后一组神器就是完整的产品</p>
+<p>好处<br>• 检查正确性的多种机会<br>• 可以相对较早地确定架构的稳健性<br>• 尽早降低风险<br>• 始终拥有软件的工作版本<br>看起来乱七八糟，其实管理方面也没那么差……<br>• 因为它是一套瀑布式迷你项目</p>
+<h4 id="OOP"><a href="#OOP" class="headerlink" title="+OOP"></a>+OOP</h4><p>统一过程是一种建模技术<br>• 模型是一组 UML 图，代表我们要开发的软件产品的各个方面<br>UML代表统一建模语言<br>• UML 是我们用来表示（建模）目标软件产品的工具</p>
+<p>面向对象范式本质上是迭代和增量的<br>• 在 UML 图令人满意之前，除了重复迭代和递增之外别无选择</p>
+<h3 id="工作流（垂直）"><a href="#工作流（垂直）" class="headerlink" title="工作流（垂直）"></a>工作流（垂直）</h3><p>（这个图是考点……）</p>
+<img src="/fit5136-se-notes/image-20210622161130304.png" class="" title="image-20210622161130304">
+
+<p>（在考试里，这四个Phase加起来叫一个Event，另外Event之间需要解释</p>
+<h4 id="需求工作流"><a href="#需求工作流" class="headerlink" title="需求工作流"></a>需求工作流</h4><p>需求工作流的目标：确定客户的需求，回顾（了解应用领域，建立商业模式：使用 UML 来描述客户的业务流程，如果在任何时候客户认为成本不合理，开发将立即终止）</p>
+<p>确定客户的限制至关重要<br>• 截止日期：如今，软件产品通常是关键任务<br>• 并行运行<br>• 便携性<br>• 可靠性<br>• 快速响应时间<br>• 成本 - <strong>客户很少会告诉开发商有多少钱可用</strong>：改为使用投标程序</p>
+<h5 id="分析工作流"><a href="#分析工作流" class="headerlink" title="分析工作流"></a>分析工作流</h5><p>目标：<strong>分析和细化需求</strong></p>
+<p>为什么不在需求工作流程中执行此操作？</p>
+<ul>
+<li>客户必须完全理解需求工件</li>
+<li>因此，需求工作流的工件必须以自然（人类）语言表达：<strong>所有自然语言都是不精确的</strong></li>
+</ul>
+<p>来自制造信息系统的示例：“从数据库中读取零件记录和工厂记录。 如果它包含字母 A 后跟字母 Q，则计算将该零件运输到该工厂的成本”，它指的是什么？零件记录？工厂记录？还是数据库？</p>
+<p>需要两个独立的工作流程</p>
+<ul>
+<li>需求工件必须用客户的语言表达</li>
+<li>分析工件必须精确，并且对于设计者来说足够完整</li>
+</ul>
+<h5 id="Software-Project-Management-Plan-软件项目管理计划"><a href="#Software-Project-Management-Plan-软件项目管理计划" class="headerlink" title="Software Project Management Plan 软件项目管理计划"></a>Software Project Management Plan 软件项目管理计划</h5><p>一旦客户签署了规范（可能以 SRS 形式的合同），详细的规划和估算就开始了<br>我们制定软件项目管理计划（SPMP），包括<br>• 成本估计<br>• 持续时间估计<br>• 可交付成果<br>• 里程碑<br>• 预算<br>这是 SPMP 最早的可能时间</p>
+<h5 id="设计工作流"><a href="#设计工作流" class="headerlink" title="设计工作流"></a>设计工作流</h5><p>• 设计工作流程的目的是改进分析工作流程，直到材料成为可由程序员实施的形式：许多非功能性需求此时需要最终确定，包括编程语言的选择、重用问题、可移植性问题<br>• 在分析工作流程中提取类并在设计工作流程中设计类<br>• 保留设计决策：当达到死胡同时，防止维护团队重新发明轮子<br>• 我们不是在谈论原型（或任何类似的东西）。 这是关于软件架构的。</p>
+<h5 id="实现工作流"><a href="#实现工作流" class="headerlink" title="实现工作流"></a>实现工作流</h5><p>实施工作流的目标是以选定的实施语言实施目标软件产品</p>
+<ul>
+<li>大型软件产品被划分为子系统</li>
+<li>子系统由组件或代码工件组成</li>
+</ul>
+<h5 id="可追溯性"><a href="#可追溯性" class="headerlink" title="可追溯性"></a>可追溯性</h5><p>所有工件都需要被检查，因此需要可追溯性：</p>
+<ul>
+<li>分析工件中的每个项目都必须可追溯到需求工件中的一个项目。</li>
+<li>设计和实现工件也是如此</li>
+</ul>
+<p>应通过审查来检查分析工件</p>
+<ul>
+<li>必须对 SPMP 进行类似检查，特别注意成本和持续时间估算</li>
+<li>设计（用户界面和架构）审查必不可少：因为客户代表通常不在场</li>
+</ul>
+<h5 id="测试工作流"><a href="#测试工作流" class="headerlink" title="测试工作流"></a>测试工作流</h5><p>• 单元测试：每个组件在实施后立即进行测试<br>• 集成测试：在每次迭代结束时，组合并测试完成的组件<br>• 产品测试：当产品看起来是完整的时，它会作为一个整体进行测试<br>• 验收测试：一旦完成的产品安装在客户的计算机上，客户就会对其进行测试</p>
+<h3 id="阶段（水平）"><a href="#阶段（水平）" class="headerlink" title="阶段（水平）"></a>阶段（水平）</h3><h4 id="初始阶段"><a href="#初始阶段" class="headerlink" title="初始阶段"></a>初始阶段</h4><p>初始阶段的目的是确定所提议的软件产品是否是<br>经济上可行</p>
+<ol>
+<li>了解领域，构建业务模式</li>
+<li>划定拟议项目的范围，关注商业模式的子集<br>被提议的软件产品所涵盖</li>
+<li>开始制作最初的商业案例<br>1.获得商业案例的初始版本是inception阶段的总体目标</li>
+<li>此初始版本包含</li>
+<li>软件产品范围的描述</li>
+<li>财务细节</li>
+<li>休息取决于软件的使用地点（内部或销售）</li>
+</ol>
+<h4 id="细化阶段"><a href="#细化阶段" class="headerlink" title="细化阶段"></a>细化阶段</h4><p>细化阶段的目标是细化初始需求<br>• 优化架构<br>• 监控风险并优化其优先级<br>• 完善业务案例<br>• 制定项目管理计划<br>细化阶段的任务对应于：<br>• 完成需求工作流程<br>• 执行几乎整个分析工作流程<br>• 开始架构设计</p>
+<h4 id="施工阶段"><a href="#施工阶段" class="headerlink" title="施工阶段"></a>施工阶段</h4><p>建设阶段的目标是产生第一个操作质量<br>软件产品的版本<br>• 这有时称为测试版<br>这一阶段的重点是<br>• 执行<br>• 测试<br>• 模块的单元测试<br>• 子系统的集成测试<br>• 整个系统的产品测试</p>
+<h4 id="过渡阶段"><a href="#过渡阶段" class="headerlink" title="过渡阶段"></a>过渡阶段</h4><p>过渡阶段的目的是确保确实满足客户的要求<br>• 软件产品中的故障得到纠正<br>• 已完成所有手册<br>• 尝试发现任何以前未识别的风险<br>此阶段由安装测试版的站点的反馈驱动</p>
+<h3 id="1-维-与-2-维生命周期模型"><a href="#1-维-与-2-维生命周期模型" class="headerlink" title="1 维 与 2 维生命周期模型"></a>1 维 与 2 维生命周期模型</h3><img src="/fit5136-se-notes/image-20210622003949552.png" class="" title="image-20210622003949552">
+
+<p>a. waterfall; b. agile</p>
+<p>为什么是二维模型？<br>• 在理想情况下，每个工作流都将在下一个工作流开始之前完成<br>• 实际上，开发任务太大了<br>• 开发任务必须分为增量（阶段）<br>• 在每个增量内，执行迭代直到任务完成<br>• 处理好不可避免的变化<br>• 移动目标问题<br>• 不可避免的错误<br>• 将一个大问题视为一组较小的、很大程度上独立的子问题<br>• 它提供了一个增量和迭代的框架</p>
+<p>过渡到敏捷很难！<br>• 成功的变革并不完全是自上而下或自下而上<br>• 最终状态是不可预测的<br>• Scrum 无处不在<br>• Scrum 截然不同<br>• 变化比以往任何时候都来得更快<br>• 最佳做法很危险</p>
+<h4 id="使用-Scrum-框架实现敏捷"><a href="#使用-Scrum-框架实现敏捷" class="headerlink" title="使用 Scrum 框架实现敏捷"></a>使用 Scrum 框架实现敏捷</h4><p>• Scrum 是帮助团队合作开发、交付和维持复杂产品的框架<br>• Sprint 计划是 Scrum 中的一个事件，它定义了在即将到来的 Sprint 中可以交付的内容以及如何实现这些工作<br>• Sprint 是一个短的、有时间限制的时期，Scrum 团队在此期间完成一定数量的工作。 冲刺通常在两周左右。<br>• 每日 Scrum 或站会是与 Scrum 团队的其他成员在同一时间和地点举行的简短会议，以相互更新 sprint 的进度<br>• 在 sprint 结束时，团队聚在一起进行 sprint 审查，非正式会议以查看演示并查看已完成的内容<br>• 在 sprint 回顾中，团队聚在一起讨论和记录哪些行得通，哪些行不通。 回顾可以是关于冲刺、人员、项目、关系和工具</p>
+<h4 id="使用看板框架实现敏捷"><a href="#使用看板框架实现敏捷" class="headerlink" title="使用看板框架实现敏捷"></a>使用看板框架实现敏捷</h4><p>• 看板就是关于可视化您的工作、限制正在进行的工作和最大限度地提高效率。<br>• 看板团队专注于减少项目从开始到结束所花费的时间。<br>• 看板正在为您的团队在项目上的工作方式制作自定义列。<br>• 主要列范围从积压、优先排序、要做、做、审查中、完成和部署。 团队可以添加或删除这些列是必需的。<br>• 在每一列中，制作卡片（或票）。 每张卡片都是分配给团队成员的任务。<br>• 取决于团队使用的软件，可以使用附加功能，例如添加清单、截止日期、标记团队成员等</p>
+<p>好处<br>• 更短的周期时间可以更快地交付功能<br>• 对变化的反应能力<br>• 当优先级变化非常频繁时，看板是理想的选择<br>• 平衡需求与吞吐量可确保大多数以客户为中心的功能始终有效<br>• 只需较少的组织&#x2F;房间设置更改即可开始<br>• 减少浪费并移除不会为团队&#x2F;部门&#x2F;组织增加价值的活动<br>• 快速反馈循环增加了更有动力、更有能力和更高绩效的团队成员的机会</p>
+<p>如何使用看板框架？看板方法假设三件事：<br>• 您了解当前的流程，因为它们实际上已在实践中，并尊重当前的角色、职责和职位。<br>• 您同意通过渐进式变革追求持续改进。<br>• 您鼓励各个层面的领导行为——从个人贡献者到高级管理人员。</p>
+<p>• 看板正在为您的团队在项目上的工作方式制作自定义列<br>• 主要列范围从积压、优先排序、要做、做、审查中、完成和部署。 团队可以根据需要添加或删除这些列。<br>• 在每一列中，制作卡片（或票）。 每张卡片都是分配给团队成员的任务。<br>• 取决于团队使用的软件，可以使用附加功能，例如添加清单、截止日期、标记团队成员等</p>
+<h3 id="敏捷过程"><a href="#敏捷过程" class="headerlink" title="敏捷过程"></a>敏捷过程</h3><p>Backlog 积压<br>• 用户故事的待办事项列表可能会变得非常复杂，因此对它们进行进一步分类可能会有所帮助。 将用户故事分解为单独的开发任务也很有帮助。<br>• 这就是backlog 的用途——允许对用户故事和相关的开发人员任务进行优先级排序，并将任务分配给各个开发人员。<br>• 有关积压工作的更多信息，请参阅 Atlassian 的积压工作指南。<br>• 积压可以在白板上进行跟踪，但更常见的是保存在电子表格或在线系统中。</p>
+<p>燃尽图<br>• 一个示例燃尽图，显示了一段时间内的剩余任务。<br>• 在敏捷开发方法中，进度通常用燃尽图来跟踪。<br>• 这些图表定期（通常每天）显示待办事项中的剩余故事，以及<br>指示预计完成时间范围的“估计”趋势线。<br>• 图表的梯度表示团队朝着目标前进的速度<br>项目完成情况以及大致剩余的工作量。<br>• 这些信息让软件工程师知道他们是否需要，比如说，减少<br>如果没有足够的时间来完成此功能或与客户重新协商规格<br>项目的一部分。</p>
+<img src="/fit5136-se-notes/image-20210622004514973.png" class="" title="image-20210622004514973">
+
+
+
+<h4 id="Version-Control-Systems-版本管理系统"><a href="#Version-Control-Systems-版本管理系统" class="headerlink" title="Version Control Systems 版本管理系统"></a>Version Control Systems 版本管理系统</h4><p>略，不要太熟练:laughing:</p>
+<h2 id="W5-分析（续）"><a href="#W5-分析（续）" class="headerlink" title="W5 分析（续）"></a>W5 分析（续）</h2><p>问题域中的类： 需要先确定类别！</p>
+<p>类之间的关系</p>
+<ul>
+<li>“collaborates with”（关联）</li>
+<li>“is-a”（继承或泛化）</li>
+<li>“has-a”（聚合&#x2F;组合）</li>
+</ul>
+<p>请记住，这是迭代过程，所以不会一次性完成所有这些！</p>
+<h3 id="UML-类图"><a href="#UML-类图" class="headerlink" title="UML 类图"></a>UML 类图</h3><p>类图还有用吗？</p>
+<ul>
+<li>新程序员倾向于学习新的语言和技术，但不会首先专注于学习创建合适的软件架构</li>
+<li>缺乏合适的软件架构会导致高耦合和低内聚，导致代码不可扩展和不可重用<br>– 即他们的代码在实施期间或实施后无法适应更改&#x2F;新功能<br>– 所以他们所做的就是为了它而“摇摆不定”，这导致了糟糕的软件架构</li>
+<li>你不需要有一个完整的类图。</li>
+<li>从你能做的开始，随着你的进展不断增加和迭代。<br>– 对于敏捷，您可以选择在编写实际代码的同时执行此操作。</li>
+</ul>
+<h4 id="Associations-关联"><a href="#Associations-关联" class="headerlink" title="Associations 关联"></a>Associations 关联</h4><ul>
+<li>关联表示类之间的关系。</li>
+<li>它们被表示为连接两个相关类的线，最简单的就是它们。</li>
+<li>如果关联具有导向性（即一端有箭头），则表明一个类知道另一个类，反之则不然。</li>
+<li>如果可以帮助您了解关系的性质，您可以给关系一个名称&#x2F;标签。<br>– “has”这个名字对理解几乎没有什么帮助（不鼓励使用）</li>
+</ul>
+<img src="/fit5136-se-notes/image-20210622005501542.png" class="" title="image-20210622005501542">
+
+<p>（箭头表示学生知道怎么找到老师</p>
+<p>有时，关联很复杂——需要一个类（有时称为关联类）来表示它……</p>
+<img src="/fit5136-se-notes/image-20210622005809093.png" class="" title="image-20210622005809093">
+
+<p>关联的每一端都可以显示其多重性: 这表示关联中涉及每个类的对象数量。（一对一，一对多，多对一，多对多</p>
+<p>我们从左到右读取多重性</p>
+<p>注意：其他多重性也是可能的，例如 2, 10 等</p>
+<h3 id="归化关系"><a href="#归化关系" class="headerlink" title="归化关系"></a>归化关系</h3><p>很多不同的术语：继承，”is a”，泛化&#x2F;专化，超类&#x2F;子类。</p>
+<p>• 泛化是我们用来管理复杂性的日常技术。<br>• 我们不是学习我们所经历的每个实体的详细特征，而是将这些实体置于更一般的类（动物、汽车、房屋等）中并学习这些类的特征。<br>• 这使我们能够推断这些类的不同成员具有一些共同特征，例如 松鼠和老鼠是啮齿动物。</p>
+<p>• 在建模系统中，检查系统中的类以查看是否有泛化的余地通常很有用。<br>• 在面向对象的语言（如 Java）中，泛化是使用语言内置的类继承机制实现的。<br>• 概括地说，与较高级别的类相关联的属性和操作也与较低级别的类相关联。<br>• 低级类是子类从其超类继承属性和操作。 这些较低级别的类然后添加更具体的属性和操作。</p>
+<img src="/fit5136-se-notes/image-20210622010247509.png" class="" title="image-20210622010247509">
+
+<p>子类继承其超类的属性和操作。<br>– 每个讲师和每个导师都有从 User 类继承的名称、ID 和密码。<br>– 讲师和导师可以标记作业，因为用户可以。<br>子类提供额外的操作和属性。<br>– 例如。 讲师可以创建作业。<br>子类可以覆盖其超类的操作。<br>– 我们稍后会展示这一点。</p>
+<h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><p>聚合（或共享聚合）——一种特殊形式的关联，“has-a”关系</p>
+<ul>
+<li>聚合模型展示了作为集合的类是如何由其他类组成的。</li>
+<li>聚合是存在于组与其成员之间的一种关联。</li>
+<li>共享聚合的三个最重要的特性是：<br>– 聚合对象可能在没有其组成对象的情况下存在（尽管不一定处于有用状态），<br>– 在任何时候，每个对象都可能是多个集合的组成部分（例如，一个人可能属于多个俱乐部），并且<br>– 组成对象通常属于同一类（但同样，情况并非总是如此）。</li>
+</ul>
+<img src="/fit5136-se-notes/image-20210622010532394.png" class="" title="image-20210622010532394">
+
+<h4 id="复合"><a href="#复合" class="headerlink" title="复合"></a>复合</h4><p>复合聚合是存在于整体与其部分之间的聚合。</p>
+<p>复合聚合相对于共享聚合的三个最重要的特征是：<br>– <strong>没有组件的复合对象不存在</strong>，<br>– 在任何时候，每个<strong>组件</strong>都<strong>可能只是一个组合的一部分</strong>，并且<br>– 组件对象很可能是混合类型（尽管情况并非总是如此。）</p>
+<img src="/fit5136-se-notes/image-20210622010710153.png" class="" title="image-20210622010710153">
+
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><h5 id="识别类和对象"><a href="#识别类和对象" class="headerlink" title="识别类和对象"></a>识别类和对象</h5><p>目标：创建抽象字典（名词提取）。<br>方式：</p>
+<ul>
+<li>研究用例场景</li>
+<li>其他要求文档。</li>
+</ul>
+<p>步骤：</p>
+<ol>
+<li>从寻找<strong>有形事物</strong>开始。</li>
+<li>弄清楚问题边界（问题域）<strong>内、外</strong>的内容</li>
+<li>有些东西可能是类</li>
+<li>有些可能是简单的<strong>属性</strong>。</li>
+</ol>
+<h5 id="识别抽象（类和对象）的角色和职责"><a href="#识别抽象（类和对象）的角色和职责" class="headerlink" title="识别抽象（类和对象）的角色和职责"></a>识别抽象（类和对象）的角色和职责</h5><p>抽象名词（属性）</p>
+<p>• “职责”~&#x3D; 属性+方法（在详细的类图中）。<br>将这些记录在：<br>• UML 类图<br>• CRC 卡。<br>• 文本。</p>
+<h5 id="模式清除"><a href="#模式清除" class="headerlink" title="模式清除"></a>模式清除</h5><p>寻找类之间职责的共性。<br>看看这些是否可以使用继承来简化： 是否存在“is-a”关系？<br>继承示例：<br>– 属性类型：屋，公寓<br>– 类别类型：出租，出售</p>
+<h3 id="三种类型的类"><a href="#三种类型的类" class="headerlink" title="三种类型的类"></a>三种类型的类</h3><ul>
+<li>实体类（为初始类图提取）</li>
+<li>边界类（稍后在设计中决定）</li>
+<li>控制类（稍后在设计中决定）</li>
+</ul>
+<img src="/fit5136-se-notes/image-20210622011659902.png" class="" title="image-20210622011659902">
+
+<img src="/fit5136-se-notes/image-20210622012028916.png" class="" title="image-20210622012028916">
+
+
+
+<h4 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h4><p>模型“长期”信息</p>
+<p>通常是“被动的”</p>
+<p>但它们可能仍然包含复杂的算法。示例：财产、代理、公司</p>
+<h4 id="边界类"><a href="#边界类" class="headerlink" title="边界类"></a>边界类</h4><p>存在于系统“自动化边界”上的类<br>• 模拟产品和环境（Actor）之间的交互<br>• 与输入或输出相关</p>
+<h4 id="控制类"><a href="#控制类" class="headerlink" title="控制类"></a>控制类</h4><p>调解边界和实体类之间的交互。<br>• 为复杂的计算和算法建模<br>• 有时与用例相关——但并非总是如此。<br>• 对于简单程序，可能是包含 main() 方法的类</p>
+<h3 id="类的交互"><a href="#类的交互" class="headerlink" title="类的交互"></a>类的交互</h3><img src="/fit5136-se-notes/image-20210622012055988.png" class="" title="image-20210622012055988">
+
+<ol>
+<li>Actor 只能与边界对象对话。</li>
+<li>边界对象只能与控制器和演员对话。</li>
+<li>实体对象可以与控制器以及其他实体对象对话。</li>
+<li>控制器可以与边界对象和实体对象对话，也可以与其他控制器对话，但不能与角色对话</li>
+</ol>
+<h3 id="Interaction-Diagrams-交互图"><a href="#Interaction-Diagrams-交互图" class="headerlink" title="Interaction Diagrams 交互图"></a>Interaction Diagrams 交互图</h3><p>使用交互图描述用例的特定场景的实现（准确地模拟了用例场景）（必须包括边界类对象和控制类对象）</p>
+<h4 id="UML-Sequence-Diagram-序列图"><a href="#UML-Sequence-Diagram-序列图" class="headerlink" title="UML Sequence Diagram 序列图"></a>UML Sequence Diagram 序列图</h4><p>• 对系统内的<strong>逻辑流</strong>进行建模<br>• 描述一组对象如何以及以何种顺序协同工作<br>• 显示对象之间的交互。<br>• 规划并了解现有或未来场景的详细功能。<br>• 对用例的详细信息建模——用例场景。</p>
+<img src="/fit5136-se-notes/image-20210622235848762.png" class="" title="image-20210622235848762">
+
+<p>画出</p>
+<img src="/fit5136-se-notes/image-20210622012608569.png" class="" title="image-20210622012608569">
+
+<p>步骤：</p>
+<p>如何细化场景并用它来展示<br>对象之间的交互？</p>
+<ol>
+<li>使用类图中的信息</li>
+<li>然后，添加boundary边界和control控制类（意思就是这俩其实不在类图里……）</li>
+<li>如果需要，您可以添加更多箭头来显示内部工作<br>系统</li>
+<li>添加尽可能多的信息</li>
+</ol>
+<h4 id="UML-state-charts-状态表"><a href="#UML-state-charts-状态表" class="headerlink" title="UML state charts 状态表"></a>UML state charts 状态表</h4><p>考点：动态建模，使用特定场景的状态图对对象的行为进行建模。</p>
+<img src="/fit5136-se-notes/image-20210622012553688.png" class="" title="image-20210622012553688">
+
+<p>TODO</p>
+<h2 id="W6-设计：从模块到对象"><a href="#W6-设计：从模块到对象" class="headerlink" title="W6 设计：从模块到对象"></a>W6 设计：从模块到对象</h2><h3 id="什么是模块？"><a href="#什么是模块？" class="headerlink" title="什么是模块？"></a>什么是模块？</h3><p>考点</p>
+<p><strong>词法上连续</strong>的程序语句序列，以<strong>边界元素</strong>为界，带有<strong>聚合标识符</strong>（例如Java一个类）</p>
+<p>好的模块化设计是：<br>模块<strong>内</strong>的最大关系<br>+<br>模块<strong>之间</strong>的最小关系</p>
+<h4 id="模块的操作"><a href="#模块的操作" class="headerlink" title="模块的操作"></a>模块的操作</h4><p>– 它做什么，它的行为<br>– 例如 “计算其参数的平方根”</p>
+<h4 id="模块的逻辑"><a href="#模块的逻辑" class="headerlink" title="模块的逻辑"></a>模块的逻辑</h4><p>– 它如何执行其操作<br>– 例如 牛顿计算平方根的方法</p>
+<h4 id="模块的上下文："><a href="#模块的上下文：" class="headerlink" title="模块的上下文："></a>模块的上下文：</h4><p>– 具体用途<br>– 例如 计算双精度整数的平方根</p>
+<h4 id="分配给模块的名称，即其操作"><a href="#分配给模块的名称，即其操作" class="headerlink" title="分配给模块的名称，即其操作"></a>分配给模块的名称，即其操作</h4><p>–（不是它的逻辑或上下文）<br>– 例如 computeSquareRoot、compute_square_root</p>
+<h3 id="模块内聚-Cohesion"><a href="#模块内聚-Cohesion" class="headerlink" title="模块内聚 Cohesion"></a>模块内聚 Cohesion</h3><p>– 模块<strong>内</strong>的交互程度<br>– 模块<strong>内</strong>的元素属于一起的程度。</p>
+<p>七个类别&#x2F;级别的凝聚力（非线性尺度）：</p>
+<img src="/fit5136-se-notes/image-20210622013437939.png" class="" title="image-20210622013437939">
+
+<p>模块的高内聚性是首选，因为它与软件的几个理想特性相关，包括健壮性、可靠性、可重用性和可理解性。</p>
+<h4 id="Coincidental-Cohesion-碰巧内聚"><a href="#Coincidental-Cohesion-碰巧内聚" class="headerlink" title="Coincidental Cohesion 碰巧内聚"></a>Coincidental Cohesion 碰巧内聚</h4><p>模块执行多个完全不相关的操作（彼此松散相关）<br>例如：包含以下操作的模块：<br><code>printTheNextLine</code>, <code>reverseStringOfCharactersComprisingSecondArgument</code><br><code>add7ToFifthParameter</code>, <code>convertFourthParameterToFloatingPoint</code><br>来自这样的规则：“每个模块将由 35 到 50 个语句组成”</p>
+<h4 id="Logical-Cohesion-逻辑内聚"><a href="#Logical-Cohesion-逻辑内聚" class="headerlink" title="Logical Cohesion 逻辑内聚"></a>Logical Cohesion 逻辑内聚</h4><p>模块执行一系列相关操作，其中一个由调用模块选择。<br>§ 执行逻辑相关的任务。例子：<br>– printReport() 函数&#x2F;方法打印各种销售报告。<br>§ 本地销售报告<br>§ 区域销售报告<br>§ 全国销售报告<br>§ 一份国际销售报告。<br>– 如果用户只需要区域报告怎么办？<br>– 如果您想生成每周报告怎么办？</p>
+<p>出现什么问题？</p>
+<ol>
+<li>降低<strong>可读性</strong></li>
+<li>多个操作的代码可能会<strong>交织</strong>在一起：“打印区域销售报告”和“打印全国销售报告”可能会交织在一起。</li>
+<li><strong>维护</strong>问题，难以重复使用</li>
+</ol>
+<p>可以通过为每个报告制定程序来消除逻辑耦合的需要<br>可以引入继承来提高内聚度。</p>
+<h4 id="时间（经典）内聚"><a href="#时间（经典）内聚" class="headerlink" title="时间（经典）内聚"></a>时间（经典）内聚</h4><p>一个模块执行多个功能，而这些功能之间的关联在于它们必须在特定时间的同一时间跨度内发生。例子：</p>
+<p>一个程序（模块）执行以下步骤<br>§ 关掉电视<br>§ 关灯<br>§ 刷牙<br>§ 睡觉</p>
+<p>例子：<br>– 执行以下操作的“初始化”程序：</p>
+<ol>
+<li>打开所有文件。</li>
+<li>初始化数组和所有变量。</li>
+<li>设置所有常量</li>
+<li>设置所有标志</li>
+<li>读取第一笔交易</li>
+</ol>
+<p>– 捕获异常后调用过程</p>
+<ol>
+<li>关闭所有打开的文件</li>
+<li>创建错误日志</li>
+<li>通知用户</li>
+</ol>
+<p>时间内聚很容易被发现，因为代码被放在一个过程中并被执行，因为在程序中的某个时间这样做很方便。</p>
+<h4 id="Procedural-过程内聚"><a href="#Procedural-过程内聚" class="headerlink" title="Procedural 过程内聚"></a>Procedural 过程内聚</h4><p>§ 模块执行一系列操作，这些仅与受软件影响的一般过程有关<br>§ 两个模块示例：<br>– <code>readPartNumberAndUpdateRepairRecordOnMasterFile</code><br>– 在绘图仪上绘制图形 R2 并打印报告 XYZ。<br>§ R2 上的信息和报告 XYZ 不相关。<br>§ 至少两个操作在过程上是相互关联的。<br>§ 与 Temporal Cohesion 非常相似，但这不仅在特定时间执行。<br>§ 为什么这么糟糕？<br>– 动作仍然弱连接，<br>– 所以模块不可重用</p>
+<p>需要将它们分成数个过程，例如上面第一个模块：<br>– <code>readPartNumber()</code><br>– <code>UpdateRepairRecordonMasterFile()</code></p>
+<h4 id="Communication-通信内聚"><a href="#Communication-通信内聚" class="headerlink" title="Communication 通信内聚"></a>Communication 通信内聚</h4><p>§ 如果一个模块支持的所有活动都使用相同的输入或输出数据，或者访问和修改数据结构的相同部分，则该模块表现出通信内聚。<br>§ 例子：<br>一个模块包含以下活动：<br>– 查找书名<br>– 查找书的价格<br>– 查找图书出版商<br>– 查找书籍作者<br>§ 为什么不制作一个包含所有必需值的 Book 对象？</p>
+<p>§ 更好 - 操作更紧密地联系在一起<br>§ 为什么还是不行？<br>§ 可重用性仍然存在问题</p>
+<h4 id="Functional-功能内聚"><a href="#Functional-功能内聚" class="headerlink" title="Functional 功能内聚"></a>Functional 功能内聚</h4><p>一个模块只执行一个动作<br>§ 例子：<br>– getTemperatureOfFurnace<br>– computeOrbitalOfElectron<br>– writeToDatabase<br>– calculateSalesCommission<br>– sortArray<br>– findLargestValue</p>
+<p>为什么这么好？<br>§ 更可重用<br>§ 纠正性维护更容易: 更少的回归错误<br>§ 更容易扩展产品</p>
+<h4 id="信息内聚"><a href="#信息内聚" class="headerlink" title="信息内聚"></a>信息内聚</h4><p>模块执行多个动作，每个动作都有自己的入口点，每个动作都有独立的代码，都在相同的数据结构上执行。</p>
+<p>例子<br>– <code>void addEmployee(int status, empRec rec);</code><br>– <code>void updateEmployee(int status, empRec rec);</code><br>– <code>void deleteEmployee(int status, empRec rec);</code></p>
+<p>模块执行所有主文件访问操作。 它读取、添加、更新和删除主文件记录。 这些函数中的每一个都有自己的入口点。</p>
+<p>示例：控件类</p>
+<p>好处<br>§ 信息内聚使开发人员能够“打包”与给定数据结构相关的所有功能。<br>§ 如果通过应用程序为所有与数据结构相关的功能提供单一位置，这可以降低维护成本。<br>缺点<br>§ 如果其他应用程序不需要所有功能，则可能会增加应用程序的内存需求，从而限制其他应用程序的效用</p>
+<h3 id="模块耦合"><a href="#模块耦合" class="headerlink" title="模块耦合"></a>模块耦合</h3><p>– 模块<strong>之间</strong>的交互程度<br>– 软件模块<strong>之间</strong>的相互依赖<br>– 衡量两个例程或模块的紧密程度</p>
+<p>如果对一个模块的更改不会对另一个模块产生太大影响，则这两个模块是松散耦合的。</p>
+<p>如果两个模块完全不相关，则它们是解耦的。</p>
+<img src="/fit5136-se-notes/image-20210622015305163.png" class="" title="image-20210622015305163">
+
+
+<p>低耦合是结构良好的计算机系统的标志。 当与高内聚性相结合时，支持高可读性和可维护性的一般目标。</p>
+<h4 id="内容耦合"><a href="#内容耦合" class="headerlink" title="内容耦合"></a>内容耦合</h4><p>一个模块直接引用另一个模块的内容<br>一个模块修改或依赖另一个模块的内部工作<br>§ 示例 1：模块 p 修改模块 q 的语句<br>§ 示例 2：模块 p 指的是模块 q 的局部数据，表示 q 内的一些数值位移（变化）。<br>§ 示例 3：模块 p 分支到模块 q 的本地标签<br>§ 示例 4：公共与私有属性。</p>
+<p>为什么这么糟糕？<br>§ 几乎对模块 q 的任何更改，甚至用新编译器重新编译 q，都需要对模块 p 进行更改<br>§ 违反信息隐藏<br>§ 数据封装</p>
+<h4 id="公共耦合"><a href="#公共耦合" class="headerlink" title="公共耦合"></a>公共耦合</h4><p>§ 公共耦合，当两个或多个函数共享全局数据时发生。<br>– 对它们的任何更改都会产生连锁反应。<br>§ 示例 1：模块 cca 和 ccb 可以访问和更改 globalVariable 的值<br>§ 示例 2：模块 cca 和 ccb 都可以访问同一个数据库，并且可以读写相同的记录</p>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (globalVar == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (xyz.arg &gt; <span class="number">25</span>)</span><br><span class="line">        xyz.method3();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        xyz.method4();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>模块可能有副作用</p>
+<p>影响可读性：是什么导致这个循环终止？</p>
+<p>§ 在一个模块中对全局变量的声明进行更改需要在其他模块中进行相应的更改<br>§ 公共耦合模块难以重用<br>§ 一个模块暴露于比必要更多的数据。 这可能导致网络犯罪</p>
+<h4 id="控制耦合"><a href="#控制耦合" class="headerlink" title="控制耦合"></a>控制耦合</h4><p>一个模块将控制元素传递给另一个<br>当一个模块通过传递控制信息来控制另一个模块的流量时发生控制耦合<br>§ 示例1：一个操作码被传递给一个具有逻辑内聚性的模块<br>§ 示例 2：作为参数传递的控制开关</p>
+<p>p调用q</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Module p &#123; // has two methods</span><br><span class="line">	print(int i)&#123;</span><br><span class="line">		………</span><br><span class="line">		printReport(i); // control switch i passed as an argument</span><br><span class="line">		…………</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	doSomething(int k) &#123;………&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么这么差？<br>模块不是独立的<br>– 模块q（被调用模块）必须知道模块p的内部结构和逻辑<br>– 这会影响可重用性</p>
+<h4 id="标记耦合"><a href="#标记耦合" class="headerlink" title="标记耦合"></a>标记耦合</h4><p>§ 一些语言只允许简单的变量作为参数</p>
+<p>– partNumber<br>– satelliteAltitude<br>– degreeOfMultiprogramming</p>
+<p>§ 很多语言也支持数据结构的传递</p>
+<p>– partRecord<br>– satelliteCoordinates<br>– segmentTable</p>
+<p>如果<strong>数据结构</strong>作为参数传递，则两个模块是标记耦合的，但被调用的模块对数据结构的部分而非全部独立组件进行操作</p>
+<p>为什么这么糟糕？<br>§ 例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">calculateLibraryFine(StudentRecord student)</span><br></pre></td></tr></table></figure>
+
+<p>§ 不清晰，不阅读整个模块，记录的哪些字段被访问或更改<br>§ 难以理解<br>§ 不太可能重复使用<br>§ 传递了不必要的数据<br>§ 注意：如果数据结构的所有组件都被访问和&#x2F;或更改，则将数据结构作为参数传递是可以的</p>
+<h4 id="数据耦合"><a href="#数据耦合" class="headerlink" title="数据耦合"></a>数据耦合</h4><p>§ 当方法通过参数定期共享数据时，会发生数据耦合。<br>§ 数据耦合优于戳耦合，因为模块准确地获取它需要的东西，而无需知道特定数据结构的结构。<br>§ 例子：</p>
+<p>– displayTimeOfArrival(flightNumber);<br>– computeProduct(firstNumber,secondNumber);<br>– getJobWithHighestPriority(jobQueue);</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="type">int</span> speed, order;</span><br><span class="line">	loop:</span><br><span class="line">	get(order);</span><br><span class="line">	<span class="keyword">switch</span>( order )&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>: calculate_airspeed(speed);</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>: display_airspeed(speed);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">goto</span> loop;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么这么好？<br>§ 不存在内容、通用、控制、标记耦合的困难<br>§ 维护更简单<br>§ 减少回归故障。</p>
+<h3 id="内聚-耦合"><a href="#内聚-耦合" class="headerlink" title="内聚+耦合"></a>内聚+耦合</h3><p>§ 模块的高内聚性是首选，因为它与软件的几个理想特性相关，包括健壮性、可靠性、可重用性和可理解性。<br>§ 低耦合是结构良好的计算机系统的标志。 当与高内聚性相结合时，支持高可读性和可维护性的一般目标。</p>
+<p><strong>因此，高内聚和低耦合是好的设计的关键。</strong></p>
+<h3 id="UML的导向性"><a href="#UML的导向性" class="headerlink" title="UML的导向性"></a>UML的导向性</h3><p>• 也称为“导航可见性”、“导航”或“可见性”或“知道”。<br>• 即，要将消息从一个对象发送到另一个对象，它必须是可见的。<br>• 例子：</p>
+<img src="/fit5136-se-notes/image-20210622075518208.png" class="" title="image-20210622075518208">
+
+<p>• 学生可以“看到”单位，因为它是学生类中的一个属性。<br>• 用箭头表示：单向可见性（单向）。</p>
+<p>• 双向导向增加了复杂性<br>– 每当发生更改时都需要维护关联的两端</p>
+<p>• 学生了解单位，单位了解学生。<br>• 当一种方式就足够时尽量避免。</p>
+<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">READ height of rectangle</span><br><span class="line">READ width of rectangle</span><br><span class="line">COMPUTE area as height times width</span><br><span class="line"></span><br><span class="line">// Input: READ, OBTAIN, GET</span><br><span class="line">// Output: PRINT, DISPLAY, SHOW</span><br><span class="line">// Compute: COMPUTE, CALCULATE, DETERMINE</span><br><span class="line">// Initialize: SET, INIT</span><br><span class="line">// Add one: INCREMENT, BUMP</span><br><span class="line"></span><br><span class="line">IF (HoursWorked &gt; NormalMax)</span><br><span class="line">  Display overtime message</span><br><span class="line">ELSE</span><br><span class="line">  Display regular time message</span><br><span class="line">END IF</span><br><span class="line">// Can also have ELSE IF</span><br><span class="line"></span><br><span class="line">WHILE Population &lt; Limit</span><br><span class="line">  Compute Population as Population + Births – Deaths</span><br><span class="line">ENDWHILE</span><br><span class="line"></span><br><span class="line">WHILE employee.type NOT EQUAL manager AND personCount &lt; numEmployees</span><br><span class="line">  INCREMENT personCount</span><br><span class="line">  CALL employeeList.getPerson with personCount RETURNING employee</span><br><span class="line">ENDWHILE</span><br><span class="line"></span><br><span class="line">CASE grade OF</span><br><span class="line">  A : points = 4</span><br><span class="line">  B : points = 3</span><br><span class="line">  C : points = 2</span><br><span class="line">  D : points = 1</span><br><span class="line">  F : points = 0</span><br><span class="line">ENDCASE</span><br><span class="line"></span><br><span class="line">REPEAT</span><br><span class="line">  Display A</span><br><span class="line">UNTIL A &gt; B</span><br><span class="line"></span><br><span class="line">// FOR each month of the year (good)</span><br><span class="line">// FOR month = 1 to 12 (ok)</span><br><span class="line">// FOR each employee in the list (good)</span><br><span class="line">FOR empno = 1 to listsize</span><br><span class="line">  Display empno</span><br><span class="line">ENDFOR</span><br><span class="line"></span><br><span class="line">CALL Swap with CurrentItem and TargetItem</span><br><span class="line"></span><br><span class="line">CALL SquareRoot with orbitHeight RETURNING nominalOrbit</span><br></pre></td></tr></table></figure>
+
+<h2 id="W7-软件设计"><a href="#W7-软件设计" class="headerlink" title="W7 软件设计"></a>W7 软件设计</h2><p>就是纵向第三步Design workflow</p>
+<h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><p>TODO：跳过了前面的铺垫</p>
+<p>• 模式是一种表示、共享和重用知识的手段。<br>• 架构模式是对良好设计实践的程式化描述，已经在不同环境中进行了尝试和测试。<br>• 模式应包括有关何时有用以及何时无用的信息。<br>• 可以使用表格和图形描述来表示模式。</p>
+<h4 id="MVC-pattern"><a href="#MVC-pattern" class="headerlink" title="MVC pattern"></a>MVC pattern</h4><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>MVC (Model-View-Controller)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>介绍</td>
+<td>将展示和交互与系统数据分开。 该系统由三个相互交互的逻辑组件构成。 模型组件管理系统数据和对该数据的相关操作。 View 组件定义和管理数据如何呈现给用户。 控制器组件管理用户交互（例如，按键、鼠标点击等）并将这些交互传递给视图和模型。</td>
+</tr>
+<tr>
+<td>适用于</td>
+<td>当有多种方式查看和交互数据时使用。 当未来对数据交互和呈现的要求未知时也使用。</td>
+</tr>
+<tr>
+<td>优势</td>
+<td>允许数据独立于其表示而改变，反之亦然。 支持以不同方式呈现相同数据，并在所有这些方式中以一种表示方式进行更改。</td>
+</tr>
+<tr>
+<td>劣势</td>
+<td>当数据模型和交互很简单时，可能会涉及额外的代码和代码复杂性。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>Model模型管理应用程序域的行为和数据<br>– 响应有关其状态信息的请求（通常来自视图）<br>– 响应改变状态的指令（通常来自控制器）</p>
+</li>
+<li><p>View视图管理信息的显示</p>
+</li>
+<li><p>Controller 控制器解释用户输入<br>– 通常是鼠标和键盘，<br>– 通知模型和&#x2F;或视图进行适当的更改。</p>
+</li>
+</ul>
+<p>• 视图和控制器都<strong>依赖于模型</strong>，但模型<strong>不依赖</strong>于它们<br>– 模型可以独立于视图和控制器进行构建和测试<br>• 在独立（桌面）应用程序中，视图和控制器之间的分离并不总是很清楚。<br>– 但总是有益的<br>• 在基于 Web 的应用程序中，它们被清楚地区分：<br>– 视图是在浏览器上实现的<br>– 控制器在服务器端实现：处理 HTTP 请求的组件</p>
+<h4 id="Layered-architecture-pattern-分层架构"><a href="#Layered-architecture-pattern-分层架构" class="headerlink" title="Layered architecture pattern 分层架构"></a>Layered architecture pattern 分层架构</h4><p>• 用于模拟子系统的接口。<br>• 将系统组织成一组层（或抽象机器），每个层提供一组服务。<br>• 然而，通常人为地以这种方式构建系统。</p>
+<img src="/fit5136-se-notes/image-20210622082040975.png" class="" title="image-20210622082040975">
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>分层架构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>介绍</td>
+<td>将系统组织成具有与每一层相关联的相关功能的层。 一个层向它上面的层提供服务，因此最低层代表可能在整个系统中使用的核心服务。</td>
+</tr>
+<tr>
+<td>适用于</td>
+<td>在现有系统上建造新设施时使用； 当开发分布在多个团队中，每个团队负责一层功能时； 当需要多级安全时。</td>
+</tr>
+<tr>
+<td>优势</td>
+<td>只要保持界面，就允许替换整个层。 可以在每一层提供冗余设施（例如，身份验证）以增加系统的可靠性。</td>
+</tr>
+<tr>
+<td>劣势</td>
+<td>在实践中，在层之间提供清晰的分离通常很困难，并且高层可能不得不直接与较低层交互，而不是直接通过它下面的层。 由于在每一层处理服务请求时对服务请求进行多级解释，因此性能可能是一个问题。</td>
+</tr>
+</tbody></table>
+<h4 id="Repository-architecture-存储库架构"><a href="#Repository-architecture-存储库架构" class="headerlink" title="Repository architecture 存储库架构"></a>Repository architecture 存储库架构</h4><p>子系统必须交换数据。 这可以通过两种方式完成：<br>– 共享数据保存在中央数据库或存储库中，所有子系统都可以访问；<br>– 每个子系统维护自己的数据库并将数据明确地传递给其他子系统。</p>
+<img src="/fit5136-se-notes/image-20210622210717116.png" class="" title="image-20210622210717116">
+
+<h4 id="C-x2F-S-architecture-客户端-服务器架构"><a href="#C-x2F-S-architecture-客户端-服务器架构" class="headerlink" title="C&#x2F;S architecture 客户端-服务器架构"></a>C&#x2F;S architecture 客户端-服务器架构</h4><p>• 分布式系统模型，显示数据和处理如何分布在一系列组件中。<br>• 一组提供特定服务（例如打印、数据管理等）的独立服务器。<br>• 一组调用这些服务的客户端。<br>• 允许客户端访问服务器的网络。</p>
+<img src="/fit5136-se-notes/image-20210622213225241.png" class="" title="image-20210622213225241">
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>Client-server</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>介绍</td>
+<td>在客户端-服务器架构中，系统的功能被组织成服务，每个服务从一个单独的服务器提供。 客户端是这些服务的用户，并访问服务器以使用它们。</td>
+</tr>
+<tr>
+<td>适用于</td>
+<td>当必须从<strong>一系列位置</strong>访问共享数据库中的数据时使用。 因为服务器可以复制，所以也可以在系统负载可变时使用。</td>
+</tr>
+<tr>
+<td>优势</td>
+<td>此模型的主要优点是服务器可以分布在网络中。 通用功能（例如打印服务）可以对所有客户端可用，不需要由所有服务实现。</td>
+</tr>
+<tr>
+<td>劣势</td>
+<td>每个服务都是单点故障，因此容易受到拒绝服务攻击或服务器故障的影响。 性能可能无法预测，因为它取决于网络和系统。 如果服务器由不同的组织拥有，则可能是管理问题。</td>
+</tr>
+</tbody></table>
+<h3 id="OO设计"><a href="#OO设计" class="headerlink" title="OO设计"></a>OO设计</h3><p>略</p>
+<ul>
+<li>为您的软件确定设计模式</li>
+<li>详细类图，将初始类图推进到：<ul>
+<li>添加方法，添加属性</li>
+<li>确定属性格式</li>
+<li>分配每个方法（返回类型、参数等）</li>
+<li>为关联分配可导航性</li>
+</ul>
+</li>
+<li>架构设计（例如 .MVC）和设计决策</li>
+<li>设计原则：信息隐藏、责任驱动设计、可扩展性决定类图的方法。</li>
+<li>所有软件工程师都能理解的伪代码</li>
+</ul>
+<h2 id="W8-道德规范-amp-知识产权（IP）"><a href="#W8-道德规范-amp-知识产权（IP）" class="headerlink" title="W8 道德规范 &amp; 知识产权（IP）"></a>W8 道德规范 &amp; 知识产权（IP）</h2><p>软件工程道德规范（考点，略，加油查表）。</p>
+<ul>
+<li>使用代码评估场景中的行为</li>
+<li>建议可能的解决方案或行动。</li>
+</ul>
+<p>知识产权是思想的表达，而不是思想本身。</p>
+<ul>
+<li>软件著作权</li>
+<li>软件专利</li>
+<li>开源软件（Copyleft）</li>
+</ul>
+<h2 id="W9-实现上的问题"><a href="#W9-实现上的问题" class="headerlink" title="W9 实现上的问题"></a>W9 实现上的问题</h2><p>太coding了基本上不会考</p>
+<p>这里相当于implement workflow + construction phase，也就是任务最重的地方</p>
+<ul>
+<li>重用 Reuse</li>
+<li>配置管理</li>
+<li>Host target development 主机目标开发</li>
+<li>编程问题：<ul>
+<li>编程语言的选择</li>
+<li>良好的编程习惯</li>
+<li>编码标准</li>
+<li>集成（持续？）</li>
+</ul>
+</li>
+</ul>
+<h2 id="W10-质量和测试"><a href="#W10-质量和测试" class="headerlink" title="W10 质量和测试"></a>W10 质量和测试</h2><ul>
+<li>质量保证QA（Quality Assurance）</li>
+<li>质量保证技术<ul>
+<li>人工审核（演练Walkthroughs和检查Inspections，Non-execution-based）</li>
+<li>证明（正式方式，Non-execution-based）</li>
+<li>软件测试（Execution-based）</li>
+</ul>
+</li>
+</ul>
+<h2 id="W11-软件测试"><a href="#W11-软件测试" class="headerlink" title="W11 软件测试"></a>W11 软件测试</h2><p>必考</p>
+<img src="/fit5136-se-notes/image-20210622163528781.png" class="" title="image-20210622163528781">
+
+<ul>
+<li>Positive正面测试确定您的应用程序按预期工作。 如果在正面测试期间遇到错误，则测试失败。</li>
+<li>Negative负面测试可确保您的应用程序可以优雅地处理无效输入或意外的用户行为。<ul>
+<li>例如，如果用户尝试在数字字段中键入字母，则在这种情况下的正确行为是显示“不正确，请输入数字”消息。</li>
+<li>负面测试的目的是检测此类情况并防止应用程序崩溃。 负面测试可帮助您提高应用程序的质量并找到其弱点。</li>
+</ul>
+</li>
+</ul>
+<h4 id="等效性测试"><a href="#等效性测试" class="headerlink" title="等效性测试"></a>等效性测试</h4><p>也称为分区测试，您可以在其中识别具有共同特征并应以相同方式处理的输入组。<br>应该从这些组中的每一个中选择测试。</p>
+<ul>
+<li>输入数据和输出结果通常属于不同的类，其中一个类的所有成员都是相关的（有效和无效）</li>
+<li>这些类中的每一个都是一个等效分区或域，其中程序对每个类成员都以等效的方式运行。</li>
+<li>应从每个分区中选择测试用例。</li>
+</ul>
+<p>假设 DBMS 规定产品必须处理 1 到 16,383 (2 14 1) 之间的任意数量的记录。<br>在伪代码中，它可能是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (</span><br><span class="line">noOfRecords is between 1 and 16,383)</span><br><span class="line">// DBMS must do this…</span><br></pre></td></tr></table></figure>
+
+<p>Range (1..16,383) 构成一个等价类<br>等价类的任何一个成员与等价类的任何其他成员一样是一个很好的测试用例</p>
+<p>Range (1..16,383) 定义了三个不同的等价类：</p>
+<p>等价类 1：少于 1 条记录</p>
+<p>等价类 2：1 到 16,383 条记录</p>
+<p>等价类 3：超过 16,383 条记录</p>
+<h4 id="边值分析"><a href="#边值分析" class="headerlink" title="边值分析"></a>边值分析</h4><p>在等价类边界的一侧或仅在其一侧选择测试用例 (1 … 16383)<br>结合边界值和等价类测试的测试用例总数：</p>
+<ul>
+<li>测试用例 1：0 条记录 等价类 1 的成员且与边界值相邻</li>
+<li>测试用例 2：1 条记录边界值</li>
+<li>测试用例 3：2 条记录邻近边界值</li>
+<li>测试用例 4：723 条记录 等价类 2 的成员</li>
+<li>测试用例 5：16,382 条记录与边界值相邻</li>
+<li>测试用例 6：16,383 条记录 边界值</li>
+<li>测试用例 7：16,384 条记录 等价类 3 的成员且与边界值相邻</li>
+</ul>
+<p>这大大增加了检测到故障的概率</p>
+<h3 id="黑盒测试"><a href="#黑盒测试" class="headerlink" title="黑盒测试"></a>黑盒测试</h3><p>Test to specifications：忽略代码，使用规范选择测试用例</p>
+<p>假设sepc包括 20 个因素，每个因素有 4 个值： 4^20 个测试用例</p>
+<p>对规范的详尽测试和对代码的详尽测试都不可行</p>
+<p>测试艺术：</p>
+<ul>
+<li><p>选择一个小的、可管理的测试用例集</p>
+</li>
+<li><p>最大限度地提高检测到故障的机会，同时</p>
+</li>
+<li><p>最大限度地减少浪费测试用例的机会</p>
+</li>
+<li><p>每个测试用例都必须检测到以前未检测到的故障</p>
+</li>
+</ul>
+<p>这样同一故障不会被多个测试用例检测到。 （不会浪费！）</p>
+<p>我们需要能够突出尽可能多的错误的方法</p>
+<img src="/fit5136-se-notes/image-20210622202634687.png" class="" title="image-20210622202634687">
+
+<h4 id="Functional-Testing-功能性测试"><a href="#Functional-Testing-功能性测试" class="headerlink" title="Functional Testing 功能性测试"></a>Functional Testing 功能性测试</h4><p>经典软件黑盒测试的另一种形式</p>
+<p>将测试数据基于代码工件的功能，每一项功能或功能都被识别<br>测试数据旨在分别测试每个（较低级别的）功能</p>
+<p>然后，测试由这些低级函数组成的高级函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;higher level functionality&gt;::=</span><br><span class="line">  if &lt;conditional expression&gt;</span><br><span class="line">    &lt;lower level functionality 1&gt;;</span><br><span class="line">  else</span><br><span class="line">    &lt;lower level functionality 2&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="玻璃盒测试"><a href="#玻璃盒测试" class="headerlink" title="玻璃盒测试"></a>玻璃盒测试</h3><p>Test to code：使用<strong>代码</strong>选择测试用例（不可靠，比如÷0</p>
+<p>通过工件的每条路径必须至少执行一次</p>
+<p>这也称为Structural结构测试（白盒）</p>
+<p>代码流图有助于手动找到正确的覆盖范围</p>
+<p>问题：</p>
+<ul>
+<li>Statement 声明的覆盖</li>
+<li>Branch 分支的覆盖</li>
+<li>路径的覆盖</li>
+<li>所有定义都使用路径的覆盖</li>
+</ul>
+<h4 id="Statement-coverage"><a href="#Statement-coverage" class="headerlink" title="Statement coverage"></a>Statement coverage</h4><p>运行一组测试用例，其中每个语句至少执行一次</p>
+<p>需要跟踪的 CASE 工具</p>
+<p>弱点：分支声明</p>
+<p>两个语句都可以执行而不会出现错误：&amp;&amp; and ||</p>
+<h4 id="Branch-coverage"><a href="#Branch-coverage" class="headerlink" title="Branch coverage"></a>Branch coverage</h4><p>运行一组测试用例，其中每个分支至少执行一次（以及所有语句）</p>
+<p>这解决了上一张幻灯片上的问题</p>
+<p>同样，需要一个 CASE 工具</p>
+<p>例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void try(int x, int y) &#123;</span><br><span class="line">  if (x == 0) y++;</span><br><span class="line">  if (y == 0) x++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>单个测试用例 try(0, 1) 足以满足语句覆盖率，但不足以满足分支覆盖率。</p>
+<p>为了实现分支覆盖，测试用例：<br>try(0, 1) 对<strong>两个</strong> if 都为 true<br>try(1, 2) 对<strong>两个</strong> if 都为 false</p>
+<h4 id="Path-Coverage"><a href="#Path-Coverage" class="headerlink" title="Path Coverage"></a>Path Coverage</h4><p>运行一组测试用例，其中每条路径都执行一次（以及所有语句）</p>
+<p>问题：</p>
+<p>路径的数量可能非常大，例如。 for 循环</p>
+<p>我们想要一个比所有路径都更弱的条件，但这会显示出比分支覆盖更多的错误</p>
+<h4 id="All-Definition-Use-Path-Coverage-所有定义使用路径覆盖"><a href="#All-Definition-Use-Path-Coverage-所有定义使用路径覆盖" class="headerlink" title="All-Definition-Use-Path Coverage 所有定义使用路径覆盖"></a>All-Definition-Use-Path Coverage 所有定义使用路径覆盖</h4><p>每次出现的变量，zz，都被标记为</p>
+<ul>
+<li><p>变量的定义：<code>zz = 1</code> 或 <code>read(zz)</code></p>
+</li>
+<li><p>或变量的使用：<code>y = zz + 3</code> 或 <code>if (zz &lt; 9) errorB()</code></p>
+</li>
+</ul>
+<p>确定从变量定义到使用该定义的所有路径（可以通过自动工具完成）</p>
+<p>为每个这样的路径设置一个测试用例</p>
+<h3 id="考点"><a href="#考点" class="headerlink" title="考点"></a>考点</h3><ul>
+<li>在实施工作流程中进行测试</li>
+<li>测试用例选择<ul>
+<li>黑盒单元测试（功能性）：忽略代码，使用规范选择测试用例</li>
+<li>Glass-box玻璃盒单元测试（语句、分支、路径）：忽略规范，使用代码选择测试用例</li>
+</ul>
+</li>
+<li>等价类划分和边值分析（可以是黑盒或玻璃盒）</li>
+<li>集成测试（由程序员）</li>
+<li>交付前的最终测试：<ul>
+<li>产品测试（QA 团队、程序员）</li>
+<li>验收测试（客户、QA 团队、程序员）</li>
+</ul>
+</li>
+</ul>
+<h2 id="W12-交付后维护"><a href="#W12-交付后维护" class="headerlink" title="W12 交付后维护"></a>W12 交付后维护</h2><p>不在考试内容里</p>
+<h2 id="Mock-Exam"><a href="#Mock-Exam" class="headerlink" title="Mock Exam"></a>Mock Exam</h2><p>一般来说考试结构和模拟考差不多（老天保佑），所以这里讲下模拟考里知识点分布</p>
+<p>每个part的背景内容不一样，但是实际考试说明了会是一样的（so focus on <strong>traceability</strong>）</p>
+<p>考试明说了不会让写代码，顶多伪代码，5个问题（小问题不好说啊，很可能总共10个小问题）</p>
+<h3 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h3><p>只有一题，偏向理论，20‘。</p>
+<p>让你结合案例，分析[the Unified Process](#The Unified Process 统一流程)，W4内容</p>
+<p>这里估计会跑偏，就可能是别的definition</p>
+<h3 id="Part-2"><a href="#Part-2" class="headerlink" title="Part 2"></a>Part 2</h3><p>分为三题</p>
+<h4 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h4><p>画UML use case diagram 10’</p>
+<p>简单，不过要注意是<a href="#%E7%94%A8%E4%BE%8B%E5%9B%BE"><strong>use case</strong> diagram 用例图</a></p>
+<p>就几个人（Actor），一个系统框，框里一堆椭圆形操作，人和操作连一连。</p>
+<h4 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h4><p>补全[use case scenario](#第一步：功能建模 - 用例场景)的 Exception conditions（including reasonable actions to be taken， 即要写系统怎么handle）9‘</p>
+<p>比较简单</p>
+<h4 id="Q3"><a href="#Q3" class="headerlink" title="Q3"></a>Q3</h4><p>第三个是31’的超级大题</p>
+<p>画 <strong>initial</strong> UML <strong>class</strong> diagram</p>
+<p>要求：</p>
+<p>包括<strong>类</strong>的适当<strong>属性</strong><br>使用泛化、关联和聚合来描述类之间的关系<br>正确指示关系的多样性（基数）。<br><strong>不包括职责或操作</strong>。 此时没有所有信息来执行此操作。</p>
+<p>pdf里还有个（1）小题，让找出名词（也就是找class第一步）。</p>
+<p>要注意的是问题边界外（即，不在UML里的）的名词也需要写进去</p>
+<img src="/fit5136-se-notes/image-20210623000050998.png" class="" title="image-20210623000050998">
+
+<h3 id="Part-3"><a href="#Part-3" class="headerlink" title="Part 3"></a>Part 3</h3><p>[UML **sequence** diagram](#UML Sequence Diagram 序列图)</p>
+<img src="/fit5136-se-notes/image-20210622235717947.png" class="" title="image-20210622235717947">
+
+
+
+<h3 id="Part-4"><a href="#Part-4" class="headerlink" title="Part 4"></a>Part 4</h3><p>[UML **state chart** diagram](#UML state charts 状态表)</p>
+<img src="/fit5136-se-notes/image-20210622235402270.png" class="" title="image-20210622235402270">
+
+<p>和lecture里的相比多了个框和标题，别的就：</p>
+<p>起始点-&gt;各个state-&gt;state之间过程、操作-&gt;终止点</p>
+<h3 id="Part-5"><a href="#Part-5" class="headerlink" title="Part 5"></a>Part 5</h3><p>道德准测，15’</p>
+<p>基本上老老实实做ASS的肯定都是熟练工了</p>
+<ol>
+<li>找到可能存在的问题</li>
+<li>评价行为（即，最后需要写should do）</li>
+</ol>
+<p>都要有code support哦，因为是开卷所以应该是好查的。</p>
+<h3 id="Part-6"><a href="#Part-6" class="headerlink" title="Part 6"></a>Part 6</h3><p>画the Unified Process的<a href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%EF%BC%88%E5%9E%82%E7%9B%B4%EF%BC%89">工作流</a>，15‘</p>
+<p>表现出（粗略）在该项目期间给予<strong>不同工作流</strong>的<strong>相对工作量</strong>。 在 x（时间）轴上大致表示“事件 1”、“事件 2”和“事件 3”发生的时间。</p>
+<h3 id="Part-7"><a href="#Part-7" class="headerlink" title="[Part 7]"></a>[Part 7]</h3><p>括号的内容只在PDF（可能只是线下考试）里看见，网上考试没有，疑似被删 （or被精简，毕竟伪代码真的长）</p>
+<p>根据分析<a href="#%E4%BC%AA%E4%BB%A3%E7%A0%81">伪代码</a>来写出 <a href="#%E7%8E%BB%E7%92%83%E7%9B%92%E6%B5%8B%E8%AF%95">glass box unit testing</a></p>
+<table>
+<thead>
+<tr>
+<th>Test No &amp; Brief Desc</th>
+<th>var a</th>
+<th>var b</th>
+<th>var c</th>
+<th>Expected output&#x2F;behaviour</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>和Ass的差不太多，考的明显比Lecture里讲的简单。</p>
+<p>和黑盒关注IO参数不一样，玻璃盒就需要关注内部var（需要instr, car.speed, car.status这种原型数据）和if&#x2F;case导致结果的不同</p>
+<p>个人感觉考试还是黑盒，明显黑盒更有考点</p>
+<img src="/fit5136-se-notes/image-20210623000819346.png" class="" title="image-20210623000819346">
+
+<ul>
+<li>Reason: Pos&#x2F;Neg? + Desc</li>
+<li>vars …</li>
+<li>Expected Result</li>
+<li>Actual （考试估计不要求，or给定）</li>
+<li>Fail&#x2F;Pass+comment（就在失败里写写原因</li>
+</ul>
+<h3 id="Part-8"><a href="#Part-8" class="headerlink" title="[Part 8]"></a>[Part 8]</h3><p>[Functional requirements](#Functional requirements) 和 [Non-Functional Requirement](#Non-functional requirements)</p>
+<p>就帮着修改requirements来达到”精确，明确，完整和一致“</p>
+<p>先鉴定是(Non-)Functional，然后再重写。（明显不难</p>
+<h2 id="实际考试"><a href="#实际考试" class="headerlink" title="实际考试"></a>实际考试</h2><p>差不多</p>
+<p>出乎意料测试没怎么考</p>
+<p>反倒是use case让写了全部（手断）</p>
+<p>initial UML反而简单。state chart 较难（需要配合guard）</p>
+<p>第一题的Unified Process画图也比想想的要难，需要对几个workflow都有点理解，每个event的发生点及影响也要熟练。（感觉自己应该是做错了，四个phase都没画齐全）</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/software-management/" rel="tag"># software management</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/fit5125-research-method-notes/" rel="prev" title="Notes for FIT5125: IT research methods S1 2021">
+                  <i class="fa fa-chevron-left"></i> Notes for FIT5125: IT research methods S1 2021
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/how-to-create-a-temp-ngin-network/" rel="next" title="How to create a temporary NGIN network">
+                  How to create a temporary NGIN network <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments giscus-container">
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.11/pdfobject.min.js","integrity":"sha256-N6JtCNwaYm6kizuG92UtOOXamRHPwu+V1yF10g3bu/c="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":"forest","js":{"url":"//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+
+<script>
+document.addEventListener('page:loaded', () => {
+  if (!CONFIG.page.comments) return;
+
+  NexT.utils.loadComments('.giscus-container')
+    .then(() => NexT.utils.getScript('https://giscus.app/client.js', {
+      attributes: {
+        async                   : true,
+        crossOrigin             : 'anonymous',
+        'data-repo'             : CONFIG.giscus.repo,
+        'data-repo-id'          : CONFIG.giscus.repo_id,
+        'data-category'         : CONFIG.giscus.category,
+        'data-category-id'      : CONFIG.giscus.category_id,
+        'data-mapping'          : CONFIG.giscus.mapping,
+        'data-reactions-enabled': CONFIG.giscus.reactions_enabled,
+        'data-emit-metadata'    : CONFIG.giscus.emit_metadata,
+        'data-theme'            : CONFIG.giscus.theme,
+        'data-lang'             : CONFIG.giscus.lang,
+        'data-input-position'   : CONFIG.giscus.input_position,
+        'data-loading'          : CONFIG.giscus.loading
+      },
+      parentNode: document.querySelector('.giscus-container')
+    }));
+});
+</script>
+
+</body>
+</html>
