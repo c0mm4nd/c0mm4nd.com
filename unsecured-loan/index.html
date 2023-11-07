@@ -28,8 +28,9 @@
 <meta property="og:description" content="关键字：[personal&#x2F;unsecured+loan&#x2F;lending]&#x2F;credit + blockchain 基于区块链和联邦学习的手段构建一个信用借贷框架 框架？哪些隐私保护措施？ 123&amp;#123;url: ipfs:&#x2F;&#x2F;unknwon_path&#x2F;this&#x2F;is&#x2F;my.model&amp;#125;  继续找文献：传统框架，如何连接web2信息   流程：  借款人">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://c0mm4nd.com/unsecured-loan/2023-04-06-11-52-40.png">
+<meta property="og:image" content="https://c0mm4nd.com/unsecured-loan/2023-07-14-23-53-23.png">
 <meta property="article:published_time" content="2023-03-26T08:33:00.000Z">
-<meta property="article:modified_time" content="2023-04-12T12:51:26.304Z">
+<meta property="article:modified_time" content="2023-07-14T19:53:26.000Z">
 <meta property="article:author" content="Command M">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://c0mm4nd.com/unsecured-loan/2023-04-06-11-52-40.png">
@@ -90,7 +91,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">72</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">70</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">76</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">72</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -153,13 +154,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-count">76</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -245,7 +246,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-12 20:51:26" itemprop="dateModified" datetime="2023-04-12T20:51:26+08:00">2023-04-12</time>
+      <time title="Modified: 2023-07-15 03:53:26" itemprop="dateModified" datetime="2023-07-15T03:53:26+08:00">2023-07-15</time>
     </span>
 
   
@@ -298,6 +299,75 @@
 <li>ipfs fork</li>
 <li>soldity 预言机 <a href="https://medium.com/iex-ec/how-to-build-a-decentralized-oracle-on-ethereum-a-step-by-step-guide-d8c14719b69f" target="_blank" rel="noopener">https://medium.com/iex-ec/how-to-build-a-decentralized-oracle-on-ethereum-a-step-by-step-guide-d8c14719b69f</a></li>
 </ul>
+<hr>
+<pre class="mermaid">sequenceDiagram
+    participant b as Borrower
+    participant ethl as Ethereum Lending Oracle
+    participant etht as Ethereum Trust Oracle
+    participant ipfs as IPFS
+    participant loc as Lending Oracle Cluster
+    participant toc as Trust Data Oracle Cluster
+
+    b->>ethl: startSession()
+
+    b->>+etht: requestTrustData(borrower_pubkey, sessionID)
+    etht->>+toc: event ReuqestTrustData(borrower_pubkey, sessionID)
+    toc->>toc: Get trust data from real world, and Enctypt with pub0
+    toc->>-etht: updateTrustData(sessionID)
+
+    loc->>ipfs: shareModel(model_0) -> model_0_cid
+    loc->>loc: createChannelKeyPair() -> (chan_privkey, chan_pubkey)
+    loc->>ethl: handleSession(chan_pubkey, model_0_cid)
+
+    ipfs->>b: downloadInitialModel(model_0_cid) -> model_0
+    b->>b: train(model_0)
+    b->>ipfs: secretShareModel(model_1, chan_pubkey) -> model_1_cid
+    b->>ethl: updateModel(model_1_cid)
+    ipfs->>loc: secretDownloadModel(model_1_cid, chan_privkey) -> model_1
+  
+    Note over loc: Wait model count ready
+    loc->>loc: aggregateModels(model_new_list) -> agg_model
+    loc->>loc: evalModel(agg_model) -> need_training
+
+    alt need_training is True
+        loc->>ethl: 
+    else need_training is False
+        loop FL training
+            loc->>ipfs: secretShareModel(model_origin) -> model_0_cid
+            ipfs->>b: secretDownloadModel(model_origin_cid) -> model_0
+            b->>b: train(model_origin)
+            b->>ipfs: secretShareModel(model_new, chan_pubkey) -> model_1_cid
+            b->>ethl: updateModel(model_new_cid)
+            ipfs->>loc: secretDownloadModel(model_new_cid, chan_privkey) -> model_new
+            Note over loc: Wait model count ready
+            loc->>loc: aggregateModels(model_new_list) -> agg_model
+            loc->>loc: evalModel(agg_model) -> need_training
+        end
+    end
+
+    loc->>loc: evalModel(agg_model) -> results
+    loc->>ethl: done(results)</pre>
+
+
+<hr>
+<ol start="4">
+<li>Simulation</li>
+</ol>
+<p>在本节中，我们将阐述我们进行的模拟过程，以评估我们提出的以太坊非担保贷款服务的实现可能性，该服务基于受信任的执行环境（TEE）设备和联邦学习。为了建立和验证我们的系统模型，我们使用了来自AAVE，Compound在以太坊上的记录，以及Kaggle上的P2P Lending Club记录的数据。</p>
+<p>4.1 数据集</p>
+<p>我们为模拟汇集了三个数据集。首先，我们从AAVE和Compound获取了链上的贷款和借款数据，这是以太坊上的两个主要去中心化金融（DeFi）平台。该数据集提供了丰富的DeFi交易和活动的上下文信息，包括借款和贷款利率，清算细节，抵押类型和用户地址。链下数据集来自Kaggle上的Lending Club记录，其中包含了大量关于P2P贷款交易的详细信息。这个数据集有助于我们理解传统P2P贷款中的行为和风险管理，这对于我们所提出的模型的设计和评估至关重要。最后，根据“链上资产越多的人往往链下年收入更多”，我们使用这个简单的启发式规则按链上资产价值和链下年收入连接了链上信息和链下信息。</p>
+<p>4.2 模拟设置</p>
+<p>如上Methodology部分所述，我们通过使用联邦学习方法在不同的TEE设备之间分发数据处理，模拟了区块链上贷款服务的操作。这种方法在保持数据的完整性和保密性的同时，确保了隐私和去中心化。</p>
+<p>我们所有实验都在一台dual-AMD7763服务器上完成，服务器上有8块3090显卡以支持机器学习训练。所有角色都通过Docker容器被隔离在不同运行环境与网络环境中。方便起见，除了智能合约上需要solidity，我们主要使用Python实现了整个模拟系统的交互。另外我们使用Rust语言开发部分复杂内容，比如TEE环境下的区块链交互等。</p>
+<p>实验中，我们在以太坊区块链私有网络上构建了模拟运行环境，该环境承载了管理用户信用评分模型的智能合约和管理贷款交易的智能合约。此外我们也运行了IPFS私有网络模拟去中心化存储环境，用来存储与传递私有或公有的模型数据。代码上，我们在现有的有抵押贷款智能合约的基础上使用solidity语言进行二次开发，通过Oracle的形式将无抵押信用贷款功能增加到现有DeFi协议。由于区块链环境并不支持机器学习这类复杂计算，我们通过用户TEE环境以及区块链智能合约中事件订阅系统的联动实现区块链上数据隐私计算。</p>
+<p>4.3 框架实施与验证</p>
+<p>我们将分别使用了简单的逻辑回归和卷积神经网络两种机器学习模型应用于数据集以计算用户信用模型来验证框架可行性。用户信用度模型通过联邦学习进行迭代更新，允许每个TEE设备从其本地数据中学习，并通过区块链以隐私保护的方式与联盟分享模型更新，从而在尊重数据隐私的同时改进全局模型。</p>
+<p>由于目前并没有准确的区块链无抵押借贷服务与相关数据，而且我们的链上和链下数据两者之间实际也并没有关联，因此我们不进行模型的评估与结果分析，而是关注框架的可行性。模拟结果表明，我们设计的框架能够在以太坊上运行，而且能够处理用户的隐私数据。通过模拟在以太坊上的非担保贷款服务，我们可以更好地理解这种方法的挑战和优势。模拟结果可以指导现实世界实现的开发和改进，从而在DeFi领域中提供更安全，高效且私有的贷款服务。</p>
+<p>为了验证我们的系统的可行性，我们对其进行了功能性上的测试。测试结果表明模型能够根据用户信用实现用户的无抵押借贷，并且根据用户的链上行为适度地调整用户信用。如图所示，图中Step之间区块高度相距也为1，两条线分别为Borrowed Amount与Available Amount。测试用户在前两步分别借贷了1000与2000单位，虽然共计3000单位小于一开始的将近3500单位，但是由于有未还的记录导致用户信用评分下降导致用户最终不可继续贷款；而当用户在步骤4直接归还3000单位后，其还款记录增加，预测的可用数量也得到略微增加。</p>
+<img src="/unsecured-loan/2023-07-14-23-53-23.png" class="">
+
+<!-- 这包括评估联邦学习过程中数据的安全性，以及我们基于以太坊的贷款服务的效率和可扩展性，包括燃气消耗和交易处理速度。 -->
+
 
     </div>
 
@@ -311,13 +381,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/sth-on-ngin/" rel="prev" title="Something on NGIN: 一些隨筆">
-                  <i class="fa fa-chevron-left"></i> Something on NGIN: 一些隨筆
+                <a href="/graph-data-workflow/" rel="prev" title="图数据工作流">
+                  <i class="fa fa-chevron-left"></i> 图数据工作流
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/op-tee-traps/" rel="next" title="OP-TEE 踩坑">
-                  OP-TEE 踩坑 <i class="fa fa-chevron-right"></i>
+                <a href="/pump-and-dump/" rel="next" title="论文分享：《The Doge of Wall Street: Analysis and Detection of Pump and Dump Cryptocurrency Manipulations》">
+                  论文分享：《The Doge of Wall Street: Analysis and Detection of Pump and Dump Cryptocurrency Manipulations》 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

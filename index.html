@@ -84,7 +84,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">72</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">70</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">76</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">72</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -147,13 +147,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">72</span>
+        <span class="site-state-item-count">76</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -202,7 +202,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/dyn-game-for-blockchain-fl/">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/meta-oculus-continue-logging-in/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -220,7 +220,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/dyn-game-for-blockchain-fl/" class="post-title-link" itemprop="url">Dynamic Game on blockchain-based Federated Learning</a>
+          <a href="/meta-oculus-continue-logging-in/" class="post-title-link" itemprop="url">修复Meta应用无法登录问题</a>
         </h2>
 
         <div class="post-meta-container">
@@ -232,7 +232,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-06-11 19:55:03 / Modified: 20:18:42" itemprop="dateCreated datePublished" datetime="2023-06-11T19:55:03+08:00">2023-06-11</time>
+      <time title="Created: 2023-11-07 16:02:18 / Modified: 16:21:09" itemprop="dateCreated datePublished" datetime="2023-11-07T16:02:18+08:00">2023-11-07</time>
     </span>
 
   
@@ -245,399 +245,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Mobile-Devices-Strategies-in-Blockchain-Based-Federated-Learning-A-Dynamic-Game-Perspective"><a href="#Mobile-Devices-Strategies-in-Blockchain-Based-Federated-Learning-A-Dynamic-Game-Perspective" class="headerlink" title="Mobile Devices Strategies in Blockchain-Based Federated Learning: A Dynamic Game Perspective"></a>Mobile Devices Strategies in Blockchain-Based Federated Learning: A Dynamic Game Perspective</h1><p>Sizheng Fan; Hongbo Zhang; Zehua Wang; Wei Cai</p>
-<p>IEEE Transactions on Network Science and Engineering</p>
-<ul>
-<li>系统建模和制定：我们提出并实施了一种基于智能合约的激励机制，以鼓励移动设备参与 FL 任务。在这种情况下，提出了两种移动设备在 FL 任务中的策略模型。</li>
-<li>动态博弈分析：据我们所知，这是第一个为 FL 动态博弈建模的工作，为进一步研究奠定了基础。我们证明了两个模型的纳什均衡（NE）和混合策略NE的存在性，并提出了相应的两种算法来实现。仿真结果证明了两种算法的收敛性，与 DSM 相比，CSM 可以有效地提高移动设备的收益。</li>
-</ul>
-<hr>
-<h2 id="Dynamic-Game-for-Blockchain-Based-Federated-Learning-基于区块链的联邦学习动态博弈"><a href="#Dynamic-Game-for-Blockchain-Based-Federated-Learning-基于区块链的联邦学习动态博弈" class="headerlink" title="Dynamic Game for Blockchain-Based Federated Learning 基于区块链的联邦学习动态博弈"></a>Dynamic Game for Blockchain-Based Federated Learning 基于区块链的联邦学习动态博弈</h2><p>FL 任务过程由多个全局迭代组成，如图 3 所示。FL 任务由多个全局迭代组成。在每一次全局迭代中，请求者会在每次全局迭代中公布一个固定的奖励 $B$ ，由workers决定是否参与每一次全局迭代。我们将请求者和移动设备之间的交互建模为动态游戏。相互作用可以按以下顺序说明。</p>
-<p>如图 4 所示，结合第 III 节中提到的基于联盟区块链的 FL 系统，请求者将发布她&#x2F;他的任务需求，包括数据类型、模型类型（即卷积神经网络（CNN）、递归神经网络(RNN)), 最大计算时间 $T_{max}$ 和 FL 任务开始时的预算 $B$ （步骤 1）。</p>
-<hr>
-<img src="/dyn-game-for-blockchain-fl/2023-06-11-20-16-09.png" class>
+          <p>今天莫名其妙地无法登录 Meta Quest Remote Desktop，症状是点击登录按钮之后没有按照预期弹出登录网址。 </p>
+<p>后面又安装Oculus PC试了一下，同样存在此问题</p>
+<p>TLDR; 解决方法： Win+R 然后随便输入https开头URL比如<a href="https://google.com,回车选择浏览器然后always,最后回到meta家应用重试登录即可弹出窗口/" target="_blank" rel="noopener">https://google.com，回车选择浏览器然后Always，最后回到Meta家应用重试登录即可弹出窗口</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/dyn-game-for-blockchain-fl/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/stablecoins-instability-and-collateral/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Command M">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Talkless">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Talkless">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/stablecoins-instability-and-collateral/" class="post-title-link" itemprop="url">stablecoins-instability-and-collateral</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2023-06-08 13:25:53 / Modified: 13:58:20" itemprop="dateCreated datePublished" datetime="2023-06-08T13:25:53+08:00">2023-06-08</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Intelligent-design-stablecoins-in-stability-and-collateral-during-market-turbulence"><a href="#Intelligent-design-stablecoins-in-stability-and-collateral-during-market-turbulence" class="headerlink" title="Intelligent design: stablecoins (in)stability and collateral during market turbulence"></a>Intelligent design: stablecoins (in)stability and collateral during market turbulence</h1><p>Riccardo De Blasis, Luca Galati, Alexander Webb and Robert I. Webb</p>
-<p>Financial Innovation</p>
-<hr>
-<ul>
-<li><p>2022 年 5 月，TerraUSD (UST) 稳定币和相关 Terra (LUNA) 代币的暴跌引发了主要稳定币的一系列反应，一些经历了价值下跌，而另一些经历了价值上涨。</p>
-</li>
-<li><p>使用 Baba、Engle、Kraft 和 Kroner (1990) (BEKK) 模型，我们检查了对这种外生冲击的反应，并发现 UST 崩盘的显着传染效应，部分原因可能是交易员之间的羊群行为。</p>
-</li>
-<li><p>我们测试了稳定币之间的不同反应，发现稳定币的设计差异会影响冲击响应的方向、幅度和持续时间。我们讨论了对稳定币开发商、交易所、交易员和监管机构的影响。</p>
-</li>
-</ul>
-<hr>
-<p>这项研究的独创性在于它使用专有数据检查了一个独特的外生事件，即迄今为止稳定币市场最大的崩溃。</p>
-<p>我们还将之前关于加密货币市场波动溢出效应的研究扩展到稳定币市场。尽管之前的研究试图调查比特币和稳定币之间的波动溢出效应（Hoang 和 Baur 2021；Grobys 等人 2021），以及仅稳定币之间的波动溢出效应（Thanh 等人 2022），但据我们所知，全面调查对稳定币价格变动的反应幅度、方向和持续时间尚未确定。本研究填补了这一空白，并通过测试其基础设计的差异是否会影响市场行为，扩展了之前关于跨稳定币波动溢出的研究。此外，本研究调查了加密货币崩盘中可能的羊群行为，如 Haykir 和 Yagli (2022) 中的泡沫，并测试了信息级联效应，如 Tse 和 Hackard (2006) 在不同的美国市场所做的那样，由其他市场的 UST 崩盘引发稳定币市场活动，这使我们能够对文献做出额外的贡献。</p>
-<hr>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/stablecoins-instability-and-collateral/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/pump-and-dump/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Command M">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Talkless">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Talkless">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/pump-and-dump/" class="post-title-link" itemprop="url">论文分享：《The Doge of Wall Street: Analysis and Detection of Pump and Dump Cryptocurrency Manipulations》</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2023-06-08 07:27:01 / Modified: 17:53:00" itemprop="dateCreated datePublished" datetime="2023-06-08T07:27:01+08:00">2023-06-08</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <!-- 
-TODO: 
-- 简介联邦学习项目
-  - 设计
-  - 进展
-- User onboard, transition, and exit 进展
-  - 展示
-  - 过滤被动
-  - 慢雾标签API内容问题
-  - DappRadar名称对应问题
-
- -->
-
-<h1 id="The-Doge-of-Wall-Street-Analysis-and-Detection-of-Pump-and-Dump-Cryptocurrency-Manipulations"><a href="#The-Doge-of-Wall-Street-Analysis-and-Detection-of-Pump-and-Dump-Cryptocurrency-Manipulations" class="headerlink" title="The Doge of Wall Street: Analysis and Detection of Pump and Dump Cryptocurrency Manipulations"></a>The Doge of Wall Street: Analysis and Detection of Pump and Dump Cryptocurrency Manipulations</h1><p>MASSIMO LA MORGIA, ALESSANDRO MEI, FRANCESCO SASSI, and JULINDA STEFA, Sapienza </p>
-<ul>
-<li>University of Rome, Italy</li>
-<li>ACM Transactions on Internet Technology</li>
-<li>本文对社区通过互联网组织的两种市场操纵进行了深入分析：<ul>
-<li>pump and dump拉高出货</li>
-<li>crowd pump群众哄抬</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="Pump-amp-Dump-拉高出货"><a href="#Pump-amp-Dump-拉高出货" class="headerlink" title="Pump &amp; Dump 拉高出货"></a>Pump &amp; Dump 拉高出货</h2><ul>
-<li>拉高出货计划是一种与股票市场一样古老的欺诈行为。<ul>
-<li>高度协调人群 在 Telegram 和 Discord 上系统地安排这种骗局。</li>
-</ul>
-</li>
-<li>对这些群体进行了 3 年多的监测，发现了大约 900 起个别事件。</li>
-<li>报告了三个与暴涨和暴跌组相关的案例研究。</li>
-<li>利用我们独特的经过验证的拉高和转储数据集来构建一个机器学习模型，该模型能够在启动后的 25 秒内检测到拉高和转储，实现了 94.5% 的 F1 分数。</li>
-</ul>
-<hr>
-<h2 id="Crowd-Pump-群众哄抬"><a href="#Crowd-Pump-群众哄抬" class="headerlink" title="Crowd Pump 群众哄抬"></a>Crowd Pump 群众哄抬</h2><ul>
-<li>2021 Reddit 社区 GameStop(GME) 的价格抬高了 1,900%</li>
-<li>加密货币市场上 Reddit 社区复制了的操作。目标是 DOGE 和 XRP</li>
-<li>重建了这些操作是如何发展的，并讨论了与正常和倾倒的区别和类比</li>
-</ul>
-<hr>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/pump-and-dump/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/op-tee-traps/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Command M">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Talkless">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Talkless">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/op-tee-traps/" class="post-title-link" itemprop="url">OP-TEE 踩坑</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2023-04-17 02:14:10 / Modified: 11:17:28" itemprop="dateCreated datePublished" datetime="2023-04-17T02:14:10+08:00">2023-04-17</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>因为要做系统模拟，所以决定在服务器上先搭个qemu试试</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/op-tee-traps/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/unsecured-loan/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Command M">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Talkless">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Talkless">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/unsecured-loan/" class="post-title-link" itemprop="url">unsecured-loan</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-03-26 16:33:00" itemprop="dateCreated datePublished" datetime="2023-03-26T16:33:00+08:00">2023-03-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-04-12 20:51:26" itemprop="dateModified" datetime="2023-04-12T20:51:26+08:00">2023-04-12</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>关键字：[personal&#x2F;unsecured+loan&#x2F;lending]&#x2F;credit + blockchain</p>
-<p>基于区块链和联邦学习的手段构建一个信用借贷框架</p>
-<p>框架？哪些隐私保护措施？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">url: ipfs://unknwon_path/this/is/my.model</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>继续找文献：传统框架，如何连接web2信息</p>
-<img src="/unsecured-loan/2023-04-06-11-52-40.png" class>
-
-<p>流程：</p>
-<hr>
-<p>借款人下载本地客户端<br>借款人使用客户端，通过以太坊节点rpc call借贷方智能合约得到无加密元数据，实现从ipfs下载下载初始评估模型 预训练模型（链上AAve+Comp）<br>借款人使用客户端进行信息验证（链上AAve Comp，PoS <del>Oauth、NFT-style Licenses&#x2F;ID、white</del>）<br>借款人使用客户端内模型进行本地联邦学习，得到训练后模型<br>借款人使用客户端将模型加密后<br>借款人使用客户端内ipfs节点寄存模型，得到元数据<br>借款人使用客户端将元数据加密后上传区块链<br>借款人使用客户端通过交易调用贷方智能合约方法，实现元数据上链<br>借贷平台通过智能合约事件接收到加密元数据<br>借贷平台解密元数据，通过ipfs下载加密评估模型。解密评估模型<br>借贷平台使用模型训练得到借款人最终评分<br>借贷平台根据评分决定是否放款</p>
-<hr>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/unsecured-loan/#more" rel="contents">
+              <a class="btn" href="/meta-oculus-continue-logging-in/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -697,7 +310,7 @@ TODO:
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-12-08 16:02:12" itemprop="dateCreated datePublished" datetime="2022-12-08T16:02:12+08:00">2022-12-08</time>
+      <time title="Created: 2023-10-11 02:27:44" itemprop="dateCreated datePublished" datetime="2023-10-11T02:27:44+08:00">2023-10-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -780,7 +393,7 @@ TODO:
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-12-08 16:02:12" itemprop="dateCreated datePublished" datetime="2022-12-08T16:02:12+08:00">2022-12-08</time>
+      <time title="Created: 2023-10-11 02:27:44" itemprop="dateCreated datePublished" datetime="2023-10-11T02:27:44+08:00">2023-10-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -864,7 +477,7 @@ TODO:
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-12-08 16:02:11" itemprop="dateCreated datePublished" datetime="2022-12-08T16:02:11+08:00">2022-12-08</time>
+      <time title="Created: 2023-10-11 02:27:44" itemprop="dateCreated datePublished" datetime="2023-10-11T02:27:44+08:00">2023-10-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -918,7 +531,7 @@ TODO:
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/fit5136-se-notes/">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/op-tee-traps/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -936,7 +549,7 @@ TODO:
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/fit5136-se-notes/" class="post-title-link" itemprop="url">Notes for FIT5136: Software engineering</a>
+          <a href="/op-tee-traps/" class="post-title-link" itemprop="url">OP-TEE 踩坑</a>
         </h2>
 
         <div class="post-meta-container">
@@ -947,7 +560,90 @@ TODO:
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-12-08 16:02:11" itemprop="dateCreated datePublished" datetime="2022-12-08T16:02:11+08:00">2022-12-08</time>
+      <time title="Created: 2023-10-11 02:27:44" itemprop="dateCreated datePublished" datetime="2023-10-11T02:27:44+08:00">2023-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-17 11:17:30" itemprop="dateModified" datetime="2023-04-17T11:17:30+08:00">2023-04-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>因为要做系统模拟，所以决定在服务器上先搭个qemu试试</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/op-tee-traps/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/fit5057-pm-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Talkless">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/fit5057-pm-notes/" class="post-title-link" itemprop="url">Notes for FIT5057: Project management</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-11 02:27:43" itemprop="dateCreated datePublished" datetime="2023-10-11T02:27:43+08:00">2023-10-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -967,10 +663,13 @@ TODO:
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>FIT5136个人感觉应该是S1这学期里理论知识上收获最大的一门课（实践最多的是FIT5046安卓开发）</p>
+          <p>可以说是上到现在觉得PPT做的最操蛋的一门课了，花里胡哨的，知识点不清晰，很难让人抓住重点。</p>
+<img src="/fit5057-pm-notes/image-20210408081128562.png" class="" title="image-20210408081128562">
+
+<p>主要学习内容为<del>图中1234</del>全部</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/fit5136-se-notes/#more" rel="contents">
+              <a class="btn" href="/fit5057-pm-notes/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1030,7 +729,7 @@ TODO:
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-12-08 16:02:11" itemprop="dateCreated datePublished" datetime="2022-12-08T16:02:11+08:00">2022-12-08</time>
+      <time title="Created: 2023-10-11 02:27:43" itemprop="dateCreated datePublished" datetime="2023-10-11T02:27:43+08:00">2023-10-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1076,8 +775,266 @@ TODO:
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/fit5136-se-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Talkless">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/fit5136-se-notes/" class="post-title-link" itemprop="url">Notes for FIT5136: Software engineering</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-11 02:27:43" itemprop="dateCreated datePublished" datetime="2023-10-11T02:27:43+08:00">2023-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-10-11 17:21:36" itemprop="dateModified" datetime="2021-10-11T17:21:36+08:00">2021-10-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>FIT5136个人感觉应该是S1这学期里理论知识上收获最大的一门课（实践最多的是FIT5046安卓开发）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/fit5136-se-notes/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/environmental_monitoring_system_based_on_blockchain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Talkless">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/environmental_monitoring_system_based_on_blockchain/" class="post-title-link" itemprop="url">基于区块链的环境监测系统 Environmental Monitoring System based on Blockchain</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-11 02:27:43" itemprop="dateCreated datePublished" datetime="2023-10-11T02:27:43+08:00">2023-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-10-11 17:21:36" itemprop="dateModified" datetime="2021-10-11T17:21:36+08:00">2021-10-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>FIT5125 Ass4 里要求的做成视频表述</p>
+<p>原文：</p>
+<p>Yan, J., Zhang, F, Ma, F., Xinxin, A., Li, Y., &amp; Huang,Y., (2019). Environmental Monitoring System Based on Blockchain. In Proceedings of the 4th International Conference on Crowd Science and Engineering (ICCSE’19). Association for Computing Machinery,. <a href="https://doi.org/10.1145/3371238.3371245" target="_blank" rel="noopener">https://doi.org/10.1145/3371238.3371245</a></p>
+<p>翻译内容非全文。</p>
+<p>随着信息技术、生物技术、遥感技术等技术的应用，环境保护领域的研究取得了重大突破。 但是现有的环保体系还存在环境数据的硬件造假和软件造假等问题。<br>本文提出了一种基于区块链的环境监测系统，其中全网环境数据统一，数据处理、共识和发布需要多方认证。 因此，通过采用本文所建议的系统，可以防止环境数据的伪造。<br>此外，提出了三维环境监控架构和智能可信设备，可以保证设备采集的环境数据的完整性和原始性。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/environmental_monitoring_system_based_on_blockchain/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://c0mm4nd.com/fit5046-a2-paper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Talkless">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/fit5046-a2-paper/" class="post-title-link" itemprop="url">使用现有基础架构进行服务器端WiFi室内定位的经验与挑战 Experiences & Challenges with Server-Side WiFi Indoor Localization Using Existing Infrastructure</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-10-11 02:27:43" itemprop="dateCreated datePublished" datetime="2023-10-11T02:27:43+08:00">2023-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-10-11 17:21:36" itemprop="dateModified" datetime="2021-10-11T17:21:36+08:00">2021-10-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>FIT5046 要求做PPT演讲的paper</p>
+<p>Authors:</p>
+<img src="/fit5046-a2-paper/image-20210412225148141.png" class="" title="image-20210412225148141">
+
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>在大型公共场所中，基于WiFi的室内定位的实际部署很少，而且相差甚远，因为大多数最新解决方案都需要客户端或基础架构方面的更改。因此，即使这些解决方案可以实现较高的定位精度，但由于成本和&#x2F;或客户采用原因，它们并不实用。大多数公共场所都使用商业控制器管理的WLAN解决方案，该解决方案既不允许客户更改，也不允许基础架构更改。实际上，对于这样的场所，我们已经观察到高度异构的设备，客户端应用的采用率非常低。</p>
+<p>在本文中，我们介绍了在此类场所部署可扩展位置系统的经验。我们证明服务器端定位并非易事，并且提出了与此方法相关的两个独特挑战，即基数不匹配和高客户端扫描延迟。 “不匹配”挑战导致在离线阶段和在线阶段报告客户端的一组接入点（AP）之间严重不匹配，而“延迟”挑战导致报告任何特定客户端的AP报告数据的数量较少。我们从已经部署了四年以上的WiFi设置中收集了三周的详细地面真相数据（≈200个地标），以提供证据证明这些问题的严重程度并了解这些问题的影响。我们提出启发式方法来减轻它们。我们还总结了实际部署面临的挑战和陷阱，这些挑战和陷阱会影响定位的准确性。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/fit5046-a2-paper/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
