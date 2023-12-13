@@ -1,57 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>具有同态值的比特币 bitcoins with homomorphic value</title>
-    <url>//bitcoins-with-homomorphic-value/</url>
-    <content><![CDATA[<p><a href="https://bitcointalk.org/index.php?topic=305791.0" target="_blank" rel="noopener">原文链接</a></p>
-<p>我已经不停地研究了几个月，因为它本身似乎是一个有趣的结构，是支付隐私的另一个不同的方面（例如，从用户的角度来看，或者如果我们希望商业实体能够从可审计但对商业敏感的信息中获取信息， 使用智能合约），而且除了可以直接使用以外，它还可以实现一些我们尚未想到的功能，或者可以提高ZeroCoin之类想法的效率（我不知道如何使用，但似乎与之相关 ）。</p>
-<span id="more"></span>
-
-<p>出发点是，据我们所知可以进行加法同态加密（additively homomorphic encryption），并且还存在基于小于的零知识证明（即下文ZK小于证明）。 （证明$E(a)+ E(b)&#x3D; E(a+b)$还不够，您还必须证明攻击者在此过程中没有将n加到他的余额上，因为加法是除n的模）。计算小于2的幂的效率更高，但是通过组合可以得到任意值（毕竟，所有值都可以从2的幂范围构建而成）。</p>
-<p>这两个（同态加和ZK小于证明）均基于已建立的保守加密假设，但是小于的通用ZKP很大（数字签名大小的证明数量与log(v)成比例，其中$v&#x3D;\log_2(n \div vmax)+1&#x3D;\log_2(n)-\log_2(vmax)+1$，因此在比特币中$\log_2(n)&#x3D;256$，vmax取决于编码，但有2100万BTC小于$2^{51}$聪。 而且可能还很慢，因为它涉及验证v签名。</p>
-<p>本来我以为这会变得缓慢而笨拙（有点像零币），所以我一直在讨论是否以及直到找到可行的有效方法为止。 贝里·斯科恩马克斯（Berry Schoenmakers）的效率也比ZKP差（他从来没有费心写过论文，natch）。 但是，在我看来，这是基于为Schnorr组选择非标准p＆q的更非标准的假设，并且也不适用于椭圆曲线，因此对ECDSA无效（仅对Schnorr（DSA是其变体））。</p>
-<p>但是最后我认为我看到了比特币使用和验证硬币值的缺失步骤，您只需要证明每个硬币的两个最高有效位为0，并使用设置$vmax&lt;2^{254}$的编码即可（即提高比特币精度） 从51位到254位，私密密钥超出&lt;$2^{51}$聪之外的次要有效位，即提供203位安全性的编码，高于提供128位安全性的P256的ECDSA的安全性。</p>
-<p>因此，最终有了一种不费吹灰之力的方式来处理EC-Schnorr签名，每个输入和输出的成本仅为2 ECS信号（成本和大小与ECDSA相同），其中#input &lt; 4和#output &lt; 4 。 对于#input &gt; 3，您还需要显示例如$ZKPoK \{ (a+b+c, d): a+b+c &lt; 2^{254}, d &lt; 2^{254} \}$，如果#output&gt; 3，则显示相同。 因此，2个$k + 2\log_3(k)$签名用于k个输入或输出。 （3因为$2^{254} \times 3 &lt; n$但$2^{254} \times 4 &gt; n$。）</p>
-<p>顺便说一句，在ECDSA IMO上使用ECS是有充分的理由的，IMO仍然较为保守和简单，而且DSA都基于此。因为它更简单（没有* k ^ -1步骤），所以它更灵活并且轻松地支持多方签名（n of n）甚至阈值签名（k of n），从而允许在一个ECS签名的空间内进行多重签名（甚至不公开其存在）在n的k中，也没有k或n的偶数），有一些论点认为ECS在关于哈希属性的假设中比ECDSA更安全。要使用ECDSA进行多方访问是一个研究主题，即使多方DSA也非常复杂，并且取决于同构加密实例的安全性，该同等加密实例的大小足以容纳涉及q的幂的临时结果，例如具有大密钥的paillier密码系统和偶数阈值DSA。更复杂的Damgard-Jurik扩展了Paillier方案。 ECS的灵活性使其在许多方面都具有更大的灵活性，例如，基于表示问题（这是对Pederson承诺的一种概括，其本身是schnorr的一种概括）的零知识选择性披露和品牌证书的盲目认证功能。使用Brands证书进行智能合约可以做很多事情，通过使用布尔公式的ZK证明等来保留依赖智能合约的人的属性的隐私。</p>
-<p>同样，为每个值额外签名的成本，您甚至可以拥有无条件的值保密性。 （即，一个假设的功能强大的实体能够以最小的努力执行离散日志，仍然无法告诉您您支付了多少钱）。 这是因为像OTP一样，所有可能的值都是同等可能的，例如，在pederson承诺，两个基点G, H然后$xG+yH$存在x和y的所有可能值的n个可能解（其中x是密钥，y是一个可以证明事情的价值）。 强大的对手只能解决并找到所有可能性，但您公开记录的ZKP并不会显示您知道哪个x值，也不会显示您转移的y。</p>
-<p>目前将发布更多的加密级别细节，也许还会发布基于openSSL的实现。</p>
-<p>亚当</p>
-<hr>
-<p>因此，如果您假设x知识的ZK证明存在（语法$x_i$是x的第i位，即LSB从0开始），那么$ZKPoK\{(x): x_i &#x3D; 0\}$可以检查两个通过使用$ZKPoK{(x): x_{255} &#x3D; 0 \And x_{254} &#x3D; 0}$，有效位为0。</p>
-<p>该证明适用于某些组中的值，我们使用schnorr组的EC实例（例如DSA，相同的键，参数，但签名更简单； DSA是Schnorr签名变体，与原始AFAIK相比没有任何优点，而我提到了许多缺点）在OP中）。因此，我们将调用值x，其中前两位必须为0 $x_{255} &#x3D; x_{254} &#x3D; 0$，并且$x_{253 … x202}$是以“聪”为单位的值（与现有精度相同）以及剩下的值$x_{201..x0}$是私钥。</p>
-<p>xG将是公共的，并且也是币的公钥（与现有的比特币地址的公钥略有不同）。现在人们可以验证加密的输入值(A，B)等于加密的输出值(X，C)和费用f，其中X是加密支出，C是加密更改，而f是费用，因为$A &#x3D; aG$和$A + B &#x3D; X + C + fG$，因为$aG + bG &#x3D; xG + cG + fG$。这将强制$a + b \mod n &#x3D; x + c + f \mod n$。发送者必须包括$ZKPoK\{(a，b): a_{255} &#x3D; a_{254} &#x3D; 0\}$。发送者还必须加密x并将其发送给接收者，以便他依次花钱时可以证明有关它的信息。 f是公开的，因为任何人都必须能够通过采矿活动将其收集并附加到其地址上。</p>
-<p>当接收者花费xG时，他将不得不类似地证明$x_{255} &#x3D; x_{254} &#x3D; 0$。</p>
-<p>我们需要两位的原因是因为n不是2的幂。为简单起见，我们说$n &#x3D; 250$。现在假设$a &#x3D; 3$，$b &#x3D; 1$，但是我们必须加n来防止欺诈，因为$a + b + n &#x3D; 254$，$(a + b + n) \mod n &#x3D; 4$，且$x &#x3D; 127，c &#x3D; 126，f &#x3D; 1$，因此仅检查最高位1可以通过n由于$a + b + n &#x3D; (x + c + f) \mod n$即$3 + 1 &#x3D; (127 + 126 + 1) \mod 250$就能伪造价值。攻击者在没有使用$msb \neq 0$的任何值的情况下将其值增加了250（减去1手续费）。如果我们证明前两位为0，则最多可以防止3次输入攻击。 （因为$3 * 64 &lt;250$；但4次输入不行，因为$4 * 64&gt; 250$）。因此，对于3个以上的输入，我们还证明了3元表达式树中的每个中间计算也具有两个msbits &#x3D; 0。例如Z(x)是$ZKPoK\{(x): x_{255} &#x3D; 0和x_{254} &#x3D; 0\}$的简写，Z(a)，Z(b)，Z(c)，Z(a + b + c)，Z(d)，Z(e)，Z(f)，Z(d + e + f)，Z(g)，Z(h)，Z(i)，Z(g + h + i)，Z((a + b + c)+(d + e + f)+(g + h + i))，因此正如我提到的，对于k个输入，必须有$k + log_3(k)$对证明（对，因为有一个对$x_{255} &#x3D; 0$，$x_{254} &#x3D; 1$）。</p>
-<p>最后请注意，证明知识是一种签名，因此原则上您可以在得到他人认可的情况下向他人支付现有余额，而不是将值的控制权转移到新地址。也就是说，说您的收款人已经有余额y，并且您想为他们添加x，然后向他们透露x（通过为他们的公钥加密），然后他们就可以添加，因此您可以用以下方式替换硬币地址：现有余额以节省签名和密钥。</p>
-<p>例如$ZKPoK[Y]\{(a，b，x，y，c), f：a + b &#x3D; x + c + f \And Z(a) \And Z(b) \And Z(y）\}, E(x) $</p>
-<p>其中[Y]表示与PoK结合的某些信息的辅助签名。因此，发件人绑定了他的X支出，表示可以将其添加到现有余额Y中（发件人不知道y）。</p>
-<p>现在，区块验证将允许接收者将其余额替换为$Y’&#x3D; Y + X &#x3D;(x + y)G$。当发送方为接收方加密值x时，他现在可以进行转账。</p>
-<p>通过将污点作为环转移的一种方式花在一些其他用户身上，也可以实现污染混合（尽管在规模上并不便宜）。 （环签名是一种方案，您可以在未经其许可的情况下将其他签名者隐含为签名的可能的发起者，其中发起者希望在可能的作者中隐藏其身份）。因此，这有点像coinjoin，但是您不需要其他用户的积极协作。如果E（值）是脱链的（例如，直接发送给接收者），则接收者可能会甚至可能无法使用额外的值，如果他不知道尘埃值（他只能通过参考先前的余额来拒绝它），但这并不能证明他仍然可以保留它-很难证明它是否定的。）我们可以选择将其附加到链上（以一定的大小代价），甚至可以加密，并带有证明收件人可以解密的证据。 （很容易证明$xG &#x3D; xH$，其中$H &#x3D; yG$，证明者不知道y，因此EC Egamal可以提供可证明的可解密值，在这种情况下，该软件可以合并硬币并阻止所有者使用较早版本）。</p>
-<p>（尘埃是一个现在被认为很小的值，但是由于$x_{202..0}$由发送方随机分配，并且没有DL能力就无法计算，因此必须将其传达给接收方，以使其具有价值。）</p>
-<p>通过开采，原始硬币的已知价值为25个比特币（且无尘），但是接收者仍然可以安全地使用它，而无需人们通过保留尘埃作为零钱来消除其当前余额（他可能永远不会花掉，因为它实际上是可忽略的小数的nano satoshi值）。</p>
-<hr>
-<p><em>验证节点如何将输入和输出值相加以确定费用？ 这是我唯一不清楚的部分。 网络不需要知道$输出总和-输入总和$吗？</em></p>
-<p>与当前不同，您将必须明确传达费用，并让其作为输入与输出的总和进行验证。 （在我的第二篇文章中显示了f的通信，而输入a，b和输出x（支出）和c（更改）是加密形式的，但是可以证明A + B &#x3D; X + C + fG。</p>
-<p>亚当</p>
-<hr>
-<p><em>您打算如何证明高两位为零？ 我认为没有人知道如何对小于，位提取或mod x之类的内容进行有效的ZK证明。 有通用的ZK方案，例如Pinocchio和TinyRAM，但它们很昂贵。 你有什么考虑？</em></p>
-<p>是的，给我一个机会我会实现这个。</p>
-<p>小于1的现有ZKP使用0或1的证明作为构建基块（这就是为什么它们效率低下，它们根据范围执行了数十次）。 即，为了证明$x \leq 5 &#x3D; 101b$的模数，对于n &#x3D; 257（一个9位素数）的说明，他们证明$x &#x3D; 000000101b$，首先证明$x &lt;100b$，方法是证明前6位为0，然后通过证明$xG-4G$的前8位为0来证明$xG-4G &#x3D; 01b \leq 1$。</p>
-<p>亚当</p>
-<p>我认为，Brands PhD论文&#x2F;MIT新闻书“重新思考公共密钥基础结构”的第3章提供了说明&#x2F;脚注&#x2F;参考，可以免费下载。 它的一个组成部分是ZK范围证明或ZK小于证明。</p>
-<p><a href="http://www.credentica.com/the_mit_pressbook.html" target="_blank" rel="noopener">http://www.credentica.com/the_mit_pressbook.html</a></p>
-<p>有空的话，我将其写出来。 （暂离一段时间）。</p>
-<p>亚当</p>
-]]></content>
-      <tags>
-        <tag>bitcointalk</tag>
-        <tag>bitcoin</tag>
-        <tag>crypto</tag>
-        <tag>autonomy</tag>
-        <tag>done</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Bitcontracts: Supporting Smart Contracts in Legacy Blockchains</title>
     <url>//bitcontracts/</url>
     <content><![CDATA[<h1 id="Bitcontracts：传统区块链上支持智能合约"><a href="#Bitcontracts：传统区块链上支持智能合约" class="headerlink" title="Bitcontracts：传统区块链上支持智能合约"></a>Bitcontracts：传统区块链上支持智能合约</h1><p><strong>摘要：</strong>在本文中，我们提出了 Bitcontracts，这是一种新颖的解决方案，可以在未修改的传统加密货币（如原生不支持合约的比特币）之上安全高效地执行通用智能合约。我们解决方案的出发点是一个链下执行模型，其中合约的发行者指定一组服务提供商来执行合约的代码。如果法定数量的服务提供商报告相同的结果，并且客户可以自由选择他们信任和使用哪些此类合约，则合约的执行结果被接受。本文的主要技术贡献是如何在不修改底层区块链的情况下安全高效地实现这样的信任模型。我们还确定了区块链系统必须支持的一组通用属性，以便可以安全地添加富有表现力的智能合约，并根据这些标准分析流行的现有区块链。</p>
@@ -205,6 +154,80 @@
 ]]></content>
   </entry>
   <entry>
+    <title>具有同态值的比特币 bitcoins with homomorphic value</title>
+    <url>//bitcoins-with-homomorphic-value/</url>
+    <content><![CDATA[<p><a href="https://bitcointalk.org/index.php?topic=305791.0" target="_blank" rel="noopener">原文链接</a></p>
+<p>我已经不停地研究了几个月，因为它本身似乎是一个有趣的结构，是支付隐私的另一个不同的方面（例如，从用户的角度来看，或者如果我们希望商业实体能够从可审计但对商业敏感的信息中获取信息， 使用智能合约），而且除了可以直接使用以外，它还可以实现一些我们尚未想到的功能，或者可以提高ZeroCoin之类想法的效率（我不知道如何使用，但似乎与之相关 ）。</p>
+<span id="more"></span>
+
+<p>出发点是，据我们所知可以进行加法同态加密（additively homomorphic encryption），并且还存在基于小于的零知识证明（即下文ZK小于证明）。 （证明$E(a)+ E(b)&#x3D; E(a+b)$还不够，您还必须证明攻击者在此过程中没有将n加到他的余额上，因为加法是除n的模）。计算小于2的幂的效率更高，但是通过组合可以得到任意值（毕竟，所有值都可以从2的幂范围构建而成）。</p>
+<p>这两个（同态加和ZK小于证明）均基于已建立的保守加密假设，但是小于的通用ZKP很大（数字签名大小的证明数量与log(v)成比例，其中$v&#x3D;\log_2(n \div vmax)+1&#x3D;\log_2(n)-\log_2(vmax)+1$，因此在比特币中$\log_2(n)&#x3D;256$，vmax取决于编码，但有2100万BTC小于$2^{51}$聪。 而且可能还很慢，因为它涉及验证v签名。</p>
+<p>本来我以为这会变得缓慢而笨拙（有点像零币），所以我一直在讨论是否以及直到找到可行的有效方法为止。 贝里·斯科恩马克斯（Berry Schoenmakers）的效率也比ZKP差（他从来没有费心写过论文，natch）。 但是，在我看来，这是基于为Schnorr组选择非标准p＆q的更非标准的假设，并且也不适用于椭圆曲线，因此对ECDSA无效（仅对Schnorr（DSA是其变体））。</p>
+<p>但是最后我认为我看到了比特币使用和验证硬币值的缺失步骤，您只需要证明每个硬币的两个最高有效位为0，并使用设置$vmax&lt;2^{254}$的编码即可（即提高比特币精度） 从51位到254位，私密密钥超出&lt;$2^{51}$聪之外的次要有效位，即提供203位安全性的编码，高于提供128位安全性的P256的ECDSA的安全性。</p>
+<p>因此，最终有了一种不费吹灰之力的方式来处理EC-Schnorr签名，每个输入和输出的成本仅为2 ECS信号（成本和大小与ECDSA相同），其中#input &lt; 4和#output &lt; 4 。 对于#input &gt; 3，您还需要显示例如$ZKPoK \{ (a+b+c, d): a+b+c &lt; 2^{254}, d &lt; 2^{254} \}$，如果#output&gt; 3，则显示相同。 因此，2个$k + 2\log_3(k)$签名用于k个输入或输出。 （3因为$2^{254} \times 3 &lt; n$但$2^{254} \times 4 &gt; n$。）</p>
+<p>顺便说一句，在ECDSA IMO上使用ECS是有充分的理由的，IMO仍然较为保守和简单，而且DSA都基于此。因为它更简单（没有* k ^ -1步骤），所以它更灵活并且轻松地支持多方签名（n of n）甚至阈值签名（k of n），从而允许在一个ECS签名的空间内进行多重签名（甚至不公开其存在）在n的k中，也没有k或n的偶数），有一些论点认为ECS在关于哈希属性的假设中比ECDSA更安全。要使用ECDSA进行多方访问是一个研究主题，即使多方DSA也非常复杂，并且取决于同构加密实例的安全性，该同等加密实例的大小足以容纳涉及q的幂的临时结果，例如具有大密钥的paillier密码系统和偶数阈值DSA。更复杂的Damgard-Jurik扩展了Paillier方案。 ECS的灵活性使其在许多方面都具有更大的灵活性，例如，基于表示问题（这是对Pederson承诺的一种概括，其本身是schnorr的一种概括）的零知识选择性披露和品牌证书的盲目认证功能。使用Brands证书进行智能合约可以做很多事情，通过使用布尔公式的ZK证明等来保留依赖智能合约的人的属性的隐私。</p>
+<p>同样，为每个值额外签名的成本，您甚至可以拥有无条件的值保密性。 （即，一个假设的功能强大的实体能够以最小的努力执行离散日志，仍然无法告诉您您支付了多少钱）。 这是因为像OTP一样，所有可能的值都是同等可能的，例如，在pederson承诺，两个基点G, H然后$xG+yH$存在x和y的所有可能值的n个可能解（其中x是密钥，y是一个可以证明事情的价值）。 强大的对手只能解决并找到所有可能性，但您公开记录的ZKP并不会显示您知道哪个x值，也不会显示您转移的y。</p>
+<p>目前将发布更多的加密级别细节，也许还会发布基于openSSL的实现。</p>
+<p>亚当</p>
+<hr>
+<p>因此，如果您假设x知识的ZK证明存在（语法$x_i$是x的第i位，即LSB从0开始），那么$ZKPoK\{(x): x_i &#x3D; 0\}$可以检查两个通过使用$ZKPoK{(x): x_{255} &#x3D; 0 \And x_{254} &#x3D; 0}$，有效位为0。</p>
+<p>该证明适用于某些组中的值，我们使用schnorr组的EC实例（例如DSA，相同的键，参数，但签名更简单； DSA是Schnorr签名变体，与原始AFAIK相比没有任何优点，而我提到了许多缺点）在OP中）。因此，我们将调用值x，其中前两位必须为0 $x_{255} &#x3D; x_{254} &#x3D; 0$，并且$x_{253 … x202}$是以“聪”为单位的值（与现有精度相同）以及剩下的值$x_{201..x0}$是私钥。</p>
+<p>xG将是公共的，并且也是币的公钥（与现有的比特币地址的公钥略有不同）。现在人们可以验证加密的输入值(A，B)等于加密的输出值(X，C)和费用f，其中X是加密支出，C是加密更改，而f是费用，因为$A &#x3D; aG$和$A + B &#x3D; X + C + fG$，因为$aG + bG &#x3D; xG + cG + fG$。这将强制$a + b \mod n &#x3D; x + c + f \mod n$。发送者必须包括$ZKPoK\{(a，b): a_{255} &#x3D; a_{254} &#x3D; 0\}$。发送者还必须加密x并将其发送给接收者，以便他依次花钱时可以证明有关它的信息。 f是公开的，因为任何人都必须能够通过采矿活动将其收集并附加到其地址上。</p>
+<p>当接收者花费xG时，他将不得不类似地证明$x_{255} &#x3D; x_{254} &#x3D; 0$。</p>
+<p>我们需要两位的原因是因为n不是2的幂。为简单起见，我们说$n &#x3D; 250$。现在假设$a &#x3D; 3$，$b &#x3D; 1$，但是我们必须加n来防止欺诈，因为$a + b + n &#x3D; 254$，$(a + b + n) \mod n &#x3D; 4$，且$x &#x3D; 127，c &#x3D; 126，f &#x3D; 1$，因此仅检查最高位1可以通过n由于$a + b + n &#x3D; (x + c + f) \mod n$即$3 + 1 &#x3D; (127 + 126 + 1) \mod 250$就能伪造价值。攻击者在没有使用$msb \neq 0$的任何值的情况下将其值增加了250（减去1手续费）。如果我们证明前两位为0，则最多可以防止3次输入攻击。 （因为$3 * 64 &lt;250$；但4次输入不行，因为$4 * 64&gt; 250$）。因此，对于3个以上的输入，我们还证明了3元表达式树中的每个中间计算也具有两个msbits &#x3D; 0。例如Z(x)是$ZKPoK\{(x): x_{255} &#x3D; 0和x_{254} &#x3D; 0\}$的简写，Z(a)，Z(b)，Z(c)，Z(a + b + c)，Z(d)，Z(e)，Z(f)，Z(d + e + f)，Z(g)，Z(h)，Z(i)，Z(g + h + i)，Z((a + b + c)+(d + e + f)+(g + h + i))，因此正如我提到的，对于k个输入，必须有$k + log_3(k)$对证明（对，因为有一个对$x_{255} &#x3D; 0$，$x_{254} &#x3D; 1$）。</p>
+<p>最后请注意，证明知识是一种签名，因此原则上您可以在得到他人认可的情况下向他人支付现有余额，而不是将值的控制权转移到新地址。也就是说，说您的收款人已经有余额y，并且您想为他们添加x，然后向他们透露x（通过为他们的公钥加密），然后他们就可以添加，因此您可以用以下方式替换硬币地址：现有余额以节省签名和密钥。</p>
+<p>例如$ZKPoK[Y]\{(a，b，x，y，c), f：a + b &#x3D; x + c + f \And Z(a) \And Z(b) \And Z(y）\}, E(x) $</p>
+<p>其中[Y]表示与PoK结合的某些信息的辅助签名。因此，发件人绑定了他的X支出，表示可以将其添加到现有余额Y中（发件人不知道y）。</p>
+<p>现在，区块验证将允许接收者将其余额替换为$Y’&#x3D; Y + X &#x3D;(x + y)G$。当发送方为接收方加密值x时，他现在可以进行转账。</p>
+<p>通过将污点作为环转移的一种方式花在一些其他用户身上，也可以实现污染混合（尽管在规模上并不便宜）。 （环签名是一种方案，您可以在未经其许可的情况下将其他签名者隐含为签名的可能的发起者，其中发起者希望在可能的作者中隐藏其身份）。因此，这有点像coinjoin，但是您不需要其他用户的积极协作。如果E（值）是脱链的（例如，直接发送给接收者），则接收者可能会甚至可能无法使用额外的值，如果他不知道尘埃值（他只能通过参考先前的余额来拒绝它），但这并不能证明他仍然可以保留它-很难证明它是否定的。）我们可以选择将其附加到链上（以一定的大小代价），甚至可以加密，并带有证明收件人可以解密的证据。 （很容易证明$xG &#x3D; xH$，其中$H &#x3D; yG$，证明者不知道y，因此EC Egamal可以提供可证明的可解密值，在这种情况下，该软件可以合并硬币并阻止所有者使用较早版本）。</p>
+<p>（尘埃是一个现在被认为很小的值，但是由于$x_{202..0}$由发送方随机分配，并且没有DL能力就无法计算，因此必须将其传达给接收方，以使其具有价值。）</p>
+<p>通过开采，原始硬币的已知价值为25个比特币（且无尘），但是接收者仍然可以安全地使用它，而无需人们通过保留尘埃作为零钱来消除其当前余额（他可能永远不会花掉，因为它实际上是可忽略的小数的nano satoshi值）。</p>
+<hr>
+<p><em>验证节点如何将输入和输出值相加以确定费用？ 这是我唯一不清楚的部分。 网络不需要知道$输出总和-输入总和$吗？</em></p>
+<p>与当前不同，您将必须明确传达费用，并让其作为输入与输出的总和进行验证。 （在我的第二篇文章中显示了f的通信，而输入a，b和输出x（支出）和c（更改）是加密形式的，但是可以证明A + B &#x3D; X + C + fG。</p>
+<p>亚当</p>
+<hr>
+<p><em>您打算如何证明高两位为零？ 我认为没有人知道如何对小于，位提取或mod x之类的内容进行有效的ZK证明。 有通用的ZK方案，例如Pinocchio和TinyRAM，但它们很昂贵。 你有什么考虑？</em></p>
+<p>是的，给我一个机会我会实现这个。</p>
+<p>小于1的现有ZKP使用0或1的证明作为构建基块（这就是为什么它们效率低下，它们根据范围执行了数十次）。 即，为了证明$x \leq 5 &#x3D; 101b$的模数，对于n &#x3D; 257（一个9位素数）的说明，他们证明$x &#x3D; 000000101b$，首先证明$x &lt;100b$，方法是证明前6位为0，然后通过证明$xG-4G$的前8位为0来证明$xG-4G &#x3D; 01b \leq 1$。</p>
+<p>亚当</p>
+<p>我认为，Brands PhD论文&#x2F;MIT新闻书“重新思考公共密钥基础结构”的第3章提供了说明&#x2F;脚注&#x2F;参考，可以免费下载。 它的一个组成部分是ZK范围证明或ZK小于证明。</p>
+<p><a href="http://www.credentica.com/the_mit_pressbook.html" target="_blank" rel="noopener">http://www.credentica.com/the_mit_pressbook.html</a></p>
+<p>有空的话，我将其写出来。 （暂离一段时间）。</p>
+<p>亚当</p>
+]]></content>
+      <tags>
+        <tag>bitcointalk</tag>
+        <tag>bitcoin</tag>
+        <tag>crypto</tag>
+        <tag>autonomy</tag>
+        <tag>done</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Bulletproof: 适用于机密交易及更多方面的简短证明</title>
+    <url>//bulletproof-paper/</url>
+    <content><![CDATA[<p>基于区块链的加密货币通过维护全球分布式但同步的分类账区块链来实现点对点电子价值转移。任何独立的观察者都可以验证区块链的当前状态以及分类帐上所有交易的有效性。在比特币中，这项创新要求交易的所有细节都是公开的：发送方、接收方和转账金额。一般来说，我们将支付的隐私分为两个属性：（1）匿名性，在交易中隐藏发送者和接收者的身份；（2）保密性，隐藏转移的金额。虽然比特币通过比特币地址与现实世界身份的不可链接性提供了一些弱匿名性，但它缺乏任何机密性。这对比特币来说是一个严重的限制，对于许多用例来说可能是禁止的。如果这意味着他们的工资发布在公共区块链上，员工是否愿意以比特币获得他们的工资？</p>
+<p>为了解决交易金额的保密问题，Maxwell [Max16] 引入了机密交易（CT），其中涉及的每笔交易金额都使用对金额的承诺隐藏起来，不让公众看到。这种方法似乎阻止了区块链的公开验证；观察者无法再检查交易输入的总和是否大于交易输出的总和，以及所有交易值是否为正。这可以通过在每笔交易中包含机密交易有效性的零知识证明来解决。</p>
+<p>当前关于 CT 零知识证明 [PBF] 的提议要么大得令人望而却步，要么需要可信的设置。两者都不是可取的。虽然可以使用简洁的零知识证明 (SNARK) [BSCG13,GGPR13]，但它们需要可信设置，这意味着每个人都需要相信设置已正确执行。人们可以通过使用 STARK [BSBTHR18] 来避免可信设置，但由此产生的范围证明虽然渐近有效，但实际上比目前提出的解决方案还要大。</p>
+<p>如本文所述，没有可信设置的简短非交互式零知识证明在加密货币领域有许多应用。在证明通过网络传输或长期存储的任何分布式系统中，简短证明了总体成本的降低。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>我们首先讨论 Bulletproofs 的几个应用程序以及特定于这些应用程序的相关工作。 其他相关工作在第 1.3 节中讨论。</p>
+<h3 id="机密交易和-Mimblewimble"><a href="#机密交易和-Mimblewimble" class="headerlink" title="机密交易和 Mimblewimble"></a>机密交易和 Mimblewimble</h3><p>比特币和其他类似的加密货币使用基于交易输出的系统，其中每笔交易完全花费之前未花费交易的输出。 这些未花费的交易输出称为 UTXO。<br>比特币允许将单个 UTXO 用于许多不同的输出，每个输出都与不同的地址相关联。 要花费一个 UTXO，用户必须提供一个签名，或者更准确地说是一个 scriptSig，使交易 SCRIPT 能够评估为真 [BMC&#96;15]。<br>除了 scriptSig 的有效性外，矿工还验证交易是否花费了之前未花费的输出，并且输入的总和大于输出的总和</p>
+<p>Maxwell [Max16] 引入了“机密交易”的概念，其中交易中的输入和输出金额隐藏在 Pedersen 承诺中 [P<code>91]。  为了实现公开验证，交易包含一个零知识证明，即提交输入的总和大于提交输出的总和，并且所有输出都是正的，即它们位于区间 $[0, 2^n]$， 其中 $2^n$ 远小于组大小。  当前所有机密交易的实现 [Max16, MP15, PBF</code>, NM&#96;16] 都使用提交值的range proof范围证明，其中证明大小在 n 中是线性的。<br>这些范围证明是机密交易规模的主要贡献者。 在当前的实现中 [Max16]，只有两个输出和 32 位精度的机密交易是 5.4 KB 字节，其中 5 KB 分配给范围证明。<br>即使最近进行了优化，范围证明仍将占用 3.8 KB。</p>
+<p>我们在第 6 节中展示了 Bulletproofs 大大改进了这一点，即使对于单个范围证明，同时以边际额外成本（64 字节）将范围证明精度加倍。<br>logarithmic proof对数证明的大小还使证明者能够聚合多个范围证明，例如对于具有多个输出的交易，转换为一个简短的证明。<br>使用 Bulletproofs，$m$ 范围证明只是单个范围证明上的 $O(log(m))$ 附加群元素。这对于当前形式的机密交易已经很有用，因为大多数比特币交易都有两个或多个输出。<br>它还提供了一个有趣的机会，可以将来自不同方的多个范围证明聚合为一个证明，例如在 CoinJoin 交易中需要的证明 [Max13]。<br>在 4.5 节中，我们提出了一个简单有效的 MPC 协议，该协议允许多个用户使用单个聚合范围证明生成单个交易。<br>用户不必向任何其他参与者透露他们的机密交易价值。</p>
+<p>机密交易实现可用于侧链 [PBF<code>]、私有区块链 [And17] 和流行的注重隐私的加密货币 Monero [NM</code>16]。 所有这些实现都将受益于 Bulletproofs。<br>在撰写本文时，比特币拥有来自 2200 万笔交易的大约 5000 万个 UTXO（参见 statoshi.info）。 使用比特币的 52 位表示，可以覆盖从 1 satoshi 到 2100 万比特币的所有值，这导致使用当前系统的范围证明数据大约为 160GB。<br>使用聚合的 Bulletproofs，所有 UTXO 的范围证明将需要不到 17GB，大小减少约 10 倍</p>
+<h4 id="Mimblewimble"><a href="#Mimblewimble" class="headerlink" title="Mimblewimble"></a>Mimblewimble</h4><p>最近，有人提议对机密交易进行改进，称为 Mimblewimble [Jed16,Poe]，可进一步节省成本。</p>
+<p>Jedusor [Jed16] 意识到 Pedersen 对 0 的承诺可以被视为 ECDSA 公钥，并且对于有效的机密交易，输出、输入和交易费用之间的差异必须为 0。因此，构建机密交易的证明者可以签名以输出和输入的差异作为公钥的交易。这一小改动消除了对 scriptSig 的需求，极大地简化了机密交易的结构。<br>Poelstra [Poe] 进一步完善和改进了 Mimblewimble，并表明这些改进可以实现一个大大简化的区块链，其中所有花费的交易都可以被修剪，新节点可以有效地验证整个区块链，而无需下载任何旧的和花费的交易。<br>随着进一步优化，这会导致高度压缩的区块链。它仅包含一小部分区块头以及剩余的未花费交易输出和随附的范围证明以及每笔交易不可修剪的 32 字节。 Mimblewimble 还允许在将交易发送到区块链之前进行聚合。</p>
+<p>Mimblewimble 区块链随着 UTXO 集的大小而增长。<br>使用 Bulletproofs，它只会随着具有未花费输出的交易数量而增长，这远小于 UTXO 集的大小。<br>总体而言，Bulletproofs 不仅可以替代机密交易中的范围证明，而且还可以帮助 Mimblewimble 成为一个实用的方案，其区块链比当前的比特币区块链小得多。</p>
+<h3 id="Provisions-协议"><a href="#Provisions-协议" class="headerlink" title="Provisions 协议"></a>Provisions 协议</h3><p>Dagher et al. [DBB&#96;15] 引入了 Provisions 协议，该协议允许比特币交易所证明它们具有偿付能力，而无需透露任何额外信息。<br>该协议主要依靠范围证明来防止交易所插入带有负余额的假账户。<br>这些占用超过 13GB 的范围证明是为具有 200 万客户的大型交易所提供近 18GB 证明大小的主要贡献者。<br>样张大小实际上与客户数量呈线性关系。<br>由于在该协议中，一方（交易所）必须同时构建多个范围证明，因此第 4.3 节中的通用 Bulletproofs 协议是 Provisions 中使用的 NIZK 证明的自然替代品。<br>使用第 6 节中列出的证明大小，我们获得范围证明在我们的协议中将占用不到 2 KB。<br>此外，证明的其他部分可以使用第 5 节中的协议进行类似压缩。<br>然后证明将由每个客户的一个承诺主导，大小为 62 MB。这大约比目前实施的规定小 300 倍。</p>
+<h4 id="可验证洗牌-verifiable-shuffle"><a href="#可验证洗牌-verifiable-shuffle" class="headerlink" title="可验证洗牌 verifiable shuffle"></a>可验证洗牌 verifiable shuffle</h4><p>考虑两个提交值列表 $x_1,…,x_n$ 和 $y_1,…,y_n$ 。目的是证明第二个列表是第一个列表的排列。<br>这个问题称为<strong>可验证洗牌 verifiable shuffle</strong>。<br>它在投票 [FS01,Nef01]、混合网络 [Cha82] 和偿付能力证明 [DBB&#96;15] 中有许多应用。<br>Neff [Nef01] 给出了可验证 shuffle 的实际实现，后来对其进行了改进 [Gro03,GI08a]。 Neff [Nef01] 给出了可验证 shuffle 的实际实现，后来对其进行了改进 [Gro03,GI08a]。<br>目前最有效的 shuffle [BG12] 的大小为 $O(\sqrt{n})$。</p>
+<p>Bulletproofs 可用于创建大小为 $O(\log{n})$ 的可验证洗牌。<br>这两个commitment列表作为第 5 节中电路协议的输入。<br>回路可以通过对两个列表进行排序然后检查它们是否相等来实现混洗。<br>排序回路可以使用 $O(n\cdot\log{n})$ 乘法来实现，这意味着证明大小将仅为 Oplogpnqq。<br>这比以前提出的协议小得多。<br>鉴于 Bulletproofs 的具体效率，使用 Bulletproofs 进行可验证的 shuffle 在实践中将非常有效。<br>构建证明并验证它只需要$n$的线性时间。</p>
+]]></content>
+      <tags>
+        <tag>crypto</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>区块链理论知识标准</title>
     <url>//blockchain-knowledge-standards/</url>
     <content><![CDATA[<p>自己仰仗着自己实战经验丰富，对一些理论定义上的想法总是天马行空。因此在这里收集一些我认可的标准，以便未来与他人在交流中达成共识。</p>
@@ -246,29 +269,6 @@
         <tag>wasi</tag>
         <tag>runtime</tag>
         <tag>todo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Bulletproof: 适用于机密交易及更多方面的简短证明</title>
-    <url>//bulletproof-paper/</url>
-    <content><![CDATA[<p>基于区块链的加密货币通过维护全球分布式但同步的分类账区块链来实现点对点电子价值转移。任何独立的观察者都可以验证区块链的当前状态以及分类帐上所有交易的有效性。在比特币中，这项创新要求交易的所有细节都是公开的：发送方、接收方和转账金额。一般来说，我们将支付的隐私分为两个属性：（1）匿名性，在交易中隐藏发送者和接收者的身份；（2）保密性，隐藏转移的金额。虽然比特币通过比特币地址与现实世界身份的不可链接性提供了一些弱匿名性，但它缺乏任何机密性。这对比特币来说是一个严重的限制，对于许多用例来说可能是禁止的。如果这意味着他们的工资发布在公共区块链上，员工是否愿意以比特币获得他们的工资？</p>
-<p>为了解决交易金额的保密问题，Maxwell [Max16] 引入了机密交易（CT），其中涉及的每笔交易金额都使用对金额的承诺隐藏起来，不让公众看到。这种方法似乎阻止了区块链的公开验证；观察者无法再检查交易输入的总和是否大于交易输出的总和，以及所有交易值是否为正。这可以通过在每笔交易中包含机密交易有效性的零知识证明来解决。</p>
-<p>当前关于 CT 零知识证明 [PBF] 的提议要么大得令人望而却步，要么需要可信的设置。两者都不是可取的。虽然可以使用简洁的零知识证明 (SNARK) [BSCG13,GGPR13]，但它们需要可信设置，这意味着每个人都需要相信设置已正确执行。人们可以通过使用 STARK [BSBTHR18] 来避免可信设置，但由此产生的范围证明虽然渐近有效，但实际上比目前提出的解决方案还要大。</p>
-<p>如本文所述，没有可信设置的简短非交互式零知识证明在加密货币领域有许多应用。在证明通过网络传输或长期存储的任何分布式系统中，简短证明了总体成本的降低。</p>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>我们首先讨论 Bulletproofs 的几个应用程序以及特定于这些应用程序的相关工作。 其他相关工作在第 1.3 节中讨论。</p>
-<h3 id="机密交易和-Mimblewimble"><a href="#机密交易和-Mimblewimble" class="headerlink" title="机密交易和 Mimblewimble"></a>机密交易和 Mimblewimble</h3><p>比特币和其他类似的加密货币使用基于交易输出的系统，其中每笔交易完全花费之前未花费交易的输出。 这些未花费的交易输出称为 UTXO。<br>比特币允许将单个 UTXO 用于许多不同的输出，每个输出都与不同的地址相关联。 要花费一个 UTXO，用户必须提供一个签名，或者更准确地说是一个 scriptSig，使交易 SCRIPT 能够评估为真 [BMC&#96;15]。<br>除了 scriptSig 的有效性外，矿工还验证交易是否花费了之前未花费的输出，并且输入的总和大于输出的总和</p>
-<p>Maxwell [Max16] 引入了“机密交易”的概念，其中交易中的输入和输出金额隐藏在 Pedersen 承诺中 [P<code>91]。  为了实现公开验证，交易包含一个零知识证明，即提交输入的总和大于提交输出的总和，并且所有输出都是正的，即它们位于区间 $[0, 2^n]$， 其中 $2^n$ 远小于组大小。  当前所有机密交易的实现 [Max16, MP15, PBF</code>, NM&#96;16] 都使用提交值的range proof范围证明，其中证明大小在 n 中是线性的。<br>这些范围证明是机密交易规模的主要贡献者。 在当前的实现中 [Max16]，只有两个输出和 32 位精度的机密交易是 5.4 KB 字节，其中 5 KB 分配给范围证明。<br>即使最近进行了优化，范围证明仍将占用 3.8 KB。</p>
-<p>我们在第 6 节中展示了 Bulletproofs 大大改进了这一点，即使对于单个范围证明，同时以边际额外成本（64 字节）将范围证明精度加倍。<br>logarithmic proof对数证明的大小还使证明者能够聚合多个范围证明，例如对于具有多个输出的交易，转换为一个简短的证明。<br>使用 Bulletproofs，$m$ 范围证明只是单个范围证明上的 $O(log(m))$ 附加群元素。这对于当前形式的机密交易已经很有用，因为大多数比特币交易都有两个或多个输出。<br>它还提供了一个有趣的机会，可以将来自不同方的多个范围证明聚合为一个证明，例如在 CoinJoin 交易中需要的证明 [Max13]。<br>在 4.5 节中，我们提出了一个简单有效的 MPC 协议，该协议允许多个用户使用单个聚合范围证明生成单个交易。<br>用户不必向任何其他参与者透露他们的机密交易价值。</p>
-<p>机密交易实现可用于侧链 [PBF<code>]、私有区块链 [And17] 和流行的注重隐私的加密货币 Monero [NM</code>16]。 所有这些实现都将受益于 Bulletproofs。<br>在撰写本文时，比特币拥有来自 2200 万笔交易的大约 5000 万个 UTXO（参见 statoshi.info）。 使用比特币的 52 位表示，可以覆盖从 1 satoshi 到 2100 万比特币的所有值，这导致使用当前系统的范围证明数据大约为 160GB。<br>使用聚合的 Bulletproofs，所有 UTXO 的范围证明将需要不到 17GB，大小减少约 10 倍</p>
-<h4 id="Mimblewimble"><a href="#Mimblewimble" class="headerlink" title="Mimblewimble"></a>Mimblewimble</h4><p>最近，有人提议对机密交易进行改进，称为 Mimblewimble [Jed16,Poe]，可进一步节省成本。</p>
-<p>Jedusor [Jed16] 意识到 Pedersen 对 0 的承诺可以被视为 ECDSA 公钥，并且对于有效的机密交易，输出、输入和交易费用之间的差异必须为 0。因此，构建机密交易的证明者可以签名以输出和输入的差异作为公钥的交易。这一小改动消除了对 scriptSig 的需求，极大地简化了机密交易的结构。<br>Poelstra [Poe] 进一步完善和改进了 Mimblewimble，并表明这些改进可以实现一个大大简化的区块链，其中所有花费的交易都可以被修剪，新节点可以有效地验证整个区块链，而无需下载任何旧的和花费的交易。<br>随着进一步优化，这会导致高度压缩的区块链。它仅包含一小部分区块头以及剩余的未花费交易输出和随附的范围证明以及每笔交易不可修剪的 32 字节。 Mimblewimble 还允许在将交易发送到区块链之前进行聚合。</p>
-<p>Mimblewimble 区块链随着 UTXO 集的大小而增长。<br>使用 Bulletproofs，它只会随着具有未花费输出的交易数量而增长，这远小于 UTXO 集的大小。<br>总体而言，Bulletproofs 不仅可以替代机密交易中的范围证明，而且还可以帮助 Mimblewimble 成为一个实用的方案，其区块链比当前的比特币区块链小得多。</p>
-<h3 id="Provisions-协议"><a href="#Provisions-协议" class="headerlink" title="Provisions 协议"></a>Provisions 协议</h3><p>Dagher et al. [DBB&#96;15] 引入了 Provisions 协议，该协议允许比特币交易所证明它们具有偿付能力，而无需透露任何额外信息。<br>该协议主要依靠范围证明来防止交易所插入带有负余额的假账户。<br>这些占用超过 13GB 的范围证明是为具有 200 万客户的大型交易所提供近 18GB 证明大小的主要贡献者。<br>样张大小实际上与客户数量呈线性关系。<br>由于在该协议中，一方（交易所）必须同时构建多个范围证明，因此第 4.3 节中的通用 Bulletproofs 协议是 Provisions 中使用的 NIZK 证明的自然替代品。<br>使用第 6 节中列出的证明大小，我们获得范围证明在我们的协议中将占用不到 2 KB。<br>此外，证明的其他部分可以使用第 5 节中的协议进行类似压缩。<br>然后证明将由每个客户的一个承诺主导，大小为 62 MB。这大约比目前实施的规定小 300 倍。</p>
-<h4 id="可验证洗牌-verifiable-shuffle"><a href="#可验证洗牌-verifiable-shuffle" class="headerlink" title="可验证洗牌 verifiable shuffle"></a>可验证洗牌 verifiable shuffle</h4><p>考虑两个提交值列表 $x_1,…,x_n$ 和 $y_1,…,y_n$ 。目的是证明第二个列表是第一个列表的排列。<br>这个问题称为<strong>可验证洗牌 verifiable shuffle</strong>。<br>它在投票 [FS01,Nef01]、混合网络 [Cha82] 和偿付能力证明 [DBB&#96;15] 中有许多应用。<br>Neff [Nef01] 给出了可验证 shuffle 的实际实现，后来对其进行了改进 [Gro03,GI08a]。 Neff [Nef01] 给出了可验证 shuffle 的实际实现，后来对其进行了改进 [Gro03,GI08a]。<br>目前最有效的 shuffle [BG12] 的大小为 $O(\sqrt{n})$。</p>
-<p>Bulletproofs 可用于创建大小为 $O(\log{n})$ 的可验证洗牌。<br>这两个commitment列表作为第 5 节中电路协议的输入。<br>回路可以通过对两个列表进行排序然后检查它们是否相等来实现混洗。<br>排序回路可以使用 $O(n\cdot\log{n})$ 乘法来实现，这意味着证明大小将仅为 Oplogpnqq。<br>这比以前提出的协议小得多。<br>鉴于 Bulletproofs 的具体效率，使用 Bulletproofs 进行可验证的 shuffle 在实践中将非常有效。<br>构建证明并验证它只需要$n$的线性时间。</p>
-]]></content>
-      <tags>
-        <tag>crypto</tag>
       </tags>
   </entry>
   <entry>
@@ -339,6 +339,60 @@
 ]]></content>
       <tags>
         <tag>blockchain</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>企业视角下的区块链: Chain on Enterprise View</title>
+    <url>//chain-on-enterprise-view/</url>
+    <content><![CDATA[<h2 id="区块链归类"><a href="#区块链归类" class="headerlink" title="区块链归类"></a>区块链归类</h2><p>出于方便理解和技术分类，我们倾向于在面向企业的介绍中将区块链描述为一种一种高度专业化的数据库。当然从最底层来看也确实是如此。</p>
+<p>我们可以简单分类一下</p>
+<pre class="mermaid">graph LR
+    数据库 --> 中心化数据库
+    数据库 --> 分布式数据库
+    分布式数据库 --> 分布式账簿
+    分布式账簿 --> 区块链</pre>
+<p>对于集中式数据库，您必须信任单个数据库——并不需要达成共识。</p>
+<p>对于分布式数据库，信任概念开始成为关注的重点。在分布式数据库中，您可以拥有一个受信任的容错数据库网络。</p>
+<p>在分布式数据库中，存在分布式账簿，通常意味着宽松的信任保证。它们可以使彼此之间不完全信任的各方达成共识。</p>
+<p>最后，我们的主人公，区块链，是分布式账簿的子类。</p>
+<span id="more"></span>
+
+<h3 id="中心化数据库"><a href="#中心化数据库" class="headerlink" title="中心化数据库"></a>中心化数据库</h3><p>需要注意的是，尽管“分布式”的定义，即分布式和中心化之间的差异，在数据库分类特别是在区块链领域下可能存在争议。在此，我们通常是指其策略和空间分布。</p>
+<p>例如，我们可能将组织的数据库系统称为集中式数据库系统，因为它们都由一个实体运营——因此在策略上是集中的。就空间分布而言，我们可以有一个“中央”数据库或在地理上集中或分散的多个数据库。</p>
+<p>为了更好地理解这一点，让我们回到大多数人都熟悉的数据库形式，即中心化数据库。<br>中心化数据库的地理位置，存储和维护集中式数据库（例如单个密码服务器）集中在一处，一个中央实体处理所有请求和数据处理。<br>这样的优点包括：设计简单，即时数据更新，成本效益，和最小的冗余。</p>
+<p>但是，集中式数据库也有许多固有的缺点：它们容易触及瓶颈，缺少多个用户对同一组数据的同时写访问权限，并作为单点故障。</p>
+<h3 id="分布式数据库"><a href="#分布式数据库" class="headerlink" title="分布式数据库"></a>分布式数据库</h3><p>分布式数据库由相互信任的节点组组成，并合作维护整个系统的一致视图。因为不再存在单点故障，所以系统更具容错能力，并且可以通过在所有节点之间平均分配负载来处理更多需求。</p>
+<p>但是，分布式数据库还会带来更高的复杂性、冗余性，更多成本和以及暴露更多的故障点。那只是维护分布式的开销。</p>
+<p>分布式数据库的一种特定类型是分布式分类帐，其中包含节点由可能互不信任的不同实体运营。</p>
+<h2 id="区块链"><a href="#区块链" class="headerlink" title="区块链"></a>区块链</h2><p>尽管存在许多针对分布式账本的共识机制，在其记录保存中实现区块链，共识协议被称为区块链。<br>回想一下我们的比特币和加密货币课程，区块链不支持分布式信息共享。<br>正如我们已经看到的，存在许多形式的分布式数据库，它们允许分布式没有区块链的信息共享。<br>相反，区块链的唯一性在于其分布式记录保存和去中心化价值交换。</p>
+<p>与传统数据库相比，区块链系统独特地能够消除需求集中管理者，并允许网络中的非信任方彼此互动。</p>
+<p>区块链还可以根据其架构以及信任和访问进行分类典型用户拥有的权限。</p>
+<p>通常，所有区块链可以分为公共链或许可链。</p>
+<p>公共区块链是最广泛和最知名的区块链类型。例如两种最受欢迎​​的加密货币，比特币和以太坊。</p>
+<p>世界上每个人都可以读取公共区块链，可以提出对他们的协议，并可以参与他们的共识机制。<br>这使得公共区块链在提供去中心化和审查制度方面具有优势抵抗性。<br>与使用这些公共区块链平台相关的网络效应导致增加应用程序开发。<br>例如，在以太坊之上构建了数千个DApp，并且通常少于每个专用平台100个。<br>但是，由于公共区块链是开放的，并且每个人都可以访问，它们限制了可以直接存储在区块链上的信息类型。<br>不应将敏感和私人数据（即病历，SSN，私钥）放在纯文本中的区块链。<br>此外，公共区块链固有地在不受信任的环境中运行。<br>信任不再放在人员和组织中，而是放在整个系统背后的数学和代码中。</p>
+<h3 id="许可链"><a href="#许可链" class="headerlink" title="许可链"></a>许可链</h3><p>不同于完全不受信任的公共区块链，我们拥有所谓的许可分类账或许可区块链。</p>
+<p>在许可的区块链类别中，既有完全私有的区块链，其中权限集中到一个实体，也有联盟或联合区块链，其中权限由中央实体组控制。</p>
+<p>在许可的区块链中，写入权限仅限于一个中央实体或实体联盟，并且读取权限可能也可能不受限制。<br>许可的区块链使组织可以自行决定更改区块链的规则，允许进行更便宜的交易，提供更大的隐私并减轻传统的基于共识的攻击的风险。</p>
+<p>与传统的公共区块链不同，获得许可的区块链不具有（公开）开放和不信任的特性。<br>但是，在企业环境中，可以使用许可的区块链来解决松散链接的组件之间的协调问题。<br>尽管区块链仍处于起步阶段，但许多科技巨头已经开始表现出兴趣。</p>
+<p>例如，Microsoft最近发布了Blockchain Workbench，它是Azure平台上的一组工具，供使用分布式分类帐技术的开发人员使用。<br>Workbench旨在通过建立基础结构来简化公司在基于Azure的区块链之上构建应用程序的过程，以便开发人员可以专注于应用程序的逻辑。</p>
+<p>Hyperledger是一个由IBM和Linux Foundation牵头的区块链财团，它召集各行各业的公司共同努力进行开发。<br>该项目的目标是开发一个高度模块化和可配置的企业区块链平台，以供企业客户定制其自己的区块链解决方案。<br>Hyperledger当前专注于解决供应链，医疗保健和财务方面的问题。<br>沃尔玛（Walmart）和雀巢（Nestle）等公司已使用Hyperledger跟踪其供应链中的食物交付。</p>
+<p>以太坊企业联盟是一个在以太坊社区内的组织，希望扩大以太坊对企业的影响。<br>它是由150多家财富500强公司和初创公司以及机构和政府组成的财团，为试图建立企业区块链的公司提供标准框架<br>使用以太坊作为其基础层。</p>
+<p>尽管企业正在朝着区块链的方向发展，但是对于整个区块链技术仍然存在不同的观点和看法–当然，这完全取决于您要与之交谈的受众。</p>
+<p>有些人可能是比特币最大化主义者，他们相信比特币和区块链的最初愿景，并且鄙视企业区块链，以将政治集中化与区块链的去中心化初始愿景</p>
+<p>还有人说企业区块链很烂。<br>不同背景的不同人倾向于有这种共同意见。</p>
+<p>比特币最大化主义者可能不喜欢最初为避开区块链而创建的公司对区块链的使用。<br>这些人可能会真正提倡使用加密货币。</p>
+<p>同时，也许那些在传统行业有更多经验的人可能也会说<br>企业区块链很烂，但是由于他们理解并喜欢更传统的政治集中式云解决方案。<br>工业界也可能有那些知道分离加密货币和区块链的人。</p>
+<p>有些人甚至对区块链在每个企业用例中都有用的看法过于乐观。</p>
+<p>最后，还有一些受过高等教育的人，他们认识到区块链技术适用性的优缺点。</p>
+<p>区块链可以很酷，但是只能以非常特殊的方式。</p>
+<p>人们误以为企业区块链总是有用的。<br>一些用例具有根本性缺陷–通常与区块链和分布式分类帐技术的核心优势和优势不符。<br>这些用例并不能保证使用区块链，也许可以通过集中式或分布式数据库来解决，但不能使用区块链。<br>这也是一个误解，认为区块链比某些集中式解决方案更有效。</p>
+<p>这种误解可以从许多不同的角度来解决。<br>问题是：我们如何定义效率？<br>如果我们在谈论计算效率，那么我们已经知道区块链是高度冗余的，因此计算效率不高。<br>毕竟，当您可能只写一对（如果不是一对）时，为什么还要写可能遍布世界的成千上万个节点。</p>
+<p>另一方面，可以进一步分析效率，这是在考虑分散和可扩展性之间的权衡问题。<br>同样，也可能有人说区块链很便宜。<br>通常，区块链的维护和开发成本很高，因为这主要是社区的努力。</p>
+<p>最后，另一个误解可能是，如果企业用例已经决定使用区块链，他们可能会认为他们应该只是构建自己的区块链，而不是使用现有基础架构。<br>建立自己的区块链并不像人们期望的那么简单。<br>过去，许多项目的确只是分叉了比特币区块链的代码库。<br>但是如今，现有的区块链开发框架已被证明是成功且安全的。</p>
+]]></content>
+      <tags>
+        <tag>blockchain</tag>
+        <tag>todo</tag>
       </tags>
   </entry>
   <entry>
@@ -421,60 +475,6 @@
         <tag>edx</tag>
         <tag>scaling</tag>
         <tag>tps</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>企业视角下的区块链: Chain on Enterprise View</title>
-    <url>//chain-on-enterprise-view/</url>
-    <content><![CDATA[<h2 id="区块链归类"><a href="#区块链归类" class="headerlink" title="区块链归类"></a>区块链归类</h2><p>出于方便理解和技术分类，我们倾向于在面向企业的介绍中将区块链描述为一种一种高度专业化的数据库。当然从最底层来看也确实是如此。</p>
-<p>我们可以简单分类一下</p>
-<pre class="mermaid">graph LR
-    数据库 --> 中心化数据库
-    数据库 --> 分布式数据库
-    分布式数据库 --> 分布式账簿
-    分布式账簿 --> 区块链</pre>
-<p>对于集中式数据库，您必须信任单个数据库——并不需要达成共识。</p>
-<p>对于分布式数据库，信任概念开始成为关注的重点。在分布式数据库中，您可以拥有一个受信任的容错数据库网络。</p>
-<p>在分布式数据库中，存在分布式账簿，通常意味着宽松的信任保证。它们可以使彼此之间不完全信任的各方达成共识。</p>
-<p>最后，我们的主人公，区块链，是分布式账簿的子类。</p>
-<span id="more"></span>
-
-<h3 id="中心化数据库"><a href="#中心化数据库" class="headerlink" title="中心化数据库"></a>中心化数据库</h3><p>需要注意的是，尽管“分布式”的定义，即分布式和中心化之间的差异，在数据库分类特别是在区块链领域下可能存在争议。在此，我们通常是指其策略和空间分布。</p>
-<p>例如，我们可能将组织的数据库系统称为集中式数据库系统，因为它们都由一个实体运营——因此在策略上是集中的。就空间分布而言，我们可以有一个“中央”数据库或在地理上集中或分散的多个数据库。</p>
-<p>为了更好地理解这一点，让我们回到大多数人都熟悉的数据库形式，即中心化数据库。<br>中心化数据库的地理位置，存储和维护集中式数据库（例如单个密码服务器）集中在一处，一个中央实体处理所有请求和数据处理。<br>这样的优点包括：设计简单，即时数据更新，成本效益，和最小的冗余。</p>
-<p>但是，集中式数据库也有许多固有的缺点：它们容易触及瓶颈，缺少多个用户对同一组数据的同时写访问权限，并作为单点故障。</p>
-<h3 id="分布式数据库"><a href="#分布式数据库" class="headerlink" title="分布式数据库"></a>分布式数据库</h3><p>分布式数据库由相互信任的节点组组成，并合作维护整个系统的一致视图。因为不再存在单点故障，所以系统更具容错能力，并且可以通过在所有节点之间平均分配负载来处理更多需求。</p>
-<p>但是，分布式数据库还会带来更高的复杂性、冗余性，更多成本和以及暴露更多的故障点。那只是维护分布式的开销。</p>
-<p>分布式数据库的一种特定类型是分布式分类帐，其中包含节点由可能互不信任的不同实体运营。</p>
-<h2 id="区块链"><a href="#区块链" class="headerlink" title="区块链"></a>区块链</h2><p>尽管存在许多针对分布式账本的共识机制，在其记录保存中实现区块链，共识协议被称为区块链。<br>回想一下我们的比特币和加密货币课程，区块链不支持分布式信息共享。<br>正如我们已经看到的，存在许多形式的分布式数据库，它们允许分布式没有区块链的信息共享。<br>相反，区块链的唯一性在于其分布式记录保存和去中心化价值交换。</p>
-<p>与传统数据库相比，区块链系统独特地能够消除需求集中管理者，并允许网络中的非信任方彼此互动。</p>
-<p>区块链还可以根据其架构以及信任和访问进行分类典型用户拥有的权限。</p>
-<p>通常，所有区块链可以分为公共链或许可链。</p>
-<p>公共区块链是最广泛和最知名的区块链类型。例如两种最受欢迎​​的加密货币，比特币和以太坊。</p>
-<p>世界上每个人都可以读取公共区块链，可以提出对他们的协议，并可以参与他们的共识机制。<br>这使得公共区块链在提供去中心化和审查制度方面具有优势抵抗性。<br>与使用这些公共区块链平台相关的网络效应导致增加应用程序开发。<br>例如，在以太坊之上构建了数千个DApp，并且通常少于每个专用平台100个。<br>但是，由于公共区块链是开放的，并且每个人都可以访问，它们限制了可以直接存储在区块链上的信息类型。<br>不应将敏感和私人数据（即病历，SSN，私钥）放在纯文本中的区块链。<br>此外，公共区块链固有地在不受信任的环境中运行。<br>信任不再放在人员和组织中，而是放在整个系统背后的数学和代码中。</p>
-<h3 id="许可链"><a href="#许可链" class="headerlink" title="许可链"></a>许可链</h3><p>不同于完全不受信任的公共区块链，我们拥有所谓的许可分类账或许可区块链。</p>
-<p>在许可的区块链类别中，既有完全私有的区块链，其中权限集中到一个实体，也有联盟或联合区块链，其中权限由中央实体组控制。</p>
-<p>在许可的区块链中，写入权限仅限于一个中央实体或实体联盟，并且读取权限可能也可能不受限制。<br>许可的区块链使组织可以自行决定更改区块链的规则，允许进行更便宜的交易，提供更大的隐私并减轻传统的基于共识的攻击的风险。</p>
-<p>与传统的公共区块链不同，获得许可的区块链不具有（公开）开放和不信任的特性。<br>但是，在企业环境中，可以使用许可的区块链来解决松散链接的组件之间的协调问题。<br>尽管区块链仍处于起步阶段，但许多科技巨头已经开始表现出兴趣。</p>
-<p>例如，Microsoft最近发布了Blockchain Workbench，它是Azure平台上的一组工具，供使用分布式分类帐技术的开发人员使用。<br>Workbench旨在通过建立基础结构来简化公司在基于Azure的区块链之上构建应用程序的过程，以便开发人员可以专注于应用程序的逻辑。</p>
-<p>Hyperledger是一个由IBM和Linux Foundation牵头的区块链财团，它召集各行各业的公司共同努力进行开发。<br>该项目的目标是开发一个高度模块化和可配置的企业区块链平台，以供企业客户定制其自己的区块链解决方案。<br>Hyperledger当前专注于解决供应链，医疗保健和财务方面的问题。<br>沃尔玛（Walmart）和雀巢（Nestle）等公司已使用Hyperledger跟踪其供应链中的食物交付。</p>
-<p>以太坊企业联盟是一个在以太坊社区内的组织，希望扩大以太坊对企业的影响。<br>它是由150多家财富500强公司和初创公司以及机构和政府组成的财团，为试图建立企业区块链的公司提供标准框架<br>使用以太坊作为其基础层。</p>
-<p>尽管企业正在朝着区块链的方向发展，但是对于整个区块链技术仍然存在不同的观点和看法–当然，这完全取决于您要与之交谈的受众。</p>
-<p>有些人可能是比特币最大化主义者，他们相信比特币和区块链的最初愿景，并且鄙视企业区块链，以将政治集中化与区块链的去中心化初始愿景</p>
-<p>还有人说企业区块链很烂。<br>不同背景的不同人倾向于有这种共同意见。</p>
-<p>比特币最大化主义者可能不喜欢最初为避开区块链而创建的公司对区块链的使用。<br>这些人可能会真正提倡使用加密货币。</p>
-<p>同时，也许那些在传统行业有更多经验的人可能也会说<br>企业区块链很烂，但是由于他们理解并喜欢更传统的政治集中式云解决方案。<br>工业界也可能有那些知道分离加密货币和区块链的人。</p>
-<p>有些人甚至对区块链在每个企业用例中都有用的看法过于乐观。</p>
-<p>最后，还有一些受过高等教育的人，他们认识到区块链技术适用性的优缺点。</p>
-<p>区块链可以很酷，但是只能以非常特殊的方式。</p>
-<p>人们误以为企业区块链总是有用的。<br>一些用例具有根本性缺陷–通常与区块链和分布式分类帐技术的核心优势和优势不符。<br>这些用例并不能保证使用区块链，也许可以通过集中式或分布式数据库来解决，但不能使用区块链。<br>这也是一个误解，认为区块链比某些集中式解决方案更有效。</p>
-<p>这种误解可以从许多不同的角度来解决。<br>问题是：我们如何定义效率？<br>如果我们在谈论计算效率，那么我们已经知道区块链是高度冗余的，因此计算效率不高。<br>毕竟，当您可能只写一对（如果不是一对）时，为什么还要写可能遍布世界的成千上万个节点。</p>
-<p>另一方面，可以进一步分析效率，这是在考虑分散和可扩展性之间的权衡问题。<br>同样，也可能有人说区块链很便宜。<br>通常，区块链的维护和开发成本很高，因为这主要是社区的努力。</p>
-<p>最后，另一个误解可能是，如果企业用例已经决定使用区块链，他们可能会认为他们应该只是构建自己的区块链，而不是使用现有基础架构。<br>建立自己的区块链并不像人们期望的那么简单。<br>过去，许多项目的确只是分叉了比特币区块链的代码库。<br>但是如今，现有的区块链开发框架已被证明是成功且安全的。</p>
-]]></content>
-      <tags>
-        <tag>blockchain</tag>
-        <tag>todo</tag>
       </tags>
   </entry>
   <entry>
@@ -631,90 +631,6 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
 <p>对于加密市场而言影响仍在但逐渐回弹。但是不论是投资者还是机构对于DeFi理财的投资不再狂热回归理性。</p>
 <p><a href="https://cointelegraph.com/news/fallout-from-crypto-contagion-subsides-but-no-market-reversal-just-yet" target="_blank" rel="noopener">https://cointelegraph.com/news/fallout-from-crypto-contagion-subsides-but-no-market-reversal-just-yet</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Design of Contracts</title>
-    <url>//design-of-contracts/</url>
-    <content><![CDATA[<p>说实话其实一开始压根没想做合约，就只是想做个chain。</p>
-<p>但是后来发现你不做DAPP你的chain都没人看，那些做coin的也都在往DAPP靠。就有种被逼上梁山的感觉。不过还好现在有个去华山的路（WASM），可以考虑上了华山再往梁山飞。</p>
-<p>其实我也不算是第一个选择华山飞梁山的，cosmos和eth2.0也选，不过人家有现成地图，我只能凭感觉乱飘。而且我们不是一个山头起飞的，他们选了更早被人发现的山头（wasmer），我选了个看起来粗大(?)一点的新山头（wasmtime）。</p>
-<span id="more"></span>
-
-<p>不瞎扯了，下面就开始分析对于合约的设计。</p>
-<p>做ethereum开发的都知道Solidity，因此需求也是从这个上面靠拢。不过由于现在主要支持wasm的语言C和RUST都是比较成熟的所以直接就选择他们对具体功能开干。</p>
-<p>+-x÷是都没有问题，问题在于和链的互动，和rpc的互动，以及事件的侦听。</p>
-<h1 id="ngVM"><a href="#ngVM" class="headerlink" title="ngVM"></a>ngVM</h1><h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p>上传至链上的wasm需要为<a href="https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md" target="_blank" rel="noopener">binary格式</a></p>
-<h3 id="数据类型-data-type"><a href="#数据类型-data-type" class="headerlink" title="数据类型 data type"></a>数据类型 data type</h3><ul>
-<li>i32: 返回code，&gt;0为正常，&lt;&#x3D;异常 </li>
-<li>i64: 指针</li>
-<li>u64: 账户</li>
-<li>bytes: 底层mem</li>
-</ul>
-<h3 id="Imports"><a href="#Imports" class="headerlink" title="Imports"></a>Imports</h3><p>wasm只能import在ngVMI中指定的接口。</p>
-<h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><p>在Debug环境里提供一系列print的接口</p>
-<h3 id="Exports"><a href="#Exports" class="headerlink" title="Exports"></a>Exports</h3><p>合同必须完全具有两个export：</p>
-<ul>
-<li><code>memory</code>: 可供EEI写入的共享内存空间。</li>
-<li><code>main</code>: 没有参数和结果值的函数。</li>
-</ul>
-<h3 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h3><p>导出为<code>main</code>的方法将由NGIN内部VM Manager执行。</p>
-<p>如果成功执行，则正常返回。</p>
-<p>如果由于故障而需要中止，则返回error，避免panic。</p>
-<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>如果执行wasm代码触发了wasm异常，则执行将失败并终止。</p>
-<h2 id="接口-ngVMI-NGIN-VM-Interface"><a href="#接口-ngVMI-NGIN-VM-Interface" class="headerlink" title="接口(ngVMI: NGIN VM Interface)"></a>接口(ngVMI: NGIN VM Interface)</h2><p>WIP</p>
-<h3 id="log-debug-msg-ptr-i64-msg-len-i64"><a href="#log-debug-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::debug(msg_ptr i64, msg_len i64)"></a>log::debug(msg_ptr i64, msg_len i64)</h3><h3 id="log-info-msg-ptr-i64-msg-len-i64"><a href="#log-info-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::info(msg_ptr i64, msg_len i64)"></a>log::info(msg_ptr i64, msg_len i64)</h3><h3 id="log-error-msg-ptr-i64-msg-len-i64"><a href="#log-error-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::error(msg_ptr i64, msg_len i64)"></a>log::error(msg_ptr i64, msg_len i64)</h3><h3 id="log-warn-msg-ptr-i64-msg-len-i64"><a href="#log-warn-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::warn(msg_ptr i64, msg_len i64)"></a>log::warn(msg_ptr i64, msg_len i64)</h3><p>打印输出，默认关闭。</p>
-<h3 id="account-get-host-gt-num-i64"><a href="#account-get-host-gt-num-i64" class="headerlink" title="account::get_host() -&gt; num i64"></a>account::get_host() -&gt; num i64</h3><p>获取vm自身account num(uint64)</p>
-<h3 id="account-get-owner-size-account-num-uint64-gt-owner-ptr-i64"><a href="#account-get-owner-size-account-num-uint64-gt-owner-ptr-i64" class="headerlink" title="account::get_owner_size(account_num uint64) -&gt; owner_ptr i64"></a>account::get_owner_size(account_num uint64) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address的长度（当前肯定是35）</p>
-<h3 id="account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64"><a href="#account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64" class="headerlink" title="account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64"></a>account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address (length &#x3D; 35 bytes)，并将其写入ptr指针处。返回值为成功写入的字节数。</p>
-<h3 id="account-get-contract-len-ptr-i64-gt-contract-ptr-i64"><a href="#account-get-contract-len-ptr-i64-gt-contract-ptr-i64" class="headerlink" title="account::get_contract(len_ptr i64) -&gt; contract_ptr i64"></a>account::get_contract(len_ptr i64) -&gt; contract_ptr i64</h3><p>已删除</p>
-<p>原：获取vm自身合约代码</p>
-<p>现：由于获取全部二进制内容毫无意义，而且会占用较多内存，所以废弃此内容。<br><del>作为替代，将来提供get_contract_hash函数来帮助开发者做对线上内容的快速double check。</del><br>不能在内容里对内容hash……</p>
-<p>如果是需要读取其他account下的contract内容，暂时感觉也没必要。</p>
-<h3 id="account-get-context-account-num-u64-ptr-u32-gt-u32"><a href="#account-get-context-account-num-u64-ptr-u32-gt-u32" class="headerlink" title="account::get_context(account_num u64, ptr u32) -&gt; u32"></a>account::get_context(account_num u64, ptr u32) -&gt; u32</h3><p>获取可持续存储内容</p>
-<p>可持续存储读取</p>
-<h3 id="context-alloc-len-u64"><a href="#context-alloc-len-u64" class="headerlink" title="context::alloc(len: u64)"></a>context::alloc(len: u64)</h3><p>为可持续存储分配空间<br>&#x2F;&#x2F;TODO: 收费</p>
-<h3 id="context-write-src-ptr-i64-dst-ptr-i64-len-u64"><a href="#context-write-src-ptr-i64-dst-ptr-i64-len-u64" class="headerlink" title="context::write(src_ptr: i64, dst_ptr: i64, len: u64)"></a>context::write(src_ptr: i64, dst_ptr: i64, len: u64)</h3><p>可持续存储写入</p>
-<h3 id="coin-transfer-to-u64-value-ptr-i64-gt-i32"><a href="#coin-transfer-to-u64-value-ptr-i64-gt-i32" class="headerlink" title="coin::transfer(to: u64, value_ptr: i64) -&gt; i32"></a>coin::transfer(to: u64, value_ptr: i64) -&gt; i32</h3><p>类似于eth里的<code>seller.send(price)</code></p>
-<p>原来叫create_transaction，表示由wasm_vm主动创建一个事务tx让chain通过处理tx方式修改state</p>
-<p>通过此函数，vm能够提供例如bank&#x2F;token的基础资金转移功能。</p>
-<p>但是遇到一个之前忽略掉的问题——从vm里发出的交易该怎么sign？</p>
-<p>根据ETH的方法，调用都会被算为是由tx的call触发，因此这些变化都是由原tx负责。</p>
-<p>换句话说，变动的只有state，并不会出现由contract主动触发的tx。</p>
-<p>因此这个tx摆在这里就不合适了，因为vm里的操作都是直接作用于state</p>
-<p>所以这里就不应该使用transaction or tx来称呼这个操作，而用transfer来简化这个函数。</p>
-<p>假如to的account不存在，那个需要触发trap</p>
-<h3 id="tx-get-convener-gt-num-u64"><a href="#tx-get-convener-gt-num-u64" class="headerlink" title="tx::get_convener() -&gt; num u64"></a>tx::get_convener() -&gt; num u64</h3><p>获取transaction的convener</p>
-<h3 id="tx-get-participants-len-gt-len-u64"><a href="#tx-get-participants-len-gt-len-u64" class="headerlink" title="tx::get_participants_len() -&gt; len u64"></a>tx::get_participants_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
-<h3 id="tx-get-participant-index-u64-gt-account-ptr-i64"><a href="#tx-get-participant-index-u64-gt-account-ptr-i64" class="headerlink" title="tx::get_participant(index: u64) -&gt; account_ptr i64"></a>tx::get_participant(index: u64) -&gt; account_ptr i64</h3><p>获取transaction的参与人，需要用account namespace的api处理</p>
-<h3 id="tx-get-values-len-gt-len-u64"><a href="#tx-get-values-len-gt-len-u64" class="headerlink" title="tx::get_values_len() -&gt; len u64"></a>tx::get_values_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
-<h3 id="tx-get-value-index-u64-gt-value-ptr-i64"><a href="#tx-get-value-index-u64-gt-value-ptr-i64" class="headerlink" title="tx::get_value(index: u64) -&gt; value_ptr i64"></a>tx::get_value(index: u64) -&gt; value_ptr i64</h3><p>获取transacation的对应value(uint256)</p>
-<h3 id="state-get-balance-addr-i64-gt-balance-ptr-i64"><a href="#state-get-balance-addr-i64-gt-balance-ptr-i64" class="headerlink" title="state::get_balance(addr: i64) -&gt; balance_ptr i64"></a>state::get_balance(addr: i64) -&gt; balance_ptr i64</h3><p>balance 长度 8*4 &#x3D; 24 </p>
-<h3 id="state-get-owner-num-u64-gt-addr-ptr-i64"><a href="#state-get-owner-num-u64-gt-addr-ptr-i64" class="headerlink" title="state::get_owner(num: u64) -&gt; addr_ptr i64"></a>state::get_owner(num: u64) -&gt; addr_ptr i64</h3><p>addr 长度 33</p>
-<h2 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h2><p>Assign &amp; Append tx</p>
-<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>WASM的发布分为两种: Web or Wasm.</p>
-<h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><p>任何ngcore节点能够作为http server提供http服务(单页面)，端口为52528。默认关闭，通过Flag打开</p>
-<p>例如 <a href="http://app.ngin.sh:52528/#10086/path1/path2" target="_blank" rel="noopener">http://app.ngin.sh:52528/#10086/path1/path2</a></p>
-<p>服务运营者可以通过nginx反代限制app为</p>
-<p><a href="https://app.mydomain.com/path1/path2?param1=1&amp;params2=2" target="_blank" rel="noopener">https://app.mydomain.com/path1/path2?param1=1&amp;params2=2</a></p>
-<p>发布Web应用需要将wasm binary写入Contract字段。在访问时会自动将字段作为文件拉取，并且通过导出的main函数进行执行</p>
-<h3 id="Wasm"><a href="#Wasm" class="headerlink" title="Wasm"></a>Wasm</h3><p>Wasm可以作为网站后端运行，也可以纯提供链上事务或者作为其他Wasi运行库</p>
-<p>Wasm要求Contract为wasm binary.</p>
-<h2 id="当前遇到的问题"><a href="#当前遇到的问题" class="headerlink" title="当前遇到的问题"></a>当前遇到的问题</h2><h3 id="Infinite-loop"><a href="#Infinite-loop" class="headerlink" title="Infinite loop"></a>Infinite loop</h3><p>当前使用wasmtime，无法在运行前拦截vm中infinite loop</p>
-<p>当loop执行，就会导致全网主机阻塞在处理该vm对应的tx上</p>
-<p>感觉该看一下wasm的opcode</p>
-<h3 id="Fee-charging"><a href="#Fee-charging" class="headerlink" title="Fee charging"></a>Fee charging</h3><p>由于wasmtime只提供封闭的ffi，因此无法将opcode与fee进行挂钩</p>
-<p>这里可以理解为我们需要自己写一个ngin专用的wasm runtime</p>
-<p>找材料的时候发现了perlin-network的一个wasm方案，<a href="https://github.com/perlin-network/life" target="_blank" rel="noopener">life</a>.</p>
-<p>钱多好办事哈，人家自己也折腾了个chain daemon叫<a href="https://github.com/perlin-network/wavelet" target="_blank" rel="noopener">wavelet</a>，意思是小波浪</p>
-<p>life里加gas是在compile时候，对每个Block做totalCost的计算（递增1，即每个instruction费用为1），然后给每个block的code前面都加上一个add_gas的instruction。</p>
-<p>当然这个add_gas的ins当前还没用，也不知道他们准备加点啥。</p>
-<p>compile是将wasm binary转换为host上的一个module，他们的api应该是参考的<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/compile" target="_blank" rel="noopener">js interface</a></p>
-]]></content>
-      <tags>
-        <tag>todo</tag>
-        <tag>NGIN</tag>
-        <tag>contract</tag>
-      </tags>
   </entry>
   <entry>
     <title>Detection of Encrypted Cryptomining Malware Connections With Machine and Deep Learning</title>
@@ -1185,38 +1101,87 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
       </tags>
   </entry>
   <entry>
-    <title>Dynamic Game on blockchain-based Federated Learning</title>
-    <url>//dyn-game-for-blockchain-fl/</url>
-    <content><![CDATA[<h1 id="Mobile-Devices-Strategies-in-Blockchain-Based-Federated-Learning-A-Dynamic-Game-Perspective"><a href="#Mobile-Devices-Strategies-in-Blockchain-Based-Federated-Learning-A-Dynamic-Game-Perspective" class="headerlink" title="Mobile Devices Strategies in Blockchain-Based Federated Learning: A Dynamic Game Perspective"></a>Mobile Devices Strategies in Blockchain-Based Federated Learning: A Dynamic Game Perspective</h1><p>Sizheng Fan; Hongbo Zhang; Zehua Wang; Wei Cai</p>
-<p>IEEE Transactions on Network Science and Engineering</p>
-<ul>
-<li>系统建模和制定：我们提出并实施了一种基于智能合约的激励机制，以鼓励移动设备参与 FL 任务。在这种情况下，提出了两种移动设备在 FL 任务中的策略模型。</li>
-<li>动态博弈分析：据我们所知，这是第一个为 FL 动态博弈建模的工作，为进一步研究奠定了基础。我们证明了两个模型的纳什均衡（NE）和混合策略NE的存在性，并提出了相应的两种算法来实现。仿真结果证明了两种算法的收敛性，与 DSM 相比，CSM 可以有效地提高移动设备的收益。</li>
+    <title>Design of Contracts</title>
+    <url>//design-of-contracts/</url>
+    <content><![CDATA[<p>说实话其实一开始压根没想做合约，就只是想做个chain。</p>
+<p>但是后来发现你不做DAPP你的chain都没人看，那些做coin的也都在往DAPP靠。就有种被逼上梁山的感觉。不过还好现在有个去华山的路（WASM），可以考虑上了华山再往梁山飞。</p>
+<p>其实我也不算是第一个选择华山飞梁山的，cosmos和eth2.0也选，不过人家有现成地图，我只能凭感觉乱飘。而且我们不是一个山头起飞的，他们选了更早被人发现的山头（wasmer），我选了个看起来粗大(?)一点的新山头（wasmtime）。</p>
+<span id="more"></span>
+
+<p>不瞎扯了，下面就开始分析对于合约的设计。</p>
+<p>做ethereum开发的都知道Solidity，因此需求也是从这个上面靠拢。不过由于现在主要支持wasm的语言C和RUST都是比较成熟的所以直接就选择他们对具体功能开干。</p>
+<p>+-x÷是都没有问题，问题在于和链的互动，和rpc的互动，以及事件的侦听。</p>
+<h1 id="ngVM"><a href="#ngVM" class="headerlink" title="ngVM"></a>ngVM</h1><h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p>上传至链上的wasm需要为<a href="https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md" target="_blank" rel="noopener">binary格式</a></p>
+<h3 id="数据类型-data-type"><a href="#数据类型-data-type" class="headerlink" title="数据类型 data type"></a>数据类型 data type</h3><ul>
+<li>i32: 返回code，&gt;0为正常，&lt;&#x3D;异常 </li>
+<li>i64: 指针</li>
+<li>u64: 账户</li>
+<li>bytes: 底层mem</li>
 </ul>
-<hr>
-<h2 id="Dynamic-Game-for-Blockchain-Based-Federated-Learning-基于区块链的联邦学习动态博弈"><a href="#Dynamic-Game-for-Blockchain-Based-Federated-Learning-基于区块链的联邦学习动态博弈" class="headerlink" title="Dynamic Game for Blockchain-Based Federated Learning 基于区块链的联邦学习动态博弈"></a>Dynamic Game for Blockchain-Based Federated Learning 基于区块链的联邦学习动态博弈</h2><p>FL 任务过程由多个全局迭代组成，如图 3 所示。FL 任务由多个全局迭代组成。在每一次全局迭代中，请求者会在每次全局迭代中公布一个固定的奖励 $B$ ，由workers决定是否参与每一次全局迭代。我们将请求者和移动设备之间的交互建模为动态游戏。相互作用可以按以下顺序说明。</p>
-<p>如图 4 所示，结合第 III 节中提到的基于联盟区块链的 FL 系统，请求者将发布她&#x2F;他的任务需求，包括数据类型、模型类型（即卷积神经网络（CNN）、递归神经网络(RNN)), 最大计算时间 $T_{max}$ 和 FL 任务开始时的预算 $B$ （步骤 1）。</p>
-<hr>
-<img src="/dyn-game-for-blockchain-fl/2023-06-11-20-16-09.png" class="">
-
-<hr>
-<h2 id="Dynamic-Game-for-Blockchain-Based-Federated-Learning"><a href="#Dynamic-Game-for-Blockchain-Based-Federated-Learning" class="headerlink" title="Dynamic Game for Blockchain-Based Federated Learning"></a>Dynamic Game for Blockchain-Based Federated Learning</h2><p>下面将显示在一次全局迭代中请求者与移动设备之间的交互。给定固定请求者的固定预算 $B$ ，最大计算和通信时间 $T_{max}$ （步骤2），每个移动设备 $m_j \in M$ 可以根据其他移动设备在当前全局迭代中的策略来决定她&#x2F;他的策略过去并将其记录在区块链上（第 3 步）。</p>
-<p>收到移动设备的信息后，智能合约将计算奖励（第 4 步）。移动设备将接收请求者的模型并开始使用其本地数据集进行训练（第 5 步）。完成训练过程后，移动设备将模型参数发送给请求者（步骤 6）。</p>
-<p>在每次全局迭代中重复图 4 中的步骤 3、4、5 和 6。我们假设移动设备在每次全球迭代中都保持连接。每个移动设备的目标是在一次全局迭代中选择最佳策略，使她&#x2F;他在整个 FL 任务中的预期收益最大化。</p>
-<hr>
-<img src="/dyn-game-for-blockchain-fl/2023-06-11-20-16-20.png" class="">
-
-<hr>
-<h2 id="Incentive-Mechanism-Design-激励机制设计"><a href="#Incentive-Mechanism-Design-激励机制设计" class="headerlink" title="Incentive Mechanism Design 激励机制设计"></a>Incentive Mechanism Design 激励机制设计</h2><p>在我们的 FL 模型中，请求者将在每次全局迭代中提供预算 B ，并与 M 移动设备竞争预算。移动设备将在每次全局迭代中将其策略决策（即使用的数据大小）发送给智能合约。我们使用 sj,n 表示移动设备 mj 在 n th全局迭代中选择的使用的数据大小，</p>
-<p>FL 中现有的大多数激励机制都具有很高的复杂性 [26]、[28]。然而，FL 中有效的激励机制应该是低复杂性和易于实施的。每次全局迭代的实时性要求是移动设备在下一次全局迭代之前收到请求者的补偿，这可以帮助他们在接下来的全局迭代中做出决策。此外，移动设备经常面临电量不足、信号弱等问题。因此，激励机制应该具有较低的计算复杂度，节省移动设备的等待时间。本文提出的激励机制如下图所示。</p>
-<p>$<br>\begin{equation*}<br>p_{j, n} &#x3D; B \frac{s_{j, n}}{s_{j, n} + \sum <em>{i \ne j}s</em>{i, n}} \tag{5}<br>\end{equation*}<br>$</p>
-<p>从式（5）我们可以了解到，请求者在当前全局迭代中根据移动设备的数据大小按比例将其固定预算分配给一组移动设备。</p>
-<hr>
-<h2 id="离散策略模型（DSM）"><a href="#离散策略模型（DSM）" class="headerlink" title="离散策略模型（DSM）"></a>离散策略模型（DSM）</h2><p>在本文中，我们从移动设备的角度考虑两种策略模型：离散策略模型（DSM）和连续策略模型（CSM）。 DSM 意味着移动设备可以决定是否参与 FL 任务。如果移动设备决定加入，她&#x2F;他的所有数据都将用于训练模型。而CSM是指移动设备可以确定FL任务中使用的数据百分比。受 FL 迭代交互的启发，我们将移动设备的决策问题建模为动态游戏，以解决训练过程中信息不完整的问题。具体来说，在联盟链系统的赋能下，即使移动设备不知道其他人的个人信息，包括总数据量和训练成本，她&#x2F;他也可以观察其他移动设备的策略历史并调整她&#x2F;他的策略以最大化 FL 任务中的收益。</p>
+<h3 id="Imports"><a href="#Imports" class="headerlink" title="Imports"></a>Imports</h3><p>wasm只能import在ngVMI中指定的接口。</p>
+<h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><p>在Debug环境里提供一系列print的接口</p>
+<h3 id="Exports"><a href="#Exports" class="headerlink" title="Exports"></a>Exports</h3><p>合同必须完全具有两个export：</p>
+<ul>
+<li><code>memory</code>: 可供EEI写入的共享内存空间。</li>
+<li><code>main</code>: 没有参数和结果值的函数。</li>
+</ul>
+<h3 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h3><p>导出为<code>main</code>的方法将由NGIN内部VM Manager执行。</p>
+<p>如果成功执行，则正常返回。</p>
+<p>如果由于故障而需要中止，则返回error，避免panic。</p>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>如果执行wasm代码触发了wasm异常，则执行将失败并终止。</p>
+<h2 id="接口-ngVMI-NGIN-VM-Interface"><a href="#接口-ngVMI-NGIN-VM-Interface" class="headerlink" title="接口(ngVMI: NGIN VM Interface)"></a>接口(ngVMI: NGIN VM Interface)</h2><p>WIP</p>
+<h3 id="log-debug-msg-ptr-i64-msg-len-i64"><a href="#log-debug-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::debug(msg_ptr i64, msg_len i64)"></a>log::debug(msg_ptr i64, msg_len i64)</h3><h3 id="log-info-msg-ptr-i64-msg-len-i64"><a href="#log-info-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::info(msg_ptr i64, msg_len i64)"></a>log::info(msg_ptr i64, msg_len i64)</h3><h3 id="log-error-msg-ptr-i64-msg-len-i64"><a href="#log-error-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::error(msg_ptr i64, msg_len i64)"></a>log::error(msg_ptr i64, msg_len i64)</h3><h3 id="log-warn-msg-ptr-i64-msg-len-i64"><a href="#log-warn-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::warn(msg_ptr i64, msg_len i64)"></a>log::warn(msg_ptr i64, msg_len i64)</h3><p>打印输出，默认关闭。</p>
+<h3 id="account-get-host-gt-num-i64"><a href="#account-get-host-gt-num-i64" class="headerlink" title="account::get_host() -&gt; num i64"></a>account::get_host() -&gt; num i64</h3><p>获取vm自身account num(uint64)</p>
+<h3 id="account-get-owner-size-account-num-uint64-gt-owner-ptr-i64"><a href="#account-get-owner-size-account-num-uint64-gt-owner-ptr-i64" class="headerlink" title="account::get_owner_size(account_num uint64) -&gt; owner_ptr i64"></a>account::get_owner_size(account_num uint64) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address的长度（当前肯定是35）</p>
+<h3 id="account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64"><a href="#account-get-owner-account-num-uint64-ptr-uint32-gt-owner-ptr-i64" class="headerlink" title="account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64"></a>account::get_owner(account_num uint64, ptr uint32) -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address (length &#x3D; 35 bytes)，并将其写入ptr指针处。返回值为成功写入的字节数。</p>
+<h3 id="account-get-contract-len-ptr-i64-gt-contract-ptr-i64"><a href="#account-get-contract-len-ptr-i64-gt-contract-ptr-i64" class="headerlink" title="account::get_contract(len_ptr i64) -&gt; contract_ptr i64"></a>account::get_contract(len_ptr i64) -&gt; contract_ptr i64</h3><p>已删除</p>
+<p>原：获取vm自身合约代码</p>
+<p>现：由于获取全部二进制内容毫无意义，而且会占用较多内存，所以废弃此内容。<br><del>作为替代，将来提供get_contract_hash函数来帮助开发者做对线上内容的快速double check。</del><br>不能在内容里对内容hash……</p>
+<p>如果是需要读取其他account下的contract内容，暂时感觉也没必要。</p>
+<h3 id="account-get-context-account-num-u64-ptr-u32-gt-u32"><a href="#account-get-context-account-num-u64-ptr-u32-gt-u32" class="headerlink" title="account::get_context(account_num u64, ptr u32) -&gt; u32"></a>account::get_context(account_num u64, ptr u32) -&gt; u32</h3><p>获取可持续存储内容</p>
+<p>可持续存储读取</p>
+<h3 id="context-alloc-len-u64"><a href="#context-alloc-len-u64" class="headerlink" title="context::alloc(len: u64)"></a>context::alloc(len: u64)</h3><p>为可持续存储分配空间<br>&#x2F;&#x2F;TODO: 收费</p>
+<h3 id="context-write-src-ptr-i64-dst-ptr-i64-len-u64"><a href="#context-write-src-ptr-i64-dst-ptr-i64-len-u64" class="headerlink" title="context::write(src_ptr: i64, dst_ptr: i64, len: u64)"></a>context::write(src_ptr: i64, dst_ptr: i64, len: u64)</h3><p>可持续存储写入</p>
+<h3 id="coin-transfer-to-u64-value-ptr-i64-gt-i32"><a href="#coin-transfer-to-u64-value-ptr-i64-gt-i32" class="headerlink" title="coin::transfer(to: u64, value_ptr: i64) -&gt; i32"></a>coin::transfer(to: u64, value_ptr: i64) -&gt; i32</h3><p>类似于eth里的<code>seller.send(price)</code></p>
+<p>原来叫create_transaction，表示由wasm_vm主动创建一个事务tx让chain通过处理tx方式修改state</p>
+<p>通过此函数，vm能够提供例如bank&#x2F;token的基础资金转移功能。</p>
+<p>但是遇到一个之前忽略掉的问题——从vm里发出的交易该怎么sign？</p>
+<p>根据ETH的方法，调用都会被算为是由tx的call触发，因此这些变化都是由原tx负责。</p>
+<p>换句话说，变动的只有state，并不会出现由contract主动触发的tx。</p>
+<p>因此这个tx摆在这里就不合适了，因为vm里的操作都是直接作用于state</p>
+<p>所以这里就不应该使用transaction or tx来称呼这个操作，而用transfer来简化这个函数。</p>
+<p>假如to的account不存在，那个需要触发trap</p>
+<h3 id="tx-get-convener-gt-num-u64"><a href="#tx-get-convener-gt-num-u64" class="headerlink" title="tx::get_convener() -&gt; num u64"></a>tx::get_convener() -&gt; num u64</h3><p>获取transaction的convener</p>
+<h3 id="tx-get-participants-len-gt-len-u64"><a href="#tx-get-participants-len-gt-len-u64" class="headerlink" title="tx::get_participants_len() -&gt; len u64"></a>tx::get_participants_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
+<h3 id="tx-get-participant-index-u64-gt-account-ptr-i64"><a href="#tx-get-participant-index-u64-gt-account-ptr-i64" class="headerlink" title="tx::get_participant(index: u64) -&gt; account_ptr i64"></a>tx::get_participant(index: u64) -&gt; account_ptr i64</h3><p>获取transaction的参与人，需要用account namespace的api处理</p>
+<h3 id="tx-get-values-len-gt-len-u64"><a href="#tx-get-values-len-gt-len-u64" class="headerlink" title="tx::get_values_len() -&gt; len u64"></a>tx::get_values_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
+<h3 id="tx-get-value-index-u64-gt-value-ptr-i64"><a href="#tx-get-value-index-u64-gt-value-ptr-i64" class="headerlink" title="tx::get_value(index: u64) -&gt; value_ptr i64"></a>tx::get_value(index: u64) -&gt; value_ptr i64</h3><p>获取transacation的对应value(uint256)</p>
+<h3 id="state-get-balance-addr-i64-gt-balance-ptr-i64"><a href="#state-get-balance-addr-i64-gt-balance-ptr-i64" class="headerlink" title="state::get_balance(addr: i64) -&gt; balance_ptr i64"></a>state::get_balance(addr: i64) -&gt; balance_ptr i64</h3><p>balance 长度 8*4 &#x3D; 24 </p>
+<h3 id="state-get-owner-num-u64-gt-addr-ptr-i64"><a href="#state-get-owner-num-u64-gt-addr-ptr-i64" class="headerlink" title="state::get_owner(num: u64) -&gt; addr_ptr i64"></a>state::get_owner(num: u64) -&gt; addr_ptr i64</h3><p>addr 长度 33</p>
+<h2 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h2><p>Assign &amp; Append tx</p>
+<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>WASM的发布分为两种: Web or Wasm.</p>
+<h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><p>任何ngcore节点能够作为http server提供http服务(单页面)，端口为52528。默认关闭，通过Flag打开</p>
+<p>例如 <a href="http://app.ngin.sh:52528/#10086/path1/path2" target="_blank" rel="noopener">http://app.ngin.sh:52528/#10086/path1/path2</a></p>
+<p>服务运营者可以通过nginx反代限制app为</p>
+<p><a href="https://app.mydomain.com/path1/path2?param1=1&amp;params2=2" target="_blank" rel="noopener">https://app.mydomain.com/path1/path2?param1=1&amp;params2=2</a></p>
+<p>发布Web应用需要将wasm binary写入Contract字段。在访问时会自动将字段作为文件拉取，并且通过导出的main函数进行执行</p>
+<h3 id="Wasm"><a href="#Wasm" class="headerlink" title="Wasm"></a>Wasm</h3><p>Wasm可以作为网站后端运行，也可以纯提供链上事务或者作为其他Wasi运行库</p>
+<p>Wasm要求Contract为wasm binary.</p>
+<h2 id="当前遇到的问题"><a href="#当前遇到的问题" class="headerlink" title="当前遇到的问题"></a>当前遇到的问题</h2><h3 id="Infinite-loop"><a href="#Infinite-loop" class="headerlink" title="Infinite loop"></a>Infinite loop</h3><p>当前使用wasmtime，无法在运行前拦截vm中infinite loop</p>
+<p>当loop执行，就会导致全网主机阻塞在处理该vm对应的tx上</p>
+<p>感觉该看一下wasm的opcode</p>
+<h3 id="Fee-charging"><a href="#Fee-charging" class="headerlink" title="Fee charging"></a>Fee charging</h3><p>由于wasmtime只提供封闭的ffi，因此无法将opcode与fee进行挂钩</p>
+<p>这里可以理解为我们需要自己写一个ngin专用的wasm runtime</p>
+<p>找材料的时候发现了perlin-network的一个wasm方案，<a href="https://github.com/perlin-network/life" target="_blank" rel="noopener">life</a>.</p>
+<p>钱多好办事哈，人家自己也折腾了个chain daemon叫<a href="https://github.com/perlin-network/wavelet" target="_blank" rel="noopener">wavelet</a>，意思是小波浪</p>
+<p>life里加gas是在compile时候，对每个Block做totalCost的计算（递增1，即每个instruction费用为1），然后给每个block的code前面都加上一个add_gas的instruction。</p>
+<p>当然这个add_gas的ins当前还没用，也不知道他们准备加点啥。</p>
+<p>compile是将wasm binary转换为host上的一个module，他们的api应该是参考的<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/compile" target="_blank" rel="noopener">js interface</a></p>
 ]]></content>
       <tags>
-        <tag>game theory</tag>
-        <tag>federated learning</tag>
+        <tag>todo</tag>
+        <tag>NGIN</tag>
+        <tag>contract</tag>
       </tags>
   </entry>
   <entry>
@@ -1269,6 +1234,41 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
         <tag>todo</tag>
         <tag>ECDSA</tag>
         <tag>cryptography</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Dynamic Game on blockchain-based Federated Learning</title>
+    <url>//dyn-game-for-blockchain-fl/</url>
+    <content><![CDATA[<h1 id="Mobile-Devices-Strategies-in-Blockchain-Based-Federated-Learning-A-Dynamic-Game-Perspective"><a href="#Mobile-Devices-Strategies-in-Blockchain-Based-Federated-Learning-A-Dynamic-Game-Perspective" class="headerlink" title="Mobile Devices Strategies in Blockchain-Based Federated Learning: A Dynamic Game Perspective"></a>Mobile Devices Strategies in Blockchain-Based Federated Learning: A Dynamic Game Perspective</h1><p>Sizheng Fan; Hongbo Zhang; Zehua Wang; Wei Cai</p>
+<p>IEEE Transactions on Network Science and Engineering</p>
+<ul>
+<li>系统建模和制定：我们提出并实施了一种基于智能合约的激励机制，以鼓励移动设备参与 FL 任务。在这种情况下，提出了两种移动设备在 FL 任务中的策略模型。</li>
+<li>动态博弈分析：据我们所知，这是第一个为 FL 动态博弈建模的工作，为进一步研究奠定了基础。我们证明了两个模型的纳什均衡（NE）和混合策略NE的存在性，并提出了相应的两种算法来实现。仿真结果证明了两种算法的收敛性，与 DSM 相比，CSM 可以有效地提高移动设备的收益。</li>
+</ul>
+<hr>
+<h2 id="Dynamic-Game-for-Blockchain-Based-Federated-Learning-基于区块链的联邦学习动态博弈"><a href="#Dynamic-Game-for-Blockchain-Based-Federated-Learning-基于区块链的联邦学习动态博弈" class="headerlink" title="Dynamic Game for Blockchain-Based Federated Learning 基于区块链的联邦学习动态博弈"></a>Dynamic Game for Blockchain-Based Federated Learning 基于区块链的联邦学习动态博弈</h2><p>FL 任务过程由多个全局迭代组成，如图 3 所示。FL 任务由多个全局迭代组成。在每一次全局迭代中，请求者会在每次全局迭代中公布一个固定的奖励 $B$ ，由workers决定是否参与每一次全局迭代。我们将请求者和移动设备之间的交互建模为动态游戏。相互作用可以按以下顺序说明。</p>
+<p>如图 4 所示，结合第 III 节中提到的基于联盟区块链的 FL 系统，请求者将发布她&#x2F;他的任务需求，包括数据类型、模型类型（即卷积神经网络（CNN）、递归神经网络(RNN)), 最大计算时间 $T_{max}$ 和 FL 任务开始时的预算 $B$ （步骤 1）。</p>
+<hr>
+<img src="/dyn-game-for-blockchain-fl/2023-06-11-20-16-09.png" class="">
+
+<hr>
+<h2 id="Dynamic-Game-for-Blockchain-Based-Federated-Learning"><a href="#Dynamic-Game-for-Blockchain-Based-Federated-Learning" class="headerlink" title="Dynamic Game for Blockchain-Based Federated Learning"></a>Dynamic Game for Blockchain-Based Federated Learning</h2><p>下面将显示在一次全局迭代中请求者与移动设备之间的交互。给定固定请求者的固定预算 $B$ ，最大计算和通信时间 $T_{max}$ （步骤2），每个移动设备 $m_j \in M$ 可以根据其他移动设备在当前全局迭代中的策略来决定她&#x2F;他的策略过去并将其记录在区块链上（第 3 步）。</p>
+<p>收到移动设备的信息后，智能合约将计算奖励（第 4 步）。移动设备将接收请求者的模型并开始使用其本地数据集进行训练（第 5 步）。完成训练过程后，移动设备将模型参数发送给请求者（步骤 6）。</p>
+<p>在每次全局迭代中重复图 4 中的步骤 3、4、5 和 6。我们假设移动设备在每次全球迭代中都保持连接。每个移动设备的目标是在一次全局迭代中选择最佳策略，使她&#x2F;他在整个 FL 任务中的预期收益最大化。</p>
+<hr>
+<img src="/dyn-game-for-blockchain-fl/2023-06-11-20-16-20.png" class="">
+
+<hr>
+<h2 id="Incentive-Mechanism-Design-激励机制设计"><a href="#Incentive-Mechanism-Design-激励机制设计" class="headerlink" title="Incentive Mechanism Design 激励机制设计"></a>Incentive Mechanism Design 激励机制设计</h2><p>在我们的 FL 模型中，请求者将在每次全局迭代中提供预算 B ，并与 M 移动设备竞争预算。移动设备将在每次全局迭代中将其策略决策（即使用的数据大小）发送给智能合约。我们使用 sj,n 表示移动设备 mj 在 n th全局迭代中选择的使用的数据大小，</p>
+<p>FL 中现有的大多数激励机制都具有很高的复杂性 [26]、[28]。然而，FL 中有效的激励机制应该是低复杂性和易于实施的。每次全局迭代的实时性要求是移动设备在下一次全局迭代之前收到请求者的补偿，这可以帮助他们在接下来的全局迭代中做出决策。此外，移动设备经常面临电量不足、信号弱等问题。因此，激励机制应该具有较低的计算复杂度，节省移动设备的等待时间。本文提出的激励机制如下图所示。</p>
+<p>$<br>\begin{equation*}<br>p_{j, n} &#x3D; B \frac{s_{j, n}}{s_{j, n} + \sum <em>{i \ne j}s</em>{i, n}} \tag{5}<br>\end{equation*}<br>$</p>
+<p>从式（5）我们可以了解到，请求者在当前全局迭代中根据移动设备的数据大小按比例将其固定预算分配给一组移动设备。</p>
+<hr>
+<h2 id="离散策略模型（DSM）"><a href="#离散策略模型（DSM）" class="headerlink" title="离散策略模型（DSM）"></a>离散策略模型（DSM）</h2><p>在本文中，我们从移动设备的角度考虑两种策略模型：离散策略模型（DSM）和连续策略模型（CSM）。 DSM 意味着移动设备可以决定是否参与 FL 任务。如果移动设备决定加入，她&#x2F;他的所有数据都将用于训练模型。而CSM是指移动设备可以确定FL任务中使用的数据百分比。受 FL 迭代交互的启发，我们将移动设备的决策问题建模为动态游戏，以解决训练过程中信息不完整的问题。具体来说，在联盟链系统的赋能下，即使移动设备不知道其他人的个人信息，包括总数据量和训练成本，她&#x2F;他也可以观察其他移动设备的策略历史并调整她&#x2F;他的策略以最大化 FL 任务中的收益。</p>
+]]></content>
+      <tags>
+        <tag>game theory</tag>
+        <tag>federated learning</tag>
       </tags>
   </entry>
   <entry>
@@ -2091,6 +2091,22 @@ C --&gt;|load| E[Gephi]
 <p>由于算法的迭代性质，并非所有“标记”的非法用户都必然留在非法组中。例如，有可能一些用户已经被 BIG 标记，但主要是为了兼容目的而使用ether。这将被步骤2中的算法识别，并且用户将被移动到符合要求的组中。</p>
 <p>在扩展算法之后产生的恶意集合是<strong>23,638</strong>个地址，并在2次迭代之后收敛。一个有趣的发现是，尽管恶意集增加了很多，但是传出事务中的 ETH 总量只有轻微增加，达到1,316,153.44 ETH。</p>
 <p>结论<br>本文的目的是引发一些讨论，什么是非法活动量化的以太和其他 DeFi 系统，我们如何可能检测和分析它。我们介绍了我们对 Ethereum 的最初调查结果，并讨论了我们的观察结果。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Extension Privacy Policy</title>
+    <url>//extension-privacy-policy/</url>
+    <content><![CDATA[<p>Here is the common privacy policy to all extensions published by myself:</p>
+<h2 id="Privacy-Policy"><a href="#Privacy-Policy" class="headerlink" title="Privacy Policy"></a>Privacy Policy</h2><p>We respect the privacy of all users of our service and are committed to protecting it. This Privacy Policy explains how we collect, use, and protect your personal information.</p>
+<h2 id="Information-We-Do-Not-Collect"><a href="#Information-We-Do-Not-Collect" class="headerlink" title="Information We Do Not Collect"></a>Information We Do Not Collect</h2><p>We do not collect any personal information about you when you use our service. This includes your name, email address, browsing data, usage data, location information or any other data that can be used to identify you. </p>
+<p>No personal information is transmitted to or stored by us at any time. Any information transmitted between your device and our service is ephemeral and immediately deleted after it is no longer necessary to fulfill the intended purpose.</p>
+<h2 id="User-Data-Storage"><a href="#User-Data-Storage" class="headerlink" title="User Data Storage"></a>User Data Storage</h2><p>All data created through the use of our service is stored locally on your device only. At no point is any user data transmitted to or stored by us, even temporarily.</p>
+<p>Any data backups created by our service are saved to your local storage only. These backups are encrypted and only accessible on devices you authorize.</p>
+<p>We have no access to read or retrieve any user data created while using this service at any time.</p>
+<h2 id="Data-Security"><a href="#Data-Security" class="headerlink" title="Data Security"></a>Data Security</h2><p>Because we do not collect or store any user data, protecting user data is entirely under your control. We encourage you to take precautions to secure data saved locally on your devices. This includes setting a strong device password and enabling encryption if available.</p>
+<p>We utilize transport layer security (TLS) to protect all traffic between your device and our service while using the service. This ensures no transmitted data can be intercepted by an unauthorized third party.</p>
+<h2 id="Changes-to-this-Policy"><a href="#Changes-to-this-Policy" class="headerlink" title="Changes to this Policy"></a>Changes to this Policy</h2><p>We may occasionally update this Privacy Policy as needed to comply with relevant regulations or address changes in our service. But our commitment to not collecting any personal user data will not change without your consent.</p>
+<p>Get in touch if you have any questions or concerns about our privacy practices. User privacy is hugely important to us. We want you to feel fully secure in using our service.</p>
 ]]></content>
   </entry>
   <entry>
@@ -5206,6 +5222,155 @@ C --&gt;|load| E[Gephi]
       </tags>
   </entry>
   <entry>
+    <title>Reading paper in FIT5152: 知识评估和进展分析与设计的统一框架 A Unified Framework for Knowledge Assessment and Progression Analysis and Design</title>
+    <url>//fit5152-a1-paper/</url>
+    <content><![CDATA[<p>作者 Shuhan Wang, Fang He &amp; Erik Andersen</p>
+<p>论文翻译，侵删</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>设计引人入胜的学习内容固然重要，但也很困难，并且通常涉及许多手动规范。 我们提出了一个统一的框架，该框架利用<strong>自动问题分解和部分排序图的构建</strong>来简化多个工作流：知识评估以及进行性分析和设计。 我们通过在线日语评估工具对847名参与者进行了研究，结果表明我们的框架可以有效地衡量学生的能力并预测学生在特定问题上的表现。 我们还提供了对课程分析的结果，结果表明两种不同教科书的进度令人惊讶地相似，并且我们的框架可以导致发现专家进行设计的一般原理。 最后，我们演示了自动进度生成以及所需的排序和步调，允许进行进度定制以及将从一个课程中提取的参数映射到另一个课程</p>
+<span id="more"></span>
+
+<p>ACM Classification Keywords</p>
+<p>H.5.0 Information Interfaces and Presentation: General</p>
+<p>Author Keywords</p>
+<p>education; automatic problem decomposition; knowledgeassessment; progression analysis and design</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>教育中的一个关键挑战是保持学生的参与度，而首要考虑的是向特定学生展示最佳知识的顺序。 排序是一个挑战：首先应该引入哪些知识？ 另一个速度是：进步会变得越来越困难。尽管有教育和心理学等方面的指导原则[15，55，59]可以帮助设计进步，但缺乏务实和自动的方法来弥合教育理论与实践之间的差距， 尤其是整个课程的规模。 设计和优化进度的困难也限制了课程适应每个学生需求的能力</p>
+<p>在HCI中，此问题与教育软件[7、14]，视频游戏[11、22、33、37、45]和软件可学习性[25、31]的设计有关。目前，我们主要是手工设计进度，这很昂贵，并且限制了我们寻找最佳进度的实验能力。最近，在自动进度设计中已有一些工作[6，11]。尽管这项工作能够自动组织内容，但仅解决了程序性主题和视频游戏级设计。我们仍然缺乏一个通用的框架来表征能够处理一些非过程性主题（如语言学习）的教育进程。此外，我们<strong>需要一种形式上的方法来使用相同的框架来评估学生的知识</strong>，以便<strong>我们可以针对该学生量身定制学习进度和进度</strong>。理想情况下，我们将能够在不费吹灰之力的情况下针对广泛的教育领域建立适应性的进步。</p>
+<p>在本文中，我们提出了一个框架，<strong>该框架允许针对非过程性任务进行自动问题分解和部分排序图构造。该框架促进了多个工作流程</strong>。它建立在项目反应理论[53]，知识空间理论[28]和知识追踪[14]的基础之上，以创建学生知识和问题难度的多维度量，从而可以快速评估和预测绩效。它还定义了起搏和其他进度参数的参数空间，并提供了一种方法来表征和比较进度以及设计符合所需参数的新进度。</p>
+<p>我们对框架进行了多次评估。首先，我们提出了对自动问题分解和偏序图构建的理论贡献，以帮助外语学习语法，这是一个重要的非程序性主题。然后，我们讨论了一个有847名参与者的用户对日语评估工具的评估，这表明我们的自动评估算法可以根据项目响应理论准确地进行能力评估和绩效预测。我们还提供了自动分析语言学习进度的结果，显示出两本用于学习日语的教科书令人惊讶地具有相似的节奏和其他进阶特征，并且两种在线语言学习工具具有非常不同的进阶设计策略。最后，我们证明了我们的框架可以自动生成具有所需特征的进度，例如学习进度以及学习和复习的比例。这使得从进度分析中获得的见解可以直接应用于进度设计和个人进度剪裁</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><h3 id="智能辅导系统"><a href="#智能辅导系统" class="headerlink" title="智能辅导系统"></a>智能辅导系统</h3><p>有成功的适应性学习系统，例如认知母语导师[7]。其中一些工作专门针对语言学习[63，65]。认知导师通过跟踪认知模型中个体生产规则的表现来利用知识边缘跟踪[14]来跟踪知识的获取并提供量身定制的指导[14，39]。该模型已通过多种方式扩展，包括估算学生了解技能的初始概率[49]，评估帮助功能对获得概率的影响[10]以及与项目难度模型集成[ 50]。另一种方法是逻辑回归，这对于涉及多种技能的任务特别有效[64]。但是，这些方法通常不考虑起搏。取而代之的是，他们一直给问题赋予特定的生产规则，直到“隐马尔可夫模型”获得了95％的置信度，即学生已经学会了该规则，然后继续研究下一个概念。此外，认知导师很难构建。据估计，设计一个小时的内容需要多达200-300个小时的专家设计工作[3]，尽管更新的设计技术已将其减少到50-100个小时[4]。我们的工作旨在开发自动分析和优化教育进度的途径。</p>
+<h3 id="教育与心理学"><a href="#教育与心理学" class="headerlink" title="教育与心理学"></a>教育与心理学</h3><p>许多理论都支持适度的难度对于交往很重要[1，8，16，20，34，47]。当国际象棋选手的排名略高于他们时[1]，最不愉快的情况。对非竞技游戏的进展分析也支持中等难度的使用[44]。 Csikszentmihalyi的流量理论规定，当挑战既不太高又不太低时，人们最会参与其中[16]。 Vygotsky的近端发展区[59]规定，学习者可以在一定指导下获得一系列概念，而教育内容应继续以此为目标。Reigeluth和Stein的阐述理论[55]认为，简单概念的首先应教授一项任务，然后逐步讲解原始任务，然后逐步进行更复杂的任务。 Li等。通过使用机器学习代理检查问题排序来研究问题排序，发现交错的问题排序比阻塞的排序导致更快的学习[43]。当前，我们缺乏实用的，自动的方法来定量描述这些原理并将其应用于实际的进步，而我们的工作旨在做到这一点。</p>
+<h3 id="语言教育"><a href="#语言教育" class="headerlink" title="语言教育"></a>语言教育</h3><p>Krashen [42]提出要以可预测的顺序（自然顺序假设）学习概念，并且当学习者接触的语言超出了他或她所能理解的范围（输入假设）时，就会发生语言习得。 语言学习文献中有广泛的证据表明，学习者在使用语法语素[30]，动词否定[13、62]，问题[52]，所有格确定语[61、66]，相对 条款[29、38]和时间参考[48]。 我们的工作旨在创建一个平台，以评估这些理论并确定它们是否能够激发扎根的学习进展，从而促进学习和参与度的提高</p>
+<h3 id="基于跟踪的部分排序"><a href="#基于跟踪的部分排序" class="headerlink" title="基于跟踪的部分排序"></a>基于跟踪的部分排序</h3><p>Andersen提出了一种通过对要学习的过程进行静态分析来自动探索任务进度空间的技术[6]。该技术通过分析在该任务上运行过程所获得的执行跟踪来表征任务。通过将每个任务描述为基本操作的序列，可以指定排序问题难度的部分排序。实验证明，这种部分排序可以与用户在教育代数游戏中对困难的感知相匹配[6]。基于轨迹的框架已应用于数学[6]，视频游戏级设计[11]和教学泰语[5]。这项工作还使用了测试输入生成工具，例如Pex [58]和FShell [36]，它们系统地创建具有高代码覆盖率的测试用例套件，以对所有可能的跟踪（在一定范围内）产生问题。但是，此框架不能应用于非过程性主题。例如，尚不清楚如何分析人类如何理解自然语言的执行轨迹。我们在此工作的基础上提出了问题分解和组织的通用框架，该框架可以应用于非过程教育领域，例如语言学习。在此框架内，我们可以衡量学生的能力并预测学生在新问题上的表现</p>
+<h3 id="知识评估：IRT和KST"><a href="#知识评估：IRT和KST" class="headerlink" title="知识评估：IRT和KST"></a>知识评估：IRT和KST</h3><p>响应理论（IRT）为知识评估提供了一个框架[26，27，54]。 IRT认为，对某个项目做出正确反应的概率是项目参数和个人能力的函数[32]。勋爵等。提出了3PL模型[46]，该模型考虑了三个项目参数：项目难度，项目歧视和猜测概率。 Rasch [53]提出了一个更简单的模型，该模型规定正确答案的可能性仅由学生的能力和项目难度之间的差异来确定。然而，IRT模型的一个共同缺点是，它们使用一维数值分数来衡量学生的能力和项目难度[28]，这并不反映出学生可能会根据自己掌握的知识而发现各种困难的子集。衡量学生能力和捕获此类差异的问题难度之间差异的方法。我们使用从在线知识评估平台收集的用户数据验证此模型。</p>
+<p>知识空间理论（KST）是用于研究知识的层次结构和强大的知识评估工具的公认观点[23，24]。有几种基于KST的辅导系统，例如Alexs [28]，RATH [35]和一种用于学习有机化学的辅导系统[57]。根据KST，学生的知识表示为知识状态，即学生可以解决的一系列问题。问题被组织成一个知识结构，其中包含所有可能的知识状态以及这些状态之间的联系[2，40，41]。研究人员提出了构建知识结构的方法，例如查询专家[41]和贝叶斯推理[21]。由于表示知识状态的复杂性，Falmagne等人。引入了“边缘”的概念来表征学生的知识，可以通过基于“熵”的方法来计算[28]。我们在此工作的基础上提出了一种自动框架，该框架可以将问题分解成其先决条件的基本技能，并为一系列问题建立层次结构。然后，我们的框架可以通过测量学生在该结构中的能力与问题之间的关系，来预测学生在新问题上的表现。</p>
+<h2 id="非过程技能的部分排序"><a href="#非过程技能的部分排序" class="headerlink" title="非过程技能的部分排序"></a>非过程技能的部分排序</h2><p>为了选择适合每个学生的难易程度的练习问题，我们需要一个层次结构来编码问题之间的难度关系。 一种简单的方法是请专家指定这些关系。 但是，随着问题集的规模越来越大，这变得异常困难。 理想情况下，我们将具有自动组织问题的方法。</p>
+<p>在先前的工作中[6，12]，研究人员为过程任务建立了部分排序图。 这项工作使用过程执行跟踪来组织内容，并对这些跟踪进行部分排序以创建分层的内容结构。 例如，一个人可以识别出解决整数加法问题所需的至少四个基本技能：不带进位的一位数字加法（A），不带进位的一位数字加法（B），写进位（C） ，然后放下最后一个进位（D）。 例如，问题可以分解为以下基本技能</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>2+3</th>
+<th>15+18</th>
+<th>93+15</th>
+<th>298+865</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>追溯</td>
+<td>A</td>
+<td>ACB</td>
+<td>AACD</td>
+<td>ACBCBD</td>
+</tr>
+</tbody></table>
+<p>但是，在某些领域（例如语言学习）中，目标对象的知识无法轻松地建模为单个过程。要在此类领域引入层次化的知识结构，我们需要对过程领域进行泛化。为此，我们的框架利用了组合性这一概念，即可以将问题分解为较小的概念单元。在一些半程序领域，例如数学和语言学习中，对此进行了充分的研究[6，60]。</p>
+<p>例如，日语句子可以分解为语法模板，专家语言教师和语言学家认为语法单元是最重要的语法知识，并让学生实际学习语言课程。这些模板已被证明对语言学习者的文本难度评估很有帮助[60]。我们发现，语法理解日语句子的特定任务可以分解为（多个）语法模板集。例如，这是三个日语句子及其语法模板</p>
+<img src="/fit5152-a1-paper/image-20210112002236844.png" class="" title="image-20210112002236844">
+
+<p>我们可以看到S1只有一个语法模板：（–の）。对于日语学习者来说，S2比S1更难，因为它不仅具有（–の）而且还有另一个模板（–は）。 S3重复相同的模板（–の）两次，因此也比S1难。 这些关系无法通过[6]中的部分排序来捕获，因为尚不清楚如何程序化人类如何理解这些句子的过程。 但是，通过考虑概念的多集而不是执行跟踪，我们可以按如下方式容纳它们：</p>
+<p>**定义1a. ** 一个问题可以分解为问题所需的一系列概念（基本技能）。 由于问题可能会要求学生重复一次或多次重复某些技能，因此我们使用一组表示为p(s)的基本技能来表征问题的难度</p>
+<p><strong>定义1b</strong>。我们说，如果且仅当p（s1）⊒ p（s2）时，问题s1至少与s2一样困难，表示为s1≥s2。 这意味着，如果学生能够解决s1，那么他&#x2F;她也必须能够解决s2 [6]</p>
+<p>这里⊒表示多集之间的超集关系。 如果是p（s1）⊒（s2），那么对于问题2次所需的任何概念c，也至少也需要1次。例如，AABC⊒ABC为true，而AABCC⊒ABBC为true，因为ABBC有两个“ B”，而AABCC只有一个</p>
+<p><strong>定义1c</strong>。严格偏序1&gt; s2定义为s1≥s2^s2≱s1，这意味着s1（严格来说）比s2难。</p>
+<p><strong>定义1d</strong>。如果说且仅当s1&gt; s2并且没有其他问题3使得s1&gt; s3&gt; s2，我们说问题1比s2更难</p>
+<p>使用定义1d，我们为一系列问题构建了层次结构，如下所示：</p>
+<p><strong>定义2</strong>.我们将一组问题S &#x3D; {s1，s2，···}（我们称为普遍问题集）组织为偏序图G &#x3D; 〈S，E〉，其中</p>
+<img src="/fit5152-a1-paper/image-20210112005148577.png" class="" title="image-20210112005148577">
+
+<p>即，当且仅当sj比si直接困难时，才在部分排序图中存在从问题si到sj的（定向）边。 图1显示了部分排序图的示例。</p>
+<img src="/fit5152-a1-paper/image-20210112005317740.png" class="" title="image-20210112005317740">
+
+<p>图一（部分排序图中的学生知识边界。 大写字母表示概念，带有字符串的节点表示问题。 学生可以解决绿色问题，而不能解决红色问题。 从每个问题到知识边界的距离以d表示。 空问题s0是一个焦虑问题，被添加来帮助我们计算距离）</p>
+<p><strong>定义3</strong>.我们用知识边界K衡量学生的能力，知识边界K是学生可以解决的最困难的问题。 形式上，如果这是学生可以解决的问题集，则</p>
+<img src="/fit5152-a1-paper/image-20210112172807977.png" class="" title="image-20210112172807977">
+
+<p>以图1中的偏序图为例。 假设一个学生可以解决问题A，AB，B，AABC和BCC（图中的绿色节点），而不能解决ABCB，D或ABCBD（图中的红色节点）。 然后，知识边界仅包含两个问题：AABC和BCC，因为没有其他“绿色”问题比AABC或BCC难。 知识边界不包括A，AB或B，因为存在一个“绿色”问题AABC，比所有问题都难</p>
+<h2 id="计算知识边界"><a href="#计算知识边界" class="headerlink" title="计算知识边界"></a>计算知识边界</h2><p>We present a graph coloring algorithm of calculating a stu-dent’s knowledge boundary in the partial ordering graph. Thisalgorithm is based on two properties of the partial ordering: ifa student can solve problems, he must be able to solve anyproblems′that is at most as hard as s(s≥s′); if a studentcannot solve problems, he must not be able to solve any prob-lems′that is at least as hard as s(s′≥s).  For example, if astudent can solve problem AB, he&#x2F;she can also solve problemsA and B; if a student cannot solve problem ABCB, then he&#x2F;she cannot solve problem ABCBD either.</p>
+<p>我们提出了一种图形着色算法，用于计算部分排序图中学生的知识边界。 该算法基于偏序的两个属性：如果一个学生能够解决问题，那么他必须能够解决至多像s(s≥s’)一样困难的任何问题。 如果学生不能解决问题，则他必须不能解决至少与 s(s’≥s) 一样困难的任何问题。 例如，如果学生可以解决问题AB，那么他&#x2F;她也可以解决问题A和B； 如果学生不能解决问题ABCB，那么他&#x2F;她也不能解决问题ABCBD。</p>
+<p>At the start of the algorithm, all the problems (nodes) in thepartial ordering graph are uncolored. The algorithm asks thestudent whether he&#x2F;she can solve some problem s*.  If thestudent can solve s*, all the nodes that are at most as hard as s*(including s* itself) will be colored ‘solvable’; if the studentcannot solve s*, all the nodes that are at least as hard as s* (including s* it self) will be colored ‘unsolvable’.  Figure 2 shows how this coloring process works.</p>
+<p>在算法开始时，部分排序图中的所有问题（节点）都是未着色的。 该算法询问学生是否可以解决某些问题s*。 如果学生能够求解s*，则所有与s*一样难的节点（包括s*本身）将被着色为“可求解”； 如果学生不能求解s*，则所有至少s*同等困难的节点（包括s*自身）将被着色为“无法解决”。 图2显示了此着色过程的工作方式。</p>
+<p>The algorithm repeatedly selects an uncolored problem s* from the partial ordering graph, asks the student to solve it, and then updates the coloring of the graph based on the response. Thisis a greedy algorithm designed to minimize the number ofproblems that must be given to the student.  Formally, if $n^+_s$ denotes the number of the uncolored problems that are at mostas hard as $s$, and $n^-_s$denotes the number of the uncolored problems that are at least as hard as s, then we can maximize thenumber of problems that can be colored based on the student’s response by greedily selecting a problem s* as follows:</p>
+<p>该算法从偏序图中反复选择一个无色问题s*，要求学生解决它，然后根据响应更新该图的颜色。 这是一种贪心算法，旨在最大程度地减少必须给学生的问题。 形式上，如果$n^+_s$ 表示最多没有硬色问题的无色问题的数量，而 $n^-_s$表示至少至少像s一样硬的无色问题的数量，那么我们可以使可以 通过贪婪地选择问题s*，根据学生的回答进行着色：</p>
+<img src="/fit5152-a1-paper/image-20210112191104189.png" class="" title="image-20210112191104189">
+
+<h2 id="预测特定问题的表现"><a href="#预测特定问题的表现" class="headerlink" title="预测特定问题的表现"></a>预测特定问题的表现</h2><h3 id="到知识边界的距离-Distance-to-Knowledge-Boundary"><a href="#到知识边界的距离-Distance-to-Knowledge-Boundary" class="headerlink" title="到知识边界的距离 Distance to Knowledge Boundary"></a>到知识边界的距离 Distance to Knowledge Boundary</h3><p>In order to recommend problems at appropriate difficulty levels to the students, we need to predict students’ performanceon problems. Existing IRT studies have proposed several popular models stipulating how student performance is related tostudent ability [46, 53].  However, they measure a student’sability and the difficulty of a problem using unidimensionalnumeric scores, which is incomprehensive [28].</p>
+<p>为了向学生推荐适当难度的问题，我们需要预测学生在问题上的表现。 现有的IRT研究提出了几种流行的模型，这些模型规定了学生的表现与学生能力之间的关系[46，53]。 但是，他们使用一维数字分数来衡量学生的能力和问题的难度，这是不全面的[28]。</p>
+<p>Ideally, prediction of a student’s performance would utilizemultidimensional metrics to measure the distance between aproblem and what a student already knows. The key technicalchallenge in the design of multidimensional metrics is thatit is impossible to measure this distance without taking intoaccount the hierarchical structure of the problem space. In ourframework, we can measure this as the distance from the prob-lem to the knowledge boundary in the partial ordering graph.We use signed numbers to distinguish which ‘side’ of theknowledge boundary a problem is on: problems ‘inside’ theboundary (which the student can solve) have positive distanceswhile problems ‘outside’ the boundary (which the student can-not solve) have negative distances.  Using this distance, wecan leverage IRT models to predict a student’s performanceon new problems.</p>
+<p>理想情况下，对学生成绩的预测将利用多维指标来衡量问题和学生已经知道的知识之间的距离。 多维度量设计中的关键技术挑战是，如果不考虑问题空间的层次结构，就无法测量该距离。 在我们的框架中，我们可以用偏序图中图中从问题到知识边界的距离来衡量这个问题。 学生可以解决）的距离为正，而“超出”边界的问题（学生无法解决的）的距离为负。 利用此距离，我们可以利用IRT模型来预测学生在新问题上的表现。</p>
+<p>Here, we give the definition of this distance together with theexamples in Figure 1. Assume we have the universal problem set S, and a student can solve a subset of problems T.  For example, in Figure 1,S&#x3D;{A, AB, B, AABC, BCC, ABCB, D,ABCBD},T&#x3D;{A, AB, B, AABC, BCC}, and the knowledge boundary K&#x3D;{AABC, BCC}. We calculate the distance fromany problems∈Sto the knowledge boundaryK, indicated as d(s, K), following the steps below:</p>
+<p>在这里，我们给出该距离的定义以及图1中的示例。假设我们有通用问题集S，并且学生可以解决问题T的子集。例如，在图1中，S &#x3D; {A，AB， B，AABC，BCC，ABCB，D，ABCBD}，T ＝ {A，AB，B，AABC，BCC}，知识边界K ＝ {AABC，BCC}。 我们按照以下步骤计算从任何问题∈S到知识边界K的距离，表示为d(s, K)：</p>
+<p><em>Step 1: Calculate distances for problems on the boundary</em></p>
+<p><em>步骤1：计算边界上问题的距离对于任何问题，</em></p>
+<p>For any problemssuch thats∈K,d(s,K) &#x3D;0.</p>
+<p>对于任何问题s使得s∈K，d(s, K)&#x3D; 0</p>
+<p>For example, the distance of problems AABC and BCC is 0</p>
+<p>例如，问题AABC和BCC的距离为0例如，问题AABC和BCC的距离为0</p>
+<p><em>Step 2: Calculate distances for problems inside the boundary</em></p>
+<p><em>步骤2：计算边界内问题的距离</em></p>
+<p>For any problem s such that s∈T−K, based on the definition of K, there must be one or more s′∈K such that s′≥s (otherwise, s should be contained in K) , and</p>
+<p>对于基于s的定义s∈T-K的任何问题s，必须存在一个或多个s′∈K使得s′≥s（否则s应该包含在K中），并且</p>
+<img src="/fit5152-a1-paper/image-20210112211143812.png" class="" title="image-20210112211143812">
+
+<p>where d is(s,s′) indicates the length of the shortest directed path from s to s′ in the partial ordering graph.  If there is no directed path from s to s′,  dis(s,s′) &#x3D;∞.  Note that if  s′≥s  ,then there must exist at least one directed path from s′ to s.</p>
+<p>其中d is（s，s’）表示部分排序图中从s到s’的最短定向路径的长度。 如果没有从s到s’的定向路径，则dis（s，s’）&#x3D;∞。 请注意，如果s’≥s，则必须存在至少一条从s’到s的定向路径。</p>
+<p>For example, the distance of problem AB is 1, since prob-lem AABC, which is on the knowlegde boundary, is directlyharder than AB. Similar for problem B (BCC is direclty harderthan B). The distance of problem A is 2, since the shortest di-rected path from A to any problem on the knowledge boundary(which is A→AB→AABC) has length 2</p>
+<p>例如，问题AB的距离为1，因为在知识已知边界上的问题AABC比AB直接困难。 与问题B相似（密件抄送比B硬）。 问题A的距离为2，因为从A到知识边界上任何问题的最短定向路径（A→AB→AABC）的长度为2</p>
+<p><em>Step 3:Calculate distances for problems outside the boundary</em></p>
+<p><em>步骤3：计算边界外问题的距离</em></p>
+<p>In a hierarchical knowledge structure, it follows intuitively thatproblems that are further away from the boundary will be moredifficult to the student. Therefore, for any problemssuch thats∈S−T, we define the distanced(s,K)to be shortest directedpath from any problem inTtos. Note that this distance alsohas a teaching interpretation: if easier problems should alwaysbe taught before harder problems [55], then this distance alsomeasures the number of problems that need to be taught beforeteachings.</p>
+<p>在分层的知识结构中，直观地认为，远离边界的问题对学生而言将更加困难。 因此，对于诸如s∈ST的任何问题，我们将距离（s，K）定义为距Ttos中任何问题最短的有向路径。 注意，这个距离也有一个教学上的解释：如果总是在较困难的问题之前总是先教更容易的问题[55]，那么这个距离也可以衡量在教学之前需要教的问题数量。</p>
+<p>ince there are some basic problems that have no problemseasier than them, and thus have no incoming edges in the par-tial ordering graph, there is not always a path from a probleminTtos.  For instance, there is no directed path from anyproblem inTto problemDin Figure 1.  To resolve this, weadd anull problems0, the pseudo problem with no prerequisiteconcepts, toT. For any problems∈S−T, if there is no otherproblems′such thatsis directly harder thans′(namely,shas no incoming edges), we add an edge(s0,s)to the partialordering graph</p>
+<p>由于存在一些基本问题，没有比这些问题更容易解决的问题，因此在空间排序图中没有传入的边，因此从问题中获取问题的路径并不总是那么容易。 例如，图1中没有从任何问题到问题D的直接路径。要解决此问题，我们将无问题先决条件的伪问题anull问题0添加到T。 对于任何问题∈ST，如果没有其他问题’使假设比’s’直接困难（即没有进入的边），我们将偏边（s0，s）添加到偏序图</p>
+<p>Now there is at least one directed path from the null problem s0 or some problem in T to s. We can define the distance as:</p>
+<p>现在，从空问题s0或T tos中的某个问题开始，至少有一条有向路径。 我们可以将距离定义为：</p>
+<img src="/fit5152-a1-paper/image-20210112234958809.png" class="" title="image-20210112234958809">
+
+<p>Note that d(s,K) is negative if and only if s is outside the knowledge boundary.For example, the distance of problem ABCB is -1, since itis directly harder than the “green” problem AB. Problem D has no incoming edges in the partial ordering graph, hence weadd an edge from the null problem s0 to D, and the distanceof problem D is -1 since the path s0→D has length 1. Lastly,the distance of problem ABCBD is -2.  Actually, there aretwo shortest paths with length 2: AB→ABCB→ABCBD ands0→D→ABCBD.</p>
+<p>请注意，当且仅当s在知识边界之外时，d(s, K)才为负。例如，问题ABCB的距离为-1，因为它比“绿色”问题AB直接困难。 问题D在偏序图中没有输入边，因此我们将零问题s0到D加上一条边，并且由于路径s0→D的长度为1，因此问题D的距离为-1。最后，问题ABCBD的距离为 -2。 实际上，有两条最短的路径，其长度为2：AB→ABCB→ABCBD和s0→D→ABCBD。</p>
+<p>The  metric  of  distance  is  dependent  on  the  density  of  thepartial-ordering graph. This is inevitable since the measure-ment is based on the hierarchical structure of the problemspace. We believe that for most well-defined problem spaces,it is a reasonable assumption that the partial ordering graph will be sufficiently dense.  We will demonstrate this metricworks well for a well-built Japanese language learning corpusin the next section</p>
+<p>距离的度量取决于偏序图的密度。 这是不可避免的，因为测量是基于问题空间的层次结构。 我们认为，对于大多数定义明确的问题空间，可以合理地假设偏序图将足够密集。 我们将在下一部分中很好地演示此度量标准，以构建完善的日语学习语料库。</p>
+<p>In the later part of this paper, we will use d to denote d(s,K) for convenience</p>
+<p>在本文的后半部分，为方便起见，我们将使用d来表示d(s, K)。</p>
+<h3 id="Adapted-Rasch-model-改编的Rasch模型"><a href="#Adapted-Rasch-model-改编的Rasch模型" class="headerlink" title="Adapted Rasch model 改编的Rasch模型"></a>Adapted Rasch model 改编的Rasch模型</h3><p>In this section, we describe how we can adapt existing uni-dimensional IRT models to build a multidimensional metricthat leverages the partial ordering graph and the distance d calculated in the previous section in order to predict studentperformance.  One of the most famous models of IRT, the Rasch model [53], stipulates that a student’s performancePis a function of the difference between the student’s ability θ and the problem’s difficulty b</p>
+<p>在本节中，我们描述如何适应现有的一维IRT模型以建立多维度量标准，该度量标准利用上一节中计算的偏序图和距离d来预测学生的表现。 Rasch模型[53]是IRT最著名的模型之一，它规定学生的表现是学生的能力θ与问题难度b之差的函数。</p>
+<img src="/fit5152-a1-paper/image-20210113085907577.png" class="" title="image-20210113085907577">
+
+<p>xxx</p>
+<p>In  the  next  section,  we  will  demonstrate  that  this  adaptedmodel nicely fits the data collected from our knowledge as-sessment platform</p>
+<p>在下一节中，我们将证明该适应模型非常适合从我们的知识评估平台收集的数据</p>
+<h2 id="知识评估的评价-EVALUATION-OF-KNOWLEDGE-ASSESSMENT"><a href="#知识评估的评价-EVALUATION-OF-KNOWLEDGE-ASSESSMENT" class="headerlink" title="知识评估的评价 EVALUATION OF KNOWLEDGE ASSESSMENT"></a>知识评估的评价 EVALUATION OF KNOWLEDGE ASSESSMENT</h2><p>In this section, we will the evaluate our calculation of the knowledge boundary and the distance represented in the previous section by applying it to a Japanese language learning domain.</p>
+<p>在本节中，我们将评估我们的知识边界与上一节中表示的距离的计算并把它应用到一个日语学习领域。</p>
+<h3 id="语言评估平台-J100-A-Language-Assessment-Platform"><a href="#语言评估平台-J100-A-Language-Assessment-Platform" class="headerlink" title="语言评估平台 J100: A Language Assessment Platform"></a>语言评估平台 J100: A Language Assessment Platform</h3><p>xxx</p>
+<h3 id="Reddit部署-Reddit-Deployment"><a href="#Reddit部署-Reddit-Deployment" class="headerlink" title="Reddit部署 Reddit Deployment"></a>Reddit部署 Reddit Deployment</h3><p>xxx</p>
+<h3 id="验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric"><a href="#验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric" class="headerlink" title="验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric"></a>验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric</h3><p>In order to validate our calculation of the knowledge boundaryand the distance metric, we will demonstrate that the user datacollected from J100 nicely fits the adapted Rasch Model. Wecalculate a user’s knowledge boundaryKbased on his&#x2F;her responses to the problems in the assessment stage, and foreach problemsresponded in the evaluation stage, we measurethe distance from the problems to the knowledge boundary K.The user responses in the evaluation stage can be regarded as users’ self-estimation of their performance, and we score thefive possible responses uniformly from 1 to 0</p>
+<p>为了验证我们对知识边界和距离度量的计算，我们将证明从J100收集的用户数据非常适合改编的Rasch模型。 我们根据用户在评估阶段对问题的回答来计算用户的知识边界K，并针对评估阶段所回答的每个问题，测量从问题到知识边界K的距离。评估阶段中的用户响应可视为用户 对他们的表现的自我评估，我们从1到0对5个可能的回答进行了统一评分</p>
+<h2 id="过程分析-PROGRESSION-ANALYSIS"><a href="#过程分析-PROGRESSION-ANALYSIS" class="headerlink" title="过程分析 PROGRESSION ANALYSIS"></a>过程分析 PROGRESSION ANALYSIS</h2><p>良好的进步会增强学生对课程的参与度[43,56]，我们的工作旨在发现良好的进步的一般特征。 在本节中，我们将利用我们的框架来分析教育进度，并介绍良好进度的两个重要特征：组成Composition和步调Pace。 我们研究了现有课程，并证明了专家设计的课程中一些惊人的相似之处</p>
+<h3 id="组成：学习与复习的平衡-Composition-The-Balance-of-Learning-and-Review"><a href="#组成：学习与复习的平衡-Composition-The-Balance-of-Learning-and-Review" class="headerlink" title="组成：学习与复习的平衡 Composition: The Balance of Learning and Review"></a>组成：学习与复习的平衡 Composition: The Balance of Learning and Review</h3><p>在设计教育进度时，一个关键的考虑因素是应该花多少时间来增强以前引入的知识，而不是引入新知识。 另一个需要考虑的问题是，通过以新的方式将概念组合在一起，进度是否应该越来越复杂。 理想情况下，我们将能够定义可以简洁地捕获这些重要方面的进度参数空间</p>
+<p>xxx</p>
+<p>我们可以认为强化是对已学知识的回顾，引入是纯学习，重组是两者的混合。 这三种类型的比例揭示了设计师在教育进步中平衡学习和复习的策略，我们将其称为进步组成</p>
+<h3 id="步调：知识的增长率-Pace-The-Growth-Rate-of-Knowledge"><a href="#步调：知识的增长率-Pace-The-Growth-Rate-of-Knowledge" class="headerlink" title="步调：知识的增长率 Pace: The Growth Rate of Knowledge"></a>步调：知识的增长率 Pace: The Growth Rate of Knowledge</h3><p>我们想知道进度中课程（章节，单元等）的难度是否以一致的速度增长，从而使学生可以顺利学习。 我们不是通过数字来衡量每节课的难度，而是计算知识的大小，即每节课之前引入的问题总数。 这可以用通用问题集5S中的问题数量来衡量，该数量被学生的知识边界归类为强化。在掌握了从一开始到当前课程的所有知识之后。 因此，知识大小| K |就是此类问题的数量</p>
+<h2 id="进度分析的评估"><a href="#进度分析的评估" class="headerlink" title="进度分析的评估"></a>进度分析的评估</h2><h3 id="教材研究"><a href="#教材研究" class="headerlink" title="教材研究"></a>教材研究</h3><h3 id="在线语言学习工具研究"><a href="#在线语言学习工具研究" class="headerlink" title="在线语言学习工具研究"></a>在线语言学习工具研究</h3><h2 id="自动渐进合成"><a href="#自动渐进合成" class="headerlink" title="自动渐进合成"></a>自动渐进合成</h2><p>We have discussed two features of an educational progression:composition and pace.  In this section, we will demonstratethat educational progressions can be automatically synthesizedaccording to specific composition and pace parameters. To bemore precise, a progression can be characterized as three nu-meric parameters: overall pace (pace), proportion of reinforce-ment (ri), and proportion of introduction (in). The proportionof recombination (rc) is redundant since ri+rc+in&#x3D;1.</p>
+<p>我们讨论了教育进步的两个特征：组成和步调。 在本节中，我们将<strong>证明可以根据特定的构成和速度参数自动合成教育进度</strong>。 更准确地说，可以将进度表示为三个数字参数：总体步速（步幅），增强比例（ri）和引入比例（输入）。 重组比例（rc）是多余的，因为ri + rc + in &#x3D; 1</p>
+<p>We use a greedy algorithm to synthesize progressions.  Thealgorithm starts with an empty progression, repeatedly selectsthe next problem that minimizes the following error function and appends it to the progression:</p>
+<p>我们使用贪婪算法来合成进度。 算法以空的级数开始，重复选择下一个使后继误差函数最小化的问题，并将其附加到级数上</p>
+<img src="/fit5152-a1-paper/image-20210112094950772.png" class="" title="image-20210112094950772">
+
+<p>其中pace, ri, in 都是实际的渐进特性，而pace*, ri*, in*是所需的渐进参数。请注意，可能存在多个具有最小误差的问题。 在这种情况下，我们的算法会从中随机选择一个作为下一个问题</p>
+<p><strong>这种贪婪算法并不总是生成具有准确所需参数的级数</strong>。 但是，它运行得非常快。对于一个包含25个问题的通用问题集，它可以在一秒钟内合成100多个进程（每个进程有10个问题），因此，我们可以多次运行此贪婪算法以合成具有所需特征的进程</p>
+<p>表2列出了合成过程的四个例子。 我们从Genki进程中提取了以下参数：pace&#x3D; 0.465，ri &#x3D; 0.582，in &#x3D; 0.214。 然后，我们使用这些参数（大约）来合成“ Genki Simulation”进度。 我们还生成了另外三个带有量身定制的参数的进度，这些进度偏向于加强，重组和引入。 这些结果表明，<strong>我们不仅可以利用专家级进度设计的原理并使用对大多数学生都有利的参数来综合进度，而且还可以为具有特定偏好的学生量身定制进度</strong></p>
+<img src="/fit5152-a1-paper/image-20210112095315867.png" class="" title="image-20210112095315867">
+
+<h2 id="结论与未来工作"><a href="#结论与未来工作" class="headerlink" title="结论与未来工作"></a>结论与未来工作</h2><p>可学习性对于HCI的许多方面都很重要：用户界面，学习工具，视频游戏和软件可用性。 在本文中，我们定义了一个框架，<strong>该框架利用自动问题分解和部分排序图构造来促进与教育相关的多个工作流程：评估学生的知识，确定和描述课程的学习策略以及设计新的学习进度</strong>。 我们以多种方式评估了该框架：通过在线部署日语评估工具，自动从现有课程中提取起搏参数，以及将问题组合成符合所需起搏特征的新项目</p>
+<p>我们希望将我们的框架用于几个教育领域，尤其是计算机辅助语言教育。 例如，我们计划利用我们的框架向第二语言学习者推荐适当的阅读材料，并改善用于语言学习的教育游戏[17，18]。 将来，我们不仅将框架应用于语法知识，还将应用于语言学习的其他方面，例如词汇和语义</p>
+<p>我们希望这些想法将有助于实现一门进行性分析的科学，在该科学中，可以从涉及多个主题的进展中提取出测序和起搏参数，以识别最佳原则。 此外，我们希望扩展此框架，以便它可以自动构建能够快速进行初始评估和进度调整的自适应学习系统</p>
+]]></content>
+      <tags>
+        <tag>done</tag>
+        <tag>UI</tag>
+        <tag>design</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>fit5147-data-vis</title>
     <url>//fit5147-data-vis/</url>
     <content><![CDATA[<p>这门课因为当时已经开始准备博士申请了，因此没有时间好好做整理，这里就单纯分享一下一些上课原文内容。</p>
@@ -5579,155 +5744,6 @@ C --&gt;|load| E[Gephi]
       <tags>
         <tag>data</tag>
         <tag>visualization</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Reading paper in FIT5152: 知识评估和进展分析与设计的统一框架 A Unified Framework for Knowledge Assessment and Progression Analysis and Design</title>
-    <url>//fit5152-a1-paper/</url>
-    <content><![CDATA[<p>作者 Shuhan Wang, Fang He &amp; Erik Andersen</p>
-<p>论文翻译，侵删</p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>设计引人入胜的学习内容固然重要，但也很困难，并且通常涉及许多手动规范。 我们提出了一个统一的框架，该框架利用<strong>自动问题分解和部分排序图的构建</strong>来简化多个工作流：知识评估以及进行性分析和设计。 我们通过在线日语评估工具对847名参与者进行了研究，结果表明我们的框架可以有效地衡量学生的能力并预测学生在特定问题上的表现。 我们还提供了对课程分析的结果，结果表明两种不同教科书的进度令人惊讶地相似，并且我们的框架可以导致发现专家进行设计的一般原理。 最后，我们演示了自动进度生成以及所需的排序和步调，允许进行进度定制以及将从一个课程中提取的参数映射到另一个课程</p>
-<span id="more"></span>
-
-<p>ACM Classification Keywords</p>
-<p>H.5.0 Information Interfaces and Presentation: General</p>
-<p>Author Keywords</p>
-<p>education; automatic problem decomposition; knowledgeassessment; progression analysis and design</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>教育中的一个关键挑战是保持学生的参与度，而首要考虑的是向特定学生展示最佳知识的顺序。 排序是一个挑战：首先应该引入哪些知识？ 另一个速度是：进步会变得越来越困难。尽管有教育和心理学等方面的指导原则[15，55，59]可以帮助设计进步，但缺乏务实和自动的方法来弥合教育理论与实践之间的差距， 尤其是整个课程的规模。 设计和优化进度的困难也限制了课程适应每个学生需求的能力</p>
-<p>在HCI中，此问题与教育软件[7、14]，视频游戏[11、22、33、37、45]和软件可学习性[25、31]的设计有关。目前，我们主要是手工设计进度，这很昂贵，并且限制了我们寻找最佳进度的实验能力。最近，在自动进度设计中已有一些工作[6，11]。尽管这项工作能够自动组织内容，但仅解决了程序性主题和视频游戏级设计。我们仍然缺乏一个通用的框架来表征能够处理一些非过程性主题（如语言学习）的教育进程。此外，我们<strong>需要一种形式上的方法来使用相同的框架来评估学生的知识</strong>，以便<strong>我们可以针对该学生量身定制学习进度和进度</strong>。理想情况下，我们将能够在不费吹灰之力的情况下针对广泛的教育领域建立适应性的进步。</p>
-<p>在本文中，我们提出了一个框架，<strong>该框架允许针对非过程性任务进行自动问题分解和部分排序图构造。该框架促进了多个工作流程</strong>。它建立在项目反应理论[53]，知识空间理论[28]和知识追踪[14]的基础之上，以创建学生知识和问题难度的多维度量，从而可以快速评估和预测绩效。它还定义了起搏和其他进度参数的参数空间，并提供了一种方法来表征和比较进度以及设计符合所需参数的新进度。</p>
-<p>我们对框架进行了多次评估。首先，我们提出了对自动问题分解和偏序图构建的理论贡献，以帮助外语学习语法，这是一个重要的非程序性主题。然后，我们讨论了一个有847名参与者的用户对日语评估工具的评估，这表明我们的自动评估算法可以根据项目响应理论准确地进行能力评估和绩效预测。我们还提供了自动分析语言学习进度的结果，显示出两本用于学习日语的教科书令人惊讶地具有相似的节奏和其他进阶特征，并且两种在线语言学习工具具有非常不同的进阶设计策略。最后，我们证明了我们的框架可以自动生成具有所需特征的进度，例如学习进度以及学习和复习的比例。这使得从进度分析中获得的见解可以直接应用于进度设计和个人进度剪裁</p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><h3 id="智能辅导系统"><a href="#智能辅导系统" class="headerlink" title="智能辅导系统"></a>智能辅导系统</h3><p>有成功的适应性学习系统，例如认知母语导师[7]。其中一些工作专门针对语言学习[63，65]。认知导师通过跟踪认知模型中个体生产规则的表现来利用知识边缘跟踪[14]来跟踪知识的获取并提供量身定制的指导[14，39]。该模型已通过多种方式扩展，包括估算学生了解技能的初始概率[49]，评估帮助功能对获得概率的影响[10]以及与项目难度模型集成[ 50]。另一种方法是逻辑回归，这对于涉及多种技能的任务特别有效[64]。但是，这些方法通常不考虑起搏。取而代之的是，他们一直给问题赋予特定的生产规则，直到“隐马尔可夫模型”获得了95％的置信度，即学生已经学会了该规则，然后继续研究下一个概念。此外，认知导师很难构建。据估计，设计一个小时的内容需要多达200-300个小时的专家设计工作[3]，尽管更新的设计技术已将其减少到50-100个小时[4]。我们的工作旨在开发自动分析和优化教育进度的途径。</p>
-<h3 id="教育与心理学"><a href="#教育与心理学" class="headerlink" title="教育与心理学"></a>教育与心理学</h3><p>许多理论都支持适度的难度对于交往很重要[1，8，16，20，34，47]。当国际象棋选手的排名略高于他们时[1]，最不愉快的情况。对非竞技游戏的进展分析也支持中等难度的使用[44]。 Csikszentmihalyi的流量理论规定，当挑战既不太高又不太低时，人们最会参与其中[16]。 Vygotsky的近端发展区[59]规定，学习者可以在一定指导下获得一系列概念，而教育内容应继续以此为目标。Reigeluth和Stein的阐述理论[55]认为，简单概念的首先应教授一项任务，然后逐步讲解原始任务，然后逐步进行更复杂的任务。 Li等。通过使用机器学习代理检查问题排序来研究问题排序，发现交错的问题排序比阻塞的排序导致更快的学习[43]。当前，我们缺乏实用的，自动的方法来定量描述这些原理并将其应用于实际的进步，而我们的工作旨在做到这一点。</p>
-<h3 id="语言教育"><a href="#语言教育" class="headerlink" title="语言教育"></a>语言教育</h3><p>Krashen [42]提出要以可预测的顺序（自然顺序假设）学习概念，并且当学习者接触的语言超出了他或她所能理解的范围（输入假设）时，就会发生语言习得。 语言学习文献中有广泛的证据表明，学习者在使用语法语素[30]，动词否定[13、62]，问题[52]，所有格确定语[61、66]，相对 条款[29、38]和时间参考[48]。 我们的工作旨在创建一个平台，以评估这些理论并确定它们是否能够激发扎根的学习进展，从而促进学习和参与度的提高</p>
-<h3 id="基于跟踪的部分排序"><a href="#基于跟踪的部分排序" class="headerlink" title="基于跟踪的部分排序"></a>基于跟踪的部分排序</h3><p>Andersen提出了一种通过对要学习的过程进行静态分析来自动探索任务进度空间的技术[6]。该技术通过分析在该任务上运行过程所获得的执行跟踪来表征任务。通过将每个任务描述为基本操作的序列，可以指定排序问题难度的部分排序。实验证明，这种部分排序可以与用户在教育代数游戏中对困难的感知相匹配[6]。基于轨迹的框架已应用于数学[6]，视频游戏级设计[11]和教学泰语[5]。这项工作还使用了测试输入生成工具，例如Pex [58]和FShell [36]，它们系统地创建具有高代码覆盖率的测试用例套件，以对所有可能的跟踪（在一定范围内）产生问题。但是，此框架不能应用于非过程性主题。例如，尚不清楚如何分析人类如何理解自然语言的执行轨迹。我们在此工作的基础上提出了问题分解和组织的通用框架，该框架可以应用于非过程教育领域，例如语言学习。在此框架内，我们可以衡量学生的能力并预测学生在新问题上的表现</p>
-<h3 id="知识评估：IRT和KST"><a href="#知识评估：IRT和KST" class="headerlink" title="知识评估：IRT和KST"></a>知识评估：IRT和KST</h3><p>响应理论（IRT）为知识评估提供了一个框架[26，27，54]。 IRT认为，对某个项目做出正确反应的概率是项目参数和个人能力的函数[32]。勋爵等。提出了3PL模型[46]，该模型考虑了三个项目参数：项目难度，项目歧视和猜测概率。 Rasch [53]提出了一个更简单的模型，该模型规定正确答案的可能性仅由学生的能力和项目难度之间的差异来确定。然而，IRT模型的一个共同缺点是，它们使用一维数值分数来衡量学生的能力和项目难度[28]，这并不反映出学生可能会根据自己掌握的知识而发现各种困难的子集。衡量学生能力和捕获此类差异的问题难度之间差异的方法。我们使用从在线知识评估平台收集的用户数据验证此模型。</p>
-<p>知识空间理论（KST）是用于研究知识的层次结构和强大的知识评估工具的公认观点[23，24]。有几种基于KST的辅导系统，例如Alexs [28]，RATH [35]和一种用于学习有机化学的辅导系统[57]。根据KST，学生的知识表示为知识状态，即学生可以解决的一系列问题。问题被组织成一个知识结构，其中包含所有可能的知识状态以及这些状态之间的联系[2，40，41]。研究人员提出了构建知识结构的方法，例如查询专家[41]和贝叶斯推理[21]。由于表示知识状态的复杂性，Falmagne等人。引入了“边缘”的概念来表征学生的知识，可以通过基于“熵”的方法来计算[28]。我们在此工作的基础上提出了一种自动框架，该框架可以将问题分解成其先决条件的基本技能，并为一系列问题建立层次结构。然后，我们的框架可以通过测量学生在该结构中的能力与问题之间的关系，来预测学生在新问题上的表现。</p>
-<h2 id="非过程技能的部分排序"><a href="#非过程技能的部分排序" class="headerlink" title="非过程技能的部分排序"></a>非过程技能的部分排序</h2><p>为了选择适合每个学生的难易程度的练习问题，我们需要一个层次结构来编码问题之间的难度关系。 一种简单的方法是请专家指定这些关系。 但是，随着问题集的规模越来越大，这变得异常困难。 理想情况下，我们将具有自动组织问题的方法。</p>
-<p>在先前的工作中[6，12]，研究人员为过程任务建立了部分排序图。 这项工作使用过程执行跟踪来组织内容，并对这些跟踪进行部分排序以创建分层的内容结构。 例如，一个人可以识别出解决整数加法问题所需的至少四个基本技能：不带进位的一位数字加法（A），不带进位的一位数字加法（B），写进位（C） ，然后放下最后一个进位（D）。 例如，问题可以分解为以下基本技能</p>
-<table>
-<thead>
-<tr>
-<th>问题</th>
-<th>2+3</th>
-<th>15+18</th>
-<th>93+15</th>
-<th>298+865</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>追溯</td>
-<td>A</td>
-<td>ACB</td>
-<td>AACD</td>
-<td>ACBCBD</td>
-</tr>
-</tbody></table>
-<p>但是，在某些领域（例如语言学习）中，目标对象的知识无法轻松地建模为单个过程。要在此类领域引入层次化的知识结构，我们需要对过程领域进行泛化。为此，我们的框架利用了组合性这一概念，即可以将问题分解为较小的概念单元。在一些半程序领域，例如数学和语言学习中，对此进行了充分的研究[6，60]。</p>
-<p>例如，日语句子可以分解为语法模板，专家语言教师和语言学家认为语法单元是最重要的语法知识，并让学生实际学习语言课程。这些模板已被证明对语言学习者的文本难度评估很有帮助[60]。我们发现，语法理解日语句子的特定任务可以分解为（多个）语法模板集。例如，这是三个日语句子及其语法模板</p>
-<img src="/fit5152-a1-paper/image-20210112002236844.png" class="" title="image-20210112002236844">
-
-<p>我们可以看到S1只有一个语法模板：（–の）。对于日语学习者来说，S2比S1更难，因为它不仅具有（–の）而且还有另一个模板（–は）。 S3重复相同的模板（–の）两次，因此也比S1难。 这些关系无法通过[6]中的部分排序来捕获，因为尚不清楚如何程序化人类如何理解这些句子的过程。 但是，通过考虑概念的多集而不是执行跟踪，我们可以按如下方式容纳它们：</p>
-<p>**定义1a. ** 一个问题可以分解为问题所需的一系列概念（基本技能）。 由于问题可能会要求学生重复一次或多次重复某些技能，因此我们使用一组表示为p(s)的基本技能来表征问题的难度</p>
-<p><strong>定义1b</strong>。我们说，如果且仅当p（s1）⊒ p（s2）时，问题s1至少与s2一样困难，表示为s1≥s2。 这意味着，如果学生能够解决s1，那么他&#x2F;她也必须能够解决s2 [6]</p>
-<p>这里⊒表示多集之间的超集关系。 如果是p（s1）⊒（s2），那么对于问题2次所需的任何概念c，也至少也需要1次。例如，AABC⊒ABC为true，而AABCC⊒ABBC为true，因为ABBC有两个“ B”，而AABCC只有一个</p>
-<p><strong>定义1c</strong>。严格偏序1&gt; s2定义为s1≥s2^s2≱s1，这意味着s1（严格来说）比s2难。</p>
-<p><strong>定义1d</strong>。如果说且仅当s1&gt; s2并且没有其他问题3使得s1&gt; s3&gt; s2，我们说问题1比s2更难</p>
-<p>使用定义1d，我们为一系列问题构建了层次结构，如下所示：</p>
-<p><strong>定义2</strong>.我们将一组问题S &#x3D; {s1，s2，···}（我们称为普遍问题集）组织为偏序图G &#x3D; 〈S，E〉，其中</p>
-<img src="/fit5152-a1-paper/image-20210112005148577.png" class="" title="image-20210112005148577">
-
-<p>即，当且仅当sj比si直接困难时，才在部分排序图中存在从问题si到sj的（定向）边。 图1显示了部分排序图的示例。</p>
-<img src="/fit5152-a1-paper/image-20210112005317740.png" class="" title="image-20210112005317740">
-
-<p>图一（部分排序图中的学生知识边界。 大写字母表示概念，带有字符串的节点表示问题。 学生可以解决绿色问题，而不能解决红色问题。 从每个问题到知识边界的距离以d表示。 空问题s0是一个焦虑问题，被添加来帮助我们计算距离）</p>
-<p><strong>定义3</strong>.我们用知识边界K衡量学生的能力，知识边界K是学生可以解决的最困难的问题。 形式上，如果这是学生可以解决的问题集，则</p>
-<img src="/fit5152-a1-paper/image-20210112172807977.png" class="" title="image-20210112172807977">
-
-<p>以图1中的偏序图为例。 假设一个学生可以解决问题A，AB，B，AABC和BCC（图中的绿色节点），而不能解决ABCB，D或ABCBD（图中的红色节点）。 然后，知识边界仅包含两个问题：AABC和BCC，因为没有其他“绿色”问题比AABC或BCC难。 知识边界不包括A，AB或B，因为存在一个“绿色”问题AABC，比所有问题都难</p>
-<h2 id="计算知识边界"><a href="#计算知识边界" class="headerlink" title="计算知识边界"></a>计算知识边界</h2><p>We present a graph coloring algorithm of calculating a stu-dent’s knowledge boundary in the partial ordering graph. Thisalgorithm is based on two properties of the partial ordering: ifa student can solve problems, he must be able to solve anyproblems′that is at most as hard as s(s≥s′); if a studentcannot solve problems, he must not be able to solve any prob-lems′that is at least as hard as s(s′≥s).  For example, if astudent can solve problem AB, he&#x2F;she can also solve problemsA and B; if a student cannot solve problem ABCB, then he&#x2F;she cannot solve problem ABCBD either.</p>
-<p>我们提出了一种图形着色算法，用于计算部分排序图中学生的知识边界。 该算法基于偏序的两个属性：如果一个学生能够解决问题，那么他必须能够解决至多像s(s≥s’)一样困难的任何问题。 如果学生不能解决问题，则他必须不能解决至少与 s(s’≥s) 一样困难的任何问题。 例如，如果学生可以解决问题AB，那么他&#x2F;她也可以解决问题A和B； 如果学生不能解决问题ABCB，那么他&#x2F;她也不能解决问题ABCBD。</p>
-<p>At the start of the algorithm, all the problems (nodes) in thepartial ordering graph are uncolored. The algorithm asks thestudent whether he&#x2F;she can solve some problem s*.  If thestudent can solve s*, all the nodes that are at most as hard as s*(including s* itself) will be colored ‘solvable’; if the studentcannot solve s*, all the nodes that are at least as hard as s* (including s* it self) will be colored ‘unsolvable’.  Figure 2 shows how this coloring process works.</p>
-<p>在算法开始时，部分排序图中的所有问题（节点）都是未着色的。 该算法询问学生是否可以解决某些问题s*。 如果学生能够求解s*，则所有与s*一样难的节点（包括s*本身）将被着色为“可求解”； 如果学生不能求解s*，则所有至少s*同等困难的节点（包括s*自身）将被着色为“无法解决”。 图2显示了此着色过程的工作方式。</p>
-<p>The algorithm repeatedly selects an uncolored problem s* from the partial ordering graph, asks the student to solve it, and then updates the coloring of the graph based on the response. Thisis a greedy algorithm designed to minimize the number ofproblems that must be given to the student.  Formally, if $n^+_s$ denotes the number of the uncolored problems that are at mostas hard as $s$, and $n^-_s$denotes the number of the uncolored problems that are at least as hard as s, then we can maximize thenumber of problems that can be colored based on the student’s response by greedily selecting a problem s* as follows:</p>
-<p>该算法从偏序图中反复选择一个无色问题s*，要求学生解决它，然后根据响应更新该图的颜色。 这是一种贪心算法，旨在最大程度地减少必须给学生的问题。 形式上，如果$n^+_s$ 表示最多没有硬色问题的无色问题的数量，而 $n^-_s$表示至少至少像s一样硬的无色问题的数量，那么我们可以使可以 通过贪婪地选择问题s*，根据学生的回答进行着色：</p>
-<img src="/fit5152-a1-paper/image-20210112191104189.png" class="" title="image-20210112191104189">
-
-<h2 id="预测特定问题的表现"><a href="#预测特定问题的表现" class="headerlink" title="预测特定问题的表现"></a>预测特定问题的表现</h2><h3 id="到知识边界的距离-Distance-to-Knowledge-Boundary"><a href="#到知识边界的距离-Distance-to-Knowledge-Boundary" class="headerlink" title="到知识边界的距离 Distance to Knowledge Boundary"></a>到知识边界的距离 Distance to Knowledge Boundary</h3><p>In order to recommend problems at appropriate difficulty levels to the students, we need to predict students’ performanceon problems. Existing IRT studies have proposed several popular models stipulating how student performance is related tostudent ability [46, 53].  However, they measure a student’sability and the difficulty of a problem using unidimensionalnumeric scores, which is incomprehensive [28].</p>
-<p>为了向学生推荐适当难度的问题，我们需要预测学生在问题上的表现。 现有的IRT研究提出了几种流行的模型，这些模型规定了学生的表现与学生能力之间的关系[46，53]。 但是，他们使用一维数字分数来衡量学生的能力和问题的难度，这是不全面的[28]。</p>
-<p>Ideally, prediction of a student’s performance would utilizemultidimensional metrics to measure the distance between aproblem and what a student already knows. The key technicalchallenge in the design of multidimensional metrics is thatit is impossible to measure this distance without taking intoaccount the hierarchical structure of the problem space. In ourframework, we can measure this as the distance from the prob-lem to the knowledge boundary in the partial ordering graph.We use signed numbers to distinguish which ‘side’ of theknowledge boundary a problem is on: problems ‘inside’ theboundary (which the student can solve) have positive distanceswhile problems ‘outside’ the boundary (which the student can-not solve) have negative distances.  Using this distance, wecan leverage IRT models to predict a student’s performanceon new problems.</p>
-<p>理想情况下，对学生成绩的预测将利用多维指标来衡量问题和学生已经知道的知识之间的距离。 多维度量设计中的关键技术挑战是，如果不考虑问题空间的层次结构，就无法测量该距离。 在我们的框架中，我们可以用偏序图中图中从问题到知识边界的距离来衡量这个问题。 学生可以解决）的距离为正，而“超出”边界的问题（学生无法解决的）的距离为负。 利用此距离，我们可以利用IRT模型来预测学生在新问题上的表现。</p>
-<p>Here, we give the definition of this distance together with theexamples in Figure 1. Assume we have the universal problem set S, and a student can solve a subset of problems T.  For example, in Figure 1,S&#x3D;{A, AB, B, AABC, BCC, ABCB, D,ABCBD},T&#x3D;{A, AB, B, AABC, BCC}, and the knowledge boundary K&#x3D;{AABC, BCC}. We calculate the distance fromany problems∈Sto the knowledge boundaryK, indicated as d(s, K), following the steps below:</p>
-<p>在这里，我们给出该距离的定义以及图1中的示例。假设我们有通用问题集S，并且学生可以解决问题T的子集。例如，在图1中，S &#x3D; {A，AB， B，AABC，BCC，ABCB，D，ABCBD}，T ＝ {A，AB，B，AABC，BCC}，知识边界K ＝ {AABC，BCC}。 我们按照以下步骤计算从任何问题∈S到知识边界K的距离，表示为d(s, K)：</p>
-<p><em>Step 1: Calculate distances for problems on the boundary</em></p>
-<p><em>步骤1：计算边界上问题的距离对于任何问题，</em></p>
-<p>For any problemssuch thats∈K,d(s,K) &#x3D;0.</p>
-<p>对于任何问题s使得s∈K，d(s, K)&#x3D; 0</p>
-<p>For example, the distance of problems AABC and BCC is 0</p>
-<p>例如，问题AABC和BCC的距离为0例如，问题AABC和BCC的距离为0</p>
-<p><em>Step 2: Calculate distances for problems inside the boundary</em></p>
-<p><em>步骤2：计算边界内问题的距离</em></p>
-<p>For any problem s such that s∈T−K, based on the definition of K, there must be one or more s′∈K such that s′≥s (otherwise, s should be contained in K) , and</p>
-<p>对于基于s的定义s∈T-K的任何问题s，必须存在一个或多个s′∈K使得s′≥s（否则s应该包含在K中），并且</p>
-<img src="/fit5152-a1-paper/image-20210112211143812.png" class="" title="image-20210112211143812">
-
-<p>where d is(s,s′) indicates the length of the shortest directed path from s to s′ in the partial ordering graph.  If there is no directed path from s to s′,  dis(s,s′) &#x3D;∞.  Note that if  s′≥s  ,then there must exist at least one directed path from s′ to s.</p>
-<p>其中d is（s，s’）表示部分排序图中从s到s’的最短定向路径的长度。 如果没有从s到s’的定向路径，则dis（s，s’）&#x3D;∞。 请注意，如果s’≥s，则必须存在至少一条从s’到s的定向路径。</p>
-<p>For example, the distance of problem AB is 1, since prob-lem AABC, which is on the knowlegde boundary, is directlyharder than AB. Similar for problem B (BCC is direclty harderthan B). The distance of problem A is 2, since the shortest di-rected path from A to any problem on the knowledge boundary(which is A→AB→AABC) has length 2</p>
-<p>例如，问题AB的距离为1，因为在知识已知边界上的问题AABC比AB直接困难。 与问题B相似（密件抄送比B硬）。 问题A的距离为2，因为从A到知识边界上任何问题的最短定向路径（A→AB→AABC）的长度为2</p>
-<p><em>Step 3:Calculate distances for problems outside the boundary</em></p>
-<p><em>步骤3：计算边界外问题的距离</em></p>
-<p>In a hierarchical knowledge structure, it follows intuitively thatproblems that are further away from the boundary will be moredifficult to the student. Therefore, for any problemssuch thats∈S−T, we define the distanced(s,K)to be shortest directedpath from any problem inTtos. Note that this distance alsohas a teaching interpretation: if easier problems should alwaysbe taught before harder problems [55], then this distance alsomeasures the number of problems that need to be taught beforeteachings.</p>
-<p>在分层的知识结构中，直观地认为，远离边界的问题对学生而言将更加困难。 因此，对于诸如s∈ST的任何问题，我们将距离（s，K）定义为距Ttos中任何问题最短的有向路径。 注意，这个距离也有一个教学上的解释：如果总是在较困难的问题之前总是先教更容易的问题[55]，那么这个距离也可以衡量在教学之前需要教的问题数量。</p>
-<p>ince there are some basic problems that have no problemseasier than them, and thus have no incoming edges in the par-tial ordering graph, there is not always a path from a probleminTtos.  For instance, there is no directed path from anyproblem inTto problemDin Figure 1.  To resolve this, weadd anull problems0, the pseudo problem with no prerequisiteconcepts, toT. For any problems∈S−T, if there is no otherproblems′such thatsis directly harder thans′(namely,shas no incoming edges), we add an edge(s0,s)to the partialordering graph</p>
-<p>由于存在一些基本问题，没有比这些问题更容易解决的问题，因此在空间排序图中没有传入的边，因此从问题中获取问题的路径并不总是那么容易。 例如，图1中没有从任何问题到问题D的直接路径。要解决此问题，我们将无问题先决条件的伪问题anull问题0添加到T。 对于任何问题∈ST，如果没有其他问题’使假设比’s’直接困难（即没有进入的边），我们将偏边（s0，s）添加到偏序图</p>
-<p>Now there is at least one directed path from the null problem s0 or some problem in T to s. We can define the distance as:</p>
-<p>现在，从空问题s0或T tos中的某个问题开始，至少有一条有向路径。 我们可以将距离定义为：</p>
-<img src="/fit5152-a1-paper/image-20210112234958809.png" class="" title="image-20210112234958809">
-
-<p>Note that d(s,K) is negative if and only if s is outside the knowledge boundary.For example, the distance of problem ABCB is -1, since itis directly harder than the “green” problem AB. Problem D has no incoming edges in the partial ordering graph, hence weadd an edge from the null problem s0 to D, and the distanceof problem D is -1 since the path s0→D has length 1. Lastly,the distance of problem ABCBD is -2.  Actually, there aretwo shortest paths with length 2: AB→ABCB→ABCBD ands0→D→ABCBD.</p>
-<p>请注意，当且仅当s在知识边界之外时，d(s, K)才为负。例如，问题ABCB的距离为-1，因为它比“绿色”问题AB直接困难。 问题D在偏序图中没有输入边，因此我们将零问题s0到D加上一条边，并且由于路径s0→D的长度为1，因此问题D的距离为-1。最后，问题ABCBD的距离为 -2。 实际上，有两条最短的路径，其长度为2：AB→ABCB→ABCBD和s0→D→ABCBD。</p>
-<p>The  metric  of  distance  is  dependent  on  the  density  of  thepartial-ordering graph. This is inevitable since the measure-ment is based on the hierarchical structure of the problemspace. We believe that for most well-defined problem spaces,it is a reasonable assumption that the partial ordering graph will be sufficiently dense.  We will demonstrate this metricworks well for a well-built Japanese language learning corpusin the next section</p>
-<p>距离的度量取决于偏序图的密度。 这是不可避免的，因为测量是基于问题空间的层次结构。 我们认为，对于大多数定义明确的问题空间，可以合理地假设偏序图将足够密集。 我们将在下一部分中很好地演示此度量标准，以构建完善的日语学习语料库。</p>
-<p>In the later part of this paper, we will use d to denote d(s,K) for convenience</p>
-<p>在本文的后半部分，为方便起见，我们将使用d来表示d(s, K)。</p>
-<h3 id="Adapted-Rasch-model-改编的Rasch模型"><a href="#Adapted-Rasch-model-改编的Rasch模型" class="headerlink" title="Adapted Rasch model 改编的Rasch模型"></a>Adapted Rasch model 改编的Rasch模型</h3><p>In this section, we describe how we can adapt existing uni-dimensional IRT models to build a multidimensional metricthat leverages the partial ordering graph and the distance d calculated in the previous section in order to predict studentperformance.  One of the most famous models of IRT, the Rasch model [53], stipulates that a student’s performancePis a function of the difference between the student’s ability θ and the problem’s difficulty b</p>
-<p>在本节中，我们描述如何适应现有的一维IRT模型以建立多维度量标准，该度量标准利用上一节中计算的偏序图和距离d来预测学生的表现。 Rasch模型[53]是IRT最著名的模型之一，它规定学生的表现是学生的能力θ与问题难度b之差的函数。</p>
-<img src="/fit5152-a1-paper/image-20210113085907577.png" class="" title="image-20210113085907577">
-
-<p>xxx</p>
-<p>In  the  next  section,  we  will  demonstrate  that  this  adaptedmodel nicely fits the data collected from our knowledge as-sessment platform</p>
-<p>在下一节中，我们将证明该适应模型非常适合从我们的知识评估平台收集的数据</p>
-<h2 id="知识评估的评价-EVALUATION-OF-KNOWLEDGE-ASSESSMENT"><a href="#知识评估的评价-EVALUATION-OF-KNOWLEDGE-ASSESSMENT" class="headerlink" title="知识评估的评价 EVALUATION OF KNOWLEDGE ASSESSMENT"></a>知识评估的评价 EVALUATION OF KNOWLEDGE ASSESSMENT</h2><p>In this section, we will the evaluate our calculation of the knowledge boundary and the distance represented in the previous section by applying it to a Japanese language learning domain.</p>
-<p>在本节中，我们将评估我们的知识边界与上一节中表示的距离的计算并把它应用到一个日语学习领域。</p>
-<h3 id="语言评估平台-J100-A-Language-Assessment-Platform"><a href="#语言评估平台-J100-A-Language-Assessment-Platform" class="headerlink" title="语言评估平台 J100: A Language Assessment Platform"></a>语言评估平台 J100: A Language Assessment Platform</h3><p>xxx</p>
-<h3 id="Reddit部署-Reddit-Deployment"><a href="#Reddit部署-Reddit-Deployment" class="headerlink" title="Reddit部署 Reddit Deployment"></a>Reddit部署 Reddit Deployment</h3><p>xxx</p>
-<h3 id="验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric"><a href="#验证知识边界和距离度量-Validating-the-Knowledge-Boundary-and-Distance-Metric" class="headerlink" title="验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric"></a>验证知识边界和距离度量 Validating the Knowledge Boundary and Distance Metric</h3><p>In order to validate our calculation of the knowledge boundaryand the distance metric, we will demonstrate that the user datacollected from J100 nicely fits the adapted Rasch Model. Wecalculate a user’s knowledge boundaryKbased on his&#x2F;her responses to the problems in the assessment stage, and foreach problemsresponded in the evaluation stage, we measurethe distance from the problems to the knowledge boundary K.The user responses in the evaluation stage can be regarded as users’ self-estimation of their performance, and we score thefive possible responses uniformly from 1 to 0</p>
-<p>为了验证我们对知识边界和距离度量的计算，我们将证明从J100收集的用户数据非常适合改编的Rasch模型。 我们根据用户在评估阶段对问题的回答来计算用户的知识边界K，并针对评估阶段所回答的每个问题，测量从问题到知识边界K的距离。评估阶段中的用户响应可视为用户 对他们的表现的自我评估，我们从1到0对5个可能的回答进行了统一评分</p>
-<h2 id="过程分析-PROGRESSION-ANALYSIS"><a href="#过程分析-PROGRESSION-ANALYSIS" class="headerlink" title="过程分析 PROGRESSION ANALYSIS"></a>过程分析 PROGRESSION ANALYSIS</h2><p>良好的进步会增强学生对课程的参与度[43,56]，我们的工作旨在发现良好的进步的一般特征。 在本节中，我们将利用我们的框架来分析教育进度，并介绍良好进度的两个重要特征：组成Composition和步调Pace。 我们研究了现有课程，并证明了专家设计的课程中一些惊人的相似之处</p>
-<h3 id="组成：学习与复习的平衡-Composition-The-Balance-of-Learning-and-Review"><a href="#组成：学习与复习的平衡-Composition-The-Balance-of-Learning-and-Review" class="headerlink" title="组成：学习与复习的平衡 Composition: The Balance of Learning and Review"></a>组成：学习与复习的平衡 Composition: The Balance of Learning and Review</h3><p>在设计教育进度时，一个关键的考虑因素是应该花多少时间来增强以前引入的知识，而不是引入新知识。 另一个需要考虑的问题是，通过以新的方式将概念组合在一起，进度是否应该越来越复杂。 理想情况下，我们将能够定义可以简洁地捕获这些重要方面的进度参数空间</p>
-<p>xxx</p>
-<p>我们可以认为强化是对已学知识的回顾，引入是纯学习，重组是两者的混合。 这三种类型的比例揭示了设计师在教育进步中平衡学习和复习的策略，我们将其称为进步组成</p>
-<h3 id="步调：知识的增长率-Pace-The-Growth-Rate-of-Knowledge"><a href="#步调：知识的增长率-Pace-The-Growth-Rate-of-Knowledge" class="headerlink" title="步调：知识的增长率 Pace: The Growth Rate of Knowledge"></a>步调：知识的增长率 Pace: The Growth Rate of Knowledge</h3><p>我们想知道进度中课程（章节，单元等）的难度是否以一致的速度增长，从而使学生可以顺利学习。 我们不是通过数字来衡量每节课的难度，而是计算知识的大小，即每节课之前引入的问题总数。 这可以用通用问题集5S中的问题数量来衡量，该数量被学生的知识边界归类为强化。在掌握了从一开始到当前课程的所有知识之后。 因此，知识大小| K |就是此类问题的数量</p>
-<h2 id="进度分析的评估"><a href="#进度分析的评估" class="headerlink" title="进度分析的评估"></a>进度分析的评估</h2><h3 id="教材研究"><a href="#教材研究" class="headerlink" title="教材研究"></a>教材研究</h3><h3 id="在线语言学习工具研究"><a href="#在线语言学习工具研究" class="headerlink" title="在线语言学习工具研究"></a>在线语言学习工具研究</h3><h2 id="自动渐进合成"><a href="#自动渐进合成" class="headerlink" title="自动渐进合成"></a>自动渐进合成</h2><p>We have discussed two features of an educational progression:composition and pace.  In this section, we will demonstratethat educational progressions can be automatically synthesizedaccording to specific composition and pace parameters. To bemore precise, a progression can be characterized as three nu-meric parameters: overall pace (pace), proportion of reinforce-ment (ri), and proportion of introduction (in). The proportionof recombination (rc) is redundant since ri+rc+in&#x3D;1.</p>
-<p>我们讨论了教育进步的两个特征：组成和步调。 在本节中，我们将<strong>证明可以根据特定的构成和速度参数自动合成教育进度</strong>。 更准确地说，可以将进度表示为三个数字参数：总体步速（步幅），增强比例（ri）和引入比例（输入）。 重组比例（rc）是多余的，因为ri + rc + in &#x3D; 1</p>
-<p>We use a greedy algorithm to synthesize progressions.  Thealgorithm starts with an empty progression, repeatedly selectsthe next problem that minimizes the following error function and appends it to the progression:</p>
-<p>我们使用贪婪算法来合成进度。 算法以空的级数开始，重复选择下一个使后继误差函数最小化的问题，并将其附加到级数上</p>
-<img src="/fit5152-a1-paper/image-20210112094950772.png" class="" title="image-20210112094950772">
-
-<p>其中pace, ri, in 都是实际的渐进特性，而pace*, ri*, in*是所需的渐进参数。请注意，可能存在多个具有最小误差的问题。 在这种情况下，我们的算法会从中随机选择一个作为下一个问题</p>
-<p><strong>这种贪婪算法并不总是生成具有准确所需参数的级数</strong>。 但是，它运行得非常快。对于一个包含25个问题的通用问题集，它可以在一秒钟内合成100多个进程（每个进程有10个问题），因此，我们可以多次运行此贪婪算法以合成具有所需特征的进程</p>
-<p>表2列出了合成过程的四个例子。 我们从Genki进程中提取了以下参数：pace&#x3D; 0.465，ri &#x3D; 0.582，in &#x3D; 0.214。 然后，我们使用这些参数（大约）来合成“ Genki Simulation”进度。 我们还生成了另外三个带有量身定制的参数的进度，这些进度偏向于加强，重组和引入。 这些结果表明，<strong>我们不仅可以利用专家级进度设计的原理并使用对大多数学生都有利的参数来综合进度，而且还可以为具有特定偏好的学生量身定制进度</strong></p>
-<img src="/fit5152-a1-paper/image-20210112095315867.png" class="" title="image-20210112095315867">
-
-<h2 id="结论与未来工作"><a href="#结论与未来工作" class="headerlink" title="结论与未来工作"></a>结论与未来工作</h2><p>可学习性对于HCI的许多方面都很重要：用户界面，学习工具，视频游戏和软件可用性。 在本文中，我们定义了一个框架，<strong>该框架利用自动问题分解和部分排序图构造来促进与教育相关的多个工作流程：评估学生的知识，确定和描述课程的学习策略以及设计新的学习进度</strong>。 我们以多种方式评估了该框架：通过在线部署日语评估工具，自动从现有课程中提取起搏参数，以及将问题组合成符合所需起搏特征的新项目</p>
-<p>我们希望将我们的框架用于几个教育领域，尤其是计算机辅助语言教育。 例如，我们计划利用我们的框架向第二语言学习者推荐适当的阅读材料，并改善用于语言学习的教育游戏[17，18]。 将来，我们不仅将框架应用于语法知识，还将应用于语言学习的其他方面，例如词汇和语义</p>
-<p>我们希望这些想法将有助于实现一门进行性分析的科学，在该科学中，可以从涉及多个主题的进展中提取出测序和起搏参数，以识别最佳原则。 此外，我们希望扩展此框架，以便它可以自动构建能够快速进行初始评估和进度调整的自适应学习系统</p>
-]]></content>
-      <tags>
-        <tag>done</tag>
-        <tag>UI</tag>
-        <tag>design</tag>
       </tags>
   </entry>
   <entry>
@@ -7077,7 +7093,7 @@ C --&gt;|load| E[Gephi]
 <ol>
 <li>接收者使用他&#x2F;她的用户密钥来解密密文</li>
 </ol>
-<p>安全性：<br>– 如果密文是为 <a href="mailto:&#x61;&#108;&#105;&#99;&#x65;&#x40;&#97;&#98;&#x63;&#46;&#99;&#111;&#x6d;">&#x61;&#108;&#105;&#99;&#x65;&#x40;&#97;&#98;&#x63;&#46;&#99;&#111;&#x6d;</a> 加密的，除了与 <a href="mailto:&#x61;&#108;&#x69;&#x63;&#x65;&#x40;&#x61;&#x62;&#99;&#x2e;&#99;&#111;&#109;">&#x61;&#108;&#x69;&#x63;&#x65;&#x40;&#x61;&#x62;&#99;&#x2e;&#99;&#111;&#109;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
+<p>安全性：<br>– 如果密文是为 <a href="mailto:&#x61;&#x6c;&#x69;&#x63;&#101;&#x40;&#x61;&#98;&#x63;&#x2e;&#99;&#111;&#109;">&#x61;&#x6c;&#x69;&#x63;&#101;&#x40;&#x61;&#98;&#x63;&#x2e;&#99;&#111;&#109;</a> 加密的，除了与 <a href="mailto:&#x61;&#108;&#105;&#99;&#101;&#64;&#x61;&#x62;&#x63;&#x2e;&#x63;&#x6f;&#109;">&#x61;&#108;&#105;&#99;&#101;&#64;&#x61;&#x62;&#x63;&#x2e;&#x63;&#x6f;&#109;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
 <p>IBE 需要一个称为双线性配对的数学函数（基于椭圆曲线）<br>• 它是两组之间的单向映射函数：G 和 GT，使得 G 和 GT 中的离散对数很难<br>• 表示为一个映射<br>$e: G \times G →G_T$<br>它取 G 组中的两个元素并输出 $G_T$ 组中的一个元素</p>
 <p>双线性配对<br>• 假设$g$是具有群序$p$的$G$生成器（即，$G$具有$p$个元素：$|G| &#x3D;p$）<br>• 我们有以下属性：<br>– Bilinear双线性：$e(g^x,g^y)&#x3D;e(g,g)^{xy}$, 对于$x \in Z_p &gt; e(g^x,g)&#x3D;e(g,g^x)&#x3D;e(g,g)^x$<br>– Non-degenerate 非退化：$e(g,g)\neq1$</p>
 <p>第一个实用的 IBE 方案是由 Dan Boneh 和 Matthew K. Franklin 在 2001 年（我们称之为 Boneh-Franklin 计划）</p>
@@ -7790,6 +7806,20 @@ C --&gt;|load| E[Gephi]
 ]]></content>
   </entry>
   <entry>
+    <title>Notes for FIT9131: Java</title>
+    <url>//fit9131-java-bluej-notes/</url>
+    <content><![CDATA[<p>学校要求的是使用bluej这个ide&#x2F;editor。这个工具和intellij idea不同，完全是面向教学，写Java有种写script的感觉。可以拿来写各种class但是不能保存各种实例化的object。</p>
+<p>到目前（W4）为止，内容都是很简单的。</p>
+<p>到W7也還是很簡單……</p>
+<p>到W12依然还是很简单……</p>
+<p>最后考试大概是没考好，明明ASS全HD但最终只有79没拿到HD太可惜了</p>
+]]></content>
+      <tags>
+        <tag>done</tag>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Notes for FIT5195: Business intelligence and data warehousing</title>
     <url>//fit5195-bi-notes/</url>
     <content><![CDATA[<p>好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪……</p>
@@ -8013,20 +8043,6 @@ C --&gt;|load| E[Gephi]
         <tag>database</tag>
         <tag>BI</tag>
         <tag>data warehouse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Notes for FIT9131: Java</title>
-    <url>//fit9131-java-bluej-notes/</url>
-    <content><![CDATA[<p>学校要求的是使用bluej这个ide&#x2F;editor。这个工具和intellij idea不同，完全是面向教学，写Java有种写script的感觉。可以拿来写各种class但是不能保存各种实例化的object。</p>
-<p>到目前（W4）为止，内容都是很简单的。</p>
-<p>到W7也還是很簡單……</p>
-<p>到W12依然还是很简单……</p>
-<p>最后考试大概是没考好，明明ASS全HD但最终只有79没拿到HD太可惜了</p>
-]]></content>
-      <tags>
-        <tag>done</tag>
-        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -10482,30 +10498,6 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>libp2p notes</title>
-    <url>//libp2p-notes/</url>
-    <content><![CDATA[<p>因为ng的整个P2P都是依赖于libp2p的，所以这里记录一下使用libp2p的一些经验。</p>
-<span id="more"></span>
-
-<p>先这边记录一下各类子库，因为我这边是用go的,所以都是根据<a href="https://github.com/libp2p/go-libp2p" target="_blank" rel="noopener">go的库</a>来介绍</p>
-<h2 id="核心库"><a href="#核心库" class="headerlink" title="核心库"></a>核心库</h2><p><code>go-libp2p</code> 作为整个libp2p的进入点，没多少代码，但是主要的函数都在；<code>go-libp2p-core</code>核心库，包含了核心接口、类型和抽象。其他所有内容都得跟着这两个库（尤其是core）一起更新，否则依赖会出现问题<br><code>go-libp2p-blankhost</code>是host的最小实现不包含任何身份识别，转发或NAT遍历代码。一般测试才用。</p>
-<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p><code>go-libp2p-swarm</code> 是使用给定libp2p网络的“低级”接口。它可以在系统的各个方面提供更细的控制。大多数应用程序不需要这种访问级别，因此Swarm通常被抽象包装在Host里以提供更友好的接口。</p>
-<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p><code>go-ws-transport</code> WS<br><code>go-tcp-transport</code> TCP<br><code>go-libp2p-quic-transport</code> QUIC<br><code>go-udp-transport</code> UDP<br><code>go-utp-transport</code> 这里utp指的是uTorrent transport<br><code>go-libp2p-circuit</code> relay传输<br><code>go-libp2p-transport-upgrader</code> 将multiaddr-net的连接升级到完整的libp2p传输<br><code>go-reuseport-transport</code> 为自动（智能地）重用 TCP 端口提供了基本的传输层</p>
-<h2 id="加密通道"><a href="#加密通道" class="headerlink" title="加密通道"></a>加密通道</h2><p><code>go-libp2p-noise</code> 基于<a href="https://noiseprotocol.org/" target="_blank" rel="noopener">noise协议</a>的加密通道。这个暂时我还未使用过，github介绍也说没在生产环境试过（<br><code>go-libp2p-tls</code> tls<br><code>go-conn-security-multistream</code> 为mux stream提供加密通道，目前支持tls和secio<br><code>go-libp2p-secio</code> <strong>官方不建议用了</strong>，以前是标配</p>
-<h2 id="私有网络"><a href="#私有网络" class="headerlink" title="私有网络"></a>私有网络</h2><p><code>go-libp2p-pnet</code> 简易的private net实现，需要一个go-libp2p-core&#x2F;pnet.PSK才能加入网络建立Conn。</p>
-<h2 id="流复用器-Mux"><a href="#流复用器-Mux" class="headerlink" title="流复用器 Mux"></a>流复用器 Mux</h2><p><code>go-libp2p-yamux</code> <a href="https://github.com/hashicorp/yamux" target="_blank" rel="noopener">YAMUX</a>是hashicorp做的一个muxer<br><code>go-libp2p-mplex</code> <a href="https://github.com/libp2p/specs/tree/master/mplex" target="_blank" rel="noopener">MPLEX</a>是libp2p自己做的一个muxer</p>
-<h2 id="NAT穿透"><a href="#NAT穿透" class="headerlink" title="NAT穿透"></a>NAT穿透</h2><p><code>go-libp2p-nat</code> 本质上是用了github.com&#x2F;fd&#x2F;go-nat，在github.com&#x2F;libp2p&#x2F;go-libp2p&#x2F;p2p&#x2F;host&#x2F;basic的NATManager里被引入。在host里有个看起来很像的<code>go-libp2p-autonat</code>，但是并不是做穿透的，而是通过同样用AutoNAT的Peer使用测试回拨来确定他们的 NAT 可拨情况。</p>
-<h2 id="Peer存储"><a href="#Peer存储" class="headerlink" title="Peer存储"></a>Peer存储</h2><p><code>go-libp2p-peerstore</code> peer管理器，一般没用(因为host自带有简易的存储了)</p>
-<h2 id="连接管理"><a href="#连接管理" class="headerlink" title="连接管理"></a>连接管理</h2><p><code>go-libp2p-connmgr</code> pubsub的test里有用到</p>
-<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p><code>go-libp2p-record</code> 路由记录<br><code>go-libp2p-kad-dht</code> 类Kademlia的路由实现,非常的重,但是在公网寻址上<strong>必用</strong><br><code>go-libp2p-kbucket</code> 为<code>go-libp2p-kad-dht</code>提供类型<br><code>go-libp2p-coral-dht</code> Coral DHT,<strong>官方弃坑</strong><br><code>go-libp2p-pubsub-router</code> 利用pubsub请求路由,当前ipfs用这个做IPNS</p>
-<h2 id="共识"><a href="#共识" class="headerlink" title="共识"></a>共识</h2><p><code>go-libp2p-consensus</code> 共识抽象层<br><code>go-libp2p-raft</code> 用的hashicorp家的raft库<code>github.com/hashicorp/raft</code></p>
-<h2 id="Pubsub"><a href="#Pubsub" class="headerlink" title="Pubsub"></a>Pubsub</h2><p><code>go-libp2p-pubsub</code> p2p网络上<a href="https://zh.wikipedia.org/wiki/%E5%8F%91%E5%B8%83/%E8%AE%A2%E9%98%85" target="_blank" rel="noopener">Pub&#x2F;Sub</a>消息范式的实现</p>
-<h2 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h2><p><code>go-libp2p-gorpc</code> 等于<code>net/rpc</code>放到p2p</p>
-<h2 id="工具-x2F-杂项"><a href="#工具-x2F-杂项" class="headerlink" title="工具&#x2F;杂项"></a>工具&#x2F;杂项</h2><p>许多实用的小功能实现,值得学习但是需要注意依赖版本</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><code>go-libp2p-testing</code> 官方自己用的套件,没用过且不建议用(没文档)</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Linguaskill</title>
     <url>//linguaskill-notes/</url>
     <content><![CDATA[<p>記錯考試日期了，所以有了多的時間來總結</p>
@@ -10605,6 +10597,30 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
+    <title>libp2p notes</title>
+    <url>//libp2p-notes/</url>
+    <content><![CDATA[<p>因为ng的整个P2P都是依赖于libp2p的，所以这里记录一下使用libp2p的一些经验。</p>
+<span id="more"></span>
+
+<p>先这边记录一下各类子库，因为我这边是用go的,所以都是根据<a href="https://github.com/libp2p/go-libp2p" target="_blank" rel="noopener">go的库</a>来介绍</p>
+<h2 id="核心库"><a href="#核心库" class="headerlink" title="核心库"></a>核心库</h2><p><code>go-libp2p</code> 作为整个libp2p的进入点，没多少代码，但是主要的函数都在；<code>go-libp2p-core</code>核心库，包含了核心接口、类型和抽象。其他所有内容都得跟着这两个库（尤其是core）一起更新，否则依赖会出现问题<br><code>go-libp2p-blankhost</code>是host的最小实现不包含任何身份识别，转发或NAT遍历代码。一般测试才用。</p>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><p><code>go-libp2p-swarm</code> 是使用给定libp2p网络的“低级”接口。它可以在系统的各个方面提供更细的控制。大多数应用程序不需要这种访问级别，因此Swarm通常被抽象包装在Host里以提供更友好的接口。</p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p><code>go-ws-transport</code> WS<br><code>go-tcp-transport</code> TCP<br><code>go-libp2p-quic-transport</code> QUIC<br><code>go-udp-transport</code> UDP<br><code>go-utp-transport</code> 这里utp指的是uTorrent transport<br><code>go-libp2p-circuit</code> relay传输<br><code>go-libp2p-transport-upgrader</code> 将multiaddr-net的连接升级到完整的libp2p传输<br><code>go-reuseport-transport</code> 为自动（智能地）重用 TCP 端口提供了基本的传输层</p>
+<h2 id="加密通道"><a href="#加密通道" class="headerlink" title="加密通道"></a>加密通道</h2><p><code>go-libp2p-noise</code> 基于<a href="https://noiseprotocol.org/" target="_blank" rel="noopener">noise协议</a>的加密通道。这个暂时我还未使用过，github介绍也说没在生产环境试过（<br><code>go-libp2p-tls</code> tls<br><code>go-conn-security-multistream</code> 为mux stream提供加密通道，目前支持tls和secio<br><code>go-libp2p-secio</code> <strong>官方不建议用了</strong>，以前是标配</p>
+<h2 id="私有网络"><a href="#私有网络" class="headerlink" title="私有网络"></a>私有网络</h2><p><code>go-libp2p-pnet</code> 简易的private net实现，需要一个go-libp2p-core&#x2F;pnet.PSK才能加入网络建立Conn。</p>
+<h2 id="流复用器-Mux"><a href="#流复用器-Mux" class="headerlink" title="流复用器 Mux"></a>流复用器 Mux</h2><p><code>go-libp2p-yamux</code> <a href="https://github.com/hashicorp/yamux" target="_blank" rel="noopener">YAMUX</a>是hashicorp做的一个muxer<br><code>go-libp2p-mplex</code> <a href="https://github.com/libp2p/specs/tree/master/mplex" target="_blank" rel="noopener">MPLEX</a>是libp2p自己做的一个muxer</p>
+<h2 id="NAT穿透"><a href="#NAT穿透" class="headerlink" title="NAT穿透"></a>NAT穿透</h2><p><code>go-libp2p-nat</code> 本质上是用了github.com&#x2F;fd&#x2F;go-nat，在github.com&#x2F;libp2p&#x2F;go-libp2p&#x2F;p2p&#x2F;host&#x2F;basic的NATManager里被引入。在host里有个看起来很像的<code>go-libp2p-autonat</code>，但是并不是做穿透的，而是通过同样用AutoNAT的Peer使用测试回拨来确定他们的 NAT 可拨情况。</p>
+<h2 id="Peer存储"><a href="#Peer存储" class="headerlink" title="Peer存储"></a>Peer存储</h2><p><code>go-libp2p-peerstore</code> peer管理器，一般没用(因为host自带有简易的存储了)</p>
+<h2 id="连接管理"><a href="#连接管理" class="headerlink" title="连接管理"></a>连接管理</h2><p><code>go-libp2p-connmgr</code> pubsub的test里有用到</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p><code>go-libp2p-record</code> 路由记录<br><code>go-libp2p-kad-dht</code> 类Kademlia的路由实现,非常的重,但是在公网寻址上<strong>必用</strong><br><code>go-libp2p-kbucket</code> 为<code>go-libp2p-kad-dht</code>提供类型<br><code>go-libp2p-coral-dht</code> Coral DHT,<strong>官方弃坑</strong><br><code>go-libp2p-pubsub-router</code> 利用pubsub请求路由,当前ipfs用这个做IPNS</p>
+<h2 id="共识"><a href="#共识" class="headerlink" title="共识"></a>共识</h2><p><code>go-libp2p-consensus</code> 共识抽象层<br><code>go-libp2p-raft</code> 用的hashicorp家的raft库<code>github.com/hashicorp/raft</code></p>
+<h2 id="Pubsub"><a href="#Pubsub" class="headerlink" title="Pubsub"></a>Pubsub</h2><p><code>go-libp2p-pubsub</code> p2p网络上<a href="https://zh.wikipedia.org/wiki/%E5%8F%91%E5%B8%83/%E8%AE%A2%E9%98%85" target="_blank" rel="noopener">Pub&#x2F;Sub</a>消息范式的实现</p>
+<h2 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h2><p><code>go-libp2p-gorpc</code> 等于<code>net/rpc</code>放到p2p</p>
+<h2 id="工具-x2F-杂项"><a href="#工具-x2F-杂项" class="headerlink" title="工具&#x2F;杂项"></a>工具&#x2F;杂项</h2><p>许多实用的小功能实现,值得学习但是需要注意依赖版本</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><code>go-libp2p-testing</code> 官方自己用的套件,没用过且不建议用(没文档)</p>
+]]></content>
+  </entry>
+  <entry>
     <title>LucidiTEE: 基于策略的规模化公平计算（摘要）</title>
     <url>//luciditee/</url>
     <content><![CDATA[<p>这个是LucidiTEE的paper的intro部分，因为知乎上有人问起所以就边看边了解边回答。这个和区块链不是一个东西，是对于硬件层面的计算可信度的保障，像我的AMD1600也有这样的可信计算功能。</p>
@@ -10684,24 +10700,6 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>修复Meta应用无法登录问题</title>
-    <url>//meta-oculus-continue-logging-in/</url>
-    <content><![CDATA[<p>今天莫名其妙地无法登录 Meta Quest Remote Desktop，症状是点击登录按钮之后没有按照预期弹出登录网址。 </p>
-<p>后面又安装Oculus PC试了一下，同样存在此问题</p>
-<p>TLDR; 解决方法： Win+R 然后随便输入https开头URL比如<a href="https://google.com,回车选择浏览器然后always,最后回到meta家应用重试登录即可弹出窗口/" target="_blank" rel="noopener">https://google.com，回车选择浏览器然后Always，最后回到Meta家应用重试登录即可弹出窗口</a></p>
-<span id="more"></span>
-
-<p>首先搜索后找到了<a href="https://www.bilibili.com/read/cv12487383/" target="_blank" rel="noopener">flushdns和hosts的操作</a>。虽然我觉得这对科学路由器环境下应该没有作用，但还是试了下，果然没有作用。</p>
-<p>回想了一下昨晚回宿舍后的操作，因为需要换区块链钱包操作因此装了Brave浏览器。因此尝试了重置默认浏览器，但也没有什么效果。</p>
-<p>最后尝试通过手动唤出浏览器追溯问题源头，具体方式为Win+R 然后随便输入https开头URL比如<a href="https://google.com再回车.这时候我看到居然还有个选择默认浏览器界面就觉得多半是这个的问题了.在选择chrome然后选always之后回到了mata的应用重试,发现一切回归正常./" target="_blank" rel="noopener">https://google.com再回车。这时候我看到居然还有个选择默认浏览器界面就觉得多半是这个的问题了。在选择chrome然后选Always之后回到了Mata的应用重试，发现一切回归正常。</a></p>
-<p>个人猜测因此这个Bug应该是由于Meta的调用默认浏览器方式无法弹出那个选择浏览器窗口的原因导致。而问题源头在于我昨晚安装Brave浏览器使得原来的默认选择失效。</p>
-]]></content>
-      <tags>
-        <tag>meta</tag>
-        <tag>oculus</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ml-notes</title>
     <url>//ml-notes/</url>
     <content><![CDATA[<p>发现不记笔记又不操练太容易忘了。ml和dl都学了好几遍了……</p>
@@ -10719,6 +10717,24 @@ With the respect to/Enperienced the less main reason, they xxx
 <p>第一种计算出所有类别总的Precision和Recall，然后计算F1</p>
 <p>第二种方式是计算出每一个类的Precison和Recall后计算F1，最后将F1平均</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>修复Meta应用无法登录问题</title>
+    <url>//meta-oculus-continue-logging-in/</url>
+    <content><![CDATA[<p>今天莫名其妙地无法登录 Meta Quest Remote Desktop，症状是点击登录按钮之后没有按照预期弹出登录网址。 </p>
+<p>后面又安装Oculus PC试了一下，同样存在此问题</p>
+<p>TLDR; 解决方法： Win+R 然后随便输入https开头URL比如<a href="https://google.com,回车选择浏览器然后always,最后回到meta家应用重试登录即可弹出窗口/" target="_blank" rel="noopener">https://google.com，回车选择浏览器然后Always，最后回到Meta家应用重试登录即可弹出窗口</a></p>
+<span id="more"></span>
+
+<p>首先搜索后找到了<a href="https://www.bilibili.com/read/cv12487383/" target="_blank" rel="noopener">flushdns和hosts的操作</a>。虽然我觉得这对科学路由器环境下应该没有作用，但还是试了下，果然没有作用。</p>
+<p>回想了一下昨晚回宿舍后的操作，因为需要换区块链钱包操作因此装了Brave浏览器。因此尝试了重置默认浏览器，但也没有什么效果。</p>
+<p>最后尝试通过手动唤出浏览器追溯问题源头，具体方式为Win+R 然后随便输入https开头URL比如<a href="https://google.com再回车.这时候我看到居然还有个选择默认浏览器界面就觉得多半是这个的问题了.在选择chrome然后选always之后回到了mata的应用重试,发现一切回归正常./" target="_blank" rel="noopener">https://google.com再回车。这时候我看到居然还有个选择默认浏览器界面就觉得多半是这个的问题了。在选择chrome然后选Always之后回到了Mata的应用重试，发现一切回归正常。</a></p>
+<p>个人猜测因此这个Bug应该是由于Meta的调用默认浏览器方式无法弹出那个选择浏览器窗口的原因导致。而问题源头在于我昨晚安装Brave浏览器使得原来的默认选择失效。</p>
+]]></content>
+      <tags>
+        <tag>meta</tag>
+        <tag>oculus</tag>
+      </tags>
   </entry>
   <entry>
     <title>Multi-Address Wallet Design: 多地址钱包设计</title>
@@ -10874,31 +10890,6 @@ With the respect to/Enperienced the less main reason, they xxx
 ]]></content>
   </entry>
   <entry>
-    <title>NGIN的新架構</title>
-    <url>//new-structure-of-ngin/</url>
-    <content><![CDATA[<p>重構一時爽……</p>
-<span id="more"></span>
-
-<h2 id="權限更大的Consensus"><a href="#權限更大的Consensus" class="headerlink" title="權限更大的Consensus"></a>權限更大的Consensus</h2><p>之前的Consensus是管不到p2p的，因此初始化，同步，廣播這些都是由p2p模塊根據網絡場景來觸發，然後調用内置的Consensus來對區塊和狀態進行修改。</p>
-<p>根據新的架構，Consensus將接管P2P的所有功能的主動觸發。</p>
-<p>針對Wired協議中response的處理，原本是通過handler處理，現在改爲直接caller func中直接對stream進行後續讀取再關閉</p>
-<h2 id="更强大的Tx"><a href="#更强大的Tx" class="headerlink" title="更强大的Tx"></a>更强大的Tx</h2><p>Tx，作为事务，除了处理交易以外最重要的功能就是处理智能合约，也就是第二层架构(layer-2)。</p>
-<p>和虽然同样使用账户模型，NGIN的Tx和Ethereum的Transaction有很大不同：Tx的目标不唯一。</p>
-<p>这就意味着，一个账户想在同一时间（同一区块）内发送多个ethereum交易，只需要将这些的内容进行合并。</p>
-<p>这有什么好处？首先这可以保证在“一账户一区块一事务”的原则下尽可能地拓展有效交易吞吐量。其次，减少Multi-Tx时不必要的参数，达到减小Block体积，提高TPS。再者，这对于WASM的模块化至关重要。</p>
-<p>前面两个应该很好理解，要是没这个那么“一账户一区块一事务”只能发一个交易也太难受了，要是一个账户发一堆Transaction的话累赘的sign和address也太多了。</p>
-<p>WASM这个就值得介绍了。</p>
-<p>首先WASM的设计是模块化的，所有功能或者值都可以被Module包裹形成一个模块，然后AsExtern就能被其他模块import。</p>
-<p>那么如果热心群众A开发了个算法库，我B想拿来用在我的应用上，按照ethereum的操作就是拿来sol再import。这样会有俩问题，首先是网络上这个库相当于就装了两回，而且B的应用（binary）内部相当于包裹了这个算法的binary，只装一个还好，装多了就大的一批。</p>
-<p>在WASM里，部署的是Module形式的WASM，只需要import就可以直接使用。这时候就是Tx出场的时候了，想要在Transaction里导入其他账户contract里的module，只需要把他们的owner写到participants里就可以。当然你要是觉得他们的库很赞，你可以写点value在vaules里给他们点赞助:-)</p>
-]]></content>
-      <tags>
-        <tag>todo</tag>
-        <tag>NGIN</tag>
-        <tag>notes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ngchain Serialization Selection: ngchain的序列化方案选择</title>
     <url>//ngchain-serialization-selection/</url>
     <content><![CDATA[<p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br>而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。</p>
@@ -10932,6 +10923,31 @@ With the respect to/Enperienced the less main reason, they xxx
 <h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p>在翻rlp资料时候看到了eth社区提出的<a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">blob serialisation</a>。这里说下至今<br><a href="https://github.com/prysmaticlabs/prysm/pull/92" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/92</a><br><a href="https://github.com/prysmaticlabs/prysm/pull/147" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/147</a><br>现在状况就是人家折腾半天然后跑去拥抱protobuf了。</p>
 <h2 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h2><p>serde&#x3D;SERializing &amp; DEserializing, rust里的framework就叫这个</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>NGIN的新架構</title>
+    <url>//new-structure-of-ngin/</url>
+    <content><![CDATA[<p>重構一時爽……</p>
+<span id="more"></span>
+
+<h2 id="權限更大的Consensus"><a href="#權限更大的Consensus" class="headerlink" title="權限更大的Consensus"></a>權限更大的Consensus</h2><p>之前的Consensus是管不到p2p的，因此初始化，同步，廣播這些都是由p2p模塊根據網絡場景來觸發，然後調用内置的Consensus來對區塊和狀態進行修改。</p>
+<p>根據新的架構，Consensus將接管P2P的所有功能的主動觸發。</p>
+<p>針對Wired協議中response的處理，原本是通過handler處理，現在改爲直接caller func中直接對stream進行後續讀取再關閉</p>
+<h2 id="更强大的Tx"><a href="#更强大的Tx" class="headerlink" title="更强大的Tx"></a>更强大的Tx</h2><p>Tx，作为事务，除了处理交易以外最重要的功能就是处理智能合约，也就是第二层架构(layer-2)。</p>
+<p>和虽然同样使用账户模型，NGIN的Tx和Ethereum的Transaction有很大不同：Tx的目标不唯一。</p>
+<p>这就意味着，一个账户想在同一时间（同一区块）内发送多个ethereum交易，只需要将这些的内容进行合并。</p>
+<p>这有什么好处？首先这可以保证在“一账户一区块一事务”的原则下尽可能地拓展有效交易吞吐量。其次，减少Multi-Tx时不必要的参数，达到减小Block体积，提高TPS。再者，这对于WASM的模块化至关重要。</p>
+<p>前面两个应该很好理解，要是没这个那么“一账户一区块一事务”只能发一个交易也太难受了，要是一个账户发一堆Transaction的话累赘的sign和address也太多了。</p>
+<p>WASM这个就值得介绍了。</p>
+<p>首先WASM的设计是模块化的，所有功能或者值都可以被Module包裹形成一个模块，然后AsExtern就能被其他模块import。</p>
+<p>那么如果热心群众A开发了个算法库，我B想拿来用在我的应用上，按照ethereum的操作就是拿来sol再import。这样会有俩问题，首先是网络上这个库相当于就装了两回，而且B的应用（binary）内部相当于包裹了这个算法的binary，只装一个还好，装多了就大的一批。</p>
+<p>在WASM里，部署的是Module形式的WASM，只需要import就可以直接使用。这时候就是Tx出场的时候了，想要在Transaction里导入其他账户contract里的module，只需要把他们的owner写到participants里就可以。当然你要是觉得他们的库很赞，你可以写点value在vaules里给他们点赞助:-)</p>
+]]></content>
+      <tags>
+        <tag>todo</tag>
+        <tag>NGIN</tag>
+        <tag>notes</tag>
+      </tags>
   </entry>
   <entry>
     <title>OP-TEE 踩坑</title>
@@ -10980,6 +10996,41 @@ With the respect to/Enperienced the less main reason, they xxx
     <content><![CDATA[<p>首先</p>
 <p>为了减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现设备绑定。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
 <p>有两类不同的通用计算设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Profiling ngcore in go</title>
+    <url>//profiling-ngcore-in-go/</url>
+    <content><![CDATA[<p>因为新版本的ngcore已经把mining模块删除了，因此在空闲状态从理论上看应该是非常低调的一个p2p“哑巴”。但是实际在PC这个3600x相对高级u的环境下都能占据&gt;10%的cpu且高耗电。因此这里就开始对程序尝试调优。</p>
+<p>暂时就只关注cpu利用率的问题（高耗电在客户端上太致命了</p>
+<span id="more"></span>
+
+<p>首先通过注释掉<code>import _ &quot;net/http/pprof&quot;</code>确认了高电量不是由于引入profile导致的。</p>
+<p>然后根据profile给出的结果对几个loop都加了runtime.Goshced，并没有太大起色。</p>
+<p>profile结果全是runtime.xxx这种内部的方法。</p>
+<h2 id="go的profile"><a href="#go的profile" class="headerlink" title="go的profile"></a>go的profile</h2><p>首先肯定是需要熟练一下go自带的pprof工具。</p>
+<p>为了方便profiling，ngcore会在一个随机可用端口上建立一个http server来为pprof提供当前运行数据。<br>一般可以使用<code>go tool pprof http://localhost:[port]</code>来开启命令行模式，如果带<code>-http=:[another_port]</code>参数就可以在another_port上建一个网页来展示diagrams</p>
+<p>下面说一下在命令行模式下的一些命令</p>
+<h3 id="topNN"><a href="#topNN" class="headerlink" title="topNN"></a>topNN</h3><p>NN可以换成任何数字，比如top10就profile（CPU）前十的func。</p>
+<p>go的blog上示例明显老旧了，这里我拿go1.16下的结果讲解一下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(pprof) top10</span><br><span class="line">Showing nodes accounting for 15330ms, 54.15% of 28310ms total</span><br><span class="line">Dropped 151 nodes (cum &lt;= 141.55ms)</span><br><span class="line">Showing top 10 nodes out of 86</span><br><span class="line">显示节点占15330ms，占28310ms总数的54.15% （pprof标识的有效样本时间，和总样本时间）</span><br><span class="line">删除了 151 个节点（cum &lt;= 141.55ms，意思就是这151个剩余的加起来不超过141ms）</span><br><span class="line">显示 86 个节点中的前 10 个节点（即top10）</span><br><span class="line"></span><br><span class="line">      flat  flat%   sum%        cum   cum%</span><br><span class="line">    3530ms 12.47% 12.47%     8150ms 28.79%  runtime.selectgo</span><br><span class="line">    2920ms 10.31% 22.78%     2930ms 10.35%  runtime.stdcall1</span><br><span class="line">    1660ms  5.86% 28.65%     1700ms  6.00%  runtime.unlock2</span><br><span class="line">    1320ms  4.66% 33.31%    11930ms 42.14%  runtime.schedule</span><br><span class="line">    1310ms  4.63% 37.94%     1310ms  4.63%  runtime.stdcall2</span><br><span class="line">    1270ms  4.49% 42.42%     3300ms 11.66%  runtime.lock2</span><br><span class="line">     960ms  3.39% 45.81%     9160ms 32.36%  github.com/ngchain/ngcore/consensus.(*PoWork).eventLoop</span><br><span class="line">     920ms  3.25% 49.06%     6950ms 24.55%  runtime.findrunnable</span><br><span class="line">     850ms  3.00% 52.07%     3230ms 11.41%  runtime.checkTimers</span><br><span class="line">     590ms  2.08% 54.15%     1630ms  5.76%  runtime.sellock</span><br></pre></td></tr></table></figure>
+<ul>
+<li>flat：样本中running时间（不包含waiting for a called function to return，默认按此排序）</li>
+<li>flat%：占总样本时间百分比</li>
+<li>sum：即从上往下sum(flat%)</li>
+<li>cum：func出现（包括running<strong>或waiting for a called function to return</strong>）的样本时间（用-cum就用它排序）</li>
+<li>cum%：占总百分比</li>
+</ul>
+<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><p><code>web</code>命令就是在网页显示stack trace。命令行打开的web不如直接host在http。</p>
+<p>通过trace就可以看到是主要哪里call了这个在前面疯狂running的func。</p>
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><code>list Func</code>会给你打印Func这个func的源码，并且在每行的左边显示对应的flat和cum</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>从上面的可以看出来其实是eventLoop里的select导致了selectgo的大量调用。</p>
+<p>在这个函数里我用了两个case的for-select结构，两个case都是从channel里接受内容。</p>
+<p>尝试了下把for-select-<code>&lt;- ch</code>分解成了两个for-<code>&lt;- ch</code>（不影响业务），cpu占用瞬间变成1-2%（而且是平板上）可以说是相当显著。</p>
+<p>有关这个for-select性能的讨论</p>
+<p><a href="https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485" target="_blank" rel="noopener">https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485</a></p>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://blog.golang.org/pprof" target="_blank" rel="noopener">https://blog.golang.org/pprof</a></p>
+<p><a href="https://github.com/dgryski/go-perfbook/blob/master/performance.md" target="_blank" rel="noopener">https://github.com/dgryski/go-perfbook/blob/master/performance.md</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -11070,39 +11121,205 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>Profiling ngcore in go</title>
-    <url>//profiling-ngcore-in-go/</url>
-    <content><![CDATA[<p>因为新版本的ngcore已经把mining模块删除了，因此在空闲状态从理论上看应该是非常低调的一个p2p“哑巴”。但是实际在PC这个3600x相对高级u的环境下都能占据&gt;10%的cpu且高耗电。因此这里就开始对程序尝试调优。</p>
-<p>暂时就只关注cpu利用率的问题（高耗电在客户端上太致命了</p>
-<span id="more"></span>
-
-<p>首先通过注释掉<code>import _ &quot;net/http/pprof&quot;</code>确认了高电量不是由于引入profile导致的。</p>
-<p>然后根据profile给出的结果对几个loop都加了runtime.Goshced，并没有太大起色。</p>
-<p>profile结果全是runtime.xxx这种内部的方法。</p>
-<h2 id="go的profile"><a href="#go的profile" class="headerlink" title="go的profile"></a>go的profile</h2><p>首先肯定是需要熟练一下go自带的pprof工具。</p>
-<p>为了方便profiling，ngcore会在一个随机可用端口上建立一个http server来为pprof提供当前运行数据。<br>一般可以使用<code>go tool pprof http://localhost:[port]</code>来开启命令行模式，如果带<code>-http=:[another_port]</code>参数就可以在another_port上建一个网页来展示diagrams</p>
-<p>下面说一下在命令行模式下的一些命令</p>
-<h3 id="topNN"><a href="#topNN" class="headerlink" title="topNN"></a>topNN</h3><p>NN可以换成任何数字，比如top10就profile（CPU）前十的func。</p>
-<p>go的blog上示例明显老旧了，这里我拿go1.16下的结果讲解一下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(pprof) top10</span><br><span class="line">Showing nodes accounting for 15330ms, 54.15% of 28310ms total</span><br><span class="line">Dropped 151 nodes (cum &lt;= 141.55ms)</span><br><span class="line">Showing top 10 nodes out of 86</span><br><span class="line">显示节点占15330ms，占28310ms总数的54.15% （pprof标识的有效样本时间，和总样本时间）</span><br><span class="line">删除了 151 个节点（cum &lt;= 141.55ms，意思就是这151个剩余的加起来不超过141ms）</span><br><span class="line">显示 86 个节点中的前 10 个节点（即top10）</span><br><span class="line"></span><br><span class="line">      flat  flat%   sum%        cum   cum%</span><br><span class="line">    3530ms 12.47% 12.47%     8150ms 28.79%  runtime.selectgo</span><br><span class="line">    2920ms 10.31% 22.78%     2930ms 10.35%  runtime.stdcall1</span><br><span class="line">    1660ms  5.86% 28.65%     1700ms  6.00%  runtime.unlock2</span><br><span class="line">    1320ms  4.66% 33.31%    11930ms 42.14%  runtime.schedule</span><br><span class="line">    1310ms  4.63% 37.94%     1310ms  4.63%  runtime.stdcall2</span><br><span class="line">    1270ms  4.49% 42.42%     3300ms 11.66%  runtime.lock2</span><br><span class="line">     960ms  3.39% 45.81%     9160ms 32.36%  github.com/ngchain/ngcore/consensus.(*PoWork).eventLoop</span><br><span class="line">     920ms  3.25% 49.06%     6950ms 24.55%  runtime.findrunnable</span><br><span class="line">     850ms  3.00% 52.07%     3230ms 11.41%  runtime.checkTimers</span><br><span class="line">     590ms  2.08% 54.15%     1630ms  5.76%  runtime.sellock</span><br></pre></td></tr></table></figure>
+    <title>RandomX Design</title>
+    <url>//randomx-design/</url>
+    <content><![CDATA[<p>原文<a href="https://github.com/tevador/RandomX/blob/master/doc/design.md" target="_blank" rel="noopener">https://github.com/tevador/RandomX/blob/master/doc/design.md</a></p>
+<p>为了最大限度地减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现<em>设备绑定</em>。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
+<p>有两类不同的通用处理设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
 <ul>
-<li>flat：样本中running时间（不包含waiting for a called function to return，默认按此排序）</li>
-<li>flat%：占总样本时间百分比</li>
-<li>sum：即从上往下sum(flat%)</li>
-<li>cum：func出现（包括running<strong>或waiting for a called function to return</strong>）的样本时间（用-cum就用它排序）</li>
-<li>cum%：占总百分比</li>
+<li>CPU非专业挖矿设备，对于正常用户来说更普遍且更容易访问。受 CPU 限制的算法更加平等，并允许更多参与者加入网络。这是[原始CryptoNote白皮书][cn_paper]中所述的目标之一。</li>
+<li>在不同的 CPU 体系结构中存在大量通用的本地硬件指令子集。GPU 则不能这样说。例如，NVIDIA 和 AMD GPU <a href="https://github.com/ifdefelse/ProgPOW/issues/16" target="_blank" rel="noopener">没有通用的整数乘法指​​令</a>。</li>
+<li>所有主要的CPU 指令集都有详细的文档记录，有多个可用的开源编译器。相比之下，GPU 指令集通常是专有的，可能需要供应商特定的闭源驱动程序才能获得最大性能。</li>
 </ul>
-<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><p><code>web</code>命令就是在网页显示stack trace。命令行打开的web不如直接host在http。</p>
-<p>通过trace就可以看到是主要哪里call了这个在前面疯狂running的func。</p>
-<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><code>list Func</code>会给你打印Func这个func的源码，并且在每行的左边显示对应的flat和cum</p>
-<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>从上面的可以看出来其实是eventLoop里的select导致了selectgo的大量调用。</p>
-<p>在这个函数里我用了两个case的for-select结构，两个case都是从channel里接受内容。</p>
-<p>尝试了下把for-select-<code>&lt;- ch</code>分解成了两个for-<code>&lt;- ch</code>（不影响业务），cpu占用瞬间变成1-2%（而且是平板上）可以说是相当显著。</p>
-<p>有关这个for-select性能的讨论</p>
-<p><a href="https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485" target="_blank" rel="noopener">https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485</a></p>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://blog.golang.org/pprof" target="_blank" rel="noopener">https://blog.golang.org/pprof</a></p>
-<p><a href="https://github.com/dgryski/go-perfbook/blob/master/performance.md" target="_blank" rel="noopener">https://github.com/dgryski/go-perfbook/blob/master/performance.md</a></p>
-]]></content>
+<h2 id="1-设计考量"><a href="#1-设计考量" class="headerlink" title="1. 设计考量"></a>1. 设计考量</h2><p>CPU 绑定工作量证明的最基本思想是“工作”必须是动态的。这利用了 CPU 接受两种输入的事实：数据（主要输入）和代码（指定对数据执行什么操作）。</p>
+<p>相反，经典的加密散列hash函数 [ 3 ] 并不适合 CPU 的工作，因为它们的唯一输入是<em>数据</em>，而<strong>操作序列是固定</strong>的，可以通过专用集成电路ASIC更有效地执行。</p>
+<h3 id="1-1-动态工作量证明"><a href="#1-1-动态工作量证明" class="headerlink" title="1.1 动态工作量证明"></a>1.1 动态工作量证明</h3><p>一个动态PoW算法通常可以包括以下4个步骤：</p>
+<ol>
+<li>生成随机程序。</li>
+<li>将其翻译成CPU的本地机器代码（机器码）。</li>
+<li>执行程序。</li>
+<li>将程序的输出转换为加密安全值。</li>
+</ol>
+<p>实际“有用”的 CPU 密集型工作在步骤 3 中执行，因此必须调整算法以最小化剩余步骤的开销。</p>
+<h4 id="1-1-1-生成随机程序"><a href="#1-1-1-生成随机程序" class="headerlink" title="1.1.1 生成随机程序"></a>1.1.1 生成随机程序</h4><p>在动态PoW设计早期的尝试是基于在高级语言，如C或Javascript [4，5]。但是，由于两个主要原因，导致非常低效：</p>
+<ul>
+<li>高级语言具有复杂的语法，因此生成有效程序的速度相对较慢，因为它需要创建抽象语法树 (ASL)。</li>
+<li>一旦生成了程序的源代码，编译器一般会将文本表示解析回ASL，这使得生成源代码的整个过程变得多余。</li>
+</ul>
+<p>生成随机程序的最快方法是使用无逻辑生成器：简单地用随机数据填充缓冲区。<br>这当然需要设计一种无语法的编程语言（或指令集），其中所有随机位串都代表有效程序。</p>
+<h4 id="1-1-2-将程序翻译成机器码"><a href="#1-1-2-将程序翻译成机器码" class="headerlink" title="1.1.2 将程序翻译成机器码"></a>1.1.2 将程序翻译成机器码</h4><p>这一步是不可避免的，因为我们不想将算法限制在特定的 CPU 架构上。<br>为了尽可能快地生成机器代码，我们需要我们的指令集尽可能接近原生硬件，同时仍然足够通用以支持不同的架构。<br>在代码编译期间没有足够的时间进行昂贵的优化。</p>
+<h4 id="1-1-3-执行程序"><a href="#1-1-3-执行程序" class="headerlink" title="1.1.3 执行程序"></a>1.1.3 执行程序</h4><p>实际的程序执行应该使用尽可能多的CPU组件。应该在程序中使用的一些功能是：</p>
+<ul>
+<li>多级缓存（L1、L2、L3）</li>
+<li>μop 缓存 [ 6 ]</li>
+<li>算术逻辑单元 (ALU)</li>
+<li>浮点单元 (FPU)</li>
+<li>内存控制器</li>
+<li>指令级并行[ 7 ]<ul>
+<li>超标量执行 [ 8 ]</li>
+<li>乱序执行 [ 9 ]</li>
+<li>投机性执行 [ 10 ]</li>
+<li>寄存器重命名 [ 11 ]</li>
+</ul>
+</li>
+</ul>
+<p>第2章描述了 RandomX VM 如何利用这些功能。</p>
+<h4 id="1-1-4-计算最终结果"><a href="#1-1-4-计算最终结果" class="headerlink" title="1.1.4 计算最终结果"></a>1.1.4 计算最终结果</h4><p>Blake2b是一种加密安全的散列函数，专门设计用于在软件中快速运行，尤其是在现代 64 位处理器上，它比 SHA-3 快三倍左右，并且可以以每 3 个时钟周期的速度运行输入字节。此函数是用于 CPU 友好的工作证明的理想候选者。</p>
+<p>为了以加密安全的方式处理大量数据，高级加密标准 (AES) 可以提供最快的处理速度，因为许多现代 CPU 支持这些操作的硬件加速。有关在 RandomX 中使用 AES 的更多详细信息，请参阅第 3 章。</p>
+<h3 id="1-2-“简易程序问题”"><a href="#1-2-“简易程序问题”" class="headerlink" title="1.2 “简易程序问题”"></a>1.2 “简易程序问题”</h3><p>当一个随机程序产生时，人们可以选择只在它有利的时候执行它。这种策略之所以可行，主要有两个原因：</p>
+<p>随机生成程序的运行时间通常遵循对数正态分布 [ 14 ]（另见附录 C）。</p>
+<ol>
+<li>生成的程序可能会被快速分析，如果它的运行时间可能高于平均水平，则可能会跳过程序执行并生成一个新程序。这可以显着提高性能，尤其是在运行时分布有重尾（许多长期运行的异常值）并且程序生成成本低的情况下。</li>
+<li>实现可以选择优化程序执行所需的功能子集。例如，可能会放弃对某些操作（例如除法）的支持，或者可能会更有效地实现某些指令序列。生成的程序只有在符合优化实施的特定要求时才会被分析和执行。</li>
+</ol>
+<p>这些搜索特定属性程序的策略与此工作量证明的目标背道而驰，因此必须消除它们。这可以通过要求执行一系列N个随机程序来实现，这样每个程序都是从前一个程序的输出生成的。然后将最终程序的输出用作结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">          +---------------+     +---------------+               +---------------+     +---------------+</span><br><span class="line">          |               |     |               |               |               |     |               |</span><br><span class="line">input --&gt; |   program 1   | --&gt; |   program 2   | --&gt;  ...  --&gt; | program (N-1) | --&gt; |   program N   | --&gt; result</span><br><span class="line">          |               |     |               |               |               |     |               |</span><br><span class="line">          +---------------+     +---------------+               +---------------+     +---------------+</span><br></pre></td></tr></table></figure>
+
+<p>其原理是，在第一个程序执行后，矿工要么承诺完成整个链（可能包括不利的程序），要么重新开始并浪费在未完成的链上花费的精力。附录 A 中给出了这如何影响不同挖掘策略的哈希率的示例。</p>
+<p>此外，这种链式程序执行具有均衡整个链的运行时间的好处，因为相同分布的运行时间总和的相对偏差减少了。</p>
+<p>1.3 验证时间<br>由于工作量证明的目的是在去信任的点对点网络中使用，网络参与者必须能够快速验证证明是否有效。这为工作量证明算法的复杂性设置了上限。特别是，我们为 RandomX 设定了一个目标，使其验证速度至少与 CryptoNight 哈希函数 [ 15 ]一样快，它旨在取代它。</p>
+<p>1.4 记忆强度<br>除了纯计算资源，如 ALU 和 FPU，CPU 通常可以以 DRAM [ 16 ]的形式访问大量内存。内存子系统的性能通常会根据计算能力进行调整，例如 [ 17 ]：</p>
+<ul>
+<li>用于嵌入式和低功耗 CPU 的单通道内存</li>
+<li>用于台式机 CPU 的双通道内存</li>
+<li>用于工作站 CPU 的三通道或四通道内存</li>
+<li>用于高端服务器 CPU 的六或八通道内存</li>
+</ul>
+<p>为了利用外部存储器以及片上存储器控制器，工作量证明算法应该访问一个大的存储器缓冲区（称为“数据集”）。数据集必须是：</p>
+<ol>
+<li>大于可以存储在芯片上的内容（需要外部存储器）</li>
+<li>动态（需要可写内存）</li>
+</ol>
+<p>对于 16 nm 工艺而言，单个芯片上可放置的最大 SRAM 量超过 512 MiB，而对于 7 nm 工艺而言，则超过 2 GiB [ 18 ]。理想情况下，数据集的大小应至少为 4 GiB。但是，由于验证时间的限制（见下文），RandomX 使用的大小选择为 2080 MiB。虽然理论上可以使用当前技术（2019 年为 7 nm）使用如此数量的 SRAM 制造单个芯片，但这种解决方案的可行性值得怀疑，至少在不久的将来如此。</p>
+<p>1.4.1 轻客户端验证<br>虽然对于解决工作量证明的专用挖矿系统要求 &gt;2 GiB 是合理的，但必须为轻客户端提供一个选项，以使用更少的内存来验证证明。</p>
+<p>必须谨慎选择“快速”和“轻”模式所需的内存比例，以免轻模式适合挖矿。特别是，光模式的面积时间（AT）乘积不应小于快速模式的AT乘积。减少 AT 乘积是衡量权衡攻击的常用方法 [ 19 ]。</p>
+<p>考虑到前几章中描述的限制，根据经验确定快速和轻型验证模式之间的最大可能性能比为 8。这是因为：</p>
+<ol>
+<li>进一步增加光验证时间将违反第 1.3 章中规定的限制。</li>
+<li>进一步减少快速模式运行时间会违反第 1.1 章中规定的约束，特别是程序生成和结果计算的开销时间会变得太高。</li>
+</ol>
+<p>此外，256 MiB 被选为轻客户端模式下可能需要的最大内存量。即使对于 Raspberry Pi 这样的小型单板计算机，这个数量也是可以接受的。</p>
+<p>为了保持恒定的内存时间乘积，最大的快速模式内存要求是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">8 * 256 MiB = 2048 MiB</span><br></pre></td></tr></table></figure>
+
+<p>这可以进一步增加，因为光照模式需要额外的芯片面积用于 SuperscalarHash 函数（参见规范的第 3.4 章和第 6 章）。假设保守估计每个 SuperscalarHash 核心0.2 mm 2和 DRAM 密度为 0.149 Gb&#x2F;mm 2 [ 20 ]，额外的内存为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">8 * 0.2 * 0.149 * 1024 / 8 = 30.5 MiB</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>虚拟机架构<br>本节介绍 RandomX 虚拟机 (VM) 的设计。</li>
+</ol>
+<p>2.1 指令集<br>RandomX 使用固定长度的指令编码，每条指令有 8 个字节。这允许在指令字中包含 32 位立即数。选择指令字位的解释，以便任何 8 字节字都是有效指令。这允许非常有效的随机程序生成（参见第 1.1.1 章）。</p>
+<p>2.1.1 指令复杂度<br>VM 是一个复杂的指令集机器，允许寄存器和内存寻址操作数。然而，每条 RandomX 指令只能转换为 1-7 条 x86 指令（平均 1.8 条）。保持指令复杂度相对较低以最小化具有定制指令集的专用硬件的效率优势非常重要。</p>
+<p>2.2 程序<br>VM 执行的程序具有循环的形式，由 256 条随机指令组成。</p>
+<ul>
+<li>256条指令足够长，可以提供大量可能的程序和足够的分支空间。可以生成的不同程序的数量限制为 2 512 &#x3D; 1.3e+154，这是随机生成器可能的种子值的数量。</li>
+<li>256 条指令足够短，因此高性能 CPU 可以在与从 DRAM 中获取数据所需的时间相似的时间内执行一次迭代。这是有利的，因为它允许同步数据集访问并完全可预取（参见第 2.9 章）。</li>
+<li>由于程序是一个循环，它可以利用一些 x86 CPU 中存在的 μop 缓存 [ 6 ]。从 μop 缓存运行循环允许 CPU 关闭 x86 指令解码器的电源，这应该有助于平衡 x86 和具有简单指令解码的体系结构之间的功率效率。</li>
+</ul>
+<p>2.3 寄存器<br>VM 使用 8 个整数寄存器和 12 个浮点寄存器。这是 x86-64 中可以分配为物理寄存器的最大值，这是常见的 64 位 CPU 架构中架构寄存器最少的。使用更多寄存器会使 x86 CPU 处于劣势，因为它们必须使用内存来存储 VM 寄存器内容。</p>
+<p>2.4 整数运算<br>RandomX 使用所有具有高输出熵的原始整数运算：加法（IADD_RS、IADD_M）、减法（ISUB_R、ISUB_M、INEG_R）、乘法（IMUL_R、IMUL_M、IMULH_R、IMULH_M、ISMULH_R、ISMULH_M、IMULR_RIXOR） IXOR_M) 和旋转 (IROR_R, IROL_R)。</p>
+<p>2.4.1 IADD_RS<br>IADD_RS 指令利用 CPU 的地址计算逻辑，大多数 CPU（x86 lea、arm add）都可以在单个硬件指令中执行。</p>
+<p>2.4.2 IMUL_RCP<br>因为整数除法在 CPU 中没有完全流水线化，在 ASIC 中可以做得更快，所以 IMUL_RCP 指令每个程序只需要一个除法来计算倒数。这迫使 ASIC 包含硬件分频器，而不会在程序执行期间给它们带来性能优势。</p>
+<p>2.4.3 IROR_R&#x2F;IROL_R<br>旋转指令分为右旋转和左旋转，比例为 4:1。向右旋转具有更高的频率，因为某些架构（如 ARM）本身不支持向左旋转（必须使用向右旋转来模拟）。</p>
+<p>2.4.4 ISWAP_R<br>支持寄存器重命名&#x2F;移动消除的 CPU 可以有效地执行此指令。</p>
+<p>2.5 浮点运算<br>RandomX 使用双精度浮点运算，大多数 CPU 都支持这种运算，并且需要比单精度更复杂的硬件。所有操作都作为 128 位向量操作执行，所有主要 CPU 架构也支持这种操作。</p>
+<p>RandomX 使用 IEEE 754 标准保证的五种运算来提供正确的舍入结果：加法、减法、乘法、除法和平方根。使用标准定义的所有 4 种舍入模式。</p>
+<p>2.5.1 浮点寄存器组<br>浮点运算的域分为使用寄存器组 F 的“加法”运算和使用寄存器组 E 的“乘法”运算。这样做是为了防止加法&#x2F;减法在添加少量数字时变为空操作到大量。由于 F 组寄存器的范围限制在 左右±3.0e+14，因此对绝对值大于 1 的浮点数进行加减运算总是至少改变 5 个小数位。</p>
+<p>由于 F 组寄存器的有限范围将允许使用更有效的定点表示（80 位数字），因此 FSCAL 指令操纵浮点格式的二进制表示，使这种优化更加困难。</p>
+<p>E 组寄存器限制为正值，以避免出现NaN结果（例如负数的平方根或0 * ∞）。除法仅使用内存源操作数，以避免被优化为常数倒数的乘法。E组内存操作数的指数设置为-255和0之间的值，以避免除以0和乘以0并增加可以获得的数字范围。可能基团E的寄存器值的近似范围为1.7E-77至infinity。</p>
+<p>每个程序循环结束时浮点寄存器值的近似分布如下图所示（左 - F组，右 - E组）：</p>
+<p><img src="https://i.imgur.com/64G4qE8.png" alt="Imgur" loading="lazy"></p>
+<p>1e+14FSCAL 指令导致的 F 寄存器值较少，显着增加了寄存器值的范围。</p>
+<p>E 组寄存器涵盖了非常大的值范围。大约 2% 的程序至少产生一个infinity值。</p>
+<p>为了最大化熵并适应一个 64 字节的高速缓存线，浮点寄存器在每次迭代结束时使用 XOR 运算进行组合，然后存储到暂存器中。</p>
+<p><em>（注意：bins 由区间的左侧值标记，例如标记为 <code>1e-40</code> 的 bin 包含从 <code>1e-40</code> 到 <code>1e-20</code> 的值。）</em></p>
+<p><code>1e+14</code> 处的 F 寄存器值较少是由 FSCAL 指令引起的，该指令显着增加了寄存器值的范围。</p>
+<p>E 组寄存器涵盖了非常大的值范围。 大约 2% 的程序产生至少一个“无穷大”值。</p>
+<p>为了最大化熵并适应一个 64 字节的高速缓存线，浮点寄存器在每次迭代结束时使用 XOR 操作进行组合，然后存储到暂存器中。</p>
+<h3 id="2-6-分支"><a href="#2-6-分支" class="headerlink" title="2.6 分支"></a>2.6 分支</h3><p>现代 CPU 投入大量芯片面积和精力来处理分支。这包括：</p>
+<ul>
+<li>分支预测器单元 <a href="https://en.wikipedia.org/wiki/Branch_predictor" target="_blank" rel="noopener">Branch predictor</a></li>
+<li>检查点&#x2F;回滚状态，允许 CPU 在分支预测错误的情况下恢复。</li>
+</ul>
+<p>为了利用推测设计，随机程序应该包含分支。但是，如果分支预测失败，则推测执行的指令将被丢弃，这导致每次错误预测都会浪费一定的能量。因此，我们的目标应该是尽量减少错误预测的数量。</p>
+<p>此外，代码中的分支是必不可少的，因为它们显着减少了可以进行的静态优化的数量。例如，考虑以下 x86 指令序列：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    ...</span><br><span class="line">branch_target_00:</span><br><span class="line">    ...</span><br><span class="line">    xor r8, r9</span><br><span class="line">    test r10, 2088960</span><br><span class="line">    je branch_target_00</span><br><span class="line">    xor r8, r9</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>XOR 操作通常会取消，但由于分支而无法优化掉，因为如果采用分支，结果会有所不同。类似地，如果不是用于分支，ISWAP_R 指令可以始终被静态优化。</p>
+<p>一般来说，随机分支必须以这样的方式设计：</p>
+<ol>
+<li>无限循环是不可能的。</li>
+<li>预测错误的分支数量少。</li>
+<li>分支条件取决于运行时值以禁用静态分支优化。</li>
+</ol>
+<h4 id="2-6-1-分支预测"><a href="#2-6-1-分支预测" class="headerlink" title="2.6.1 分支预测"></a>2.6.1 分支预测</h4><p>不幸的是，我们还没有找到如何在 RandomX 中利用分支预测的方法。因为 RandomX 是一个共识协议，所以所有的规则都必须提前制定，包括分支规则。完全可预测的分支不能依赖于任何 VM 寄存器的运行时值（因为寄存器值是伪随机且不可预测的），因此它们必须是静态的，因此可以通过专用硬件轻松优化。</p>
+<h4 id="2-6-2-CBRANCH-指令"><a href="#2-6-2-CBRANCH-指令" class="headerlink" title="2.6.2 CBRANCH 指令"></a>2.6.2 CBRANCH 指令</h4><p>因此，RandomX 使用跳跃概率为 1&#x2F;256 的随机分支和依赖于整数寄存器值的分支条件。这些分支将被 CPU 预测为“未采用”。这些分支在大多数 CPU 设计中是“免费的”，除非它们被采用。虽然这没有利用分支预测器，但与非推测分支处理相比，推测设计将显着提高性能 - 有关更多信息，请参阅附录 B。</p>
+<p>分支条件和跳转目标的选择方式使得 RandomX 代码中的无限循环是不可能的，因为控制分支的寄存器永远不会在重复代码块中被修改。每条 CBRANCH 指令最多可以连续跳转两次。使用谓词执行 [<a href="https://en.wikipedia.org/wiki/Predication_(computer_architecture)" target="_blank" rel="noopener">22</a>] 处理 CBRANCH 是不切实际的，因为大部分时间都不采用分支。</p>
+<h3 id="2-7-指令级并行"><a href="#2-7-指令级并行" class="headerlink" title="2.7 指令级并行"></a>2.7 指令级并行</h3><p>CPU 使用几种利用执行代码的指令级并行性的技术来提高其性能。这些技术包括：</p>
+<ul>
+<li>拥有多个可以并行执行操作的执行单元（<em>超标量执行</em>）。</li>
+<li>执行指令不是按照程序顺序，而是按照操作数可用性的顺序（<em>乱序执行</em>）。</li>
+<li>预测分支将采用哪种方式来增强超标量和无序执行的好处。</li>
+</ul>
+<p>RandomX 受益于所有这些优化。详细分析见附录 B。</p>
+<h3 id="2-8-Scratchpad"><a href="#2-8-Scratchpad" class="headerlink" title="2.8 Scratchpad"></a>2.8 Scratchpad</h3><p>Scratchpad 用作读写存储器。它的大小被选择为完全适合 CPU 缓存。</p>
+<h4 id="2-8-1-Scratchpad-级别"><a href="#2-8-1-Scratchpad-级别" class="headerlink" title="2.8.1 Scratchpad 级别"></a>2.8.1 Scratchpad 级别</h4><p>Scratchpad 分为 3 个级别以模仿典型的 CPU 缓存层次结构 <a href="https://en.wikipedia.org/wiki/CPU_cache" target="_blank" rel="noopener">CPU_cache</a>。大多数 VM 指令访问“L1”和“L2”暂存器，因为 L1 和 L2 CPU 缓存位于靠近 CPU 执行单元的位置，并提供最佳的随机访问延迟。从 L1 和 L2 读取的比率为 3:1，这与典型延迟的反比相匹配（见下表）。</p>
+<table>
+<thead>
+<tr>
+<th>CPU μ 架构</th>
+<th>L1 延迟</th>
+<th>L2 延迟</th>
+<th>L3 延迟</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARM Cortex A55</td>
+<td>2</td>
+<td>6</td>
+<td>-</td>
+<td>[<a href="https://www.anandtech.com/show/11441/dynamiq-and-arms-new-cpus-cortex-a75-a55/4" target="_blank" rel="noopener">src</a>]</td>
+</tr>
+<tr>
+<td>AMD Zen+</td>
+<td>4</td>
+<td>12</td>
+<td>40</td>
+<td>[<a href="https://en.wikichip.org/wiki/amd/microarchitectures/zen%2B#Memory_Hierarchy" target="_blank" rel="noopener">src</a>]</td>
+</tr>
+<tr>
+<td>Intel Skylake</td>
+<td>4</td>
+<td>12</td>
+<td>42</td>
+<td>[<a href="https://en.wikichip.org/wiki/intel/microarchitectures/skylake_(client)#Memory_Hierarchy" target="_blank" rel="noopener">src</a>]</td>
+</tr>
+</tbody></table>
+<p>L3 缓存要大得多，并且离 CPU 内核更远。因此，它的访问延迟要高得多，并可能导致程序执行停顿。</p>
+<p>因此，RandomX 每次程序迭代仅对“L3”Scratchpad 执行 2 次随机访问（规范第 4.6.2 章中的第 2 步和第 3 步）。来自给定迭代的寄存器值被写入它们从中加载的相同位置，这保证了所需的缓存线已移动到更快的 L1 或 L2 缓存中。</p>
+<p>此外，从固定地址读取的整数指令也使用整个“L3”暂存器（规范的表 5.1.4），因为重复访问将确保缓存线将放置在 CPU 的 L1 缓存中。这表明 Scratchpad 级别并不总是直接对应于相同的 CPU 缓存级别。</p>
+<h3 id="2-9-数据集"><a href="#2-9-数据集" class="headerlink" title="2.9 数据集"></a>2.9 数据集</h3><p>由于 Scratchpad 通常存储在 CPU 缓存中，因此只有数据集访问使用内存控制器。</p>
+<p>RandomX 每次程序迭代从数据集随机读取一次（每个哈希结果 16384 次）。由于数据集必须存储在 DRAM 中，因此它提供了一个自然的并行化限制，因为 DRAM 每个存储体组每秒不能进行超过约 2500 万次随机访问。每个可单独寻址的银行组允许大约 1500 H&#x2F;s 的吞吐量。</p>
+<p>所有数据集访问读取一个 CPU 缓存行（64 字节）并完全预取。执行规范第 4.6.2 章中描述的一个程序迭代的时间与典型的 DRAM 访问延迟（50-100 ns）大致相同。</p>
+<h4 id="2-9-1-缓存"><a href="#2-9-1-缓存" class="headerlink" title="2.9.1 缓存"></a>2.9.1 缓存</h4><p>用于光照验证和Dataset构建的Cache，比Dataset小8倍左右。为了保持恒定的区域时间乘积，每个数据集项都由 8 次随机缓存访问构成。</p>
+<p>由于 256 MiB 足够小，可以包含在芯片上，RandomX 使用自定义的高延迟、高功率混合函数（“SuperscalarHash”），这抵消了使用低延迟内存的好处，并且计算 SuperscalarHash 所需的能量变得轻巧模式非常低效的挖矿（见第 3.4 章）。</p>
+<p>由于使用了具有 3 次迭代的抗折衷 Argon2d，因此不可能使用少于 256 MiB 的内存。当使用 3 次迭代（passes）时，将内存使用量减半会使最佳权衡攻击的计算成本增加 3423 倍 <a href="https://eprint.iacr.org/2015/430.pdf" target="_blank" rel="noopener">Fast and Tradeoff-Resilient Memory-Hard Functions for Cryptocurrencies and Password Hashing</a></p>
+<h4 id="2-8-2-Scratchpad-写入"><a href="#2-8-2-Scratchpad-写入" class="headerlink" title="2.8.2 Scratchpad 写入"></a>2.8.2 Scratchpad 写入</h4><p>在 VM 执行期间，有两种方式修改 Scratchpad：</p>
+<ol>
+<li>在每次程序迭代结束时，所有寄存器值都写入“L3”暂存器（参见规范章节 4.6.2，步骤 9 和 11）。这在两个 64 字节的块中每次迭代总共写入 128 字节。</li>
+<li>ISTORE 指令执行显式存储。每个程序平均有 16 个商店，其中 2 个商店进入“L3”级别。每个 ISTORE 指令写入 8 个字节。</li>
+</ol>
+<p>下图显示了写入暂存器的分布示例。图像中的每个像素代表 Scratchpad 的 8 个字节。红色像素代表在散列计算期间至少被覆盖一次的便签本部分。 “L1”和“L2”级别位于左侧（几乎完全覆盖）。暂存器的右侧代表底部 1792 KiB。其中只有大约 66% 被覆盖，但写入是均匀随机分布的。</p>
+<p><img src="https://i.imgur.com/pRz6aBG.png" alt="Imgur" loading="lazy"></p>
+<p>有关 Scratchpad 熵的分析，请参见附录 D。</p>
+<h4 id="2-8-3-读写比例"><a href="#2-8-3-读写比例" class="headerlink" title="2.8.3 读写比例"></a>2.8.3 读写比例</h4><p>程序每次程序迭代平均对便笺簿进行 39 次读取（指令 IADD_M、ISUB_M、IMUL_M、IMULH_M、ISMULH_M、IXOR_M、FADD_M、FSUB_M、FDIV_M）和 16 次写入（指令 ISTORE）。额外的 128 个字节被隐式读取和写入以初始化和存储寄存器值。每次迭代从 Dataset 中读取 64 字节的数据。总共：</p>
+<ul>
+<li>每次程序迭代从内存读取的平均数据量为：39 * 8 + 128 + 64 &#x3D; <strong>504 字节</strong>。</li>
+<li>每次程序迭代写入内存的平均数据量为：16 * 8 + 128 &#x3D; <strong>256 字节</strong>。</li>
+</ul>
+<p>这接近于 2:1 的读&#x2F;写比，这是 CPU 优化的。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2>]]></content>
   </entry>
   <entry>
     <title>论文分享：《The Doge of Wall Street: Analysis and Detection of Pump and Dump Cryptocurrency Manipulations》</title>
@@ -11427,207 +11644,6 @@ TODO:
         <tag>gopls</tag>
         <tag>go</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>RandomX Design</title>
-    <url>//randomx-design/</url>
-    <content><![CDATA[<p>原文<a href="https://github.com/tevador/RandomX/blob/master/doc/design.md" target="_blank" rel="noopener">https://github.com/tevador/RandomX/blob/master/doc/design.md</a></p>
-<p>为了最大限度地减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现<em>设备绑定</em>。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
-<p>有两类不同的通用处理设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
-<ul>
-<li>CPU非专业挖矿设备，对于正常用户来说更普遍且更容易访问。受 CPU 限制的算法更加平等，并允许更多参与者加入网络。这是[原始CryptoNote白皮书][cn_paper]中所述的目标之一。</li>
-<li>在不同的 CPU 体系结构中存在大量通用的本地硬件指令子集。GPU 则不能这样说。例如，NVIDIA 和 AMD GPU <a href="https://github.com/ifdefelse/ProgPOW/issues/16" target="_blank" rel="noopener">没有通用的整数乘法指​​令</a>。</li>
-<li>所有主要的CPU 指令集都有详细的文档记录，有多个可用的开源编译器。相比之下，GPU 指令集通常是专有的，可能需要供应商特定的闭源驱动程序才能获得最大性能。</li>
-</ul>
-<h2 id="1-设计考量"><a href="#1-设计考量" class="headerlink" title="1. 设计考量"></a>1. 设计考量</h2><p>CPU 绑定工作量证明的最基本思想是“工作”必须是动态的。这利用了 CPU 接受两种输入的事实：数据（主要输入）和代码（指定对数据执行什么操作）。</p>
-<p>相反，经典的加密散列hash函数 [ 3 ] 并不适合 CPU 的工作，因为它们的唯一输入是<em>数据</em>，而<strong>操作序列是固定</strong>的，可以通过专用集成电路ASIC更有效地执行。</p>
-<h3 id="1-1-动态工作量证明"><a href="#1-1-动态工作量证明" class="headerlink" title="1.1 动态工作量证明"></a>1.1 动态工作量证明</h3><p>一个动态PoW算法通常可以包括以下4个步骤：</p>
-<ol>
-<li>生成随机程序。</li>
-<li>将其翻译成CPU的本地机器代码（机器码）。</li>
-<li>执行程序。</li>
-<li>将程序的输出转换为加密安全值。</li>
-</ol>
-<p>实际“有用”的 CPU 密集型工作在步骤 3 中执行，因此必须调整算法以最小化剩余步骤的开销。</p>
-<h4 id="1-1-1-生成随机程序"><a href="#1-1-1-生成随机程序" class="headerlink" title="1.1.1 生成随机程序"></a>1.1.1 生成随机程序</h4><p>在动态PoW设计早期的尝试是基于在高级语言，如C或Javascript [4，5]。但是，由于两个主要原因，导致非常低效：</p>
-<ul>
-<li>高级语言具有复杂的语法，因此生成有效程序的速度相对较慢，因为它需要创建抽象语法树 (ASL)。</li>
-<li>一旦生成了程序的源代码，编译器一般会将文本表示解析回ASL，这使得生成源代码的整个过程变得多余。</li>
-</ul>
-<p>生成随机程序的最快方法是使用无逻辑生成器：简单地用随机数据填充缓冲区。<br>这当然需要设计一种无语法的编程语言（或指令集），其中所有随机位串都代表有效程序。</p>
-<h4 id="1-1-2-将程序翻译成机器码"><a href="#1-1-2-将程序翻译成机器码" class="headerlink" title="1.1.2 将程序翻译成机器码"></a>1.1.2 将程序翻译成机器码</h4><p>这一步是不可避免的，因为我们不想将算法限制在特定的 CPU 架构上。<br>为了尽可能快地生成机器代码，我们需要我们的指令集尽可能接近原生硬件，同时仍然足够通用以支持不同的架构。<br>在代码编译期间没有足够的时间进行昂贵的优化。</p>
-<h4 id="1-1-3-执行程序"><a href="#1-1-3-执行程序" class="headerlink" title="1.1.3 执行程序"></a>1.1.3 执行程序</h4><p>实际的程序执行应该使用尽可能多的CPU组件。应该在程序中使用的一些功能是：</p>
-<ul>
-<li>多级缓存（L1、L2、L3）</li>
-<li>μop 缓存 [ 6 ]</li>
-<li>算术逻辑单元 (ALU)</li>
-<li>浮点单元 (FPU)</li>
-<li>内存控制器</li>
-<li>指令级并行[ 7 ]<ul>
-<li>超标量执行 [ 8 ]</li>
-<li>乱序执行 [ 9 ]</li>
-<li>投机性执行 [ 10 ]</li>
-<li>寄存器重命名 [ 11 ]</li>
-</ul>
-</li>
-</ul>
-<p>第2章描述了 RandomX VM 如何利用这些功能。</p>
-<h4 id="1-1-4-计算最终结果"><a href="#1-1-4-计算最终结果" class="headerlink" title="1.1.4 计算最终结果"></a>1.1.4 计算最终结果</h4><p>Blake2b是一种加密安全的散列函数，专门设计用于在软件中快速运行，尤其是在现代 64 位处理器上，它比 SHA-3 快三倍左右，并且可以以每 3 个时钟周期的速度运行输入字节。此函数是用于 CPU 友好的工作证明的理想候选者。</p>
-<p>为了以加密安全的方式处理大量数据，高级加密标准 (AES) 可以提供最快的处理速度，因为许多现代 CPU 支持这些操作的硬件加速。有关在 RandomX 中使用 AES 的更多详细信息，请参阅第 3 章。</p>
-<h3 id="1-2-“简易程序问题”"><a href="#1-2-“简易程序问题”" class="headerlink" title="1.2 “简易程序问题”"></a>1.2 “简易程序问题”</h3><p>当一个随机程序产生时，人们可以选择只在它有利的时候执行它。这种策略之所以可行，主要有两个原因：</p>
-<p>随机生成程序的运行时间通常遵循对数正态分布 [ 14 ]（另见附录 C）。</p>
-<ol>
-<li>生成的程序可能会被快速分析，如果它的运行时间可能高于平均水平，则可能会跳过程序执行并生成一个新程序。这可以显着提高性能，尤其是在运行时分布有重尾（许多长期运行的异常值）并且程序生成成本低的情况下。</li>
-<li>实现可以选择优化程序执行所需的功能子集。例如，可能会放弃对某些操作（例如除法）的支持，或者可能会更有效地实现某些指令序列。生成的程序只有在符合优化实施的特定要求时才会被分析和执行。</li>
-</ol>
-<p>这些搜索特定属性程序的策略与此工作量证明的目标背道而驰，因此必须消除它们。这可以通过要求执行一系列N个随机程序来实现，这样每个程序都是从前一个程序的输出生成的。然后将最终程序的输出用作结果。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">          +---------------+     +---------------+               +---------------+     +---------------+</span><br><span class="line">          |               |     |               |               |               |     |               |</span><br><span class="line">input --&gt; |   program 1   | --&gt; |   program 2   | --&gt;  ...  --&gt; | program (N-1) | --&gt; |   program N   | --&gt; result</span><br><span class="line">          |               |     |               |               |               |     |               |</span><br><span class="line">          +---------------+     +---------------+               +---------------+     +---------------+</span><br></pre></td></tr></table></figure>
-
-<p>其原理是，在第一个程序执行后，矿工要么承诺完成整个链（可能包括不利的程序），要么重新开始并浪费在未完成的链上花费的精力。附录 A 中给出了这如何影响不同挖掘策略的哈希率的示例。</p>
-<p>此外，这种链式程序执行具有均衡整个链的运行时间的好处，因为相同分布的运行时间总和的相对偏差减少了。</p>
-<p>1.3 验证时间<br>由于工作量证明的目的是在去信任的点对点网络中使用，网络参与者必须能够快速验证证明是否有效。这为工作量证明算法的复杂性设置了上限。特别是，我们为 RandomX 设定了一个目标，使其验证速度至少与 CryptoNight 哈希函数 [ 15 ]一样快，它旨在取代它。</p>
-<p>1.4 记忆强度<br>除了纯计算资源，如 ALU 和 FPU，CPU 通常可以以 DRAM [ 16 ]的形式访问大量内存。内存子系统的性能通常会根据计算能力进行调整，例如 [ 17 ]：</p>
-<ul>
-<li>用于嵌入式和低功耗 CPU 的单通道内存</li>
-<li>用于台式机 CPU 的双通道内存</li>
-<li>用于工作站 CPU 的三通道或四通道内存</li>
-<li>用于高端服务器 CPU 的六或八通道内存</li>
-</ul>
-<p>为了利用外部存储器以及片上存储器控制器，工作量证明算法应该访问一个大的存储器缓冲区（称为“数据集”）。数据集必须是：</p>
-<ol>
-<li>大于可以存储在芯片上的内容（需要外部存储器）</li>
-<li>动态（需要可写内存）</li>
-</ol>
-<p>对于 16 nm 工艺而言，单个芯片上可放置的最大 SRAM 量超过 512 MiB，而对于 7 nm 工艺而言，则超过 2 GiB [ 18 ]。理想情况下，数据集的大小应至少为 4 GiB。但是，由于验证时间的限制（见下文），RandomX 使用的大小选择为 2080 MiB。虽然理论上可以使用当前技术（2019 年为 7 nm）使用如此数量的 SRAM 制造单个芯片，但这种解决方案的可行性值得怀疑，至少在不久的将来如此。</p>
-<p>1.4.1 轻客户端验证<br>虽然对于解决工作量证明的专用挖矿系统要求 &gt;2 GiB 是合理的，但必须为轻客户端提供一个选项，以使用更少的内存来验证证明。</p>
-<p>必须谨慎选择“快速”和“轻”模式所需的内存比例，以免轻模式适合挖矿。特别是，光模式的面积时间（AT）乘积不应小于快速模式的AT乘积。减少 AT 乘积是衡量权衡攻击的常用方法 [ 19 ]。</p>
-<p>考虑到前几章中描述的限制，根据经验确定快速和轻型验证模式之间的最大可能性能比为 8。这是因为：</p>
-<ol>
-<li>进一步增加光验证时间将违反第 1.3 章中规定的限制。</li>
-<li>进一步减少快速模式运行时间会违反第 1.1 章中规定的约束，特别是程序生成和结果计算的开销时间会变得太高。</li>
-</ol>
-<p>此外，256 MiB 被选为轻客户端模式下可能需要的最大内存量。即使对于 Raspberry Pi 这样的小型单板计算机，这个数量也是可以接受的。</p>
-<p>为了保持恒定的内存时间乘积，最大的快速模式内存要求是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">8 * 256 MiB = 2048 MiB</span><br></pre></td></tr></table></figure>
-
-<p>这可以进一步增加，因为光照模式需要额外的芯片面积用于 SuperscalarHash 函数（参见规范的第 3.4 章和第 6 章）。假设保守估计每个 SuperscalarHash 核心0.2 mm 2和 DRAM 密度为 0.149 Gb&#x2F;mm 2 [ 20 ]，额外的内存为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">8 * 0.2 * 0.149 * 1024 / 8 = 30.5 MiB</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>虚拟机架构<br>本节介绍 RandomX 虚拟机 (VM) 的设计。</li>
-</ol>
-<p>2.1 指令集<br>RandomX 使用固定长度的指令编码，每条指令有 8 个字节。这允许在指令字中包含 32 位立即数。选择指令字位的解释，以便任何 8 字节字都是有效指令。这允许非常有效的随机程序生成（参见第 1.1.1 章）。</p>
-<p>2.1.1 指令复杂度<br>VM 是一个复杂的指令集机器，允许寄存器和内存寻址操作数。然而，每条 RandomX 指令只能转换为 1-7 条 x86 指令（平均 1.8 条）。保持指令复杂度相对较低以最小化具有定制指令集的专用硬件的效率优势非常重要。</p>
-<p>2.2 程序<br>VM 执行的程序具有循环的形式，由 256 条随机指令组成。</p>
-<ul>
-<li>256条指令足够长，可以提供大量可能的程序和足够的分支空间。可以生成的不同程序的数量限制为 2 512 &#x3D; 1.3e+154，这是随机生成器可能的种子值的数量。</li>
-<li>256 条指令足够短，因此高性能 CPU 可以在与从 DRAM 中获取数据所需的时间相似的时间内执行一次迭代。这是有利的，因为它允许同步数据集访问并完全可预取（参见第 2.9 章）。</li>
-<li>由于程序是一个循环，它可以利用一些 x86 CPU 中存在的 μop 缓存 [ 6 ]。从 μop 缓存运行循环允许 CPU 关闭 x86 指令解码器的电源，这应该有助于平衡 x86 和具有简单指令解码的体系结构之间的功率效率。</li>
-</ul>
-<p>2.3 寄存器<br>VM 使用 8 个整数寄存器和 12 个浮点寄存器。这是 x86-64 中可以分配为物理寄存器的最大值，这是常见的 64 位 CPU 架构中架构寄存器最少的。使用更多寄存器会使 x86 CPU 处于劣势，因为它们必须使用内存来存储 VM 寄存器内容。</p>
-<p>2.4 整数运算<br>RandomX 使用所有具有高输出熵的原始整数运算：加法（IADD_RS、IADD_M）、减法（ISUB_R、ISUB_M、INEG_R）、乘法（IMUL_R、IMUL_M、IMULH_R、IMULH_M、ISMULH_R、ISMULH_M、IMULR_RIXOR） IXOR_M) 和旋转 (IROR_R, IROL_R)。</p>
-<p>2.4.1 IADD_RS<br>IADD_RS 指令利用 CPU 的地址计算逻辑，大多数 CPU（x86 lea、arm add）都可以在单个硬件指令中执行。</p>
-<p>2.4.2 IMUL_RCP<br>因为整数除法在 CPU 中没有完全流水线化，在 ASIC 中可以做得更快，所以 IMUL_RCP 指令每个程序只需要一个除法来计算倒数。这迫使 ASIC 包含硬件分频器，而不会在程序执行期间给它们带来性能优势。</p>
-<p>2.4.3 IROR_R&#x2F;IROL_R<br>旋转指令分为右旋转和左旋转，比例为 4:1。向右旋转具有更高的频率，因为某些架构（如 ARM）本身不支持向左旋转（必须使用向右旋转来模拟）。</p>
-<p>2.4.4 ISWAP_R<br>支持寄存器重命名&#x2F;移动消除的 CPU 可以有效地执行此指令。</p>
-<p>2.5 浮点运算<br>RandomX 使用双精度浮点运算，大多数 CPU 都支持这种运算，并且需要比单精度更复杂的硬件。所有操作都作为 128 位向量操作执行，所有主要 CPU 架构也支持这种操作。</p>
-<p>RandomX 使用 IEEE 754 标准保证的五种运算来提供正确的舍入结果：加法、减法、乘法、除法和平方根。使用标准定义的所有 4 种舍入模式。</p>
-<p>2.5.1 浮点寄存器组<br>浮点运算的域分为使用寄存器组 F 的“加法”运算和使用寄存器组 E 的“乘法”运算。这样做是为了防止加法&#x2F;减法在添加少量数字时变为空操作到大量。由于 F 组寄存器的范围限制在 左右±3.0e+14，因此对绝对值大于 1 的浮点数进行加减运算总是至少改变 5 个小数位。</p>
-<p>由于 F 组寄存器的有限范围将允许使用更有效的定点表示（80 位数字），因此 FSCAL 指令操纵浮点格式的二进制表示，使这种优化更加困难。</p>
-<p>E 组寄存器限制为正值，以避免出现NaN结果（例如负数的平方根或0 * ∞）。除法仅使用内存源操作数，以避免被优化为常数倒数的乘法。E组内存操作数的指数设置为-255和0之间的值，以避免除以0和乘以0并增加可以获得的数字范围。可能基团E的寄存器值的近似范围为1.7E-77至infinity。</p>
-<p>每个程序循环结束时浮点寄存器值的近似分布如下图所示（左 - F组，右 - E组）：</p>
-<p><img src="https://i.imgur.com/64G4qE8.png" alt="Imgur" loading="lazy"></p>
-<p>1e+14FSCAL 指令导致的 F 寄存器值较少，显着增加了寄存器值的范围。</p>
-<p>E 组寄存器涵盖了非常大的值范围。大约 2% 的程序至少产生一个infinity值。</p>
-<p>为了最大化熵并适应一个 64 字节的高速缓存线，浮点寄存器在每次迭代结束时使用 XOR 运算进行组合，然后存储到暂存器中。</p>
-<p><em>（注意：bins 由区间的左侧值标记，例如标记为 <code>1e-40</code> 的 bin 包含从 <code>1e-40</code> 到 <code>1e-20</code> 的值。）</em></p>
-<p><code>1e+14</code> 处的 F 寄存器值较少是由 FSCAL 指令引起的，该指令显着增加了寄存器值的范围。</p>
-<p>E 组寄存器涵盖了非常大的值范围。 大约 2% 的程序产生至少一个“无穷大”值。</p>
-<p>为了最大化熵并适应一个 64 字节的高速缓存线，浮点寄存器在每次迭代结束时使用 XOR 操作进行组合，然后存储到暂存器中。</p>
-<h3 id="2-6-分支"><a href="#2-6-分支" class="headerlink" title="2.6 分支"></a>2.6 分支</h3><p>现代 CPU 投入大量芯片面积和精力来处理分支。这包括：</p>
-<ul>
-<li>分支预测器单元 <a href="https://en.wikipedia.org/wiki/Branch_predictor" target="_blank" rel="noopener">Branch predictor</a></li>
-<li>检查点&#x2F;回滚状态，允许 CPU 在分支预测错误的情况下恢复。</li>
-</ul>
-<p>为了利用推测设计，随机程序应该包含分支。但是，如果分支预测失败，则推测执行的指令将被丢弃，这导致每次错误预测都会浪费一定的能量。因此，我们的目标应该是尽量减少错误预测的数量。</p>
-<p>此外，代码中的分支是必不可少的，因为它们显着减少了可以进行的静态优化的数量。例如，考虑以下 x86 指令序列：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    ...</span><br><span class="line">branch_target_00:</span><br><span class="line">    ...</span><br><span class="line">    xor r8, r9</span><br><span class="line">    test r10, 2088960</span><br><span class="line">    je branch_target_00</span><br><span class="line">    xor r8, r9</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>XOR 操作通常会取消，但由于分支而无法优化掉，因为如果采用分支，结果会有所不同。类似地，如果不是用于分支，ISWAP_R 指令可以始终被静态优化。</p>
-<p>一般来说，随机分支必须以这样的方式设计：</p>
-<ol>
-<li>无限循环是不可能的。</li>
-<li>预测错误的分支数量少。</li>
-<li>分支条件取决于运行时值以禁用静态分支优化。</li>
-</ol>
-<h4 id="2-6-1-分支预测"><a href="#2-6-1-分支预测" class="headerlink" title="2.6.1 分支预测"></a>2.6.1 分支预测</h4><p>不幸的是，我们还没有找到如何在 RandomX 中利用分支预测的方法。因为 RandomX 是一个共识协议，所以所有的规则都必须提前制定，包括分支规则。完全可预测的分支不能依赖于任何 VM 寄存器的运行时值（因为寄存器值是伪随机且不可预测的），因此它们必须是静态的，因此可以通过专用硬件轻松优化。</p>
-<h4 id="2-6-2-CBRANCH-指令"><a href="#2-6-2-CBRANCH-指令" class="headerlink" title="2.6.2 CBRANCH 指令"></a>2.6.2 CBRANCH 指令</h4><p>因此，RandomX 使用跳跃概率为 1&#x2F;256 的随机分支和依赖于整数寄存器值的分支条件。这些分支将被 CPU 预测为“未采用”。这些分支在大多数 CPU 设计中是“免费的”，除非它们被采用。虽然这没有利用分支预测器，但与非推测分支处理相比，推测设计将显着提高性能 - 有关更多信息，请参阅附录 B。</p>
-<p>分支条件和跳转目标的选择方式使得 RandomX 代码中的无限循环是不可能的，因为控制分支的寄存器永远不会在重复代码块中被修改。每条 CBRANCH 指令最多可以连续跳转两次。使用谓词执行 [<a href="https://en.wikipedia.org/wiki/Predication_(computer_architecture)" target="_blank" rel="noopener">22</a>] 处理 CBRANCH 是不切实际的，因为大部分时间都不采用分支。</p>
-<h3 id="2-7-指令级并行"><a href="#2-7-指令级并行" class="headerlink" title="2.7 指令级并行"></a>2.7 指令级并行</h3><p>CPU 使用几种利用执行代码的指令级并行性的技术来提高其性能。这些技术包括：</p>
-<ul>
-<li>拥有多个可以并行执行操作的执行单元（<em>超标量执行</em>）。</li>
-<li>执行指令不是按照程序顺序，而是按照操作数可用性的顺序（<em>乱序执行</em>）。</li>
-<li>预测分支将采用哪种方式来增强超标量和无序执行的好处。</li>
-</ul>
-<p>RandomX 受益于所有这些优化。详细分析见附录 B。</p>
-<h3 id="2-8-Scratchpad"><a href="#2-8-Scratchpad" class="headerlink" title="2.8 Scratchpad"></a>2.8 Scratchpad</h3><p>Scratchpad 用作读写存储器。它的大小被选择为完全适合 CPU 缓存。</p>
-<h4 id="2-8-1-Scratchpad-级别"><a href="#2-8-1-Scratchpad-级别" class="headerlink" title="2.8.1 Scratchpad 级别"></a>2.8.1 Scratchpad 级别</h4><p>Scratchpad 分为 3 个级别以模仿典型的 CPU 缓存层次结构 <a href="https://en.wikipedia.org/wiki/CPU_cache" target="_blank" rel="noopener">CPU_cache</a>。大多数 VM 指令访问“L1”和“L2”暂存器，因为 L1 和 L2 CPU 缓存位于靠近 CPU 执行单元的位置，并提供最佳的随机访问延迟。从 L1 和 L2 读取的比率为 3:1，这与典型延迟的反比相匹配（见下表）。</p>
-<table>
-<thead>
-<tr>
-<th>CPU μ 架构</th>
-<th>L1 延迟</th>
-<th>L2 延迟</th>
-<th>L3 延迟</th>
-<th>来源</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ARM Cortex A55</td>
-<td>2</td>
-<td>6</td>
-<td>-</td>
-<td>[<a href="https://www.anandtech.com/show/11441/dynamiq-and-arms-new-cpus-cortex-a75-a55/4" target="_blank" rel="noopener">src</a>]</td>
-</tr>
-<tr>
-<td>AMD Zen+</td>
-<td>4</td>
-<td>12</td>
-<td>40</td>
-<td>[<a href="https://en.wikichip.org/wiki/amd/microarchitectures/zen%2B#Memory_Hierarchy" target="_blank" rel="noopener">src</a>]</td>
-</tr>
-<tr>
-<td>Intel Skylake</td>
-<td>4</td>
-<td>12</td>
-<td>42</td>
-<td>[<a href="https://en.wikichip.org/wiki/intel/microarchitectures/skylake_(client)#Memory_Hierarchy" target="_blank" rel="noopener">src</a>]</td>
-</tr>
-</tbody></table>
-<p>L3 缓存要大得多，并且离 CPU 内核更远。因此，它的访问延迟要高得多，并可能导致程序执行停顿。</p>
-<p>因此，RandomX 每次程序迭代仅对“L3”Scratchpad 执行 2 次随机访问（规范第 4.6.2 章中的第 2 步和第 3 步）。来自给定迭代的寄存器值被写入它们从中加载的相同位置，这保证了所需的缓存线已移动到更快的 L1 或 L2 缓存中。</p>
-<p>此外，从固定地址读取的整数指令也使用整个“L3”暂存器（规范的表 5.1.4），因为重复访问将确保缓存线将放置在 CPU 的 L1 缓存中。这表明 Scratchpad 级别并不总是直接对应于相同的 CPU 缓存级别。</p>
-<h3 id="2-9-数据集"><a href="#2-9-数据集" class="headerlink" title="2.9 数据集"></a>2.9 数据集</h3><p>由于 Scratchpad 通常存储在 CPU 缓存中，因此只有数据集访问使用内存控制器。</p>
-<p>RandomX 每次程序迭代从数据集随机读取一次（每个哈希结果 16384 次）。由于数据集必须存储在 DRAM 中，因此它提供了一个自然的并行化限制，因为 DRAM 每个存储体组每秒不能进行超过约 2500 万次随机访问。每个可单独寻址的银行组允许大约 1500 H&#x2F;s 的吞吐量。</p>
-<p>所有数据集访问读取一个 CPU 缓存行（64 字节）并完全预取。执行规范第 4.6.2 章中描述的一个程序迭代的时间与典型的 DRAM 访问延迟（50-100 ns）大致相同。</p>
-<h4 id="2-9-1-缓存"><a href="#2-9-1-缓存" class="headerlink" title="2.9.1 缓存"></a>2.9.1 缓存</h4><p>用于光照验证和Dataset构建的Cache，比Dataset小8倍左右。为了保持恒定的区域时间乘积，每个数据集项都由 8 次随机缓存访问构成。</p>
-<p>由于 256 MiB 足够小，可以包含在芯片上，RandomX 使用自定义的高延迟、高功率混合函数（“SuperscalarHash”），这抵消了使用低延迟内存的好处，并且计算 SuperscalarHash 所需的能量变得轻巧模式非常低效的挖矿（见第 3.4 章）。</p>
-<p>由于使用了具有 3 次迭代的抗折衷 Argon2d，因此不可能使用少于 256 MiB 的内存。当使用 3 次迭代（passes）时，将内存使用量减半会使最佳权衡攻击的计算成本增加 3423 倍 <a href="https://eprint.iacr.org/2015/430.pdf" target="_blank" rel="noopener">Fast and Tradeoff-Resilient Memory-Hard Functions for Cryptocurrencies and Password Hashing</a></p>
-<h4 id="2-8-2-Scratchpad-写入"><a href="#2-8-2-Scratchpad-写入" class="headerlink" title="2.8.2 Scratchpad 写入"></a>2.8.2 Scratchpad 写入</h4><p>在 VM 执行期间，有两种方式修改 Scratchpad：</p>
-<ol>
-<li>在每次程序迭代结束时，所有寄存器值都写入“L3”暂存器（参见规范章节 4.6.2，步骤 9 和 11）。这在两个 64 字节的块中每次迭代总共写入 128 字节。</li>
-<li>ISTORE 指令执行显式存储。每个程序平均有 16 个商店，其中 2 个商店进入“L3”级别。每个 ISTORE 指令写入 8 个字节。</li>
-</ol>
-<p>下图显示了写入暂存器的分布示例。图像中的每个像素代表 Scratchpad 的 8 个字节。红色像素代表在散列计算期间至少被覆盖一次的便签本部分。 “L1”和“L2”级别位于左侧（几乎完全覆盖）。暂存器的右侧代表底部 1792 KiB。其中只有大约 66% 被覆盖，但写入是均匀随机分布的。</p>
-<p><img src="https://i.imgur.com/pRz6aBG.png" alt="Imgur" loading="lazy"></p>
-<p>有关 Scratchpad 熵的分析，请参见附录 D。</p>
-<h4 id="2-8-3-读写比例"><a href="#2-8-3-读写比例" class="headerlink" title="2.8.3 读写比例"></a>2.8.3 读写比例</h4><p>程序每次程序迭代平均对便笺簿进行 39 次读取（指令 IADD_M、ISUB_M、IMUL_M、IMULH_M、ISMULH_M、IXOR_M、FADD_M、FSUB_M、FDIV_M）和 16 次写入（指令 ISTORE）。额外的 128 个字节被隐式读取和写入以初始化和存储寄存器值。每次迭代从 Dataset 中读取 64 字节的数据。总共：</p>
-<ul>
-<li>每次程序迭代从内存读取的平均数据量为：39 * 8 + 128 + 64 &#x3D; <strong>504 字节</strong>。</li>
-<li>每次程序迭代写入内存的平均数据量为：16 * 8 + 128 &#x3D; <strong>256 字节</strong>。</li>
-</ul>
-<p>这接近于 2:1 的读&#x2F;写比，这是 CPU 优化的。</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2>]]></content>
   </entry>
   <entry>
     <title>reputational-contagion-and-the-fall-of-ftx</title>
@@ -12338,6 +12354,70 @@ TODO:
       </tags>
   </entry>
   <entry>
+    <title>Something on NGIN: 一些隨筆</title>
+    <url>//sth-on-ngin/</url>
+    <content><![CDATA[<p>隨意地記錄一些NGIN上的一些思考</p>
+<span id="more"></span>
+
+<h2 id="28-April-2020-爲什麽選擇不添加TD-Toatl-Difficulty"><a href="#28-April-2020-爲什麽選擇不添加TD-Toatl-Difficulty" class="headerlink" title="28 April 2020 爲什麽選擇不添加TD(Toatl Difficulty)?"></a>28 April 2020 爲什麽選擇不添加TD(Toatl Difficulty)?</h2><p>本來是打算加的，因爲有如下好處</p>
+<ul>
+<li>藉鑒ETH的sync</li>
+<li>讓同一時間收到的Block之間有不同的rank， 方便node決定fork方向</li>
+</ul>
+<p>但是後來取消了，選擇了不添加TD，只使用Diff(target)</p>
+<ul>
+<li>無法排查Block的内部TD錯誤</li>
+<li>需要修改難度算法。因爲當前Block難度是在一個checkround中不變的，TD決定rank的特性毫無意義。</li>
+<li>Block的獨立性。這個是一直在爭取的東西，可以讓整個架構更可插拔，方便拓展。Diff的關聯已經和上一區塊過於緊密了。在不改變算法的情況下要使得rank不同就需要使用由nonce決定的ActualDiff，而每次ActualDiff實際上都是在re-hash，對PoW算法要求高。而NGIN本來就是CPU算法，不應當采取這樣的機制。</li>
+<li>Sync還不完善。Sync機制還是殘廢狀態，不應該開始考慮調優</li>
+<li>rank應該能有別的替代品: UnixNano, len(txs) …</li>
+</ul>
+<h2 id="28-April-2020-Sync機制"><a href="#28-April-2020-Sync機制" class="headerlink" title="28 April 2020 Sync機制?"></a>28 April 2020 Sync機制?</h2><p>P2P_protocol-v0.0.1下NGIN的Sync機制比較殘廢，是直接不停地pingpong來獲取Wired Node的狀態（最高高度）來確認自己是不是out of date.</p>
+<p>這裏先簡單説一下其他區塊鏈網絡的Sync機制</p>
+<ol>
+<li>Bitcoin</li>
+</ol>
+<p>BTC的Sync機制是發一個hash_stop&#x3D;0（即取盡可能多）的getheaders&#x2F;getblocks，讓remoteNode傳回一份Inv也就是庫存清單，localNode就check了一眼這個清單，對自己沒的Block發getdata</p>
+<ol start="2">
+<li>Ethereum</li>
+</ol>
+<p>ETH有倆種Sync，一個是Block的，一個是State也就是合約狀態的</p>
+<p>這裏就講下Block的。</p>
+<p>ETH在連接建立之後就會優先交換一個Status message，裏面就包括了bestHash，前面說的TD，還有一些區別forknet的字段。</p>
+<p>然後localNode一看我自家的TD不如別家啊，然後，就會發個GetBlockHeaders請求，認證了PoW信息之後再通過GetBlockBodies把内容也取來，之後就存（執行）起來。</p>
+<hr>
+<p>因爲Discovery是利用libp2p的kaddht實現，Broadcast機制也已經用libp2p的pubsub給實現了，所以NGIN天生就和上面的不一樣……</p>
+<p>libp2p這裏有寫好的<a href="https://godoc.org/github.com/libp2p/go-libp2p-consensus" target="_blank" rel="noopener">共識</a>（<a href="https://godoc.org/github.com/libp2p/go-libp2p-raft" target="_blank" rel="noopener">raft</a>）</p>
+<p>當然還有<a href="https://godoc.org/github.com/ipfs/ipfs-cluster/consensus/raft" target="_blank" rel="noopener">ipfs自己在用的raft</a></p>
+<p>雖然這個raft庫不能用，也不能從ipfs的改，但是一些架構可以參考</p>
+<p>比如，這個consensus是建立在p2p的上層</p>
+<p>這就很顛覆了……</p>
+<p>&#x3D; &#x3D;這樣咋收response</p>
+<p>！！！<br>哦對哦</p>
+<p>這個Wired又不是broadcast要register！我返回stream然後做個阻塞讀不就好了！</p>
+<p>參考<a href="https://github.com/prysmaticlabs/prysm/blob/master/beacon-chain/p2p/sender.go" target="_blank" rel="noopener">prysm</a></p>
+<p>媽的，被libp2p的example帶跑了……</p>
+<p>看了下prysm的<a href="https://github.com/prysmaticlabs/prysm/tree/9d173dcad2146f34bf5583f359f6227951bf3efc/beacon-chain/sync" target="_blank" rel="noopener">sync</a>，看來他們對initial sync也花了不少心思……居然還有個old……</p>
+<h2 id="orphan"><a href="#orphan" class="headerlink" title="orphan"></a>orphan</h2><p>因爲上綫了測試網，因此p2p上很多問題就暴露出來了，其中最嚴重的是由於BlockTime過短導致的分叉。</p>
+<p>查了很多遍”prevent&#x2F;avoid fork”都沒結果，現在在看DAG方案時候才發現人家管這個問題叫orphan block…</p>
+<p>大概是手上沒有算力的情況分叉的確就孤兒了……</p>
+<p>eth的思路是uncle block，形象一点就是把敌人化为己用，就把uncle的header和hash保存进Block的uncle字段里。</p>
+<p>如果分叉节点收到这个带uncle的Block广播就知道了自己手里拿着的这个Block是没用的，它就会“从良”回到这个主线上。</p>
+<p>NGIN没有这个设计，因为我觉得uncle信息是冗余的，而且真的作为10s的blockTime要叉出去也很难直接救回来</p>
+<p>所以在NGIN裏只有强制fork的情況，儅遠程節點比本機高出數個blockCheckRound的時候就會觸發</p>
+<p>爲了防止惡意擡高區塊高度來强制fork，我們需要給這個機制加一個cap。換句話説就是對於離綫過久切分叉太遠的直接孤立隔離，避免其污染網絡</p>
+<h2 id="quill"><a href="#quill" class="headerlink" title="quill"></a>quill</h2><p>在对错误处理升级的时候突然萌生了使用子协议来对tx进行操作的想法。暂时把这个协议称为quill（羽毛笔）。</p>
+<p>现在tx的种类众多，却只是通过switch来将他们发到各个handler上进行验证或是处理。</p>
+<p>现在我们希望能把contract相关的tx（append,delete,以及未来的lock,unlock）通过quill来进行整合，<br>即，使用quill来解析extra内容。看起来就应该像是在用tx操作一个quill（羽毛笔）在contract上写内容。</p>
+<p>除了负责这些基本操作以外，quill也应当负责保证accounts的一致性。<br>和raft，paxos这些算法不同，quill是一个针对PoW环境的一致性算法，即记账人已经确定。</p>
+]]></content>
+      <tags>
+        <tag>todo</tag>
+        <tag>NGIN</tag>
+        <tag>notes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>unsecured-loan</title>
     <url>//unsecured-loan/</url>
     <content><![CDATA[<p>关键字：[personal&#x2F;unsecured+loan&#x2F;lending]&#x2F;credit + blockchain</p>
@@ -12451,70 +12531,6 @@ TODO:
 <!-- 这包括评估联邦学习过程中数据的安全性，以及我们基于以太坊的贷款服务的效率和可扩展性，包括燃气消耗和交易处理速度。 -->
 
 ]]></content>
-  </entry>
-  <entry>
-    <title>Something on NGIN: 一些隨筆</title>
-    <url>//sth-on-ngin/</url>
-    <content><![CDATA[<p>隨意地記錄一些NGIN上的一些思考</p>
-<span id="more"></span>
-
-<h2 id="28-April-2020-爲什麽選擇不添加TD-Toatl-Difficulty"><a href="#28-April-2020-爲什麽選擇不添加TD-Toatl-Difficulty" class="headerlink" title="28 April 2020 爲什麽選擇不添加TD(Toatl Difficulty)?"></a>28 April 2020 爲什麽選擇不添加TD(Toatl Difficulty)?</h2><p>本來是打算加的，因爲有如下好處</p>
-<ul>
-<li>藉鑒ETH的sync</li>
-<li>讓同一時間收到的Block之間有不同的rank， 方便node決定fork方向</li>
-</ul>
-<p>但是後來取消了，選擇了不添加TD，只使用Diff(target)</p>
-<ul>
-<li>無法排查Block的内部TD錯誤</li>
-<li>需要修改難度算法。因爲當前Block難度是在一個checkround中不變的，TD決定rank的特性毫無意義。</li>
-<li>Block的獨立性。這個是一直在爭取的東西，可以讓整個架構更可插拔，方便拓展。Diff的關聯已經和上一區塊過於緊密了。在不改變算法的情況下要使得rank不同就需要使用由nonce決定的ActualDiff，而每次ActualDiff實際上都是在re-hash，對PoW算法要求高。而NGIN本來就是CPU算法，不應當采取這樣的機制。</li>
-<li>Sync還不完善。Sync機制還是殘廢狀態，不應該開始考慮調優</li>
-<li>rank應該能有別的替代品: UnixNano, len(txs) …</li>
-</ul>
-<h2 id="28-April-2020-Sync機制"><a href="#28-April-2020-Sync機制" class="headerlink" title="28 April 2020 Sync機制?"></a>28 April 2020 Sync機制?</h2><p>P2P_protocol-v0.0.1下NGIN的Sync機制比較殘廢，是直接不停地pingpong來獲取Wired Node的狀態（最高高度）來確認自己是不是out of date.</p>
-<p>這裏先簡單説一下其他區塊鏈網絡的Sync機制</p>
-<ol>
-<li>Bitcoin</li>
-</ol>
-<p>BTC的Sync機制是發一個hash_stop&#x3D;0（即取盡可能多）的getheaders&#x2F;getblocks，讓remoteNode傳回一份Inv也就是庫存清單，localNode就check了一眼這個清單，對自己沒的Block發getdata</p>
-<ol start="2">
-<li>Ethereum</li>
-</ol>
-<p>ETH有倆種Sync，一個是Block的，一個是State也就是合約狀態的</p>
-<p>這裏就講下Block的。</p>
-<p>ETH在連接建立之後就會優先交換一個Status message，裏面就包括了bestHash，前面說的TD，還有一些區別forknet的字段。</p>
-<p>然後localNode一看我自家的TD不如別家啊，然後，就會發個GetBlockHeaders請求，認證了PoW信息之後再通過GetBlockBodies把内容也取來，之後就存（執行）起來。</p>
-<hr>
-<p>因爲Discovery是利用libp2p的kaddht實現，Broadcast機制也已經用libp2p的pubsub給實現了，所以NGIN天生就和上面的不一樣……</p>
-<p>libp2p這裏有寫好的<a href="https://godoc.org/github.com/libp2p/go-libp2p-consensus" target="_blank" rel="noopener">共識</a>（<a href="https://godoc.org/github.com/libp2p/go-libp2p-raft" target="_blank" rel="noopener">raft</a>）</p>
-<p>當然還有<a href="https://godoc.org/github.com/ipfs/ipfs-cluster/consensus/raft" target="_blank" rel="noopener">ipfs自己在用的raft</a></p>
-<p>雖然這個raft庫不能用，也不能從ipfs的改，但是一些架構可以參考</p>
-<p>比如，這個consensus是建立在p2p的上層</p>
-<p>這就很顛覆了……</p>
-<p>&#x3D; &#x3D;這樣咋收response</p>
-<p>！！！<br>哦對哦</p>
-<p>這個Wired又不是broadcast要register！我返回stream然後做個阻塞讀不就好了！</p>
-<p>參考<a href="https://github.com/prysmaticlabs/prysm/blob/master/beacon-chain/p2p/sender.go" target="_blank" rel="noopener">prysm</a></p>
-<p>媽的，被libp2p的example帶跑了……</p>
-<p>看了下prysm的<a href="https://github.com/prysmaticlabs/prysm/tree/9d173dcad2146f34bf5583f359f6227951bf3efc/beacon-chain/sync" target="_blank" rel="noopener">sync</a>，看來他們對initial sync也花了不少心思……居然還有個old……</p>
-<h2 id="orphan"><a href="#orphan" class="headerlink" title="orphan"></a>orphan</h2><p>因爲上綫了測試網，因此p2p上很多問題就暴露出來了，其中最嚴重的是由於BlockTime過短導致的分叉。</p>
-<p>查了很多遍”prevent&#x2F;avoid fork”都沒結果，現在在看DAG方案時候才發現人家管這個問題叫orphan block…</p>
-<p>大概是手上沒有算力的情況分叉的確就孤兒了……</p>
-<p>eth的思路是uncle block，形象一点就是把敌人化为己用，就把uncle的header和hash保存进Block的uncle字段里。</p>
-<p>如果分叉节点收到这个带uncle的Block广播就知道了自己手里拿着的这个Block是没用的，它就会“从良”回到这个主线上。</p>
-<p>NGIN没有这个设计，因为我觉得uncle信息是冗余的，而且真的作为10s的blockTime要叉出去也很难直接救回来</p>
-<p>所以在NGIN裏只有强制fork的情況，儅遠程節點比本機高出數個blockCheckRound的時候就會觸發</p>
-<p>爲了防止惡意擡高區塊高度來强制fork，我們需要給這個機制加一個cap。換句話説就是對於離綫過久切分叉太遠的直接孤立隔離，避免其污染網絡</p>
-<h2 id="quill"><a href="#quill" class="headerlink" title="quill"></a>quill</h2><p>在对错误处理升级的时候突然萌生了使用子协议来对tx进行操作的想法。暂时把这个协议称为quill（羽毛笔）。</p>
-<p>现在tx的种类众多，却只是通过switch来将他们发到各个handler上进行验证或是处理。</p>
-<p>现在我们希望能把contract相关的tx（append,delete,以及未来的lock,unlock）通过quill来进行整合，<br>即，使用quill来解析extra内容。看起来就应该像是在用tx操作一个quill（羽毛笔）在contract上写内容。</p>
-<p>除了负责这些基本操作以外，quill也应当负责保证accounts的一致性。<br>和raft，paxos这些算法不同，quill是一个针对PoW环境的一致性算法，即记账人已经确定。</p>
-]]></content>
-      <tags>
-        <tag>todo</tag>
-        <tag>NGIN</tag>
-        <tag>notes</tag>
-      </tags>
   </entry>
   <entry>
     <title>WASM 2Master</title>
@@ -13207,6 +13223,23 @@ TODO:
       </tags>
   </entry>
   <entry>
+    <title>为什么选择放弃在block中加入sheet</title>
+    <url>//why-shouldnt-put-sheet-into-block/</url>
+    <content><![CDATA[<p>先简单说下最开始的Vault，vault是一个从上个vault角度对一个范围内block的状态总结，包含一个叫sheet的map(s)来存放最终账户数据（公钥，数据，合约etc）。然后由于同步和验证等过程中因为将vault并入了block的chain中所以每次都要swich type相当别扭，所以删除了vault，将sheet放进了block里。然后就是出现如下弊端。</p>
+<span id="more"></span>
+
+<p>最开始独立的vault设计虽然在同步block时候会别扭，但是对于账户等的设计上完全可以做到“状态chain”。在Vault合并Block之后就出现了明显的问题：真的太大了。刚开始想的是放整个sheet，然后发现sheet太大了（相比其他），一个sheet就相当于N*Tx大小而且还每个块必出现。这<strong>恒定占据size对于VPS带宽压力非常大</strong>。VPS带宽的利用会极大地影响实际的TPS和使用体验。假设在未来正常情况下，我区块大小10M，区块时间10s，那么要求就是VPS的网速达到1M&#x2F;s才能广播<strong>1</strong>个区块。在追求低区块时间的同时，追求减小区块体积的目标也应该落实。这样就和“存入状态”的设计相悖。</p>
+<p>后来尝试了sheetHash。从功能上和结构上看是没有什么问题。但是从设计上来看，sheet在仅“账户-余额”的简单应用中大概率可行，但是在涉及了虚拟机和DAPP业务之后就力不从心：因为<strong>需要考虑执行时间</strong>。这也是为啥ethereum不让玩for遍历的原因。当一个新块已经成熟，上个块Block对应的任务还没做完，那这时候的sheet内容就是不正确的。另外，接收者的验证sheet阶段也会消耗时间，当多个Block广播时就会出现疲于验证。</p>
+<p>虽然初衷是为chain的deleteable，但是这样就有点得不偿失。</p>
+<p>未来做coin了会考虑重拾状态链，但是现阶段主攻还是wasm，schnorr这些技术融合的区块链引擎。</p>
+]]></content>
+      <tags>
+        <tag>done</tag>
+        <tag>NGIN</tag>
+        <tag>notes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>个人想法记录</title>
     <url>//why_do_I_dislike_big_data_AI_etc/</url>
     <content><![CDATA[<h2 id="Why-do-I-dislike-big-data-AI-etc"><a href="#Why-do-I-dislike-big-data-AI-etc" class="headerlink" title="Why do I dislike big data, AI etc"></a>Why do I dislike big data, AI etc</h2><p>当时大二的时候，人工智能还不像现在这么火，big data也是个新玩意。作为一个尝鲜者我很早就开始对这些东西进行学习研究了。</p>
@@ -13234,23 +13267,6 @@ TODO:
         <tag>notes</tag>
         <tag>BigData</tag>
         <tag>AI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为什么选择放弃在block中加入sheet</title>
-    <url>//why-shouldnt-put-sheet-into-block/</url>
-    <content><![CDATA[<p>先简单说下最开始的Vault，vault是一个从上个vault角度对一个范围内block的状态总结，包含一个叫sheet的map(s)来存放最终账户数据（公钥，数据，合约etc）。然后由于同步和验证等过程中因为将vault并入了block的chain中所以每次都要swich type相当别扭，所以删除了vault，将sheet放进了block里。然后就是出现如下弊端。</p>
-<span id="more"></span>
-
-<p>最开始独立的vault设计虽然在同步block时候会别扭，但是对于账户等的设计上完全可以做到“状态chain”。在Vault合并Block之后就出现了明显的问题：真的太大了。刚开始想的是放整个sheet，然后发现sheet太大了（相比其他），一个sheet就相当于N*Tx大小而且还每个块必出现。这<strong>恒定占据size对于VPS带宽压力非常大</strong>。VPS带宽的利用会极大地影响实际的TPS和使用体验。假设在未来正常情况下，我区块大小10M，区块时间10s，那么要求就是VPS的网速达到1M&#x2F;s才能广播<strong>1</strong>个区块。在追求低区块时间的同时，追求减小区块体积的目标也应该落实。这样就和“存入状态”的设计相悖。</p>
-<p>后来尝试了sheetHash。从功能上和结构上看是没有什么问题。但是从设计上来看，sheet在仅“账户-余额”的简单应用中大概率可行，但是在涉及了虚拟机和DAPP业务之后就力不从心：因为<strong>需要考虑执行时间</strong>。这也是为啥ethereum不让玩for遍历的原因。当一个新块已经成熟，上个块Block对应的任务还没做完，那这时候的sheet内容就是不正确的。另外，接收者的验证sheet阶段也会消耗时间，当多个Block广播时就会出现疲于验证。</p>
-<p>虽然初衷是为chain的deleteable，但是这样就有点得不偿失。</p>
-<p>未来做coin了会考虑重拾状态链，但是现阶段主攻还是wasm，schnorr这些技术融合的区块链引擎。</p>
-]]></content>
-      <tags>
-        <tag>done</tag>
-        <tag>NGIN</tag>
-        <tag>notes</tag>
       </tags>
   </entry>
 </search>
