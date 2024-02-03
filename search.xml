@@ -7093,7 +7093,7 @@ C --&gt;|load| E[Gephi]
 <ol>
 <li>接收者使用他&#x2F;她的用户密钥来解密密文</li>
 </ol>
-<p>安全性：<br>– 如果密文是为 <a href="mailto:&#97;&#108;&#105;&#x63;&#101;&#x40;&#x61;&#x62;&#x63;&#46;&#x63;&#x6f;&#109;">&#97;&#108;&#105;&#x63;&#101;&#x40;&#x61;&#x62;&#x63;&#46;&#x63;&#x6f;&#109;</a> 加密的，除了与 <a href="mailto:&#97;&#108;&#105;&#99;&#x65;&#64;&#97;&#x62;&#x63;&#x2e;&#99;&#111;&#109;">&#97;&#108;&#105;&#99;&#x65;&#64;&#97;&#x62;&#x63;&#x2e;&#99;&#111;&#109;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
+<p>安全性：<br>– 如果密文是为 <a href="mailto:&#x61;&#x6c;&#105;&#x63;&#x65;&#x40;&#x61;&#x62;&#99;&#46;&#99;&#111;&#x6d;">&#x61;&#x6c;&#105;&#x63;&#x65;&#x40;&#x61;&#x62;&#99;&#46;&#99;&#111;&#x6d;</a> 加密的，除了与 <a href="mailto:&#97;&#108;&#105;&#x63;&#101;&#x40;&#x61;&#x62;&#x63;&#46;&#99;&#x6f;&#109;">&#97;&#108;&#105;&#x63;&#101;&#x40;&#x61;&#x62;&#x63;&#46;&#99;&#x6f;&#109;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
 <p>IBE 需要一个称为双线性配对的数学函数（基于椭圆曲线）<br>• 它是两组之间的单向映射函数：G 和 GT，使得 G 和 GT 中的离散对数很难<br>• 表示为一个映射<br>$e: G \times G →G_T$<br>它取 G 组中的两个元素并输出 $G_T$ 组中的一个元素</p>
 <p>双线性配对<br>• 假设$g$是具有群序$p$的$G$生成器（即，$G$具有$p$个元素：$|G| &#x3D;p$）<br>• 我们有以下属性：<br>– Bilinear双线性：$e(g^x,g^y)&#x3D;e(g,g)^{xy}$, 对于$x \in Z_p &gt; e(g^x,g)&#x3D;e(g,g^x)&#x3D;e(g,g)^x$<br>– Non-degenerate 非退化：$e(g,g)\neq1$</p>
 <p>第一个实用的 IBE 方案是由 Dan Boneh 和 Matthew K. Franklin 在 2001 年（我们称之为 Boneh-Franklin 计划）</p>
@@ -9519,6 +9519,30 @@ C --&gt;|load| E[Gephi]
       </tags>
   </entry>
   <entry>
+    <title>HTTPS TLS JA3</title>
+    <url>//https-tls-ja3/</url>
+    <content><![CDATA[<p>JA3能不能用来识别纯tls链接数据？</p>
+<span id="more"></span>
+
+<p>JA3(S)的原理是计算握手最后Hello包的信息，那对于纯TLS，非HTTPS的流是否可以获得JA3？</p>
+<p>这个问题是因为在查看挖矿软件走TLS的时候发现了Wireshark的JA3插件并没有对其握手计算JA3的值</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">JA3S=md5(</span><br><span class="line">    server_handshake.tls_version + &quot;,&quot; + </span><br><span class="line">    server_handshake.cipher_suites + &quot;,&quot; +</span><br><span class="line">    &quot;-&quot;.join(server_handshake.extensions)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>依然能在包里找到对应的握手内容</p>
+<img src="/https-tls-ja3/handshake.png" class="">
+
+<p>因此应该是扩展限定了端口的问题</p>
+<p>我这边用的Wireshark插件是<a href="https://github.com/fullylegit/ja3/blob/master/ja3.lua" target="_blank" rel="noopener">https://github.com/fullylegit/ja3/blob/master/ja3.lua</a></p>
+<p>可以看到在最后它加了443端口的限制</p>
+<p>这样在最后加入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tcp_dissector_table:add( 5555, proto_ja3 )</span><br></pre></td></tr></table></figure>
+
+<img src="/https-tls-ja3/ja3.png" class="">
+
+<p>这样就可以看到在5555端口上的JA3S值了</p>
+]]></content>
+  </entry>
+  <entry>
     <title>How does Monero pick fake inputs?</title>
     <url>//how-xmr-pick-fake-inputs/</url>
     <content><![CDATA[<p>门罗在生成交易时如何选择ringCT中除真实inputs以外的假inputs？</p>
@@ -9586,28 +9610,34 @@ C --&gt;|load| E[Gephi]
       </tags>
   </entry>
   <entry>
-    <title>HTTPS TLS JA3</title>
-    <url>//https-tls-ja3/</url>
-    <content><![CDATA[<p>JA3能不能用来识别纯tls链接数据？</p>
+    <title>Idea on edX&#39;s Blockchain Technology</title>
+    <url>//idea-on-edx-blockchain-tech/</url>
+    <content><![CDATA[<p>Some writes for edx blockchain course</p>
 <span id="more"></span>
 
-<p>JA3(S)的原理是计算握手最后Hello包的信息，那对于纯TLS，非HTTPS的流是否可以获得JA3？</p>
-<p>这个问题是因为在查看挖矿软件走TLS的时候发现了Wireshark的JA3插件并没有对其握手计算JA3的值</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">JA3S=md5(</span><br><span class="line">    server_handshake.tls_version + &quot;,&quot; + </span><br><span class="line">    server_handshake.cipher_suites + &quot;,&quot; +</span><br><span class="line">    &quot;-&quot;.join(server_handshake.extensions)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>依然能在包里找到对应的握手内容</p>
-<img src="/https-tls-ja3/handshake.png" class="">
-
-<p>因此应该是扩展限定了端口的问题</p>
-<p>我这边用的Wireshark插件是<a href="https://github.com/fullylegit/ja3/blob/master/ja3.lua" target="_blank" rel="noopener">https://github.com/fullylegit/ja3/blob/master/ja3.lua</a></p>
-<p>可以看到在最后它加了443端口的限制</p>
-<p>这样在最后加入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tcp_dissector_table:add( 5555, proto_ja3 )</span><br></pre></td></tr></table></figure>
-
-<img src="/https-tls-ja3/ja3.png" class="">
-
-<p>这样就可以看到在5555端口上的JA3S值了</p>
+<h2 id="What-is-PoW"><a href="#What-is-PoW" class="headerlink" title="What is PoW"></a>What is PoW</h2><p>The idea for Proof of Work(PoW) was first published in 1993 by Cynthia Dwork and Moni Naor and was later applied by Satoshi Nakamoto in the Bitcoin paper in 2008. Proof of Work consensus is the mechanism of choice for the majority of cryptocurrencies currently in circulation. The term “proof of work” was first used by Markus Jakobsson and Ari Juels in a publication in 1999. Nowadays, it is widely used in public chain projects especially bitcoin and ethereum codebased ones</p>
+<p>The goal of PoW is to maintain the p2p network, defending from DoS attacks, and gurantee the value’s safety on chain. PoW imposes some restrictions on operations in the network. They need to put a lot of effort into execution. Effective attacks require a lot of computing power and a lot of time to calculate. Therefore, an attack is possible, but it is useless because the cost is too high. And it is important to have strong computing power to solve difficult problems and form new obstacles no matter how much money in the wallet. Therefore, the holders of huge amounts of funds are not responsible for the decision of the entire network. It is more like a “two factor authorization”, because it uses non-service-ralated factors, like CPU computation, to gurantee datastore in the chain is safe. For example, in bitcoin, coins are “mined” using the Hashcash proof-of-work function by individual miners and verified by the decentralized nodes in the P2P bitcoin network. And the difficulty is periodically adjusted to keep the block time around a target time.</p>
+<h2 id="The-Understanding-on-Proof-of-Work"><a href="#The-Understanding-on-Proof-of-Work" class="headerlink" title="The Understanding on Proof of Work"></a>The Understanding on Proof of Work</h2><p>The defination of PoW is well-known, so I wont repeat these basic infomation. On the other hand, as an experienced PoW(mining) project host and user, I would argue more personal opinion about the “shortages” of PoW ecosystem.</p>
+<p>0x01 Energy really is wasted on PoW?</p>
+<p>Almost all opponents of PoW are focus on the usage of electricity, and then comparing to their home electricity price to conclude a huge lost result. But the fact is, the waste is less than they imagine, even no actual loss. </p>
+<p>I have to answer, no, PoW is not a waste of electricity.</p>
+<p>As a Chinese, I know how a miner or a mining farm manager controls his cost on electric - find the cheapest electricity source. In China, you can find excess hydropower in wide Southern area, and wind power in West. If there is no mining pool, the cheap electricity will have to be moved to the national power grid and add the high transportation cost to its price. Thus in large cities, like Shanghai, electricity price is much higher. But with mining, the value of electricity can be converted into the coin value on the first time, and we just need to move the necessary part to maintain the power grid. So we can avoid the power loss on transportation, we can avoid the value loss on transportation, even we can avoid the extra cost on electricity management.</p>
+<p>And also, the cost of PoW is not more than the triditional economy. We always call cryptocurrency “the new money”, and it represents that the cryptocurrency itself can be a standalone economic system. You can google how many resources are wasted by the “old moneys”, the cost of every banks, clearing houses, finance brokers etc. The answer is that it must be larger than PoW. I am used to worked in Citibank, I saw the stuffs never turn off their computers after work, I saw the sub-branch was open but did not serve anyone, I saw stuffs competing with each other by food-wasting Chinese style dinners. So why their work is not resource-consuming, but PoW is?</p>
+<p>0x01 PoW is worse than other consensus?</p>
+<p>Nowadays it is a trend that desperating PoW in blockchain developing, and the projects which still uses PoW are all treated as a “Bitcoin style”, “Old style”, “Out of date style”, regardless of whether it is really a bitcoin fork.</p>
+<p>But I have to answer again, no, PoW is never worse than anyone, especially for public chain.</p>
+<p>I had maintained one cryptocurrency project. Maybe beacase of the situation which was fulfilled with eth tokens or the token-style project name, my project was always treated as a token. After publishing on bitcointalk forum, tons of vendors sent me message - provide ICO(initial coin offering) service, provide advertisement service, provide exchange service, provide google rank service, provide youtube interview service, etc. But all of them were charging 0.5-2BTC which I cannot afford as a small technical project. The fact was that we were a PoW mining project having a great scene application. I felt failure at first becasue I cannot afford services. However, after mainnet igniting, the hashrate of the network was pumping and the coin price was pumping. Then I started reviewing bitcoin, ethereum, and projects born from ethereum like EOS.</p>
+<p>It is clear that, PoW leads to the bitcoin’s successful. Without it, there will be nobody who are willing to pay their fiat currency to a useless unreliable coin whose founder disappering. </p>
+<p>As for ethereum, though Vitalik Buterin says PoS is a better, without Ethash, ethereum wont ignite its mainnet and pump its coin price. </p>
+<p>Some will argue that ethereum’s success is from its decentralized applications, which is not depending on mainnet coin price nor PoW consensus. Maybe it’s right, it is true that PoW is not fit for private chain or union chain, becasue it needs other factors to keep the network safety instead of electricity. But the opponents still have to approve that the PoW guarantee the robust of ethereum’s, as a public chain, “value network”. And also, with this, ethereum is able to serve the well-known token publish services. Provided with no PoW gurantee, ethereum will be hard to serve at beginning. After all, bitcoin network, or bitcoin forks can also privide token services, and projects like EOS would be ICOed in bitcoin network not ethereum.</p>
+<h2 id="What-is-consensus"><a href="#What-is-consensus" class="headerlink" title="What is consensus?"></a>What is consensus?</h2><p>There is <a href="https://godoc.org/github.com/libp2p/go-libp2p-consensus" target="_blank" rel="noopener">an abstract go lib</a> which is great for understanding what consensus is</p>
+<p>And its theorical raft implement is <a href="https://godoc.org/github.com/libp2p/go-libp2p-raft" target="_blank" rel="noopener">here</a>, practical raft implement is <a href="https://godoc.org/github.com/ipfs/ipfs-cluster/consensus/raft" target="_blank" rel="noopener">here</a></p>
+<p>So, in short, consensus is a manager of state, which ensures the state’s unify among p2p network, accepting and execuating continuous opeartions on state. </p>
 ]]></content>
+      <tags>
+        <tag>todo</tag>
+        <tag>edx</tag>
+      </tags>
   </entry>
   <entry>
     <title>LELTS Notes</title>
@@ -10468,36 +10498,6 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>Idea on edX&#39;s Blockchain Technology</title>
-    <url>//idea-on-edx-blockchain-tech/</url>
-    <content><![CDATA[<p>Some writes for edx blockchain course</p>
-<span id="more"></span>
-
-<h2 id="What-is-PoW"><a href="#What-is-PoW" class="headerlink" title="What is PoW"></a>What is PoW</h2><p>The idea for Proof of Work(PoW) was first published in 1993 by Cynthia Dwork and Moni Naor and was later applied by Satoshi Nakamoto in the Bitcoin paper in 2008. Proof of Work consensus is the mechanism of choice for the majority of cryptocurrencies currently in circulation. The term “proof of work” was first used by Markus Jakobsson and Ari Juels in a publication in 1999. Nowadays, it is widely used in public chain projects especially bitcoin and ethereum codebased ones</p>
-<p>The goal of PoW is to maintain the p2p network, defending from DoS attacks, and gurantee the value’s safety on chain. PoW imposes some restrictions on operations in the network. They need to put a lot of effort into execution. Effective attacks require a lot of computing power and a lot of time to calculate. Therefore, an attack is possible, but it is useless because the cost is too high. And it is important to have strong computing power to solve difficult problems and form new obstacles no matter how much money in the wallet. Therefore, the holders of huge amounts of funds are not responsible for the decision of the entire network. It is more like a “two factor authorization”, because it uses non-service-ralated factors, like CPU computation, to gurantee datastore in the chain is safe. For example, in bitcoin, coins are “mined” using the Hashcash proof-of-work function by individual miners and verified by the decentralized nodes in the P2P bitcoin network. And the difficulty is periodically adjusted to keep the block time around a target time.</p>
-<h2 id="The-Understanding-on-Proof-of-Work"><a href="#The-Understanding-on-Proof-of-Work" class="headerlink" title="The Understanding on Proof of Work"></a>The Understanding on Proof of Work</h2><p>The defination of PoW is well-known, so I wont repeat these basic infomation. On the other hand, as an experienced PoW(mining) project host and user, I would argue more personal opinion about the “shortages” of PoW ecosystem.</p>
-<p>0x01 Energy really is wasted on PoW?</p>
-<p>Almost all opponents of PoW are focus on the usage of electricity, and then comparing to their home electricity price to conclude a huge lost result. But the fact is, the waste is less than they imagine, even no actual loss. </p>
-<p>I have to answer, no, PoW is not a waste of electricity.</p>
-<p>As a Chinese, I know how a miner or a mining farm manager controls his cost on electric - find the cheapest electricity source. In China, you can find excess hydropower in wide Southern area, and wind power in West. If there is no mining pool, the cheap electricity will have to be moved to the national power grid and add the high transportation cost to its price. Thus in large cities, like Shanghai, electricity price is much higher. But with mining, the value of electricity can be converted into the coin value on the first time, and we just need to move the necessary part to maintain the power grid. So we can avoid the power loss on transportation, we can avoid the value loss on transportation, even we can avoid the extra cost on electricity management.</p>
-<p>And also, the cost of PoW is not more than the triditional economy. We always call cryptocurrency “the new money”, and it represents that the cryptocurrency itself can be a standalone economic system. You can google how many resources are wasted by the “old moneys”, the cost of every banks, clearing houses, finance brokers etc. The answer is that it must be larger than PoW. I am used to worked in Citibank, I saw the stuffs never turn off their computers after work, I saw the sub-branch was open but did not serve anyone, I saw stuffs competing with each other by food-wasting Chinese style dinners. So why their work is not resource-consuming, but PoW is?</p>
-<p>0x01 PoW is worse than other consensus?</p>
-<p>Nowadays it is a trend that desperating PoW in blockchain developing, and the projects which still uses PoW are all treated as a “Bitcoin style”, “Old style”, “Out of date style”, regardless of whether it is really a bitcoin fork.</p>
-<p>But I have to answer again, no, PoW is never worse than anyone, especially for public chain.</p>
-<p>I had maintained one cryptocurrency project. Maybe beacase of the situation which was fulfilled with eth tokens or the token-style project name, my project was always treated as a token. After publishing on bitcointalk forum, tons of vendors sent me message - provide ICO(initial coin offering) service, provide advertisement service, provide exchange service, provide google rank service, provide youtube interview service, etc. But all of them were charging 0.5-2BTC which I cannot afford as a small technical project. The fact was that we were a PoW mining project having a great scene application. I felt failure at first becasue I cannot afford services. However, after mainnet igniting, the hashrate of the network was pumping and the coin price was pumping. Then I started reviewing bitcoin, ethereum, and projects born from ethereum like EOS.</p>
-<p>It is clear that, PoW leads to the bitcoin’s successful. Without it, there will be nobody who are willing to pay their fiat currency to a useless unreliable coin whose founder disappering. </p>
-<p>As for ethereum, though Vitalik Buterin says PoS is a better, without Ethash, ethereum wont ignite its mainnet and pump its coin price. </p>
-<p>Some will argue that ethereum’s success is from its decentralized applications, which is not depending on mainnet coin price nor PoW consensus. Maybe it’s right, it is true that PoW is not fit for private chain or union chain, becasue it needs other factors to keep the network safety instead of electricity. But the opponents still have to approve that the PoW guarantee the robust of ethereum’s, as a public chain, “value network”. And also, with this, ethereum is able to serve the well-known token publish services. Provided with no PoW gurantee, ethereum will be hard to serve at beginning. After all, bitcoin network, or bitcoin forks can also privide token services, and projects like EOS would be ICOed in bitcoin network not ethereum.</p>
-<h2 id="What-is-consensus"><a href="#What-is-consensus" class="headerlink" title="What is consensus?"></a>What is consensus?</h2><p>There is <a href="https://godoc.org/github.com/libp2p/go-libp2p-consensus" target="_blank" rel="noopener">an abstract go lib</a> which is great for understanding what consensus is</p>
-<p>And its theorical raft implement is <a href="https://godoc.org/github.com/libp2p/go-libp2p-raft" target="_blank" rel="noopener">here</a>, practical raft implement is <a href="https://godoc.org/github.com/ipfs/ipfs-cluster/consensus/raft" target="_blank" rel="noopener">here</a></p>
-<p>So, in short, consensus is a manager of state, which ensures the state’s unify among p2p network, accepting and execuating continuous opeartions on state. </p>
-]]></content>
-      <tags>
-        <tag>todo</tag>
-        <tag>edx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>libp2p notes</title>
     <url>//libp2p-notes/</url>
     <content><![CDATA[<p>因为ng的整个P2P都是依赖于libp2p的，所以这里记录一下使用libp2p的一些经验。</p>
@@ -10795,6 +10795,41 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
+    <title>ngchain Serialization Selection: ngchain的序列化方案选择</title>
+    <url>//ngchain-serialization-selection/</url>
+    <content><![CDATA[<p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br>而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。</p>
+<span id="more"></span>
+
+<p><a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">https://ethresear.ch/t/blob-serialisation/1705</a></p>
+<h2 id="protobuf"><a href="#protobuf" class="headerlink" title="protobuf"></a>protobuf</h2><p>至于为什么会走向protobuf这个歪路，是因为真的在benchmark里它的速度太诱人了。<br>golang那个benchmark对比里它也是被推荐的。<br>那时候新版还没出，gogo的速度在一众序列化方案里简直快到爆。<br>而且protobuf序列化之后的字节也非常小。<br>所以当时就觉得这个可以有。</p>
+<p>但是随着项目一点点成型，protobuf的定位和项目需求的矛盾也越来越明显。<br>对于一个到处都是serde，到处在不顾兼容性地通过修改数据原型优化系统的一个底层应用，<br>protobuf的操作实在是过于繁琐且束缚过大</p>
+<ul>
+<li><p>protobuf没有继承关系。<br>protobuf的各种feature在和golang结合的时候会让人很难受。<br>不止是单纯的用户定义的message之间继承不了，比如说这里希望<code>message A</code>继承<code>bytes</code>，<code>message B</code>继承<code>map&lt;string, string&gt;</code>这种就都做不到。<br>而且本身protobuf的（优化）集成也很麻烦（尤其在bazel里）。其对特殊类型（any啥的）的支持在golang下让人不太敢用，尤其是apiv2之后。</p>
+</li>
+<li><p>我想要的大部分情况下只是简单的把一个list序列化，但是protobuf只处理generated code里的那些message<br>例如raw, err :&#x3D; proto.Marshal([][]byte{[]byte{“wasd”}})<br>就会提示cannot use ([][]byte literal) (value of type [][]byte) as protoreflect.ProtoMessage value in argument to proto.Marshal: missing method ProtoReflect。<br>正确的serde做法就是建立一个新的message，然后这个message里带一个这个bytes list类型的字段。</p>
+</li>
+<li><p>我想要序列化过程可定制，但是官方新版本不可以<br>为什么需要可定制？因为一个struct中并非全部字段需要serde。<br>一般的解决方法是将要序列化的字段public，而不需要的private，通过func来调用private内容。<br>但是这里还有个痛点：生成的代码不应该修改，我根本没法把我的私有字段加到struct里。<br>v0.0.19之前，我们是通过func直接生成值，例如GetHash()相当于每次调用都进行hash。<br>即便是sha3.256这样的简单hash，都消耗了大量资源。<br>后面v0.0.20的实践是加上对应的public字段。<br>但是hash值这样的内容导致了值和其他内容填充的步调不一：需要先有内容且确定才能得到hash，修改内容后也得重新hash。<br>v0.0.21带来了更优实践：使用自定义struct继承生成的struct。<br>这样既可以保存自定义的辅助性字段（比如hash）（在自定义struct之中），<br>又可以serde（通过父struct，即生成的）。<br>但是实际体验并没有那么美好，自定义struct即便是继承了，也不是protoreflect.ProtoMessage，没法直接serde。<br>注意这里是protoreflect.ProtoMessage，不是proto.Message，这是新版和旧版（or gogo）的区别所在。<br>然而更坑的是goland会告诉你自定义的子类可以serde……因此需要一个个排查。<br>最后来到我们的最后一个方案，为了快速排查，我们放弃了直接继承，选择了将原型作为自定义struct字段，通过GetProto()来获取原型以及LoadProto()进行serde。<br>这样改掉一堆错误之后看似安静和谐了很多，但是，我们被框架限制住了。<br>这样妥协的方式，让我们很难在types.proto之外继续利用serde来扩展。<br>很明显，protobuf是给那些有准备的人的，而我们只是到处碰运气的赌徒罢了。</p>
+</li>
+</ul>
+<h2 id="rlp"><a href="#rlp" class="headerlink" title="rlp"></a>rlp</h2><p>作为一个有在geth上debug经验的开发，我也不是第一次使用rlp。在过去golang使用还不熟练的经历里，rlp真的是不好用。<br>首先从直观来看rlp不像别的那样有Marshal和Unmarshal。<br>其次IDE上的提示（lint）也不尽如人意，经常会出现看起来啥问题都没有跑起来到处不能encode的问题。<br>同样Decode也有问题，见这里<a href="https://ethresear.ch/t/blob-serialisation/1705/5" target="_blank" rel="noopener">vb说的例子</a>。这个帖子说的序列化还在优化更新中，而prysm用的是protobuf，所以现在不适合跟上ethereum的设计。<br>再者，缺少对map的支持，不过这个很好理解，有map之后就很难deterministic，像protobuf一样可能不同的实现有着不同的deterministic规则，仅在同一语言上统一。<br>此外如果直接<code>type Uint uint</code>这样建立type（很常见，比如NetworkType，TxType等等），那么rlp是不支持把他当uint这样的原始类型看的，就需要自己实现一个Encoder+Decoder。</p>
+<p>但是首先这个数据大小很香，真的很小。根据github上benchmark来看是比protobuf要小。</p>
+<p>其次原理简洁易懂。说白了就是万物list or str。这部分根据rlp的En&#x2F;Decoder来讲。</p>
+<h3 id="En-x2F-Decoder"><a href="#En-x2F-Decoder" class="headerlink" title="En&#x2F;Decoder"></a>En&#x2F;Decoder</h3><p>和json的返回值不同，rlp的内容是直接写入io.Writter。<br>一般我们就直接使用rlp.Encode(writter, 【自定义好的结构】)就可以</p>
+<p>前面也说到了rlp原理简单，这里就举点案例：</p>
+<p>比如说一个Nonce是个8字节的定长[]byte，需要把它encode to rlp只需要在这个8字节前面写一个prefix来描述它就可以用136（&#x3D;0x80+8）来表示8这个长度。</p>
+<p>具体的rlp的规则：</p>
+<ul>
+<li>对于单个byte（char），如果值是在0x00-0x7f（127，也就是常用ascii），那么就直接放着就行</li>
+<li>此外，对于0-55长度的bytes，rlp就用<code>0x80（128）+长度</code>作为其前缀来描述后面的列表（or单byte&gt;127）。这个前缀byte值在0x80（128）-0xb7（183）</li>
+<li>如果是比55还长，那么肯定就需要不止一个byte来修饰。为了支持巨长的内容，前缀的第一个字符来描述后面&gt;55的长度。例如一个1024字节的bytes&#x2F;str，会被encode成<code>[0xb9, 0x04, 0x00, byte_1, ... , byte_1024]</code>，这里0xb9&#x3D;0xb7+2，这个2就表示后面有俩字节（0x04，0x00）是拿来描述长度的。而长度0x04，0x00则是1024的big-endian encode。这部分的首字节被限制在0xb8-0xbf，即最大支持8字节的长度描述，最大支持2^(8*4)字节长度的bytes</li>
+<li>另外还有个概念就是list，就相当于bytes或者其他list的一个容器，例如[[‘h’, ‘e’], [‘l’, ‘p’]]。如果这个list的总payload（子元素，包括了前缀，的长度加起来）是0-55bytes，那么就单用一个0xc0（192）来表述。</li>
+<li>和前面一样，如果超过55，那就用0xf7+长度。首字节范围在0xf8-0xff，也是最大支持2^(8*4)字节长度的bytes。</li>
+</ul>
+<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p>在翻rlp资料时候看到了eth社区提出的<a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">blob serialisation</a>。这里说下至今<br><a href="https://github.com/prysmaticlabs/prysm/pull/92" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/92</a><br><a href="https://github.com/prysmaticlabs/prysm/pull/147" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/147</a><br>现在状况就是人家折腾半天然后跑去拥抱protobuf了。</p>
+<h2 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h2><p>serde&#x3D;SERializing &amp; DEserializing, rust里的framework就叫这个</p>
+]]></content>
+  </entry>
+  <entry>
     <title>New Env in msys2: msys2引入的新环境</title>
     <url>//new-env-in-msys2/</url>
     <content><![CDATA[<p>今天为小平板配置精简版开发环境来着，因为vscode在ngcore上一直报</p>
@@ -10915,41 +10950,6 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>ngchain Serialization Selection: ngchain的序列化方案选择</title>
-    <url>//ngchain-serialization-selection/</url>
-    <content><![CDATA[<p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br>而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。</p>
-<span id="more"></span>
-
-<p><a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">https://ethresear.ch/t/blob-serialisation/1705</a></p>
-<h2 id="protobuf"><a href="#protobuf" class="headerlink" title="protobuf"></a>protobuf</h2><p>至于为什么会走向protobuf这个歪路，是因为真的在benchmark里它的速度太诱人了。<br>golang那个benchmark对比里它也是被推荐的。<br>那时候新版还没出，gogo的速度在一众序列化方案里简直快到爆。<br>而且protobuf序列化之后的字节也非常小。<br>所以当时就觉得这个可以有。</p>
-<p>但是随着项目一点点成型，protobuf的定位和项目需求的矛盾也越来越明显。<br>对于一个到处都是serde，到处在不顾兼容性地通过修改数据原型优化系统的一个底层应用，<br>protobuf的操作实在是过于繁琐且束缚过大</p>
-<ul>
-<li><p>protobuf没有继承关系。<br>protobuf的各种feature在和golang结合的时候会让人很难受。<br>不止是单纯的用户定义的message之间继承不了，比如说这里希望<code>message A</code>继承<code>bytes</code>，<code>message B</code>继承<code>map&lt;string, string&gt;</code>这种就都做不到。<br>而且本身protobuf的（优化）集成也很麻烦（尤其在bazel里）。其对特殊类型（any啥的）的支持在golang下让人不太敢用，尤其是apiv2之后。</p>
-</li>
-<li><p>我想要的大部分情况下只是简单的把一个list序列化，但是protobuf只处理generated code里的那些message<br>例如raw, err :&#x3D; proto.Marshal([][]byte{[]byte{“wasd”}})<br>就会提示cannot use ([][]byte literal) (value of type [][]byte) as protoreflect.ProtoMessage value in argument to proto.Marshal: missing method ProtoReflect。<br>正确的serde做法就是建立一个新的message，然后这个message里带一个这个bytes list类型的字段。</p>
-</li>
-<li><p>我想要序列化过程可定制，但是官方新版本不可以<br>为什么需要可定制？因为一个struct中并非全部字段需要serde。<br>一般的解决方法是将要序列化的字段public，而不需要的private，通过func来调用private内容。<br>但是这里还有个痛点：生成的代码不应该修改，我根本没法把我的私有字段加到struct里。<br>v0.0.19之前，我们是通过func直接生成值，例如GetHash()相当于每次调用都进行hash。<br>即便是sha3.256这样的简单hash，都消耗了大量资源。<br>后面v0.0.20的实践是加上对应的public字段。<br>但是hash值这样的内容导致了值和其他内容填充的步调不一：需要先有内容且确定才能得到hash，修改内容后也得重新hash。<br>v0.0.21带来了更优实践：使用自定义struct继承生成的struct。<br>这样既可以保存自定义的辅助性字段（比如hash）（在自定义struct之中），<br>又可以serde（通过父struct，即生成的）。<br>但是实际体验并没有那么美好，自定义struct即便是继承了，也不是protoreflect.ProtoMessage，没法直接serde。<br>注意这里是protoreflect.ProtoMessage，不是proto.Message，这是新版和旧版（or gogo）的区别所在。<br>然而更坑的是goland会告诉你自定义的子类可以serde……因此需要一个个排查。<br>最后来到我们的最后一个方案，为了快速排查，我们放弃了直接继承，选择了将原型作为自定义struct字段，通过GetProto()来获取原型以及LoadProto()进行serde。<br>这样改掉一堆错误之后看似安静和谐了很多，但是，我们被框架限制住了。<br>这样妥协的方式，让我们很难在types.proto之外继续利用serde来扩展。<br>很明显，protobuf是给那些有准备的人的，而我们只是到处碰运气的赌徒罢了。</p>
-</li>
-</ul>
-<h2 id="rlp"><a href="#rlp" class="headerlink" title="rlp"></a>rlp</h2><p>作为一个有在geth上debug经验的开发，我也不是第一次使用rlp。在过去golang使用还不熟练的经历里，rlp真的是不好用。<br>首先从直观来看rlp不像别的那样有Marshal和Unmarshal。<br>其次IDE上的提示（lint）也不尽如人意，经常会出现看起来啥问题都没有跑起来到处不能encode的问题。<br>同样Decode也有问题，见这里<a href="https://ethresear.ch/t/blob-serialisation/1705/5" target="_blank" rel="noopener">vb说的例子</a>。这个帖子说的序列化还在优化更新中，而prysm用的是protobuf，所以现在不适合跟上ethereum的设计。<br>再者，缺少对map的支持，不过这个很好理解，有map之后就很难deterministic，像protobuf一样可能不同的实现有着不同的deterministic规则，仅在同一语言上统一。<br>此外如果直接<code>type Uint uint</code>这样建立type（很常见，比如NetworkType，TxType等等），那么rlp是不支持把他当uint这样的原始类型看的，就需要自己实现一个Encoder+Decoder。</p>
-<p>但是首先这个数据大小很香，真的很小。根据github上benchmark来看是比protobuf要小。</p>
-<p>其次原理简洁易懂。说白了就是万物list or str。这部分根据rlp的En&#x2F;Decoder来讲。</p>
-<h3 id="En-x2F-Decoder"><a href="#En-x2F-Decoder" class="headerlink" title="En&#x2F;Decoder"></a>En&#x2F;Decoder</h3><p>和json的返回值不同，rlp的内容是直接写入io.Writter。<br>一般我们就直接使用rlp.Encode(writter, 【自定义好的结构】)就可以</p>
-<p>前面也说到了rlp原理简单，这里就举点案例：</p>
-<p>比如说一个Nonce是个8字节的定长[]byte，需要把它encode to rlp只需要在这个8字节前面写一个prefix来描述它就可以用136（&#x3D;0x80+8）来表示8这个长度。</p>
-<p>具体的rlp的规则：</p>
-<ul>
-<li>对于单个byte（char），如果值是在0x00-0x7f（127，也就是常用ascii），那么就直接放着就行</li>
-<li>此外，对于0-55长度的bytes，rlp就用<code>0x80（128）+长度</code>作为其前缀来描述后面的列表（or单byte&gt;127）。这个前缀byte值在0x80（128）-0xb7（183）</li>
-<li>如果是比55还长，那么肯定就需要不止一个byte来修饰。为了支持巨长的内容，前缀的第一个字符来描述后面&gt;55的长度。例如一个1024字节的bytes&#x2F;str，会被encode成<code>[0xb9, 0x04, 0x00, byte_1, ... , byte_1024]</code>，这里0xb9&#x3D;0xb7+2，这个2就表示后面有俩字节（0x04，0x00）是拿来描述长度的。而长度0x04，0x00则是1024的big-endian encode。这部分的首字节被限制在0xb8-0xbf，即最大支持8字节的长度描述，最大支持2^(8*4)字节长度的bytes</li>
-<li>另外还有个概念就是list，就相当于bytes或者其他list的一个容器，例如[[‘h’, ‘e’], [‘l’, ‘p’]]。如果这个list的总payload（子元素，包括了前缀，的长度加起来）是0-55bytes，那么就单用一个0xc0（192）来表述。</li>
-<li>和前面一样，如果超过55，那就用0xf7+长度。首字节范围在0xf8-0xff，也是最大支持2^(8*4)字节长度的bytes。</li>
-</ul>
-<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p>在翻rlp资料时候看到了eth社区提出的<a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">blob serialisation</a>。这里说下至今<br><a href="https://github.com/prysmaticlabs/prysm/pull/92" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/92</a><br><a href="https://github.com/prysmaticlabs/prysm/pull/147" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/147</a><br>现在状况就是人家折腾半天然后跑去拥抱protobuf了。</p>
-<h2 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h2><p>serde&#x3D;SERializing &amp; DEserializing, rust里的framework就叫这个</p>
-]]></content>
-  </entry>
-  <entry>
     <title>OP-TEE 踩坑</title>
     <url>//op-tee-traps/</url>
     <content><![CDATA[<p>因为要做系统模拟，所以决定在服务器上先搭个qemu试试</p>
@@ -10989,14 +10989,6 @@ With the respect to/Enperienced the less main reason, they xxx
       <tags>
         <tag>TEE</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>PoW Algorithm Design</title>
-    <url>//pow-algo-design/</url>
-    <content><![CDATA[<p>首先</p>
-<p>为了减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现设备绑定。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
-<p>有两类不同的通用计算设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
-]]></content>
   </entry>
   <entry>
     <title>Profiling ngcore in go</title>
@@ -11119,6 +11111,14 @@ With the respect to/Enperienced the less main reason, they xxx
         <tag>todo</tag>
         <tag>edx</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>PoW Algorithm Design</title>
+    <url>//pow-algo-design/</url>
+    <content><![CDATA[<p>首先</p>
+<p>为了减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现设备绑定。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
+<p>有两类不同的通用计算设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
+]]></content>
   </entry>
   <entry>
     <title>论文分享：《The Doge of Wall Street: Analysis and Detection of Pump and Dump Cryptocurrency Manipulations》</title>
@@ -11416,35 +11416,6 @@ TODO:
       </tags>
   </entry>
   <entry>
-    <title>regenerate cgo definitions: vscode里gopls对cgo的新支持</title>
-    <url>//regenerate-cgo-definitions/</url>
-    <content><![CDATA[<p>因为之前都是让IDE&#x2F;VScode(goreturns)自动处理的import，所以今天在用vscode重新format的时候才看到，在<code>import &quot;C&quot;</code>的上面有个可以点的<code>regenerate cgo definitions</code>按钮。</p>
-<p>这里就根据这个<a href="https://github.com/golang/go/issues/35721" target="_blank" rel="noopener">github issue</a>来阐述一下这个按钮是干啥的，该怎么用。答案是根据<a href="https://www.reddit.com/r/vscode/comments/hjphbz/what_is_the_purpose_of_regenerate_cgo_definitions/" target="_blank" rel="noopener">reddit上这个帖子的回复</a>找到的</p>
-<span id="more"></span>
-
-<h2 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h2><p>使用了<code>import &quot;C&quot;</code>的源代码文件不是真正有效的Go。它们在严重依赖于go tool在构建软件包时所产生的额外信息。尽管可以通过设置<a href="https://golang.org/pkg/go/types/#Config" target="_blank" rel="noopener">types.Config.FakeImportC flag</a>来解决这些问题，可以对它们进行解析，但不能进行类型检查。</p>
-<p>许多人建议gopls使用包中的GoFiles而不是其CompiledGoFiles。<br>GoFiles是原始的（即无效的）文件。使用它们可能会给编辑包的人带来更好的体验，但是由于包将不再进行类型检查，因此它将完全破坏依赖于类型信息的所有内容。在当前架构中进行更改之前，我们必须非常仔细地评估效果。</p>
-<p>我们可以考虑两次检查cgo软件包的类型，一次使用实际代码，一次使用用户的代码。那将会是一个重大的架构变化。</p>
-<p>或者，我们可以在<code>.go</code>文件更改时运行cgo工具，以生成实际代码。这是一种更加可靠的方法，但是运行cgo处理的成本可能太高，尤其是在大型的包上。</p>
-<p>无论如何，这是一个大项目，需要大量的测试和思考。我们不太可能很快在这里做出巨大的改进。</p>
-<h2 id="Beta测试指令"><a href="#Beta测试指令" class="headerlink" title="Beta测试指令"></a>Beta测试指令</h2><p>这是当前的状态：如果您使用tip Go（即gotip安装的golang, gotip是从开发分支上编译并运行go的命令）在master分支上构建gopls，那么您应该具有很好的cgo创作经验。<br>据我所知有一个bug在自动代码补全上，它会提供_cgo_foo之类的符号，而不是正确的C.foo。</p>
-<p>不过，有一个障碍是，除非您告知，否则它不会重新生成cgo绑定。<br>为此，在使用cgo的文件中，在<code>import &quot;C&quot;</code>行的顶部应该有一个<code>regenerate cgo</code>的按钮。<br>当您引用C中的新标识符时，或使用影响Go可以看到的符号的方式更改魔术注释时，将需要使用它。</p>
-<p>要进行设置，请按照以下说明进行操作：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ go get golang.org/dl/gotip</span><br><span class="line">$ gotip download # 安装开发版golang</span><br><span class="line">[...]</span><br><span class="line">Success. You may now run &#x27;gotip&#x27;!</span><br><span class="line">$ cd /</span><br><span class="line">$ GO111MODULE=on gotip get golang.org/x/tools/gopls@master</span><br><span class="line">$ gotip version</span><br><span class="line">... devel +f7f9c8f ...</span><br><span class="line">$ gotip version $(which gopls)</span><br><span class="line">... devel +f7f9c8f ...</span><br></pre></td></tr></table></figure>
-
-<p>您无需使用tip Go即可在自己的项目上工作，仅需用其构建gopls。（这是2020.05.01的更新，现在2020.10.24估计是不用了）</p>
-<h2 id="说人话"><a href="#说人话" class="headerlink" title="说人话"></a>说人话</h2><p>就是，go自己读不懂cgo，要靠别的工具。但是别的工具一直调用会很浪费资源，那就让大家通过按钮手动让go通过工具读cgo。</p>
-<p>但是看起来bug还是挺多的，所以issue也没close</p>
-]]></content>
-      <tags>
-        <tag>done</tag>
-        <tag>vscode</tag>
-        <tag>cgo</tag>
-        <tag>gopls</tag>
-        <tag>go</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RandomX Design</title>
     <url>//randomx-design/</url>
     <content><![CDATA[<p>原文<a href="https://github.com/tevador/RandomX/blob/master/doc/design.md" target="_blank" rel="noopener">https://github.com/tevador/RandomX/blob/master/doc/design.md</a></p>
@@ -11646,50 +11617,32 @@ TODO:
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2>]]></content>
   </entry>
   <entry>
-    <title>reputational-contagion-and-the-fall-of-ftx</title>
-    <url>//reputational-contagion-and-the-fall-of-ftx/</url>
-    <content><![CDATA[<h1 id="Reputational-contagion-and-the-fall-of-FTX-Examining-the-response-of-tokens-to-the-delegitimization-of-FTT"><a href="#Reputational-contagion-and-the-fall-of-FTX-Examining-the-response-of-tokens-to-the-delegitimization-of-FTT" class="headerlink" title="Reputational contagion and the fall of FTX: Examining the response of tokens to the delegitimization of FTT"></a>Reputational contagion and the fall of FTX: Examining the response of tokens to the delegitimization of FTT</h1><p>Finance Research Letters</p>
-<p>Imran Yousaf a, John W. Goodell</p>
-<p><a href="https://www.sciencedirect.com/science/article/pii/S1544612323000788" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/pii/S1544612323000788</a></p>
-<hr>
-<p>与加密货币交易所 FTX 最近的下跌交织在一起的是，向投资者揭示了 FTX 平台代币 FTT 缺乏资产支持。鉴于对声誉传染的兴趣，以及最近学术界和投资者对数字代币的兴趣，我们有动力利用 FTX&#x2F;FTT 事件来调查声誉传染到其他代币的情况。我们采用事件研究方法来衡量 FTX 崩溃对各种代币的影响。从异常收益结果 以及 累积异常收益 CAR 和 累积平均异常收益 CAAR 表明，几乎所有代币在活动当天都开启了持续的看跌趋势。</p>
-<hr>
-<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><p>八类代币的每日数据来自 coinmarketcap.com。这些代币包括DEX（Uniswap-UNI、Stellar-XLM、PancakeSwap-CAKE、Synthetix-SNX）、CEX（BNB、UNUS SED LEO-LEO、Cronos-CRO、FTX Token-FTT）、NFT（ApeCoin-APE、Flow、 Chiliz-CHZ、Theta Network-THETA)、Defi (Dai、Avalanche-AVAX、Chainlink-LINK、Wrapped Bitcoin-WBTC)、Memes (Dogecoin-DOGE、Shiba Inu-SHIB、Baby Doge Coin-BabyDoge、MonaCoin-MONA)、能源（Energy Web Token-EWT、Powerledger-POWR、Efforce-WOZX、GRID）、旅游（Travala.com-AVA、TripCandy-CANDY、XcelToken Plus-XLAB、BTU Protocol-BTU）和医疗保健（MediBloc-MED、SOLVE） 、Dentacoin-DCN、DOC.COM-MTC）。活动日期为2022年11月8日，因为FTX交易所在这一天崩盘，FTT代币下跌75%。估计窗口由2022年7月4日至2022年11月1日（t-127至t-7）的120天组成，事件窗口由2022年11月2日至2022年11月17日（t-6至t+9）的16天组成。在本文附录的表A1中，我们提供了所有代币收益的描述性统计。</p>
-<hr>
-<h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p>我们采用事件研究方法来估计 FTX 崩溃对 DEX、CEX 和其他类别代币造成的 FTT 声誉损害的影响。利用普通最小二乘（OLS）市场模型计算从t-127到t-7的120天估计窗口的正常收益。戴克曼等人。 （1984）表明 OLS 市场模型为事件研究方法产生了相对更好的结果。使用方程式(1)，我们计算预期或正常回报，E(R it ):</p>
-<p>$E \left(\right. R_{i t} \left.\right) &#x3D; a_{i} + b_{i} R_{m t}$</p>
-<p>其中，$R_{mt}$ 是基准 MSCI 世界股票指数在 t 天的回报率。此外，我们采用等式。 (2) 确定基准指数和样本指数每日实际收益：</p>
-<p>$R_{i t} &#x3D; \left[\right. \left(\right. P_{i t} - - P_{i t - 1} \left.\right) &#x2F; P_{i t - 1} \left]\right. \times 100$</p>
-<p>$P_{it}$ 表示所选指数 i 在 t 日的价格，而 $P_{it-1}$ 显示所选指数 i 在 t 日前一天的价格</p>
-<hr>
-<h3 id="Abnormal-returns-amp-cumulative-abnormal-returns"><a href="#Abnormal-returns-amp-cumulative-abnormal-returns" class="headerlink" title="Abnormal returns &amp; cumulative abnormal returns"></a>Abnormal returns &amp; cumulative abnormal returns</h3><p>异常收益和累计异常收益</p>
-<p>我们通过实际每日收益与预期每日收益的差值来计算异常收益 AR it ，如式（3）所示。</p>
-<p>$A R_{i t} &#x3D; R_{i t} - E \left(\right. R_{i t} \left.\right)$</p>
-<p>其中，R it 表示资产 i 在 t 天的实际收益。我们从等式中的实际回报中减去预期回报。 (3) 在第 t 天获得指数 i 的超额收益 (AR it )。在从 $\Gamma_1$ 天到 $\Gamma_2$ 的事件窗口中，我们估计资产 i 的累积异常收益 (CAR) 如下</p>
-<p>$C A R_{i} \left( \Gamma_{1} , \Gamma\right)<em>{2} \left.\right) &#x3D; \sum</em>{t &#x3D; \left(\Gamma\right)<em>{1}}^{\left(\Gamma\right)</em>{2}} A R_{i t}$</p>
-<hr>
-<h3 id="Aggregates-of-abnormal-returns-and-cumulative-aggregates-of-abnormal-returns"><a href="#Aggregates-of-abnormal-returns-and-cumulative-aggregates-of-abnormal-returns" class="headerlink" title="Aggregates of abnormal returns and cumulative aggregates of abnormal returns"></a>Aggregates of abnormal returns and cumulative aggregates of abnormal returns</h3><p>异常收益总额及异常收益累计总额</p>
-<p>为了估计所有代币对 FTX 崩溃的总体反应，我们通过平均每个代币的每日异常收益来进一步估计总体异常收益。总异常收益计算如下：</p>
-<p>$A A R_{t} &#x3D; \frac{1}{N} \sum_{i &#x3D; 1}^{N} A R_{i t}$</p>
-<p>其中，$AAR_t$ 表示 t 时刻各代币的平均异常收益。 N 是研究中包含的代币数量。最后，我们根据事件窗口的 $AAR_t$ 估计累积平均异常收益 (CAAR)。</p>
-<hr>
-<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><p>图 1 展示了活动当天的回报。几乎所有类型的代币都显示出看跌趋势。 FTT 在活动当天的各类代币中跌幅最高（-75%）。多个代币跌幅超过 15%，包括 SNX、CRO、APE、FLOW、CHZ、DOGE、SHIB 和 AVA。</p>
-<img src="/reputational-contagion-and-the-fall-of-ftx/2023-06-29-17-11-28.png" class="">
+    <title>regenerate cgo definitions: vscode里gopls对cgo的新支持</title>
+    <url>//regenerate-cgo-definitions/</url>
+    <content><![CDATA[<p>因为之前都是让IDE&#x2F;VScode(goreturns)自动处理的import，所以今天在用vscode重新format的时候才看到，在<code>import &quot;C&quot;</code>的上面有个可以点的<code>regenerate cgo definitions</code>按钮。</p>
+<p>这里就根据这个<a href="https://github.com/golang/go/issues/35721" target="_blank" rel="noopener">github issue</a>来阐述一下这个按钮是干啥的，该怎么用。答案是根据<a href="https://www.reddit.com/r/vscode/comments/hjphbz/what_is_the_purpose_of_regenerate_cgo_definitions/" target="_blank" rel="noopener">reddit上这个帖子的回复</a>找到的</p>
+<span id="more"></span>
 
-<hr>
-<p>表1报告了活动当天各种类型代币的异常收益。所有 DEX、NFT 和 Memes 代币的异常收益均呈负显着，这证明了 FTX 崩盘以及相关 FTT 上隐藏的坏消息的披露所带来的不利影响。这些结果与 Yousaf 等人的结果一致。 (2023)，他们报告了 FTX 崩溃当天比特币和以太坊的异常收益显着为负。中心化交易所代币表现好坏参半，BNB和LEO（CRO和FTT）的异常收益微不足道（显着）。这些结果可以归因于投资者从高风险中心化交易所到低风险中心化交易所的替代效应。自 2022 年 10 月以来，CRO 代币因另一交易所 Gate.io 的一笔 4 亿美元可疑交易而受到市场的批评。</p>
-<p>大多数旅游和医疗保健代币的异常回报并不显着，这与这些代币具有直接的各自行业效用相一致，可以支持它们应对不断变化的投资者情绪。</p>
-<p>表 2 列出了 t-6 到 t + 9 窗口期间 DEX、CEX 和其他代币（NFT、Defi、meme、能源、旅游和医疗保健）的累积异常收益 (CAR)。天（t-6 到 t-1），所有 CAR 系数对于去中心化交易所代币都不显着。优素福等人。 (2023) 还发现 CAR 系数在 FTX 崩溃事件发生前并不显着​​。</p>
-<p>CAR系数显着且为正； BNB 为 t-4 和 t-3 天，CRO 为 t-3 和 t-1 天，表明由于资产负债表的不确定性，BNB 和 CRO 在事件发生前的几天内得到了投资者的积极反应他们的竞争对手 FTX 交易所。然而，FTT的CAR系数在t-2和t-1天为负且显着，揭示了FTT在事件前窗口日的负面反应。参考表 3 中的其他代币，大多数代币（DOGE 除外）的 CAR 系数在事件前窗口日并不显着，但少数代币的 CAR 系数为正且显着，尤其是在 t-3 时。</p>
-<p>关于 FTX、FTT 和 Alameda 研究的坏消息最初是于 2022 年 11 月 2 日（t-6）通过 CoinDesk 上的文章发布的。随后对 FTT 和其他代币的影响是迅速而巨大的。当币安和 FTX 交易所的首席执行官在推特上发布有关 FTX 和 FTT 的推文时，FTT 在 t-2 和 t-1 做出了负面反应。由于 FTX 的财务状况不佳，币安首席执行官在推特上表示，由于认为 FTX 的财务状况不佳，因此将在 t-2 出售 FTT 股份，而 FTX 首席执行官则向投资者保证 FTX 的财务状况良好。币安首席执行官的推文放大了 FTX 财务状况和 FTT 价值的不确定性，投资者对 FTT 做出了负面反应。</p>
-<p>在事后时期（t+1至t+9），XLM、CAKE和SNX在t+1至t+9天的CAR系数显着为负，而UNI在t+1的CAR系数显着为负。 1 日至 t+5 日以及 t+9 日，与 FTX 和 FTT 坏消息发布后多日去中心化交易所代币受到不利影响的情况一致。这些发现与 Yousaf 等人的结果一致。 (2023)，他们报告称，在 FTX 崩盘事件发生后，比特币和以太坊的 CAR 系数显着为负。</p>
-<p>对于中心化交易所代币而言，BNB、CRO（和FTT）在事后时期的CAR值具有负显着性。然而，从 t + 1 到 t + 4 和 t + 6 到 t + 7 天，LEO 的 CAR 系数为负且显着。</p>
-<p>与 FTX 和 FTT 坏消息发布后投资者对所有中心化交易所代币的负面反应一致。有趣的是，在事件发生前，BNB 似乎最初受益于 FTT 较高的不确定性，但随后在事件发生后失去了这些收益。总而言之，在事件发生后几天有关 FTT 和 FTX 的坏消息发布后，投资者对所有去中心化和中心化交易所做出了负面反应。</p>
-<p>至于其他代币，对于 3 个 NFT、3 个 Defi 代币、4 个 Meme 代币、3 个能源代币、1 个旅游代币和 1 个医疗保健代币，在活动结束后的大部分时间里，CAR 都呈负显着性，这表明这些类型的代币也容易受到影响。事件后期 FTX 和 FTT 的传染。 Akyildirim 等人。 (2023) 还报告了 FTT 对包括比特币在内的传统加密货币的蔓延。然而，对于 DAI 和 BTU 代币来说，CAR 是积极的和&#x2F;或微不足道的，这反映出它们对 FTX 和 FTT 的坏消息发布的抵御能力。表 4 列出了所有代币的 AAR 和 CAAR 合计。 AAR 的系数在 t-2、t 0 和 t+1 至 t+5 时间段均为负且显着，揭示了 FTX&#x2F;FTT 相关新闻在事前、事中和事后对代币市场的强烈负面影响活动日。此外，CAAR 从 t+1 到 t+9 的负显着系数表明，即使在事件发生 9 天后，代币市场也没有恢复损失。这表明代币投资者需要更长时间地持有投资，以在大型加密货币交易所崩溃时挽回损失。</p>
+<h2 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h2><p>使用了<code>import &quot;C&quot;</code>的源代码文件不是真正有效的Go。它们在严重依赖于go tool在构建软件包时所产生的额外信息。尽管可以通过设置<a href="https://golang.org/pkg/go/types/#Config" target="_blank" rel="noopener">types.Config.FakeImportC flag</a>来解决这些问题，可以对它们进行解析，但不能进行类型检查。</p>
+<p>许多人建议gopls使用包中的GoFiles而不是其CompiledGoFiles。<br>GoFiles是原始的（即无效的）文件。使用它们可能会给编辑包的人带来更好的体验，但是由于包将不再进行类型检查，因此它将完全破坏依赖于类型信息的所有内容。在当前架构中进行更改之前，我们必须非常仔细地评估效果。</p>
+<p>我们可以考虑两次检查cgo软件包的类型，一次使用实际代码，一次使用用户的代码。那将会是一个重大的架构变化。</p>
+<p>或者，我们可以在<code>.go</code>文件更改时运行cgo工具，以生成实际代码。这是一种更加可靠的方法，但是运行cgo处理的成本可能太高，尤其是在大型的包上。</p>
+<p>无论如何，这是一个大项目，需要大量的测试和思考。我们不太可能很快在这里做出巨大的改进。</p>
+<h2 id="Beta测试指令"><a href="#Beta测试指令" class="headerlink" title="Beta测试指令"></a>Beta测试指令</h2><p>这是当前的状态：如果您使用tip Go（即gotip安装的golang, gotip是从开发分支上编译并运行go的命令）在master分支上构建gopls，那么您应该具有很好的cgo创作经验。<br>据我所知有一个bug在自动代码补全上，它会提供_cgo_foo之类的符号，而不是正确的C.foo。</p>
+<p>不过，有一个障碍是，除非您告知，否则它不会重新生成cgo绑定。<br>为此，在使用cgo的文件中，在<code>import &quot;C&quot;</code>行的顶部应该有一个<code>regenerate cgo</code>的按钮。<br>当您引用C中的新标识符时，或使用影响Go可以看到的符号的方式更改魔术注释时，将需要使用它。</p>
+<p>要进行设置，请按照以下说明进行操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ go get golang.org/dl/gotip</span><br><span class="line">$ gotip download # 安装开发版golang</span><br><span class="line">[...]</span><br><span class="line">Success. You may now run &#x27;gotip&#x27;!</span><br><span class="line">$ cd /</span><br><span class="line">$ GO111MODULE=on gotip get golang.org/x/tools/gopls@master</span><br><span class="line">$ gotip version</span><br><span class="line">... devel +f7f9c8f ...</span><br><span class="line">$ gotip version $(which gopls)</span><br><span class="line">... devel +f7f9c8f ...</span><br></pre></td></tr></table></figure>
+
+<p>您无需使用tip Go即可在自己的项目上工作，仅需用其构建gopls。（这是2020.05.01的更新，现在2020.10.24估计是不用了）</p>
+<h2 id="说人话"><a href="#说人话" class="headerlink" title="说人话"></a>说人话</h2><p>就是，go自己读不懂cgo，要靠别的工具。但是别的工具一直调用会很浪费资源，那就让大家通过按钮手动让go通过工具读cgo。</p>
+<p>但是看起来bug还是挺多的，所以issue也没close</p>
 ]]></content>
       <tags>
-        <tag>ftx</tag>
-        <tag>contagion</tag>
+        <tag>done</tag>
+        <tag>vscode</tag>
+        <tag>cgo</tag>
+        <tag>gopls</tag>
+        <tag>go</tag>
       </tags>
   </entry>
   <entry>
@@ -11746,6 +11699,53 @@ TODO:
 <p>形式上，所有操作都定义在位序列上。 一个序列是有序的； 第一位是最左边的，而最后一位是最右边的。</p>
 <p>在大多数软件系统上，（每8个）位被编排分组为八进制位（八位序列）。<br>二进制数据，例如散列函数的输出，可用作八位字节序列。 在适用的情况下，我们认为八位字节中的位按从最重要到最不重要的顺序排列：八位字节中的第一个（最左侧）位的数值为 128，而最后一个（最右侧）的数值为 1。</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>reputational-contagion-and-the-fall-of-ftx</title>
+    <url>//reputational-contagion-and-the-fall-of-ftx/</url>
+    <content><![CDATA[<h1 id="Reputational-contagion-and-the-fall-of-FTX-Examining-the-response-of-tokens-to-the-delegitimization-of-FTT"><a href="#Reputational-contagion-and-the-fall-of-FTX-Examining-the-response-of-tokens-to-the-delegitimization-of-FTT" class="headerlink" title="Reputational contagion and the fall of FTX: Examining the response of tokens to the delegitimization of FTT"></a>Reputational contagion and the fall of FTX: Examining the response of tokens to the delegitimization of FTT</h1><p>Finance Research Letters</p>
+<p>Imran Yousaf a, John W. Goodell</p>
+<p><a href="https://www.sciencedirect.com/science/article/pii/S1544612323000788" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/pii/S1544612323000788</a></p>
+<hr>
+<p>与加密货币交易所 FTX 最近的下跌交织在一起的是，向投资者揭示了 FTX 平台代币 FTT 缺乏资产支持。鉴于对声誉传染的兴趣，以及最近学术界和投资者对数字代币的兴趣，我们有动力利用 FTX&#x2F;FTT 事件来调查声誉传染到其他代币的情况。我们采用事件研究方法来衡量 FTX 崩溃对各种代币的影响。从异常收益结果 以及 累积异常收益 CAR 和 累积平均异常收益 CAAR 表明，几乎所有代币在活动当天都开启了持续的看跌趋势。</p>
+<hr>
+<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><p>八类代币的每日数据来自 coinmarketcap.com。这些代币包括DEX（Uniswap-UNI、Stellar-XLM、PancakeSwap-CAKE、Synthetix-SNX）、CEX（BNB、UNUS SED LEO-LEO、Cronos-CRO、FTX Token-FTT）、NFT（ApeCoin-APE、Flow、 Chiliz-CHZ、Theta Network-THETA)、Defi (Dai、Avalanche-AVAX、Chainlink-LINK、Wrapped Bitcoin-WBTC)、Memes (Dogecoin-DOGE、Shiba Inu-SHIB、Baby Doge Coin-BabyDoge、MonaCoin-MONA)、能源（Energy Web Token-EWT、Powerledger-POWR、Efforce-WOZX、GRID）、旅游（Travala.com-AVA、TripCandy-CANDY、XcelToken Plus-XLAB、BTU Protocol-BTU）和医疗保健（MediBloc-MED、SOLVE） 、Dentacoin-DCN、DOC.COM-MTC）。活动日期为2022年11月8日，因为FTX交易所在这一天崩盘，FTT代币下跌75%。估计窗口由2022年7月4日至2022年11月1日（t-127至t-7）的120天组成，事件窗口由2022年11月2日至2022年11月17日（t-6至t+9）的16天组成。在本文附录的表A1中，我们提供了所有代币收益的描述性统计。</p>
+<hr>
+<h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p>我们采用事件研究方法来估计 FTX 崩溃对 DEX、CEX 和其他类别代币造成的 FTT 声誉损害的影响。利用普通最小二乘（OLS）市场模型计算从t-127到t-7的120天估计窗口的正常收益。戴克曼等人。 （1984）表明 OLS 市场模型为事件研究方法产生了相对更好的结果。使用方程式(1)，我们计算预期或正常回报，E(R it ):</p>
+<p>$E \left(\right. R_{i t} \left.\right) &#x3D; a_{i} + b_{i} R_{m t}$</p>
+<p>其中，$R_{mt}$ 是基准 MSCI 世界股票指数在 t 天的回报率。此外，我们采用等式。 (2) 确定基准指数和样本指数每日实际收益：</p>
+<p>$R_{i t} &#x3D; \left[\right. \left(\right. P_{i t} - - P_{i t - 1} \left.\right) &#x2F; P_{i t - 1} \left]\right. \times 100$</p>
+<p>$P_{it}$ 表示所选指数 i 在 t 日的价格，而 $P_{it-1}$ 显示所选指数 i 在 t 日前一天的价格</p>
+<hr>
+<h3 id="Abnormal-returns-amp-cumulative-abnormal-returns"><a href="#Abnormal-returns-amp-cumulative-abnormal-returns" class="headerlink" title="Abnormal returns &amp; cumulative abnormal returns"></a>Abnormal returns &amp; cumulative abnormal returns</h3><p>异常收益和累计异常收益</p>
+<p>我们通过实际每日收益与预期每日收益的差值来计算异常收益 AR it ，如式（3）所示。</p>
+<p>$A R_{i t} &#x3D; R_{i t} - E \left(\right. R_{i t} \left.\right)$</p>
+<p>其中，R it 表示资产 i 在 t 天的实际收益。我们从等式中的实际回报中减去预期回报。 (3) 在第 t 天获得指数 i 的超额收益 (AR it )。在从 $\Gamma_1$ 天到 $\Gamma_2$ 的事件窗口中，我们估计资产 i 的累积异常收益 (CAR) 如下</p>
+<p>$C A R_{i} \left( \Gamma_{1} , \Gamma\right)<em>{2} \left.\right) &#x3D; \sum</em>{t &#x3D; \left(\Gamma\right)<em>{1}}^{\left(\Gamma\right)</em>{2}} A R_{i t}$</p>
+<hr>
+<h3 id="Aggregates-of-abnormal-returns-and-cumulative-aggregates-of-abnormal-returns"><a href="#Aggregates-of-abnormal-returns-and-cumulative-aggregates-of-abnormal-returns" class="headerlink" title="Aggregates of abnormal returns and cumulative aggregates of abnormal returns"></a>Aggregates of abnormal returns and cumulative aggregates of abnormal returns</h3><p>异常收益总额及异常收益累计总额</p>
+<p>为了估计所有代币对 FTX 崩溃的总体反应，我们通过平均每个代币的每日异常收益来进一步估计总体异常收益。总异常收益计算如下：</p>
+<p>$A A R_{t} &#x3D; \frac{1}{N} \sum_{i &#x3D; 1}^{N} A R_{i t}$</p>
+<p>其中，$AAR_t$ 表示 t 时刻各代币的平均异常收益。 N 是研究中包含的代币数量。最后，我们根据事件窗口的 $AAR_t$ 估计累积平均异常收益 (CAAR)。</p>
+<hr>
+<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><p>图 1 展示了活动当天的回报。几乎所有类型的代币都显示出看跌趋势。 FTT 在活动当天的各类代币中跌幅最高（-75%）。多个代币跌幅超过 15%，包括 SNX、CRO、APE、FLOW、CHZ、DOGE、SHIB 和 AVA。</p>
+<img src="/reputational-contagion-and-the-fall-of-ftx/2023-06-29-17-11-28.png" class="">
+
+<hr>
+<p>表1报告了活动当天各种类型代币的异常收益。所有 DEX、NFT 和 Memes 代币的异常收益均呈负显着，这证明了 FTX 崩盘以及相关 FTT 上隐藏的坏消息的披露所带来的不利影响。这些结果与 Yousaf 等人的结果一致。 (2023)，他们报告了 FTX 崩溃当天比特币和以太坊的异常收益显着为负。中心化交易所代币表现好坏参半，BNB和LEO（CRO和FTT）的异常收益微不足道（显着）。这些结果可以归因于投资者从高风险中心化交易所到低风险中心化交易所的替代效应。自 2022 年 10 月以来，CRO 代币因另一交易所 Gate.io 的一笔 4 亿美元可疑交易而受到市场的批评。</p>
+<p>大多数旅游和医疗保健代币的异常回报并不显着，这与这些代币具有直接的各自行业效用相一致，可以支持它们应对不断变化的投资者情绪。</p>
+<p>表 2 列出了 t-6 到 t + 9 窗口期间 DEX、CEX 和其他代币（NFT、Defi、meme、能源、旅游和医疗保健）的累积异常收益 (CAR)。天（t-6 到 t-1），所有 CAR 系数对于去中心化交易所代币都不显着。优素福等人。 (2023) 还发现 CAR 系数在 FTX 崩溃事件发生前并不显着​​。</p>
+<p>CAR系数显着且为正； BNB 为 t-4 和 t-3 天，CRO 为 t-3 和 t-1 天，表明由于资产负债表的不确定性，BNB 和 CRO 在事件发生前的几天内得到了投资者的积极反应他们的竞争对手 FTX 交易所。然而，FTT的CAR系数在t-2和t-1天为负且显着，揭示了FTT在事件前窗口日的负面反应。参考表 3 中的其他代币，大多数代币（DOGE 除外）的 CAR 系数在事件前窗口日并不显着，但少数代币的 CAR 系数为正且显着，尤其是在 t-3 时。</p>
+<p>关于 FTX、FTT 和 Alameda 研究的坏消息最初是于 2022 年 11 月 2 日（t-6）通过 CoinDesk 上的文章发布的。随后对 FTT 和其他代币的影响是迅速而巨大的。当币安和 FTX 交易所的首席执行官在推特上发布有关 FTX 和 FTT 的推文时，FTT 在 t-2 和 t-1 做出了负面反应。由于 FTX 的财务状况不佳，币安首席执行官在推特上表示，由于认为 FTX 的财务状况不佳，因此将在 t-2 出售 FTT 股份，而 FTX 首席执行官则向投资者保证 FTX 的财务状况良好。币安首席执行官的推文放大了 FTX 财务状况和 FTT 价值的不确定性，投资者对 FTT 做出了负面反应。</p>
+<p>在事后时期（t+1至t+9），XLM、CAKE和SNX在t+1至t+9天的CAR系数显着为负，而UNI在t+1的CAR系数显着为负。 1 日至 t+5 日以及 t+9 日，与 FTX 和 FTT 坏消息发布后多日去中心化交易所代币受到不利影响的情况一致。这些发现与 Yousaf 等人的结果一致。 (2023)，他们报告称，在 FTX 崩盘事件发生后，比特币和以太坊的 CAR 系数显着为负。</p>
+<p>对于中心化交易所代币而言，BNB、CRO（和FTT）在事后时期的CAR值具有负显着性。然而，从 t + 1 到 t + 4 和 t + 6 到 t + 7 天，LEO 的 CAR 系数为负且显着。</p>
+<p>与 FTX 和 FTT 坏消息发布后投资者对所有中心化交易所代币的负面反应一致。有趣的是，在事件发生前，BNB 似乎最初受益于 FTT 较高的不确定性，但随后在事件发生后失去了这些收益。总而言之，在事件发生后几天有关 FTT 和 FTX 的坏消息发布后，投资者对所有去中心化和中心化交易所做出了负面反应。</p>
+<p>至于其他代币，对于 3 个 NFT、3 个 Defi 代币、4 个 Meme 代币、3 个能源代币、1 个旅游代币和 1 个医疗保健代币，在活动结束后的大部分时间里，CAR 都呈负显着性，这表明这些类型的代币也容易受到影响。事件后期 FTX 和 FTT 的传染。 Akyildirim 等人。 (2023) 还报告了 FTT 对包括比特币在内的传统加密货币的蔓延。然而，对于 DAI 和 BTU 代币来说，CAR 是积极的和&#x2F;或微不足道的，这反映出它们对 FTX 和 FTT 的坏消息发布的抵御能力。表 4 列出了所有代币的 AAR 和 CAAR 合计。 AAR 的系数在 t-2、t 0 和 t+1 至 t+5 时间段均为负且显着，揭示了 FTX&#x2F;FTT 相关新闻在事前、事中和事后对代币市场的强烈负面影响活动日。此外，CAAR 从 t+1 到 t+9 的负显着系数表明，即使在事件发生 9 天后，代币市场也没有恢复损失。这表明代币投资者需要更长时间地持有投资，以在大型加密货币交易所崩溃时挽回损失。</p>
+]]></content>
+      <tags>
+        <tag>ftx</tag>
+        <tag>contagion</tag>
+      </tags>
   </entry>
   <entry>
     <title>schnorr-signature-improvements</title>
@@ -11812,66 +11812,6 @@ TODO:
         <tag>ecdsa</tag>
         <tag>address</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>论文分享：Intelligent design: stablecoins (in)stability and collateral during market turbulence</title>
-    <url>//stablecoins-instability-and-collateral/</url>
-    <content><![CDATA[<h1 id="Intelligent-design-stablecoins-in-stability-and-collateral-during-market-turbulence"><a href="#Intelligent-design-stablecoins-in-stability-and-collateral-during-market-turbulence" class="headerlink" title="Intelligent design: stablecoins (in)stability and collateral during market turbulence"></a>Intelligent design: stablecoins (in)stability and collateral during market turbulence</h1><p>Riccardo De Blasis, Luca Galati, Alexander Webb and Robert I. Webb</p>
-<p>Financial Innovation</p>
-<p><a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4" target="_blank" rel="noopener">https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4</a></p>
-<hr>
-<ul>
-<li><p>2022 年 5 月，TerraUSD (UST) 稳定币和相关 Terra (LUNA) 代币的暴跌引发了主要稳定币的一系列反应，一些经历了价值下跌，而另一些经历了价值上涨。</p>
-</li>
-<li><p>使用 Baba、Engle、Kraft 和 Kroner (1990) (BEKK) 模型，我们检查了对这种外生冲击的反应，并发现 UST 崩盘的显着传染效应，部分原因可能是交易员之间的羊群行为。</p>
-</li>
-<li><p>我们测试了稳定币之间的不同反应，发现稳定币的设计差异会影响冲击响应的方向、幅度和持续时间。我们讨论了对稳定币开发商、交易所、交易员和监管机构的影响。</p>
-</li>
-</ul>
-<hr>
-<p>这项研究的独创性在于它使用专有数据检查了一个独特的外生事件，即迄今为止稳定币市场最大的崩溃。</p>
-<p>我们还将之前关于加密货币市场波动溢出效应的研究扩展到稳定币市场。尽管之前的研究试图调查比特币和稳定币之间的波动溢出效应，以及仅稳定币之间的波动溢出效应，但据我们所知，<strong>全面调查对稳定币价格变动的反应幅度、方向和持续时间尚未确定</strong>。本研究填补了这一空白，并<strong>通过测试其基础设计的差异是否会影响市场行为，扩展了之前关于跨稳定币波动溢出的研究</strong>。此外，本研究<strong>调查了加密货币崩盘中可能的羊群行为</strong>，如 Haykir 和 Yagli (2022) 中的泡沫，并<strong>测试了信息级联效应</strong>，如 Tse 和 Hackard (2006) 在不同的美国市场所做的那样，由其他市场的 UST 崩盘引发稳定币市场活动，这使我们能够对文献做出额外的贡献。</p>
-<p>*<em>信息级联或信息瀑布是行为经济学和网络理论中描述的一种现象，在这种现象中，许多人以一种连续的方式做出相同的决策。</em></p>
-<hr>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>为了测试稳定币之间的金融传染效应，我们遵循 Celık (2012) 提出的方法，他通过 Engle (2002) 开发的 DCC-GARCH 模型提供了美国次贷危机期间传染的证据。 DCC-GARCH 模型是一类多元 GARCH 模型，用于衡量条件协方差和相关性，从而衡量时间序列之间的相互作用。与 Celık (2012) 的方法不同，考虑到 Engle 和 Kroner (1995) 开发的 BEKK 模型优于 DCC-GARCH 模型，我们以下采用 BEKK 模型评估 UST 崩溃期间传染效应的存在。</p>
-<p>*<em>GARCH模型是一类常用的随机时序模型，它对金融类短期数据进行拟合与预测，且精度较高，介于对收益率预测值和真实值的比较，GARCH模型的预测能更好的反应时间序列的结构与特性。</em></p>
-<hr>
-<p>假设对数收益服从零均值和方差-协方差矩阵 𝐻𝑡 的正态分布，我们可以将条件协方差建模为</p>
-<p>$<br> \begin{aligned} H_t&#x3D;C C^{\prime }+A\left( e_{t-1} e_{t-1}^{\prime }\right) A^{\prime }+B H_{t-1} B^{\prime } \end{aligned}<br>$</p>
-<p>其中 $C$、$A$ 和 $B$ 是参数矩阵，$C$ 是下三角矩阵。</p>
-<p>式中的 BEKK 表示在估计过程中造成了一些困难，因为在考虑许多时间序列时参数的数量非常多。为了减少参数，我们采用其的标量版本并应用方差目标的概念来消除项 $CC^{\prime }$。</p>
-<hr>
-<p>因此，模型变为<br>$<br>\begin{aligned} H_t&#x3D;(1-a-b) {\bar{H}}+a\left( e_{t-1} e_{t-1}^{\prime }\right) +b H_{t-1}, \end{aligned}<br>$</p>
-<p>其中 ${\bar{H}}&#x3D;\sum <em>{t&#x3D;1}^T e</em>{t-1} e_{t-1}^{\prime }$ 表示从完整样本估计的无条件协方差矩阵。在此标量版本中，唯一的参数是 $a$ 和 $b$，受 $a, 𝑏&gt;0$<br>和 $𝑎+𝑏&lt;1$ 的约束。施加这些约束是为了保持过程平稳并保证协方差矩阵的正定性。</p>
-<hr>
-<p>一旦我们获得条件协方差，从而获得条件相关性，我们就可以执行 Celık (2012) 中提出的传染检验。假设是<br>$<br>\begin{aligned} H_0: \mu _{\text {pre}}&#x3D;\mu _{\text {post}}, \end{aligned}<br>$</p>
-<p>其中 $\mu _{\text {pre}}$ 和 $\mu _$ 是 UST 崩溃前总体条件相关性均值的矩阵崩溃周期分别具有方差 $\sigma _{\text {pre}}$  和 $\sigma _{\text {post}}$ 。</p>
-<p>考虑两个大小为  $n_{\text {pre}}$ 和 $n_{\text {post}}$ 的样本以及根据 BEKK 模型计算的条件相关性均值矩阵，${\bar{\rho}}<em>{\text {pre}}$ 和 ${\bar{\rho }}</em>{\text{ pre }}$ 具有差异 $s_{\text {pre}}^2&#x3D;\frac{1}{n_{\text {pre}}-1} \sum <em>{t&#x3D;1}^{n</em>{\text {pre}}}\left( \rho <em>{\text {pre}}-{\bar{\rho }}</em>{\text {pre}}\right) ^2$ 和 $s_{\text {post}}^2&#x3D;\frac{1}{n_{\text {post}}-1} \sum <em>{t&#x3D;1}^{n</em>{\text {post}}}\left( \rho <em>{\text {post}}-{\bar{\rho }}</em>{\text {post}}\right) ^2$ .</p>
-<hr>
-<p>我们可以将  t-statistics 计算为</p>
-<p>$\begin{aligned} t&#x3D;\frac{\left( {\bar{\rho }}<em>{\text {post}}-{\bar{\rho }}</em>{\text {pre}}\right) -\left( \mu <em>{\text {post}}-\mu <em>{\text {pre}}\right) }{\sqrt{\frac{s^2</em>{\text {post}}}{n</em>{\text {post}}}+\frac{s^2_{\text {pre}}}{n_{\text {pre}}}}}, \end{aligned}$</p>
-<p>自由度</p>
-<p>$\begin{aligned} v&#x3D;\frac{\left( \frac{s^2_{\text {post}}}{n_{\text {post}}}+\frac{s^2_{\text {pre}}}{n_{\text {pre}}}\right) ^2}{\frac{\left( \frac{s^2\text {post}}{n_{\text {post}}}\right) ^2}{n_{\text {post}}-1}+\frac{\left( \frac{s^2\text {pre}}{n_{\text {pre}}}\right) ^2}{n_{\text {pre}}-1}}. \end{aligned}$</p>
-<p>当 t-statistic 显着大于临界值时，零假设被拒绝，支持传染效应的存在。</p>
-<hr>
-<p>本研究使用流动性最强的加密货币比特币 (BTC) 和六种流动性最强的稳定币，USDT BUSD USDC, DAI, TerraUSD 和 Terra (LUNA)，与 UST 相关的配套加密货币。该样本跨越 2022 年 4 月 20 日至 5 月 29 日的 40 天时间段，并涵盖 2022 年 5 月 9 日至 10 日 TerrUSD 崩盘前后 20 天的对称前后周期。我​​们从不同的交易所和提供商，例如 Kaiko（用于 BTC、USDT、USDC、DAI 和 UST）和 CryptoCompare（用于 BUSD 和 LUNA），均由伦敦证券交易所集团 (LSEG) 旗下的 Refinitiv（前汤森路透）提供, 并来自汤森路透报价历史 (TRTH) 数据库。最终数据集包含七种数字资产的 57,600 个价格观察值。</p>
-<hr>
-<p>鉴于加密货币市场有许多可供选择的交易场所，自然会出现分析哪个价格序列的问题。我们使用来自 Refinitiv 的价格数据，因为它是各个交易所<strong>报告的价格的加权平均值</strong>。该决定减少了观察到的波动性和价格响应新闻的幅度，因为价格数据基本上通过平均来平滑。然而，我们认为平滑数据避免对较小交易场所的交易赋予过多权重，从而提供更准确的价格在任何时刻的快照，这一事实可以弥补这一缺点。</p>
-<hr>
-<p>我们将加密货币和稳定币回报计算为 𝑙𝑛(𝑃𝑡&#x2F;𝑃𝑡−1)，其中 𝑃𝑡 是时间 t 时数字资产的价格。根据文献，确定危机时期的截止日期可能并不简单（Kaminsky 和 ​​Schmukler 1999）。因此，我们认为 UST 价格大幅下跌的开始，这也与首次基于新闻宣布稳定币潜在崩盘的日期相一致。因此，我们以2022年5月10日午夜作为崩溃期的起点。最后，我们计算累积异常收益（CAR）以用于第二次分析。对于稳定币，我们假设预期收益为 𝐸[𝑅𝑆]&#x3D;0，并在求和之前通过将稳定币的预期收益减去如上所述计算的实际收益来计算异常收益。而对于比特币，我们计算样本前两天的基准BTC收益，然后从每天每分钟的实际BTC收益中减去该基准，以获得累计前的异常收益。</p>
-<hr>
-<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><p><a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/tables/2" target="_blank" rel="noopener">表 2</a> 说明了稳定币在两个时期（即面板 A 中的崩溃前和面板 B 中的 UST 崩溃）和整个样本（面板 C）期间的描述性统计数据。为了运行分析，我们通过 Jarque-Bera 检验测试回报（和平方回报）是否正态分布，是否通过增强的 Dickey-Fuller 检验返回时间序列样本中存在单位根的原假设， ARCH 模型的样本分布是否存在异方差，最后是我们数据中自相关的 Ljung-Box 检验。所有三个时期的所有统计检验在 1% 的水平上<strong>始终显著</strong>。 C 中还清楚地表明，方法部分所做的假设成立，因为所有回报的均值近似为零。另一个值得注意的统计数据是，每个时期的所有回报分布的中位数均为 0。与 Celık (2012) <strong>一样</strong>，所有回报的分布都是尖峰态的，这是<strong>金融市场数据的一个共同特征</strong>。</p>
-<p>*<em>Jarque–Bera检验是对样本数据是否具有符合正态分布的偏度和峰度的拟合优度的检验</em><br>*<em>Dickey-Fuller test可以测试一个自回归模型是否存在单位根（unit root）</em><br>*<em>Ljung-Box test是对randomness的检验,或者说是对时间序列是否存在滞后相关的一种统计检验</em></p>
-<hr>
-<p><a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/figures/1" target="_blank" rel="noopener">图 1</a> 说明了在样本期内检查的所有加密货币的固定回报。每张图表的右侧都有一个明显的异常现象。也就是说，K线走势图显示异常收益发生在UST开始崩溃之后。有趣的是，<strong>UST 和 LUNA 出现最高回报的那一天不同于 USDT、USDC 和 DAI 的飙升</strong>。这可能预示着信息级联效应。<a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/tables/3" target="_blank" rel="noopener">表 3</a> 显示了崩溃前（面板 A）和崩溃（面板 B）期间所有加密货币之间的动态条件相关矩阵。</p>
-<p>当然，理想情况下，稳定币的累积回报应该为零，因为它应该与美元保持精确的挂钩。结果证实，<strong>交易者对加密货币的底层设计做出了反应，而底层设计本身也会影响交易者的活动</strong>。例如，BUSD以美国银行的现金进行一美元对一美元的支持，并在纽约受到监管，是崩溃期间逃往避险资产的受益者。</p>
-<hr>
-<p><a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/figures/2" target="_blank" rel="noopener">图 2</a> 显示了在整个样本期间分析的数字资产的 *累积异常收益 (CAR)*，而 <a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/figures/3" target="_blank" rel="noopener">图 3</a> 则显示了 2022 年 5 月 9 日至 13 日价格反应较大期间的 CAR。 CAR 还概述了从 UST 以及同时基于 UST 的 LUNA 开始的信息级联，然后在几天后的 5 月 12 日传播到 USDT，在反弹之前几乎立即蔓延到 USDC 和 DAI回到 UST 和 LUNA，对 BUSD 也略有影响。 USDT 下跌时出现了明显的市场反应，导致 USDC CAR 在几个小时内急剧增加约 6% 。一小时后，USDT创历史新低，累计异常收益为 −5%  ，导致DAI同步飙升（正值累计异常收益为 3% ）。仅一天后，UST 就完全暴跌至几美分，跌幅为 9𝑥% ，甚至在 BUSD 也引发了轻微脱钩（一个负CAR约−0.1%）。 比特币 CAR 下降至 −50% ，而 UST 和 LUNA 整体崩溃，幅度约为 −300% 和 -1500% 的CAR。一项非技术分析显示，中心化交易所发生的市场事件会延迟两天，而这本来可以通过检查去中心化流动性池中的市场活动来预测。然而，这个主题仍然是未来研究的主题。</p>
-<hr>
-<p><a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/tables/4" target="_blank" rel="noopener">表 4</a>  显示了 BEKK-GARCH 模型的动态条件协方差估计和关于传染存在的相关 t 检验统计数据。有证据表明，<strong>除了比特币之外，TerraUSD 的崩溃还对所有分析的主要稳定币产生了溢出效应</strong>。所有测试都在 1% 的水平上具有<strong>统计显着性，支持传染效应的存在</strong>。<a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/figures/4" target="_blank" rel="noopener">图 4</a> 说明了在整个样本期间绘制的这些动态条件协方差。所有图表的右侧都清楚地显示了平稳协方差的明显变化，这意味着在 UST 崩盘后，所有其他数字资产在 2022 年 5 月 9 日之后的一段时间内都经历了由溢出效应引起的显着价格变动。</p>
-<hr>
-<p>这些结果表明 UST 和其他稳定币之间<strong>在统计上具有显着的传染性</strong>。这表明 UST 崩溃是造成 2022 年 5 月稳定币市场更广泛混乱和蔓延的原因。稳定币和加密货币资产的不同行为表明，交易员之间的羊群行为可能是造成这些市场结果的原因。尽管 UST 导致了稳定币市场的最初崩盘，但直到 2022 年 5 月 12 日 USDT 的崩盘才对 UST 造成了进一步的、也是最后的打击。此外，影响的持续时间在加密货币之间是不均衡的。对 BUSD 的影响并未持续，但 Tether 在 2022 年 7 月 19 日之前继续偏离其与美元挂钩的汇率，尽管偏离幅度远小于最初对该消息做出反应时所经历的偏离。这表明较小的市场参与者引起金融传染，进而感染较大的参与者，最终反馈到整个市场。</p>
-]]></content>
   </entry>
   <entry>
     <title>软件工程道德规范和专业实践 Software Engineering Code of Ethics and Professional Practice</title>
@@ -11988,171 +11928,64 @@ TODO:
       </tags>
   </entry>
   <entry>
-    <title>标准化WASI: 一个网页外运行WebAssembly的系统接口</title>
-    <url>//standardizing-wasi-a-webassembly-system-interface/</url>
-    <content><![CDATA[<p>今天，我们宣布一项新标准化工作的开始——WASI，即WebAssembly系统接口。</p>
-<span id="more"></span>
-
-<p><strong>为何需要WASI</strong>：开发人员开始将WebAssembly(译：下称WASM)推向浏览器以外的世界，因为WASM提供了一种快速，可扩展，且安全的方式在所有计算机上运行相同的代码。</p>
-<p>但是现在我们还没有坚实的基础可以构建WASI。浏览器外部的代码需要一种与系统对话的方式，即系统接口，这是当前WASM平台还没有的。</p>
-<p><strong>WASI是什么</strong>：WebAssembly是用于概念中计算机的汇编语言，而不是用于物理计算机的汇编语言。这就是它可以在各种不同的机器架构上运行的原因。</p>
-<p>就像WASM是概念中计算机的汇编语言一样，WebAssembly需要概念中的操作系统（而不是任何一个具体的操作系统）的系统接口。这样，它可以在所有不同的操作系统上运行。</p>
-<p>这就是WASI – WASM平台的系统接口。</p>
-<p>我们旨在创建一个系统接口，该接口将成为WebAssembly的真正伙伴，并经历时间考验。这意味着要坚持WASM的关键原则——“可移植性和安全性”。</p>
-<p><strong>谁在制作WASI</strong>：我们正组织一个WebAssembly子项目组来专攻标准化WASI。我们已经召集了感兴趣的合作伙伴，并正在寻找更多加入的伙伴。</p>
-<p>我们与合作伙伴，还有支持者，认为WASI重要的一些原因如下：</p>
-<p>Mozilla首席研发官Sean White</p>
-<p>“ WebAssembly正在为人们改变网络带来新的引人入胜的内容的方式，并使开发人员和创作者能够在网络上100%发挥实力。到目前为止，这是都是通过浏览器实现的。但是通过WASI，我们可以将WebAssembly和Web的优势交给更多的用户，更多的岗位，更多的设备，并作为更多体验的一部分。”</p>
-<p>Fastly的首席技术官Tyler McMullen</p>
-<p>“我们将WebAssembly扩展到浏览器之外，作为在边缘云中快速，安全地执行代码的平台。尽管我们的边缘和浏览器之间的环境存在差异，但WASI意味着WebAssembly开发人员无需将其代码移植到每个不同的平台上。”<br>Myles Borins，Node技术指导委员会主任</p>
-<p>“ WebAssembly可以解决Node中最大的问题之一 —— 如何以接近本机的速度并像使用本机模块一样重用以C和C++等其他语言编写的代码，同时仍保持可移植性和安全性。标准化此系统接口是实现这一目标的第一步。”</p>
-<p>npm的联合创始人Laurie Voss</p>
-<p>“ npm对可能的WebAssembly能够扩展npm生态系统的功能感到非常兴奋，同时极大地简化了使本机代码在服务器端JavaScript应用程序中运行的过程。我们期待这一过程的结果。”</p>
-<p>所以这是个大新闻！ 🎉</p>
-<p>WASI当前有3种实现：</p>
+    <title>论文分享：Intelligent design: stablecoins (in)stability and collateral during market turbulence</title>
+    <url>//stablecoins-instability-and-collateral/</url>
+    <content><![CDATA[<h1 id="Intelligent-design-stablecoins-in-stability-and-collateral-during-market-turbulence"><a href="#Intelligent-design-stablecoins-in-stability-and-collateral-during-market-turbulence" class="headerlink" title="Intelligent design: stablecoins (in)stability and collateral during market turbulence"></a>Intelligent design: stablecoins (in)stability and collateral during market turbulence</h1><p>Riccardo De Blasis, Luca Galati, Alexander Webb and Robert I. Webb</p>
+<p>Financial Innovation</p>
+<p><a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4" target="_blank" rel="noopener">https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4</a></p>
+<hr>
 <ul>
-<li>wasmtime，Mozilla主导的WebAssembly运行时</li>
-<li>Lucet，Fastly主导的WebAssembly运行时</li>
-<li>浏览器上的polyfill</li>
+<li><p>2022 年 5 月，TerraUSD (UST) 稳定币和相关 Terra (LUNA) 代币的暴跌引发了主要稳定币的一系列反应，一些经历了价值下跌，而另一些经历了价值上涨。</p>
+</li>
+<li><p>使用 Baba、Engle、Kraft 和 Kroner (1990) (BEKK) 模型，我们检查了对这种外生冲击的反应，并发现 UST 崩盘的显着传染效应，部分原因可能是交易员之间的羊群行为。</p>
+</li>
+<li><p>我们测试了稳定币之间的不同反应，发现稳定币的设计差异会影响冲击响应的方向、幅度和持续时间。我们讨论了对稳定币开发商、交易所、交易员和监管机构的影响。</p>
+</li>
 </ul>
-<p>如果您想了解有关该系统接口应如何工作的建议的更多信息，请继续阅读。</p>
-<h2 id="什么是系统接口？"><a href="#什么是系统接口？" class="headerlink" title="什么是系统接口？"></a>什么是系统接口？</h2><p>许多人谈论像C这样可以使您直接访问系统资源的语言。但事实并不是这样的。</p>
-<p>这些语言实际上无权直接在大多数系统上执行，打开或创建文件之类的操作。为什么不？</p>
-<p>因为这些系统资源（例如文件，内存和网络连接）对于稳定性和安全性来说非常重要。</p>
-<p>如果一个程序无意间弄乱了另一个程序的资源，则可能使该程序崩溃。更糟糕的是，如果某个程序（或用户）故意弄乱了另一个程序的资源，它可能会窃取敏感数据。(译：就是缓冲区溢出导致RCE)</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/01-01_crash-data-leak-1-500x220.png" class="" title="crash-data-leak">
-
-<p>因此，我们需要一种方法来控制哪些程序和用户可以访问哪些资源。人们很早就意识到了这一点，并提出了一种提供这种控制的方法：保护环的安保。</p>
-<p>借助保护环的安保，操作系统基本上可以在系统资源周围设置保护屏障。这也就是内核(Kernel)。内核是唯一一个需要做比如创建新文件，打开文件或打开网络连接之类的操作的东西。</p>
-<p>用户程序在此内核之外以“用户模式”运行。如果程序想要执行任何操作，例如打开文件，则必须要求内核为其打开文件。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/01-02-protection-ring-sec-1-500x298.png" class="" title="protection-ring-sec">
-
-<p>这就是系统调用(syscall)这个概念出现的地方。当程序需要让内核执行这些操作之一时，它会要求使用系统调用。这使内核有机会弄清楚是哪个用户在要求。然后，它可以在该用户在打开文件之前查看用户是否有权访问该文件。</p>
-<p>在大多数设备上，这是代码可以通过系统调用访问系统资源的唯一方法。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/01-03-syscall-1-500x227.png" class="" title="syscall">
-
-<p>操作系统使系统调用可用。但是，如果每个操作系统都有自己的系统调用，那么是否就需要为每个操作系统使用不同版本的代码？幸运的是，现在的您不需要。</p>
-<p>那这个问题是如何被解决的？抽象化。</p>
-<p>大多数语言都提供标准库。进行编码时，程序员无需知道他们针对的系统。他们只是使用接口。</p>
-<p>然后，在编译时，您的工具链会根据您要定位的系统来选择要使用的接口实现。此实现使用操作系统API中的功能，因此特定于系统。</p>
-<p>这就是系统接口的所在。例如，为Windows机器编译的printf可以使用Windows API与该机器进行交互。如果要针对Mac或Linux进行编译，它将改用POSIX。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/02-01-implementations-1-500x267.png" class="" title="implementations">
-
-<p>但是，这也给WebAssembly带来了一个问题。</p>
-<p>使用WebAssembly，即使在编译时，您也不知道要使用哪种操作系统。因此，您不能在标准库的WebAssembly实现中使用任何单个操作系统的系统接口。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/02-02-implementations-1-500x260.png" class="" title="implementations">
-
-<p>我之前说过，为何WebAssembly是个<a href="https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/" target="_blank" rel="noopener">用于概念计算机的汇编语言</a>而不是真实计算机的汇编语言。以同样的方式，WebAssembly需要用于概念性操作系统的系统接口，而不是真正的操作系统。</p>
-<p>但是，即使没有适当的系统接口，也已经有运行时可以在浏览器外部运行WebAssembly。他们是怎么做到的呢？ 让我们来看看。</p>
-<h2 id="当下，WebAssembly是如何在浏览器之外运行？"><a href="#当下，WebAssembly是如何在浏览器之外运行？" class="headerlink" title="当下，WebAssembly是如何在浏览器之外运行？"></a>当下，WebAssembly是如何在浏览器之外运行？</h2><p>生成WebAssembly的第一个工具是Emscripten。它在网页上模拟了特定的OS系统接口POSIX。这意味着程序员可以使用C标准库（libc）中的函数。</p>
-<p>为此，Emscripten创建了自己的libc实现。 此实现分为两部分 —— 将一部分编译到WebAssembly模块中，另一部分用JS胶水代码实现；然后，此JS胶水将调用浏览器，此后浏览器将与OS通信。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/03-01-emscripten-1-500x329.png" class="" title="emscripten">
-
-<p>早期的大多数WebAssembly代码都是使用Emscripten编译的。因此，当人们开始希望在没有浏览器的情况下运行WebAssembly时，他们首先通过运行Emscripten编译的代码开始。</p>
-<p>所以，为JS胶水代码中的所有这些功能，这些运行时需要创建自己的实现。</p>
-<p>不过这里有个问题。该JS胶水代码提供的接口并非标准设计，甚至不是面向外部的接口。因为这不是它当时需要解决的问题。</p>
-<p>打个比方，对于一个类似于public接口API上<code>read</code>的函数的调用，JS胶水代码改用 <code>_system3(which, varargs)</code>。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/03-02-system3-1-500x179.png" class="" title="system3">
-
-<p>第一个参数，<code>which</code>，是一个整数，该整数始终与名称中的数字相同（在这种情况下为3）。</p>
-<p>第二个参数，<code>varargs</code>，是要使用的参数。之所以称为varargs，是因为您可以使用可变数量的变量。但是WebAssembly无法提供将可变数量的参数传递给函数的方法。因此，参数是通过线性内存传递的。这不是安全的类型，而且比使用寄存器传递参数的速度要慢。</p>
-<p>这对于在浏览器中运行Emscripten来说很好。但是现在，运行时将其视为事实上的标准，实现了自己的JS胶水代码版本。他们正在仿真POSIX仿真层的内部细节。</p>
-<p>这意味着他们正在重新实现基于Emscripten约束有意义的选择（例如将参数作为堆值传递），即使这些约束不适用于他们当前的环境。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/03-03-emulation-1-500x341.png" class="" title="emulation">
-
-<p>如果我们要建立一个可持续数十年的WebAssembly生态系统，则需要坚实的基础。 这意味着我们的事实上的标准不能是模仿的模仿。</p>
-<p>但是，我们应该采用什么原则？</p>
-<h3 id="WASI需要遵循哪些原则？"><a href="#WASI需要遵循哪些原则？" class="headerlink" title="WASI需要遵循哪些原则？"></a>WASI需要遵循哪些原则？</h3><p>WebAssembly中包含两个重要的原则：</p>
-<ul>
-<li>可移植性</li>
-<li>安全性</li>
-</ul>
-<p>在转向浏览器外的使用时，我们需要保证这些关键原则。</p>
-<p>事实是，POSIX和Unix的安全性访问控制方法还不能完全解决问题。让我们看看它们的不足之处。</p>
-<h4 id="可移植性"><a href="#可移植性" class="headerlink" title="可移植性"></a>可移植性</h4><p>POSIX提供源代码可移植性。您可以使用不同版本的libc编译相同的源代码，以针对不同的计算机。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/04-01-portability-1-500x375.png" class="" title="portability">
-
-<p>但是WebAssembly需要超越这一步骤。我们需要能够编译一次并跨一大堆不同的机器运行。我们需要可移植的二进制文件。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/04-02-portability-1-500x484.png" class="" title="portability">
-
-<p>这种可移植性使向用户分发代码变得更加容易。</p>
-<p>例如，如果Node的本机模块是用WebAssembly编写的，则用户在安装带有本机模块的应用程序时无需运行node-gyp，并且开发人员无需配置和分发数十个二进制文件。</p>
-<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p>当一行代码要求操作系统进行某些输入或输出时，操作系统需要确定执行代码要求的操作是否安全。</p>
-<p>操作系统通常使用基于所有权和组的访问控制来处理此问题。</p>
-<p>例如，程序可能要求操作系统打开文件。用户具有他们有权访问的一组文件。</p>
-<p>当用户启动程序时，该程序代表该用户运行。如果用户有权访问文件——（因为他们是所有者，或者因为他们在具有访问权限的组中），那么程序也具有相同的访问权限。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/04-03-access-control-1-500x224.png" class="" title="access-control">
-
-<p>这样可以用户之间进行保护。在早期操作系统的开发中，这很有意义。系统通常是多用户的，并且管理员控制要安装的软件。因此，最主要的威胁是其他用户偷看您的文件。</p>
-<p>但是，大人，时代变了。系统现在通常是单用户，但是它们正在运行的代码会引入许多其他可信度未知的第三方代码。现在最大的威胁是您自己正在运行的代码将对您不利。</p>
-<p>例如，假设您在应用程序中使用的库获得了一个新的维护程序（在开放源代码中经常发生）。那个维护者可能会引起您的兴趣……或者他们可能是坏人之一。 而且，如果他们有权在您的系统上执行任何操作（例如打开任何文件并通过网络发送文件），那么他们的代码可能会造成很大的破坏。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/04-04-bitcoin-1-500x258.png" class="" title="bitcoin">
-
-<p>这就是为什么使用可以直接与系统对话的第三方库很危险的原因。</p>
-<p>WebAssembly的安全性方法不同。WebAssembly已沙盒化。</p>
-<p>这意味着代码无法直接与操作系统对话。但是，它如何处理系统资源呢？主机（可能是浏览器，也可能是wasm运行时）将函数放入代码可以使用的沙箱中。</p>
-<p>这意味着主机可以限制程序在逐个程序的基础上可以执行的操作。它不仅可以让程序代表用户执行操作，还可以在具有用户完全权限的情况下调用任何系统调用。</p>
-<p>仅仅拥有一种沙箱机制并不能保证系统本身的安全性——因为主机仍然可以将所有功能都放到沙箱中，在这种情况下，我们的状况就不会更好了——但它至少使主机可以能够选择创建一个更安全的系统。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/04-05-sandbox-1-500x278.png" class="" title="sandbox">
-
-<p>在我们设计的任何系统接口中，我们都需要坚持这两个原则。可移植性使开发和分发软件更加容易，并且绝对必须为主机提供工具以保护自己或他们的用户安全。</p>
-<h3 id="WASI应该是什么样？"><a href="#WASI应该是什么样？" class="headerlink" title="WASI应该是什么样？"></a>WASI应该是什么样？</h3><p>给定这两个关键原则，WebAssembly系统接口的设计应该是什么？</p>
-<p>这就是我们在标准化过程中要解决的问题。 不过，我们确实有一个建议：</p>
-<ul>
-<li>创建一组标准接口</li>
-<li>从标准化最基本的模块wasi-core开始</li>
-</ul>
-<img src="/standardizing-wasi-a-webassembly-system-interface/05-01-wasi-1-500x419.png" class="" title="wasi">
-
-<p>wasi-core将会是个啥？</p>
-<p>wasi-core将包含所有程序需要的基础。它将覆盖与POSIX相同的大部分内容，包括文件，网络连接，时钟和随机数。</p>
-<p>对于许多这些事情，它将采用与POSIX非常相似的方法。例如，它将使用POSIX的面向文件的方式，在此基础上您可以进行诸如open，close，read和write之类的系统调用，而其他所有操作基本上都可以在顶部进行增强。</p>
-<p>但是wasi-core无法涵盖POSIX的所有功能。例如，进程概念不能清楚地映射到WebAssembly上。除此之外，说每个WebAssembly引擎都需要支持进程操作（如fork）是没有意义的。 但是我们也想使标准化fork成为可能。</p>
-<p>这就是模块化方法的用武之地。通过这种方式，我们可以获得良好的标准化覆盖率，同时仍然允许细分平台仅使用WASI在该平台上有意义的部分。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/05-02-wasi-1-500x251.png" class="" title="wasi">
-
-<p>像Rust这样的语言将直接在其标准库中使用wasi-core。 例如，Rust的<code>open</code>是通过在编译为WebAssembly时调用<code>__wasi_path_open</code>来实现的。</p>
-<p>对于C和C++，我们创建了一个<a href="https://github.com/CraneStation/wasi-sysroot" target="_blank" rel="noopener">wasi-sysroot</a>，它根据wasi-core函数实现了libc。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/05-03-open-imps-1-500x229.png" class="" title="open-imps">
-
-<p>我们希望像clang这样的编译器准备好与WASI API交互，并且像Rust编译器和Emscripten这样的完整工具链也可以将WASI用作其系统实现的一部分</p>
-<p>那么用户的代码需要如何调用这些WASI函数？</p>
-<p>答案是，运行代码的运行时将wasi-core函数作为导入(imports)传递进WASM。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/05-04-imports-1-500x285.png" class="" title="imports">
-
-<p>这给我们带来了可移植性，因为每个主机都可以有自己的wasi-core实现，该实现专门针对其平台编写——从Mozilla的wasmtime和Fastly的Lucet之类的WebAssembly运行时，到Node甚至是浏览器。</p>
-<p>这也给我们提供了沙箱管理功能，因为主机可以逐个程序选择要传入的wasi-core函数，因此，可以允许哪个系统调用。 这样可以保持安全性。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/05-05-sec-port-2-500x705.png" class="" title="sec-port">
-
-<p>WASI为我们提供了进一步扩展此安全性的方法。它从基于功能的安全性中引入了更多概念。</p>
-<p>传统上，如果代码需要打开文件，则使用字符串（路径名）调用open。然后，操作系统会检查代码是否具有权限（基于启动程序的用户）。</p>
-<p>使用WASI，如果要调用需要访问文件的函数，则必须传入文件描述符，该描述符具有附加的权限。这可以用于文件本身，也可以用于包含文件的目录。</p>
-<p>这样，您就不会拥有随机要求打开&#x2F;etc&#x2F;passwd的代码。相反，代码只能在传递给它的目录上操作。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/05-06-openat-path-1-500x192.png" class="" title="openat-path">
-
-<p>这使得可以安全地给沙盒代码更多地访问不同的系统调用的权限，因为这些系统调用的功能可能受到限制。</p>
-<p>而且这是逐个模块进行的。默认情况下，模块无权访问文件描述符。但是，如果一个模块中的代码具有文件描述符，则可以选择将该文件描述符传递给它在其他模块中调用的函数。或者，它可以创建文件描述符的更多受限版本以传递给其他功能。</p>
-<p>因此，运行时将应用程序可以使用的文件描述符传递给顶层代码，然后根据需要，将文件描述符传播到系统的其余部分。</p>
-<img src="/standardizing-wasi-a-webassembly-system-interface/05-07-file-perms-1-500x423.png" class="" title="file-perms">
-
-<p>这使WebAssembly更接近最小特权原则，在该原则下，模块只能访问执行其工作所需的确切资源。</p>
-<p>这些概念来自面向功能的系统，例如CloudABI和Capsicum。面向功能的系统的一个问题是，通常很难向其移植代码。但是我们认为这个问题可以解决。</p>
-<p>如果代码已经使用了带有相对文件路径的<code>openat</code>，那么编译代码就可以了。</p>
-<p>如果代码使用<code>open</code>并且正迁移到<code>openat</code>风格是过度的前期投资，WASI可以提供一个增量解决方案。使用<img src="https://github.com/musec/libpreopen" alt="libpreopen" loading="lazy">，您可以创建应用程序需要合法访问的文件路径的列表。然后，您可以使用open，但只能使用这些路径。</p>
-<h3 id="接下来做什么"><a href="#接下来做什么" class="headerlink" title="接下来做什么"></a>接下来做什么</h3><p>我们认为wasi-core是一个好的开始。它保留了WebAssembly的可移植性和安全性，为生态系统奠定了坚实的基础。</p>
-<p>但是，在wasi-core完全标准化之后，我们仍然需要解决一些问题。这些问题包括：</p>
-<ul>
-<li>异步I&#x2F;O</li>
-<li>文件监控</li>
-<li>文件锁定</li>
-</ul>
-<p>这仅仅是开始，因此，如果您有解决这些问题的想法，请加入我们！</p>
+<hr>
+<p>这项研究的独创性在于它使用专有数据检查了一个独特的外生事件，即迄今为止稳定币市场最大的崩溃。</p>
+<p>我们还将之前关于加密货币市场波动溢出效应的研究扩展到稳定币市场。尽管之前的研究试图调查比特币和稳定币之间的波动溢出效应，以及仅稳定币之间的波动溢出效应，但据我们所知，<strong>全面调查对稳定币价格变动的反应幅度、方向和持续时间尚未确定</strong>。本研究填补了这一空白，并<strong>通过测试其基础设计的差异是否会影响市场行为，扩展了之前关于跨稳定币波动溢出的研究</strong>。此外，本研究<strong>调查了加密货币崩盘中可能的羊群行为</strong>，如 Haykir 和 Yagli (2022) 中的泡沫，并<strong>测试了信息级联效应</strong>，如 Tse 和 Hackard (2006) 在不同的美国市场所做的那样，由其他市场的 UST 崩盘引发稳定币市场活动，这使我们能够对文献做出额外的贡献。</p>
+<p>*<em>信息级联或信息瀑布是行为经济学和网络理论中描述的一种现象，在这种现象中，许多人以一种连续的方式做出相同的决策。</em></p>
+<hr>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>为了测试稳定币之间的金融传染效应，我们遵循 Celık (2012) 提出的方法，他通过 Engle (2002) 开发的 DCC-GARCH 模型提供了美国次贷危机期间传染的证据。 DCC-GARCH 模型是一类多元 GARCH 模型，用于衡量条件协方差和相关性，从而衡量时间序列之间的相互作用。与 Celık (2012) 的方法不同，考虑到 Engle 和 Kroner (1995) 开发的 BEKK 模型优于 DCC-GARCH 模型，我们以下采用 BEKK 模型评估 UST 崩溃期间传染效应的存在。</p>
+<p>*<em>GARCH模型是一类常用的随机时序模型，它对金融类短期数据进行拟合与预测，且精度较高，介于对收益率预测值和真实值的比较，GARCH模型的预测能更好的反应时间序列的结构与特性。</em></p>
+<hr>
+<p>假设对数收益服从零均值和方差-协方差矩阵 𝐻𝑡 的正态分布，我们可以将条件协方差建模为</p>
+<p>$<br> \begin{aligned} H_t&#x3D;C C^{\prime }+A\left( e_{t-1} e_{t-1}^{\prime }\right) A^{\prime }+B H_{t-1} B^{\prime } \end{aligned}<br>$</p>
+<p>其中 $C$、$A$ 和 $B$ 是参数矩阵，$C$ 是下三角矩阵。</p>
+<p>式中的 BEKK 表示在估计过程中造成了一些困难，因为在考虑许多时间序列时参数的数量非常多。为了减少参数，我们采用其的标量版本并应用方差目标的概念来消除项 $CC^{\prime }$。</p>
+<hr>
+<p>因此，模型变为<br>$<br>\begin{aligned} H_t&#x3D;(1-a-b) {\bar{H}}+a\left( e_{t-1} e_{t-1}^{\prime }\right) +b H_{t-1}, \end{aligned}<br>$</p>
+<p>其中 ${\bar{H}}&#x3D;\sum <em>{t&#x3D;1}^T e</em>{t-1} e_{t-1}^{\prime }$ 表示从完整样本估计的无条件协方差矩阵。在此标量版本中，唯一的参数是 $a$ 和 $b$，受 $a, 𝑏&gt;0$<br>和 $𝑎+𝑏&lt;1$ 的约束。施加这些约束是为了保持过程平稳并保证协方差矩阵的正定性。</p>
+<hr>
+<p>一旦我们获得条件协方差，从而获得条件相关性，我们就可以执行 Celık (2012) 中提出的传染检验。假设是<br>$<br>\begin{aligned} H_0: \mu _{\text {pre}}&#x3D;\mu _{\text {post}}, \end{aligned}<br>$</p>
+<p>其中 $\mu _{\text {pre}}$ 和 $\mu _$ 是 UST 崩溃前总体条件相关性均值的矩阵崩溃周期分别具有方差 $\sigma _{\text {pre}}$  和 $\sigma _{\text {post}}$ 。</p>
+<p>考虑两个大小为  $n_{\text {pre}}$ 和 $n_{\text {post}}$ 的样本以及根据 BEKK 模型计算的条件相关性均值矩阵，${\bar{\rho}}<em>{\text {pre}}$ 和 ${\bar{\rho }}</em>{\text{ pre }}$ 具有差异 $s_{\text {pre}}^2&#x3D;\frac{1}{n_{\text {pre}}-1} \sum <em>{t&#x3D;1}^{n</em>{\text {pre}}}\left( \rho <em>{\text {pre}}-{\bar{\rho }}</em>{\text {pre}}\right) ^2$ 和 $s_{\text {post}}^2&#x3D;\frac{1}{n_{\text {post}}-1} \sum <em>{t&#x3D;1}^{n</em>{\text {post}}}\left( \rho <em>{\text {post}}-{\bar{\rho }}</em>{\text {post}}\right) ^2$ .</p>
+<hr>
+<p>我们可以将  t-statistics 计算为</p>
+<p>$\begin{aligned} t&#x3D;\frac{\left( {\bar{\rho }}<em>{\text {post}}-{\bar{\rho }}</em>{\text {pre}}\right) -\left( \mu <em>{\text {post}}-\mu <em>{\text {pre}}\right) }{\sqrt{\frac{s^2</em>{\text {post}}}{n</em>{\text {post}}}+\frac{s^2_{\text {pre}}}{n_{\text {pre}}}}}, \end{aligned}$</p>
+<p>自由度</p>
+<p>$\begin{aligned} v&#x3D;\frac{\left( \frac{s^2_{\text {post}}}{n_{\text {post}}}+\frac{s^2_{\text {pre}}}{n_{\text {pre}}}\right) ^2}{\frac{\left( \frac{s^2\text {post}}{n_{\text {post}}}\right) ^2}{n_{\text {post}}-1}+\frac{\left( \frac{s^2\text {pre}}{n_{\text {pre}}}\right) ^2}{n_{\text {pre}}-1}}. \end{aligned}$</p>
+<p>当 t-statistic 显着大于临界值时，零假设被拒绝，支持传染效应的存在。</p>
+<hr>
+<p>本研究使用流动性最强的加密货币比特币 (BTC) 和六种流动性最强的稳定币，USDT BUSD USDC, DAI, TerraUSD 和 Terra (LUNA)，与 UST 相关的配套加密货币。该样本跨越 2022 年 4 月 20 日至 5 月 29 日的 40 天时间段，并涵盖 2022 年 5 月 9 日至 10 日 TerrUSD 崩盘前后 20 天的对称前后周期。我​​们从不同的交易所和提供商，例如 Kaiko（用于 BTC、USDT、USDC、DAI 和 UST）和 CryptoCompare（用于 BUSD 和 LUNA），均由伦敦证券交易所集团 (LSEG) 旗下的 Refinitiv（前汤森路透）提供, 并来自汤森路透报价历史 (TRTH) 数据库。最终数据集包含七种数字资产的 57,600 个价格观察值。</p>
+<hr>
+<p>鉴于加密货币市场有许多可供选择的交易场所，自然会出现分析哪个价格序列的问题。我们使用来自 Refinitiv 的价格数据，因为它是各个交易所<strong>报告的价格的加权平均值</strong>。该决定减少了观察到的波动性和价格响应新闻的幅度，因为价格数据基本上通过平均来平滑。然而，我们认为平滑数据避免对较小交易场所的交易赋予过多权重，从而提供更准确的价格在任何时刻的快照，这一事实可以弥补这一缺点。</p>
+<hr>
+<p>我们将加密货币和稳定币回报计算为 𝑙𝑛(𝑃𝑡&#x2F;𝑃𝑡−1)，其中 𝑃𝑡 是时间 t 时数字资产的价格。根据文献，确定危机时期的截止日期可能并不简单（Kaminsky 和 ​​Schmukler 1999）。因此，我们认为 UST 价格大幅下跌的开始，这也与首次基于新闻宣布稳定币潜在崩盘的日期相一致。因此，我们以2022年5月10日午夜作为崩溃期的起点。最后，我们计算累积异常收益（CAR）以用于第二次分析。对于稳定币，我们假设预期收益为 𝐸[𝑅𝑆]&#x3D;0，并在求和之前通过将稳定币的预期收益减去如上所述计算的实际收益来计算异常收益。而对于比特币，我们计算样本前两天的基准BTC收益，然后从每天每分钟的实际BTC收益中减去该基准，以获得累计前的异常收益。</p>
+<hr>
+<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><p><a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/tables/2" target="_blank" rel="noopener">表 2</a> 说明了稳定币在两个时期（即面板 A 中的崩溃前和面板 B 中的 UST 崩溃）和整个样本（面板 C）期间的描述性统计数据。为了运行分析，我们通过 Jarque-Bera 检验测试回报（和平方回报）是否正态分布，是否通过增强的 Dickey-Fuller 检验返回时间序列样本中存在单位根的原假设， ARCH 模型的样本分布是否存在异方差，最后是我们数据中自相关的 Ljung-Box 检验。所有三个时期的所有统计检验在 1% 的水平上<strong>始终显著</strong>。 C 中还清楚地表明，方法部分所做的假设成立，因为所有回报的均值近似为零。另一个值得注意的统计数据是，每个时期的所有回报分布的中位数均为 0。与 Celık (2012) <strong>一样</strong>，所有回报的分布都是尖峰态的，这是<strong>金融市场数据的一个共同特征</strong>。</p>
+<p>*<em>Jarque–Bera检验是对样本数据是否具有符合正态分布的偏度和峰度的拟合优度的检验</em><br>*<em>Dickey-Fuller test可以测试一个自回归模型是否存在单位根（unit root）</em><br>*<em>Ljung-Box test是对randomness的检验,或者说是对时间序列是否存在滞后相关的一种统计检验</em></p>
+<hr>
+<p><a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/figures/1" target="_blank" rel="noopener">图 1</a> 说明了在样本期内检查的所有加密货币的固定回报。每张图表的右侧都有一个明显的异常现象。也就是说，K线走势图显示异常收益发生在UST开始崩溃之后。有趣的是，<strong>UST 和 LUNA 出现最高回报的那一天不同于 USDT、USDC 和 DAI 的飙升</strong>。这可能预示着信息级联效应。<a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/tables/3" target="_blank" rel="noopener">表 3</a> 显示了崩溃前（面板 A）和崩溃（面板 B）期间所有加密货币之间的动态条件相关矩阵。</p>
+<p>当然，理想情况下，稳定币的累积回报应该为零，因为它应该与美元保持精确的挂钩。结果证实，<strong>交易者对加密货币的底层设计做出了反应，而底层设计本身也会影响交易者的活动</strong>。例如，BUSD以美国银行的现金进行一美元对一美元的支持，并在纽约受到监管，是崩溃期间逃往避险资产的受益者。</p>
+<hr>
+<p><a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/figures/2" target="_blank" rel="noopener">图 2</a> 显示了在整个样本期间分析的数字资产的 *累积异常收益 (CAR)*，而 <a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/figures/3" target="_blank" rel="noopener">图 3</a> 则显示了 2022 年 5 月 9 日至 13 日价格反应较大期间的 CAR。 CAR 还概述了从 UST 以及同时基于 UST 的 LUNA 开始的信息级联，然后在几天后的 5 月 12 日传播到 USDT，在反弹之前几乎立即蔓延到 USDC 和 DAI回到 UST 和 LUNA，对 BUSD 也略有影响。 USDT 下跌时出现了明显的市场反应，导致 USDC CAR 在几个小时内急剧增加约 6% 。一小时后，USDT创历史新低，累计异常收益为 −5%  ，导致DAI同步飙升（正值累计异常收益为 3% ）。仅一天后，UST 就完全暴跌至几美分，跌幅为 9𝑥% ，甚至在 BUSD 也引发了轻微脱钩（一个负CAR约−0.1%）。 比特币 CAR 下降至 −50% ，而 UST 和 LUNA 整体崩溃，幅度约为 −300% 和 -1500% 的CAR。一项非技术分析显示，中心化交易所发生的市场事件会延迟两天，而这本来可以通过检查去中心化流动性池中的市场活动来预测。然而，这个主题仍然是未来研究的主题。</p>
+<hr>
+<p><a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/tables/4" target="_blank" rel="noopener">表 4</a>  显示了 BEKK-GARCH 模型的动态条件协方差估计和关于传染存在的相关 t 检验统计数据。有证据表明，<strong>除了比特币之外，TerraUSD 的崩溃还对所有分析的主要稳定币产生了溢出效应</strong>。所有测试都在 1% 的水平上具有<strong>统计显着性，支持传染效应的存在</strong>。<a href="https://jfin-swufe.springeropen.com/articles/10.1186/s40854-023-00492-4/figures/4" target="_blank" rel="noopener">图 4</a> 说明了在整个样本期间绘制的这些动态条件协方差。所有图表的右侧都清楚地显示了平稳协方差的明显变化，这意味着在 UST 崩盘后，所有其他数字资产在 2022 年 5 月 9 日之后的一段时间内都经历了由溢出效应引起的显着价格变动。</p>
+<hr>
+<p>这些结果表明 UST 和其他稳定币之间<strong>在统计上具有显着的传染性</strong>。这表明 UST 崩溃是造成 2022 年 5 月稳定币市场更广泛混乱和蔓延的原因。稳定币和加密货币资产的不同行为表明，交易员之间的羊群行为可能是造成这些市场结果的原因。尽管 UST 导致了稳定币市场的最初崩盘，但直到 2022 年 5 月 12 日 USDT 的崩盘才对 UST 造成了进一步的、也是最后的打击。此外，影响的持续时间在加密货币之间是不均衡的。对 BUSD 的影响并未持续，但 Tether 在 2022 年 7 月 19 日之前继续偏离其与美元挂钩的汇率，尽管偏离幅度远小于最初对该消息做出反应时所经历的偏离。这表明较小的市场参与者引起金融传染，进而感染较大的参与者，最终反馈到整个市场。</p>
 ]]></content>
-      <tags>
-        <tag>done</tag>
-        <tag>wasm</tag>
-        <tag>wasi</tag>
-      </tags>
   </entry>
   <entry>
     <title>近来半年工作的思考</title>
@@ -12354,6 +12187,173 @@ TODO:
       </tags>
   </entry>
   <entry>
+    <title>标准化WASI: 一个网页外运行WebAssembly的系统接口</title>
+    <url>//standardizing-wasi-a-webassembly-system-interface/</url>
+    <content><![CDATA[<p>今天，我们宣布一项新标准化工作的开始——WASI，即WebAssembly系统接口。</p>
+<span id="more"></span>
+
+<p><strong>为何需要WASI</strong>：开发人员开始将WebAssembly(译：下称WASM)推向浏览器以外的世界，因为WASM提供了一种快速，可扩展，且安全的方式在所有计算机上运行相同的代码。</p>
+<p>但是现在我们还没有坚实的基础可以构建WASI。浏览器外部的代码需要一种与系统对话的方式，即系统接口，这是当前WASM平台还没有的。</p>
+<p><strong>WASI是什么</strong>：WebAssembly是用于概念中计算机的汇编语言，而不是用于物理计算机的汇编语言。这就是它可以在各种不同的机器架构上运行的原因。</p>
+<p>就像WASM是概念中计算机的汇编语言一样，WebAssembly需要概念中的操作系统（而不是任何一个具体的操作系统）的系统接口。这样，它可以在所有不同的操作系统上运行。</p>
+<p>这就是WASI – WASM平台的系统接口。</p>
+<p>我们旨在创建一个系统接口，该接口将成为WebAssembly的真正伙伴，并经历时间考验。这意味着要坚持WASM的关键原则——“可移植性和安全性”。</p>
+<p><strong>谁在制作WASI</strong>：我们正组织一个WebAssembly子项目组来专攻标准化WASI。我们已经召集了感兴趣的合作伙伴，并正在寻找更多加入的伙伴。</p>
+<p>我们与合作伙伴，还有支持者，认为WASI重要的一些原因如下：</p>
+<p>Mozilla首席研发官Sean White</p>
+<p>“ WebAssembly正在为人们改变网络带来新的引人入胜的内容的方式，并使开发人员和创作者能够在网络上100%发挥实力。到目前为止，这是都是通过浏览器实现的。但是通过WASI，我们可以将WebAssembly和Web的优势交给更多的用户，更多的岗位，更多的设备，并作为更多体验的一部分。”</p>
+<p>Fastly的首席技术官Tyler McMullen</p>
+<p>“我们将WebAssembly扩展到浏览器之外，作为在边缘云中快速，安全地执行代码的平台。尽管我们的边缘和浏览器之间的环境存在差异，但WASI意味着WebAssembly开发人员无需将其代码移植到每个不同的平台上。”<br>Myles Borins，Node技术指导委员会主任</p>
+<p>“ WebAssembly可以解决Node中最大的问题之一 —— 如何以接近本机的速度并像使用本机模块一样重用以C和C++等其他语言编写的代码，同时仍保持可移植性和安全性。标准化此系统接口是实现这一目标的第一步。”</p>
+<p>npm的联合创始人Laurie Voss</p>
+<p>“ npm对可能的WebAssembly能够扩展npm生态系统的功能感到非常兴奋，同时极大地简化了使本机代码在服务器端JavaScript应用程序中运行的过程。我们期待这一过程的结果。”</p>
+<p>所以这是个大新闻！ 🎉</p>
+<p>WASI当前有3种实现：</p>
+<ul>
+<li>wasmtime，Mozilla主导的WebAssembly运行时</li>
+<li>Lucet，Fastly主导的WebAssembly运行时</li>
+<li>浏览器上的polyfill</li>
+</ul>
+<p>如果您想了解有关该系统接口应如何工作的建议的更多信息，请继续阅读。</p>
+<h2 id="什么是系统接口？"><a href="#什么是系统接口？" class="headerlink" title="什么是系统接口？"></a>什么是系统接口？</h2><p>许多人谈论像C这样可以使您直接访问系统资源的语言。但事实并不是这样的。</p>
+<p>这些语言实际上无权直接在大多数系统上执行，打开或创建文件之类的操作。为什么不？</p>
+<p>因为这些系统资源（例如文件，内存和网络连接）对于稳定性和安全性来说非常重要。</p>
+<p>如果一个程序无意间弄乱了另一个程序的资源，则可能使该程序崩溃。更糟糕的是，如果某个程序（或用户）故意弄乱了另一个程序的资源，它可能会窃取敏感数据。(译：就是缓冲区溢出导致RCE)</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/01-01_crash-data-leak-1-500x220.png" class="" title="crash-data-leak">
+
+<p>因此，我们需要一种方法来控制哪些程序和用户可以访问哪些资源。人们很早就意识到了这一点，并提出了一种提供这种控制的方法：保护环的安保。</p>
+<p>借助保护环的安保，操作系统基本上可以在系统资源周围设置保护屏障。这也就是内核(Kernel)。内核是唯一一个需要做比如创建新文件，打开文件或打开网络连接之类的操作的东西。</p>
+<p>用户程序在此内核之外以“用户模式”运行。如果程序想要执行任何操作，例如打开文件，则必须要求内核为其打开文件。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/01-02-protection-ring-sec-1-500x298.png" class="" title="protection-ring-sec">
+
+<p>这就是系统调用(syscall)这个概念出现的地方。当程序需要让内核执行这些操作之一时，它会要求使用系统调用。这使内核有机会弄清楚是哪个用户在要求。然后，它可以在该用户在打开文件之前查看用户是否有权访问该文件。</p>
+<p>在大多数设备上，这是代码可以通过系统调用访问系统资源的唯一方法。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/01-03-syscall-1-500x227.png" class="" title="syscall">
+
+<p>操作系统使系统调用可用。但是，如果每个操作系统都有自己的系统调用，那么是否就需要为每个操作系统使用不同版本的代码？幸运的是，现在的您不需要。</p>
+<p>那这个问题是如何被解决的？抽象化。</p>
+<p>大多数语言都提供标准库。进行编码时，程序员无需知道他们针对的系统。他们只是使用接口。</p>
+<p>然后，在编译时，您的工具链会根据您要定位的系统来选择要使用的接口实现。此实现使用操作系统API中的功能，因此特定于系统。</p>
+<p>这就是系统接口的所在。例如，为Windows机器编译的printf可以使用Windows API与该机器进行交互。如果要针对Mac或Linux进行编译，它将改用POSIX。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/02-01-implementations-1-500x267.png" class="" title="implementations">
+
+<p>但是，这也给WebAssembly带来了一个问题。</p>
+<p>使用WebAssembly，即使在编译时，您也不知道要使用哪种操作系统。因此，您不能在标准库的WebAssembly实现中使用任何单个操作系统的系统接口。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/02-02-implementations-1-500x260.png" class="" title="implementations">
+
+<p>我之前说过，为何WebAssembly是个<a href="https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/" target="_blank" rel="noopener">用于概念计算机的汇编语言</a>而不是真实计算机的汇编语言。以同样的方式，WebAssembly需要用于概念性操作系统的系统接口，而不是真正的操作系统。</p>
+<p>但是，即使没有适当的系统接口，也已经有运行时可以在浏览器外部运行WebAssembly。他们是怎么做到的呢？ 让我们来看看。</p>
+<h2 id="当下，WebAssembly是如何在浏览器之外运行？"><a href="#当下，WebAssembly是如何在浏览器之外运行？" class="headerlink" title="当下，WebAssembly是如何在浏览器之外运行？"></a>当下，WebAssembly是如何在浏览器之外运行？</h2><p>生成WebAssembly的第一个工具是Emscripten。它在网页上模拟了特定的OS系统接口POSIX。这意味着程序员可以使用C标准库（libc）中的函数。</p>
+<p>为此，Emscripten创建了自己的libc实现。 此实现分为两部分 —— 将一部分编译到WebAssembly模块中，另一部分用JS胶水代码实现；然后，此JS胶水将调用浏览器，此后浏览器将与OS通信。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/03-01-emscripten-1-500x329.png" class="" title="emscripten">
+
+<p>早期的大多数WebAssembly代码都是使用Emscripten编译的。因此，当人们开始希望在没有浏览器的情况下运行WebAssembly时，他们首先通过运行Emscripten编译的代码开始。</p>
+<p>所以，为JS胶水代码中的所有这些功能，这些运行时需要创建自己的实现。</p>
+<p>不过这里有个问题。该JS胶水代码提供的接口并非标准设计，甚至不是面向外部的接口。因为这不是它当时需要解决的问题。</p>
+<p>打个比方，对于一个类似于public接口API上<code>read</code>的函数的调用，JS胶水代码改用 <code>_system3(which, varargs)</code>。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/03-02-system3-1-500x179.png" class="" title="system3">
+
+<p>第一个参数，<code>which</code>，是一个整数，该整数始终与名称中的数字相同（在这种情况下为3）。</p>
+<p>第二个参数，<code>varargs</code>，是要使用的参数。之所以称为varargs，是因为您可以使用可变数量的变量。但是WebAssembly无法提供将可变数量的参数传递给函数的方法。因此，参数是通过线性内存传递的。这不是安全的类型，而且比使用寄存器传递参数的速度要慢。</p>
+<p>这对于在浏览器中运行Emscripten来说很好。但是现在，运行时将其视为事实上的标准，实现了自己的JS胶水代码版本。他们正在仿真POSIX仿真层的内部细节。</p>
+<p>这意味着他们正在重新实现基于Emscripten约束有意义的选择（例如将参数作为堆值传递），即使这些约束不适用于他们当前的环境。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/03-03-emulation-1-500x341.png" class="" title="emulation">
+
+<p>如果我们要建立一个可持续数十年的WebAssembly生态系统，则需要坚实的基础。 这意味着我们的事实上的标准不能是模仿的模仿。</p>
+<p>但是，我们应该采用什么原则？</p>
+<h3 id="WASI需要遵循哪些原则？"><a href="#WASI需要遵循哪些原则？" class="headerlink" title="WASI需要遵循哪些原则？"></a>WASI需要遵循哪些原则？</h3><p>WebAssembly中包含两个重要的原则：</p>
+<ul>
+<li>可移植性</li>
+<li>安全性</li>
+</ul>
+<p>在转向浏览器外的使用时，我们需要保证这些关键原则。</p>
+<p>事实是，POSIX和Unix的安全性访问控制方法还不能完全解决问题。让我们看看它们的不足之处。</p>
+<h4 id="可移植性"><a href="#可移植性" class="headerlink" title="可移植性"></a>可移植性</h4><p>POSIX提供源代码可移植性。您可以使用不同版本的libc编译相同的源代码，以针对不同的计算机。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/04-01-portability-1-500x375.png" class="" title="portability">
+
+<p>但是WebAssembly需要超越这一步骤。我们需要能够编译一次并跨一大堆不同的机器运行。我们需要可移植的二进制文件。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/04-02-portability-1-500x484.png" class="" title="portability">
+
+<p>这种可移植性使向用户分发代码变得更加容易。</p>
+<p>例如，如果Node的本机模块是用WebAssembly编写的，则用户在安装带有本机模块的应用程序时无需运行node-gyp，并且开发人员无需配置和分发数十个二进制文件。</p>
+<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p>当一行代码要求操作系统进行某些输入或输出时，操作系统需要确定执行代码要求的操作是否安全。</p>
+<p>操作系统通常使用基于所有权和组的访问控制来处理此问题。</p>
+<p>例如，程序可能要求操作系统打开文件。用户具有他们有权访问的一组文件。</p>
+<p>当用户启动程序时，该程序代表该用户运行。如果用户有权访问文件——（因为他们是所有者，或者因为他们在具有访问权限的组中），那么程序也具有相同的访问权限。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/04-03-access-control-1-500x224.png" class="" title="access-control">
+
+<p>这样可以用户之间进行保护。在早期操作系统的开发中，这很有意义。系统通常是多用户的，并且管理员控制要安装的软件。因此，最主要的威胁是其他用户偷看您的文件。</p>
+<p>但是，大人，时代变了。系统现在通常是单用户，但是它们正在运行的代码会引入许多其他可信度未知的第三方代码。现在最大的威胁是您自己正在运行的代码将对您不利。</p>
+<p>例如，假设您在应用程序中使用的库获得了一个新的维护程序（在开放源代码中经常发生）。那个维护者可能会引起您的兴趣……或者他们可能是坏人之一。 而且，如果他们有权在您的系统上执行任何操作（例如打开任何文件并通过网络发送文件），那么他们的代码可能会造成很大的破坏。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/04-04-bitcoin-1-500x258.png" class="" title="bitcoin">
+
+<p>这就是为什么使用可以直接与系统对话的第三方库很危险的原因。</p>
+<p>WebAssembly的安全性方法不同。WebAssembly已沙盒化。</p>
+<p>这意味着代码无法直接与操作系统对话。但是，它如何处理系统资源呢？主机（可能是浏览器，也可能是wasm运行时）将函数放入代码可以使用的沙箱中。</p>
+<p>这意味着主机可以限制程序在逐个程序的基础上可以执行的操作。它不仅可以让程序代表用户执行操作，还可以在具有用户完全权限的情况下调用任何系统调用。</p>
+<p>仅仅拥有一种沙箱机制并不能保证系统本身的安全性——因为主机仍然可以将所有功能都放到沙箱中，在这种情况下，我们的状况就不会更好了——但它至少使主机可以能够选择创建一个更安全的系统。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/04-05-sandbox-1-500x278.png" class="" title="sandbox">
+
+<p>在我们设计的任何系统接口中，我们都需要坚持这两个原则。可移植性使开发和分发软件更加容易，并且绝对必须为主机提供工具以保护自己或他们的用户安全。</p>
+<h3 id="WASI应该是什么样？"><a href="#WASI应该是什么样？" class="headerlink" title="WASI应该是什么样？"></a>WASI应该是什么样？</h3><p>给定这两个关键原则，WebAssembly系统接口的设计应该是什么？</p>
+<p>这就是我们在标准化过程中要解决的问题。 不过，我们确实有一个建议：</p>
+<ul>
+<li>创建一组标准接口</li>
+<li>从标准化最基本的模块wasi-core开始</li>
+</ul>
+<img src="/standardizing-wasi-a-webassembly-system-interface/05-01-wasi-1-500x419.png" class="" title="wasi">
+
+<p>wasi-core将会是个啥？</p>
+<p>wasi-core将包含所有程序需要的基础。它将覆盖与POSIX相同的大部分内容，包括文件，网络连接，时钟和随机数。</p>
+<p>对于许多这些事情，它将采用与POSIX非常相似的方法。例如，它将使用POSIX的面向文件的方式，在此基础上您可以进行诸如open，close，read和write之类的系统调用，而其他所有操作基本上都可以在顶部进行增强。</p>
+<p>但是wasi-core无法涵盖POSIX的所有功能。例如，进程概念不能清楚地映射到WebAssembly上。除此之外，说每个WebAssembly引擎都需要支持进程操作（如fork）是没有意义的。 但是我们也想使标准化fork成为可能。</p>
+<p>这就是模块化方法的用武之地。通过这种方式，我们可以获得良好的标准化覆盖率，同时仍然允许细分平台仅使用WASI在该平台上有意义的部分。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/05-02-wasi-1-500x251.png" class="" title="wasi">
+
+<p>像Rust这样的语言将直接在其标准库中使用wasi-core。 例如，Rust的<code>open</code>是通过在编译为WebAssembly时调用<code>__wasi_path_open</code>来实现的。</p>
+<p>对于C和C++，我们创建了一个<a href="https://github.com/CraneStation/wasi-sysroot" target="_blank" rel="noopener">wasi-sysroot</a>，它根据wasi-core函数实现了libc。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/05-03-open-imps-1-500x229.png" class="" title="open-imps">
+
+<p>我们希望像clang这样的编译器准备好与WASI API交互，并且像Rust编译器和Emscripten这样的完整工具链也可以将WASI用作其系统实现的一部分</p>
+<p>那么用户的代码需要如何调用这些WASI函数？</p>
+<p>答案是，运行代码的运行时将wasi-core函数作为导入(imports)传递进WASM。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/05-04-imports-1-500x285.png" class="" title="imports">
+
+<p>这给我们带来了可移植性，因为每个主机都可以有自己的wasi-core实现，该实现专门针对其平台编写——从Mozilla的wasmtime和Fastly的Lucet之类的WebAssembly运行时，到Node甚至是浏览器。</p>
+<p>这也给我们提供了沙箱管理功能，因为主机可以逐个程序选择要传入的wasi-core函数，因此，可以允许哪个系统调用。 这样可以保持安全性。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/05-05-sec-port-2-500x705.png" class="" title="sec-port">
+
+<p>WASI为我们提供了进一步扩展此安全性的方法。它从基于功能的安全性中引入了更多概念。</p>
+<p>传统上，如果代码需要打开文件，则使用字符串（路径名）调用open。然后，操作系统会检查代码是否具有权限（基于启动程序的用户）。</p>
+<p>使用WASI，如果要调用需要访问文件的函数，则必须传入文件描述符，该描述符具有附加的权限。这可以用于文件本身，也可以用于包含文件的目录。</p>
+<p>这样，您就不会拥有随机要求打开&#x2F;etc&#x2F;passwd的代码。相反，代码只能在传递给它的目录上操作。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/05-06-openat-path-1-500x192.png" class="" title="openat-path">
+
+<p>这使得可以安全地给沙盒代码更多地访问不同的系统调用的权限，因为这些系统调用的功能可能受到限制。</p>
+<p>而且这是逐个模块进行的。默认情况下，模块无权访问文件描述符。但是，如果一个模块中的代码具有文件描述符，则可以选择将该文件描述符传递给它在其他模块中调用的函数。或者，它可以创建文件描述符的更多受限版本以传递给其他功能。</p>
+<p>因此，运行时将应用程序可以使用的文件描述符传递给顶层代码，然后根据需要，将文件描述符传播到系统的其余部分。</p>
+<img src="/standardizing-wasi-a-webassembly-system-interface/05-07-file-perms-1-500x423.png" class="" title="file-perms">
+
+<p>这使WebAssembly更接近最小特权原则，在该原则下，模块只能访问执行其工作所需的确切资源。</p>
+<p>这些概念来自面向功能的系统，例如CloudABI和Capsicum。面向功能的系统的一个问题是，通常很难向其移植代码。但是我们认为这个问题可以解决。</p>
+<p>如果代码已经使用了带有相对文件路径的<code>openat</code>，那么编译代码就可以了。</p>
+<p>如果代码使用<code>open</code>并且正迁移到<code>openat</code>风格是过度的前期投资，WASI可以提供一个增量解决方案。使用<img src="https://github.com/musec/libpreopen" alt="libpreopen" loading="lazy">，您可以创建应用程序需要合法访问的文件路径的列表。然后，您可以使用open，但只能使用这些路径。</p>
+<h3 id="接下来做什么"><a href="#接下来做什么" class="headerlink" title="接下来做什么"></a>接下来做什么</h3><p>我们认为wasi-core是一个好的开始。它保留了WebAssembly的可移植性和安全性，为生态系统奠定了坚实的基础。</p>
+<p>但是，在wasi-core完全标准化之后，我们仍然需要解决一些问题。这些问题包括：</p>
+<ul>
+<li>异步I&#x2F;O</li>
+<li>文件监控</li>
+<li>文件锁定</li>
+</ul>
+<p>这仅仅是开始，因此，如果您有解决这些问题的想法，请加入我们！</p>
+]]></content>
+      <tags>
+        <tag>done</tag>
+        <tag>wasm</tag>
+        <tag>wasi</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Something on NGIN: 一些隨筆</title>
     <url>//sth-on-ngin/</url>
     <content><![CDATA[<p>隨意地記錄一些NGIN上的一些思考</p>
@@ -12416,6 +12416,121 @@ TODO:
         <tag>NGIN</tag>
         <tag>notes</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>unsecured-loan</title>
+    <url>//unsecured-loan/</url>
+    <content><![CDATA[<p>关键字：[personal&#x2F;unsecured+loan&#x2F;lending]&#x2F;credit + blockchain</p>
+<p>基于区块链和联邦学习的手段构建一个信用借贷框架</p>
+<p>框架？哪些隐私保护措施？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">url: ipfs://unknwon_path/this/is/my.model</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>继续找文献：传统框架，如何连接web2信息</p>
+<img src="/unsecured-loan/2023-04-06-11-52-40.png" class="">
+
+<p>流程：</p>
+<hr>
+<p>借款人下载本地客户端<br>借款人使用客户端，通过以太坊节点rpc call借贷方智能合约得到无加密元数据，实现从ipfs下载下载初始评估模型 预训练模型（链上AAve+Comp）<br>借款人使用客户端进行信息验证（链上AAve Comp，PoS <del>Oauth、NFT-style Licenses&#x2F;ID、white</del>）<br>借款人使用客户端内模型进行本地联邦学习，得到训练后模型<br>借款人使用客户端将模型加密后<br>借款人使用客户端内ipfs节点寄存模型，得到元数据<br>借款人使用客户端将元数据加密后上传区块链<br>借款人使用客户端通过交易调用贷方智能合约方法，实现元数据上链<br>借贷平台通过智能合约事件接收到加密元数据<br>借贷平台解密元数据，通过ipfs下载加密评估模型。解密评估模型<br>借贷平台使用模型训练得到借款人最终评分<br>借贷平台根据评分决定是否放款</p>
+<hr>
+<p>【链上学习】<br>借贷平台随着区块号升高，本地更新借款人信用模型，并提供Oracle链上调用（DeFi对接？<br>当借款超出期限（借款人无归还交易&#x2F;归还少于借出额度） -&gt; 更新信用<br>当借款按期归还（借款人还款交易满足偿还要求） -&gt; 更新信用<br>更新信用 -&gt; （通用？专有？）模型更新<br>新模型元数据上链，客户端收到智能合约事件，更新本地模型</p>
+<p>结合有抵押</p>
+<!-- ---
+【EVM上学习 => 即智能合约技术栈上即可学习】
+借款人下载与部署区块链节点
+借款人使用节点接口进行信息验证（Oauth、NFT-style Licenses/ID、Oracle）
+借款人使用节点中模型对应的智能合约调用进行本地联邦学习，得到训练后模型
+借款人使用客户端通过交易调用智能合约方法，实现模型上链
+所有节点将通过执行模型得到借款人最终评分
+借贷平台根据评分决定是否放款
+
+---
+【链上学习】
+借贷平台随着区块号升高，本地更新借款人信用模型，并提供Oracle链上调用（DeFi对接？
+当借款超出期限（借款人无归还交易/归还少于借出额度） -> 更新信用
+当借款按期归还（借款人还款交易满足偿还要求） -> 更新信用
+更新信用 -> （通用？专有？）模型更新
+新模型元数据上链，客户端收到智能合约事件，更新本地模型 -->
+
+<hr>
+<p>模型上链安全</p>
+<p>仓位杠杆率 反映连环抵押<br>defisaver</p>
+<hr>
+<p>系统设计：</p>
+<ul>
+<li>geth fork: <a href="https://geth.ethereum.org/docs/fundamentals/private-network" target="_blank" rel="noopener">https://geth.ethereum.org/docs/fundamentals/private-network</a></li>
+<li>ipfs fork</li>
+<li>soldity 预言机 <a href="https://medium.com/iex-ec/how-to-build-a-decentralized-oracle-on-ethereum-a-step-by-step-guide-d8c14719b69f" target="_blank" rel="noopener">https://medium.com/iex-ec/how-to-build-a-decentralized-oracle-on-ethereum-a-step-by-step-guide-d8c14719b69f</a></li>
+</ul>
+<hr>
+<pre class="mermaid">sequenceDiagram
+    participant b as Borrower
+    participant ethl as Ethereum Lending Oracle
+    participant etht as Ethereum Trust Oracle
+    participant ipfs as IPFS
+    participant loc as Lending Oracle Cluster
+    participant toc as Trust Data Oracle Cluster
+
+    b->>ethl: startSession()
+
+    b->>+etht: requestTrustData(borrower_pubkey, sessionID)
+    etht->>+toc: event ReuqestTrustData(borrower_pubkey, sessionID)
+    toc->>toc: Get trust data from real world, and Enctypt with pub0
+    toc->>-etht: updateTrustData(sessionID)
+
+    loc->>ipfs: shareModel(model_0) -> model_0_cid
+    loc->>loc: createChannelKeyPair() -> (chan_privkey, chan_pubkey)
+    loc->>ethl: handleSession(chan_pubkey, model_0_cid)
+
+    ipfs->>b: downloadInitialModel(model_0_cid) -> model_0
+    b->>b: train(model_0)
+    b->>ipfs: secretShareModel(model_1, chan_pubkey) -> model_1_cid
+    b->>ethl: updateModel(model_1_cid)
+    ipfs->>loc: secretDownloadModel(model_1_cid, chan_privkey) -> model_1
+  
+    Note over loc: Wait model count ready
+    loc->>loc: aggregateModels(model_new_list) -> agg_model
+    loc->>loc: evalModel(agg_model) -> need_training
+
+    alt need_training is True
+        loc->>ethl: 
+    else need_training is False
+        loop FL training
+            loc->>ipfs: secretShareModel(model_origin) -> model_0_cid
+            ipfs->>b: secretDownloadModel(model_origin_cid) -> model_0
+            b->>b: train(model_origin)
+            b->>ipfs: secretShareModel(model_new, chan_pubkey) -> model_1_cid
+            b->>ethl: updateModel(model_new_cid)
+            ipfs->>loc: secretDownloadModel(model_new_cid, chan_privkey) -> model_new
+            Note over loc: Wait model count ready
+            loc->>loc: aggregateModels(model_new_list) -> agg_model
+            loc->>loc: evalModel(agg_model) -> need_training
+        end
+    end
+
+    loc->>loc: evalModel(agg_model) -> results
+    loc->>ethl: done(results)</pre>
+
+
+<hr>
+<ol start="4">
+<li>Simulation</li>
+</ol>
+<p>在本节中，我们将阐述我们进行的模拟过程，以评估我们提出的以太坊非担保贷款服务的实现可能性，该服务基于受信任的执行环境（TEE）设备和联邦学习。为了建立和验证我们的系统模型，我们使用了来自AAVE，Compound在以太坊上的记录，以及Kaggle上的P2P Lending Club记录的数据。</p>
+<p>4.1 数据集</p>
+<p>我们为模拟汇集了三个数据集。首先，我们从AAVE和Compound获取了链上的贷款和借款数据，这是以太坊上的两个主要去中心化金融（DeFi）平台。该数据集提供了丰富的DeFi交易和活动的上下文信息，包括借款和贷款利率，清算细节，抵押类型和用户地址。链下数据集来自Kaggle上的Lending Club记录，其中包含了大量关于P2P贷款交易的详细信息。这个数据集有助于我们理解传统P2P贷款中的行为和风险管理，这对于我们所提出的模型的设计和评估至关重要。最后，根据“链上资产越多的人往往链下年收入更多”，我们使用这个简单的启发式规则按链上资产价值和链下年收入连接了链上信息和链下信息。</p>
+<p>4.2 模拟设置</p>
+<p>如上Methodology部分所述，我们通过使用联邦学习方法在不同的TEE设备之间分发数据处理，模拟了区块链上贷款服务的操作。这种方法在保持数据的完整性和保密性的同时，确保了隐私和去中心化。</p>
+<p>我们所有实验都在一台dual-AMD7763服务器上完成，服务器上有8块3090显卡以支持机器学习训练。所有角色都通过Docker容器被隔离在不同运行环境与网络环境中。方便起见，除了智能合约上需要solidity，我们主要使用Python实现了整个模拟系统的交互。另外我们使用Rust语言开发部分复杂内容，比如TEE环境下的区块链交互等。</p>
+<p>实验中，我们在以太坊区块链私有网络上构建了模拟运行环境，该环境承载了管理用户信用评分模型的智能合约和管理贷款交易的智能合约。此外我们也运行了IPFS私有网络模拟去中心化存储环境，用来存储与传递私有或公有的模型数据。代码上，我们在现有的有抵押贷款智能合约的基础上使用solidity语言进行二次开发，通过Oracle的形式将无抵押信用贷款功能增加到现有DeFi协议。由于区块链环境并不支持机器学习这类复杂计算，我们通过用户TEE环境以及区块链智能合约中事件订阅系统的联动实现区块链上数据隐私计算。</p>
+<p>4.3 框架实施与验证</p>
+<p>我们将分别使用了简单的逻辑回归和卷积神经网络两种机器学习模型应用于数据集以计算用户信用模型来验证框架可行性。用户信用度模型通过联邦学习进行迭代更新，允许每个TEE设备从其本地数据中学习，并通过区块链以隐私保护的方式与联盟分享模型更新，从而在尊重数据隐私的同时改进全局模型。</p>
+<p>由于目前并没有准确的区块链无抵押借贷服务与相关数据，而且我们的链上和链下数据两者之间实际也并没有关联，因此我们不进行模型的评估与结果分析，而是关注框架的可行性。模拟结果表明，我们设计的框架能够在以太坊上运行，而且能够处理用户的隐私数据。通过模拟在以太坊上的非担保贷款服务，我们可以更好地理解这种方法的挑战和优势。模拟结果可以指导现实世界实现的开发和改进，从而在DeFi领域中提供更安全，高效且私有的贷款服务。</p>
+<p>为了验证我们的系统的可行性，我们对其进行了功能性上的测试。测试结果表明模型能够根据用户信用实现用户的无抵押借贷，并且根据用户的链上行为适度地调整用户信用。如图所示，图中Step之间区块高度相距也为1，两条线分别为Borrowed Amount与Available Amount。测试用户在前两步分别借贷了1000与2000单位，虽然共计3000单位小于一开始的将近3500单位，但是由于有未还的记录导致用户信用评分下降导致用户最终不可继续贷款；而当用户在步骤4直接归还3000单位后，其还款记录增加，预测的可用数量也得到略微增加。</p>
+<img src="/unsecured-loan/2023-07-14-23-53-23.png" class="">
+
+<!-- 这包括评估联邦学习过程中数据的安全性，以及我们基于以太坊的贷款服务的效率和可扩展性，包括燃气消耗和交易处理速度。 -->
+
+]]></content>
   </entry>
   <entry>
     <title>WASM 2Master</title>
@@ -12601,121 +12716,6 @@ TODO:
         <tag>wasi</tag>
         <tag>todo</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>unsecured-loan</title>
-    <url>//unsecured-loan/</url>
-    <content><![CDATA[<p>关键字：[personal&#x2F;unsecured+loan&#x2F;lending]&#x2F;credit + blockchain</p>
-<p>基于区块链和联邦学习的手段构建一个信用借贷框架</p>
-<p>框架？哪些隐私保护措施？</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">url: ipfs://unknwon_path/this/is/my.model</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>继续找文献：传统框架，如何连接web2信息</p>
-<img src="/unsecured-loan/2023-04-06-11-52-40.png" class="">
-
-<p>流程：</p>
-<hr>
-<p>借款人下载本地客户端<br>借款人使用客户端，通过以太坊节点rpc call借贷方智能合约得到无加密元数据，实现从ipfs下载下载初始评估模型 预训练模型（链上AAve+Comp）<br>借款人使用客户端进行信息验证（链上AAve Comp，PoS <del>Oauth、NFT-style Licenses&#x2F;ID、white</del>）<br>借款人使用客户端内模型进行本地联邦学习，得到训练后模型<br>借款人使用客户端将模型加密后<br>借款人使用客户端内ipfs节点寄存模型，得到元数据<br>借款人使用客户端将元数据加密后上传区块链<br>借款人使用客户端通过交易调用贷方智能合约方法，实现元数据上链<br>借贷平台通过智能合约事件接收到加密元数据<br>借贷平台解密元数据，通过ipfs下载加密评估模型。解密评估模型<br>借贷平台使用模型训练得到借款人最终评分<br>借贷平台根据评分决定是否放款</p>
-<hr>
-<p>【链上学习】<br>借贷平台随着区块号升高，本地更新借款人信用模型，并提供Oracle链上调用（DeFi对接？<br>当借款超出期限（借款人无归还交易&#x2F;归还少于借出额度） -&gt; 更新信用<br>当借款按期归还（借款人还款交易满足偿还要求） -&gt; 更新信用<br>更新信用 -&gt; （通用？专有？）模型更新<br>新模型元数据上链，客户端收到智能合约事件，更新本地模型</p>
-<p>结合有抵押</p>
-<!-- ---
-【EVM上学习 => 即智能合约技术栈上即可学习】
-借款人下载与部署区块链节点
-借款人使用节点接口进行信息验证（Oauth、NFT-style Licenses/ID、Oracle）
-借款人使用节点中模型对应的智能合约调用进行本地联邦学习，得到训练后模型
-借款人使用客户端通过交易调用智能合约方法，实现模型上链
-所有节点将通过执行模型得到借款人最终评分
-借贷平台根据评分决定是否放款
-
----
-【链上学习】
-借贷平台随着区块号升高，本地更新借款人信用模型，并提供Oracle链上调用（DeFi对接？
-当借款超出期限（借款人无归还交易/归还少于借出额度） -> 更新信用
-当借款按期归还（借款人还款交易满足偿还要求） -> 更新信用
-更新信用 -> （通用？专有？）模型更新
-新模型元数据上链，客户端收到智能合约事件，更新本地模型 -->
-
-<hr>
-<p>模型上链安全</p>
-<p>仓位杠杆率 反映连环抵押<br>defisaver</p>
-<hr>
-<p>系统设计：</p>
-<ul>
-<li>geth fork: <a href="https://geth.ethereum.org/docs/fundamentals/private-network" target="_blank" rel="noopener">https://geth.ethereum.org/docs/fundamentals/private-network</a></li>
-<li>ipfs fork</li>
-<li>soldity 预言机 <a href="https://medium.com/iex-ec/how-to-build-a-decentralized-oracle-on-ethereum-a-step-by-step-guide-d8c14719b69f" target="_blank" rel="noopener">https://medium.com/iex-ec/how-to-build-a-decentralized-oracle-on-ethereum-a-step-by-step-guide-d8c14719b69f</a></li>
-</ul>
-<hr>
-<pre class="mermaid">sequenceDiagram
-    participant b as Borrower
-    participant ethl as Ethereum Lending Oracle
-    participant etht as Ethereum Trust Oracle
-    participant ipfs as IPFS
-    participant loc as Lending Oracle Cluster
-    participant toc as Trust Data Oracle Cluster
-
-    b->>ethl: startSession()
-
-    b->>+etht: requestTrustData(borrower_pubkey, sessionID)
-    etht->>+toc: event ReuqestTrustData(borrower_pubkey, sessionID)
-    toc->>toc: Get trust data from real world, and Enctypt with pub0
-    toc->>-etht: updateTrustData(sessionID)
-
-    loc->>ipfs: shareModel(model_0) -> model_0_cid
-    loc->>loc: createChannelKeyPair() -> (chan_privkey, chan_pubkey)
-    loc->>ethl: handleSession(chan_pubkey, model_0_cid)
-
-    ipfs->>b: downloadInitialModel(model_0_cid) -> model_0
-    b->>b: train(model_0)
-    b->>ipfs: secretShareModel(model_1, chan_pubkey) -> model_1_cid
-    b->>ethl: updateModel(model_1_cid)
-    ipfs->>loc: secretDownloadModel(model_1_cid, chan_privkey) -> model_1
-  
-    Note over loc: Wait model count ready
-    loc->>loc: aggregateModels(model_new_list) -> agg_model
-    loc->>loc: evalModel(agg_model) -> need_training
-
-    alt need_training is True
-        loc->>ethl: 
-    else need_training is False
-        loop FL training
-            loc->>ipfs: secretShareModel(model_origin) -> model_0_cid
-            ipfs->>b: secretDownloadModel(model_origin_cid) -> model_0
-            b->>b: train(model_origin)
-            b->>ipfs: secretShareModel(model_new, chan_pubkey) -> model_1_cid
-            b->>ethl: updateModel(model_new_cid)
-            ipfs->>loc: secretDownloadModel(model_new_cid, chan_privkey) -> model_new
-            Note over loc: Wait model count ready
-            loc->>loc: aggregateModels(model_new_list) -> agg_model
-            loc->>loc: evalModel(agg_model) -> need_training
-        end
-    end
-
-    loc->>loc: evalModel(agg_model) -> results
-    loc->>ethl: done(results)</pre>
-
-
-<hr>
-<ol start="4">
-<li>Simulation</li>
-</ol>
-<p>在本节中，我们将阐述我们进行的模拟过程，以评估我们提出的以太坊非担保贷款服务的实现可能性，该服务基于受信任的执行环境（TEE）设备和联邦学习。为了建立和验证我们的系统模型，我们使用了来自AAVE，Compound在以太坊上的记录，以及Kaggle上的P2P Lending Club记录的数据。</p>
-<p>4.1 数据集</p>
-<p>我们为模拟汇集了三个数据集。首先，我们从AAVE和Compound获取了链上的贷款和借款数据，这是以太坊上的两个主要去中心化金融（DeFi）平台。该数据集提供了丰富的DeFi交易和活动的上下文信息，包括借款和贷款利率，清算细节，抵押类型和用户地址。链下数据集来自Kaggle上的Lending Club记录，其中包含了大量关于P2P贷款交易的详细信息。这个数据集有助于我们理解传统P2P贷款中的行为和风险管理，这对于我们所提出的模型的设计和评估至关重要。最后，根据“链上资产越多的人往往链下年收入更多”，我们使用这个简单的启发式规则按链上资产价值和链下年收入连接了链上信息和链下信息。</p>
-<p>4.2 模拟设置</p>
-<p>如上Methodology部分所述，我们通过使用联邦学习方法在不同的TEE设备之间分发数据处理，模拟了区块链上贷款服务的操作。这种方法在保持数据的完整性和保密性的同时，确保了隐私和去中心化。</p>
-<p>我们所有实验都在一台dual-AMD7763服务器上完成，服务器上有8块3090显卡以支持机器学习训练。所有角色都通过Docker容器被隔离在不同运行环境与网络环境中。方便起见，除了智能合约上需要solidity，我们主要使用Python实现了整个模拟系统的交互。另外我们使用Rust语言开发部分复杂内容，比如TEE环境下的区块链交互等。</p>
-<p>实验中，我们在以太坊区块链私有网络上构建了模拟运行环境，该环境承载了管理用户信用评分模型的智能合约和管理贷款交易的智能合约。此外我们也运行了IPFS私有网络模拟去中心化存储环境，用来存储与传递私有或公有的模型数据。代码上，我们在现有的有抵押贷款智能合约的基础上使用solidity语言进行二次开发，通过Oracle的形式将无抵押信用贷款功能增加到现有DeFi协议。由于区块链环境并不支持机器学习这类复杂计算，我们通过用户TEE环境以及区块链智能合约中事件订阅系统的联动实现区块链上数据隐私计算。</p>
-<p>4.3 框架实施与验证</p>
-<p>我们将分别使用了简单的逻辑回归和卷积神经网络两种机器学习模型应用于数据集以计算用户信用模型来验证框架可行性。用户信用度模型通过联邦学习进行迭代更新，允许每个TEE设备从其本地数据中学习，并通过区块链以隐私保护的方式与联盟分享模型更新，从而在尊重数据隐私的同时改进全局模型。</p>
-<p>由于目前并没有准确的区块链无抵押借贷服务与相关数据，而且我们的链上和链下数据两者之间实际也并没有关联，因此我们不进行模型的评估与结果分析，而是关注框架的可行性。模拟结果表明，我们设计的框架能够在以太坊上运行，而且能够处理用户的隐私数据。通过模拟在以太坊上的非担保贷款服务，我们可以更好地理解这种方法的挑战和优势。模拟结果可以指导现实世界实现的开发和改进，从而在DeFi领域中提供更安全，高效且私有的贷款服务。</p>
-<p>为了验证我们的系统的可行性，我们对其进行了功能性上的测试。测试结果表明模型能够根据用户信用实现用户的无抵押借贷，并且根据用户的链上行为适度地调整用户信用。如图所示，图中Step之间区块高度相距也为1，两条线分别为Borrowed Amount与Available Amount。测试用户在前两步分别借贷了1000与2000单位，虽然共计3000单位小于一开始的将近3500单位，但是由于有未还的记录导致用户信用评分下降导致用户最终不可继续贷款；而当用户在步骤4直接归还3000单位后，其还款记录增加，预测的可用数量也得到略微增加。</p>
-<img src="/unsecured-loan/2023-07-14-23-53-23.png" class="">
-
-<!-- 这包括评估联邦学习过程中数据的安全性，以及我们基于以太坊的贷款服务的效率和可扩展性，包括燃气消耗和交易处理速度。 -->
-
-]]></content>
   </entry>
   <entry>
     <title>WebAssembly核心标准：WebAssembly Core Specification</title>

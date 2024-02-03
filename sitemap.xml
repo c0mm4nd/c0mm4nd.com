@@ -461,7 +461,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/ielts-notes/</loc>
+    <loc>https://c0mm4nd.com/idea-on-edx-blockchain-tech/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -470,7 +470,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/idea-on-edx-blockchain-tech/</loc>
+    <loc>https://c0mm4nd.com/ielts-notes/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -515,6 +515,15 @@
   </url>
   
   <url>
+    <loc>https://c0mm4nd.com/ngchain-serialization-selection/</loc>
+    
+    <lastmod>2021-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://c0mm4nd.com/new-env-in-msys2/</loc>
     
     <lastmod>2021-10-11</lastmod>
@@ -525,24 +534,6 @@
   
   <url>
     <loc>https://c0mm4nd.com/new-structure-of-ngin/</loc>
-    
-    <lastmod>2021-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/ngchain-serialization-selection/</loc>
-    
-    <lastmod>2021-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/pow-algo-design/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -569,7 +560,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/regenerate-cgo-definitions/</loc>
+    <loc>https://c0mm4nd.com/pow-algo-design/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -579,6 +570,15 @@
   
   <url>
     <loc>https://c0mm4nd.com/randomx-design/</loc>
+    
+    <lastmod>2021-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/regenerate-cgo-definitions/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -614,7 +614,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/standardizing-wasi-a-webassembly-system-interface/</loc>
+    <loc>https://c0mm4nd.com/state-chain-on-pm-paper/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -623,7 +623,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/state-chain-on-pm-paper/</loc>
+    <loc>https://c0mm4nd.com/standardizing-wasi-a-webassembly-system-interface/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
