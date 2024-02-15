@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Notes for FIT5125: IT research methods S1 2021</title>
+    <url>//fit5125-research-method-notes/</url>
+    <content><![CDATA[<p>这门课是本科，研究生和博士生一起上的。任务量巨大。</p>
+<span id="more"></span>
+
+<p>W2</p>
+<ul>
+<li>Physical or psychological harm or abuse 身体或心理上的伤害或虐待</li>
+<li>Informed consent 知情同意</li>
+<li>Right of withdrawal 退出的权利 ​​</li>
+<li>Access to outcomes 对成果知情</li>
+<li>Vulnerable participant groups 弱势参与者群体</li>
+<li>Deception and coercion 欺骗与强迫</li>
+<li>Illegal practices 违法</li>
+<li>Invasion of privacy 侵犯隐私</li>
+<li>Confidentiality 保密</li>
+<li>Human subject data 人体主题数据</li>
+</ul>
+<p>Deception 欺骗<br>欺骗的类型：<br>•“故意”：告诉参与者不正确的事情<br>•“遗漏”：不告诉参与者或模棱两可<br>一些研究需要欺骗，例如：<br>•防止参与者猜测正在研究的行为<br>•“欺骗”本身就是正在研究的现象<br>•当需要研究员的“同盟”时<br>尽量减少欺骗<br>必须尽早通知参与者有关欺骗的信息<br>汇报时<br>欺骗不得造成困扰（包括汇报后）<br>欺骗的使用受到争议（违反了知情同意）</p>
+<p>强制和不当影响 Coercion &amp; undue influence<br>参与研究的压力。<br>显式强制 Explicit coercion：例如<br>•告诉参与者他们将不会获得某些好处<br>•告诉参与者他们必须参加<br>隐式强制 Implicit coercion：例如<br>•参与者推断他们将受到不利待遇<br>不当影响 Undue influence：<br>•参与奖励过多或不适当<br>研究人员必须意识到会对潜在参与者产生不适当的影响：<br>•例如 在他们的学生或同事身上</p>
+<hr>
+<h2 id="W6-质性研究"><a href="#W6-质性研究" class="headerlink" title="W6 质性研究"></a>W6 质性研究</h2><p>关键学的是主题分析（法），百科上内容挺少。</p>
+<p>这里内容来自<a href="https://www.jianshu.com/p/427779f36752%E7%9A%84%E8%AE%B0%E5%BD%95" target="_blank" rel="noopener">https://www.jianshu.com/p/427779f36752的记录</a></p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>对这些内容进行归纳整理，从而提炼出一些主题</p>
+<h3 id="1-熟悉数据"><a href="#1-熟悉数据" class="headerlink" title="1. 熟悉数据"></a>1. 熟悉数据</h3><p><em>将口头语言转录为文字</em></p>
+<h3 id="2-生成初始code"><a href="#2-生成初始code" class="headerlink" title="2. 生成初始code"></a>2. 生成初始code</h3><p>对数据进行初步的编码。</p>
+<p>编码在一定程度上取决于主题是更“数据驱动”还是“理论驱动” </p>
+<p>在前者中，主题将取决于数据，但在后者中，是在特定问题中处理数据。</p>
+<p>在编码过程中需要注意：<br> a）尽可能多地编码潜在主题&#x2F;模式——因为永远不知道后面的内容是否与此相关；<br> b）对代码的摘录中，保留一些上下文相关的数据。<br> c）可以按照适合的多种“主题”来编码单个数据摘录，因此，相关的摘录可能会未被编码，被一次编码或多次编码。</p>
+<h3 id="3-寻找主题"><a href="#3-寻找主题" class="headerlink" title="3. 寻找主题"></a>3. 寻找主题</h3><p>对代码进行整理和归纳。即分析编码，并要考虑如何将代码结合形成一个总体主题。</p>
+<p>排序不同的代码到潜在的主题，整理所有相关的编码数据中提取出的主题。</p>
+<p>有些编码可能会形成主主题，有些则成为子主题，还有一些可能不属于任何地方，可以为此创建一个名为“misc”的主题来存放这类编码。</p>
+<p>最后得到候选主题和子主题的集合，以及与它们相关的编码的所有数据摘要。</p>
+<h3 id="4-审阅主题"><a href="#4-审阅主题" class="headerlink" title="4. 审阅主题"></a>4. 审阅主题</h3><p>通过详细分析，会发现一些候选主题并不是真正的主题(例如，如果没有足够的数据来支持它们，或者数据太多样化)，而其他的主题可能会相互合并(例如，两个明显独立的主题可能会形成一个主题)。有些主题可能需要被分解成单独的主题。</p>
+<h3 id="5-定义与命名主题"><a href="#5-定义与命名主题" class="headerlink" title="5. 定义与命名主题"></a>5. 定义与命名主题</h3><p>通过定义和细化，我们指的是确定每个主题的本质(以及主题的总体)，并确定每个主题捕获的数据的哪个方面。</p>
+<p>段结束时，可以清楚地定义什么是你的主题，什么不是。或者，是否能用几句话来描述每个主题的范围和内容</p>
+<h3 id="6-撰写报告"><a href="#6-撰写报告" class="headerlink" title="6. 撰写报告"></a>6. 撰写报告</h3><p>主题分析写作的任务，无论是出版或研究任务或论文，是以一种让读者信服你的分析的价值和有效性的方式，讲述数据背后的复杂故事。</p>
+<p>重要的是，分析(包括数据摘录)提供了一个简洁、连贯、有逻辑、不重复、有趣的数据在主题内和主题间讲述的故事。你的书面记录必须在数据中提供足够的关于主题的证据，也就是说，足够的数据摘录来证明主题的普遍性。选择特别生动的例子，或能抓住你所展示的要点的精华，作为这个问题的示例。</p>
+<p>然而，报告需要做的不仅仅是提供数据。摘要需要嵌入到一个分析性的叙述中，以引人注目地说明你正在讲述的关于你的数据的故事，而你的分析性的叙述需要超越对数据的描述，并对你的研究问题提出一个论点。</p>
+<hr>
+<p>W7</p>
+<p>统计</p>
+<p>descriptive statistics</p>
+<p>敘述统计（descriptive statistics），是统计学中，来描绘或总结观察量的基本情况的统计总称</p>
+<hr>
+<p>W8</p>
+<img src="/fit5125-research-method-notes/image-20210511195219137.png" class="" title="image-20210511195219137">
+
+<p>correlational 与 experimental study的区别</p>
+<p>cor就相关性研究（相关性 -1→ 0 → 1）</p>
+<p>相关研究是揭示相关关系，实验研究是揭示因果关系</p>
+<p>exp：</p>
+<p>要证明两个变量之间有因果关系，必须满足以下几个条件：</p>
+<p>第一，两个变量均是引发变量。即自变量必须是可以人为操纵变化的（这个变化是指在同一个人身上的变化），因变量的变化必须是自变量的变化所引起的。</p>
+<p>第二，两个变量在时间上有前后关系，比如，必须是A先发生，B后发生，才能有因果关系的可能。</p>
+<p>第三，两个变量的关系需排除掉第三种可能的解释。</p>
+<p>Experimental design is about varying&#x2F;manipulating one or more Independent Variables, to see its effect on one or more Dependent Variables, whilst minimising the effect of Confounding Variables</p>
+<p>独立度量设计和重复度量设计有什么区别？</p>
+<p>1.独立措施：<br>独立度量设计（也称为组间）是一种实验设计，其中在自变量的<strong>每种条件</strong>下使用<strong>不同的参与者</strong>。这意味着实验的每个条件都包括不同的参与者组。 </p>
+<p>这应该通过随机分配来完成，这可以确保每个参与者都有被分配到一个组或另一个组的同等机会。</p>
+<p>独立措施涉及使用两组独立的参与者；每个条件一个。例如：</p>
+<img src="/fit5125-research-method-notes/Ind.jpg" class="" title="独立措施实验设计">
+
+<p>缺点：与重复测量设计相比，需要更多的人（即，更耗时）。<br>优点：由于人们仅参与一种情况，因此避免了订单效应（例如练习或疲劳）。如果一个人遇到多种情况，到第二种情况时他们可能会变得无聊，疲倦和烦躁，或者对实验的要求变得明智！<br>缺点：例如，小组参与者之间的差异可能会影响结果。年龄，性别或社会背景的差异。这些差异称为参与者变量（即，一种无关的变量）。<br>控制：招募参与者后，应将他们随机分配到他们的组中。这应确保各组平均相似（减少参与者变量）。</p>
+<p>2.重复措施：<br>重复测量设计是一种实验设计，其中<strong>相同的参与者</strong>参与自变量的<strong>每种条件</strong>。这意味着实验的每个条件都包括同一组参与者。</p>
+<p>重复测量设计也称为组内或主题内设计。</p>
+<p>优点：由于在每种情况下使用相同的参与者，因此参与者变量（即个体差异）减少了。<br>缺点：可能会有订单效果。顺序效应是指影响参与者行为的条件顺序。第二种情况下的表现可能会更好，因为参与者知道该做什么（即练习效果）。否则在第二种情况下它们的性能可能会变差，因为它们很累（即疲劳效果）。可以使用平衡来控制此限制。<br>优点：参与各种情况所需的人员更少（即节省时间）。<br>控制：为了对抗秩序效应，研究人员平衡了参与者的条件秩序。改变参与者在不同实验条件下的执行顺序。</p>
+<p><strong>参数测试</strong> 假设数据中存在基础统计分布。因此，必须满足几个有效性条件，以便参数测试的结果可靠。例如，仅当每个样本服从正态分布并且样本方差是均质的时，两个独立样本的Student t检验才是可靠的。</p>
+<p><strong>非参数测试</strong> 不依赖任何分布。因此，即使不满足有效性的参数条件，也可以应用它们。 </p>
+<p>非参数测试 比参数测试更 <strong>健壮</strong>。换句话说，它们在更广泛的情况下（较少的有效条件）有效。</p>
+<p>使用参数测试而不是非参数等效项的优点在于，前者 将比后者具有更大的统计 <strong>能力</strong>。换句话说，参数测试更有可能导致拒绝H0。在大多数情况下，与参数测试关联的p值将低于与在相同数据上运行的非参数等效项关联的p值。</p>
+]]></content>
+      <tags>
+        <tag>research</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>具有同态值的比特币 bitcoins with homomorphic value</title>
     <url>//bitcoins-with-homomorphic-value/</url>
     <content><![CDATA[<p><a href="https://bitcointalk.org/index.php?topic=305791.0" target="_blank" rel="noopener">原文链接</a></p>
@@ -396,6 +473,39 @@
       </tags>
   </entry>
   <entry>
+    <title>Crunchbeats: Spear and Shield</title>
+    <url>//churchbeats-spear&amp;shield/</url>
+    <content><![CDATA[<p>Crunchbeats项目是针对<a href="https://www.crunchbase.com/" target="_blank" rel="noopener">crunchbase</a>的公开数据采集项目</p>
+<span id="more"></span>
+
+<h2 id="Spear-0x01"><a href="#Spear-0x01" class="headerlink" title="Spear 0x01"></a>Spear 0x01</h2><p>由于crunchbase并没有提供任何company&#x2F;organisation index，而且categories也是仅面向Pro(氪金)用户的search。因此，作为数据采集，我们首先需要一份可用的索引来引导具体的采集任务。</p>
+<p>清单是利用了一个非常trick的方式来获取的。首先我们已经知道，org_name有意义的（即会被fuzz search注意的）也就0-9a-z这31个字符。然后在instant search的api里，结果虽然只给至多15个，但是实际总数也会暴露在response里。因此可以通过穷举来获取一份总org_name清单。</p>
+<h2 id="Shield-0x01"><a href="#Shield-0x01" class="headerlink" title="Shield 0x01"></a>Shield 0x01</h2><p>当然按照其他情况来说，全站下载也是个不错的方法。但是在crunchbase里，有如下几个因素导致此方案不可行。首先就是无法判断是否已经全网下载。下载任务结束并不意味着全部下载完成，很可能只是陷入站内url闭环回路。没有一份清单而爬取数据只会徒增成本，招ban。</p>
+<h2 id="Shield-0x02"><a href="#Shield-0x02" class="headerlink" title="Shield 0x02"></a>Shield 0x02</h2><p>效率低下。crunchbase包含了public界面，pro可见界面，try pro可见界面，而除了org以外还有industry，group等其他模块，因此全站下载下载到的资源可用率极低。</p>
+<h2 id="Shield-0x03"><a href="#Shield-0x03" class="headerlink" title="Shield 0x03"></a>Shield 0x03</h2><p>crunchbase使用了cloudflare，在cookie里可以看到这个__cfdid</p>
+<pre><code>Cookies Search Results: __cfduid
+About this cookie:
+Cookie associated with sites using CloudFlare, used to speed up page load times. According to CloudFlare it is used to override any security restrictions based on the IP address the visitor is coming from. It does not contain any user identification information.
+</code></pre>
+<p>虽然quora上说是distil提供的 <a href="https://www.quora.com/How-do-you-crawl-Crunchbase-and-bypass-the-bot-protection" target="_blank" rel="noopener">https://www.quora.com/How-do-you-crawl-Crunchbase-and-bypass-the-bot-protection</a></p>
+<p>反正就是会有看脸的bot检测，具体是让你press and hold一个button，然后再看脸让你通过。</p>
+<h2 id="Spear-0x02"><a href="#Spear-0x02" class="headerlink" title="Spear 0x02"></a>Spear 0x02</h2><p>我最开始想的其实是走bypass bot detection。毕竟以前绕cf找源站的文章看的有点多，<a href="https://www.anquanke.com/post/id/183238" target="_blank" rel="noopener">https://www.anquanke.com/post/id/183238</a></p>
+<p>但是当时对无CDN加持下的origin IP能否直接國内访问十分怀疑，因此没有实现。</p>
+<h2 id="Spear-0x03"><a href="#Spear-0x03" class="headerlink" title="Spear 0x03"></a>Spear 0x03</h2><p>后来选择的还是和对方硬碰硬。可以发现人家不管你登陆没登陆，过量的请求就会ban。至于sleep，少量sleep等于没睡，长时间sleep等于没干活。</p>
+<p>因此就决定展开proxy池，咬牙花了点重金（几十块）买了proxy的服务。</p>
+<h2 id="Shield-0x04"><a href="#Shield-0x04" class="headerlink" title="Shield 0x04"></a>Shield 0x04</h2><p>但是proxy在cf和gfw面前真的很脆弱。几千几万个proxy中只有数个能访问网站（经过墙），然后在网站面前被cf揍死。</p>
+<h2 id="Spear-0x04"><a href="#Spear-0x04" class="headerlink" title="Spear 0x04"></a>Spear 0x04</h2><p>因为一开始是requests进行的网络请求，全都是python也就不处理任何js，遇到challenge就停下来让人手摇解禁。效率就很低。为了效率，尝试了利用selenium(webdriver)来处理请求。首先的确利用chrome+firefox的自动challenge可以降低被ban的几率，但是和requests比起来真的是太慢了……尤其是在笔记本上，换句话说就是出师未捷身先死了。</p>
+<h2 id="Spear-0x05"><a href="#Spear-0x05" class="headerlink" title="Spear 0x05"></a>Spear 0x05</h2><p>后来通过手里闲置的几台tx云学生机</p>
+<h2 id="WIP"><a href="#WIP" class="headerlink" title="[WIP]"></a>[WIP]</h2><h2 id="New-solution"><a href="#New-solution" class="headerlink" title="New solution"></a>New solution</h2><p>New solution to overcome the ip blacklist: Vultr&#x2F;GCP&#x2F;AWS &#x3D;&gt; unlimited new machine&#x2F;ip with low fee</p>
+]]></content>
+      <tags>
+        <tag>todo</tag>
+        <tag>crunchbase</tag>
+        <tag>spider</tag>
+        <tag>data gathering</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>区块链缩放研究</title>
     <url>//chain-scaling/</url>
     <content><![CDATA[<p>原文自edX上伯克利大学课程Blockchain Technology。本文是对课程内部分内容的总结与修改。</p>
@@ -478,37 +588,38 @@
       </tags>
   </entry>
   <entry>
-    <title>Crunchbeats: Spear and Shield</title>
-    <url>//churchbeats-spear&amp;shield/</url>
-    <content><![CDATA[<p>Crunchbeats项目是针对<a href="https://www.crunchbase.com/" target="_blank" rel="noopener">crunchbase</a>的公开数据采集项目</p>
+    <title>Crypto Contagion：加密货币崩盘传染</title>
+    <url>//crypto-contagion/</url>
+    <content><![CDATA[<p>DeFi正在进入Contagion</p>
+<p>Contagion蔓延是指市场干扰从一个国家蔓延到另一个国家，或蔓延到一组国家；是一个通过汇率、股票价格、主权利差和资本流动的共同运动观察到的<br>过程。</p>
+<p>（美元-&gt;世界）假如生息但当前通货膨胀不消退-&gt;stagflation经济停滞</p>
 <span id="more"></span>
 
-<h2 id="Spear-0x01"><a href="#Spear-0x01" class="headerlink" title="Spear 0x01"></a>Spear 0x01</h2><p>由于crunchbase并没有提供任何company&#x2F;organisation index，而且categories也是仅面向Pro(氪金)用户的search。因此，作为数据采集，我们首先需要一份可用的索引来引导具体的采集任务。</p>
-<p>清单是利用了一个非常trick的方式来获取的。首先我们已经知道，org_name有意义的（即会被fuzz search注意的）也就0-9a-z这31个字符。然后在instant search的api里，结果虽然只给至多15个，但是实际总数也会暴露在response里。因此可以通过穷举来获取一份总org_name清单。</p>
-<h2 id="Shield-0x01"><a href="#Shield-0x01" class="headerlink" title="Shield 0x01"></a>Shield 0x01</h2><p>当然按照其他情况来说，全站下载也是个不错的方法。但是在crunchbase里，有如下几个因素导致此方案不可行。首先就是无法判断是否已经全网下载。下载任务结束并不意味着全部下载完成，很可能只是陷入站内url闭环回路。没有一份清单而爬取数据只会徒增成本，招ban。</p>
-<h2 id="Shield-0x02"><a href="#Shield-0x02" class="headerlink" title="Shield 0x02"></a>Shield 0x02</h2><p>效率低下。crunchbase包含了public界面，pro可见界面，try pro可见界面，而除了org以外还有industry，group等其他模块，因此全站下载下载到的资源可用率极低。</p>
-<h2 id="Shield-0x03"><a href="#Shield-0x03" class="headerlink" title="Shield 0x03"></a>Shield 0x03</h2><p>crunchbase使用了cloudflare，在cookie里可以看到这个__cfdid</p>
-<pre><code>Cookies Search Results: __cfduid
-About this cookie:
-Cookie associated with sites using CloudFlare, used to speed up page load times. According to CloudFlare it is used to override any security restrictions based on the IP address the visitor is coming from. It does not contain any user identification information.
-</code></pre>
-<p>虽然quora上说是distil提供的 <a href="https://www.quora.com/How-do-you-crawl-Crunchbase-and-bypass-the-bot-protection" target="_blank" rel="noopener">https://www.quora.com/How-do-you-crawl-Crunchbase-and-bypass-the-bot-protection</a></p>
-<p>反正就是会有看脸的bot检测，具体是让你press and hold一个button，然后再看脸让你通过。</p>
-<h2 id="Spear-0x02"><a href="#Spear-0x02" class="headerlink" title="Spear 0x02"></a>Spear 0x02</h2><p>我最开始想的其实是走bypass bot detection。毕竟以前绕cf找源站的文章看的有点多，<a href="https://www.anquanke.com/post/id/183238" target="_blank" rel="noopener">https://www.anquanke.com/post/id/183238</a></p>
-<p>但是当时对无CDN加持下的origin IP能否直接國内访问十分怀疑，因此没有实现。</p>
-<h2 id="Spear-0x03"><a href="#Spear-0x03" class="headerlink" title="Spear 0x03"></a>Spear 0x03</h2><p>后来选择的还是和对方硬碰硬。可以发现人家不管你登陆没登陆，过量的请求就会ban。至于sleep，少量sleep等于没睡，长时间sleep等于没干活。</p>
-<p>因此就决定展开proxy池，咬牙花了点重金（几十块）买了proxy的服务。</p>
-<h2 id="Shield-0x04"><a href="#Shield-0x04" class="headerlink" title="Shield 0x04"></a>Shield 0x04</h2><p>但是proxy在cf和gfw面前真的很脆弱。几千几万个proxy中只有数个能访问网站（经过墙），然后在网站面前被cf揍死。</p>
-<h2 id="Spear-0x04"><a href="#Spear-0x04" class="headerlink" title="Spear 0x04"></a>Spear 0x04</h2><p>因为一开始是requests进行的网络请求，全都是python也就不处理任何js，遇到challenge就停下来让人手摇解禁。效率就很低。为了效率，尝试了利用selenium(webdriver)来处理请求。首先的确利用chrome+firefox的自动challenge可以降低被ban的几率，但是和requests比起来真的是太慢了……尤其是在笔记本上，换句话说就是出师未捷身先死了。</p>
-<h2 id="Spear-0x05"><a href="#Spear-0x05" class="headerlink" title="Spear 0x05"></a>Spear 0x05</h2><p>后来通过手里闲置的几台tx云学生机</p>
-<h2 id="WIP"><a href="#WIP" class="headerlink" title="[WIP]"></a>[WIP]</h2><h2 id="New-solution"><a href="#New-solution" class="headerlink" title="New solution"></a>New solution</h2><p>New solution to overcome the ip blacklist: Vultr&#x2F;GCP&#x2F;AWS &#x3D;&gt; unlimited new machine&#x2F;ip with low fee</p>
+<h2 id="认认名字"><a href="#认认名字" class="headerlink" title="认认名字"></a>认认名字</h2><p>在开始讲述之前，需要对这些一个个暴雷的产品做一个简单的介绍。</p>
+<h3 id="Terra，Luna和UST"><a href="#Terra，Luna和UST" class="headerlink" title="Terra，Luna和UST"></a>Terra，Luna和UST</h3><p>一群开发者为了部署稳定币生态的，就拿着Cosmos的SDK（开发套件）建了一个链。这个链就叫做<a href="https://www.terra.money/" target="_blank" rel="noopener">Terra</a>。这个链上和以太坊主链上ETH一样可以作为交易费用的主网币简写（？）是LUNA（出事后原链改名叫LUNC，C表示classic，新链还是LUNA）<br>而他们想要在部署的稳定币，就叫做TerraUSD，简写是UST。UST的价格是基于算法达到的稳定。当一个UST被铸造时，1美元价格的Luna被燃烧，而Luna的铸造和UST燃烧也发生相反的情况。</p>
+<h2 id="事情开端：Luna-Crash"><a href="#事情开端：Luna-Crash" class="headerlink" title="事情开端：Luna Crash"></a>事情开端：Luna Crash</h2><p>在市场上，当UST低于其挂钩价值（1美元）时，持有人将UST兑换成实实在在1美元的Luna，从而获得微薄的利润。而UST升至1美元以上，持有人就会把Luna兑换回UST。</p>
+<p>在2022年5月初，大量UST被抛售后，稳定币开始脱钩。更多的UST在大规模恐慌中被出售，铸造了更多更多更多的Luna，并导致了Luna的流通量泛滥。如此一来Luna的价格狂跌（99.9%），而UST也完全脱钩。</p>
+<p><img src="http://img.soogif.com/xMFPmBsEQ7NWYmwsnsNbGLEpCGpEgEMQ.gif" loading="lazy"></p>
+<h2 id="连带加密市场"><a href="#连带加密市场" class="headerlink" title="连带加密市场"></a>连带加密市场</h2><p>官方（Luna Foundation Guard）肯定不会坐看归零（虽然确实反应速度不太行）。但是本就是BTC大跌的环境下，恐慌情绪蔓延导致救市于事无补。</p>
+<p>首先回顾此次脱钩事件和 LFG 的救市策略。</p>
+<ol>
+<li>5月8日凌晨到5月8日晚上，Terra移除<a href="https://curve.fi/" target="_blank" rel="noopener">Curve</a>(一个交易所)中的流动性，以准备包括UST、FRAX、USDT、USDC的四个资金池，此时8400万UST砸向 Curve。UST两次小范围的脱离1美元，经过「0x6b67」开头的地址耗费7万枚ETH（5万枚用于兑换为USDT并买入 UST，另外2万枚 ETH 发送至币安）和「0x5996」开头的两个地址（积累了5.8亿枚UST）的努力，UST恢复1美元。</li>
+<li>5月9日晚上到5月10日期间，UST在略低于1美元的地方出现巨量成交，币安上也打响了「UST保卫战」，但最终战争失败，UST最低跌至0.6美元附近。部分人已经断言Terra走向失败。币安暂停UST的充提，Terra链上操作卡顿，UST难以在链上销毁以赎回LUNA。</li>
+<li>5月11日早上，The Block报导称LFG正在向机构寻求筹集超过10亿美元的资金来支持UST，Jump Trading、Celsius 以及 Jane Street 已经承诺该笔融资，机构以50%的价格购买 LUNA，锁仓一年，之后按月线性释放。随后传出融资失败的消息，因为LUNA的跌得太快，LFG给出的折扣价已经意义不大。而之后，迎接LUNA和UST的是进一步下跌，LUNA跌至1美元，此前LUNA的最高价超过100美元。</li>
+<li>5月11日下午，Terra Research宣布了一项提案，将UST的铸币容量（一天内在特定滑点内的理论铸币上限，交易者与套利者的竞争导致实际销毁的UST可能高于这一数值）从2.93亿美元增加到12亿美元，以加快UST的通缩。后续方案倾向于牺牲LUNA拯救 UST，LUNA加速下跌。</li>
+<li>5月12日，Terra 官方称1164号提案将扩大基础池规模并加快 UST的燃烧速度，帮助缩小链上价差。TFL启动三项紧急行动：销毁社群池中的 UST；在以太坊上跨链销毁剩余的3.71亿UST；质押2.4亿LUNA以防御网络治理攻击。</li>
+</ol>
+<h2 id="连带资本市场"><a href="#连带资本市场" class="headerlink" title="连带资本市场"></a>连带资本市场</h2><p>不管是灾前持仓还是救市过程中都有许多机构受到损失。许多加密货币公司与 Terra 生态系统中持有的负债和存款交织在一起，导致资产严重受损和“多米诺骨牌效应”也就是所谓的Contagion</p>
+<p>如下图总结</p>
+<img src="/crypto-contagion/contagion.png" class="">
+
+<h2 id="外部大环境的压迫"><a href="#外部大环境的压迫" class="headerlink" title="外部大环境的压迫"></a>外部大环境的压迫</h2><p>加密货币最近的低迷可能会损害散户投资者的情绪，并进一步加剧正在进行的、部分由美联储引发的风险资产抛售。 </p>
+<p>在美股，科技板块已经经历了历史上最糟糕的开端之一，以科技股为主的纳斯达克综合指数今年迄今下跌超过 28%，但如果加密货币继续下跌，散户投资者的投资态度将恶化，情况可能会变得更糟。而加密货币今年来越来越与科技股同步，投资者将两者视为风险资产，并且在市场波动期间经常撤退到其他更安全的市场中。<a href="https://fortune.com/2022/05/12/crypto-crash-contagion-systemic-risk-financial-crisis-lehman-brothers/" target="_blank" rel="noopener">https://fortune.com/2022/05/12/crypto-crash-contagion-systemic-risk-financial-crisis-lehman-brothers/</a></p>
+<p>而外部美股的下跌也会导致没有足够的机构资金注入加密市场来“救市”。这将直接导致加密货币中算稳币的共识大打折扣，对市场资金量以及资金流动性具有巨大的打击。</p>
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>现在已经是22年8月了，最后提到的对外部环境的冲击并没有出现多大影响，美股自6月中旬以来一路向好。</p>
+<p>对于加密市场而言影响仍在但逐渐回弹。但是不论是投资者还是机构对于DeFi理财的投资不再狂热回归理性。</p>
+<p><a href="https://cointelegraph.com/news/fallout-from-crypto-contagion-subsides-but-no-market-reversal-just-yet" target="_blank" rel="noopener">https://cointelegraph.com/news/fallout-from-crypto-contagion-subsides-but-no-market-reversal-just-yet</a></p>
 ]]></content>
-      <tags>
-        <tag>todo</tag>
-        <tag>crunchbase</tag>
-        <tag>spider</tag>
-        <tag>data gathering</tag>
-      </tags>
   </entry>
   <entry>
     <title>CoinJoin: Bitcoin privacy for the real world</title>
@@ -597,40 +708,6 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
         <tag>coinjoin</tag>
         <tag>privacy</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Crypto Contagion：加密货币崩盘传染</title>
-    <url>//crypto-contagion/</url>
-    <content><![CDATA[<p>DeFi正在进入Contagion</p>
-<p>Contagion蔓延是指市场干扰从一个国家蔓延到另一个国家，或蔓延到一组国家；是一个通过汇率、股票价格、主权利差和资本流动的共同运动观察到的<br>过程。</p>
-<p>（美元-&gt;世界）假如生息但当前通货膨胀不消退-&gt;stagflation经济停滞</p>
-<span id="more"></span>
-
-<h2 id="认认名字"><a href="#认认名字" class="headerlink" title="认认名字"></a>认认名字</h2><p>在开始讲述之前，需要对这些一个个暴雷的产品做一个简单的介绍。</p>
-<h3 id="Terra，Luna和UST"><a href="#Terra，Luna和UST" class="headerlink" title="Terra，Luna和UST"></a>Terra，Luna和UST</h3><p>一群开发者为了部署稳定币生态的，就拿着Cosmos的SDK（开发套件）建了一个链。这个链就叫做<a href="https://www.terra.money/" target="_blank" rel="noopener">Terra</a>。这个链上和以太坊主链上ETH一样可以作为交易费用的主网币简写（？）是LUNA（出事后原链改名叫LUNC，C表示classic，新链还是LUNA）<br>而他们想要在部署的稳定币，就叫做TerraUSD，简写是UST。UST的价格是基于算法达到的稳定。当一个UST被铸造时，1美元价格的Luna被燃烧，而Luna的铸造和UST燃烧也发生相反的情况。</p>
-<h2 id="事情开端：Luna-Crash"><a href="#事情开端：Luna-Crash" class="headerlink" title="事情开端：Luna Crash"></a>事情开端：Luna Crash</h2><p>在市场上，当UST低于其挂钩价值（1美元）时，持有人将UST兑换成实实在在1美元的Luna，从而获得微薄的利润。而UST升至1美元以上，持有人就会把Luna兑换回UST。</p>
-<p>在2022年5月初，大量UST被抛售后，稳定币开始脱钩。更多的UST在大规模恐慌中被出售，铸造了更多更多更多的Luna，并导致了Luna的流通量泛滥。如此一来Luna的价格狂跌（99.9%），而UST也完全脱钩。</p>
-<p><img src="http://img.soogif.com/xMFPmBsEQ7NWYmwsnsNbGLEpCGpEgEMQ.gif" loading="lazy"></p>
-<h2 id="连带加密市场"><a href="#连带加密市场" class="headerlink" title="连带加密市场"></a>连带加密市场</h2><p>官方（Luna Foundation Guard）肯定不会坐看归零（虽然确实反应速度不太行）。但是本就是BTC大跌的环境下，恐慌情绪蔓延导致救市于事无补。</p>
-<p>首先回顾此次脱钩事件和 LFG 的救市策略。</p>
-<ol>
-<li>5月8日凌晨到5月8日晚上，Terra移除<a href="https://curve.fi/" target="_blank" rel="noopener">Curve</a>(一个交易所)中的流动性，以准备包括UST、FRAX、USDT、USDC的四个资金池，此时8400万UST砸向 Curve。UST两次小范围的脱离1美元，经过「0x6b67」开头的地址耗费7万枚ETH（5万枚用于兑换为USDT并买入 UST，另外2万枚 ETH 发送至币安）和「0x5996」开头的两个地址（积累了5.8亿枚UST）的努力，UST恢复1美元。</li>
-<li>5月9日晚上到5月10日期间，UST在略低于1美元的地方出现巨量成交，币安上也打响了「UST保卫战」，但最终战争失败，UST最低跌至0.6美元附近。部分人已经断言Terra走向失败。币安暂停UST的充提，Terra链上操作卡顿，UST难以在链上销毁以赎回LUNA。</li>
-<li>5月11日早上，The Block报导称LFG正在向机构寻求筹集超过10亿美元的资金来支持UST，Jump Trading、Celsius 以及 Jane Street 已经承诺该笔融资，机构以50%的价格购买 LUNA，锁仓一年，之后按月线性释放。随后传出融资失败的消息，因为LUNA的跌得太快，LFG给出的折扣价已经意义不大。而之后，迎接LUNA和UST的是进一步下跌，LUNA跌至1美元，此前LUNA的最高价超过100美元。</li>
-<li>5月11日下午，Terra Research宣布了一项提案，将UST的铸币容量（一天内在特定滑点内的理论铸币上限，交易者与套利者的竞争导致实际销毁的UST可能高于这一数值）从2.93亿美元增加到12亿美元，以加快UST的通缩。后续方案倾向于牺牲LUNA拯救 UST，LUNA加速下跌。</li>
-<li>5月12日，Terra 官方称1164号提案将扩大基础池规模并加快 UST的燃烧速度，帮助缩小链上价差。TFL启动三项紧急行动：销毁社群池中的 UST；在以太坊上跨链销毁剩余的3.71亿UST；质押2.4亿LUNA以防御网络治理攻击。</li>
-</ol>
-<h2 id="连带资本市场"><a href="#连带资本市场" class="headerlink" title="连带资本市场"></a>连带资本市场</h2><p>不管是灾前持仓还是救市过程中都有许多机构受到损失。许多加密货币公司与 Terra 生态系统中持有的负债和存款交织在一起，导致资产严重受损和“多米诺骨牌效应”也就是所谓的Contagion</p>
-<p>如下图总结</p>
-<img src="/crypto-contagion/contagion.png" class="">
-
-<h2 id="外部大环境的压迫"><a href="#外部大环境的压迫" class="headerlink" title="外部大环境的压迫"></a>外部大环境的压迫</h2><p>加密货币最近的低迷可能会损害散户投资者的情绪，并进一步加剧正在进行的、部分由美联储引发的风险资产抛售。 </p>
-<p>在美股，科技板块已经经历了历史上最糟糕的开端之一，以科技股为主的纳斯达克综合指数今年迄今下跌超过 28%，但如果加密货币继续下跌，散户投资者的投资态度将恶化，情况可能会变得更糟。而加密货币今年来越来越与科技股同步，投资者将两者视为风险资产，并且在市场波动期间经常撤退到其他更安全的市场中。<a href="https://fortune.com/2022/05/12/crypto-crash-contagion-systemic-risk-financial-crisis-lehman-brothers/" target="_blank" rel="noopener">https://fortune.com/2022/05/12/crypto-crash-contagion-systemic-risk-financial-crisis-lehman-brothers/</a></p>
-<p>而外部美股的下跌也会导致没有足够的机构资金注入加密市场来“救市”。这将直接导致加密货币中算稳币的共识大打折扣，对市场资金量以及资金流动性具有巨大的打击。</p>
-<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>现在已经是22年8月了，最后提到的对外部环境的冲击并没有出现多大影响，美股自6月中旬以来一路向好。</p>
-<p>对于加密市场而言影响仍在但逐渐回弹。但是不论是投资者还是机构对于DeFi理财的投资不再狂热回归理性。</p>
-<p><a href="https://cointelegraph.com/news/fallout-from-crypto-contagion-subsides-but-no-market-reversal-just-yet" target="_blank" rel="noopener">https://cointelegraph.com/news/fallout-from-crypto-contagion-subsides-but-no-market-reversal-just-yet</a></p>
-]]></content>
   </entry>
   <entry>
     <title>Design of Contracts</title>
@@ -1185,41 +1262,6 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
       </tags>
   </entry>
   <entry>
-    <title>Dynamic Game on blockchain-based Federated Learning</title>
-    <url>//dyn-game-for-blockchain-fl/</url>
-    <content><![CDATA[<h1 id="Mobile-Devices-Strategies-in-Blockchain-Based-Federated-Learning-A-Dynamic-Game-Perspective"><a href="#Mobile-Devices-Strategies-in-Blockchain-Based-Federated-Learning-A-Dynamic-Game-Perspective" class="headerlink" title="Mobile Devices Strategies in Blockchain-Based Federated Learning: A Dynamic Game Perspective"></a>Mobile Devices Strategies in Blockchain-Based Federated Learning: A Dynamic Game Perspective</h1><p>Sizheng Fan; Hongbo Zhang; Zehua Wang; Wei Cai</p>
-<p>IEEE Transactions on Network Science and Engineering</p>
-<ul>
-<li>系统建模和制定：我们提出并实施了一种基于智能合约的激励机制，以鼓励移动设备参与 FL 任务。在这种情况下，提出了两种移动设备在 FL 任务中的策略模型。</li>
-<li>动态博弈分析：据我们所知，这是第一个为 FL 动态博弈建模的工作，为进一步研究奠定了基础。我们证明了两个模型的纳什均衡（NE）和混合策略NE的存在性，并提出了相应的两种算法来实现。仿真结果证明了两种算法的收敛性，与 DSM 相比，CSM 可以有效地提高移动设备的收益。</li>
-</ul>
-<hr>
-<h2 id="Dynamic-Game-for-Blockchain-Based-Federated-Learning-基于区块链的联邦学习动态博弈"><a href="#Dynamic-Game-for-Blockchain-Based-Federated-Learning-基于区块链的联邦学习动态博弈" class="headerlink" title="Dynamic Game for Blockchain-Based Federated Learning 基于区块链的联邦学习动态博弈"></a>Dynamic Game for Blockchain-Based Federated Learning 基于区块链的联邦学习动态博弈</h2><p>FL 任务过程由多个全局迭代组成，如图 3 所示。FL 任务由多个全局迭代组成。在每一次全局迭代中，请求者会在每次全局迭代中公布一个固定的奖励 $B$ ，由workers决定是否参与每一次全局迭代。我们将请求者和移动设备之间的交互建模为动态游戏。相互作用可以按以下顺序说明。</p>
-<p>如图 4 所示，结合第 III 节中提到的基于联盟区块链的 FL 系统，请求者将发布她&#x2F;他的任务需求，包括数据类型、模型类型（即卷积神经网络（CNN）、递归神经网络(RNN)), 最大计算时间 $T_{max}$ 和 FL 任务开始时的预算 $B$ （步骤 1）。</p>
-<hr>
-<img src="/dyn-game-for-blockchain-fl/2023-06-11-20-16-09.png" class="">
-
-<hr>
-<h2 id="Dynamic-Game-for-Blockchain-Based-Federated-Learning"><a href="#Dynamic-Game-for-Blockchain-Based-Federated-Learning" class="headerlink" title="Dynamic Game for Blockchain-Based Federated Learning"></a>Dynamic Game for Blockchain-Based Federated Learning</h2><p>下面将显示在一次全局迭代中请求者与移动设备之间的交互。给定固定请求者的固定预算 $B$ ，最大计算和通信时间 $T_{max}$ （步骤2），每个移动设备 $m_j \in M$ 可以根据其他移动设备在当前全局迭代中的策略来决定她&#x2F;他的策略过去并将其记录在区块链上（第 3 步）。</p>
-<p>收到移动设备的信息后，智能合约将计算奖励（第 4 步）。移动设备将接收请求者的模型并开始使用其本地数据集进行训练（第 5 步）。完成训练过程后，移动设备将模型参数发送给请求者（步骤 6）。</p>
-<p>在每次全局迭代中重复图 4 中的步骤 3、4、5 和 6。我们假设移动设备在每次全球迭代中都保持连接。每个移动设备的目标是在一次全局迭代中选择最佳策略，使她&#x2F;他在整个 FL 任务中的预期收益最大化。</p>
-<hr>
-<img src="/dyn-game-for-blockchain-fl/2023-06-11-20-16-20.png" class="">
-
-<hr>
-<h2 id="Incentive-Mechanism-Design-激励机制设计"><a href="#Incentive-Mechanism-Design-激励机制设计" class="headerlink" title="Incentive Mechanism Design 激励机制设计"></a>Incentive Mechanism Design 激励机制设计</h2><p>在我们的 FL 模型中，请求者将在每次全局迭代中提供预算 B ，并与 M 移动设备竞争预算。移动设备将在每次全局迭代中将其策略决策（即使用的数据大小）发送给智能合约。我们使用 sj,n 表示移动设备 mj 在 n th全局迭代中选择的使用的数据大小，</p>
-<p>FL 中现有的大多数激励机制都具有很高的复杂性 [26]、[28]。然而，FL 中有效的激励机制应该是低复杂性和易于实施的。每次全局迭代的实时性要求是移动设备在下一次全局迭代之前收到请求者的补偿，这可以帮助他们在接下来的全局迭代中做出决策。此外，移动设备经常面临电量不足、信号弱等问题。因此，激励机制应该具有较低的计算复杂度，节省移动设备的等待时间。本文提出的激励机制如下图所示。</p>
-<p>$<br>\begin{equation*}<br>p_{j, n} &#x3D; B \frac{s_{j, n}}{s_{j, n} + \sum <em>{i \ne j}s</em>{i, n}} \tag{5}<br>\end{equation*}<br>$</p>
-<p>从式（5）我们可以了解到，请求者在当前全局迭代中根据移动设备的数据大小按比例将其固定预算分配给一组移动设备。</p>
-<hr>
-<h2 id="离散策略模型（DSM）"><a href="#离散策略模型（DSM）" class="headerlink" title="离散策略模型（DSM）"></a>离散策略模型（DSM）</h2><p>在本文中，我们从移动设备的角度考虑两种策略模型：离散策略模型（DSM）和连续策略模型（CSM）。 DSM 意味着移动设备可以决定是否参与 FL 任务。如果移动设备决定加入，她&#x2F;他的所有数据都将用于训练模型。而CSM是指移动设备可以确定FL任务中使用的数据百分比。受 FL 迭代交互的启发，我们将移动设备的决策问题建模为动态游戏，以解决训练过程中信息不完整的问题。具体来说，在联盟链系统的赋能下，即使移动设备不知道其他人的个人信息，包括总数据量和训练成本，她&#x2F;他也可以观察其他移动设备的策略历史并调整她&#x2F;他的策略以最大化 FL 任务中的收益。</p>
-]]></content>
-      <tags>
-        <tag>game theory</tag>
-        <tag>federated learning</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ECDSA签名及验证</title>
     <url>//ecdsa-sign/</url>
     <content><![CDATA[<p>ECDSA私钥是取q为模后得到的整数x。相关标准规定x不得为0。 因此，x是在[1，q-1]范围内的整数。qlen为q的二进制长度。</p>
@@ -1269,6 +1311,92 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
         <tag>todo</tag>
         <tag>ECDSA</tag>
         <tag>cryptography</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Dynamic Game on blockchain-based Federated Learning</title>
+    <url>//dyn-game-for-blockchain-fl/</url>
+    <content><![CDATA[<h1 id="Mobile-Devices-Strategies-in-Blockchain-Based-Federated-Learning-A-Dynamic-Game-Perspective"><a href="#Mobile-Devices-Strategies-in-Blockchain-Based-Federated-Learning-A-Dynamic-Game-Perspective" class="headerlink" title="Mobile Devices Strategies in Blockchain-Based Federated Learning: A Dynamic Game Perspective"></a>Mobile Devices Strategies in Blockchain-Based Federated Learning: A Dynamic Game Perspective</h1><p>Sizheng Fan; Hongbo Zhang; Zehua Wang; Wei Cai</p>
+<p>IEEE Transactions on Network Science and Engineering</p>
+<ul>
+<li>系统建模和制定：我们提出并实施了一种基于智能合约的激励机制，以鼓励移动设备参与 FL 任务。在这种情况下，提出了两种移动设备在 FL 任务中的策略模型。</li>
+<li>动态博弈分析：据我们所知，这是第一个为 FL 动态博弈建模的工作，为进一步研究奠定了基础。我们证明了两个模型的纳什均衡（NE）和混合策略NE的存在性，并提出了相应的两种算法来实现。仿真结果证明了两种算法的收敛性，与 DSM 相比，CSM 可以有效地提高移动设备的收益。</li>
+</ul>
+<hr>
+<h2 id="Dynamic-Game-for-Blockchain-Based-Federated-Learning-基于区块链的联邦学习动态博弈"><a href="#Dynamic-Game-for-Blockchain-Based-Federated-Learning-基于区块链的联邦学习动态博弈" class="headerlink" title="Dynamic Game for Blockchain-Based Federated Learning 基于区块链的联邦学习动态博弈"></a>Dynamic Game for Blockchain-Based Federated Learning 基于区块链的联邦学习动态博弈</h2><p>FL 任务过程由多个全局迭代组成，如图 3 所示。FL 任务由多个全局迭代组成。在每一次全局迭代中，请求者会在每次全局迭代中公布一个固定的奖励 $B$ ，由workers决定是否参与每一次全局迭代。我们将请求者和移动设备之间的交互建模为动态游戏。相互作用可以按以下顺序说明。</p>
+<p>如图 4 所示，结合第 III 节中提到的基于联盟区块链的 FL 系统，请求者将发布她&#x2F;他的任务需求，包括数据类型、模型类型（即卷积神经网络（CNN）、递归神经网络(RNN)), 最大计算时间 $T_{max}$ 和 FL 任务开始时的预算 $B$ （步骤 1）。</p>
+<hr>
+<img src="/dyn-game-for-blockchain-fl/2023-06-11-20-16-09.png" class="">
+
+<hr>
+<h2 id="Dynamic-Game-for-Blockchain-Based-Federated-Learning"><a href="#Dynamic-Game-for-Blockchain-Based-Federated-Learning" class="headerlink" title="Dynamic Game for Blockchain-Based Federated Learning"></a>Dynamic Game for Blockchain-Based Federated Learning</h2><p>下面将显示在一次全局迭代中请求者与移动设备之间的交互。给定固定请求者的固定预算 $B$ ，最大计算和通信时间 $T_{max}$ （步骤2），每个移动设备 $m_j \in M$ 可以根据其他移动设备在当前全局迭代中的策略来决定她&#x2F;他的策略过去并将其记录在区块链上（第 3 步）。</p>
+<p>收到移动设备的信息后，智能合约将计算奖励（第 4 步）。移动设备将接收请求者的模型并开始使用其本地数据集进行训练（第 5 步）。完成训练过程后，移动设备将模型参数发送给请求者（步骤 6）。</p>
+<p>在每次全局迭代中重复图 4 中的步骤 3、4、5 和 6。我们假设移动设备在每次全球迭代中都保持连接。每个移动设备的目标是在一次全局迭代中选择最佳策略，使她&#x2F;他在整个 FL 任务中的预期收益最大化。</p>
+<hr>
+<img src="/dyn-game-for-blockchain-fl/2023-06-11-20-16-20.png" class="">
+
+<hr>
+<h2 id="Incentive-Mechanism-Design-激励机制设计"><a href="#Incentive-Mechanism-Design-激励机制设计" class="headerlink" title="Incentive Mechanism Design 激励机制设计"></a>Incentive Mechanism Design 激励机制设计</h2><p>在我们的 FL 模型中，请求者将在每次全局迭代中提供预算 B ，并与 M 移动设备竞争预算。移动设备将在每次全局迭代中将其策略决策（即使用的数据大小）发送给智能合约。我们使用 sj,n 表示移动设备 mj 在 n th全局迭代中选择的使用的数据大小，</p>
+<p>FL 中现有的大多数激励机制都具有很高的复杂性 [26]、[28]。然而，FL 中有效的激励机制应该是低复杂性和易于实施的。每次全局迭代的实时性要求是移动设备在下一次全局迭代之前收到请求者的补偿，这可以帮助他们在接下来的全局迭代中做出决策。此外，移动设备经常面临电量不足、信号弱等问题。因此，激励机制应该具有较低的计算复杂度，节省移动设备的等待时间。本文提出的激励机制如下图所示。</p>
+<p>$<br>\begin{equation*}<br>p_{j, n} &#x3D; B \frac{s_{j, n}}{s_{j, n} + \sum <em>{i \ne j}s</em>{i, n}} \tag{5}<br>\end{equation*}<br>$</p>
+<p>从式（5）我们可以了解到，请求者在当前全局迭代中根据移动设备的数据大小按比例将其固定预算分配给一组移动设备。</p>
+<hr>
+<h2 id="离散策略模型（DSM）"><a href="#离散策略模型（DSM）" class="headerlink" title="离散策略模型（DSM）"></a>离散策略模型（DSM）</h2><p>在本文中，我们从移动设备的角度考虑两种策略模型：离散策略模型（DSM）和连续策略模型（CSM）。 DSM 意味着移动设备可以决定是否参与 FL 任务。如果移动设备决定加入，她&#x2F;他的所有数据都将用于训练模型。而CSM是指移动设备可以确定FL任务中使用的数据百分比。受 FL 迭代交互的启发，我们将移动设备的决策问题建模为动态游戏，以解决训练过程中信息不完整的问题。具体来说，在联盟链系统的赋能下，即使移动设备不知道其他人的个人信息，包括总数据量和训练成本，她&#x2F;他也可以观察其他移动设备的策略历史并调整她&#x2F;他的策略以最大化 FL 任务中的收益。</p>
+]]></content>
+      <tags>
+        <tag>game theory</tag>
+        <tag>federated learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于区块链的环境监测系统 Environmental Monitoring System based on Blockchain</title>
+    <url>//environmental_monitoring_system_based_on_blockchain/</url>
+    <content><![CDATA[<p>FIT5125 Ass4 里要求的做成视频表述</p>
+<p>原文：</p>
+<p>Yan, J., Zhang, F, Ma, F., Xinxin, A., Li, Y., &amp; Huang,Y., (2019). Environmental Monitoring System Based on Blockchain. In Proceedings of the 4th International Conference on Crowd Science and Engineering (ICCSE’19). Association for Computing Machinery,. <a href="https://doi.org/10.1145/3371238.3371245" target="_blank" rel="noopener">https://doi.org/10.1145/3371238.3371245</a></p>
+<p>翻译内容非全文。</p>
+<p>随着信息技术、生物技术、遥感技术等技术的应用，环境保护领域的研究取得了重大突破。 但是现有的环保体系还存在环境数据的硬件造假和软件造假等问题。<br>本文提出了一种基于区块链的环境监测系统，其中全网环境数据统一，数据处理、共识和发布需要多方认证。 因此，通过采用本文所建议的系统，可以防止环境数据的伪造。<br>此外，提出了三维环境监控架构和智能可信设备，可以保证设备采集的环境数据的完整性和原始性。</p>
+<span id="more"></span>
+
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>环境监测是环境保护的前提，环境监测是生态文明建设的重要环节。基于环境监测数据，不仅可以客观评价环境质量，还可以反映治理的有效性。此外，环境管理和决策也应以环境监测数据为基础。但是，污染企业数据造假、政府环境监测设备干扰、各部门环境数据不一致等行为屡禁不止。上述情况严重降低了环境监测数据的质量，进而影响环境管理水平。<br>由于环境监测涉及方多，监测设备数量多且分散，测试环境复杂，环境监测数据质量很难提高。因此，有必要采用一个全面，多方向，系统的环境监测系统。<br>本文提出了一种基于区块链的环境监测系统。区块链的特点非常符合提高环境监测数据质量的需求。</p>
+<h3 id="此前研究"><a href="#此前研究" class="headerlink" title="此前研究"></a>此前研究</h3><p>随着城市化和能源消耗的快速发展，环境污染日益严重。与此同时，越来越多的机构和个人开始关注环境保护。<br>关于空气污染的研究如下。研究表明，许多疾病与<strong>空气污染</strong>密切相关[1, 2]。 CO 和 SO2 是中国大多数城市的两种重要污染物，但城市之间的差异很大[3]。空气质量及其影响因素具有明显的空间异质性[4]。许多研究都着眼于通过开发许多新的空气污染指数和测试来提高 AQI [5, 6]。对于<strong>水污染</strong>，分析了主要的水污染物及其对人体健康的影响[7]。综述了处理药物残留的电化学方法[8]。<br>在环境监测领域，有<strong>新的设备、试剂[9]和型号的研究</strong>。在遥感方面，高分系列卫星不仅用于检测局部污染，还用于监测水、大气和生态环境[10]。<br>对于环境数据收集，环境监测数据涉及复杂的多维权衡[11]，它需要跨学科和系统的方法、新的数据源和利益相关者的伙伴关系[12]。</p>
+<h3 id="传统数据采集方法缺陷"><a href="#传统数据采集方法缺陷" class="headerlink" title="传统数据采集方法缺陷"></a>传统数据采集方法缺陷</h3><p>如<strong>图1</strong>所示，传统的环保数据采集方式为部门采集、第三方采集和部门间数据共享。 部门采集包括车辆排放监测、企业排放监测、其他渠道的数据采集等，采集的数据大部分将采集到监测平台的数据中心。 而传统的监测数据采集方法存在诸多缺陷。</p>
+<ul>
+<li>数据收集和管理的方式大不相同。</li>
+<li>目前，没有标准化的质量保证和质量控制手段。</li>
+<li>报告低置信度数据的风险。</li>
+</ul>
+<p>有两个主要的自动数据收集通道。 一个是属于政府的监测站，另一个是公共和私人组成的传感器网络。</p>
+<p>另外，监控数据本身也存在很多问题。 环境数据存在的问题分为三部分，如<strong>图3</strong>所示，即硬件欺诈、软件欺诈和公开透明。 一旦出现问题，从数据的采集、处理、传输、发布，都很难开展环保工作。</p>
+<h3 id="假想平台架构"><a href="#假想平台架构" class="headerlink" title="假想平台架构"></a>假想平台架构</h3><p>提出的基于区块链的环保系统如<strong>图4</strong>所示。 在系统中，底部是环境数据采集设备，例如 空气和水品质的传感器。 然后，从数千台设备收集的原始数据直接汇集到大数据平台。 基于大数据平台，将完成三项任务。 <strong>一是要搭建一个区块链平台</strong>，搭建一个网络，搭建一个服务。 其次，原始数据的哈希值、即刻采样的原始数据、统计数据、修正后的<strong>环保数据</strong>应毫无保留地写入区块链。 <strong>三是智能监测分析</strong>，包括环保标准监测、装置参数监测、原始数据采集监测、修正数据监测等。</p>
+<p>区块链在防止环境数据造假方面的价值可以列举如下。</p>
+<ul>
+<li>全网环境数据统一，杜绝数据造假。</li>
+<li>直接记录原始数据，这减少了数据流链接并提高了数据的可靠性。</li>
+<li>修改设备参数和监控数据需要达成共识，加强监管，增加软件造假难度。</li>
+<li>数据处理、共识和发布需要多方认证，记录信息不可修改，权责清晰。 建立责任追溯制度，相关人员对原始监测数据和监测报告的真实性负责。</li>
+<li>环境数据记录公开透明，增强了数据的可信度，也便于监督和实施。</li>
+<li>为大数据分析提供可靠的数据记录，更好地支持设备运行状态分析，帮助识别恶意数据欺诈。</li>
+</ul>
+<p>环保传感器与区块链网络的交互机制如<strong>图5</strong>所示。作为一个轻节点，每个传感器应该具备以下四个功能。<br>首先，它可以存储公钥和私钥。<br>其次，应该有区块链客户端SDK。<br>第三，所有收集的原始数据都应签名和加密。<br>第四，每个传感器可以将采集到的原始数据存储一段时间。<br>签名和加密的数据将通过网络从传感器传输到整个节点。<br>然后，在整个节点内，将完成两个主要功能，将传感器数据发送到区块链和同步区块链网络内的所有数据。</p>
+<h3 id="分布式与可信数据"><a href="#分布式与可信数据" class="headerlink" title="分布式与可信数据"></a>分布式与可信数据</h3><h4 id="3D-三维-环境监控系统"><a href="#3D-三维-环境监控系统" class="headerlink" title="3D (三维)环境监控系统"></a>3D (三维)环境监控系统</h4><p>三维环境监测系统由四个主要部分组成。<br>最外围是空间卫星，可以实现对大气、水、土壤和生态的动态监测。<br>第二部分是航空气象、污染物和辐射监测。 第三部分是针对人类活动的，包括工业、农业、交通、建筑的监测，可以实现跨行业的数据分析和验证。<br>底部为地面，通过分布在各处的物联网设备监测土壤、水和生态状况。</p>
+<h4 id="智能可信设备"><a href="#智能可信设备" class="headerlink" title="智能可信设备"></a>智能可信设备</h4><p>如<strong>图3</strong>所示，监测数据存在问题。区块链虽然在某些情况下可以防止环境数据被篡改，但无法保证原始数据的真实性和有效性。<br>基于以上考虑，提出了一种环保机器人方案，主要由全息数据采集模块、通信模块、执行模块、存储模块、电源模块、智能可信设备组成。</p>
+<p>智能环保监控机器人具有感知、视觉、听觉、分析、计算、学习、管理、控制等功能，多台智能环保监控机器人根据其能覆盖的范围部署在特定区域。<br>它们与环保平台互联互通，形成环保监控智慧网络，是环保监控物联网的升级版。</p>
+<p>所提出的机器人的具体功能如下。</p>
+<ul>
+<li>能够以有线或无线方式连接环保平台。</li>
+<li>机器人可以通过有线或无线方式相互连接。</li>
+<li>机器人可自动采集特定区域的关键环境数据，如大气、水、土壤、噪声等参数。</li>
+<li>通过摄像头实时监控特定的环保区域。</li>
+<li>基于分析和学习控制联网的智能机械操作。</li>
+<li>多台机器人协同分析诊断特定区域的环保状况。</li>
+</ul>
+<p>智能可信设备的详细功能见<strong>图8</strong>。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在本文中，我们提出了一种基于区块链的环境监测系统，包括环境数据采集装置、大数据平台、区块链和智能监测。<br>采用区块链可以防止环境数据被篡改，其中全网环境数据统一，数据处理、共识和发布需要多方认证。<br>还提供了传感器与区块链网络之间的交互机制。<br>此外，提出了三维环境监测系统，由四个主要部分组成，保证了采集数据的完整性。<br>而对于智能可信设备，则可以保证数据的来源。</p>
+<p>在这篇论文的基础上，还有很多进一步的研究可以做。<br>首先，应提供更多详细信息。 其次，建议的系统需要通过案例研究进行分析和验证。</p>
+]]></content>
+      <tags>
+        <tag>blockchain</tag>
       </tags>
   </entry>
   <entry>
@@ -1647,57 +1775,6 @@ Cookie associated with sites using CloudFlare, used to speed up page load times.
         <tag>cross-chain</tag>
         <tag>exchange</tag>
         <tag>cryptocurrency</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于区块链的环境监测系统 Environmental Monitoring System based on Blockchain</title>
-    <url>//environmental_monitoring_system_based_on_blockchain/</url>
-    <content><![CDATA[<p>FIT5125 Ass4 里要求的做成视频表述</p>
-<p>原文：</p>
-<p>Yan, J., Zhang, F, Ma, F., Xinxin, A., Li, Y., &amp; Huang,Y., (2019). Environmental Monitoring System Based on Blockchain. In Proceedings of the 4th International Conference on Crowd Science and Engineering (ICCSE’19). Association for Computing Machinery,. <a href="https://doi.org/10.1145/3371238.3371245" target="_blank" rel="noopener">https://doi.org/10.1145/3371238.3371245</a></p>
-<p>翻译内容非全文。</p>
-<p>随着信息技术、生物技术、遥感技术等技术的应用，环境保护领域的研究取得了重大突破。 但是现有的环保体系还存在环境数据的硬件造假和软件造假等问题。<br>本文提出了一种基于区块链的环境监测系统，其中全网环境数据统一，数据处理、共识和发布需要多方认证。 因此，通过采用本文所建议的系统，可以防止环境数据的伪造。<br>此外，提出了三维环境监控架构和智能可信设备，可以保证设备采集的环境数据的完整性和原始性。</p>
-<span id="more"></span>
-
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>环境监测是环境保护的前提，环境监测是生态文明建设的重要环节。基于环境监测数据，不仅可以客观评价环境质量，还可以反映治理的有效性。此外，环境管理和决策也应以环境监测数据为基础。但是，污染企业数据造假、政府环境监测设备干扰、各部门环境数据不一致等行为屡禁不止。上述情况严重降低了环境监测数据的质量，进而影响环境管理水平。<br>由于环境监测涉及方多，监测设备数量多且分散，测试环境复杂，环境监测数据质量很难提高。因此，有必要采用一个全面，多方向，系统的环境监测系统。<br>本文提出了一种基于区块链的环境监测系统。区块链的特点非常符合提高环境监测数据质量的需求。</p>
-<h3 id="此前研究"><a href="#此前研究" class="headerlink" title="此前研究"></a>此前研究</h3><p>随着城市化和能源消耗的快速发展，环境污染日益严重。与此同时，越来越多的机构和个人开始关注环境保护。<br>关于空气污染的研究如下。研究表明，许多疾病与<strong>空气污染</strong>密切相关[1, 2]。 CO 和 SO2 是中国大多数城市的两种重要污染物，但城市之间的差异很大[3]。空气质量及其影响因素具有明显的空间异质性[4]。许多研究都着眼于通过开发许多新的空气污染指数和测试来提高 AQI [5, 6]。对于<strong>水污染</strong>，分析了主要的水污染物及其对人体健康的影响[7]。综述了处理药物残留的电化学方法[8]。<br>在环境监测领域，有<strong>新的设备、试剂[9]和型号的研究</strong>。在遥感方面，高分系列卫星不仅用于检测局部污染，还用于监测水、大气和生态环境[10]。<br>对于环境数据收集，环境监测数据涉及复杂的多维权衡[11]，它需要跨学科和系统的方法、新的数据源和利益相关者的伙伴关系[12]。</p>
-<h3 id="传统数据采集方法缺陷"><a href="#传统数据采集方法缺陷" class="headerlink" title="传统数据采集方法缺陷"></a>传统数据采集方法缺陷</h3><p>如<strong>图1</strong>所示，传统的环保数据采集方式为部门采集、第三方采集和部门间数据共享。 部门采集包括车辆排放监测、企业排放监测、其他渠道的数据采集等，采集的数据大部分将采集到监测平台的数据中心。 而传统的监测数据采集方法存在诸多缺陷。</p>
-<ul>
-<li>数据收集和管理的方式大不相同。</li>
-<li>目前，没有标准化的质量保证和质量控制手段。</li>
-<li>报告低置信度数据的风险。</li>
-</ul>
-<p>有两个主要的自动数据收集通道。 一个是属于政府的监测站，另一个是公共和私人组成的传感器网络。</p>
-<p>另外，监控数据本身也存在很多问题。 环境数据存在的问题分为三部分，如<strong>图3</strong>所示，即硬件欺诈、软件欺诈和公开透明。 一旦出现问题，从数据的采集、处理、传输、发布，都很难开展环保工作。</p>
-<h3 id="假想平台架构"><a href="#假想平台架构" class="headerlink" title="假想平台架构"></a>假想平台架构</h3><p>提出的基于区块链的环保系统如<strong>图4</strong>所示。 在系统中，底部是环境数据采集设备，例如 空气和水品质的传感器。 然后，从数千台设备收集的原始数据直接汇集到大数据平台。 基于大数据平台，将完成三项任务。 <strong>一是要搭建一个区块链平台</strong>，搭建一个网络，搭建一个服务。 其次，原始数据的哈希值、即刻采样的原始数据、统计数据、修正后的<strong>环保数据</strong>应毫无保留地写入区块链。 <strong>三是智能监测分析</strong>，包括环保标准监测、装置参数监测、原始数据采集监测、修正数据监测等。</p>
-<p>区块链在防止环境数据造假方面的价值可以列举如下。</p>
-<ul>
-<li>全网环境数据统一，杜绝数据造假。</li>
-<li>直接记录原始数据，这减少了数据流链接并提高了数据的可靠性。</li>
-<li>修改设备参数和监控数据需要达成共识，加强监管，增加软件造假难度。</li>
-<li>数据处理、共识和发布需要多方认证，记录信息不可修改，权责清晰。 建立责任追溯制度，相关人员对原始监测数据和监测报告的真实性负责。</li>
-<li>环境数据记录公开透明，增强了数据的可信度，也便于监督和实施。</li>
-<li>为大数据分析提供可靠的数据记录，更好地支持设备运行状态分析，帮助识别恶意数据欺诈。</li>
-</ul>
-<p>环保传感器与区块链网络的交互机制如<strong>图5</strong>所示。作为一个轻节点，每个传感器应该具备以下四个功能。<br>首先，它可以存储公钥和私钥。<br>其次，应该有区块链客户端SDK。<br>第三，所有收集的原始数据都应签名和加密。<br>第四，每个传感器可以将采集到的原始数据存储一段时间。<br>签名和加密的数据将通过网络从传感器传输到整个节点。<br>然后，在整个节点内，将完成两个主要功能，将传感器数据发送到区块链和同步区块链网络内的所有数据。</p>
-<h3 id="分布式与可信数据"><a href="#分布式与可信数据" class="headerlink" title="分布式与可信数据"></a>分布式与可信数据</h3><h4 id="3D-三维-环境监控系统"><a href="#3D-三维-环境监控系统" class="headerlink" title="3D (三维)环境监控系统"></a>3D (三维)环境监控系统</h4><p>三维环境监测系统由四个主要部分组成。<br>最外围是空间卫星，可以实现对大气、水、土壤和生态的动态监测。<br>第二部分是航空气象、污染物和辐射监测。 第三部分是针对人类活动的，包括工业、农业、交通、建筑的监测，可以实现跨行业的数据分析和验证。<br>底部为地面，通过分布在各处的物联网设备监测土壤、水和生态状况。</p>
-<h4 id="智能可信设备"><a href="#智能可信设备" class="headerlink" title="智能可信设备"></a>智能可信设备</h4><p>如<strong>图3</strong>所示，监测数据存在问题。区块链虽然在某些情况下可以防止环境数据被篡改，但无法保证原始数据的真实性和有效性。<br>基于以上考虑，提出了一种环保机器人方案，主要由全息数据采集模块、通信模块、执行模块、存储模块、电源模块、智能可信设备组成。</p>
-<p>智能环保监控机器人具有感知、视觉、听觉、分析、计算、学习、管理、控制等功能，多台智能环保监控机器人根据其能覆盖的范围部署在特定区域。<br>它们与环保平台互联互通，形成环保监控智慧网络，是环保监控物联网的升级版。</p>
-<p>所提出的机器人的具体功能如下。</p>
-<ul>
-<li>能够以有线或无线方式连接环保平台。</li>
-<li>机器人可以通过有线或无线方式相互连接。</li>
-<li>机器人可自动采集特定区域的关键环境数据，如大气、水、土壤、噪声等参数。</li>
-<li>通过摄像头实时监控特定的环保区域。</li>
-<li>基于分析和学习控制联网的智能机械操作。</li>
-<li>多台机器人协同分析诊断特定区域的环保状况。</li>
-</ul>
-<p>智能可信设备的详细功能见<strong>图8</strong>。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在本文中，我们提出了一种基于区块链的环境监测系统，包括环境数据采集装置、大数据平台、区块链和智能监测。<br>采用区块链可以防止环境数据被篡改，其中全网环境数据统一，数据处理、共识和发布需要多方认证。<br>还提供了传感器与区块链网络之间的交互机制。<br>此外，提出了三维环境监测系统，由四个主要部分组成，保证了采集数据的完整性。<br>而对于智能可信设备，则可以保证数据的来源。</p>
-<p>在这篇论文的基础上，还有很多进一步的研究可以做。<br>首先，应提供更多详细信息。 其次，建议的系统需要通过案例研究进行分析和验证。</p>
-]]></content>
-      <tags>
-        <tag>blockchain</tag>
       </tags>
   </entry>
   <entry>
@@ -3697,83 +3774,6 @@ C --&gt;|load| E[Gephi]
 <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h3 id="成本管理过程"><a href="#成本管理过程" class="headerlink" title="成本管理过程"></a>成本管理过程</h3><h3 id="成本透明与欺诈"><a href="#成本透明与欺诈" class="headerlink" title="成本透明与欺诈"></a>成本透明与欺诈</h3>]]></content>
       <tags>
         <tag>project management</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Notes for FIT5125: IT research methods S1 2021</title>
-    <url>//fit5125-research-method-notes/</url>
-    <content><![CDATA[<p>这门课是本科，研究生和博士生一起上的。任务量巨大。</p>
-<span id="more"></span>
-
-<p>W2</p>
-<ul>
-<li>Physical or psychological harm or abuse 身体或心理上的伤害或虐待</li>
-<li>Informed consent 知情同意</li>
-<li>Right of withdrawal 退出的权利 ​​</li>
-<li>Access to outcomes 对成果知情</li>
-<li>Vulnerable participant groups 弱势参与者群体</li>
-<li>Deception and coercion 欺骗与强迫</li>
-<li>Illegal practices 违法</li>
-<li>Invasion of privacy 侵犯隐私</li>
-<li>Confidentiality 保密</li>
-<li>Human subject data 人体主题数据</li>
-</ul>
-<p>Deception 欺骗<br>欺骗的类型：<br>•“故意”：告诉参与者不正确的事情<br>•“遗漏”：不告诉参与者或模棱两可<br>一些研究需要欺骗，例如：<br>•防止参与者猜测正在研究的行为<br>•“欺骗”本身就是正在研究的现象<br>•当需要研究员的“同盟”时<br>尽量减少欺骗<br>必须尽早通知参与者有关欺骗的信息<br>汇报时<br>欺骗不得造成困扰（包括汇报后）<br>欺骗的使用受到争议（违反了知情同意）</p>
-<p>强制和不当影响 Coercion &amp; undue influence<br>参与研究的压力。<br>显式强制 Explicit coercion：例如<br>•告诉参与者他们将不会获得某些好处<br>•告诉参与者他们必须参加<br>隐式强制 Implicit coercion：例如<br>•参与者推断他们将受到不利待遇<br>不当影响 Undue influence：<br>•参与奖励过多或不适当<br>研究人员必须意识到会对潜在参与者产生不适当的影响：<br>•例如 在他们的学生或同事身上</p>
-<hr>
-<h2 id="W6-质性研究"><a href="#W6-质性研究" class="headerlink" title="W6 质性研究"></a>W6 质性研究</h2><p>关键学的是主题分析（法），百科上内容挺少。</p>
-<p>这里内容来自<a href="https://www.jianshu.com/p/427779f36752%E7%9A%84%E8%AE%B0%E5%BD%95" target="_blank" rel="noopener">https://www.jianshu.com/p/427779f36752的记录</a></p>
-<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>对这些内容进行归纳整理，从而提炼出一些主题</p>
-<h3 id="1-熟悉数据"><a href="#1-熟悉数据" class="headerlink" title="1. 熟悉数据"></a>1. 熟悉数据</h3><p><em>将口头语言转录为文字</em></p>
-<h3 id="2-生成初始code"><a href="#2-生成初始code" class="headerlink" title="2. 生成初始code"></a>2. 生成初始code</h3><p>对数据进行初步的编码。</p>
-<p>编码在一定程度上取决于主题是更“数据驱动”还是“理论驱动” </p>
-<p>在前者中，主题将取决于数据，但在后者中，是在特定问题中处理数据。</p>
-<p>在编码过程中需要注意：<br> a）尽可能多地编码潜在主题&#x2F;模式——因为永远不知道后面的内容是否与此相关；<br> b）对代码的摘录中，保留一些上下文相关的数据。<br> c）可以按照适合的多种“主题”来编码单个数据摘录，因此，相关的摘录可能会未被编码，被一次编码或多次编码。</p>
-<h3 id="3-寻找主题"><a href="#3-寻找主题" class="headerlink" title="3. 寻找主题"></a>3. 寻找主题</h3><p>对代码进行整理和归纳。即分析编码，并要考虑如何将代码结合形成一个总体主题。</p>
-<p>排序不同的代码到潜在的主题，整理所有相关的编码数据中提取出的主题。</p>
-<p>有些编码可能会形成主主题，有些则成为子主题，还有一些可能不属于任何地方，可以为此创建一个名为“misc”的主题来存放这类编码。</p>
-<p>最后得到候选主题和子主题的集合，以及与它们相关的编码的所有数据摘要。</p>
-<h3 id="4-审阅主题"><a href="#4-审阅主题" class="headerlink" title="4. 审阅主题"></a>4. 审阅主题</h3><p>通过详细分析，会发现一些候选主题并不是真正的主题(例如，如果没有足够的数据来支持它们，或者数据太多样化)，而其他的主题可能会相互合并(例如，两个明显独立的主题可能会形成一个主题)。有些主题可能需要被分解成单独的主题。</p>
-<h3 id="5-定义与命名主题"><a href="#5-定义与命名主题" class="headerlink" title="5. 定义与命名主题"></a>5. 定义与命名主题</h3><p>通过定义和细化，我们指的是确定每个主题的本质(以及主题的总体)，并确定每个主题捕获的数据的哪个方面。</p>
-<p>段结束时，可以清楚地定义什么是你的主题，什么不是。或者，是否能用几句话来描述每个主题的范围和内容</p>
-<h3 id="6-撰写报告"><a href="#6-撰写报告" class="headerlink" title="6. 撰写报告"></a>6. 撰写报告</h3><p>主题分析写作的任务，无论是出版或研究任务或论文，是以一种让读者信服你的分析的价值和有效性的方式，讲述数据背后的复杂故事。</p>
-<p>重要的是，分析(包括数据摘录)提供了一个简洁、连贯、有逻辑、不重复、有趣的数据在主题内和主题间讲述的故事。你的书面记录必须在数据中提供足够的关于主题的证据，也就是说，足够的数据摘录来证明主题的普遍性。选择特别生动的例子，或能抓住你所展示的要点的精华，作为这个问题的示例。</p>
-<p>然而，报告需要做的不仅仅是提供数据。摘要需要嵌入到一个分析性的叙述中，以引人注目地说明你正在讲述的关于你的数据的故事，而你的分析性的叙述需要超越对数据的描述，并对你的研究问题提出一个论点。</p>
-<hr>
-<p>W7</p>
-<p>统计</p>
-<p>descriptive statistics</p>
-<p>敘述统计（descriptive statistics），是统计学中，来描绘或总结观察量的基本情况的统计总称</p>
-<hr>
-<p>W8</p>
-<img src="/fit5125-research-method-notes/image-20210511195219137.png" class="" title="image-20210511195219137">
-
-<p>correlational 与 experimental study的区别</p>
-<p>cor就相关性研究（相关性 -1→ 0 → 1）</p>
-<p>相关研究是揭示相关关系，实验研究是揭示因果关系</p>
-<p>exp：</p>
-<p>要证明两个变量之间有因果关系，必须满足以下几个条件：</p>
-<p>第一，两个变量均是引发变量。即自变量必须是可以人为操纵变化的（这个变化是指在同一个人身上的变化），因变量的变化必须是自变量的变化所引起的。</p>
-<p>第二，两个变量在时间上有前后关系，比如，必须是A先发生，B后发生，才能有因果关系的可能。</p>
-<p>第三，两个变量的关系需排除掉第三种可能的解释。</p>
-<p>Experimental design is about varying&#x2F;manipulating one or more Independent Variables, to see its effect on one or more Dependent Variables, whilst minimising the effect of Confounding Variables</p>
-<p>独立度量设计和重复度量设计有什么区别？</p>
-<p>1.独立措施：<br>独立度量设计（也称为组间）是一种实验设计，其中在自变量的<strong>每种条件</strong>下使用<strong>不同的参与者</strong>。这意味着实验的每个条件都包括不同的参与者组。 </p>
-<p>这应该通过随机分配来完成，这可以确保每个参与者都有被分配到一个组或另一个组的同等机会。</p>
-<p>独立措施涉及使用两组独立的参与者；每个条件一个。例如：</p>
-<img src="/fit5125-research-method-notes/Ind.jpg" class="" title="独立措施实验设计">
-
-<p>缺点：与重复测量设计相比，需要更多的人（即，更耗时）。<br>优点：由于人们仅参与一种情况，因此避免了订单效应（例如练习或疲劳）。如果一个人遇到多种情况，到第二种情况时他们可能会变得无聊，疲倦和烦躁，或者对实验的要求变得明智！<br>缺点：例如，小组参与者之间的差异可能会影响结果。年龄，性别或社会背景的差异。这些差异称为参与者变量（即，一种无关的变量）。<br>控制：招募参与者后，应将他们随机分配到他们的组中。这应确保各组平均相似（减少参与者变量）。</p>
-<p>2.重复措施：<br>重复测量设计是一种实验设计，其中<strong>相同的参与者</strong>参与自变量的<strong>每种条件</strong>。这意味着实验的每个条件都包括同一组参与者。</p>
-<p>重复测量设计也称为组内或主题内设计。</p>
-<p>优点：由于在每种情况下使用相同的参与者，因此参与者变量（即个体差异）减少了。<br>缺点：可能会有订单效果。顺序效应是指影响参与者行为的条件顺序。第二种情况下的表现可能会更好，因为参与者知道该做什么（即练习效果）。否则在第二种情况下它们的性能可能会变差，因为它们很累（即疲劳效果）。可以使用平衡来控制此限制。<br>优点：参与各种情况所需的人员更少（即节省时间）。<br>控制：为了对抗秩序效应，研究人员平衡了参与者的条件秩序。改变参与者在不同实验条件下的执行顺序。</p>
-<p><strong>参数测试</strong> 假设数据中存在基础统计分布。因此，必须满足几个有效性条件，以便参数测试的结果可靠。例如，仅当每个样本服从正态分布并且样本方差是均质的时，两个独立样本的Student t检验才是可靠的。</p>
-<p><strong>非参数测试</strong> 不依赖任何分布。因此，即使不满足有效性的参数条件，也可以应用它们。 </p>
-<p>非参数测试 比参数测试更 <strong>健壮</strong>。换句话说，它们在更广泛的情况下（较少的有效条件）有效。</p>
-<p>使用参数测试而不是非参数等效项的优点在于，前者 将比后者具有更大的统计 <strong>能力</strong>。换句话说，参数测试更有可能导致拒绝H0。在大多数情况下，与参数测试关联的p值将低于与在相同数据上运行的非参数等效项关联的p值。</p>
-]]></content>
-      <tags>
-        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -7093,7 +7093,7 @@ C --&gt;|load| E[Gephi]
 <ol>
 <li>接收者使用他&#x2F;她的用户密钥来解密密文</li>
 </ol>
-<p>安全性：<br>– 如果密文是为 <a href="mailto:&#x61;&#x6c;&#105;&#x63;&#x65;&#x40;&#x61;&#x62;&#99;&#46;&#99;&#111;&#x6d;">&#x61;&#x6c;&#105;&#x63;&#x65;&#x40;&#x61;&#x62;&#99;&#46;&#99;&#111;&#x6d;</a> 加密的，除了与 <a href="mailto:&#97;&#108;&#105;&#x63;&#101;&#x40;&#x61;&#x62;&#x63;&#46;&#99;&#x6f;&#109;">&#97;&#108;&#105;&#x63;&#101;&#x40;&#x61;&#x62;&#x63;&#46;&#99;&#x6f;&#109;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
+<p>安全性：<br>– 如果密文是为 <a href="mailto:&#97;&#x6c;&#x69;&#x63;&#x65;&#x40;&#97;&#x62;&#99;&#x2e;&#99;&#x6f;&#x6d;">&#97;&#x6c;&#x69;&#x63;&#x65;&#x40;&#97;&#x62;&#99;&#x2e;&#99;&#x6f;&#x6d;</a> 加密的，除了与 <a href="mailto:&#97;&#108;&#105;&#99;&#x65;&#x40;&#97;&#x62;&#x63;&#46;&#99;&#x6f;&#109;">&#97;&#108;&#105;&#99;&#x65;&#x40;&#97;&#x62;&#x63;&#46;&#99;&#x6f;&#109;</a> 关联的密钥的所有者之外，没有人可以解密此密文<br>– 这里不存在PKI（无证书）中的伪造攻击！ -&gt; Marvin 无法从 PKG 获取私钥</p>
 <p>IBE 需要一个称为双线性配对的数学函数（基于椭圆曲线）<br>• 它是两组之间的单向映射函数：G 和 GT，使得 G 和 GT 中的离散对数很难<br>• 表示为一个映射<br>$e: G \times G →G_T$<br>它取 G 组中的两个元素并输出 $G_T$ 组中的一个元素</p>
 <p>双线性配对<br>• 假设$g$是具有群序$p$的$G$生成器（即，$G$具有$p$个元素：$|G| &#x3D;p$）<br>• 我们有以下属性：<br>– Bilinear双线性：$e(g^x,g^y)&#x3D;e(g,g)^{xy}$, 对于$x \in Z_p &gt; e(g^x,g)&#x3D;e(g,g^x)&#x3D;e(g,g)^x$<br>– Non-degenerate 非退化：$e(g,g)\neq1$</p>
 <p>第一个实用的 IBE 方案是由 Dan Boneh 和 Matthew K. Franklin 在 2001 年（我们称之为 Boneh-Franklin 计划）</p>
@@ -9519,30 +9519,6 @@ C --&gt;|load| E[Gephi]
       </tags>
   </entry>
   <entry>
-    <title>HTTPS TLS JA3</title>
-    <url>//https-tls-ja3/</url>
-    <content><![CDATA[<p>JA3能不能用来识别纯tls链接数据？</p>
-<span id="more"></span>
-
-<p>JA3(S)的原理是计算握手最后Hello包的信息，那对于纯TLS，非HTTPS的流是否可以获得JA3？</p>
-<p>这个问题是因为在查看挖矿软件走TLS的时候发现了Wireshark的JA3插件并没有对其握手计算JA3的值</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">JA3S=md5(</span><br><span class="line">    server_handshake.tls_version + &quot;,&quot; + </span><br><span class="line">    server_handshake.cipher_suites + &quot;,&quot; +</span><br><span class="line">    &quot;-&quot;.join(server_handshake.extensions)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>依然能在包里找到对应的握手内容</p>
-<img src="/https-tls-ja3/handshake.png" class="">
-
-<p>因此应该是扩展限定了端口的问题</p>
-<p>我这边用的Wireshark插件是<a href="https://github.com/fullylegit/ja3/blob/master/ja3.lua" target="_blank" rel="noopener">https://github.com/fullylegit/ja3/blob/master/ja3.lua</a></p>
-<p>可以看到在最后它加了443端口的限制</p>
-<p>这样在最后加入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tcp_dissector_table:add( 5555, proto_ja3 )</span><br></pre></td></tr></table></figure>
-
-<img src="/https-tls-ja3/ja3.png" class="">
-
-<p>这样就可以看到在5555端口上的JA3S值了</p>
-]]></content>
-  </entry>
-  <entry>
     <title>How does Monero pick fake inputs?</title>
     <url>//how-xmr-pick-fake-inputs/</url>
     <content><![CDATA[<p>门罗在生成交易时如何选择ringCT中除真实inputs以外的假inputs？</p>
@@ -9608,6 +9584,30 @@ C --&gt;|load| E[Gephi]
         <tag>monero</tag>
         <tag>ringct</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>HTTPS TLS JA3</title>
+    <url>//https-tls-ja3/</url>
+    <content><![CDATA[<p>JA3能不能用来识别纯tls链接数据？</p>
+<span id="more"></span>
+
+<p>JA3(S)的原理是计算握手最后Hello包的信息，那对于纯TLS，非HTTPS的流是否可以获得JA3？</p>
+<p>这个问题是因为在查看挖矿软件走TLS的时候发现了Wireshark的JA3插件并没有对其握手计算JA3的值</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">JA3S=md5(</span><br><span class="line">    server_handshake.tls_version + &quot;,&quot; + </span><br><span class="line">    server_handshake.cipher_suites + &quot;,&quot; +</span><br><span class="line">    &quot;-&quot;.join(server_handshake.extensions)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>依然能在包里找到对应的握手内容</p>
+<img src="/https-tls-ja3/handshake.png" class="">
+
+<p>因此应该是扩展限定了端口的问题</p>
+<p>我这边用的Wireshark插件是<a href="https://github.com/fullylegit/ja3/blob/master/ja3.lua" target="_blank" rel="noopener">https://github.com/fullylegit/ja3/blob/master/ja3.lua</a></p>
+<p>可以看到在最后它加了443端口的限制</p>
+<p>这样在最后加入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tcp_dissector_table:add( 5555, proto_ja3 )</span><br></pre></td></tr></table></figure>
+
+<img src="/https-tls-ja3/ja3.png" class="">
+
+<p>这样就可以看到在5555端口上的JA3S值了</p>
+]]></content>
   </entry>
   <entry>
     <title>Idea on edX&#39;s Blockchain Technology</title>
@@ -10795,41 +10795,6 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>ngchain Serialization Selection: ngchain的序列化方案选择</title>
-    <url>//ngchain-serialization-selection/</url>
-    <content><![CDATA[<p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br>而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。</p>
-<span id="more"></span>
-
-<p><a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">https://ethresear.ch/t/blob-serialisation/1705</a></p>
-<h2 id="protobuf"><a href="#protobuf" class="headerlink" title="protobuf"></a>protobuf</h2><p>至于为什么会走向protobuf这个歪路，是因为真的在benchmark里它的速度太诱人了。<br>golang那个benchmark对比里它也是被推荐的。<br>那时候新版还没出，gogo的速度在一众序列化方案里简直快到爆。<br>而且protobuf序列化之后的字节也非常小。<br>所以当时就觉得这个可以有。</p>
-<p>但是随着项目一点点成型，protobuf的定位和项目需求的矛盾也越来越明显。<br>对于一个到处都是serde，到处在不顾兼容性地通过修改数据原型优化系统的一个底层应用，<br>protobuf的操作实在是过于繁琐且束缚过大</p>
-<ul>
-<li><p>protobuf没有继承关系。<br>protobuf的各种feature在和golang结合的时候会让人很难受。<br>不止是单纯的用户定义的message之间继承不了，比如说这里希望<code>message A</code>继承<code>bytes</code>，<code>message B</code>继承<code>map&lt;string, string&gt;</code>这种就都做不到。<br>而且本身protobuf的（优化）集成也很麻烦（尤其在bazel里）。其对特殊类型（any啥的）的支持在golang下让人不太敢用，尤其是apiv2之后。</p>
-</li>
-<li><p>我想要的大部分情况下只是简单的把一个list序列化，但是protobuf只处理generated code里的那些message<br>例如raw, err :&#x3D; proto.Marshal([][]byte{[]byte{“wasd”}})<br>就会提示cannot use ([][]byte literal) (value of type [][]byte) as protoreflect.ProtoMessage value in argument to proto.Marshal: missing method ProtoReflect。<br>正确的serde做法就是建立一个新的message，然后这个message里带一个这个bytes list类型的字段。</p>
-</li>
-<li><p>我想要序列化过程可定制，但是官方新版本不可以<br>为什么需要可定制？因为一个struct中并非全部字段需要serde。<br>一般的解决方法是将要序列化的字段public，而不需要的private，通过func来调用private内容。<br>但是这里还有个痛点：生成的代码不应该修改，我根本没法把我的私有字段加到struct里。<br>v0.0.19之前，我们是通过func直接生成值，例如GetHash()相当于每次调用都进行hash。<br>即便是sha3.256这样的简单hash，都消耗了大量资源。<br>后面v0.0.20的实践是加上对应的public字段。<br>但是hash值这样的内容导致了值和其他内容填充的步调不一：需要先有内容且确定才能得到hash，修改内容后也得重新hash。<br>v0.0.21带来了更优实践：使用自定义struct继承生成的struct。<br>这样既可以保存自定义的辅助性字段（比如hash）（在自定义struct之中），<br>又可以serde（通过父struct，即生成的）。<br>但是实际体验并没有那么美好，自定义struct即便是继承了，也不是protoreflect.ProtoMessage，没法直接serde。<br>注意这里是protoreflect.ProtoMessage，不是proto.Message，这是新版和旧版（or gogo）的区别所在。<br>然而更坑的是goland会告诉你自定义的子类可以serde……因此需要一个个排查。<br>最后来到我们的最后一个方案，为了快速排查，我们放弃了直接继承，选择了将原型作为自定义struct字段，通过GetProto()来获取原型以及LoadProto()进行serde。<br>这样改掉一堆错误之后看似安静和谐了很多，但是，我们被框架限制住了。<br>这样妥协的方式，让我们很难在types.proto之外继续利用serde来扩展。<br>很明显，protobuf是给那些有准备的人的，而我们只是到处碰运气的赌徒罢了。</p>
-</li>
-</ul>
-<h2 id="rlp"><a href="#rlp" class="headerlink" title="rlp"></a>rlp</h2><p>作为一个有在geth上debug经验的开发，我也不是第一次使用rlp。在过去golang使用还不熟练的经历里，rlp真的是不好用。<br>首先从直观来看rlp不像别的那样有Marshal和Unmarshal。<br>其次IDE上的提示（lint）也不尽如人意，经常会出现看起来啥问题都没有跑起来到处不能encode的问题。<br>同样Decode也有问题，见这里<a href="https://ethresear.ch/t/blob-serialisation/1705/5" target="_blank" rel="noopener">vb说的例子</a>。这个帖子说的序列化还在优化更新中，而prysm用的是protobuf，所以现在不适合跟上ethereum的设计。<br>再者，缺少对map的支持，不过这个很好理解，有map之后就很难deterministic，像protobuf一样可能不同的实现有着不同的deterministic规则，仅在同一语言上统一。<br>此外如果直接<code>type Uint uint</code>这样建立type（很常见，比如NetworkType，TxType等等），那么rlp是不支持把他当uint这样的原始类型看的，就需要自己实现一个Encoder+Decoder。</p>
-<p>但是首先这个数据大小很香，真的很小。根据github上benchmark来看是比protobuf要小。</p>
-<p>其次原理简洁易懂。说白了就是万物list or str。这部分根据rlp的En&#x2F;Decoder来讲。</p>
-<h3 id="En-x2F-Decoder"><a href="#En-x2F-Decoder" class="headerlink" title="En&#x2F;Decoder"></a>En&#x2F;Decoder</h3><p>和json的返回值不同，rlp的内容是直接写入io.Writter。<br>一般我们就直接使用rlp.Encode(writter, 【自定义好的结构】)就可以</p>
-<p>前面也说到了rlp原理简单，这里就举点案例：</p>
-<p>比如说一个Nonce是个8字节的定长[]byte，需要把它encode to rlp只需要在这个8字节前面写一个prefix来描述它就可以用136（&#x3D;0x80+8）来表示8这个长度。</p>
-<p>具体的rlp的规则：</p>
-<ul>
-<li>对于单个byte（char），如果值是在0x00-0x7f（127，也就是常用ascii），那么就直接放着就行</li>
-<li>此外，对于0-55长度的bytes，rlp就用<code>0x80（128）+长度</code>作为其前缀来描述后面的列表（or单byte&gt;127）。这个前缀byte值在0x80（128）-0xb7（183）</li>
-<li>如果是比55还长，那么肯定就需要不止一个byte来修饰。为了支持巨长的内容，前缀的第一个字符来描述后面&gt;55的长度。例如一个1024字节的bytes&#x2F;str，会被encode成<code>[0xb9, 0x04, 0x00, byte_1, ... , byte_1024]</code>，这里0xb9&#x3D;0xb7+2，这个2就表示后面有俩字节（0x04，0x00）是拿来描述长度的。而长度0x04，0x00则是1024的big-endian encode。这部分的首字节被限制在0xb8-0xbf，即最大支持8字节的长度描述，最大支持2^(8*4)字节长度的bytes</li>
-<li>另外还有个概念就是list，就相当于bytes或者其他list的一个容器，例如[[‘h’, ‘e’], [‘l’, ‘p’]]。如果这个list的总payload（子元素，包括了前缀，的长度加起来）是0-55bytes，那么就单用一个0xc0（192）来表述。</li>
-<li>和前面一样，如果超过55，那就用0xf7+长度。首字节范围在0xf8-0xff，也是最大支持2^(8*4)字节长度的bytes。</li>
-</ul>
-<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p>在翻rlp资料时候看到了eth社区提出的<a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">blob serialisation</a>。这里说下至今<br><a href="https://github.com/prysmaticlabs/prysm/pull/92" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/92</a><br><a href="https://github.com/prysmaticlabs/prysm/pull/147" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/147</a><br>现在状况就是人家折腾半天然后跑去拥抱protobuf了。</p>
-<h2 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h2><p>serde&#x3D;SERializing &amp; DEserializing, rust里的framework就叫这个</p>
-]]></content>
-  </entry>
-  <entry>
     <title>New Env in msys2: msys2引入的新环境</title>
     <url>//new-env-in-msys2/</url>
     <content><![CDATA[<p>今天为小平板配置精简版开发环境来着，因为vscode在ngcore上一直报</p>
@@ -10925,29 +10890,39 @@ With the respect to/Enperienced the less main reason, they xxx
 ]]></content>
   </entry>
   <entry>
-    <title>NGIN的新架構</title>
-    <url>//new-structure-of-ngin/</url>
-    <content><![CDATA[<p>重構一時爽……</p>
+    <title>ngchain Serialization Selection: ngchain的序列化方案选择</title>
+    <url>//ngchain-serialization-selection/</url>
+    <content><![CDATA[<p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br>而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。</p>
 <span id="more"></span>
 
-<h2 id="權限更大的Consensus"><a href="#權限更大的Consensus" class="headerlink" title="權限更大的Consensus"></a>權限更大的Consensus</h2><p>之前的Consensus是管不到p2p的，因此初始化，同步，廣播這些都是由p2p模塊根據網絡場景來觸發，然後調用内置的Consensus來對區塊和狀態進行修改。</p>
-<p>根據新的架構，Consensus將接管P2P的所有功能的主動觸發。</p>
-<p>針對Wired協議中response的處理，原本是通過handler處理，現在改爲直接caller func中直接對stream進行後續讀取再關閉</p>
-<h2 id="更强大的Tx"><a href="#更强大的Tx" class="headerlink" title="更强大的Tx"></a>更强大的Tx</h2><p>Tx，作为事务，除了处理交易以外最重要的功能就是处理智能合约，也就是第二层架构(layer-2)。</p>
-<p>和虽然同样使用账户模型，NGIN的Tx和Ethereum的Transaction有很大不同：Tx的目标不唯一。</p>
-<p>这就意味着，一个账户想在同一时间（同一区块）内发送多个ethereum交易，只需要将这些的内容进行合并。</p>
-<p>这有什么好处？首先这可以保证在“一账户一区块一事务”的原则下尽可能地拓展有效交易吞吐量。其次，减少Multi-Tx时不必要的参数，达到减小Block体积，提高TPS。再者，这对于WASM的模块化至关重要。</p>
-<p>前面两个应该很好理解，要是没这个那么“一账户一区块一事务”只能发一个交易也太难受了，要是一个账户发一堆Transaction的话累赘的sign和address也太多了。</p>
-<p>WASM这个就值得介绍了。</p>
-<p>首先WASM的设计是模块化的，所有功能或者值都可以被Module包裹形成一个模块，然后AsExtern就能被其他模块import。</p>
-<p>那么如果热心群众A开发了个算法库，我B想拿来用在我的应用上，按照ethereum的操作就是拿来sol再import。这样会有俩问题，首先是网络上这个库相当于就装了两回，而且B的应用（binary）内部相当于包裹了这个算法的binary，只装一个还好，装多了就大的一批。</p>
-<p>在WASM里，部署的是Module形式的WASM，只需要import就可以直接使用。这时候就是Tx出场的时候了，想要在Transaction里导入其他账户contract里的module，只需要把他们的owner写到participants里就可以。当然你要是觉得他们的库很赞，你可以写点value在vaules里给他们点赞助:-)</p>
+<p><a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">https://ethresear.ch/t/blob-serialisation/1705</a></p>
+<h2 id="protobuf"><a href="#protobuf" class="headerlink" title="protobuf"></a>protobuf</h2><p>至于为什么会走向protobuf这个歪路，是因为真的在benchmark里它的速度太诱人了。<br>golang那个benchmark对比里它也是被推荐的。<br>那时候新版还没出，gogo的速度在一众序列化方案里简直快到爆。<br>而且protobuf序列化之后的字节也非常小。<br>所以当时就觉得这个可以有。</p>
+<p>但是随着项目一点点成型，protobuf的定位和项目需求的矛盾也越来越明显。<br>对于一个到处都是serde，到处在不顾兼容性地通过修改数据原型优化系统的一个底层应用，<br>protobuf的操作实在是过于繁琐且束缚过大</p>
+<ul>
+<li><p>protobuf没有继承关系。<br>protobuf的各种feature在和golang结合的时候会让人很难受。<br>不止是单纯的用户定义的message之间继承不了，比如说这里希望<code>message A</code>继承<code>bytes</code>，<code>message B</code>继承<code>map&lt;string, string&gt;</code>这种就都做不到。<br>而且本身protobuf的（优化）集成也很麻烦（尤其在bazel里）。其对特殊类型（any啥的）的支持在golang下让人不太敢用，尤其是apiv2之后。</p>
+</li>
+<li><p>我想要的大部分情况下只是简单的把一个list序列化，但是protobuf只处理generated code里的那些message<br>例如raw, err :&#x3D; proto.Marshal([][]byte{[]byte{“wasd”}})<br>就会提示cannot use ([][]byte literal) (value of type [][]byte) as protoreflect.ProtoMessage value in argument to proto.Marshal: missing method ProtoReflect。<br>正确的serde做法就是建立一个新的message，然后这个message里带一个这个bytes list类型的字段。</p>
+</li>
+<li><p>我想要序列化过程可定制，但是官方新版本不可以<br>为什么需要可定制？因为一个struct中并非全部字段需要serde。<br>一般的解决方法是将要序列化的字段public，而不需要的private，通过func来调用private内容。<br>但是这里还有个痛点：生成的代码不应该修改，我根本没法把我的私有字段加到struct里。<br>v0.0.19之前，我们是通过func直接生成值，例如GetHash()相当于每次调用都进行hash。<br>即便是sha3.256这样的简单hash，都消耗了大量资源。<br>后面v0.0.20的实践是加上对应的public字段。<br>但是hash值这样的内容导致了值和其他内容填充的步调不一：需要先有内容且确定才能得到hash，修改内容后也得重新hash。<br>v0.0.21带来了更优实践：使用自定义struct继承生成的struct。<br>这样既可以保存自定义的辅助性字段（比如hash）（在自定义struct之中），<br>又可以serde（通过父struct，即生成的）。<br>但是实际体验并没有那么美好，自定义struct即便是继承了，也不是protoreflect.ProtoMessage，没法直接serde。<br>注意这里是protoreflect.ProtoMessage，不是proto.Message，这是新版和旧版（or gogo）的区别所在。<br>然而更坑的是goland会告诉你自定义的子类可以serde……因此需要一个个排查。<br>最后来到我们的最后一个方案，为了快速排查，我们放弃了直接继承，选择了将原型作为自定义struct字段，通过GetProto()来获取原型以及LoadProto()进行serde。<br>这样改掉一堆错误之后看似安静和谐了很多，但是，我们被框架限制住了。<br>这样妥协的方式，让我们很难在types.proto之外继续利用serde来扩展。<br>很明显，protobuf是给那些有准备的人的，而我们只是到处碰运气的赌徒罢了。</p>
+</li>
+</ul>
+<h2 id="rlp"><a href="#rlp" class="headerlink" title="rlp"></a>rlp</h2><p>作为一个有在geth上debug经验的开发，我也不是第一次使用rlp。在过去golang使用还不熟练的经历里，rlp真的是不好用。<br>首先从直观来看rlp不像别的那样有Marshal和Unmarshal。<br>其次IDE上的提示（lint）也不尽如人意，经常会出现看起来啥问题都没有跑起来到处不能encode的问题。<br>同样Decode也有问题，见这里<a href="https://ethresear.ch/t/blob-serialisation/1705/5" target="_blank" rel="noopener">vb说的例子</a>。这个帖子说的序列化还在优化更新中，而prysm用的是protobuf，所以现在不适合跟上ethereum的设计。<br>再者，缺少对map的支持，不过这个很好理解，有map之后就很难deterministic，像protobuf一样可能不同的实现有着不同的deterministic规则，仅在同一语言上统一。<br>此外如果直接<code>type Uint uint</code>这样建立type（很常见，比如NetworkType，TxType等等），那么rlp是不支持把他当uint这样的原始类型看的，就需要自己实现一个Encoder+Decoder。</p>
+<p>但是首先这个数据大小很香，真的很小。根据github上benchmark来看是比protobuf要小。</p>
+<p>其次原理简洁易懂。说白了就是万物list or str。这部分根据rlp的En&#x2F;Decoder来讲。</p>
+<h3 id="En-x2F-Decoder"><a href="#En-x2F-Decoder" class="headerlink" title="En&#x2F;Decoder"></a>En&#x2F;Decoder</h3><p>和json的返回值不同，rlp的内容是直接写入io.Writter。<br>一般我们就直接使用rlp.Encode(writter, 【自定义好的结构】)就可以</p>
+<p>前面也说到了rlp原理简单，这里就举点案例：</p>
+<p>比如说一个Nonce是个8字节的定长[]byte，需要把它encode to rlp只需要在这个8字节前面写一个prefix来描述它就可以用136（&#x3D;0x80+8）来表示8这个长度。</p>
+<p>具体的rlp的规则：</p>
+<ul>
+<li>对于单个byte（char），如果值是在0x00-0x7f（127，也就是常用ascii），那么就直接放着就行</li>
+<li>此外，对于0-55长度的bytes，rlp就用<code>0x80（128）+长度</code>作为其前缀来描述后面的列表（or单byte&gt;127）。这个前缀byte值在0x80（128）-0xb7（183）</li>
+<li>如果是比55还长，那么肯定就需要不止一个byte来修饰。为了支持巨长的内容，前缀的第一个字符来描述后面&gt;55的长度。例如一个1024字节的bytes&#x2F;str，会被encode成<code>[0xb9, 0x04, 0x00, byte_1, ... , byte_1024]</code>，这里0xb9&#x3D;0xb7+2，这个2就表示后面有俩字节（0x04，0x00）是拿来描述长度的。而长度0x04，0x00则是1024的big-endian encode。这部分的首字节被限制在0xb8-0xbf，即最大支持8字节的长度描述，最大支持2^(8*4)字节长度的bytes</li>
+<li>另外还有个概念就是list，就相当于bytes或者其他list的一个容器，例如[[‘h’, ‘e’], [‘l’, ‘p’]]。如果这个list的总payload（子元素，包括了前缀，的长度加起来）是0-55bytes，那么就单用一个0xc0（192）来表述。</li>
+<li>和前面一样，如果超过55，那就用0xf7+长度。首字节范围在0xf8-0xff，也是最大支持2^(8*4)字节长度的bytes。</li>
+</ul>
+<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p>在翻rlp资料时候看到了eth社区提出的<a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">blob serialisation</a>。这里说下至今<br><a href="https://github.com/prysmaticlabs/prysm/pull/92" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/92</a><br><a href="https://github.com/prysmaticlabs/prysm/pull/147" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/147</a><br>现在状况就是人家折腾半天然后跑去拥抱protobuf了。</p>
+<h2 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h2><p>serde&#x3D;SERializing &amp; DEserializing, rust里的framework就叫这个</p>
 ]]></content>
-      <tags>
-        <tag>todo</tag>
-        <tag>NGIN</tag>
-        <tag>notes</tag>
-      </tags>
   </entry>
   <entry>
     <title>OP-TEE 踩坑</title>
@@ -10989,6 +10964,39 @@ With the respect to/Enperienced the less main reason, they xxx
       <tags>
         <tag>TEE</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>NGIN的新架構</title>
+    <url>//new-structure-of-ngin/</url>
+    <content><![CDATA[<p>重構一時爽……</p>
+<span id="more"></span>
+
+<h2 id="權限更大的Consensus"><a href="#權限更大的Consensus" class="headerlink" title="權限更大的Consensus"></a>權限更大的Consensus</h2><p>之前的Consensus是管不到p2p的，因此初始化，同步，廣播這些都是由p2p模塊根據網絡場景來觸發，然後調用内置的Consensus來對區塊和狀態進行修改。</p>
+<p>根據新的架構，Consensus將接管P2P的所有功能的主動觸發。</p>
+<p>針對Wired協議中response的處理，原本是通過handler處理，現在改爲直接caller func中直接對stream進行後續讀取再關閉</p>
+<h2 id="更强大的Tx"><a href="#更强大的Tx" class="headerlink" title="更强大的Tx"></a>更强大的Tx</h2><p>Tx，作为事务，除了处理交易以外最重要的功能就是处理智能合约，也就是第二层架构(layer-2)。</p>
+<p>和虽然同样使用账户模型，NGIN的Tx和Ethereum的Transaction有很大不同：Tx的目标不唯一。</p>
+<p>这就意味着，一个账户想在同一时间（同一区块）内发送多个ethereum交易，只需要将这些的内容进行合并。</p>
+<p>这有什么好处？首先这可以保证在“一账户一区块一事务”的原则下尽可能地拓展有效交易吞吐量。其次，减少Multi-Tx时不必要的参数，达到减小Block体积，提高TPS。再者，这对于WASM的模块化至关重要。</p>
+<p>前面两个应该很好理解，要是没这个那么“一账户一区块一事务”只能发一个交易也太难受了，要是一个账户发一堆Transaction的话累赘的sign和address也太多了。</p>
+<p>WASM这个就值得介绍了。</p>
+<p>首先WASM的设计是模块化的，所有功能或者值都可以被Module包裹形成一个模块，然后AsExtern就能被其他模块import。</p>
+<p>那么如果热心群众A开发了个算法库，我B想拿来用在我的应用上，按照ethereum的操作就是拿来sol再import。这样会有俩问题，首先是网络上这个库相当于就装了两回，而且B的应用（binary）内部相当于包裹了这个算法的binary，只装一个还好，装多了就大的一批。</p>
+<p>在WASM里，部署的是Module形式的WASM，只需要import就可以直接使用。这时候就是Tx出场的时候了，想要在Transaction里导入其他账户contract里的module，只需要把他们的owner写到participants里就可以。当然你要是觉得他们的库很赞，你可以写点value在vaules里给他们点赞助:-)</p>
+]]></content>
+      <tags>
+        <tag>todo</tag>
+        <tag>NGIN</tag>
+        <tag>notes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PoW Algorithm Design</title>
+    <url>//pow-algo-design/</url>
+    <content><![CDATA[<p>首先</p>
+<p>为了减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现设备绑定。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
+<p>有两类不同的通用计算设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
+]]></content>
   </entry>
   <entry>
     <title>Profiling ngcore in go</title>
@@ -11113,12 +11121,205 @@ With the respect to/Enperienced the less main reason, they xxx
       </tags>
   </entry>
   <entry>
-    <title>PoW Algorithm Design</title>
-    <url>//pow-algo-design/</url>
-    <content><![CDATA[<p>首先</p>
-<p>为了减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现设备绑定。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
-<p>有两类不同的通用计算设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
-]]></content>
+    <title>RandomX Design</title>
+    <url>//randomx-design/</url>
+    <content><![CDATA[<p>原文<a href="https://github.com/tevador/RandomX/blob/master/doc/design.md" target="_blank" rel="noopener">https://github.com/tevador/RandomX/blob/master/doc/design.md</a></p>
+<p>为了最大限度地减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现<em>设备绑定</em>。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
+<p>有两类不同的通用处理设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
+<ul>
+<li>CPU非专业挖矿设备，对于正常用户来说更普遍且更容易访问。受 CPU 限制的算法更加平等，并允许更多参与者加入网络。这是[原始CryptoNote白皮书][cn_paper]中所述的目标之一。</li>
+<li>在不同的 CPU 体系结构中存在大量通用的本地硬件指令子集。GPU 则不能这样说。例如，NVIDIA 和 AMD GPU <a href="https://github.com/ifdefelse/ProgPOW/issues/16" target="_blank" rel="noopener">没有通用的整数乘法指​​令</a>。</li>
+<li>所有主要的CPU 指令集都有详细的文档记录，有多个可用的开源编译器。相比之下，GPU 指令集通常是专有的，可能需要供应商特定的闭源驱动程序才能获得最大性能。</li>
+</ul>
+<h2 id="1-设计考量"><a href="#1-设计考量" class="headerlink" title="1. 设计考量"></a>1. 设计考量</h2><p>CPU 绑定工作量证明的最基本思想是“工作”必须是动态的。这利用了 CPU 接受两种输入的事实：数据（主要输入）和代码（指定对数据执行什么操作）。</p>
+<p>相反，经典的加密散列hash函数 [ 3 ] 并不适合 CPU 的工作，因为它们的唯一输入是<em>数据</em>，而<strong>操作序列是固定</strong>的，可以通过专用集成电路ASIC更有效地执行。</p>
+<h3 id="1-1-动态工作量证明"><a href="#1-1-动态工作量证明" class="headerlink" title="1.1 动态工作量证明"></a>1.1 动态工作量证明</h3><p>一个动态PoW算法通常可以包括以下4个步骤：</p>
+<ol>
+<li>生成随机程序。</li>
+<li>将其翻译成CPU的本地机器代码（机器码）。</li>
+<li>执行程序。</li>
+<li>将程序的输出转换为加密安全值。</li>
+</ol>
+<p>实际“有用”的 CPU 密集型工作在步骤 3 中执行，因此必须调整算法以最小化剩余步骤的开销。</p>
+<h4 id="1-1-1-生成随机程序"><a href="#1-1-1-生成随机程序" class="headerlink" title="1.1.1 生成随机程序"></a>1.1.1 生成随机程序</h4><p>在动态PoW设计早期的尝试是基于在高级语言，如C或Javascript [4，5]。但是，由于两个主要原因，导致非常低效：</p>
+<ul>
+<li>高级语言具有复杂的语法，因此生成有效程序的速度相对较慢，因为它需要创建抽象语法树 (ASL)。</li>
+<li>一旦生成了程序的源代码，编译器一般会将文本表示解析回ASL，这使得生成源代码的整个过程变得多余。</li>
+</ul>
+<p>生成随机程序的最快方法是使用无逻辑生成器：简单地用随机数据填充缓冲区。<br>这当然需要设计一种无语法的编程语言（或指令集），其中所有随机位串都代表有效程序。</p>
+<h4 id="1-1-2-将程序翻译成机器码"><a href="#1-1-2-将程序翻译成机器码" class="headerlink" title="1.1.2 将程序翻译成机器码"></a>1.1.2 将程序翻译成机器码</h4><p>这一步是不可避免的，因为我们不想将算法限制在特定的 CPU 架构上。<br>为了尽可能快地生成机器代码，我们需要我们的指令集尽可能接近原生硬件，同时仍然足够通用以支持不同的架构。<br>在代码编译期间没有足够的时间进行昂贵的优化。</p>
+<h4 id="1-1-3-执行程序"><a href="#1-1-3-执行程序" class="headerlink" title="1.1.3 执行程序"></a>1.1.3 执行程序</h4><p>实际的程序执行应该使用尽可能多的CPU组件。应该在程序中使用的一些功能是：</p>
+<ul>
+<li>多级缓存（L1、L2、L3）</li>
+<li>μop 缓存 [ 6 ]</li>
+<li>算术逻辑单元 (ALU)</li>
+<li>浮点单元 (FPU)</li>
+<li>内存控制器</li>
+<li>指令级并行[ 7 ]<ul>
+<li>超标量执行 [ 8 ]</li>
+<li>乱序执行 [ 9 ]</li>
+<li>投机性执行 [ 10 ]</li>
+<li>寄存器重命名 [ 11 ]</li>
+</ul>
+</li>
+</ul>
+<p>第2章描述了 RandomX VM 如何利用这些功能。</p>
+<h4 id="1-1-4-计算最终结果"><a href="#1-1-4-计算最终结果" class="headerlink" title="1.1.4 计算最终结果"></a>1.1.4 计算最终结果</h4><p>Blake2b是一种加密安全的散列函数，专门设计用于在软件中快速运行，尤其是在现代 64 位处理器上，它比 SHA-3 快三倍左右，并且可以以每 3 个时钟周期的速度运行输入字节。此函数是用于 CPU 友好的工作证明的理想候选者。</p>
+<p>为了以加密安全的方式处理大量数据，高级加密标准 (AES) 可以提供最快的处理速度，因为许多现代 CPU 支持这些操作的硬件加速。有关在 RandomX 中使用 AES 的更多详细信息，请参阅第 3 章。</p>
+<h3 id="1-2-“简易程序问题”"><a href="#1-2-“简易程序问题”" class="headerlink" title="1.2 “简易程序问题”"></a>1.2 “简易程序问题”</h3><p>当一个随机程序产生时，人们可以选择只在它有利的时候执行它。这种策略之所以可行，主要有两个原因：</p>
+<p>随机生成程序的运行时间通常遵循对数正态分布 [ 14 ]（另见附录 C）。</p>
+<ol>
+<li>生成的程序可能会被快速分析，如果它的运行时间可能高于平均水平，则可能会跳过程序执行并生成一个新程序。这可以显着提高性能，尤其是在运行时分布有重尾（许多长期运行的异常值）并且程序生成成本低的情况下。</li>
+<li>实现可以选择优化程序执行所需的功能子集。例如，可能会放弃对某些操作（例如除法）的支持，或者可能会更有效地实现某些指令序列。生成的程序只有在符合优化实施的特定要求时才会被分析和执行。</li>
+</ol>
+<p>这些搜索特定属性程序的策略与此工作量证明的目标背道而驰，因此必须消除它们。这可以通过要求执行一系列N个随机程序来实现，这样每个程序都是从前一个程序的输出生成的。然后将最终程序的输出用作结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">          +---------------+     +---------------+               +---------------+     +---------------+</span><br><span class="line">          |               |     |               |               |               |     |               |</span><br><span class="line">input --&gt; |   program 1   | --&gt; |   program 2   | --&gt;  ...  --&gt; | program (N-1) | --&gt; |   program N   | --&gt; result</span><br><span class="line">          |               |     |               |               |               |     |               |</span><br><span class="line">          +---------------+     +---------------+               +---------------+     +---------------+</span><br></pre></td></tr></table></figure>
+
+<p>其原理是，在第一个程序执行后，矿工要么承诺完成整个链（可能包括不利的程序），要么重新开始并浪费在未完成的链上花费的精力。附录 A 中给出了这如何影响不同挖掘策略的哈希率的示例。</p>
+<p>此外，这种链式程序执行具有均衡整个链的运行时间的好处，因为相同分布的运行时间总和的相对偏差减少了。</p>
+<p>1.3 验证时间<br>由于工作量证明的目的是在去信任的点对点网络中使用，网络参与者必须能够快速验证证明是否有效。这为工作量证明算法的复杂性设置了上限。特别是，我们为 RandomX 设定了一个目标，使其验证速度至少与 CryptoNight 哈希函数 [ 15 ]一样快，它旨在取代它。</p>
+<p>1.4 记忆强度<br>除了纯计算资源，如 ALU 和 FPU，CPU 通常可以以 DRAM [ 16 ]的形式访问大量内存。内存子系统的性能通常会根据计算能力进行调整，例如 [ 17 ]：</p>
+<ul>
+<li>用于嵌入式和低功耗 CPU 的单通道内存</li>
+<li>用于台式机 CPU 的双通道内存</li>
+<li>用于工作站 CPU 的三通道或四通道内存</li>
+<li>用于高端服务器 CPU 的六或八通道内存</li>
+</ul>
+<p>为了利用外部存储器以及片上存储器控制器，工作量证明算法应该访问一个大的存储器缓冲区（称为“数据集”）。数据集必须是：</p>
+<ol>
+<li>大于可以存储在芯片上的内容（需要外部存储器）</li>
+<li>动态（需要可写内存）</li>
+</ol>
+<p>对于 16 nm 工艺而言，单个芯片上可放置的最大 SRAM 量超过 512 MiB，而对于 7 nm 工艺而言，则超过 2 GiB [ 18 ]。理想情况下，数据集的大小应至少为 4 GiB。但是，由于验证时间的限制（见下文），RandomX 使用的大小选择为 2080 MiB。虽然理论上可以使用当前技术（2019 年为 7 nm）使用如此数量的 SRAM 制造单个芯片，但这种解决方案的可行性值得怀疑，至少在不久的将来如此。</p>
+<p>1.4.1 轻客户端验证<br>虽然对于解决工作量证明的专用挖矿系统要求 &gt;2 GiB 是合理的，但必须为轻客户端提供一个选项，以使用更少的内存来验证证明。</p>
+<p>必须谨慎选择“快速”和“轻”模式所需的内存比例，以免轻模式适合挖矿。特别是，光模式的面积时间（AT）乘积不应小于快速模式的AT乘积。减少 AT 乘积是衡量权衡攻击的常用方法 [ 19 ]。</p>
+<p>考虑到前几章中描述的限制，根据经验确定快速和轻型验证模式之间的最大可能性能比为 8。这是因为：</p>
+<ol>
+<li>进一步增加光验证时间将违反第 1.3 章中规定的限制。</li>
+<li>进一步减少快速模式运行时间会违反第 1.1 章中规定的约束，特别是程序生成和结果计算的开销时间会变得太高。</li>
+</ol>
+<p>此外，256 MiB 被选为轻客户端模式下可能需要的最大内存量。即使对于 Raspberry Pi 这样的小型单板计算机，这个数量也是可以接受的。</p>
+<p>为了保持恒定的内存时间乘积，最大的快速模式内存要求是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">8 * 256 MiB = 2048 MiB</span><br></pre></td></tr></table></figure>
+
+<p>这可以进一步增加，因为光照模式需要额外的芯片面积用于 SuperscalarHash 函数（参见规范的第 3.4 章和第 6 章）。假设保守估计每个 SuperscalarHash 核心0.2 mm 2和 DRAM 密度为 0.149 Gb&#x2F;mm 2 [ 20 ]，额外的内存为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">8 * 0.2 * 0.149 * 1024 / 8 = 30.5 MiB</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>虚拟机架构<br>本节介绍 RandomX 虚拟机 (VM) 的设计。</li>
+</ol>
+<p>2.1 指令集<br>RandomX 使用固定长度的指令编码，每条指令有 8 个字节。这允许在指令字中包含 32 位立即数。选择指令字位的解释，以便任何 8 字节字都是有效指令。这允许非常有效的随机程序生成（参见第 1.1.1 章）。</p>
+<p>2.1.1 指令复杂度<br>VM 是一个复杂的指令集机器，允许寄存器和内存寻址操作数。然而，每条 RandomX 指令只能转换为 1-7 条 x86 指令（平均 1.8 条）。保持指令复杂度相对较低以最小化具有定制指令集的专用硬件的效率优势非常重要。</p>
+<p>2.2 程序<br>VM 执行的程序具有循环的形式，由 256 条随机指令组成。</p>
+<ul>
+<li>256条指令足够长，可以提供大量可能的程序和足够的分支空间。可以生成的不同程序的数量限制为 2 512 &#x3D; 1.3e+154，这是随机生成器可能的种子值的数量。</li>
+<li>256 条指令足够短，因此高性能 CPU 可以在与从 DRAM 中获取数据所需的时间相似的时间内执行一次迭代。这是有利的，因为它允许同步数据集访问并完全可预取（参见第 2.9 章）。</li>
+<li>由于程序是一个循环，它可以利用一些 x86 CPU 中存在的 μop 缓存 [ 6 ]。从 μop 缓存运行循环允许 CPU 关闭 x86 指令解码器的电源，这应该有助于平衡 x86 和具有简单指令解码的体系结构之间的功率效率。</li>
+</ul>
+<p>2.3 寄存器<br>VM 使用 8 个整数寄存器和 12 个浮点寄存器。这是 x86-64 中可以分配为物理寄存器的最大值，这是常见的 64 位 CPU 架构中架构寄存器最少的。使用更多寄存器会使 x86 CPU 处于劣势，因为它们必须使用内存来存储 VM 寄存器内容。</p>
+<p>2.4 整数运算<br>RandomX 使用所有具有高输出熵的原始整数运算：加法（IADD_RS、IADD_M）、减法（ISUB_R、ISUB_M、INEG_R）、乘法（IMUL_R、IMUL_M、IMULH_R、IMULH_M、ISMULH_R、ISMULH_M、IMULR_RIXOR） IXOR_M) 和旋转 (IROR_R, IROL_R)。</p>
+<p>2.4.1 IADD_RS<br>IADD_RS 指令利用 CPU 的地址计算逻辑，大多数 CPU（x86 lea、arm add）都可以在单个硬件指令中执行。</p>
+<p>2.4.2 IMUL_RCP<br>因为整数除法在 CPU 中没有完全流水线化，在 ASIC 中可以做得更快，所以 IMUL_RCP 指令每个程序只需要一个除法来计算倒数。这迫使 ASIC 包含硬件分频器，而不会在程序执行期间给它们带来性能优势。</p>
+<p>2.4.3 IROR_R&#x2F;IROL_R<br>旋转指令分为右旋转和左旋转，比例为 4:1。向右旋转具有更高的频率，因为某些架构（如 ARM）本身不支持向左旋转（必须使用向右旋转来模拟）。</p>
+<p>2.4.4 ISWAP_R<br>支持寄存器重命名&#x2F;移动消除的 CPU 可以有效地执行此指令。</p>
+<p>2.5 浮点运算<br>RandomX 使用双精度浮点运算，大多数 CPU 都支持这种运算，并且需要比单精度更复杂的硬件。所有操作都作为 128 位向量操作执行，所有主要 CPU 架构也支持这种操作。</p>
+<p>RandomX 使用 IEEE 754 标准保证的五种运算来提供正确的舍入结果：加法、减法、乘法、除法和平方根。使用标准定义的所有 4 种舍入模式。</p>
+<p>2.5.1 浮点寄存器组<br>浮点运算的域分为使用寄存器组 F 的“加法”运算和使用寄存器组 E 的“乘法”运算。这样做是为了防止加法&#x2F;减法在添加少量数字时变为空操作到大量。由于 F 组寄存器的范围限制在 左右±3.0e+14，因此对绝对值大于 1 的浮点数进行加减运算总是至少改变 5 个小数位。</p>
+<p>由于 F 组寄存器的有限范围将允许使用更有效的定点表示（80 位数字），因此 FSCAL 指令操纵浮点格式的二进制表示，使这种优化更加困难。</p>
+<p>E 组寄存器限制为正值，以避免出现NaN结果（例如负数的平方根或0 * ∞）。除法仅使用内存源操作数，以避免被优化为常数倒数的乘法。E组内存操作数的指数设置为-255和0之间的值，以避免除以0和乘以0并增加可以获得的数字范围。可能基团E的寄存器值的近似范围为1.7E-77至infinity。</p>
+<p>每个程序循环结束时浮点寄存器值的近似分布如下图所示（左 - F组，右 - E组）：</p>
+<p><img src="https://i.imgur.com/64G4qE8.png" alt="Imgur" loading="lazy"></p>
+<p>1e+14FSCAL 指令导致的 F 寄存器值较少，显着增加了寄存器值的范围。</p>
+<p>E 组寄存器涵盖了非常大的值范围。大约 2% 的程序至少产生一个infinity值。</p>
+<p>为了最大化熵并适应一个 64 字节的高速缓存线，浮点寄存器在每次迭代结束时使用 XOR 运算进行组合，然后存储到暂存器中。</p>
+<p><em>（注意：bins 由区间的左侧值标记，例如标记为 <code>1e-40</code> 的 bin 包含从 <code>1e-40</code> 到 <code>1e-20</code> 的值。）</em></p>
+<p><code>1e+14</code> 处的 F 寄存器值较少是由 FSCAL 指令引起的，该指令显着增加了寄存器值的范围。</p>
+<p>E 组寄存器涵盖了非常大的值范围。 大约 2% 的程序产生至少一个“无穷大”值。</p>
+<p>为了最大化熵并适应一个 64 字节的高速缓存线，浮点寄存器在每次迭代结束时使用 XOR 操作进行组合，然后存储到暂存器中。</p>
+<h3 id="2-6-分支"><a href="#2-6-分支" class="headerlink" title="2.6 分支"></a>2.6 分支</h3><p>现代 CPU 投入大量芯片面积和精力来处理分支。这包括：</p>
+<ul>
+<li>分支预测器单元 <a href="https://en.wikipedia.org/wiki/Branch_predictor" target="_blank" rel="noopener">Branch predictor</a></li>
+<li>检查点&#x2F;回滚状态，允许 CPU 在分支预测错误的情况下恢复。</li>
+</ul>
+<p>为了利用推测设计，随机程序应该包含分支。但是，如果分支预测失败，则推测执行的指令将被丢弃，这导致每次错误预测都会浪费一定的能量。因此，我们的目标应该是尽量减少错误预测的数量。</p>
+<p>此外，代码中的分支是必不可少的，因为它们显着减少了可以进行的静态优化的数量。例如，考虑以下 x86 指令序列：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    ...</span><br><span class="line">branch_target_00:</span><br><span class="line">    ...</span><br><span class="line">    xor r8, r9</span><br><span class="line">    test r10, 2088960</span><br><span class="line">    je branch_target_00</span><br><span class="line">    xor r8, r9</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>XOR 操作通常会取消，但由于分支而无法优化掉，因为如果采用分支，结果会有所不同。类似地，如果不是用于分支，ISWAP_R 指令可以始终被静态优化。</p>
+<p>一般来说，随机分支必须以这样的方式设计：</p>
+<ol>
+<li>无限循环是不可能的。</li>
+<li>预测错误的分支数量少。</li>
+<li>分支条件取决于运行时值以禁用静态分支优化。</li>
+</ol>
+<h4 id="2-6-1-分支预测"><a href="#2-6-1-分支预测" class="headerlink" title="2.6.1 分支预测"></a>2.6.1 分支预测</h4><p>不幸的是，我们还没有找到如何在 RandomX 中利用分支预测的方法。因为 RandomX 是一个共识协议，所以所有的规则都必须提前制定，包括分支规则。完全可预测的分支不能依赖于任何 VM 寄存器的运行时值（因为寄存器值是伪随机且不可预测的），因此它们必须是静态的，因此可以通过专用硬件轻松优化。</p>
+<h4 id="2-6-2-CBRANCH-指令"><a href="#2-6-2-CBRANCH-指令" class="headerlink" title="2.6.2 CBRANCH 指令"></a>2.6.2 CBRANCH 指令</h4><p>因此，RandomX 使用跳跃概率为 1&#x2F;256 的随机分支和依赖于整数寄存器值的分支条件。这些分支将被 CPU 预测为“未采用”。这些分支在大多数 CPU 设计中是“免费的”，除非它们被采用。虽然这没有利用分支预测器，但与非推测分支处理相比，推测设计将显着提高性能 - 有关更多信息，请参阅附录 B。</p>
+<p>分支条件和跳转目标的选择方式使得 RandomX 代码中的无限循环是不可能的，因为控制分支的寄存器永远不会在重复代码块中被修改。每条 CBRANCH 指令最多可以连续跳转两次。使用谓词执行 [<a href="https://en.wikipedia.org/wiki/Predication_(computer_architecture)" target="_blank" rel="noopener">22</a>] 处理 CBRANCH 是不切实际的，因为大部分时间都不采用分支。</p>
+<h3 id="2-7-指令级并行"><a href="#2-7-指令级并行" class="headerlink" title="2.7 指令级并行"></a>2.7 指令级并行</h3><p>CPU 使用几种利用执行代码的指令级并行性的技术来提高其性能。这些技术包括：</p>
+<ul>
+<li>拥有多个可以并行执行操作的执行单元（<em>超标量执行</em>）。</li>
+<li>执行指令不是按照程序顺序，而是按照操作数可用性的顺序（<em>乱序执行</em>）。</li>
+<li>预测分支将采用哪种方式来增强超标量和无序执行的好处。</li>
+</ul>
+<p>RandomX 受益于所有这些优化。详细分析见附录 B。</p>
+<h3 id="2-8-Scratchpad"><a href="#2-8-Scratchpad" class="headerlink" title="2.8 Scratchpad"></a>2.8 Scratchpad</h3><p>Scratchpad 用作读写存储器。它的大小被选择为完全适合 CPU 缓存。</p>
+<h4 id="2-8-1-Scratchpad-级别"><a href="#2-8-1-Scratchpad-级别" class="headerlink" title="2.8.1 Scratchpad 级别"></a>2.8.1 Scratchpad 级别</h4><p>Scratchpad 分为 3 个级别以模仿典型的 CPU 缓存层次结构 <a href="https://en.wikipedia.org/wiki/CPU_cache" target="_blank" rel="noopener">CPU_cache</a>。大多数 VM 指令访问“L1”和“L2”暂存器，因为 L1 和 L2 CPU 缓存位于靠近 CPU 执行单元的位置，并提供最佳的随机访问延迟。从 L1 和 L2 读取的比率为 3:1，这与典型延迟的反比相匹配（见下表）。</p>
+<table>
+<thead>
+<tr>
+<th>CPU μ 架构</th>
+<th>L1 延迟</th>
+<th>L2 延迟</th>
+<th>L3 延迟</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARM Cortex A55</td>
+<td>2</td>
+<td>6</td>
+<td>-</td>
+<td>[<a href="https://www.anandtech.com/show/11441/dynamiq-and-arms-new-cpus-cortex-a75-a55/4" target="_blank" rel="noopener">src</a>]</td>
+</tr>
+<tr>
+<td>AMD Zen+</td>
+<td>4</td>
+<td>12</td>
+<td>40</td>
+<td>[<a href="https://en.wikichip.org/wiki/amd/microarchitectures/zen%2B#Memory_Hierarchy" target="_blank" rel="noopener">src</a>]</td>
+</tr>
+<tr>
+<td>Intel Skylake</td>
+<td>4</td>
+<td>12</td>
+<td>42</td>
+<td>[<a href="https://en.wikichip.org/wiki/intel/microarchitectures/skylake_(client)#Memory_Hierarchy" target="_blank" rel="noopener">src</a>]</td>
+</tr>
+</tbody></table>
+<p>L3 缓存要大得多，并且离 CPU 内核更远。因此，它的访问延迟要高得多，并可能导致程序执行停顿。</p>
+<p>因此，RandomX 每次程序迭代仅对“L3”Scratchpad 执行 2 次随机访问（规范第 4.6.2 章中的第 2 步和第 3 步）。来自给定迭代的寄存器值被写入它们从中加载的相同位置，这保证了所需的缓存线已移动到更快的 L1 或 L2 缓存中。</p>
+<p>此外，从固定地址读取的整数指令也使用整个“L3”暂存器（规范的表 5.1.4），因为重复访问将确保缓存线将放置在 CPU 的 L1 缓存中。这表明 Scratchpad 级别并不总是直接对应于相同的 CPU 缓存级别。</p>
+<h3 id="2-9-数据集"><a href="#2-9-数据集" class="headerlink" title="2.9 数据集"></a>2.9 数据集</h3><p>由于 Scratchpad 通常存储在 CPU 缓存中，因此只有数据集访问使用内存控制器。</p>
+<p>RandomX 每次程序迭代从数据集随机读取一次（每个哈希结果 16384 次）。由于数据集必须存储在 DRAM 中，因此它提供了一个自然的并行化限制，因为 DRAM 每个存储体组每秒不能进行超过约 2500 万次随机访问。每个可单独寻址的银行组允许大约 1500 H&#x2F;s 的吞吐量。</p>
+<p>所有数据集访问读取一个 CPU 缓存行（64 字节）并完全预取。执行规范第 4.6.2 章中描述的一个程序迭代的时间与典型的 DRAM 访问延迟（50-100 ns）大致相同。</p>
+<h4 id="2-9-1-缓存"><a href="#2-9-1-缓存" class="headerlink" title="2.9.1 缓存"></a>2.9.1 缓存</h4><p>用于光照验证和Dataset构建的Cache，比Dataset小8倍左右。为了保持恒定的区域时间乘积，每个数据集项都由 8 次随机缓存访问构成。</p>
+<p>由于 256 MiB 足够小，可以包含在芯片上，RandomX 使用自定义的高延迟、高功率混合函数（“SuperscalarHash”），这抵消了使用低延迟内存的好处，并且计算 SuperscalarHash 所需的能量变得轻巧模式非常低效的挖矿（见第 3.4 章）。</p>
+<p>由于使用了具有 3 次迭代的抗折衷 Argon2d，因此不可能使用少于 256 MiB 的内存。当使用 3 次迭代（passes）时，将内存使用量减半会使最佳权衡攻击的计算成本增加 3423 倍 <a href="https://eprint.iacr.org/2015/430.pdf" target="_blank" rel="noopener">Fast and Tradeoff-Resilient Memory-Hard Functions for Cryptocurrencies and Password Hashing</a></p>
+<h4 id="2-8-2-Scratchpad-写入"><a href="#2-8-2-Scratchpad-写入" class="headerlink" title="2.8.2 Scratchpad 写入"></a>2.8.2 Scratchpad 写入</h4><p>在 VM 执行期间，有两种方式修改 Scratchpad：</p>
+<ol>
+<li>在每次程序迭代结束时，所有寄存器值都写入“L3”暂存器（参见规范章节 4.6.2，步骤 9 和 11）。这在两个 64 字节的块中每次迭代总共写入 128 字节。</li>
+<li>ISTORE 指令执行显式存储。每个程序平均有 16 个商店，其中 2 个商店进入“L3”级别。每个 ISTORE 指令写入 8 个字节。</li>
+</ol>
+<p>下图显示了写入暂存器的分布示例。图像中的每个像素代表 Scratchpad 的 8 个字节。红色像素代表在散列计算期间至少被覆盖一次的便签本部分。 “L1”和“L2”级别位于左侧（几乎完全覆盖）。暂存器的右侧代表底部 1792 KiB。其中只有大约 66% 被覆盖，但写入是均匀随机分布的。</p>
+<p><img src="https://i.imgur.com/pRz6aBG.png" alt="Imgur" loading="lazy"></p>
+<p>有关 Scratchpad 熵的分析，请参见附录 D。</p>
+<h4 id="2-8-3-读写比例"><a href="#2-8-3-读写比例" class="headerlink" title="2.8.3 读写比例"></a>2.8.3 读写比例</h4><p>程序每次程序迭代平均对便笺簿进行 39 次读取（指令 IADD_M、ISUB_M、IMUL_M、IMULH_M、ISMULH_M、IXOR_M、FADD_M、FSUB_M、FDIV_M）和 16 次写入（指令 ISTORE）。额外的 128 个字节被隐式读取和写入以初始化和存储寄存器值。每次迭代从 Dataset 中读取 64 字节的数据。总共：</p>
+<ul>
+<li>每次程序迭代从内存读取的平均数据量为：39 * 8 + 128 + 64 &#x3D; <strong>504 字节</strong>。</li>
+<li>每次程序迭代写入内存的平均数据量为：16 * 8 + 128 &#x3D; <strong>256 字节</strong>。</li>
+</ul>
+<p>这接近于 2:1 的读&#x2F;写比，这是 CPU 优化的。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2>]]></content>
   </entry>
   <entry>
     <title>论文分享：《The Doge of Wall Street: Analysis and Detection of Pump and Dump Cryptocurrency Manipulations》</title>
@@ -11416,207 +11617,6 @@ TODO:
       </tags>
   </entry>
   <entry>
-    <title>RandomX Design</title>
-    <url>//randomx-design/</url>
-    <content><![CDATA[<p>原文<a href="https://github.com/tevador/RandomX/blob/master/doc/design.md" target="_blank" rel="noopener">https://github.com/tevador/RandomX/blob/master/doc/design.md</a></p>
-<p>为了最大限度地减少专用硬件的性能优势，工作量证明 (PoW) 算法必须通过针对现有通用硬件的特定功能来实现<em>设备绑定</em>。<br>这是一项复杂的任务，因为我们必须针对来自不同制造商的具有不同架构的一大类设备。</p>
-<p>有两类不同的通用处理设备：中央处理单元 (CPU) 和图形处理单元 (GPU)。RandomX 针对 CPU 的原因如下：</p>
-<ul>
-<li>CPU非专业挖矿设备，对于正常用户来说更普遍且更容易访问。受 CPU 限制的算法更加平等，并允许更多参与者加入网络。这是[原始CryptoNote白皮书][cn_paper]中所述的目标之一。</li>
-<li>在不同的 CPU 体系结构中存在大量通用的本地硬件指令子集。GPU 则不能这样说。例如，NVIDIA 和 AMD GPU <a href="https://github.com/ifdefelse/ProgPOW/issues/16" target="_blank" rel="noopener">没有通用的整数乘法指​​令</a>。</li>
-<li>所有主要的CPU 指令集都有详细的文档记录，有多个可用的开源编译器。相比之下，GPU 指令集通常是专有的，可能需要供应商特定的闭源驱动程序才能获得最大性能。</li>
-</ul>
-<h2 id="1-设计考量"><a href="#1-设计考量" class="headerlink" title="1. 设计考量"></a>1. 设计考量</h2><p>CPU 绑定工作量证明的最基本思想是“工作”必须是动态的。这利用了 CPU 接受两种输入的事实：数据（主要输入）和代码（指定对数据执行什么操作）。</p>
-<p>相反，经典的加密散列hash函数 [ 3 ] 并不适合 CPU 的工作，因为它们的唯一输入是<em>数据</em>，而<strong>操作序列是固定</strong>的，可以通过专用集成电路ASIC更有效地执行。</p>
-<h3 id="1-1-动态工作量证明"><a href="#1-1-动态工作量证明" class="headerlink" title="1.1 动态工作量证明"></a>1.1 动态工作量证明</h3><p>一个动态PoW算法通常可以包括以下4个步骤：</p>
-<ol>
-<li>生成随机程序。</li>
-<li>将其翻译成CPU的本地机器代码（机器码）。</li>
-<li>执行程序。</li>
-<li>将程序的输出转换为加密安全值。</li>
-</ol>
-<p>实际“有用”的 CPU 密集型工作在步骤 3 中执行，因此必须调整算法以最小化剩余步骤的开销。</p>
-<h4 id="1-1-1-生成随机程序"><a href="#1-1-1-生成随机程序" class="headerlink" title="1.1.1 生成随机程序"></a>1.1.1 生成随机程序</h4><p>在动态PoW设计早期的尝试是基于在高级语言，如C或Javascript [4，5]。但是，由于两个主要原因，导致非常低效：</p>
-<ul>
-<li>高级语言具有复杂的语法，因此生成有效程序的速度相对较慢，因为它需要创建抽象语法树 (ASL)。</li>
-<li>一旦生成了程序的源代码，编译器一般会将文本表示解析回ASL，这使得生成源代码的整个过程变得多余。</li>
-</ul>
-<p>生成随机程序的最快方法是使用无逻辑生成器：简单地用随机数据填充缓冲区。<br>这当然需要设计一种无语法的编程语言（或指令集），其中所有随机位串都代表有效程序。</p>
-<h4 id="1-1-2-将程序翻译成机器码"><a href="#1-1-2-将程序翻译成机器码" class="headerlink" title="1.1.2 将程序翻译成机器码"></a>1.1.2 将程序翻译成机器码</h4><p>这一步是不可避免的，因为我们不想将算法限制在特定的 CPU 架构上。<br>为了尽可能快地生成机器代码，我们需要我们的指令集尽可能接近原生硬件，同时仍然足够通用以支持不同的架构。<br>在代码编译期间没有足够的时间进行昂贵的优化。</p>
-<h4 id="1-1-3-执行程序"><a href="#1-1-3-执行程序" class="headerlink" title="1.1.3 执行程序"></a>1.1.3 执行程序</h4><p>实际的程序执行应该使用尽可能多的CPU组件。应该在程序中使用的一些功能是：</p>
-<ul>
-<li>多级缓存（L1、L2、L3）</li>
-<li>μop 缓存 [ 6 ]</li>
-<li>算术逻辑单元 (ALU)</li>
-<li>浮点单元 (FPU)</li>
-<li>内存控制器</li>
-<li>指令级并行[ 7 ]<ul>
-<li>超标量执行 [ 8 ]</li>
-<li>乱序执行 [ 9 ]</li>
-<li>投机性执行 [ 10 ]</li>
-<li>寄存器重命名 [ 11 ]</li>
-</ul>
-</li>
-</ul>
-<p>第2章描述了 RandomX VM 如何利用这些功能。</p>
-<h4 id="1-1-4-计算最终结果"><a href="#1-1-4-计算最终结果" class="headerlink" title="1.1.4 计算最终结果"></a>1.1.4 计算最终结果</h4><p>Blake2b是一种加密安全的散列函数，专门设计用于在软件中快速运行，尤其是在现代 64 位处理器上，它比 SHA-3 快三倍左右，并且可以以每 3 个时钟周期的速度运行输入字节。此函数是用于 CPU 友好的工作证明的理想候选者。</p>
-<p>为了以加密安全的方式处理大量数据，高级加密标准 (AES) 可以提供最快的处理速度，因为许多现代 CPU 支持这些操作的硬件加速。有关在 RandomX 中使用 AES 的更多详细信息，请参阅第 3 章。</p>
-<h3 id="1-2-“简易程序问题”"><a href="#1-2-“简易程序问题”" class="headerlink" title="1.2 “简易程序问题”"></a>1.2 “简易程序问题”</h3><p>当一个随机程序产生时，人们可以选择只在它有利的时候执行它。这种策略之所以可行，主要有两个原因：</p>
-<p>随机生成程序的运行时间通常遵循对数正态分布 [ 14 ]（另见附录 C）。</p>
-<ol>
-<li>生成的程序可能会被快速分析，如果它的运行时间可能高于平均水平，则可能会跳过程序执行并生成一个新程序。这可以显着提高性能，尤其是在运行时分布有重尾（许多长期运行的异常值）并且程序生成成本低的情况下。</li>
-<li>实现可以选择优化程序执行所需的功能子集。例如，可能会放弃对某些操作（例如除法）的支持，或者可能会更有效地实现某些指令序列。生成的程序只有在符合优化实施的特定要求时才会被分析和执行。</li>
-</ol>
-<p>这些搜索特定属性程序的策略与此工作量证明的目标背道而驰，因此必须消除它们。这可以通过要求执行一系列N个随机程序来实现，这样每个程序都是从前一个程序的输出生成的。然后将最终程序的输出用作结果。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">          +---------------+     +---------------+               +---------------+     +---------------+</span><br><span class="line">          |               |     |               |               |               |     |               |</span><br><span class="line">input --&gt; |   program 1   | --&gt; |   program 2   | --&gt;  ...  --&gt; | program (N-1) | --&gt; |   program N   | --&gt; result</span><br><span class="line">          |               |     |               |               |               |     |               |</span><br><span class="line">          +---------------+     +---------------+               +---------------+     +---------------+</span><br></pre></td></tr></table></figure>
-
-<p>其原理是，在第一个程序执行后，矿工要么承诺完成整个链（可能包括不利的程序），要么重新开始并浪费在未完成的链上花费的精力。附录 A 中给出了这如何影响不同挖掘策略的哈希率的示例。</p>
-<p>此外，这种链式程序执行具有均衡整个链的运行时间的好处，因为相同分布的运行时间总和的相对偏差减少了。</p>
-<p>1.3 验证时间<br>由于工作量证明的目的是在去信任的点对点网络中使用，网络参与者必须能够快速验证证明是否有效。这为工作量证明算法的复杂性设置了上限。特别是，我们为 RandomX 设定了一个目标，使其验证速度至少与 CryptoNight 哈希函数 [ 15 ]一样快，它旨在取代它。</p>
-<p>1.4 记忆强度<br>除了纯计算资源，如 ALU 和 FPU，CPU 通常可以以 DRAM [ 16 ]的形式访问大量内存。内存子系统的性能通常会根据计算能力进行调整，例如 [ 17 ]：</p>
-<ul>
-<li>用于嵌入式和低功耗 CPU 的单通道内存</li>
-<li>用于台式机 CPU 的双通道内存</li>
-<li>用于工作站 CPU 的三通道或四通道内存</li>
-<li>用于高端服务器 CPU 的六或八通道内存</li>
-</ul>
-<p>为了利用外部存储器以及片上存储器控制器，工作量证明算法应该访问一个大的存储器缓冲区（称为“数据集”）。数据集必须是：</p>
-<ol>
-<li>大于可以存储在芯片上的内容（需要外部存储器）</li>
-<li>动态（需要可写内存）</li>
-</ol>
-<p>对于 16 nm 工艺而言，单个芯片上可放置的最大 SRAM 量超过 512 MiB，而对于 7 nm 工艺而言，则超过 2 GiB [ 18 ]。理想情况下，数据集的大小应至少为 4 GiB。但是，由于验证时间的限制（见下文），RandomX 使用的大小选择为 2080 MiB。虽然理论上可以使用当前技术（2019 年为 7 nm）使用如此数量的 SRAM 制造单个芯片，但这种解决方案的可行性值得怀疑，至少在不久的将来如此。</p>
-<p>1.4.1 轻客户端验证<br>虽然对于解决工作量证明的专用挖矿系统要求 &gt;2 GiB 是合理的，但必须为轻客户端提供一个选项，以使用更少的内存来验证证明。</p>
-<p>必须谨慎选择“快速”和“轻”模式所需的内存比例，以免轻模式适合挖矿。特别是，光模式的面积时间（AT）乘积不应小于快速模式的AT乘积。减少 AT 乘积是衡量权衡攻击的常用方法 [ 19 ]。</p>
-<p>考虑到前几章中描述的限制，根据经验确定快速和轻型验证模式之间的最大可能性能比为 8。这是因为：</p>
-<ol>
-<li>进一步增加光验证时间将违反第 1.3 章中规定的限制。</li>
-<li>进一步减少快速模式运行时间会违反第 1.1 章中规定的约束，特别是程序生成和结果计算的开销时间会变得太高。</li>
-</ol>
-<p>此外，256 MiB 被选为轻客户端模式下可能需要的最大内存量。即使对于 Raspberry Pi 这样的小型单板计算机，这个数量也是可以接受的。</p>
-<p>为了保持恒定的内存时间乘积，最大的快速模式内存要求是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">8 * 256 MiB = 2048 MiB</span><br></pre></td></tr></table></figure>
-
-<p>这可以进一步增加，因为光照模式需要额外的芯片面积用于 SuperscalarHash 函数（参见规范的第 3.4 章和第 6 章）。假设保守估计每个 SuperscalarHash 核心0.2 mm 2和 DRAM 密度为 0.149 Gb&#x2F;mm 2 [ 20 ]，额外的内存为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">8 * 0.2 * 0.149 * 1024 / 8 = 30.5 MiB</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>虚拟机架构<br>本节介绍 RandomX 虚拟机 (VM) 的设计。</li>
-</ol>
-<p>2.1 指令集<br>RandomX 使用固定长度的指令编码，每条指令有 8 个字节。这允许在指令字中包含 32 位立即数。选择指令字位的解释，以便任何 8 字节字都是有效指令。这允许非常有效的随机程序生成（参见第 1.1.1 章）。</p>
-<p>2.1.1 指令复杂度<br>VM 是一个复杂的指令集机器，允许寄存器和内存寻址操作数。然而，每条 RandomX 指令只能转换为 1-7 条 x86 指令（平均 1.8 条）。保持指令复杂度相对较低以最小化具有定制指令集的专用硬件的效率优势非常重要。</p>
-<p>2.2 程序<br>VM 执行的程序具有循环的形式，由 256 条随机指令组成。</p>
-<ul>
-<li>256条指令足够长，可以提供大量可能的程序和足够的分支空间。可以生成的不同程序的数量限制为 2 512 &#x3D; 1.3e+154，这是随机生成器可能的种子值的数量。</li>
-<li>256 条指令足够短，因此高性能 CPU 可以在与从 DRAM 中获取数据所需的时间相似的时间内执行一次迭代。这是有利的，因为它允许同步数据集访问并完全可预取（参见第 2.9 章）。</li>
-<li>由于程序是一个循环，它可以利用一些 x86 CPU 中存在的 μop 缓存 [ 6 ]。从 μop 缓存运行循环允许 CPU 关闭 x86 指令解码器的电源，这应该有助于平衡 x86 和具有简单指令解码的体系结构之间的功率效率。</li>
-</ul>
-<p>2.3 寄存器<br>VM 使用 8 个整数寄存器和 12 个浮点寄存器。这是 x86-64 中可以分配为物理寄存器的最大值，这是常见的 64 位 CPU 架构中架构寄存器最少的。使用更多寄存器会使 x86 CPU 处于劣势，因为它们必须使用内存来存储 VM 寄存器内容。</p>
-<p>2.4 整数运算<br>RandomX 使用所有具有高输出熵的原始整数运算：加法（IADD_RS、IADD_M）、减法（ISUB_R、ISUB_M、INEG_R）、乘法（IMUL_R、IMUL_M、IMULH_R、IMULH_M、ISMULH_R、ISMULH_M、IMULR_RIXOR） IXOR_M) 和旋转 (IROR_R, IROL_R)。</p>
-<p>2.4.1 IADD_RS<br>IADD_RS 指令利用 CPU 的地址计算逻辑，大多数 CPU（x86 lea、arm add）都可以在单个硬件指令中执行。</p>
-<p>2.4.2 IMUL_RCP<br>因为整数除法在 CPU 中没有完全流水线化，在 ASIC 中可以做得更快，所以 IMUL_RCP 指令每个程序只需要一个除法来计算倒数。这迫使 ASIC 包含硬件分频器，而不会在程序执行期间给它们带来性能优势。</p>
-<p>2.4.3 IROR_R&#x2F;IROL_R<br>旋转指令分为右旋转和左旋转，比例为 4:1。向右旋转具有更高的频率，因为某些架构（如 ARM）本身不支持向左旋转（必须使用向右旋转来模拟）。</p>
-<p>2.4.4 ISWAP_R<br>支持寄存器重命名&#x2F;移动消除的 CPU 可以有效地执行此指令。</p>
-<p>2.5 浮点运算<br>RandomX 使用双精度浮点运算，大多数 CPU 都支持这种运算，并且需要比单精度更复杂的硬件。所有操作都作为 128 位向量操作执行，所有主要 CPU 架构也支持这种操作。</p>
-<p>RandomX 使用 IEEE 754 标准保证的五种运算来提供正确的舍入结果：加法、减法、乘法、除法和平方根。使用标准定义的所有 4 种舍入模式。</p>
-<p>2.5.1 浮点寄存器组<br>浮点运算的域分为使用寄存器组 F 的“加法”运算和使用寄存器组 E 的“乘法”运算。这样做是为了防止加法&#x2F;减法在添加少量数字时变为空操作到大量。由于 F 组寄存器的范围限制在 左右±3.0e+14，因此对绝对值大于 1 的浮点数进行加减运算总是至少改变 5 个小数位。</p>
-<p>由于 F 组寄存器的有限范围将允许使用更有效的定点表示（80 位数字），因此 FSCAL 指令操纵浮点格式的二进制表示，使这种优化更加困难。</p>
-<p>E 组寄存器限制为正值，以避免出现NaN结果（例如负数的平方根或0 * ∞）。除法仅使用内存源操作数，以避免被优化为常数倒数的乘法。E组内存操作数的指数设置为-255和0之间的值，以避免除以0和乘以0并增加可以获得的数字范围。可能基团E的寄存器值的近似范围为1.7E-77至infinity。</p>
-<p>每个程序循环结束时浮点寄存器值的近似分布如下图所示（左 - F组，右 - E组）：</p>
-<p><img src="https://i.imgur.com/64G4qE8.png" alt="Imgur" loading="lazy"></p>
-<p>1e+14FSCAL 指令导致的 F 寄存器值较少，显着增加了寄存器值的范围。</p>
-<p>E 组寄存器涵盖了非常大的值范围。大约 2% 的程序至少产生一个infinity值。</p>
-<p>为了最大化熵并适应一个 64 字节的高速缓存线，浮点寄存器在每次迭代结束时使用 XOR 运算进行组合，然后存储到暂存器中。</p>
-<p><em>（注意：bins 由区间的左侧值标记，例如标记为 <code>1e-40</code> 的 bin 包含从 <code>1e-40</code> 到 <code>1e-20</code> 的值。）</em></p>
-<p><code>1e+14</code> 处的 F 寄存器值较少是由 FSCAL 指令引起的，该指令显着增加了寄存器值的范围。</p>
-<p>E 组寄存器涵盖了非常大的值范围。 大约 2% 的程序产生至少一个“无穷大”值。</p>
-<p>为了最大化熵并适应一个 64 字节的高速缓存线，浮点寄存器在每次迭代结束时使用 XOR 操作进行组合，然后存储到暂存器中。</p>
-<h3 id="2-6-分支"><a href="#2-6-分支" class="headerlink" title="2.6 分支"></a>2.6 分支</h3><p>现代 CPU 投入大量芯片面积和精力来处理分支。这包括：</p>
-<ul>
-<li>分支预测器单元 <a href="https://en.wikipedia.org/wiki/Branch_predictor" target="_blank" rel="noopener">Branch predictor</a></li>
-<li>检查点&#x2F;回滚状态，允许 CPU 在分支预测错误的情况下恢复。</li>
-</ul>
-<p>为了利用推测设计，随机程序应该包含分支。但是，如果分支预测失败，则推测执行的指令将被丢弃，这导致每次错误预测都会浪费一定的能量。因此，我们的目标应该是尽量减少错误预测的数量。</p>
-<p>此外，代码中的分支是必不可少的，因为它们显着减少了可以进行的静态优化的数量。例如，考虑以下 x86 指令序列：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    ...</span><br><span class="line">branch_target_00:</span><br><span class="line">    ...</span><br><span class="line">    xor r8, r9</span><br><span class="line">    test r10, 2088960</span><br><span class="line">    je branch_target_00</span><br><span class="line">    xor r8, r9</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>XOR 操作通常会取消，但由于分支而无法优化掉，因为如果采用分支，结果会有所不同。类似地，如果不是用于分支，ISWAP_R 指令可以始终被静态优化。</p>
-<p>一般来说，随机分支必须以这样的方式设计：</p>
-<ol>
-<li>无限循环是不可能的。</li>
-<li>预测错误的分支数量少。</li>
-<li>分支条件取决于运行时值以禁用静态分支优化。</li>
-</ol>
-<h4 id="2-6-1-分支预测"><a href="#2-6-1-分支预测" class="headerlink" title="2.6.1 分支预测"></a>2.6.1 分支预测</h4><p>不幸的是，我们还没有找到如何在 RandomX 中利用分支预测的方法。因为 RandomX 是一个共识协议，所以所有的规则都必须提前制定，包括分支规则。完全可预测的分支不能依赖于任何 VM 寄存器的运行时值（因为寄存器值是伪随机且不可预测的），因此它们必须是静态的，因此可以通过专用硬件轻松优化。</p>
-<h4 id="2-6-2-CBRANCH-指令"><a href="#2-6-2-CBRANCH-指令" class="headerlink" title="2.6.2 CBRANCH 指令"></a>2.6.2 CBRANCH 指令</h4><p>因此，RandomX 使用跳跃概率为 1&#x2F;256 的随机分支和依赖于整数寄存器值的分支条件。这些分支将被 CPU 预测为“未采用”。这些分支在大多数 CPU 设计中是“免费的”，除非它们被采用。虽然这没有利用分支预测器，但与非推测分支处理相比，推测设计将显着提高性能 - 有关更多信息，请参阅附录 B。</p>
-<p>分支条件和跳转目标的选择方式使得 RandomX 代码中的无限循环是不可能的，因为控制分支的寄存器永远不会在重复代码块中被修改。每条 CBRANCH 指令最多可以连续跳转两次。使用谓词执行 [<a href="https://en.wikipedia.org/wiki/Predication_(computer_architecture)" target="_blank" rel="noopener">22</a>] 处理 CBRANCH 是不切实际的，因为大部分时间都不采用分支。</p>
-<h3 id="2-7-指令级并行"><a href="#2-7-指令级并行" class="headerlink" title="2.7 指令级并行"></a>2.7 指令级并行</h3><p>CPU 使用几种利用执行代码的指令级并行性的技术来提高其性能。这些技术包括：</p>
-<ul>
-<li>拥有多个可以并行执行操作的执行单元（<em>超标量执行</em>）。</li>
-<li>执行指令不是按照程序顺序，而是按照操作数可用性的顺序（<em>乱序执行</em>）。</li>
-<li>预测分支将采用哪种方式来增强超标量和无序执行的好处。</li>
-</ul>
-<p>RandomX 受益于所有这些优化。详细分析见附录 B。</p>
-<h3 id="2-8-Scratchpad"><a href="#2-8-Scratchpad" class="headerlink" title="2.8 Scratchpad"></a>2.8 Scratchpad</h3><p>Scratchpad 用作读写存储器。它的大小被选择为完全适合 CPU 缓存。</p>
-<h4 id="2-8-1-Scratchpad-级别"><a href="#2-8-1-Scratchpad-级别" class="headerlink" title="2.8.1 Scratchpad 级别"></a>2.8.1 Scratchpad 级别</h4><p>Scratchpad 分为 3 个级别以模仿典型的 CPU 缓存层次结构 <a href="https://en.wikipedia.org/wiki/CPU_cache" target="_blank" rel="noopener">CPU_cache</a>。大多数 VM 指令访问“L1”和“L2”暂存器，因为 L1 和 L2 CPU 缓存位于靠近 CPU 执行单元的位置，并提供最佳的随机访问延迟。从 L1 和 L2 读取的比率为 3:1，这与典型延迟的反比相匹配（见下表）。</p>
-<table>
-<thead>
-<tr>
-<th>CPU μ 架构</th>
-<th>L1 延迟</th>
-<th>L2 延迟</th>
-<th>L3 延迟</th>
-<th>来源</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ARM Cortex A55</td>
-<td>2</td>
-<td>6</td>
-<td>-</td>
-<td>[<a href="https://www.anandtech.com/show/11441/dynamiq-and-arms-new-cpus-cortex-a75-a55/4" target="_blank" rel="noopener">src</a>]</td>
-</tr>
-<tr>
-<td>AMD Zen+</td>
-<td>4</td>
-<td>12</td>
-<td>40</td>
-<td>[<a href="https://en.wikichip.org/wiki/amd/microarchitectures/zen%2B#Memory_Hierarchy" target="_blank" rel="noopener">src</a>]</td>
-</tr>
-<tr>
-<td>Intel Skylake</td>
-<td>4</td>
-<td>12</td>
-<td>42</td>
-<td>[<a href="https://en.wikichip.org/wiki/intel/microarchitectures/skylake_(client)#Memory_Hierarchy" target="_blank" rel="noopener">src</a>]</td>
-</tr>
-</tbody></table>
-<p>L3 缓存要大得多，并且离 CPU 内核更远。因此，它的访问延迟要高得多，并可能导致程序执行停顿。</p>
-<p>因此，RandomX 每次程序迭代仅对“L3”Scratchpad 执行 2 次随机访问（规范第 4.6.2 章中的第 2 步和第 3 步）。来自给定迭代的寄存器值被写入它们从中加载的相同位置，这保证了所需的缓存线已移动到更快的 L1 或 L2 缓存中。</p>
-<p>此外，从固定地址读取的整数指令也使用整个“L3”暂存器（规范的表 5.1.4），因为重复访问将确保缓存线将放置在 CPU 的 L1 缓存中。这表明 Scratchpad 级别并不总是直接对应于相同的 CPU 缓存级别。</p>
-<h3 id="2-9-数据集"><a href="#2-9-数据集" class="headerlink" title="2.9 数据集"></a>2.9 数据集</h3><p>由于 Scratchpad 通常存储在 CPU 缓存中，因此只有数据集访问使用内存控制器。</p>
-<p>RandomX 每次程序迭代从数据集随机读取一次（每个哈希结果 16384 次）。由于数据集必须存储在 DRAM 中，因此它提供了一个自然的并行化限制，因为 DRAM 每个存储体组每秒不能进行超过约 2500 万次随机访问。每个可单独寻址的银行组允许大约 1500 H&#x2F;s 的吞吐量。</p>
-<p>所有数据集访问读取一个 CPU 缓存行（64 字节）并完全预取。执行规范第 4.6.2 章中描述的一个程序迭代的时间与典型的 DRAM 访问延迟（50-100 ns）大致相同。</p>
-<h4 id="2-9-1-缓存"><a href="#2-9-1-缓存" class="headerlink" title="2.9.1 缓存"></a>2.9.1 缓存</h4><p>用于光照验证和Dataset构建的Cache，比Dataset小8倍左右。为了保持恒定的区域时间乘积，每个数据集项都由 8 次随机缓存访问构成。</p>
-<p>由于 256 MiB 足够小，可以包含在芯片上，RandomX 使用自定义的高延迟、高功率混合函数（“SuperscalarHash”），这抵消了使用低延迟内存的好处，并且计算 SuperscalarHash 所需的能量变得轻巧模式非常低效的挖矿（见第 3.4 章）。</p>
-<p>由于使用了具有 3 次迭代的抗折衷 Argon2d，因此不可能使用少于 256 MiB 的内存。当使用 3 次迭代（passes）时，将内存使用量减半会使最佳权衡攻击的计算成本增加 3423 倍 <a href="https://eprint.iacr.org/2015/430.pdf" target="_blank" rel="noopener">Fast and Tradeoff-Resilient Memory-Hard Functions for Cryptocurrencies and Password Hashing</a></p>
-<h4 id="2-8-2-Scratchpad-写入"><a href="#2-8-2-Scratchpad-写入" class="headerlink" title="2.8.2 Scratchpad 写入"></a>2.8.2 Scratchpad 写入</h4><p>在 VM 执行期间，有两种方式修改 Scratchpad：</p>
-<ol>
-<li>在每次程序迭代结束时，所有寄存器值都写入“L3”暂存器（参见规范章节 4.6.2，步骤 9 和 11）。这在两个 64 字节的块中每次迭代总共写入 128 字节。</li>
-<li>ISTORE 指令执行显式存储。每个程序平均有 16 个商店，其中 2 个商店进入“L3”级别。每个 ISTORE 指令写入 8 个字节。</li>
-</ol>
-<p>下图显示了写入暂存器的分布示例。图像中的每个像素代表 Scratchpad 的 8 个字节。红色像素代表在散列计算期间至少被覆盖一次的便签本部分。 “L1”和“L2”级别位于左侧（几乎完全覆盖）。暂存器的右侧代表底部 1792 KiB。其中只有大约 66% 被覆盖，但写入是均匀随机分布的。</p>
-<p><img src="https://i.imgur.com/pRz6aBG.png" alt="Imgur" loading="lazy"></p>
-<p>有关 Scratchpad 熵的分析，请参见附录 D。</p>
-<h4 id="2-8-3-读写比例"><a href="#2-8-3-读写比例" class="headerlink" title="2.8.3 读写比例"></a>2.8.3 读写比例</h4><p>程序每次程序迭代平均对便笺簿进行 39 次读取（指令 IADD_M、ISUB_M、IMUL_M、IMULH_M、ISMULH_M、IXOR_M、FADD_M、FSUB_M、FDIV_M）和 16 次写入（指令 ISTORE）。额外的 128 个字节被隐式读取和写入以初始化和存储寄存器值。每次迭代从 Dataset 中读取 64 字节的数据。总共：</p>
-<ul>
-<li>每次程序迭代从内存读取的平均数据量为：39 * 8 + 128 + 64 &#x3D; <strong>504 字节</strong>。</li>
-<li>每次程序迭代写入内存的平均数据量为：16 * 8 + 128 &#x3D; <strong>256 字节</strong>。</li>
-</ul>
-<p>这接近于 2:1 的读&#x2F;写比，这是 CPU 优化的。</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2>]]></content>
-  </entry>
-  <entry>
     <title>regenerate cgo definitions: vscode里gopls对cgo的新支持</title>
     <url>//regenerate-cgo-definitions/</url>
     <content><![CDATA[<p>因为之前都是让IDE&#x2F;VScode(goreturns)自动处理的import，所以今天在用vscode重新format的时候才看到，在<code>import &quot;C&quot;</code>的上面有个可以点的<code>regenerate cgo definitions</code>按钮。</p>
@@ -11643,6 +11643,53 @@ TODO:
         <tag>cgo</tag>
         <tag>gopls</tag>
         <tag>go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>reputational-contagion-and-the-fall-of-ftx</title>
+    <url>//reputational-contagion-and-the-fall-of-ftx/</url>
+    <content><![CDATA[<h1 id="Reputational-contagion-and-the-fall-of-FTX-Examining-the-response-of-tokens-to-the-delegitimization-of-FTT"><a href="#Reputational-contagion-and-the-fall-of-FTX-Examining-the-response-of-tokens-to-the-delegitimization-of-FTT" class="headerlink" title="Reputational contagion and the fall of FTX: Examining the response of tokens to the delegitimization of FTT"></a>Reputational contagion and the fall of FTX: Examining the response of tokens to the delegitimization of FTT</h1><p>Finance Research Letters</p>
+<p>Imran Yousaf a, John W. Goodell</p>
+<p><a href="https://www.sciencedirect.com/science/article/pii/S1544612323000788" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/pii/S1544612323000788</a></p>
+<hr>
+<p>与加密货币交易所 FTX 最近的下跌交织在一起的是，向投资者揭示了 FTX 平台代币 FTT 缺乏资产支持。鉴于对声誉传染的兴趣，以及最近学术界和投资者对数字代币的兴趣，我们有动力利用 FTX&#x2F;FTT 事件来调查声誉传染到其他代币的情况。我们采用事件研究方法来衡量 FTX 崩溃对各种代币的影响。从异常收益结果 以及 累积异常收益 CAR 和 累积平均异常收益 CAAR 表明，几乎所有代币在活动当天都开启了持续的看跌趋势。</p>
+<hr>
+<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><p>八类代币的每日数据来自 coinmarketcap.com。这些代币包括DEX（Uniswap-UNI、Stellar-XLM、PancakeSwap-CAKE、Synthetix-SNX）、CEX（BNB、UNUS SED LEO-LEO、Cronos-CRO、FTX Token-FTT）、NFT（ApeCoin-APE、Flow、 Chiliz-CHZ、Theta Network-THETA)、Defi (Dai、Avalanche-AVAX、Chainlink-LINK、Wrapped Bitcoin-WBTC)、Memes (Dogecoin-DOGE、Shiba Inu-SHIB、Baby Doge Coin-BabyDoge、MonaCoin-MONA)、能源（Energy Web Token-EWT、Powerledger-POWR、Efforce-WOZX、GRID）、旅游（Travala.com-AVA、TripCandy-CANDY、XcelToken Plus-XLAB、BTU Protocol-BTU）和医疗保健（MediBloc-MED、SOLVE） 、Dentacoin-DCN、DOC.COM-MTC）。活动日期为2022年11月8日，因为FTX交易所在这一天崩盘，FTT代币下跌75%。估计窗口由2022年7月4日至2022年11月1日（t-127至t-7）的120天组成，事件窗口由2022年11月2日至2022年11月17日（t-6至t+9）的16天组成。在本文附录的表A1中，我们提供了所有代币收益的描述性统计。</p>
+<hr>
+<h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p>我们采用事件研究方法来估计 FTX 崩溃对 DEX、CEX 和其他类别代币造成的 FTT 声誉损害的影响。利用普通最小二乘（OLS）市场模型计算从t-127到t-7的120天估计窗口的正常收益。戴克曼等人。 （1984）表明 OLS 市场模型为事件研究方法产生了相对更好的结果。使用方程式(1)，我们计算预期或正常回报，E(R it ):</p>
+<p>$E \left(\right. R_{i t} \left.\right) &#x3D; a_{i} + b_{i} R_{m t}$</p>
+<p>其中，$R_{mt}$ 是基准 MSCI 世界股票指数在 t 天的回报率。此外，我们采用等式。 (2) 确定基准指数和样本指数每日实际收益：</p>
+<p>$R_{i t} &#x3D; \left[\right. \left(\right. P_{i t} - - P_{i t - 1} \left.\right) &#x2F; P_{i t - 1} \left]\right. \times 100$</p>
+<p>$P_{it}$ 表示所选指数 i 在 t 日的价格，而 $P_{it-1}$ 显示所选指数 i 在 t 日前一天的价格</p>
+<hr>
+<h3 id="Abnormal-returns-amp-cumulative-abnormal-returns"><a href="#Abnormal-returns-amp-cumulative-abnormal-returns" class="headerlink" title="Abnormal returns &amp; cumulative abnormal returns"></a>Abnormal returns &amp; cumulative abnormal returns</h3><p>异常收益和累计异常收益</p>
+<p>我们通过实际每日收益与预期每日收益的差值来计算异常收益 AR it ，如式（3）所示。</p>
+<p>$A R_{i t} &#x3D; R_{i t} - E \left(\right. R_{i t} \left.\right)$</p>
+<p>其中，R it 表示资产 i 在 t 天的实际收益。我们从等式中的实际回报中减去预期回报。 (3) 在第 t 天获得指数 i 的超额收益 (AR it )。在从 $\Gamma_1$ 天到 $\Gamma_2$ 的事件窗口中，我们估计资产 i 的累积异常收益 (CAR) 如下</p>
+<p>$C A R_{i} \left( \Gamma_{1} , \Gamma\right)<em>{2} \left.\right) &#x3D; \sum</em>{t &#x3D; \left(\Gamma\right)<em>{1}}^{\left(\Gamma\right)</em>{2}} A R_{i t}$</p>
+<hr>
+<h3 id="Aggregates-of-abnormal-returns-and-cumulative-aggregates-of-abnormal-returns"><a href="#Aggregates-of-abnormal-returns-and-cumulative-aggregates-of-abnormal-returns" class="headerlink" title="Aggregates of abnormal returns and cumulative aggregates of abnormal returns"></a>Aggregates of abnormal returns and cumulative aggregates of abnormal returns</h3><p>异常收益总额及异常收益累计总额</p>
+<p>为了估计所有代币对 FTX 崩溃的总体反应，我们通过平均每个代币的每日异常收益来进一步估计总体异常收益。总异常收益计算如下：</p>
+<p>$A A R_{t} &#x3D; \frac{1}{N} \sum_{i &#x3D; 1}^{N} A R_{i t}$</p>
+<p>其中，$AAR_t$ 表示 t 时刻各代币的平均异常收益。 N 是研究中包含的代币数量。最后，我们根据事件窗口的 $AAR_t$ 估计累积平均异常收益 (CAAR)。</p>
+<hr>
+<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><p>图 1 展示了活动当天的回报。几乎所有类型的代币都显示出看跌趋势。 FTT 在活动当天的各类代币中跌幅最高（-75%）。多个代币跌幅超过 15%，包括 SNX、CRO、APE、FLOW、CHZ、DOGE、SHIB 和 AVA。</p>
+<img src="/reputational-contagion-and-the-fall-of-ftx/2023-06-29-17-11-28.png" class="">
+
+<hr>
+<p>表1报告了活动当天各种类型代币的异常收益。所有 DEX、NFT 和 Memes 代币的异常收益均呈负显着，这证明了 FTX 崩盘以及相关 FTT 上隐藏的坏消息的披露所带来的不利影响。这些结果与 Yousaf 等人的结果一致。 (2023)，他们报告了 FTX 崩溃当天比特币和以太坊的异常收益显着为负。中心化交易所代币表现好坏参半，BNB和LEO（CRO和FTT）的异常收益微不足道（显着）。这些结果可以归因于投资者从高风险中心化交易所到低风险中心化交易所的替代效应。自 2022 年 10 月以来，CRO 代币因另一交易所 Gate.io 的一笔 4 亿美元可疑交易而受到市场的批评。</p>
+<p>大多数旅游和医疗保健代币的异常回报并不显着，这与这些代币具有直接的各自行业效用相一致，可以支持它们应对不断变化的投资者情绪。</p>
+<p>表 2 列出了 t-6 到 t + 9 窗口期间 DEX、CEX 和其他代币（NFT、Defi、meme、能源、旅游和医疗保健）的累积异常收益 (CAR)。天（t-6 到 t-1），所有 CAR 系数对于去中心化交易所代币都不显着。优素福等人。 (2023) 还发现 CAR 系数在 FTX 崩溃事件发生前并不显着​​。</p>
+<p>CAR系数显着且为正； BNB 为 t-4 和 t-3 天，CRO 为 t-3 和 t-1 天，表明由于资产负债表的不确定性，BNB 和 CRO 在事件发生前的几天内得到了投资者的积极反应他们的竞争对手 FTX 交易所。然而，FTT的CAR系数在t-2和t-1天为负且显着，揭示了FTT在事件前窗口日的负面反应。参考表 3 中的其他代币，大多数代币（DOGE 除外）的 CAR 系数在事件前窗口日并不显着，但少数代币的 CAR 系数为正且显着，尤其是在 t-3 时。</p>
+<p>关于 FTX、FTT 和 Alameda 研究的坏消息最初是于 2022 年 11 月 2 日（t-6）通过 CoinDesk 上的文章发布的。随后对 FTT 和其他代币的影响是迅速而巨大的。当币安和 FTX 交易所的首席执行官在推特上发布有关 FTX 和 FTT 的推文时，FTT 在 t-2 和 t-1 做出了负面反应。由于 FTX 的财务状况不佳，币安首席执行官在推特上表示，由于认为 FTX 的财务状况不佳，因此将在 t-2 出售 FTT 股份，而 FTX 首席执行官则向投资者保证 FTX 的财务状况良好。币安首席执行官的推文放大了 FTX 财务状况和 FTT 价值的不确定性，投资者对 FTT 做出了负面反应。</p>
+<p>在事后时期（t+1至t+9），XLM、CAKE和SNX在t+1至t+9天的CAR系数显着为负，而UNI在t+1的CAR系数显着为负。 1 日至 t+5 日以及 t+9 日，与 FTX 和 FTT 坏消息发布后多日去中心化交易所代币受到不利影响的情况一致。这些发现与 Yousaf 等人的结果一致。 (2023)，他们报告称，在 FTX 崩盘事件发生后，比特币和以太坊的 CAR 系数显着为负。</p>
+<p>对于中心化交易所代币而言，BNB、CRO（和FTT）在事后时期的CAR值具有负显着性。然而，从 t + 1 到 t + 4 和 t + 6 到 t + 7 天，LEO 的 CAR 系数为负且显着。</p>
+<p>与 FTX 和 FTT 坏消息发布后投资者对所有中心化交易所代币的负面反应一致。有趣的是，在事件发生前，BNB 似乎最初受益于 FTT 较高的不确定性，但随后在事件发生后失去了这些收益。总而言之，在事件发生后几天有关 FTT 和 FTX 的坏消息发布后，投资者对所有去中心化和中心化交易所做出了负面反应。</p>
+<p>至于其他代币，对于 3 个 NFT、3 个 Defi 代币、4 个 Meme 代币、3 个能源代币、1 个旅游代币和 1 个医疗保健代币，在活动结束后的大部分时间里，CAR 都呈负显着性，这表明这些类型的代币也容易受到影响。事件后期 FTX 和 FTT 的传染。 Akyildirim 等人。 (2023) 还报告了 FTT 对包括比特币在内的传统加密货币的蔓延。然而，对于 DAI 和 BTU 代币来说，CAR 是积极的和&#x2F;或微不足道的，这反映出它们对 FTX 和 FTT 的坏消息发布的抵御能力。表 4 列出了所有代币的 AAR 和 CAAR 合计。 AAR 的系数在 t-2、t 0 和 t+1 至 t+5 时间段均为负且显着，揭示了 FTX&#x2F;FTT 相关新闻在事前、事中和事后对代币市场的强烈负面影响活动日。此外，CAAR 从 t+1 到 t+9 的负显着系数表明，即使在事件发生 9 天后，代币市场也没有恢复损失。这表明代币投资者需要更长时间地持有投资，以在大型加密货币交易所崩溃时挽回损失。</p>
+]]></content>
+      <tags>
+        <tag>ftx</tag>
+        <tag>contagion</tag>
       </tags>
   </entry>
   <entry>
@@ -11701,117 +11748,10 @@ TODO:
 ]]></content>
   </entry>
   <entry>
-    <title>reputational-contagion-and-the-fall-of-ftx</title>
-    <url>//reputational-contagion-and-the-fall-of-ftx/</url>
-    <content><![CDATA[<h1 id="Reputational-contagion-and-the-fall-of-FTX-Examining-the-response-of-tokens-to-the-delegitimization-of-FTT"><a href="#Reputational-contagion-and-the-fall-of-FTX-Examining-the-response-of-tokens-to-the-delegitimization-of-FTT" class="headerlink" title="Reputational contagion and the fall of FTX: Examining the response of tokens to the delegitimization of FTT"></a>Reputational contagion and the fall of FTX: Examining the response of tokens to the delegitimization of FTT</h1><p>Finance Research Letters</p>
-<p>Imran Yousaf a, John W. Goodell</p>
-<p><a href="https://www.sciencedirect.com/science/article/pii/S1544612323000788" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/pii/S1544612323000788</a></p>
-<hr>
-<p>与加密货币交易所 FTX 最近的下跌交织在一起的是，向投资者揭示了 FTX 平台代币 FTT 缺乏资产支持。鉴于对声誉传染的兴趣，以及最近学术界和投资者对数字代币的兴趣，我们有动力利用 FTX&#x2F;FTT 事件来调查声誉传染到其他代币的情况。我们采用事件研究方法来衡量 FTX 崩溃对各种代币的影响。从异常收益结果 以及 累积异常收益 CAR 和 累积平均异常收益 CAAR 表明，几乎所有代币在活动当天都开启了持续的看跌趋势。</p>
-<hr>
-<h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><p>八类代币的每日数据来自 coinmarketcap.com。这些代币包括DEX（Uniswap-UNI、Stellar-XLM、PancakeSwap-CAKE、Synthetix-SNX）、CEX（BNB、UNUS SED LEO-LEO、Cronos-CRO、FTX Token-FTT）、NFT（ApeCoin-APE、Flow、 Chiliz-CHZ、Theta Network-THETA)、Defi (Dai、Avalanche-AVAX、Chainlink-LINK、Wrapped Bitcoin-WBTC)、Memes (Dogecoin-DOGE、Shiba Inu-SHIB、Baby Doge Coin-BabyDoge、MonaCoin-MONA)、能源（Energy Web Token-EWT、Powerledger-POWR、Efforce-WOZX、GRID）、旅游（Travala.com-AVA、TripCandy-CANDY、XcelToken Plus-XLAB、BTU Protocol-BTU）和医疗保健（MediBloc-MED、SOLVE） 、Dentacoin-DCN、DOC.COM-MTC）。活动日期为2022年11月8日，因为FTX交易所在这一天崩盘，FTT代币下跌75%。估计窗口由2022年7月4日至2022年11月1日（t-127至t-7）的120天组成，事件窗口由2022年11月2日至2022年11月17日（t-6至t+9）的16天组成。在本文附录的表A1中，我们提供了所有代币收益的描述性统计。</p>
-<hr>
-<h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p>我们采用事件研究方法来估计 FTX 崩溃对 DEX、CEX 和其他类别代币造成的 FTT 声誉损害的影响。利用普通最小二乘（OLS）市场模型计算从t-127到t-7的120天估计窗口的正常收益。戴克曼等人。 （1984）表明 OLS 市场模型为事件研究方法产生了相对更好的结果。使用方程式(1)，我们计算预期或正常回报，E(R it ):</p>
-<p>$E \left(\right. R_{i t} \left.\right) &#x3D; a_{i} + b_{i} R_{m t}$</p>
-<p>其中，$R_{mt}$ 是基准 MSCI 世界股票指数在 t 天的回报率。此外，我们采用等式。 (2) 确定基准指数和样本指数每日实际收益：</p>
-<p>$R_{i t} &#x3D; \left[\right. \left(\right. P_{i t} - - P_{i t - 1} \left.\right) &#x2F; P_{i t - 1} \left]\right. \times 100$</p>
-<p>$P_{it}$ 表示所选指数 i 在 t 日的价格，而 $P_{it-1}$ 显示所选指数 i 在 t 日前一天的价格</p>
-<hr>
-<h3 id="Abnormal-returns-amp-cumulative-abnormal-returns"><a href="#Abnormal-returns-amp-cumulative-abnormal-returns" class="headerlink" title="Abnormal returns &amp; cumulative abnormal returns"></a>Abnormal returns &amp; cumulative abnormal returns</h3><p>异常收益和累计异常收益</p>
-<p>我们通过实际每日收益与预期每日收益的差值来计算异常收益 AR it ，如式（3）所示。</p>
-<p>$A R_{i t} &#x3D; R_{i t} - E \left(\right. R_{i t} \left.\right)$</p>
-<p>其中，R it 表示资产 i 在 t 天的实际收益。我们从等式中的实际回报中减去预期回报。 (3) 在第 t 天获得指数 i 的超额收益 (AR it )。在从 $\Gamma_1$ 天到 $\Gamma_2$ 的事件窗口中，我们估计资产 i 的累积异常收益 (CAR) 如下</p>
-<p>$C A R_{i} \left( \Gamma_{1} , \Gamma\right)<em>{2} \left.\right) &#x3D; \sum</em>{t &#x3D; \left(\Gamma\right)<em>{1}}^{\left(\Gamma\right)</em>{2}} A R_{i t}$</p>
-<hr>
-<h3 id="Aggregates-of-abnormal-returns-and-cumulative-aggregates-of-abnormal-returns"><a href="#Aggregates-of-abnormal-returns-and-cumulative-aggregates-of-abnormal-returns" class="headerlink" title="Aggregates of abnormal returns and cumulative aggregates of abnormal returns"></a>Aggregates of abnormal returns and cumulative aggregates of abnormal returns</h3><p>异常收益总额及异常收益累计总额</p>
-<p>为了估计所有代币对 FTX 崩溃的总体反应，我们通过平均每个代币的每日异常收益来进一步估计总体异常收益。总异常收益计算如下：</p>
-<p>$A A R_{t} &#x3D; \frac{1}{N} \sum_{i &#x3D; 1}^{N} A R_{i t}$</p>
-<p>其中，$AAR_t$ 表示 t 时刻各代币的平均异常收益。 N 是研究中包含的代币数量。最后，我们根据事件窗口的 $AAR_t$ 估计累积平均异常收益 (CAAR)。</p>
-<hr>
-<h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><p>图 1 展示了活动当天的回报。几乎所有类型的代币都显示出看跌趋势。 FTT 在活动当天的各类代币中跌幅最高（-75%）。多个代币跌幅超过 15%，包括 SNX、CRO、APE、FLOW、CHZ、DOGE、SHIB 和 AVA。</p>
-<img src="/reputational-contagion-and-the-fall-of-ftx/2023-06-29-17-11-28.png" class="">
-
-<hr>
-<p>表1报告了活动当天各种类型代币的异常收益。所有 DEX、NFT 和 Memes 代币的异常收益均呈负显着，这证明了 FTX 崩盘以及相关 FTT 上隐藏的坏消息的披露所带来的不利影响。这些结果与 Yousaf 等人的结果一致。 (2023)，他们报告了 FTX 崩溃当天比特币和以太坊的异常收益显着为负。中心化交易所代币表现好坏参半，BNB和LEO（CRO和FTT）的异常收益微不足道（显着）。这些结果可以归因于投资者从高风险中心化交易所到低风险中心化交易所的替代效应。自 2022 年 10 月以来，CRO 代币因另一交易所 Gate.io 的一笔 4 亿美元可疑交易而受到市场的批评。</p>
-<p>大多数旅游和医疗保健代币的异常回报并不显着，这与这些代币具有直接的各自行业效用相一致，可以支持它们应对不断变化的投资者情绪。</p>
-<p>表 2 列出了 t-6 到 t + 9 窗口期间 DEX、CEX 和其他代币（NFT、Defi、meme、能源、旅游和医疗保健）的累积异常收益 (CAR)。天（t-6 到 t-1），所有 CAR 系数对于去中心化交易所代币都不显着。优素福等人。 (2023) 还发现 CAR 系数在 FTX 崩溃事件发生前并不显着​​。</p>
-<p>CAR系数显着且为正； BNB 为 t-4 和 t-3 天，CRO 为 t-3 和 t-1 天，表明由于资产负债表的不确定性，BNB 和 CRO 在事件发生前的几天内得到了投资者的积极反应他们的竞争对手 FTX 交易所。然而，FTT的CAR系数在t-2和t-1天为负且显着，揭示了FTT在事件前窗口日的负面反应。参考表 3 中的其他代币，大多数代币（DOGE 除外）的 CAR 系数在事件前窗口日并不显着，但少数代币的 CAR 系数为正且显着，尤其是在 t-3 时。</p>
-<p>关于 FTX、FTT 和 Alameda 研究的坏消息最初是于 2022 年 11 月 2 日（t-6）通过 CoinDesk 上的文章发布的。随后对 FTT 和其他代币的影响是迅速而巨大的。当币安和 FTX 交易所的首席执行官在推特上发布有关 FTX 和 FTT 的推文时，FTT 在 t-2 和 t-1 做出了负面反应。由于 FTX 的财务状况不佳，币安首席执行官在推特上表示，由于认为 FTX 的财务状况不佳，因此将在 t-2 出售 FTT 股份，而 FTX 首席执行官则向投资者保证 FTX 的财务状况良好。币安首席执行官的推文放大了 FTX 财务状况和 FTT 价值的不确定性，投资者对 FTT 做出了负面反应。</p>
-<p>在事后时期（t+1至t+9），XLM、CAKE和SNX在t+1至t+9天的CAR系数显着为负，而UNI在t+1的CAR系数显着为负。 1 日至 t+5 日以及 t+9 日，与 FTX 和 FTT 坏消息发布后多日去中心化交易所代币受到不利影响的情况一致。这些发现与 Yousaf 等人的结果一致。 (2023)，他们报告称，在 FTX 崩盘事件发生后，比特币和以太坊的 CAR 系数显着为负。</p>
-<p>对于中心化交易所代币而言，BNB、CRO（和FTT）在事后时期的CAR值具有负显着性。然而，从 t + 1 到 t + 4 和 t + 6 到 t + 7 天，LEO 的 CAR 系数为负且显着。</p>
-<p>与 FTX 和 FTT 坏消息发布后投资者对所有中心化交易所代币的负面反应一致。有趣的是，在事件发生前，BNB 似乎最初受益于 FTT 较高的不确定性，但随后在事件发生后失去了这些收益。总而言之，在事件发生后几天有关 FTT 和 FTX 的坏消息发布后，投资者对所有去中心化和中心化交易所做出了负面反应。</p>
-<p>至于其他代币，对于 3 个 NFT、3 个 Defi 代币、4 个 Meme 代币、3 个能源代币、1 个旅游代币和 1 个医疗保健代币，在活动结束后的大部分时间里，CAR 都呈负显着性，这表明这些类型的代币也容易受到影响。事件后期 FTX 和 FTT 的传染。 Akyildirim 等人。 (2023) 还报告了 FTT 对包括比特币在内的传统加密货币的蔓延。然而，对于 DAI 和 BTU 代币来说，CAR 是积极的和&#x2F;或微不足道的，这反映出它们对 FTX 和 FTT 的坏消息发布的抵御能力。表 4 列出了所有代币的 AAR 和 CAAR 合计。 AAR 的系数在 t-2、t 0 和 t+1 至 t+5 时间段均为负且显着，揭示了 FTX&#x2F;FTT 相关新闻在事前、事中和事后对代币市场的强烈负面影响活动日。此外，CAAR 从 t+1 到 t+9 的负显着系数表明，即使在事件发生 9 天后，代币市场也没有恢复损失。这表明代币投资者需要更长时间地持有投资，以在大型加密货币交易所崩溃时挽回损失。</p>
-]]></content>
-      <tags>
-        <tag>ftx</tag>
-        <tag>contagion</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>schnorr-signature-improvements</title>
     <url>//schnorr-signature-improvements/</url>
     <content><![CDATA[<p>今天想实现在schnorr类似ECDSA那样从文本hash与签名反推公钥，查找了资历后发现行不通。而且schnorr本身也并不支持m-of-n形式的签名（只能n-of-n）。因此这里在这里收集与思考一些在schnorr上的改进方案（主要BTC）</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>消息的签名与验证 —— 证明BTC地址的所有权</title>
-    <url>//sign-and-verify-messages/</url>
-    <content><![CDATA[<p>译：众所周知，本人现在正在开发一个新型的区块链架构NGIN。最近看到Schnorr签名算法很热门就在NG上部署了。但是部署完之后就陷入了更深层的思考——如何更好的利用Schnorr的MultiSig（多重签名）机制？现在我构思将Account也转为利用Schnorr来判定所有权。但是发现如此设计的话Account结构中不包含PublicKey，将很难通过anonymous表来搜索账户余额。故希望从本文中获得启发。</p>
-<p><a href="https://bitcointalk.org/index.php?topic=4382780.0" target="_blank" rel="noopener">原文地址</a></p>
-<span id="more"></span>
-
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>许多人在问，如何证明或声明属于某个公共地址的比特币的所有权？</p>
-<p>假设，您叫A，并且想与B做生意。B告诉你，他的公开地址是19Ho6eA4hBtb7hkN1S6GdmHD611Egd7gtC，而他在2015年10月15日余额恰好是2.04531538BTC。通过怎样，B可以毫无疑问地证明他确实拥有这个地址，让A能绝对信任？</p>
-<p>在这个简短的教程中，我们将向您展示如何使用我们最喜欢的钱包Electrum完成所有这些工作。您根本不需要任何编程技能，但是您应该熟悉私钥和公钥的概念，并且至少应牢记不要与任何人共享私钥或以任何形式在线发送私钥的重要性。</p>
-<p>其中的所有私钥和公钥都是出于教育目的，切勿使用——否则余额将立马被抢走。</p>
-<h2 id="区块链还不够-——-屏幕截图还不够"><a href="#区块链还不够-——-屏幕截图还不够" class="headerlink" title="区块链还不够 —— 屏幕截图还不够"></a>区块链还不够 —— 屏幕截图还不够</h2><p>B向A发送了<a href="https://blockchain.info/address/19Ho6eA4hBtb7hkN1S6GdmHD611Egd7gtC" target="_blank" rel="noopener">这个交易</a>到区块链。</p>
-<p>当然，那里有公共地址，金额和日期。但是不久，A意识到A可以选择区块链上的任何随机地址，并将其作为“证明”发送给她。</p>
-<p>A请B提供更好的证据，然后B用他的钱包的两个屏幕截图回复：</p>
-<p>（图略，建议都用ascii图，不然图床真不靠谱）</p>
-<p>好吧，所以看起来B好像在说实话。但是！图像很容易被操纵。B可以使用Photoshop来创建这些图像。</p>
-<p>因此，A仍然没有被说服，A也不可能被这样说服。A需要确切的证据。最好的部分是A可以拥有的！</p>
-<h2 id="消息的签名与验证-——-完美的证明"><a href="#消息的签名与验证-——-完美的证明" class="headerlink" title="消息的签名与验证 —— 完美的证明"></a>消息的签名与验证 —— 完美的证明</h2><p>比特币地址由一个私钥（您应该始终保持私有）和一个公钥组成，该公钥与您的公网地址相同。这是最重要的部分：密钥对可用于对消息进行签名。甚至不涉及区块链。</p>
-<p>如果B真正拥有他声称的公共地址，那么他也拥有其私钥。它可以用来签名消息。</p>
-<p>在这个例子中，B确实拥有他声称的比特币地址。具体来说，他的证据是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Private key: 5KSFWJRuCuTFFsPQgokmLuKbY84f8e9pcWaJX2C7r8jsLi2RuJF</span><br><span class="line">Public key: 19Ho6eA4hBtb7hkN1S6GdmHD611Egd7gtC</span><br></pre></td></tr></table></figure>
-
-<p>A现在意识到，如果B是诚实的，他可以访问他的密钥对，从而能够为珍妮签名消息。</p>
-<p>现在，A要求B使用他的密钥对签署特定的消息。简希望约翰用他的公钥（即他的比特币地址）来签署“我拥有这个地址，A！”这个消息。</p>
-<p>这可以在Electrum中快速完成。 John只是将他的私钥导入一个新的钱包，选择“工具&#x2F;签名&#x2F;验证”消息，然后…钱包吐出以下代码…</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">I own this address, Jane!</span><br><span class="line"></span><br><span class="line">19Ho6eA4hBtb7hkN1S6GdmHD611Egd7gtC</span><br><span class="line"></span><br><span class="line">GxHVqiSW+WxEA+IlNB5oqDpzLba7MJxYJl5Gr3ijm1SQYb9xEukrvnoXPbfi1k+wa54k0F/0tQ0hdsEjw1paa5w=</span><br></pre></td></tr></table></figure>
-
-<p>…他寄给A。特别要注意的是，如果没有他的私钥，他将无法签署此消息。更重要的是，A从未将自己的私钥发送给简。</p>
-<p>A现在可以在自己的计算机上使用Electrum。A完全不需要导入任何特定的钱包详细信息，现在可以使用相同的功能并粘贴自己的EXACT消息，B的比特币地址，签名的代码，然后按“验证”。 她得到…（图略，反正就是ok了）</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>任务完成！A现在可以100％确信B拥有他声称拥有的地址。B毫无疑问地证明了他控制着他所说的比特币地址。</p>
-<p><strong>如果您正在考虑与不确定的人打交道，只需要求他们为您签名。这真的很容易，它使整个加密生态系统变得更加安全和可信。双赢！</strong></p>
-<h2 id="后文"><a href="#后文" class="headerlink" title="后文"></a>后文</h2><p>妈的感觉白翻译了等于啥也没讲。都是超基础的……</p>
-<p>也不知道哪里能找到，干脆就自己写吧。</p>
-<p>就是说，BTC的地址是个公钥——这句话是不那么正确的，BTC地址是个hash后的公钥。换句话说，第三方没法通过你的地址得到你的公钥。</p>
-<p>之前看到一个ETH的攻击，就是通过signature之后的R和S得到ETH的account地址，然后再结合别的R，S来降低爆破privateKey的难度（原文找不到了）。</p>
-<p>恢复PublicKey的如下</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ECDSA public key recovery from signature</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Buffer</span>&#125; <span class="variable">msgHash</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Number</span>&#125; <span class="variable">v</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Buffer</span>&#125; <span class="variable">r</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Buffer</span>&#125; <span class="variable">s</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">Buffer</span>&#125; <span class="variable">publicKey</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">ecrecover</span> = <span class="keyword">function</span> (<span class="params">msgHash, v, r, s</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> signature = <span class="title class_">Buffer</span>.<span class="title function_">concat</span>([<span class="built_in">exports</span>.<span class="title function_">setLength</span>(r, <span class="number">32</span>), <span class="built_in">exports</span>.<span class="title function_">setLength</span>(s, <span class="number">32</span>)], <span class="number">64</span>)</span><br><span class="line">  <span class="keyword">var</span> recovery = v - <span class="number">27</span></span><br><span class="line">  <span class="keyword">if</span> (recovery !== <span class="number">0</span> &amp;&amp; recovery !== <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;Invalid signature v value&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> senderPubKey = secp256k1.<span class="title function_">recover</span>(msgHash, signature, recovery)</span><br><span class="line">  <span class="keyword">return</span> secp256k1.<span class="title function_">publicKeyConvert</span>(senderPubKey, <span class="literal">false</span>).<span class="title function_">slice</span>(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>而BTC的<a href="https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses#How_to_create_Bitcoin_Address" target="_blank" rel="noopener">PK-&gt;Addr转换方式</a>又是sha256又是ripemd160能recover个鬼……</p>
-<p>这我就很好奇了，没PublicKey咋鉴权？</p>
-<p>本来是打算btcd里看的，不过没立即找到。后来还是搜到<a href="https://github.com/nanotube/supybot-bitcoin-marketmonitor/blob/master/GPG/local/bitcoinsig.py" target="_blank" rel="noopener">别的实现</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">verify_message</span>(<span class="params">address, signature, message</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; See http://www.secg.org/download/aid-780/sec1-v2.pdf for the math &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">from</span> ecdsa <span class="keyword">import</span> numbertheory, ellipticcurve, util</span><br><span class="line">    curve = curve_secp256k1</span><br><span class="line">    G = generator_secp256k1</span><br><span class="line">    order = G.order()</span><br><span class="line">    <span class="comment"># extract r,s from signature</span></span><br><span class="line">    sig = base64.b64decode(signature)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sig) != <span class="number">65</span>: <span class="keyword">raise</span> BaseException(<span class="string">&quot;Wrong encoding&quot;</span>)</span><br><span class="line">    r,s = util.sigdecode_string(sig[<span class="number">1</span>:], order)</span><br><span class="line">    nV = <span class="built_in">ord</span>(sig[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">if</span> nV &lt; <span class="number">27</span> <span class="keyword">or</span> nV &gt;= <span class="number">35</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> nV &gt;= <span class="number">31</span>:</span><br><span class="line">        compressed = <span class="literal">True</span></span><br><span class="line">        nV -= <span class="number">4</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        compressed = <span class="literal">False</span></span><br><span class="line">    recid = nV - <span class="number">27</span></span><br><span class="line">    <span class="comment"># 1.1</span></span><br><span class="line">    x = r + (recid/<span class="number">2</span>) * order</span><br><span class="line">    <span class="comment"># 1.3</span></span><br><span class="line">    alpha = ( x * x * x  + curve.a() * x + curve.b() ) % curve.p()</span><br><span class="line">    beta = modular_sqrt(alpha, curve.p())</span><br><span class="line">    y = beta <span class="keyword">if</span> (beta - recid) % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">else</span> curve.p() - beta</span><br><span class="line">    <span class="comment"># 1.4 the constructor checks that nR is at infinity</span></span><br><span class="line">    R = ellipticcurve.Point(curve, x, y, order)</span><br><span class="line">    <span class="comment"># 1.5 compute e from message:</span></span><br><span class="line">    h = Hash( msg_magic( message ) )</span><br><span class="line">    e = string_to_number(h)</span><br><span class="line">    minus_e = -e % order</span><br><span class="line">    <span class="comment"># 1.6 compute Q = r^-1 (sR - eG)</span></span><br><span class="line">    inv_r = numbertheory.inverse_mod(r,order)</span><br><span class="line">    Q = inv_r * ( s * R + minus_e * G )</span><br><span class="line">    public_key = ecdsa.VerifyingKey.from_public_point( Q, curve = SECP256k1 )</span><br><span class="line">    <span class="comment"># check that Q is the public key</span></span><br><span class="line">    public_key.verify_digest( sig[<span class="number">1</span>:], h, sigdecode = ecdsa.util.sigdecode_string)</span><br><span class="line">    <span class="comment"># check that we get the original signing address</span></span><br><span class="line">    addr = public_key_to_bc_address(encode_point(public_key, compressed))</span><br><span class="line">    <span class="keyword">if</span> address == addr:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment">#print addr</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这tm就很nb了，居然还真又是反推PublicKey的。</p>
-<p>对应的是dcrd（一个btcd的fork）的<a href="https://github.com/decred/dcrd/blob/master/dcrec/secp256k1/ecdsa/signature.go#L746" target="_blank" rel="noopener">这部分</a></p>
-<p>那么NGIN里的multi-own的设计就有点难了【本来还以为有什么黑科技</p>
-<p>现在难点在于，用Account里增加Sign来实现了multi-own之后，怎么实现去publickey情况下的address?</p>
-<p>一种办法是把balance写进Account里，这样的话anonymous表里的balance该怎么办？无Account的矿工或者买家该怎么办？</p>
-<p>另一种办法是看看Schnorr能不能生成一个可以MultiSig的PublicKey。</p>
-<p>还有种办法就是放弃这个特性。</p>
-<p>看了下go-schnorr对聚合签名鉴权的确是用的一个新的PublicKey，索性就把这个拿来当address。也用不着放弃了。</p>
-]]></content>
-      <tags>
-        <tag>bitcointalk</tag>
-        <tag>done</tag>
-        <tag>翻译</tag>
-        <tag>ecdsa</tag>
-        <tag>address</tag>
-      </tags>
   </entry>
   <entry>
     <title>软件工程道德规范和专业实践 Software Engineering Code of Ethics and Professional Practice</title>
@@ -11928,6 +11868,66 @@ TODO:
       </tags>
   </entry>
   <entry>
+    <title>消息的签名与验证 —— 证明BTC地址的所有权</title>
+    <url>//sign-and-verify-messages/</url>
+    <content><![CDATA[<p>译：众所周知，本人现在正在开发一个新型的区块链架构NGIN。最近看到Schnorr签名算法很热门就在NG上部署了。但是部署完之后就陷入了更深层的思考——如何更好的利用Schnorr的MultiSig（多重签名）机制？现在我构思将Account也转为利用Schnorr来判定所有权。但是发现如此设计的话Account结构中不包含PublicKey，将很难通过anonymous表来搜索账户余额。故希望从本文中获得启发。</p>
+<p><a href="https://bitcointalk.org/index.php?topic=4382780.0" target="_blank" rel="noopener">原文地址</a></p>
+<span id="more"></span>
+
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>许多人在问，如何证明或声明属于某个公共地址的比特币的所有权？</p>
+<p>假设，您叫A，并且想与B做生意。B告诉你，他的公开地址是19Ho6eA4hBtb7hkN1S6GdmHD611Egd7gtC，而他在2015年10月15日余额恰好是2.04531538BTC。通过怎样，B可以毫无疑问地证明他确实拥有这个地址，让A能绝对信任？</p>
+<p>在这个简短的教程中，我们将向您展示如何使用我们最喜欢的钱包Electrum完成所有这些工作。您根本不需要任何编程技能，但是您应该熟悉私钥和公钥的概念，并且至少应牢记不要与任何人共享私钥或以任何形式在线发送私钥的重要性。</p>
+<p>其中的所有私钥和公钥都是出于教育目的，切勿使用——否则余额将立马被抢走。</p>
+<h2 id="区块链还不够-——-屏幕截图还不够"><a href="#区块链还不够-——-屏幕截图还不够" class="headerlink" title="区块链还不够 —— 屏幕截图还不够"></a>区块链还不够 —— 屏幕截图还不够</h2><p>B向A发送了<a href="https://blockchain.info/address/19Ho6eA4hBtb7hkN1S6GdmHD611Egd7gtC" target="_blank" rel="noopener">这个交易</a>到区块链。</p>
+<p>当然，那里有公共地址，金额和日期。但是不久，A意识到A可以选择区块链上的任何随机地址，并将其作为“证明”发送给她。</p>
+<p>A请B提供更好的证据，然后B用他的钱包的两个屏幕截图回复：</p>
+<p>（图略，建议都用ascii图，不然图床真不靠谱）</p>
+<p>好吧，所以看起来B好像在说实话。但是！图像很容易被操纵。B可以使用Photoshop来创建这些图像。</p>
+<p>因此，A仍然没有被说服，A也不可能被这样说服。A需要确切的证据。最好的部分是A可以拥有的！</p>
+<h2 id="消息的签名与验证-——-完美的证明"><a href="#消息的签名与验证-——-完美的证明" class="headerlink" title="消息的签名与验证 —— 完美的证明"></a>消息的签名与验证 —— 完美的证明</h2><p>比特币地址由一个私钥（您应该始终保持私有）和一个公钥组成，该公钥与您的公网地址相同。这是最重要的部分：密钥对可用于对消息进行签名。甚至不涉及区块链。</p>
+<p>如果B真正拥有他声称的公共地址，那么他也拥有其私钥。它可以用来签名消息。</p>
+<p>在这个例子中，B确实拥有他声称的比特币地址。具体来说，他的证据是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Private key: 5KSFWJRuCuTFFsPQgokmLuKbY84f8e9pcWaJX2C7r8jsLi2RuJF</span><br><span class="line">Public key: 19Ho6eA4hBtb7hkN1S6GdmHD611Egd7gtC</span><br></pre></td></tr></table></figure>
+
+<p>A现在意识到，如果B是诚实的，他可以访问他的密钥对，从而能够为珍妮签名消息。</p>
+<p>现在，A要求B使用他的密钥对签署特定的消息。简希望约翰用他的公钥（即他的比特币地址）来签署“我拥有这个地址，A！”这个消息。</p>
+<p>这可以在Electrum中快速完成。 John只是将他的私钥导入一个新的钱包，选择“工具&#x2F;签名&#x2F;验证”消息，然后…钱包吐出以下代码…</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">I own this address, Jane!</span><br><span class="line"></span><br><span class="line">19Ho6eA4hBtb7hkN1S6GdmHD611Egd7gtC</span><br><span class="line"></span><br><span class="line">GxHVqiSW+WxEA+IlNB5oqDpzLba7MJxYJl5Gr3ijm1SQYb9xEukrvnoXPbfi1k+wa54k0F/0tQ0hdsEjw1paa5w=</span><br></pre></td></tr></table></figure>
+
+<p>…他寄给A。特别要注意的是，如果没有他的私钥，他将无法签署此消息。更重要的是，A从未将自己的私钥发送给简。</p>
+<p>A现在可以在自己的计算机上使用Electrum。A完全不需要导入任何特定的钱包详细信息，现在可以使用相同的功能并粘贴自己的EXACT消息，B的比特币地址，签名的代码，然后按“验证”。 她得到…（图略，反正就是ok了）</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>任务完成！A现在可以100％确信B拥有他声称拥有的地址。B毫无疑问地证明了他控制着他所说的比特币地址。</p>
+<p><strong>如果您正在考虑与不确定的人打交道，只需要求他们为您签名。这真的很容易，它使整个加密生态系统变得更加安全和可信。双赢！</strong></p>
+<h2 id="后文"><a href="#后文" class="headerlink" title="后文"></a>后文</h2><p>妈的感觉白翻译了等于啥也没讲。都是超基础的……</p>
+<p>也不知道哪里能找到，干脆就自己写吧。</p>
+<p>就是说，BTC的地址是个公钥——这句话是不那么正确的，BTC地址是个hash后的公钥。换句话说，第三方没法通过你的地址得到你的公钥。</p>
+<p>之前看到一个ETH的攻击，就是通过signature之后的R和S得到ETH的account地址，然后再结合别的R，S来降低爆破privateKey的难度（原文找不到了）。</p>
+<p>恢复PublicKey的如下</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ECDSA public key recovery from signature</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Buffer</span>&#125; <span class="variable">msgHash</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Number</span>&#125; <span class="variable">v</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Buffer</span>&#125; <span class="variable">r</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Buffer</span>&#125; <span class="variable">s</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">Buffer</span>&#125; <span class="variable">publicKey</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">ecrecover</span> = <span class="keyword">function</span> (<span class="params">msgHash, v, r, s</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> signature = <span class="title class_">Buffer</span>.<span class="title function_">concat</span>([<span class="built_in">exports</span>.<span class="title function_">setLength</span>(r, <span class="number">32</span>), <span class="built_in">exports</span>.<span class="title function_">setLength</span>(s, <span class="number">32</span>)], <span class="number">64</span>)</span><br><span class="line">  <span class="keyword">var</span> recovery = v - <span class="number">27</span></span><br><span class="line">  <span class="keyword">if</span> (recovery !== <span class="number">0</span> &amp;&amp; recovery !== <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;Invalid signature v value&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> senderPubKey = secp256k1.<span class="title function_">recover</span>(msgHash, signature, recovery)</span><br><span class="line">  <span class="keyword">return</span> secp256k1.<span class="title function_">publicKeyConvert</span>(senderPubKey, <span class="literal">false</span>).<span class="title function_">slice</span>(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而BTC的<a href="https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses#How_to_create_Bitcoin_Address" target="_blank" rel="noopener">PK-&gt;Addr转换方式</a>又是sha256又是ripemd160能recover个鬼……</p>
+<p>这我就很好奇了，没PublicKey咋鉴权？</p>
+<p>本来是打算btcd里看的，不过没立即找到。后来还是搜到<a href="https://github.com/nanotube/supybot-bitcoin-marketmonitor/blob/master/GPG/local/bitcoinsig.py" target="_blank" rel="noopener">别的实现</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">verify_message</span>(<span class="params">address, signature, message</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; See http://www.secg.org/download/aid-780/sec1-v2.pdf for the math &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">from</span> ecdsa <span class="keyword">import</span> numbertheory, ellipticcurve, util</span><br><span class="line">    curve = curve_secp256k1</span><br><span class="line">    G = generator_secp256k1</span><br><span class="line">    order = G.order()</span><br><span class="line">    <span class="comment"># extract r,s from signature</span></span><br><span class="line">    sig = base64.b64decode(signature)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sig) != <span class="number">65</span>: <span class="keyword">raise</span> BaseException(<span class="string">&quot;Wrong encoding&quot;</span>)</span><br><span class="line">    r,s = util.sigdecode_string(sig[<span class="number">1</span>:], order)</span><br><span class="line">    nV = <span class="built_in">ord</span>(sig[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">if</span> nV &lt; <span class="number">27</span> <span class="keyword">or</span> nV &gt;= <span class="number">35</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> nV &gt;= <span class="number">31</span>:</span><br><span class="line">        compressed = <span class="literal">True</span></span><br><span class="line">        nV -= <span class="number">4</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        compressed = <span class="literal">False</span></span><br><span class="line">    recid = nV - <span class="number">27</span></span><br><span class="line">    <span class="comment"># 1.1</span></span><br><span class="line">    x = r + (recid/<span class="number">2</span>) * order</span><br><span class="line">    <span class="comment"># 1.3</span></span><br><span class="line">    alpha = ( x * x * x  + curve.a() * x + curve.b() ) % curve.p()</span><br><span class="line">    beta = modular_sqrt(alpha, curve.p())</span><br><span class="line">    y = beta <span class="keyword">if</span> (beta - recid) % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">else</span> curve.p() - beta</span><br><span class="line">    <span class="comment"># 1.4 the constructor checks that nR is at infinity</span></span><br><span class="line">    R = ellipticcurve.Point(curve, x, y, order)</span><br><span class="line">    <span class="comment"># 1.5 compute e from message:</span></span><br><span class="line">    h = Hash( msg_magic( message ) )</span><br><span class="line">    e = string_to_number(h)</span><br><span class="line">    minus_e = -e % order</span><br><span class="line">    <span class="comment"># 1.6 compute Q = r^-1 (sR - eG)</span></span><br><span class="line">    inv_r = numbertheory.inverse_mod(r,order)</span><br><span class="line">    Q = inv_r * ( s * R + minus_e * G )</span><br><span class="line">    public_key = ecdsa.VerifyingKey.from_public_point( Q, curve = SECP256k1 )</span><br><span class="line">    <span class="comment"># check that Q is the public key</span></span><br><span class="line">    public_key.verify_digest( sig[<span class="number">1</span>:], h, sigdecode = ecdsa.util.sigdecode_string)</span><br><span class="line">    <span class="comment"># check that we get the original signing address</span></span><br><span class="line">    addr = public_key_to_bc_address(encode_point(public_key, compressed))</span><br><span class="line">    <span class="keyword">if</span> address == addr:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment">#print addr</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这tm就很nb了，居然还真又是反推PublicKey的。</p>
+<p>对应的是dcrd（一个btcd的fork）的<a href="https://github.com/decred/dcrd/blob/master/dcrec/secp256k1/ecdsa/signature.go#L746" target="_blank" rel="noopener">这部分</a></p>
+<p>那么NGIN里的multi-own的设计就有点难了【本来还以为有什么黑科技</p>
+<p>现在难点在于，用Account里增加Sign来实现了multi-own之后，怎么实现去publickey情况下的address?</p>
+<p>一种办法是把balance写进Account里，这样的话anonymous表里的balance该怎么办？无Account的矿工或者买家该怎么办？</p>
+<p>另一种办法是看看Schnorr能不能生成一个可以MultiSig的PublicKey。</p>
+<p>还有种办法就是放弃这个特性。</p>
+<p>看了下go-schnorr对聚合签名鉴权的确是用的一个新的PublicKey，索性就把这个拿来当address。也用不着放弃了。</p>
+]]></content>
+      <tags>
+        <tag>bitcointalk</tag>
+        <tag>done</tag>
+        <tag>翻译</tag>
+        <tag>ecdsa</tag>
+        <tag>address</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>论文分享：Intelligent design: stablecoins (in)stability and collateral during market turbulence</title>
     <url>//stablecoins-instability-and-collateral/</url>
     <content><![CDATA[<h1 id="Intelligent-design-stablecoins-in-stability-and-collateral-during-market-turbulence"><a href="#Intelligent-design-stablecoins-in-stability-and-collateral-during-market-turbulence" class="headerlink" title="Intelligent design: stablecoins (in)stability and collateral during market turbulence"></a>Intelligent design: stablecoins (in)stability and collateral during market turbulence</h1><p>Riccardo De Blasis, Luca Galati, Alexander Webb and Robert I. Webb</p>
@@ -12039,151 +12039,6 @@ TODO:
       <tags>
         <tag>todo</tag>
         <tag>notes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>工程项目管理应用的低存储量区块链实现</title>
-    <url>//state-chain-on-pm-paper/</url>
-    <content><![CDATA[<p>区块链不仅仅构造了数字货币，作为可信底层架构，区块链通过保存历史信息提供了可追溯的功能。该功能在获得用户信任基础上，保证了产品可信度，降低业务审查、清算等会计成本。状态区块链是一种比传统区块链更加激进的区块链底层架构，它选择了不保存所有历史，而是选择通过总结来归纳出每个可信区段中所有账户的状态，从而实现在现有可信基础上更加灵活的应用部署，彻底摆脱了原本对每个节点存储空间的苛刻要求。工程建设过程中随着工程的推进，尤其是大工程，工程管理对于可信基础上的账簿、设备以及合同等元素管理的需求越加强烈。但由于工程环境及项目成本的限制，相比传统区块链，状态区块链应更具优势。</p>
-<p>本文中，在对区块链相关技术进行综述的基础上，对市场上的低存储量区块链技术进行了比较分析，提出了基于状态的低存储量区块链的实现方案和部署思路。然后，在工程项目管理领域中，对提出的低存储量区块链进行了实现和场景分析，表明本文所提方案在保障区块链安全性的基础上，具有项目成本优势。</p>
-<span id="more"></span>
-
-<p><strong>论文<a href="/state-chain-on-pm-paper.pdf">PDF标准版下载</a></strong></p>
-<h2 id="区块链中存储的成本"><a href="#区块链中存储的成本" class="headerlink" title="区块链中存储的成本"></a>区块链中存储的成本</h2><p>首先，随着技术的提高，假定存储数据的成本呈指数级下降。我们则可得到一个这样的模型</p>
-<p>$$c(t)&#x3D;Ae^{-kt}$$</p>
-<p>c(t)是在任何给定年份t中存储1GB数据的成本。</p>
-<p>A是当前按存储1GB1年的成本。通过Amazon Elastic File System进行定价。使用EFS，全年存储1GB数据的6个副本的成本为每年21.60美元。即A&#x3D;21.60美元。</p>
-<p>k是存储成本随着时间推移下降的速度。k越大，价格越快降低。根据过去35年的历史数据，k约为0.2502，但对未来存储成本的预测表明未来这种变化率会下降。</p>
-<p>这可以得出我们在任何一年内将要花费的存储容量。现在我们可以计算我们的存储总成本。</p>
-<p>每年我们必须为当年收到的新数据支付费用，并继续存储前几年的所有数据。所以每年的存储成本为：</p>
-<p>$$S(t)&#x3D;c(t)\sum_{T&#x3D;0}^nPredictedGB(t)$$</p>
-<p>由于众所周知的区块链扩容，比如比特币从1MB过渡到2MB，模型中的Predicted_GB本质也是在逐年增加的值。随着数字货币与区块链逐步被越来越多的人所认可，区块容量(BuiltinSize)增加的步伐也越来越快。作为激进的比特币分叉，比特币现金，已经分叉至32MB。从市场来看，越是热门的区块链产品的信息存储量增速越快。而热门程度我们可以根据其代币的交易量来判断。</p>
-<p>$$PredictedGB(t)&#x3D;\sum_{d&#x3D;0}^{365}BuiltinSize \times Volume(t,d)$$</p>
-<p>那么最终的每年存储成本即为：</p>
-<p>$$S(t)&#x3D;Ae^{-kt}\sum_{T&#x3D;0}^n\sum_{d&#x3D;0}^{365}BuiltinSize \times Volume(t,d)$$</p>
-<p>总而言之，通过该模型，我们可以清晰地看出，这通过优化后的区块链存储成本模型，最终其是递增膨胀，还是逼近指数下降，取决于科技发展的k值（&lt;1）与年存储量，也可以说是k值与产品热度之间的博弈。作为跑赢市场的明星产品，例如Ethereum，必面临存储量爆炸的问题。当然从一般角度来看，<strong>服务器</strong>硬盘的发展是完全超越一般的区块链增长的。</p>
-<p>但是在特定环境，尤其是分布式的物联网环境，区块链上为了实现分布式与数据可信，设备往往分散且数量可观。因此，实际在物联网或多节点等正常区块链环境下，当区块链应用全网设备数为DeviceNum时，存储成本为：</p>
-<p>$$S(t)&#x3D;DeviceNum \times Ae^{-kt}\sum_{T&#x3D;0}^n\sum_{d&#x3D;0}^{365}BuiltinSize \times Volume(t,d)$$</p>
-<p>也因此，为了节约成本，项目往往选择具有较少的存储空间的设备，这就更进一步限制了区块链存储不能无限制地膨胀。因此，换句话来说，在存储成本较低基础之上，倘若能够限制住区块链数据存储的膨胀，区块链产品则能够部署于更广泛的领域。</p>
-<h3 id="区块链在工程管理中的应用"><a href="#区块链在工程管理中的应用" class="headerlink" title="区块链在工程管理中的应用"></a>区块链在工程管理中的应用</h3><p>到目前为止，区块链在建造行业中的实际使用并不常见。有些人正在使用它结合物联网来存储建筑物的传感器数据。还有人认为类似以太坊的分布式平台可以托管BIM应用程序。也有人提到区块链在合建项目中的应用，因为它可以提供一个有用的工具，通过使用智能合约，监控各方在整个设计和施工阶段管理和记录上对BIM模型的更改，即通过编辑和存储建筑模型的所有修改记录到不可变的公共记录中（区块）。</p>
-<p>首先，众所周知的是，区块链可以作为数字账簿的存在，如hyperledger，中文名超级账簿。</p>
-<p>当前，企业间的战略联盟（partnering模式）中，由于各个企业仍然是独立法人，战略联盟中经常会发生由于道德风险、逆向选择等问题造成的联盟合作关系不稳定。因此，目前急需一种合理的激励机制，保障供应链联盟之间的信息开放共享来防止问题发生。因此，需要一种受到各方信任的信息技术手段，来支持分布式的信息记录储存，联盟中的企业从不同途径来分享多样化的信息。区块链技术的应用，在对企业共识数字化的基础上，受所有人信任，不仅能实现价值共创共享的目标，而且构建了利益相关者之间的共生关系，实现了多元资本共生和利益相关者的共同治理。万达、百度、空客、美国运通、思科、富士通、日立等国内外各个行业的大公司在战略上往往拥有更加错综复杂的联盟关系，因此其对hyperledger的需求更为强烈。除他们以外，hyperledger还有约200余个企业合作伙伴，可见世界领先的企业对区块链在账簿上应用的普遍认可。</p>
-<p>虽然区块链技术为项目相关的会计更多样化的工作与管理模式提供了可能。但与金融领域相比，项目管理会计领域拥有复杂性和独特性，区块链技术在该方面应用中依然面临数据存储空间有限、业务数据处理难度高、对现有中心化记录的管理会计基础业务架构和业务规则挑战等问题。</p>
-<p>更贴近工程内容的，区块链往往依托着物联网或BIM这类将传统产品信息化的载体，以此方式在工程项目之中得到运用。</p>
-<p>以前的方案可用于管理存储在文件中的任何建筑物信息，包括BIM文件。然而，在BIM设置中实施区块链的正确方法是将其与BIM服务器集成。架构如图所示。</p>
-<img src="/state-chain-on-pm-paper/BIM&BC.jpg" class="" title="BIM">
-
-<p>Barnett正在确定建筑行业中区块链的一些用途，例如维护记录数字财产，基于时间戳记录行为或交易，多重签名交易，智能监控情况并执行自己的计算机程序以及与真实世界结合的智能合约信息存储库。还有争议中能够使用自动化区块链解决方案，基于智能合约的智慧城市，以及区块链房地产投资等也被设想出来。</p>
-<!--抄论文-->
-<p>Security Ledger指出，“在保卫物联网安全方面最大的挑战之一就是身份问题。更明确一点就是：我们如何确保数十亿或者百亿的智能设备相互之间的连接与交流安全。看起来区块链能够提供答案。”</p>
-<p>在与区块链结合之前，物联网一直是个“矛盾的存在”，物联网的发展前景已被所有人认可，但是症结问题一直得不到解决。中心化的管理架构存在无法自证清白的问题，也即不管你是否窃取了参与方的隐私，都容易被怀疑，没有理性的方式可以证明你的清白，完全靠相互的自觉与信任。况且，个人隐私数据被泄露的相关时间时有发生，例如，摄像头被网络直播的事屡见不鲜。物联网的参与者，尤其是工程项目中物联网的参与者，通常不完全被发起方所单独掌控（例如普通私人用户、企业用户），如何让其他的合作方能够更好地参与到项目之中，面临极为复杂的协同成本。</p>
-<p>但是如此看待区块链，大多是由于当今区块链产品多基于以太坊等平台，制作思维也跳脱不出数字货币的范畴。以太坊中除了CAP冲突以外，对于合约本身的进行也存在着合约不可修改、合约太过依赖主网等缺陷。这未免太过局限了其区块链应用的发展。本质上来说，区块链的应用重点在于其共识的形成，共识才是一个分布式应用与区块链应用的最大差别，最重要的，包括区块形成条件（挖矿条件）、出块时间、区块存储方式设计等各种被平台所简化的内容本应也是应用的重要内容。</p>
-<p>因此除了传统的和物联网、BIM等信息元素结合以外，工程项目之中可以将生产过程、交付过程等一系列费时费力的过程量化编译成数个共识，将这些共识合并起来数字化形成针对项目的合约。</p>
-<h3 id="市场上的低存储区块链方案"><a href="#市场上的低存储区块链方案" class="headerlink" title="市场上的低存储区块链方案"></a>市场上的低存储区块链方案</h3><!-- 首先是将状态作为更重要的保存内容。 -->
-
-<p>在UTXO中，比如比特币，抛去了状态的概念，其中账户（即地址）的余额通过与它相关的事务来进行判断，例如某个地址在区块链中的出现是先通过工作证明获得了100货币单位，然后在其之后8个区块时间后它将88个货币单位转移到另一个地址中，其后没有任何相关交易。这样在当一个节点遍历完所有区块之后就可以计算出该地址余额为12个货币单位。</p>
-<p>这样的产品设计，虽说要求了节点必须下载并遍历整个区块才能分析出地址余额这样累赘的工作，但是也的确非常成功地解除了他人尤其是非技术人员对区块链的怀疑——至少让区块链概念更加通俗易懂。</p>
-<p>可是区块链的不断增长使得这个下载与遍历操作越来越困难。比特币核心开发者团队意识到了这个问题的严肃性。在2016年初bitcoin的区块就已经超过60G，开发者团队在新核心钱包中针对节点新加了区块链存储的修剪模式（prune）。全节点钱包，即核心钱包的使用者通过在个人目录中bitcoin.conf配置文件中，输入“prune&#x3D;1024”并保存，重启钱包后即可打开节点的修剪模式。通过该模式，节点可以将60多G的存储不断删减直至你设定的值（1024mb），且相比以前能更加快速地打开钱包。但是这个模式仍有局限性——及其耗时且耗计算的同步过程：它需要先从p2p网络上下载这所有的区块，再对已下载的区块逐个进行散列计算生成散列值，并校对散列值的树结构，以此保证所下载区块的完整与安全——这样的下载过程中耗费数G的带宽流量以及堪比数字货币挖矿的计算任务依旧非个人电脑，或者非一般的服务器所能承受。尤其是在用户重新导入一个新私钥后，为了获取这个私钥对应地址的余额信息，节点必须再重复一遍上述所有操作。</p>
-<p>随着时代的发展，在2016年开始行业进入了基于区块链的链上应用，即分布式应用（decentralized application，简称DApp）的时代。简单来说，DApp和普通的App原理一样，除了他们是完全去中心化的。由底层区块链网络自己的节点来运作的DApp，不依赖于任何中心化的服务器。虽然DApp是去中心化的，可以完全自动地运行，但是依然也有可能性会被入侵。为了要能够很好地使用这些DApp，就需要定制的入口。例如其中较为著名的就是Augur，一个基于以太坊的去中心化市场预测平台，完全不需要通过任何第三方服务器。目前来看，由于以太坊EVM的健壮，大部分分布式应用都是基于以太坊。</p>
-<p>但是，从现状来看，如今很多区块链产品中的“永久存储”特性却仅仅只是一个吸引投资人和购买者的华丽噱头，或者说是一个非常普遍的对当下区块链模式的一种妥协现象：想要让人可信就必须永久存储所有事务。毕竟，在以太坊平台上就已经拥有了在链上存储的功能，无需再多费手脚即可拥有。</p>
-<p>但是从产品设计的角度来看，在许多的特定环境下，区块链产品本质上其实并不需求永久的存储——例如游戏、匿名货币以及数据存储等。拿游戏作为例子来看，基于区块链的互联网游戏本身就是在飞速信息交换，在存储和带宽以及共识的限制下，这个交换的成本被无限放大。</p>
-<p>如CryptoKitties这个在中心化时代看起来非常简单的养猫游戏。</p>
-<p>CryptoKitties(加密猫)是因为一款基于以太坊的DAPP，它由设计工作室AxiomZen打造，它是一个围绕着可育，可收集和可爱生物的游戏，每只猫都是独一无二的，100％归您所有，而且它不能被复制，带走或毁坏。</p>
-<p>CryptoKitties是世界上第一款基于区块链技术的游戏，这一突破使得一些像比特币和以太坊的虚拟物品成为可能。比特币和以太币是加密货币，但CryptoKitties是加密的收藏品。就像传统的收藏品一样，你可以购买，出售或交易你的CryptoKitty，在知识产权保护上，区块链会监测保障您的所有权。简单来说，就是利用链来存储了信息。</p>
-<p>但是在以太坊网络中部署后，由于销量火爆，直接压垮了以太坊平台的交易传输。据悉以太坊网络在该期间平均堵了近2万笔交易。众所周知，无论是以太坊还是比特币都对每个区块限定了大小，这就决定了每次的区块打包交易中交易总数据量都有上限。对于超出上限的交易，就被拖至下个区块中打包。“近2万笔交易”，可见该应用在链上究竟写入了多少庞大的数据。</p>
-<p>因此“永久存储”这个功能对于区块链应用底层来说非常容易成为网络的累赘。纵观当今部署的互联网应用，应用都是以一个“状态”实现的部署——持续集成（CI）就是这种理念的实现，通过不停的覆盖“状态”来达到工程合作的统一；同样的还有应用的持续发布，都是以最终的“状态”作为最终的目的。</p>
-<p>对于此问题，以太坊选择的是利用分片技术对其网络进行扩容。</p>
-<p>“分片”的大致设计思路是：将区块链网络中的每个区块变为一个子区块链，子区块链中可以容纳若干（目前为100个）打包了交易数据的Collation（大概可以称为“校验块”，为了在分片的情景中将其与区块的概念区分开），这些Collation最终组成一个在主链上区块；因为这些Collation是整体作为区块存在的，所以其数据必定是全部由某个特定的矿工所打包生成，本质上和现有协议中的区块没有区别，所以不再需要增加额外的网络确认。这样，每个区块的交易容量就大概扩大了100倍；而且这种设计还有利于未来的继续扩展，整个扩展计划目前也被大致分为4个阶段；本文所介绍的仅仅是第一阶段的相关实现细节。本质来说就是通过层叠的状态和少量的过程区块来保证性能与可信的双重获利。除此之外，以太坊在新节点部署上通过引入账户（Account）与状态（State）的概念来实现区块更加迅速的同步。其中账户即为已经出现在链上的地址，而状态即为一个时间点上账户及其相关信息的列表。</p>
-<p>其实在以太坊启用分片之前，在市场上早已经出现了成型的利用类似技术的数字货币，PascalCoin，它通过pascal编程语言重写了比特币奠定的数字货币的架构，并且引入了账户和状态的概念，实现了其数字货币后台区块链的秒同步。但是，由于高度去中心化的办公模式带来的低效更新以及pascal编程语言死气沉沉的社区，目前情况来看，其在链上应用等方面的发展非常局限。</p>
-<!-- pascalcoin的工作模式如图所示balabala -->
-<p>简单来说，PascalCoin中的块将超过100的检查点高度新的块将附加到链的顶部，旧的块从底部删除，只有一个任何时候都将需要不断的块数。检查点在每100个区块中发生一次，并简单地压缩成SafeBox。当新节点加入网络时，它只会下载最新的检查点和几十个块。此外，SafeBox现在包含在每一个账户段子结构块头信息中。这使得节点成为能独立地计算、验证和构建SafeBox结构所需的累积工作。</p>
-<p>它通过以下方式实现:</p>
-<ul>
-<li>检查是否所有区块头通过SafeBox以类区块链接方式连接</li>
-<li>使用工作证明方式重新计算SafeBox的累积工作</li>
-<li>验证是否SafeBox的累积工作是网络中最大的已知工作。</li>
-</ul>
-<p>因此，相比其他加密货币，PascalCoin会以指数方式达到更高的每单位存储吞吐量，因为节点只需要存储网络吞吐而不是累积的网络吞吐量。 换句话说，PascalCoin存储的是交易流，而不是交易历史 。如果流量不变，存储也是恒定的。这里要提醒的是SafeBox确实在每个区块都变得可以忽略不计，但总是在固定数量中且无论交易数量如何变化。</p>
-<p>且由于节点在任何时间只需要保持100个块，所以相比其他加密数字货币，PascalCoin考虑到了以指数方式增长的更大的区块规模。例如，对于相同数量的存储，即一个Bitcoin节点在现在消耗的存储，PascalCoin理论上可以支持吞吐量为每秒72,000个交易，本地只需5.4GB区块大小。</p>
-<p>从模型角度来说，传统区块链，例如比特币，区块大小起初线性增长，在触及区块上限后开启扩容分叉。</p>
-<p>而状态链限制其账户增长。PascalCoin的主要新功能之一是帐户可以有唯一的公开可见的名称，与域名系统的方式大致相同。这允许用户接收资金到他们的电子邮件地址或聊天昵称。它允许商店用他们的域名或品牌名称收款。支付本质上仍然是通过数字号码来引用帐户，但是名称用于查找背后的帐号，就像是域名是用于查找背后的IP地址。</p>
-<h2 id="低存储方案"><a href="#低存储方案" class="headerlink" title="低存储方案"></a>低存储方案</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>虽然区块链总是存在着在新块生成同时有分叉的风险，但是在旧的区块链中，各节点总是形成相同的一条无任何分叉的链</p>
-<p>传统的区块链存储结构与内容如下图所示：</p>
-<img src="/state-chain-on-pm-paper/OriginBlockchainStructure.jpg" class="" title="OriginBlockchainStructure.jpg">
-
-<p>可见大部分数据（难度、随机数、版本号等）都存在非常严重的冗余。而交易数据根据UTXO形式，分为交易发送者、交易接受者、交易货币数量、以及交易签名。其中交易签名占空间最大且基本上是一次性数据，对区块链后续发展并无推动作用。</p>
-<p>因此我们需要从区块链结构入手设计低存储区块链的设计。</p>
-<img src="/state-chain-on-pm-paper/4NodesNetwork.png" class="" title="4NodesNetwork.png">
-
-<p>如图中四个区块链节点形成了一个区块链网络。我们可以看到每个节点都保存了从创世区块（GenesisBlock）到N号区块（BlockN），因此从创世区块到N号区块之间的链，根据共识来说，它们就是经过了所有节点的审计且已经可以被我们认为是可信的——那么对于可信的内容，我们则无需再进行验算（尤其是私钥导入新节点接入等流程中），因而我们可以将其删除。但是为了下方（N+1）号区块以及更新的节点的安全保证，我们仍然需要k个区块来形成最长链以防止分叉。同时为了防止数据的丢失，我们也应当将从创世区块到N号区块之间的链中的数据以其他格式存储起来。</p>
-<p>因此我们将创世区块到（N-k）号区块的内容整合为“状态区块”来保存内容。</p>
-<img src="/state-chain-on-pm-paper/IntroStateBlock.png" class="" title="IntroStateBlock.png">
-
-<p>在每过一定阶段，根据全网节点状态进行区块删减，形成由数个“状态区块”形成的“状态区块链”。但是由于状态内容的冗余与过时我们仅仅保留数个最新块。最终则形成了我们的新方案。</p>
-<img src="/state-chain-on-pm-paper/WithBIM.png" class="" title="WithBIM.png">
-
-<p>用公式表示原始方案与改进方案的存储量如下</p>
-<p>原始方案即为直接对区块的存储。StorageSize为总存储规模，blockHeight为区块高度（个数），BlockSize为内置的区块大小，例如Bitcoin初始为1M。<br>$$ StorageSize(blockHeight) &#x3D; BlockSize \times blockHeight $$</p>
-<p>而在针对存储内容优化的新方案中，去除了极大部分的区块，引入了新的”状态区块”Generation来存储每个时间段账户信息。其中，StorageSize为总存储规模，blockHeight为区块高度（个数），GenerationSize为单个“状态区块”的大小，为了安全我们本地需要两个状态区块来保证安全性。CredibleHeight为可信高度，在PascalCoin中该高度被固定设定为100个区块。BuiltinTxNum为单个区块中的事务（交易）个数。<br>$$ StorageSize(blockHeight) &#x3D; BlockSize \times (blockHeight \bmod CredibleHeight) + GenerationSize(blockHeight) + GenerationSize(\lfloor \frac{blockHeight}{CredibleHeight} \rfloor ) $$</p>
-<p>$$ GenerationSize(blockHeight) \approx \frac{BlockSize \times blockHeight}{BuiltinTxNum} $$</p>
-<p>从数学模型可见，该方案除了删除了大部分冗余数据以外，还限制住了数据量体积，可以有效防止数据量的无限扩张。</p>
-<h3 id="为什么该方案依旧安全可信"><a href="#为什么该方案依旧安全可信" class="headerlink" title="为什么该方案依旧安全可信"></a>为什么该方案依旧安全可信</h3><p>Bitcoin从Merkle树，即默克尔树出发来保证区块安全。如上所述，在进行区块“压缩”、“删减”过程之中链的默克尔树实际上是被破坏了——无法从创世区块重新递推至最新块。</p>
-<p>但这并不意味着方案的安全性被打破。我们的关注点在于共识之上——在共识中，所有达到了N的节点在确认全网都已经达到N（通常实践上由8个“确认”消息来判断，与Bitcoin交易的广播类似）之后都会将（N-k）号区块之前的区块进行“删减”——这就如同一次简易的硬分叉（hard fork），在共识之中，虽然树被打破，但是所有交易信息所有事务的结果不会丢失。</p>
-<p>而且，新方案中依然存在着默克尔树。首先是“状态区块”能够形成简短的默克尔树，防止恶意用户上线多个恶意节点利用共识篡改历史数据。其次，区块的默克尔树依然存在，但仅仅服务于现在与未来，关注于新区块是否安全可信。</p>
-<!-- 3. 为什么该方案在低存储基础上还能低膨胀？ -->
-
-<h3 id="低存储的应用部署思路"><a href="#低存储的应用部署思路" class="headerlink" title="低存储的应用部署思路"></a>低存储的应用部署思路</h3><!--非工程环境，通用思路-->
-<p>本质来说，低存储方案中应用部署相比正常方案中并不具有相对更多的限制。但是若是需要最大程度地发挥其中优势，则需要更好地对应用进行筛选。</p>
-<p>首先，最佳效果之下，信息应当存储于各个账户的状态之中。如此便可直接摆脱UTXO货币在导入新私钥时，或是创建账号地址时，不得不通过P2P网络将所有区块同步之后才能安全进行其余例如交易等操作的这一困境。这对于数字货币钱包来说，是加强了其易用性，几乎能够直接在打开瞬间开始进行操作。且摆脱了SPV协议轻钱包。由于SPV钱包不能检查区块上任意其他的交易，理论上讲，区块就有可能是无效的。而且spv协议往往指向一个中心服务器，这可能被重定向到一个恶意地址，给用户带来财产损失的风险。这对于如以太坊这类的应用入口来说，更可以大大加快应用开发速度，加快应用加载速度。</p>
-<p>其次，尽可能地删除不必要的旧区块。在过了可信高度，即几乎所有节点的区块链存储都高于某一高度一定高度之后，区块链系统完全可以将某一高度前的区块进行删除来达到节省存储空间的目的。因为首先数据我们是选择存储在各个账户状态之中，换句话说就是即便删除了历史的区块也不会造成信息的损失。其次我们所有节点都在这“某一高度”上方，我们在这“某一高度”上达成了共识，即每个节点在“某一高度”之前的区块都是完全相同的，之后的区块的merkle树或trie树都可以在这“某一高度”开始进行，不必强制从创世区块开始。对于这之前的区块，已经无特别重要的作用，当然对于存储空间足够的设备来说依然可以保留这些区块，但是对于空间较小或者更加集约的环境下，将这之前的区块删除应当是最为正确的操作。</p>
-<p>再者，必须限制账户、事务的膨胀。首先，区块的大小和事务数量有直接关系，因此中本聪利用了fee也就是手续费概念，fee的竞争以及区块打包交易上限增加了事务进入系统的成本，以此来防止事务的过度或恶意的膨胀。</p>
-<p>其次由于新的区块链中选择将信息存储于账户之中，因此在打包账户时账户数量和使用存储量有直接的正比关系</p>
-<p>$$ StorageSize &#x3D; kAccountNum $$</p>
-<p>倘若不限制账户数量，依旧和比特币一样提供无限的基于私钥与ECDSA椭圆曲线数字签名算法生成的账户地址，那么存储量很容易脱离监管。例如可能有人恶意地通过给许多未在网络出现的地址发送事务，强制增加了许多新的账户，那么在该网络下：</p>
-<p>$$ NewAccountNum &#x3D; TransactionNum $$</p>
-<p>而为了交易的速度，我们往往在一个区块中打包许多事务。如比特币中，一般一个交易（事务）在250字节左右，扩容前1M大概就能容纳4000多笔。</p>
-<p>$$ NewAccuntNum &#x3D;  TransactionNum &#x3D; 4000 $$<br>$$ AccountNum &#x3D; OriginalAccountNum + NewAccuntNum $$<br>$$ StorageSize &#x3D; kOriginalAccountNum + 4000k &#x3D; OriginalStorage + 4000k $$</p>
-<p>即每次都需要增加整整4000k大小存储空间，而由于在攻击下，大部分账户不具有真实性，并不真正被他人使用，即很可能这4000k大小将是无用的。随着时间推移以及区块高度增加，在攻击之下的真实账户所占空间增长缓慢，无用账户所占空间却越来越多，最终和改良前无用区块冗余的状态一致。即无法达到限制膨胀，无法将其应用于多设备尤其是类似物联网的场景之中。可见限制账户与事务非常有必要。</p>
-<!-- 另外，更切实的智能合约。结合工程详情 -->
-
-<h2 id="项目案例"><a href="#项目案例" class="headerlink" title="项目案例"></a>项目案例</h2><p>实际工程项目中可能涉及工地环境，计算机环境以及经济环境等等具有非常鲜明特点且各不相同的方面。</p>
-<p>因此，区块链在工程的每个部分中的应用都有所不同。但是在大多数场景中，我们都可以将其功能与需求部署在区块链中，从最基本的可信数据存储的基础之上开始向上增加特性。</p>
-<h3 id="应用概述"><a href="#应用概述" class="headerlink" title="应用概述"></a>应用概述</h3><p>本案例从事务存储角度进行，假设进行的是一个混合了高频率的物联网监管信息监管以及企业间合约的共识化</p>
-<p>首先，我们通过定义一系列参数为常见数字货币公有链中内置参数，来模拟通用状态下，基于状态的理论低存储非膨胀方案相比原始中本聪论文内方案在存储上的差异。</p>
-<!--多扯点-->
-<p>其次针对工程设计与安全责任的监控项目的低存储区块链化的目标设定相关内容，进行实验</p>
-<p>最后根据工程合同的低存储区块链化来制定另一实验。</p>
-<h3 id="不同的区块链底层设计"><a href="#不同的区块链底层设计" class="headerlink" title="不同的区块链底层设计"></a>不同的区块链底层设计</h3><!--代码细节-->
-<p>首先，基于Python，我们可以从中本聪（Satoshi）论文中轻易地制作一个基本的区块链模型。</p>
-<p>为了快速地实现多层的区块，我们可以将其中繁杂的工作证明、密钥交换、交易签名等安全细节删去。最终我们生成一个较为简易但具有完整的在挖矿成功后建立新区块并对数据进行存储的功能。</p>
-<p>然后我们再建立一个基于状态的区块链系统。除了Block区块以外，我们还需要一个新的对象——该对象需要保存一个时间点上的账户状态信息以及之前历史区块信息，同时它也和传统的区块一样能够通过散列值来形成一个链。如前文介绍中简写，该“状态区块”也可以叫做Generation（代）。同样地为了测试我们将其中繁杂的工作证明、密钥交换、交易签名等安全细节删去，将判断可信高度的方法简便化。但是依然保留状态区块链之中删除历史区块的功能。</p>
-<!--介绍！！！-->
-
-<p>最终我们再写一个程序，通过该程序我们能对两个系统进行“挖矿”操作。简单来说，该程序能够在两个系统之中分别注入相对相同的事务信息，并不断激活两者新区块打包存储功能。在这个过程之中，两个不同的区块链系统会用两者不同的方式打包交易。但是，状态区块链除了单纯的打包储存以外，也会将交易信息在生成状态区块的过程中归纳进账户信息之中，在每个可信高度之后追加一个包含当前时间点链上所有账户的“状态区块”，并删除可信高度个“状态区块”之前的过久的区块。</p>
-<p>公平起见，所有写入区块的交易本质相同，唯一不同在于低存储区块链中为数字（账户编号），传统区块链之中为对该数字进行类比特币地址生成方式处理（即sha256计算散列后将该值进行base58加密）后得到的地址。</p>
-<p>此外，我们还可以通过修改模拟生成的交易内容来控制对实验内容的模拟。</p>
-<p>在工程设计与安全责任的监控项目的低存储区块链化中，大部分事务是由物联网设备的工作证明与工作状态构成。这里的工作证明和传统的数字货币的工作证明挖矿是有些许区别的，工作内容不再是通过计算无意义的散列值，而是根据工程环境进行定制。例如在我们假设的传感器监控环境之中，所有进行正常工作（搜集数据，打包数据，分析数据等等）的时间都可以被视为其工作，而其对于每个时间段进行的工作总结即为工作证明。换句话说，我们是摆脱了账户间交易，或者说是只考虑工作证明并没有其他账户之间的交易，即我们可以选择将事务发送目标与发送货币数量字段都设置为空且增加可能的账户数（通用场景中设为100，在多设备的监控环境之中设置为10万，即100000）。对应的，又由于高速出块，我们将可信高度也拔高数倍（10000）。</p>
-<p>在工程合同的低存储区块链化项目之中，往往参与账户相对较少（100），企业之间即合约内的总代币量不变。公司（账号0）为总发包方，即最终的代币兑现方，在初始即创世区块中账户就具备该代币量。其他各个承包方与“0”公司，或承包方之间，进行代币交易并在交易内签署合同落实细则来实现现实中项目转接或合同内外事件的发生。该场景下对于共识中区块生成条件没有额外要求，但是在最优情况下，应当结合底层设施，或者底层人员，对于项目工作落实的监测与管理汇报，在与实际工作相有机结合之后来实现上层管理（合约）与下层劳动的联动。在保证工作基础上，透明化联盟内合作企业之间关系，真正实现付出换来收获，也最大幅度地扩大各企业效益。</p>
-<h3 id="模拟数据"><a href="#模拟数据" class="headerlink" title="模拟数据"></a>模拟数据</h3><!--图表-->
-<p>通过Python制作的相关应用，我们可以得到各方案在区块存储方面随着区块高度逐步增加而变化的状况。我们将数据再次用Python清洗整理后，通过JavaScript配合Echarts进行渲染，我们即可得到可视化的数据图。</p>
-<p>最终我们能够得到对比结果</p>
-<img src="/state-chain-on-pm-paper/image0001.png" class="" title="image0001">
-
-<p>具体的，对于传统区块链的存储使用情况如下：</p>
-<img src="/state-chain-on-pm-paper/image0002.png" class="" title="image0002">
-
-<p>对于状态的低存储区块链模型在使用中存储情况如下：</p>
-<img src="/state-chain-on-pm-paper/image0003.png" class="" title="image0003">
-
-<p>首先我们录入的数据分为两种。</p>
-<p>第一种工程设计与安全责任的监控项目的低存储区块链化中，与第二种在工程合同的低存储区块链化项目之中，我们得到的结果都和通用情况下结果相近。</p>
-<p>更详细<strong>实验与后续分析</strong>请见最上面PDF</p>
-]]></content>
-      <tags>
-        <tag>done</tag>
-        <tag>blockchain</tag>
-        <tag>paper</tag>
-        <tag>project mManegement</tag>
       </tags>
   </entry>
   <entry>
@@ -12351,6 +12206,151 @@ TODO:
         <tag>done</tag>
         <tag>wasm</tag>
         <tag>wasi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>工程项目管理应用的低存储量区块链实现</title>
+    <url>//state-chain-on-pm-paper/</url>
+    <content><![CDATA[<p>区块链不仅仅构造了数字货币，作为可信底层架构，区块链通过保存历史信息提供了可追溯的功能。该功能在获得用户信任基础上，保证了产品可信度，降低业务审查、清算等会计成本。状态区块链是一种比传统区块链更加激进的区块链底层架构，它选择了不保存所有历史，而是选择通过总结来归纳出每个可信区段中所有账户的状态，从而实现在现有可信基础上更加灵活的应用部署，彻底摆脱了原本对每个节点存储空间的苛刻要求。工程建设过程中随着工程的推进，尤其是大工程，工程管理对于可信基础上的账簿、设备以及合同等元素管理的需求越加强烈。但由于工程环境及项目成本的限制，相比传统区块链，状态区块链应更具优势。</p>
+<p>本文中，在对区块链相关技术进行综述的基础上，对市场上的低存储量区块链技术进行了比较分析，提出了基于状态的低存储量区块链的实现方案和部署思路。然后，在工程项目管理领域中，对提出的低存储量区块链进行了实现和场景分析，表明本文所提方案在保障区块链安全性的基础上，具有项目成本优势。</p>
+<span id="more"></span>
+
+<p><strong>论文<a href="/state-chain-on-pm-paper.pdf">PDF标准版下载</a></strong></p>
+<h2 id="区块链中存储的成本"><a href="#区块链中存储的成本" class="headerlink" title="区块链中存储的成本"></a>区块链中存储的成本</h2><p>首先，随着技术的提高，假定存储数据的成本呈指数级下降。我们则可得到一个这样的模型</p>
+<p>$$c(t)&#x3D;Ae^{-kt}$$</p>
+<p>c(t)是在任何给定年份t中存储1GB数据的成本。</p>
+<p>A是当前按存储1GB1年的成本。通过Amazon Elastic File System进行定价。使用EFS，全年存储1GB数据的6个副本的成本为每年21.60美元。即A&#x3D;21.60美元。</p>
+<p>k是存储成本随着时间推移下降的速度。k越大，价格越快降低。根据过去35年的历史数据，k约为0.2502，但对未来存储成本的预测表明未来这种变化率会下降。</p>
+<p>这可以得出我们在任何一年内将要花费的存储容量。现在我们可以计算我们的存储总成本。</p>
+<p>每年我们必须为当年收到的新数据支付费用，并继续存储前几年的所有数据。所以每年的存储成本为：</p>
+<p>$$S(t)&#x3D;c(t)\sum_{T&#x3D;0}^nPredictedGB(t)$$</p>
+<p>由于众所周知的区块链扩容，比如比特币从1MB过渡到2MB，模型中的Predicted_GB本质也是在逐年增加的值。随着数字货币与区块链逐步被越来越多的人所认可，区块容量(BuiltinSize)增加的步伐也越来越快。作为激进的比特币分叉，比特币现金，已经分叉至32MB。从市场来看，越是热门的区块链产品的信息存储量增速越快。而热门程度我们可以根据其代币的交易量来判断。</p>
+<p>$$PredictedGB(t)&#x3D;\sum_{d&#x3D;0}^{365}BuiltinSize \times Volume(t,d)$$</p>
+<p>那么最终的每年存储成本即为：</p>
+<p>$$S(t)&#x3D;Ae^{-kt}\sum_{T&#x3D;0}^n\sum_{d&#x3D;0}^{365}BuiltinSize \times Volume(t,d)$$</p>
+<p>总而言之，通过该模型，我们可以清晰地看出，这通过优化后的区块链存储成本模型，最终其是递增膨胀，还是逼近指数下降，取决于科技发展的k值（&lt;1）与年存储量，也可以说是k值与产品热度之间的博弈。作为跑赢市场的明星产品，例如Ethereum，必面临存储量爆炸的问题。当然从一般角度来看，<strong>服务器</strong>硬盘的发展是完全超越一般的区块链增长的。</p>
+<p>但是在特定环境，尤其是分布式的物联网环境，区块链上为了实现分布式与数据可信，设备往往分散且数量可观。因此，实际在物联网或多节点等正常区块链环境下，当区块链应用全网设备数为DeviceNum时，存储成本为：</p>
+<p>$$S(t)&#x3D;DeviceNum \times Ae^{-kt}\sum_{T&#x3D;0}^n\sum_{d&#x3D;0}^{365}BuiltinSize \times Volume(t,d)$$</p>
+<p>也因此，为了节约成本，项目往往选择具有较少的存储空间的设备，这就更进一步限制了区块链存储不能无限制地膨胀。因此，换句话来说，在存储成本较低基础之上，倘若能够限制住区块链数据存储的膨胀，区块链产品则能够部署于更广泛的领域。</p>
+<h3 id="区块链在工程管理中的应用"><a href="#区块链在工程管理中的应用" class="headerlink" title="区块链在工程管理中的应用"></a>区块链在工程管理中的应用</h3><p>到目前为止，区块链在建造行业中的实际使用并不常见。有些人正在使用它结合物联网来存储建筑物的传感器数据。还有人认为类似以太坊的分布式平台可以托管BIM应用程序。也有人提到区块链在合建项目中的应用，因为它可以提供一个有用的工具，通过使用智能合约，监控各方在整个设计和施工阶段管理和记录上对BIM模型的更改，即通过编辑和存储建筑模型的所有修改记录到不可变的公共记录中（区块）。</p>
+<p>首先，众所周知的是，区块链可以作为数字账簿的存在，如hyperledger，中文名超级账簿。</p>
+<p>当前，企业间的战略联盟（partnering模式）中，由于各个企业仍然是独立法人，战略联盟中经常会发生由于道德风险、逆向选择等问题造成的联盟合作关系不稳定。因此，目前急需一种合理的激励机制，保障供应链联盟之间的信息开放共享来防止问题发生。因此，需要一种受到各方信任的信息技术手段，来支持分布式的信息记录储存，联盟中的企业从不同途径来分享多样化的信息。区块链技术的应用，在对企业共识数字化的基础上，受所有人信任，不仅能实现价值共创共享的目标，而且构建了利益相关者之间的共生关系，实现了多元资本共生和利益相关者的共同治理。万达、百度、空客、美国运通、思科、富士通、日立等国内外各个行业的大公司在战略上往往拥有更加错综复杂的联盟关系，因此其对hyperledger的需求更为强烈。除他们以外，hyperledger还有约200余个企业合作伙伴，可见世界领先的企业对区块链在账簿上应用的普遍认可。</p>
+<p>虽然区块链技术为项目相关的会计更多样化的工作与管理模式提供了可能。但与金融领域相比，项目管理会计领域拥有复杂性和独特性，区块链技术在该方面应用中依然面临数据存储空间有限、业务数据处理难度高、对现有中心化记录的管理会计基础业务架构和业务规则挑战等问题。</p>
+<p>更贴近工程内容的，区块链往往依托着物联网或BIM这类将传统产品信息化的载体，以此方式在工程项目之中得到运用。</p>
+<p>以前的方案可用于管理存储在文件中的任何建筑物信息，包括BIM文件。然而，在BIM设置中实施区块链的正确方法是将其与BIM服务器集成。架构如图所示。</p>
+<img src="/state-chain-on-pm-paper/BIM&BC.jpg" class="" title="BIM">
+
+<p>Barnett正在确定建筑行业中区块链的一些用途，例如维护记录数字财产，基于时间戳记录行为或交易，多重签名交易，智能监控情况并执行自己的计算机程序以及与真实世界结合的智能合约信息存储库。还有争议中能够使用自动化区块链解决方案，基于智能合约的智慧城市，以及区块链房地产投资等也被设想出来。</p>
+<!--抄论文-->
+<p>Security Ledger指出，“在保卫物联网安全方面最大的挑战之一就是身份问题。更明确一点就是：我们如何确保数十亿或者百亿的智能设备相互之间的连接与交流安全。看起来区块链能够提供答案。”</p>
+<p>在与区块链结合之前，物联网一直是个“矛盾的存在”，物联网的发展前景已被所有人认可，但是症结问题一直得不到解决。中心化的管理架构存在无法自证清白的问题，也即不管你是否窃取了参与方的隐私，都容易被怀疑，没有理性的方式可以证明你的清白，完全靠相互的自觉与信任。况且，个人隐私数据被泄露的相关时间时有发生，例如，摄像头被网络直播的事屡见不鲜。物联网的参与者，尤其是工程项目中物联网的参与者，通常不完全被发起方所单独掌控（例如普通私人用户、企业用户），如何让其他的合作方能够更好地参与到项目之中，面临极为复杂的协同成本。</p>
+<p>但是如此看待区块链，大多是由于当今区块链产品多基于以太坊等平台，制作思维也跳脱不出数字货币的范畴。以太坊中除了CAP冲突以外，对于合约本身的进行也存在着合约不可修改、合约太过依赖主网等缺陷。这未免太过局限了其区块链应用的发展。本质上来说，区块链的应用重点在于其共识的形成，共识才是一个分布式应用与区块链应用的最大差别，最重要的，包括区块形成条件（挖矿条件）、出块时间、区块存储方式设计等各种被平台所简化的内容本应也是应用的重要内容。</p>
+<p>因此除了传统的和物联网、BIM等信息元素结合以外，工程项目之中可以将生产过程、交付过程等一系列费时费力的过程量化编译成数个共识，将这些共识合并起来数字化形成针对项目的合约。</p>
+<h3 id="市场上的低存储区块链方案"><a href="#市场上的低存储区块链方案" class="headerlink" title="市场上的低存储区块链方案"></a>市场上的低存储区块链方案</h3><!-- 首先是将状态作为更重要的保存内容。 -->
+
+<p>在UTXO中，比如比特币，抛去了状态的概念，其中账户（即地址）的余额通过与它相关的事务来进行判断，例如某个地址在区块链中的出现是先通过工作证明获得了100货币单位，然后在其之后8个区块时间后它将88个货币单位转移到另一个地址中，其后没有任何相关交易。这样在当一个节点遍历完所有区块之后就可以计算出该地址余额为12个货币单位。</p>
+<p>这样的产品设计，虽说要求了节点必须下载并遍历整个区块才能分析出地址余额这样累赘的工作，但是也的确非常成功地解除了他人尤其是非技术人员对区块链的怀疑——至少让区块链概念更加通俗易懂。</p>
+<p>可是区块链的不断增长使得这个下载与遍历操作越来越困难。比特币核心开发者团队意识到了这个问题的严肃性。在2016年初bitcoin的区块就已经超过60G，开发者团队在新核心钱包中针对节点新加了区块链存储的修剪模式（prune）。全节点钱包，即核心钱包的使用者通过在个人目录中bitcoin.conf配置文件中，输入“prune&#x3D;1024”并保存，重启钱包后即可打开节点的修剪模式。通过该模式，节点可以将60多G的存储不断删减直至你设定的值（1024mb），且相比以前能更加快速地打开钱包。但是这个模式仍有局限性——及其耗时且耗计算的同步过程：它需要先从p2p网络上下载这所有的区块，再对已下载的区块逐个进行散列计算生成散列值，并校对散列值的树结构，以此保证所下载区块的完整与安全——这样的下载过程中耗费数G的带宽流量以及堪比数字货币挖矿的计算任务依旧非个人电脑，或者非一般的服务器所能承受。尤其是在用户重新导入一个新私钥后，为了获取这个私钥对应地址的余额信息，节点必须再重复一遍上述所有操作。</p>
+<p>随着时代的发展，在2016年开始行业进入了基于区块链的链上应用，即分布式应用（decentralized application，简称DApp）的时代。简单来说，DApp和普通的App原理一样，除了他们是完全去中心化的。由底层区块链网络自己的节点来运作的DApp，不依赖于任何中心化的服务器。虽然DApp是去中心化的，可以完全自动地运行，但是依然也有可能性会被入侵。为了要能够很好地使用这些DApp，就需要定制的入口。例如其中较为著名的就是Augur，一个基于以太坊的去中心化市场预测平台，完全不需要通过任何第三方服务器。目前来看，由于以太坊EVM的健壮，大部分分布式应用都是基于以太坊。</p>
+<p>但是，从现状来看，如今很多区块链产品中的“永久存储”特性却仅仅只是一个吸引投资人和购买者的华丽噱头，或者说是一个非常普遍的对当下区块链模式的一种妥协现象：想要让人可信就必须永久存储所有事务。毕竟，在以太坊平台上就已经拥有了在链上存储的功能，无需再多费手脚即可拥有。</p>
+<p>但是从产品设计的角度来看，在许多的特定环境下，区块链产品本质上其实并不需求永久的存储——例如游戏、匿名货币以及数据存储等。拿游戏作为例子来看，基于区块链的互联网游戏本身就是在飞速信息交换，在存储和带宽以及共识的限制下，这个交换的成本被无限放大。</p>
+<p>如CryptoKitties这个在中心化时代看起来非常简单的养猫游戏。</p>
+<p>CryptoKitties(加密猫)是因为一款基于以太坊的DAPP，它由设计工作室AxiomZen打造，它是一个围绕着可育，可收集和可爱生物的游戏，每只猫都是独一无二的，100％归您所有，而且它不能被复制，带走或毁坏。</p>
+<p>CryptoKitties是世界上第一款基于区块链技术的游戏，这一突破使得一些像比特币和以太坊的虚拟物品成为可能。比特币和以太币是加密货币，但CryptoKitties是加密的收藏品。就像传统的收藏品一样，你可以购买，出售或交易你的CryptoKitty，在知识产权保护上，区块链会监测保障您的所有权。简单来说，就是利用链来存储了信息。</p>
+<p>但是在以太坊网络中部署后，由于销量火爆，直接压垮了以太坊平台的交易传输。据悉以太坊网络在该期间平均堵了近2万笔交易。众所周知，无论是以太坊还是比特币都对每个区块限定了大小，这就决定了每次的区块打包交易中交易总数据量都有上限。对于超出上限的交易，就被拖至下个区块中打包。“近2万笔交易”，可见该应用在链上究竟写入了多少庞大的数据。</p>
+<p>因此“永久存储”这个功能对于区块链应用底层来说非常容易成为网络的累赘。纵观当今部署的互联网应用，应用都是以一个“状态”实现的部署——持续集成（CI）就是这种理念的实现，通过不停的覆盖“状态”来达到工程合作的统一；同样的还有应用的持续发布，都是以最终的“状态”作为最终的目的。</p>
+<p>对于此问题，以太坊选择的是利用分片技术对其网络进行扩容。</p>
+<p>“分片”的大致设计思路是：将区块链网络中的每个区块变为一个子区块链，子区块链中可以容纳若干（目前为100个）打包了交易数据的Collation（大概可以称为“校验块”，为了在分片的情景中将其与区块的概念区分开），这些Collation最终组成一个在主链上区块；因为这些Collation是整体作为区块存在的，所以其数据必定是全部由某个特定的矿工所打包生成，本质上和现有协议中的区块没有区别，所以不再需要增加额外的网络确认。这样，每个区块的交易容量就大概扩大了100倍；而且这种设计还有利于未来的继续扩展，整个扩展计划目前也被大致分为4个阶段；本文所介绍的仅仅是第一阶段的相关实现细节。本质来说就是通过层叠的状态和少量的过程区块来保证性能与可信的双重获利。除此之外，以太坊在新节点部署上通过引入账户（Account）与状态（State）的概念来实现区块更加迅速的同步。其中账户即为已经出现在链上的地址，而状态即为一个时间点上账户及其相关信息的列表。</p>
+<p>其实在以太坊启用分片之前，在市场上早已经出现了成型的利用类似技术的数字货币，PascalCoin，它通过pascal编程语言重写了比特币奠定的数字货币的架构，并且引入了账户和状态的概念，实现了其数字货币后台区块链的秒同步。但是，由于高度去中心化的办公模式带来的低效更新以及pascal编程语言死气沉沉的社区，目前情况来看，其在链上应用等方面的发展非常局限。</p>
+<!-- pascalcoin的工作模式如图所示balabala -->
+<p>简单来说，PascalCoin中的块将超过100的检查点高度新的块将附加到链的顶部，旧的块从底部删除，只有一个任何时候都将需要不断的块数。检查点在每100个区块中发生一次，并简单地压缩成SafeBox。当新节点加入网络时，它只会下载最新的检查点和几十个块。此外，SafeBox现在包含在每一个账户段子结构块头信息中。这使得节点成为能独立地计算、验证和构建SafeBox结构所需的累积工作。</p>
+<p>它通过以下方式实现:</p>
+<ul>
+<li>检查是否所有区块头通过SafeBox以类区块链接方式连接</li>
+<li>使用工作证明方式重新计算SafeBox的累积工作</li>
+<li>验证是否SafeBox的累积工作是网络中最大的已知工作。</li>
+</ul>
+<p>因此，相比其他加密货币，PascalCoin会以指数方式达到更高的每单位存储吞吐量，因为节点只需要存储网络吞吐而不是累积的网络吞吐量。 换句话说，PascalCoin存储的是交易流，而不是交易历史 。如果流量不变，存储也是恒定的。这里要提醒的是SafeBox确实在每个区块都变得可以忽略不计，但总是在固定数量中且无论交易数量如何变化。</p>
+<p>且由于节点在任何时间只需要保持100个块，所以相比其他加密数字货币，PascalCoin考虑到了以指数方式增长的更大的区块规模。例如，对于相同数量的存储，即一个Bitcoin节点在现在消耗的存储，PascalCoin理论上可以支持吞吐量为每秒72,000个交易，本地只需5.4GB区块大小。</p>
+<p>从模型角度来说，传统区块链，例如比特币，区块大小起初线性增长，在触及区块上限后开启扩容分叉。</p>
+<p>而状态链限制其账户增长。PascalCoin的主要新功能之一是帐户可以有唯一的公开可见的名称，与域名系统的方式大致相同。这允许用户接收资金到他们的电子邮件地址或聊天昵称。它允许商店用他们的域名或品牌名称收款。支付本质上仍然是通过数字号码来引用帐户，但是名称用于查找背后的帐号，就像是域名是用于查找背后的IP地址。</p>
+<h2 id="低存储方案"><a href="#低存储方案" class="headerlink" title="低存储方案"></a>低存储方案</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>虽然区块链总是存在着在新块生成同时有分叉的风险，但是在旧的区块链中，各节点总是形成相同的一条无任何分叉的链</p>
+<p>传统的区块链存储结构与内容如下图所示：</p>
+<img src="/state-chain-on-pm-paper/OriginBlockchainStructure.jpg" class="" title="OriginBlockchainStructure.jpg">
+
+<p>可见大部分数据（难度、随机数、版本号等）都存在非常严重的冗余。而交易数据根据UTXO形式，分为交易发送者、交易接受者、交易货币数量、以及交易签名。其中交易签名占空间最大且基本上是一次性数据，对区块链后续发展并无推动作用。</p>
+<p>因此我们需要从区块链结构入手设计低存储区块链的设计。</p>
+<img src="/state-chain-on-pm-paper/4NodesNetwork.png" class="" title="4NodesNetwork.png">
+
+<p>如图中四个区块链节点形成了一个区块链网络。我们可以看到每个节点都保存了从创世区块（GenesisBlock）到N号区块（BlockN），因此从创世区块到N号区块之间的链，根据共识来说，它们就是经过了所有节点的审计且已经可以被我们认为是可信的——那么对于可信的内容，我们则无需再进行验算（尤其是私钥导入新节点接入等流程中），因而我们可以将其删除。但是为了下方（N+1）号区块以及更新的节点的安全保证，我们仍然需要k个区块来形成最长链以防止分叉。同时为了防止数据的丢失，我们也应当将从创世区块到N号区块之间的链中的数据以其他格式存储起来。</p>
+<p>因此我们将创世区块到（N-k）号区块的内容整合为“状态区块”来保存内容。</p>
+<img src="/state-chain-on-pm-paper/IntroStateBlock.png" class="" title="IntroStateBlock.png">
+
+<p>在每过一定阶段，根据全网节点状态进行区块删减，形成由数个“状态区块”形成的“状态区块链”。但是由于状态内容的冗余与过时我们仅仅保留数个最新块。最终则形成了我们的新方案。</p>
+<img src="/state-chain-on-pm-paper/WithBIM.png" class="" title="WithBIM.png">
+
+<p>用公式表示原始方案与改进方案的存储量如下</p>
+<p>原始方案即为直接对区块的存储。StorageSize为总存储规模，blockHeight为区块高度（个数），BlockSize为内置的区块大小，例如Bitcoin初始为1M。<br>$$ StorageSize(blockHeight) &#x3D; BlockSize \times blockHeight $$</p>
+<p>而在针对存储内容优化的新方案中，去除了极大部分的区块，引入了新的”状态区块”Generation来存储每个时间段账户信息。其中，StorageSize为总存储规模，blockHeight为区块高度（个数），GenerationSize为单个“状态区块”的大小，为了安全我们本地需要两个状态区块来保证安全性。CredibleHeight为可信高度，在PascalCoin中该高度被固定设定为100个区块。BuiltinTxNum为单个区块中的事务（交易）个数。<br>$$ StorageSize(blockHeight) &#x3D; BlockSize \times (blockHeight \bmod CredibleHeight) + GenerationSize(blockHeight) + GenerationSize(\lfloor \frac{blockHeight}{CredibleHeight} \rfloor ) $$</p>
+<p>$$ GenerationSize(blockHeight) \approx \frac{BlockSize \times blockHeight}{BuiltinTxNum} $$</p>
+<p>从数学模型可见，该方案除了删除了大部分冗余数据以外，还限制住了数据量体积，可以有效防止数据量的无限扩张。</p>
+<h3 id="为什么该方案依旧安全可信"><a href="#为什么该方案依旧安全可信" class="headerlink" title="为什么该方案依旧安全可信"></a>为什么该方案依旧安全可信</h3><p>Bitcoin从Merkle树，即默克尔树出发来保证区块安全。如上所述，在进行区块“压缩”、“删减”过程之中链的默克尔树实际上是被破坏了——无法从创世区块重新递推至最新块。</p>
+<p>但这并不意味着方案的安全性被打破。我们的关注点在于共识之上——在共识中，所有达到了N的节点在确认全网都已经达到N（通常实践上由8个“确认”消息来判断，与Bitcoin交易的广播类似）之后都会将（N-k）号区块之前的区块进行“删减”——这就如同一次简易的硬分叉（hard fork），在共识之中，虽然树被打破，但是所有交易信息所有事务的结果不会丢失。</p>
+<p>而且，新方案中依然存在着默克尔树。首先是“状态区块”能够形成简短的默克尔树，防止恶意用户上线多个恶意节点利用共识篡改历史数据。其次，区块的默克尔树依然存在，但仅仅服务于现在与未来，关注于新区块是否安全可信。</p>
+<!-- 3. 为什么该方案在低存储基础上还能低膨胀？ -->
+
+<h3 id="低存储的应用部署思路"><a href="#低存储的应用部署思路" class="headerlink" title="低存储的应用部署思路"></a>低存储的应用部署思路</h3><!--非工程环境，通用思路-->
+<p>本质来说，低存储方案中应用部署相比正常方案中并不具有相对更多的限制。但是若是需要最大程度地发挥其中优势，则需要更好地对应用进行筛选。</p>
+<p>首先，最佳效果之下，信息应当存储于各个账户的状态之中。如此便可直接摆脱UTXO货币在导入新私钥时，或是创建账号地址时，不得不通过P2P网络将所有区块同步之后才能安全进行其余例如交易等操作的这一困境。这对于数字货币钱包来说，是加强了其易用性，几乎能够直接在打开瞬间开始进行操作。且摆脱了SPV协议轻钱包。由于SPV钱包不能检查区块上任意其他的交易，理论上讲，区块就有可能是无效的。而且spv协议往往指向一个中心服务器，这可能被重定向到一个恶意地址，给用户带来财产损失的风险。这对于如以太坊这类的应用入口来说，更可以大大加快应用开发速度，加快应用加载速度。</p>
+<p>其次，尽可能地删除不必要的旧区块。在过了可信高度，即几乎所有节点的区块链存储都高于某一高度一定高度之后，区块链系统完全可以将某一高度前的区块进行删除来达到节省存储空间的目的。因为首先数据我们是选择存储在各个账户状态之中，换句话说就是即便删除了历史的区块也不会造成信息的损失。其次我们所有节点都在这“某一高度”上方，我们在这“某一高度”上达成了共识，即每个节点在“某一高度”之前的区块都是完全相同的，之后的区块的merkle树或trie树都可以在这“某一高度”开始进行，不必强制从创世区块开始。对于这之前的区块，已经无特别重要的作用，当然对于存储空间足够的设备来说依然可以保留这些区块，但是对于空间较小或者更加集约的环境下，将这之前的区块删除应当是最为正确的操作。</p>
+<p>再者，必须限制账户、事务的膨胀。首先，区块的大小和事务数量有直接关系，因此中本聪利用了fee也就是手续费概念，fee的竞争以及区块打包交易上限增加了事务进入系统的成本，以此来防止事务的过度或恶意的膨胀。</p>
+<p>其次由于新的区块链中选择将信息存储于账户之中，因此在打包账户时账户数量和使用存储量有直接的正比关系</p>
+<p>$$ StorageSize &#x3D; kAccountNum $$</p>
+<p>倘若不限制账户数量，依旧和比特币一样提供无限的基于私钥与ECDSA椭圆曲线数字签名算法生成的账户地址，那么存储量很容易脱离监管。例如可能有人恶意地通过给许多未在网络出现的地址发送事务，强制增加了许多新的账户，那么在该网络下：</p>
+<p>$$ NewAccountNum &#x3D; TransactionNum $$</p>
+<p>而为了交易的速度，我们往往在一个区块中打包许多事务。如比特币中，一般一个交易（事务）在250字节左右，扩容前1M大概就能容纳4000多笔。</p>
+<p>$$ NewAccuntNum &#x3D;  TransactionNum &#x3D; 4000 $$<br>$$ AccountNum &#x3D; OriginalAccountNum + NewAccuntNum $$<br>$$ StorageSize &#x3D; kOriginalAccountNum + 4000k &#x3D; OriginalStorage + 4000k $$</p>
+<p>即每次都需要增加整整4000k大小存储空间，而由于在攻击下，大部分账户不具有真实性，并不真正被他人使用，即很可能这4000k大小将是无用的。随着时间推移以及区块高度增加，在攻击之下的真实账户所占空间增长缓慢，无用账户所占空间却越来越多，最终和改良前无用区块冗余的状态一致。即无法达到限制膨胀，无法将其应用于多设备尤其是类似物联网的场景之中。可见限制账户与事务非常有必要。</p>
+<!-- 另外，更切实的智能合约。结合工程详情 -->
+
+<h2 id="项目案例"><a href="#项目案例" class="headerlink" title="项目案例"></a>项目案例</h2><p>实际工程项目中可能涉及工地环境，计算机环境以及经济环境等等具有非常鲜明特点且各不相同的方面。</p>
+<p>因此，区块链在工程的每个部分中的应用都有所不同。但是在大多数场景中，我们都可以将其功能与需求部署在区块链中，从最基本的可信数据存储的基础之上开始向上增加特性。</p>
+<h3 id="应用概述"><a href="#应用概述" class="headerlink" title="应用概述"></a>应用概述</h3><p>本案例从事务存储角度进行，假设进行的是一个混合了高频率的物联网监管信息监管以及企业间合约的共识化</p>
+<p>首先，我们通过定义一系列参数为常见数字货币公有链中内置参数，来模拟通用状态下，基于状态的理论低存储非膨胀方案相比原始中本聪论文内方案在存储上的差异。</p>
+<!--多扯点-->
+<p>其次针对工程设计与安全责任的监控项目的低存储区块链化的目标设定相关内容，进行实验</p>
+<p>最后根据工程合同的低存储区块链化来制定另一实验。</p>
+<h3 id="不同的区块链底层设计"><a href="#不同的区块链底层设计" class="headerlink" title="不同的区块链底层设计"></a>不同的区块链底层设计</h3><!--代码细节-->
+<p>首先，基于Python，我们可以从中本聪（Satoshi）论文中轻易地制作一个基本的区块链模型。</p>
+<p>为了快速地实现多层的区块，我们可以将其中繁杂的工作证明、密钥交换、交易签名等安全细节删去。最终我们生成一个较为简易但具有完整的在挖矿成功后建立新区块并对数据进行存储的功能。</p>
+<p>然后我们再建立一个基于状态的区块链系统。除了Block区块以外，我们还需要一个新的对象——该对象需要保存一个时间点上的账户状态信息以及之前历史区块信息，同时它也和传统的区块一样能够通过散列值来形成一个链。如前文介绍中简写，该“状态区块”也可以叫做Generation（代）。同样地为了测试我们将其中繁杂的工作证明、密钥交换、交易签名等安全细节删去，将判断可信高度的方法简便化。但是依然保留状态区块链之中删除历史区块的功能。</p>
+<!--介绍！！！-->
+
+<p>最终我们再写一个程序，通过该程序我们能对两个系统进行“挖矿”操作。简单来说，该程序能够在两个系统之中分别注入相对相同的事务信息，并不断激活两者新区块打包存储功能。在这个过程之中，两个不同的区块链系统会用两者不同的方式打包交易。但是，状态区块链除了单纯的打包储存以外，也会将交易信息在生成状态区块的过程中归纳进账户信息之中，在每个可信高度之后追加一个包含当前时间点链上所有账户的“状态区块”，并删除可信高度个“状态区块”之前的过久的区块。</p>
+<p>公平起见，所有写入区块的交易本质相同，唯一不同在于低存储区块链中为数字（账户编号），传统区块链之中为对该数字进行类比特币地址生成方式处理（即sha256计算散列后将该值进行base58加密）后得到的地址。</p>
+<p>此外，我们还可以通过修改模拟生成的交易内容来控制对实验内容的模拟。</p>
+<p>在工程设计与安全责任的监控项目的低存储区块链化中，大部分事务是由物联网设备的工作证明与工作状态构成。这里的工作证明和传统的数字货币的工作证明挖矿是有些许区别的，工作内容不再是通过计算无意义的散列值，而是根据工程环境进行定制。例如在我们假设的传感器监控环境之中，所有进行正常工作（搜集数据，打包数据，分析数据等等）的时间都可以被视为其工作，而其对于每个时间段进行的工作总结即为工作证明。换句话说，我们是摆脱了账户间交易，或者说是只考虑工作证明并没有其他账户之间的交易，即我们可以选择将事务发送目标与发送货币数量字段都设置为空且增加可能的账户数（通用场景中设为100，在多设备的监控环境之中设置为10万，即100000）。对应的，又由于高速出块，我们将可信高度也拔高数倍（10000）。</p>
+<p>在工程合同的低存储区块链化项目之中，往往参与账户相对较少（100），企业之间即合约内的总代币量不变。公司（账号0）为总发包方，即最终的代币兑现方，在初始即创世区块中账户就具备该代币量。其他各个承包方与“0”公司，或承包方之间，进行代币交易并在交易内签署合同落实细则来实现现实中项目转接或合同内外事件的发生。该场景下对于共识中区块生成条件没有额外要求，但是在最优情况下，应当结合底层设施，或者底层人员，对于项目工作落实的监测与管理汇报，在与实际工作相有机结合之后来实现上层管理（合约）与下层劳动的联动。在保证工作基础上，透明化联盟内合作企业之间关系，真正实现付出换来收获，也最大幅度地扩大各企业效益。</p>
+<h3 id="模拟数据"><a href="#模拟数据" class="headerlink" title="模拟数据"></a>模拟数据</h3><!--图表-->
+<p>通过Python制作的相关应用，我们可以得到各方案在区块存储方面随着区块高度逐步增加而变化的状况。我们将数据再次用Python清洗整理后，通过JavaScript配合Echarts进行渲染，我们即可得到可视化的数据图。</p>
+<p>最终我们能够得到对比结果</p>
+<img src="/state-chain-on-pm-paper/image0001.png" class="" title="image0001">
+
+<p>具体的，对于传统区块链的存储使用情况如下：</p>
+<img src="/state-chain-on-pm-paper/image0002.png" class="" title="image0002">
+
+<p>对于状态的低存储区块链模型在使用中存储情况如下：</p>
+<img src="/state-chain-on-pm-paper/image0003.png" class="" title="image0003">
+
+<p>首先我们录入的数据分为两种。</p>
+<p>第一种工程设计与安全责任的监控项目的低存储区块链化中，与第二种在工程合同的低存储区块链化项目之中，我们得到的结果都和通用情况下结果相近。</p>
+<p>更详细<strong>实验与后续分析</strong>请见最上面PDF</p>
+]]></content>
+      <tags>
+        <tag>done</tag>
+        <tag>blockchain</tag>
+        <tag>paper</tag>
+        <tag>project mManegement</tag>
       </tags>
   </entry>
   <entry>
@@ -13223,23 +13223,6 @@ TODO:
       </tags>
   </entry>
   <entry>
-    <title>为什么选择放弃在block中加入sheet</title>
-    <url>//why-shouldnt-put-sheet-into-block/</url>
-    <content><![CDATA[<p>先简单说下最开始的Vault，vault是一个从上个vault角度对一个范围内block的状态总结，包含一个叫sheet的map(s)来存放最终账户数据（公钥，数据，合约etc）。然后由于同步和验证等过程中因为将vault并入了block的chain中所以每次都要swich type相当别扭，所以删除了vault，将sheet放进了block里。然后就是出现如下弊端。</p>
-<span id="more"></span>
-
-<p>最开始独立的vault设计虽然在同步block时候会别扭，但是对于账户等的设计上完全可以做到“状态chain”。在Vault合并Block之后就出现了明显的问题：真的太大了。刚开始想的是放整个sheet，然后发现sheet太大了（相比其他），一个sheet就相当于N*Tx大小而且还每个块必出现。这<strong>恒定占据size对于VPS带宽压力非常大</strong>。VPS带宽的利用会极大地影响实际的TPS和使用体验。假设在未来正常情况下，我区块大小10M，区块时间10s，那么要求就是VPS的网速达到1M&#x2F;s才能广播<strong>1</strong>个区块。在追求低区块时间的同时，追求减小区块体积的目标也应该落实。这样就和“存入状态”的设计相悖。</p>
-<p>后来尝试了sheetHash。从功能上和结构上看是没有什么问题。但是从设计上来看，sheet在仅“账户-余额”的简单应用中大概率可行，但是在涉及了虚拟机和DAPP业务之后就力不从心：因为<strong>需要考虑执行时间</strong>。这也是为啥ethereum不让玩for遍历的原因。当一个新块已经成熟，上个块Block对应的任务还没做完，那这时候的sheet内容就是不正确的。另外，接收者的验证sheet阶段也会消耗时间，当多个Block广播时就会出现疲于验证。</p>
-<p>虽然初衷是为chain的deleteable，但是这样就有点得不偿失。</p>
-<p>未来做coin了会考虑重拾状态链，但是现阶段主攻还是wasm，schnorr这些技术融合的区块链引擎。</p>
-]]></content>
-      <tags>
-        <tag>done</tag>
-        <tag>NGIN</tag>
-        <tag>notes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>个人想法记录</title>
     <url>//why_do_I_dislike_big_data_AI_etc/</url>
     <content><![CDATA[<h2 id="Why-do-I-dislike-big-data-AI-etc"><a href="#Why-do-I-dislike-big-data-AI-etc" class="headerlink" title="Why do I dislike big data, AI etc"></a>Why do I dislike big data, AI etc</h2><p>当时大二的时候，人工智能还不像现在这么火，big data也是个新玩意。作为一个尝鲜者我很早就开始对这些东西进行学习研究了。</p>
@@ -13267,6 +13250,23 @@ TODO:
         <tag>notes</tag>
         <tag>BigData</tag>
         <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为什么选择放弃在block中加入sheet</title>
+    <url>//why-shouldnt-put-sheet-into-block/</url>
+    <content><![CDATA[<p>先简单说下最开始的Vault，vault是一个从上个vault角度对一个范围内block的状态总结，包含一个叫sheet的map(s)来存放最终账户数据（公钥，数据，合约etc）。然后由于同步和验证等过程中因为将vault并入了block的chain中所以每次都要swich type相当别扭，所以删除了vault，将sheet放进了block里。然后就是出现如下弊端。</p>
+<span id="more"></span>
+
+<p>最开始独立的vault设计虽然在同步block时候会别扭，但是对于账户等的设计上完全可以做到“状态chain”。在Vault合并Block之后就出现了明显的问题：真的太大了。刚开始想的是放整个sheet，然后发现sheet太大了（相比其他），一个sheet就相当于N*Tx大小而且还每个块必出现。这<strong>恒定占据size对于VPS带宽压力非常大</strong>。VPS带宽的利用会极大地影响实际的TPS和使用体验。假设在未来正常情况下，我区块大小10M，区块时间10s，那么要求就是VPS的网速达到1M&#x2F;s才能广播<strong>1</strong>个区块。在追求低区块时间的同时，追求减小区块体积的目标也应该落实。这样就和“存入状态”的设计相悖。</p>
+<p>后来尝试了sheetHash。从功能上和结构上看是没有什么问题。但是从设计上来看，sheet在仅“账户-余额”的简单应用中大概率可行，但是在涉及了虚拟机和DAPP业务之后就力不从心：因为<strong>需要考虑执行时间</strong>。这也是为啥ethereum不让玩for遍历的原因。当一个新块已经成熟，上个块Block对应的任务还没做完，那这时候的sheet内容就是不正确的。另外，接收者的验证sheet阶段也会消耗时间，当多个Block广播时就会出现疲于验证。</p>
+<p>虽然初衷是为chain的deleteable，但是这样就有点得不偿失。</p>
+<p>未来做coin了会考虑重拾状态链，但是现阶段主攻还是wasm，schnorr这些技术融合的区块链引擎。</p>
+]]></content>
+      <tags>
+        <tag>done</tag>
+        <tag>NGIN</tag>
+        <tag>notes</tag>
       </tags>
   </entry>
 </search>
