@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ready"><span class="nav-number">1.</span> <span class="nav-text">Ready</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-0"><span class="nav-number">2.</span> <span class="nav-text">Node #0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-1"><span class="nav-number">3.</span> <span class="nav-text">Node #1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Connect"><span class="nav-number">4.</span> <span class="nav-text">Connect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Startup"><span class="nav-number">5.</span> <span class="nav-text">Startup</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ready"><span class="nav-number">1.</span> <span class="nav-text"> Ready</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-0"><span class="nav-number">2.</span> <span class="nav-text"> Node #0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-1"><span class="nav-number">3.</span> <span class="nav-text"> Node #1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connect"><span class="nav-number">4.</span> <span class="nav-text"> Connect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#startup"><span class="nav-number">5.</span> <span class="nav-text"> Startup</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -262,26 +262,28 @@
     
     <div class="post-body" itemprop="articleBody"><p>This is the tutorial material for dev building a temporary NGIN network through ngcore’s regression testnet flag.</p>
 <span id="more"></span>
-
-<h2 id="Ready"><a href="#Ready" class="headerlink" title="Ready"></a>Ready</h2><p>Before we start, we should create two different folder to keep the chain data. </p>
+<h2 id="ready"><a class="markdownIt-Anchor" href="#ready"></a> Ready</h2>
+<p>Before we start, we should create two different folder to keep the chain data.</p>
 <p>I will suggest using <code>--in-mem</code> flag which can reach the same goal.</p>
-<p>If you dislike that, for example, you can create <code>./dataFolder1</code> and <code>dataFolder2</code>.<br>On the following ngcore command, you should add <code>--db-folder dataFolder1</code> for the first node<br>and <code>--db-folder dataFolder2</code> for the second one</p>
-<h2 id="Node-0"><a href="#Node-0" class="headerlink" title="Node #0"></a>Node #0</h2><p>let we start a regression testnet ngcore node with <code>--reg-testnet</code> only first. </p>
+<p>If you dislike that, for example, you can create <code>./dataFolder1</code> and <code>dataFolder2</code>.<br />
+On the following ngcore command, you should add <code>--db-folder dataFolder1</code> for the first node<br />
+and <code>--db-folder dataFolder2</code> for the second one</p>
+<h2 id="node-0"><a class="markdownIt-Anchor" href="#node-0"></a> Node #0</h2>
+<p>let we start a regression testnet ngcore node with <code>--reg-testnet</code> only first.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ngcore --reg-testnet --db-folder ./env/1 --p2p-key ./env/1.p2pkey </span><br></pre></td></tr></table></figure>
-
 <p>The node will serve its p2p service on 52520 and rpc service on 52521.</p>
 <p>Write down this node’s p2p address like <code>16Uiu2HAmL6ojX5jgxJsoo55suHxM8HocaLuMx4uLSfHpER9rTYtJ</code> , which will be used in the connecting step.</p>
-<h2 id="Node-1"><a href="#Node-1" class="headerlink" title="Node #1"></a>Node #1</h2><p>Now we need to start another one on different port</p>
+<h2 id="node-1"><a class="markdownIt-Anchor" href="#node-1"></a> Node #1</h2>
+<p>Now we need to start another one on different port</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ngcore --reg-testnet --db-folder ./env/2 --p2p-key ./env/2.p2pkey --p2p-port 62620 --rpc-port 62621</span><br></pre></td></tr></table></figure>
-
 <p>The node will serve its p2p service on 62620 and rpc service on 62621.</p>
-<h2 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h2><p>To build a small network, we should use rpc command to manually connect them.</p>
+<h2 id="connect"><a class="markdownIt-Anchor" href="#connect"></a> Connect</h2>
+<p>To build a small network, we should use rpc command to manually connect them.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d <span class="string">&#x27;&#123;&quot;id&quot;: 1, &quot;method&quot;: &quot;addPeer&quot;, &quot;params&quot;: &#123;&quot;peerMultiAddr&quot;: &quot;/ip4/127.0.0.1/tcp/52520/p2p/16Uiu2HAmL6ojX5jgxJsoo55suHxM8HocaLuMx4uLSfHpER9rTYtJ&quot;&#125; &#125;&#x27;</span> http://127.0.0.1:62621</span><br></pre></td></tr></table></figure>
-
 <p><code>16Uiu2HAmL6ojX5jgxJsoo55suHxM8HocaLuMx4uLSfHpER9rTYtJ</code> is the p2p address of node #0 in my machine. You should replace it with yours.</p>
-<h2 id="Startup"><a href="#Startup" class="headerlink" title="Startup"></a>Startup</h2><p>Finally, you should let one of your node start mining, to import blocks into your chain.</p>
+<h2 id="startup"><a class="markdownIt-Anchor" href="#startup"></a> Startup</h2>
+<p>Finally, you should let one of your node start mining, to import blocks into your chain.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d <span class="string">&#x27;&#123;&quot;id&quot;: 1, &quot;method&quot;: &quot;switchMining&quot;, &quot;params&quot;: &#123;&quot;mode&quot;: &quot;on&quot;&#125; &#125;&#x27;</span> http://127.0.0.1:62621</span><br></pre></td></tr></table></figure>
-
 
     </div>
 
@@ -391,7 +393,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

@@ -261,10 +261,9 @@
 </blockquote>
 <p>这样的错误，所以认为是因为没有gcc的问题。那就装msys2.</p>
 <span id="more"></span>
-
 <p>相比我上次装（应该是至少有半年了），这次msys2的installer换了个更精致的皮。不过在最后一步应该是开terminal初始化的时候还是会有各种乱码，而且内容格式也很混乱。</p>
-<p>熟悉地pacman -Syu一阵之后根据提示自动关闭了installer弹出的msys2界面。然后进安装目录找exe打算再起一个terminal，结果发现多了个clang64.exe（没看到ucrt64，因为在后面平板屏幕小没拉下去继续看）。一开始觉得只是多了个clang定制入口没太当回事，打开mingw64并pacman -Ss gcc查找toolchain全名（安装这么多次从没记住过）。结果跳出来的相比以前有一堆ucrt64&#x2F;开头的，让人一脸懵逼。</p>
-<p>这里就简单说一下当前的msys2内部支持的环境&#x2F;架构：</p>
+<p>熟悉地pacman -Syu一阵之后根据提示自动关闭了installer弹出的msys2界面。然后进安装目录找exe打算再起一个terminal，结果发现多了个clang64.exe（没看到ucrt64，因为在后面平板屏幕小没拉下去继续看）。一开始觉得只是多了个clang定制入口没太当回事，打开mingw64并pacman -Ss gcc查找toolchain全名（安装这么多次从没记住过）。结果跳出来的相比以前有一堆ucrt64/开头的，让人一脸懵逼。</p>
+<p>这里就简单说一下当前的msys2内部支持的环境/架构：</p>
 <table>
 <thead>
 <tr>
@@ -276,7 +275,8 @@
 <th>C++库</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>msys2</td>
 <td><code>/usr</code></td>
 <td>gcc</td>
@@ -316,35 +316,38 @@
 <td>msvcrt</td>
 <td>libstdc++</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>先从列内容说起。</p>
 <ul>
 <li>路径前缀：因为msys2是多环境混合的，所以就可能同时存在多个gcc这样的程序，因此使用路径前缀区分</li>
 <li>Toolchain：就是一套默认的编译链，像arch上的base-devel和ubuntu上build-essential</li>
 <li>架构：64和32位</li>
 <li>C库：C语言的标准库，环境决定</li>
-<li>C++库：C++标准库，编译器决定</li>
+<li>C<ins>库：C</ins>标准库，编译器决定</li>
 </ul>
 <p>然后逐行介绍</p>
 <ul>
 <li>msys2：这个是msys2的支持环境，所有在msys2里直接跑的命令（比如最常用的pacman）都是这个环境支持的，环境基于cygwin也导致了它带的gcc编译出来的东西不好跑……真的不建议用它干任何除了pacman包管理以外的任何事。</li>
 <li>mingw64 &amp; mingw32：这里把w32也一起说了。根据我的记忆，一开始是只有mingw32没有msys2，其基于msvcrt（Microsoft Visual C++ Runtime）因此相比cygwin（需要一堆支持库）更好用，可以直接在Windows下跑起来。那时候还是全32位的时代。后来64位成为了主流，也有人开始基于mingw32做了mingw64，但是包更新巨慢，而且w32和w64的更新器也非常难用（就vb程序显示一堆多选列表，每次都得取整个列表）。于是msys2出来带着pacman来管理各个包。</li>
 <li>ucrt64：Visual Studio的新宠，全名是Universal C Runtime，用来替代前面mingw64&amp;w32里的msvcrt。ucrt不支持加载msvcrt的产物，因此老版本Windows（&lt;10）不能直接兼容基于它的软件。但是这不是无理由的激进，要知道msvcrt在当前开发环境里真的是让开发打哑谜，（原生）不支持C99，不支持UTF8</li>
-<li>clang64：就是大家熟悉的llvm前端，其实mingw64&#x2F;w32里也有它的toolchain不过不是默认，这里它被拆出来作为默认且基于ucrt了。</li>
+<li>clang64：就是大家熟悉的llvm前端，其实mingw64/w32里也有它的toolchain不过不是默认，这里它被拆出来作为默认且基于ucrt了。</li>
 </ul>
-<p>我现在的选择是开始尝试使用ucrt一阵子，后面再根据体验来反馈一下。<br>emmmmm…算是出师未捷身先死了，直接golang这关就过不了。首先我用的golang是官方预编译的安装版，肯定就是带msvcrt编译的，用cgo就出现了下面的报错</p>
+<p>我现在的选择是开始尝试使用ucrt一阵子，后面再根据体验来反馈一下。<br />
+emmmmm…算是出师未捷身先死了，直接golang这关就过不了。首先我用的golang是官方预编译的安装版，肯定就是带msvcrt编译的，用cgo就出现了下面的报错</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files\Go\pkg\tool\windows_amd64\link.exe: running gcc failed: exit status 1</span><br><span class="line">C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\Users\c\AppData\Local\Temp\go-link-397521815\000007.o: in function `_cgo_preinit_init&#x27;:</span><br><span class="line">c:\go\src\runtime\cgo/gcc_libinit_windows.c:30: undefined reference to `__imp___iob_func&#x27;</span><br><span class="line">C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\Users\c\AppData\Local\Temp\go-link-397521815\000007.o: in function `x_cgo_sys_thread_create&#x27;:</span><br><span class="line">c:\go\src\runtime\cgo/gcc_libinit_windows.c:60: undefined reference to `__imp___iob_func&#x27;</span><br><span class="line">C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\Users\c\AppData\Local\Temp\go-link-397521815\000007.o: in function `x_cgo_notify_runtime_init_done&#x27;:</span><br><span class="line">c:\go\src\runtime\cgo/gcc_libinit_windows.c:101: undefined reference to `__imp___iob_func&#x27;</span><br><span class="line">C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\Users\c\AppData\Local\Temp\go-link-397521815\000008.o: in function `x_cgo_thread_start&#x27;:</span><br><span class="line">c:\go\src\runtime\cgo/gcc_util.c:18: undefined reference to `__imp___iob_func&#x27;</span><br><span class="line">C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/10.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\Users\c\AppData\Local\Temp\go-link-397521815\000009.o: in function `_cgo_sys_thread_start&#x27;:</span><br><span class="line">c:\go\src\runtime\cgo/gcc_windows_amd64.c:29: undefined reference to `__imp___iob_func&#x27;</span><br><span class="line">collect2.exe: error: ld returned 1 exit status</span><br></pre></td></tr></table></figure>
 <p>为了继续体验就只能先把预编译的卸载了，在msys2里装<code>mingw-w64-ucrt-x86_64-go</code>。换完golang就能编译了。说明编译期间也支持装载msvcrt编译的.a文件</p>
 <p>根据运行来看，对msvcrt下编译好的静态库.a的支持也是没有问题。</p>
 <p>golang的动态库导入实现即plugin库还是不支持Windows。大概得靠rust来测试了。</p>
-<hr>
+<hr />
 <p>在小平板上用vscode+gopls配合完全没有问题，但是在PC上使用goland就出现问题了（虽然并不是ucrt的问题）——goland不支持msys2下的go……</p>
-<p><del>goland在Windows上会直接找整个go的安装（linux下为tar解压后的）文件夹，在msys2这里并没有这样的一个单独文件夹给go，所以goland根本就不认。</del></p>
-<p><del>唯一办法就是自己编译一个文件夹出来覆盖掉，但是以后升级什么的都得自己编译了。</del></p>
-<hr>
+<p><s>goland在Windows上会直接找整个go的安装（linux下为tar解压后的）文件夹，在msys2这里并没有这样的一个单独文件夹给go，所以goland根本就不认。</s></p>
+<p><s>唯一办法就是自己编译一个文件夹出来覆盖掉，但是以后升级什么的都得自己编译了。</s></p>
+<hr />
 <p>仔细搜了一下msys2里GOROOT的定义，发现了<code>/&lt;Env&gt;/lib/go</code>这个路径，即<code>C:\msys64\&lt;Env&gt;\lib\go</code>这个文件夹保留着GOROOT的全部内容</p>
 <p>（默默把刚装回去的官方golang给卸载</p>
-<p>试了下goland的确能识别这个目录作为SDK的。<br>但是有个小问题，就是GOROOT在msys2里写死了路径（即<code>C:\msys64\&lt;Env&gt;\lib\go</code>）意味着如果要用这个默认值你就不能把msys2装到其他盘或者其他目录（比如choco会把msys2放进<code>C:\tools\msys2</code>目录，直接导致了goland上的golangci-lint插件挂掉）。</p>
+<p>试了下goland的确能识别这个目录作为SDK的。<br />
+但是有个小问题，就是GOROOT在msys2里写死了路径（即<code>C:\msys64\&lt;Env&gt;\lib\go</code>）意味着如果要用这个默认值你就不能把msys2装到其他盘或者其他目录（比如choco会把msys2放进<code>C:\tools\msys2</code>目录，直接导致了goland上的golangci-lint插件挂掉）。</p>
 
     </div>
 
@@ -448,7 +451,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

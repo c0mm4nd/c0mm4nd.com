@@ -262,7 +262,6 @@
     <div class="post-body" itemprop="articleBody"><p>这个是LucidiTEE的paper的intro部分，因为知乎上有人问起所以就边看边了解边回答。这个和区块链不是一个东西，是对于硬件层面的计算可信度的保障，像我的AMD1600也有这样的可信计算功能。</p>
 <p>受大肆滥用个人信息的现状启发，我们通过将信息绑定在策略上，允许用户去控制他们个人信息的分享与使用，即便是在离线的时候。一个策略制定了一个被允许的函数，策略包含了防止对输入提供者与输出接收人的执行（基于有关该数据的所有先前计算的历史记录）和识别。为了达到这个级别的控制，我们的目标是建立一个能够确保策略与输入提供者保持一致，对输出接收方的公平和公正（即，所有一方或没有一方获取输出），而无需这些方彼此信任或与计算主机信任的计算系统。</p>
 <span id="more"></span>
-
 <p>最近，受信任的执行环境（TEE），例如英特尔SGX和Sanctum enclaves，正在敏感数据的外包计算中找到应用程序。 但是，由于TEE受到不受信任的主机托管用于存储和网络通信，因此它们无法执行依赖历史的策略或公平性。 例如，与用户只希望揭示其整个数据上的汇总函数的愿望相反，对抗主机可以在其数据集的不同子集上反复评估该汇总函数，并学习单个记录。 对手还可能串通并将输出仅传递给输出接收者的子集，从而违反了公平性。</p>
 <p>本文介绍了LucidiTEE，这是第一个使多方可以联合计算大规模私有数据的系统，同时确保即使输入提供者处于脱机状态也可以强制执行上述策略，并保证对所有输出接收者的公平性。 为此，LucidiTEE在TEE网络和共享的仅限追加的分类帐之间开发了一套新颖的协议。LucidiTEE仅使用分类帐执行策略； 它不会在账本上存储输入，输出或状态，也不会在参与者之间重复执行，这使其可以扩展到大数据和大量参与者。</p>
 <p>我们演示了几种基于策略的应用程序，包括个人理财，联合机器学习，公平N方信息交换和医疗记录中私有集之间的交集。</p>
@@ -375,7 +374,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

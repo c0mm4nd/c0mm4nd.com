@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BIP32"><span class="nav-number">1.</span> <span class="nav-text">BIP32</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-derivation-%E6%B4%BE%E7%94%9F%E5%AF%86%E9%92%A5"><span class="nav-number">1.1.</span> <span class="nav-text">Key derivation: 派生密钥</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Extended-keys-%E6%8B%93%E5%B1%95%E5%AF%86%E9%92%A5"><span class="nav-number">1.1.1.</span> <span class="nav-text">Extended keys: 拓展密钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Child-key-derivation-CKD-functions-%E5%AD%90%E5%AF%86%E9%92%A5%E6%B4%BE%E7%94%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">Child key derivation (CKD) functions: 子密钥派生函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%88%B6%E7%A7%81%E9%92%A5-amp-rarr-%E5%AD%90%E7%A7%81%E9%92%A5"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">父私钥 &amp;rarr; 子私钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%88%B6%E7%A7%81%E9%92%A5-amp-rarr-%E5%AD%90%E5%85%AC%E9%92%A5"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">父私钥 &amp;rarr; 子公钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%88%B6%E5%85%AC%E9%92%A5-amp-rarr-%E5%AD%90%E5%85%AC%E9%92%A5"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">父公钥 &amp;rarr; 子公钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%88%B6%E5%85%AC%E9%92%A5-amp-rarr-%E5%AD%90%E7%A7%81%E9%92%A5"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">父公钥 &amp;rarr; 子私钥</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-key-tree-%E5%AF%86%E9%92%A5%E6%A0%91"><span class="nav-number">1.2.</span> <span class="nav-text">The key tree: 密钥树</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#bip32"><span class="nav-number">1.</span> <span class="nav-text"> BIP32</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#key-derivation-%E6%B4%BE%E7%94%9F%E5%AF%86%E9%92%A5"><span class="nav-number">1.1.</span> <span class="nav-text"> Key derivation: 派生密钥</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#extended-keys-%E6%8B%93%E5%B1%95%E5%AF%86%E9%92%A5"><span class="nav-number">1.1.1.</span> <span class="nav-text"> Extended keys: 拓展密钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#child-key-derivation-ckd-functions-%E5%AD%90%E5%AF%86%E9%92%A5%E6%B4%BE%E7%94%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text"> Child key derivation (CKD) functions: 子密钥派生函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%88%B6%E7%A7%81%E9%92%A5-%E5%AD%90%E7%A7%81%E9%92%A5"><span class="nav-number">1.1.2.1.</span> <span class="nav-text"> 父私钥 → 子私钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%88%B6%E7%A7%81%E9%92%A5-%E5%AD%90%E5%85%AC%E9%92%A5"><span class="nav-number">1.1.2.2.</span> <span class="nav-text"> 父私钥 → 子公钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%88%B6%E5%85%AC%E9%92%A5-%E5%AD%90%E5%85%AC%E9%92%A5"><span class="nav-number">1.1.2.3.</span> <span class="nav-text"> 父公钥 → 子公钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%88%B6%E5%85%AC%E9%92%A5-%E5%AD%90%E7%A7%81%E9%92%A5"><span class="nav-number">1.1.2.4.</span> <span class="nav-text"> 父公钥 → 子私钥</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-key-tree-%E5%AF%86%E9%92%A5%E6%A0%91"><span class="nav-number">1.2.</span> <span class="nav-text"> The key tree: 密钥树</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -261,30 +261,40 @@
     
     <div class="post-body" itemprop="articleBody"><p>因为导出的hex比较ugly，因此是想要为ngwallet钱包定制一个助记词方案。本来构思的是直接通过密钥生成助记词，但是在寻找wordlist的时候仔细看了一下bitcoin的助记词方案，发现hd钱包（Hierachical Deterministic Wallets）这套密钥管理非常有趣且实用。既然在专心做钱包了那就顺带学习借鉴。</p>
 <span id="more"></span>
-
-<h2 id="BIP32"><a href="#BIP32" class="headerlink" title="BIP32"></a>BIP32</h2><h3 id="Key-derivation-派生密钥"><a href="#Key-derivation-派生密钥" class="headerlink" title="Key derivation: 派生密钥"></a>Key derivation: 派生密钥</h3><p>我们将使用比特币中公钥加密曲线，即<a href="http://www.secg.org/sec2-v2.pdf" target="_blank" rel="noopener">secp256k1</a>定义的字段和曲线参数的椭圆曲线密码术。有关secp256k1的细节这里不做展开。</p>
-<h4 id="Extended-keys-拓展密钥"><a href="#Extended-keys-拓展密钥" class="headerlink" title="Extended keys: 拓展密钥"></a>Extended keys: 拓展密钥</h4><p>在下面的内容中，我们将定义一个由父密钥派生许多子密钥的函数。 为了防止它们仅依赖于密钥本身，我们首先使用额外的256位”熵”(entropy)来扩展私有密钥和公共密钥。此扩展称为链码chain code，对于相应的私钥和公钥是相同的，并且由32个字节组成。</p>
+<h2 id="bip32"><a class="markdownIt-Anchor" href="#bip32"></a> BIP32</h2>
+<h3 id="key-derivation-派生密钥"><a class="markdownIt-Anchor" href="#key-derivation-派生密钥"></a> Key derivation: 派生密钥</h3>
+<p>我们将使用比特币中公钥加密曲线，即<a target="_blank" rel="noopener" href="http://www.secg.org/sec2-v2.pdf">secp256k1</a>定义的字段和曲线参数的椭圆曲线密码术。有关secp256k1的细节这里不做展开。</p>
+<h4 id="extended-keys-拓展密钥"><a class="markdownIt-Anchor" href="#extended-keys-拓展密钥"></a> Extended keys: 拓展密钥</h4>
+<p>在下面的内容中，我们将定义一个由父密钥派生许多子密钥的函数。 为了防止它们仅依赖于密钥本身，我们首先使用额外的256位&quot;熵&quot;(entropy)来扩展私有密钥和公共密钥。此扩展称为链码chain code，对于相应的私钥和公钥是相同的，并且由32个字节组成。</p>
 <p>我们将扩展私钥表示为(k, c)，其中k为普通私钥，而c为链码。 扩展的公钥表示为(K, c)，其中<code>K = point(k)</code>，c为链码。</p>
-<p>每个扩展密钥都有$2^{31}$个普通子密钥和$2^{31}$个强化子密钥。 这些子密钥中的每一个都有一个索引index。普通子键使用从0到$2^{31}-1$的index。加固的子密钥使用索引$2^{31}$到$2^{32} -1 $。 为了简化强化子密钥index的表示，用$i_H$表示$i + 2^{31}$。</p>
-<h4 id="Child-key-derivation-CKD-functions-子密钥派生函数"><a href="#Child-key-derivation-CKD-functions-子密钥派生函数" class="headerlink" title="Child key derivation (CKD) functions: 子密钥派生函数"></a>Child key derivation (CKD) functions: 子密钥派生函数</h4><p>给定父扩展密钥和index i，可以计算相应的子扩展密钥。 这样做的算法取决于子密钥是否是强化密钥（或，等效地，i是否大于等于$2^{31}$），以及我们是在谈论私钥还是公钥。</p>
-<h5 id="父私钥-amp-rarr-子私钥"><a href="#父私钥-amp-rarr-子私钥" class="headerlink" title="父私钥 &amp;rarr; 子私钥"></a>父私钥 &amp;rarr; 子私钥</h5><p>函数CKDpriv((k<sub>par</sub>, c<sub>par</sub>), i) &amp;rarr; (k<sub>i</sub>, c<sub>i</sub>)从父扩展私钥计算子扩展私钥</p>
+<p>每个扩展密钥都有<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">2^{31}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>个普通子密钥和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">2^{31}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>个强化子密钥。 这些子密钥中的每一个都有一个索引index。普通子键使用从0到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>31</mn></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{31}-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>的index。加固的子密钥使用索引<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">2^{31}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>到$2^{32} -1 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>。为了简化强化子密钥</mtext><mi>i</mi><mi>n</mi><mi>d</mi><mi>e</mi><mi>x</mi><mtext>的表示，用</mtext></mrow><annotation encoding="application/x-tex">。 为了简化强化子密钥index的表示，用</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord cjk_fallback">。</span><span class="mord cjk_fallback">为</span><span class="mord cjk_fallback">了</span><span class="mord cjk_fallback">简</span><span class="mord cjk_fallback">化</span><span class="mord cjk_fallback">强</span><span class="mord cjk_fallback">化</span><span class="mord cjk_fallback">子</span><span class="mord cjk_fallback">密</span><span class="mord cjk_fallback">钥</span><span class="mord mathnormal">i</span><span class="mord mathnormal">n</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">x</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">表</span><span class="mord cjk_fallback">示</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">用</span></span></span></span>i_H<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>表示</mtext></mrow><annotation encoding="application/x-tex">表示</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord cjk_fallback">表</span><span class="mord cjk_fallback">示</span></span></span></span>i + 2^{31}$。</p>
+<h4 id="child-key-derivation-ckd-functions-子密钥派生函数"><a class="markdownIt-Anchor" href="#child-key-derivation-ckd-functions-子密钥派生函数"></a> Child key derivation (CKD) functions: 子密钥派生函数</h4>
+<p>给定父扩展密钥和index i，可以计算相应的子扩展密钥。 这样做的算法取决于子密钥是否是强化密钥（或，等效地，i是否大于等于<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">2^{31}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>），以及我们是在谈论私钥还是公钥。</p>
+<h5 id="父私钥-子私钥"><a class="markdownIt-Anchor" href="#父私钥-子私钥"></a> 父私钥 → 子私钥</h5>
+<p>函数CKDpriv((k<sub>par</sub>, c<sub>par</sub>), i) → (k<sub>i</sub>, c<sub>i</sub>)从父扩展私钥计算子扩展私钥</p>
 <ul>
-<li><p>Check whether i ≥ 2<sup>31</sup> (whether the child is a hardened key).</p>
+<li>
+<p>Check whether i ≥ 2<sup>31</sup> (whether the child is a hardened key).</p>
 <ul>
-<li>If so (hardened child): let I &#x3D; HMAC-SHA512(Key &#x3D; c<sub>par</sub>, Data &#x3D; 0x00 || ser<sub>256</sub>(k<sub>par</sub>) || ser<sub>32</sub>(i)). (Note: The 0x00 pads the private key to make it 33 bytes long.)</li>
-<li>If not (normal child): let I &#x3D; HMAC-SHA512(Key &#x3D; c<sub>par</sub>, Data &#x3D; ser<sub>P</sub>(point(k<sub>par</sub>)) || ser<sub>32</sub>(i)).</li>
+<li>If so (hardened child): let I = HMAC-SHA512(Key = c<sub>par</sub>, Data = 0x00 || ser<sub>256</sub>(k<sub>par</sub>) || ser<sub>32</sub>(i)). (Note: The 0x00 pads the private key to make it 33 bytes long.)</li>
+<li>If not (normal child): let I = HMAC-SHA512(Key = c<sub>par</sub>, Data = ser<sub>P</sub>(point(k<sub>par</sub>)) || ser<sub>32</sub>(i)).</li>
 </ul>
 </li>
-<li><p>Split I into two 32-byte sequences, I<sub>L</sub> and I<sub>R</sub>.</p>
+<li>
+<p>Split I into two 32-byte sequences, I<sub>L</sub> and I<sub>R</sub>.</p>
 </li>
-<li><p>The returned child key k<sub>i</sub> is parse<sub>256</sub>(I<sub>L</sub>) + k<sub>par</sub> (mod n).</p>
+<li>
+<p>The returned child key k<sub>i</sub> is parse<sub>256</sub>(I<sub>L</sub>) + k<sub>par</sub> (mod n).</p>
 </li>
-<li><p>The returned chain code c<sub>i</sub> is I<sub>R</sub>.</p>
+<li>
+<p>The returned chain code c<sub>i</sub> is I<sub>R</sub>.</p>
 </li>
-<li><p>In case parse<sub>256</sub>(I<sub>L</sub>) ≥ n or k<sub>i</sub> &#x3D; 0, the resulting key is invalid, and one should proceed with the next value for i. (Note: this has probability lower than 1 in 2<sup>127</sup>.)</p>
+<li>
+<p>In case parse<sub>256</sub>(I<sub>L</sub>) ≥ n or k<sub>i</sub> = 0, the resulting key is invalid, and one should proceed with the next value for i. (Note: this has probability lower than 1 in 2<sup>127</sup>.)</p>
 </li>
 </ul>
-<h5 id="父私钥-amp-rarr-子公钥"><a href="#父私钥-amp-rarr-子公钥" class="headerlink" title="父私钥 &amp;rarr; 子公钥"></a>父私钥 &amp;rarr; 子公钥</h5><p>函数N((k, c)) &amp;rarr; (K, c) 从父扩展公钥计算子扩展公钥。 仅针对未加固的子键定义</p>
+<h5 id="父私钥-子公钥"><a class="markdownIt-Anchor" href="#父私钥-子公钥"></a> 父私钥 → 子公钥</h5>
+<p>函数N((k, c)) → (K, c) 从父扩展公钥计算子扩展公钥。 仅针对未加固的子键定义</p>
 <ul>
 <li>返回的密钥K为point(k)。</li>
 <li>返回的链码c只是传递的链码。</li>
@@ -295,18 +305,21 @@
 <li>CKDpub(N(k<sub>par</sub>, c <sub>par</sub>), i)（仅适用于非强化的子密钥）。</li>
 </ul>
 <p>两者等效，使得非强化的密钥变得有用（一个人可以在不知道任何私钥的情况下派生出给定父密钥的子公钥），也使它们与强化密钥有所区别。 不一直使用非强化密钥（尽管更有用）的原因是安全性考量。</p>
-<h5 id="父公钥-amp-rarr-子公钥"><a href="#父公钥-amp-rarr-子公钥" class="headerlink" title="父公钥 &amp;rarr; 子公钥"></a>父公钥 &amp;rarr; 子公钥</h5><p>函数 CKDpub((K<sub>par</sub>, c<sub>par</sub>), i) &amp;rarr; (K<sub>i</sub>, c<sub>i</sub>) 从父扩展公钥计算子扩展公钥。它仅针对未强化的子密钥。</p>
+<h5 id="父公钥-子公钥"><a class="markdownIt-Anchor" href="#父公钥-子公钥"></a> 父公钥 → 子公钥</h5>
+<p>函数 CKDpub((K<sub>par</sub>, c<sub>par</sub>), i) → (K<sub>i</sub>, c<sub>i</sub>) 从父扩展公钥计算子扩展公钥。它仅针对未强化的子密钥。</p>
 <ul>
 <li>检查是否 i ≥ 2<sup>31</sup> (即，是否子密钥为强化密钥).</li>
 <li>如果是强化密钥，返回失败</li>
-<li>如果是普通密钥: 设置 I &#x3D; HMAC-SHA512(Key &#x3D; c<sub>par</sub>, Data &#x3D; ser<sub>P</sub>(K<sub>par</sub>) || ser<sub>32</sub>(i)).</li>
+<li>如果是普通密钥: 设置 I = HMAC-SHA512(Key = c<sub>par</sub>, Data = ser<sub>P</sub>(K<sub>par</sub>) || ser<sub>32</sub>(i)).</li>
 <li>把I 分割成两个32-byte 序列, I<sub>L</sub> 和 I<sub>R</sub>.</li>
 <li>返回的子密钥 K<sub>i</sub> 即为point(parse<sub>256</sub>(I<sub>L</sub>)) + K<sub>par</sub>.</li>
 <li>返回的链码 c<sub>i</sub> 为 I<sub>R</sub>.</li>
 <li>如果 parse<sub>256</sub>(I<sub>L</sub>) ≥ n 或 K<sub>i</sub> 是在无限上的点, 那么得到的密钥无效, 且需要继续处理i的下一个值.</li>
 </ul>
-<h5 id="父公钥-amp-rarr-子私钥"><a href="#父公钥-amp-rarr-子私钥" class="headerlink" title="父公钥 &amp;rarr; 子私钥"></a>父公钥 &amp;rarr; 子私钥</h5><p>不可能</p>
-<h3 id="The-key-tree-密钥树"><a href="#The-key-tree-密钥树" class="headerlink" title="The key tree: 密钥树"></a>The key tree: 密钥树</h3><p>下一步则是串联数个CKD 结构来构造一个树形结构。我们从一个根节点，即主拓展密钥m开始。通过执行多个i值对应的CKDpriv(m,i) , 我们得到一系列level-1的派生节点。由于它们每个都是扩展密钥，因此CKDpriv也可以应用于这些扩展密钥。</p>
+<h5 id="父公钥-子私钥"><a class="markdownIt-Anchor" href="#父公钥-子私钥"></a> 父公钥 → 子私钥</h5>
+<p>不可能</p>
+<h3 id="the-key-tree-密钥树"><a class="markdownIt-Anchor" href="#the-key-tree-密钥树"></a> The key tree: 密钥树</h3>
+<p>下一步则是串联数个CKD 结构来构造一个树形结构。我们从一个根节点，即主拓展密钥m开始。通过执行多个i值对应的CKDpriv(m,i) , 我们得到一系列level-1的派生节点。由于它们每个都是扩展密钥，因此CKDpriv也可以应用于这些扩展密钥。</p>
 
     </div>
 
@@ -415,7 +428,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

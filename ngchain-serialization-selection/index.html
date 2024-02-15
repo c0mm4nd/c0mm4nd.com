@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"c0mm4nd.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":null,"show_result":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。">
+    <meta name="description" content="实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。 而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ngchain Serialization Selection: ngchain的序列化方案选择">
 <meta property="og:url" content="https://c0mm4nd.com/ngchain-serialization-selection/index.html">
 <meta property="og:site_name" content="Talkless">
-<meta property="og:description" content="实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。">
+<meta property="og:description" content="实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。 而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-06-27T17:52:54.000Z">
 <meta property="article:modified_time" content="2021-10-11T09:21:36.000Z">
@@ -139,7 +139,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#protobuf"><span class="nav-number">1.</span> <span class="nav-text">protobuf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rlp"><span class="nav-number">2.</span> <span class="nav-text">rlp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#En-x2F-Decoder"><span class="nav-number">2.1.</span> <span class="nav-text">En&#x2F;Decoder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blob"><span class="nav-number">3.</span> <span class="nav-text">Blob</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%87%E6%B3%A8%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">备注：</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#protobuf"><span class="nav-number">1.</span> <span class="nav-text"> protobuf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rlp"><span class="nav-number">2.</span> <span class="nav-text"> rlp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#endecoder"><span class="nav-number">2.1.</span> <span class="nav-text"> En&#x2F;Decoder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blob"><span class="nav-number">3.</span> <span class="nav-text"> Blob</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%87%E6%B3%A8"><span class="nav-number">4.</span> <span class="nav-text"> 备注：</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -256,36 +256,82 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br>而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。</p>
+    <div class="post-body" itemprop="articleBody"><p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br />
+而我们需要的仅仅只是一个简单的blob存储/传输方案。</p>
 <span id="more"></span>
-
-<p><a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">https://ethresear.ch/t/blob-serialisation/1705</a></p>
-<h2 id="protobuf"><a href="#protobuf" class="headerlink" title="protobuf"></a>protobuf</h2><p>至于为什么会走向protobuf这个歪路，是因为真的在benchmark里它的速度太诱人了。<br>golang那个benchmark对比里它也是被推荐的。<br>那时候新版还没出，gogo的速度在一众序列化方案里简直快到爆。<br>而且protobuf序列化之后的字节也非常小。<br>所以当时就觉得这个可以有。</p>
-<p>但是随着项目一点点成型，protobuf的定位和项目需求的矛盾也越来越明显。<br>对于一个到处都是serde，到处在不顾兼容性地通过修改数据原型优化系统的一个底层应用，<br>protobuf的操作实在是过于繁琐且束缚过大</p>
+<p><a target="_blank" rel="noopener" href="https://ethresear.ch/t/blob-serialisation/1705">https://ethresear.ch/t/blob-serialisation/1705</a></p>
+<h2 id="protobuf"><a class="markdownIt-Anchor" href="#protobuf"></a> protobuf</h2>
+<p>至于为什么会走向protobuf这个歪路，是因为真的在benchmark里它的速度太诱人了。<br />
+golang那个benchmark对比里它也是被推荐的。<br />
+那时候新版还没出，gogo的速度在一众序列化方案里简直快到爆。<br />
+而且protobuf序列化之后的字节也非常小。<br />
+所以当时就觉得这个可以有。</p>
+<p>但是随着项目一点点成型，protobuf的定位和项目需求的矛盾也越来越明显。<br />
+对于一个到处都是serde，到处在不顾兼容性地通过修改数据原型优化系统的一个底层应用，<br />
+protobuf的操作实在是过于繁琐且束缚过大</p>
 <ul>
-<li><p>protobuf没有继承关系。<br>protobuf的各种feature在和golang结合的时候会让人很难受。<br>不止是单纯的用户定义的message之间继承不了，比如说这里希望<code>message A</code>继承<code>bytes</code>，<code>message B</code>继承<code>map&lt;string, string&gt;</code>这种就都做不到。<br>而且本身protobuf的（优化）集成也很麻烦（尤其在bazel里）。其对特殊类型（any啥的）的支持在golang下让人不太敢用，尤其是apiv2之后。</p>
+<li>
+<p>protobuf没有继承关系。<br />
+protobuf的各种feature在和golang结合的时候会让人很难受。<br />
+不止是单纯的用户定义的message之间继承不了，比如说这里希望<code>message A</code>继承<code>bytes</code>，<code>message B</code>继承<code>map&lt;string, string&gt;</code>这种就都做不到。<br />
+而且本身protobuf的（优化）集成也很麻烦（尤其在bazel里）。其对特殊类型（any啥的）的支持在golang下让人不太敢用，尤其是apiv2之后。</p>
 </li>
-<li><p>我想要的大部分情况下只是简单的把一个list序列化，但是protobuf只处理generated code里的那些message<br>例如raw, err :&#x3D; proto.Marshal([][]byte{[]byte{“wasd”}})<br>就会提示cannot use ([][]byte literal) (value of type [][]byte) as protoreflect.ProtoMessage value in argument to proto.Marshal: missing method ProtoReflect。<br>正确的serde做法就是建立一个新的message，然后这个message里带一个这个bytes list类型的字段。</p>
+<li>
+<p>我想要的大部分情况下只是简单的把一个list序列化，但是protobuf只处理generated code里的那些message<br />
+例如raw, err := proto.Marshal([][]byte{[]byte{“wasd”}})<br />
+就会提示cannot use ([][]byte literal) (value of type [][]byte) as protoreflect.ProtoMessage value in argument to proto.Marshal: missing method ProtoReflect。<br />
+正确的serde做法就是建立一个新的message，然后这个message里带一个这个bytes list类型的字段。</p>
 </li>
-<li><p>我想要序列化过程可定制，但是官方新版本不可以<br>为什么需要可定制？因为一个struct中并非全部字段需要serde。<br>一般的解决方法是将要序列化的字段public，而不需要的private，通过func来调用private内容。<br>但是这里还有个痛点：生成的代码不应该修改，我根本没法把我的私有字段加到struct里。<br>v0.0.19之前，我们是通过func直接生成值，例如GetHash()相当于每次调用都进行hash。<br>即便是sha3.256这样的简单hash，都消耗了大量资源。<br>后面v0.0.20的实践是加上对应的public字段。<br>但是hash值这样的内容导致了值和其他内容填充的步调不一：需要先有内容且确定才能得到hash，修改内容后也得重新hash。<br>v0.0.21带来了更优实践：使用自定义struct继承生成的struct。<br>这样既可以保存自定义的辅助性字段（比如hash）（在自定义struct之中），<br>又可以serde（通过父struct，即生成的）。<br>但是实际体验并没有那么美好，自定义struct即便是继承了，也不是protoreflect.ProtoMessage，没法直接serde。<br>注意这里是protoreflect.ProtoMessage，不是proto.Message，这是新版和旧版（or gogo）的区别所在。<br>然而更坑的是goland会告诉你自定义的子类可以serde……因此需要一个个排查。<br>最后来到我们的最后一个方案，为了快速排查，我们放弃了直接继承，选择了将原型作为自定义struct字段，通过GetProto()来获取原型以及LoadProto()进行serde。<br>这样改掉一堆错误之后看似安静和谐了很多，但是，我们被框架限制住了。<br>这样妥协的方式，让我们很难在types.proto之外继续利用serde来扩展。<br>很明显，protobuf是给那些有准备的人的，而我们只是到处碰运气的赌徒罢了。</p>
+<li>
+<p>我想要序列化过程可定制，但是官方新版本不可以<br />
+为什么需要可定制？因为一个struct中并非全部字段需要serde。<br />
+一般的解决方法是将要序列化的字段public，而不需要的private，通过func来调用private内容。<br />
+但是这里还有个痛点：生成的代码不应该修改，我根本没法把我的私有字段加到struct里。<br />
+v0.0.19之前，我们是通过func直接生成值，例如GetHash()相当于每次调用都进行hash。<br />
+即便是sha3.256这样的简单hash，都消耗了大量资源。<br />
+后面v0.0.20的实践是加上对应的public字段。<br />
+但是hash值这样的内容导致了值和其他内容填充的步调不一：需要先有内容且确定才能得到hash，修改内容后也得重新hash。<br />
+v0.0.21带来了更优实践：使用自定义struct继承生成的struct。<br />
+这样既可以保存自定义的辅助性字段（比如hash）（在自定义struct之中），<br />
+又可以serde（通过父struct，即生成的）。<br />
+但是实际体验并没有那么美好，自定义struct即便是继承了，也不是protoreflect.ProtoMessage，没法直接serde。<br />
+注意这里是protoreflect.ProtoMessage，不是proto.Message，这是新版和旧版（or gogo）的区别所在。<br />
+然而更坑的是goland会告诉你自定义的子类可以serde……因此需要一个个排查。<br />
+最后来到我们的最后一个方案，为了快速排查，我们放弃了直接继承，选择了将原型作为自定义struct字段，通过GetProto()来获取原型以及LoadProto()进行serde。<br />
+这样改掉一堆错误之后看似安静和谐了很多，但是，我们被框架限制住了。<br />
+这样妥协的方式，让我们很难在types.proto之外继续利用serde来扩展。<br />
+很明显，protobuf是给那些有准备的人的，而我们只是到处碰运气的赌徒罢了。</p>
 </li>
 </ul>
-<h2 id="rlp"><a href="#rlp" class="headerlink" title="rlp"></a>rlp</h2><p>作为一个有在geth上debug经验的开发，我也不是第一次使用rlp。在过去golang使用还不熟练的经历里，rlp真的是不好用。<br>首先从直观来看rlp不像别的那样有Marshal和Unmarshal。<br>其次IDE上的提示（lint）也不尽如人意，经常会出现看起来啥问题都没有跑起来到处不能encode的问题。<br>同样Decode也有问题，见这里<a href="https://ethresear.ch/t/blob-serialisation/1705/5" target="_blank" rel="noopener">vb说的例子</a>。这个帖子说的序列化还在优化更新中，而prysm用的是protobuf，所以现在不适合跟上ethereum的设计。<br>再者，缺少对map的支持，不过这个很好理解，有map之后就很难deterministic，像protobuf一样可能不同的实现有着不同的deterministic规则，仅在同一语言上统一。<br>此外如果直接<code>type Uint uint</code>这样建立type（很常见，比如NetworkType，TxType等等），那么rlp是不支持把他当uint这样的原始类型看的，就需要自己实现一个Encoder+Decoder。</p>
+<h2 id="rlp"><a class="markdownIt-Anchor" href="#rlp"></a> rlp</h2>
+<p>作为一个有在geth上debug经验的开发，我也不是第一次使用rlp。在过去golang使用还不熟练的经历里，rlp真的是不好用。<br />
+首先从直观来看rlp不像别的那样有Marshal和Unmarshal。<br />
+其次IDE上的提示（lint）也不尽如人意，经常会出现看起来啥问题都没有跑起来到处不能encode的问题。<br />
+同样Decode也有问题，见这里<a target="_blank" rel="noopener" href="https://ethresear.ch/t/blob-serialisation/1705/5">vb说的例子</a>。这个帖子说的序列化还在优化更新中，而prysm用的是protobuf，所以现在不适合跟上ethereum的设计。<br />
+再者，缺少对map的支持，不过这个很好理解，有map之后就很难deterministic，像protobuf一样可能不同的实现有着不同的deterministic规则，仅在同一语言上统一。<br />
+此外如果直接<code>type Uint uint</code>这样建立type（很常见，比如NetworkType，TxType等等），那么rlp是不支持把他当uint这样的原始类型看的，就需要自己实现一个Encoder+Decoder。</p>
 <p>但是首先这个数据大小很香，真的很小。根据github上benchmark来看是比protobuf要小。</p>
-<p>其次原理简洁易懂。说白了就是万物list or str。这部分根据rlp的En&#x2F;Decoder来讲。</p>
-<h3 id="En-x2F-Decoder"><a href="#En-x2F-Decoder" class="headerlink" title="En&#x2F;Decoder"></a>En&#x2F;Decoder</h3><p>和json的返回值不同，rlp的内容是直接写入io.Writter。<br>一般我们就直接使用rlp.Encode(writter, 【自定义好的结构】)就可以</p>
+<p>其次原理简洁易懂。说白了就是万物list or str。这部分根据rlp的En/Decoder来讲。</p>
+<h3 id="endecoder"><a class="markdownIt-Anchor" href="#endecoder"></a> En/Decoder</h3>
+<p>和json的返回值不同，rlp的内容是直接写入io.Writter。<br />
+一般我们就直接使用rlp.Encode(writter, 【自定义好的结构】)就可以</p>
 <p>前面也说到了rlp原理简单，这里就举点案例：</p>
-<p>比如说一个Nonce是个8字节的定长[]byte，需要把它encode to rlp只需要在这个8字节前面写一个prefix来描述它就可以用136（&#x3D;0x80+8）来表示8这个长度。</p>
+<p>比如说一个Nonce是个8字节的定长[]byte，需要把它encode to rlp只需要在这个8字节前面写一个prefix来描述它就可以用136（=0x80+8）来表示8这个长度。</p>
 <p>具体的rlp的规则：</p>
 <ul>
 <li>对于单个byte（char），如果值是在0x00-0x7f（127，也就是常用ascii），那么就直接放着就行</li>
 <li>此外，对于0-55长度的bytes，rlp就用<code>0x80（128）+长度</code>作为其前缀来描述后面的列表（or单byte&gt;127）。这个前缀byte值在0x80（128）-0xb7（183）</li>
-<li>如果是比55还长，那么肯定就需要不止一个byte来修饰。为了支持巨长的内容，前缀的第一个字符来描述后面&gt;55的长度。例如一个1024字节的bytes&#x2F;str，会被encode成<code>[0xb9, 0x04, 0x00, byte_1, ... , byte_1024]</code>，这里0xb9&#x3D;0xb7+2，这个2就表示后面有俩字节（0x04，0x00）是拿来描述长度的。而长度0x04，0x00则是1024的big-endian encode。这部分的首字节被限制在0xb8-0xbf，即最大支持8字节的长度描述，最大支持2^(8*4)字节长度的bytes</li>
+<li>如果是比55还长，那么肯定就需要不止一个byte来修饰。为了支持巨长的内容，前缀的第一个字符来描述后面&gt;55的长度。例如一个1024字节的bytes/str，会被encode成<code>[0xb9, 0x04, 0x00, byte_1, ... , byte_1024]</code>，这里0xb9=0xb7+2，这个2就表示后面有俩字节（0x04，0x00）是拿来描述长度的。而长度0x04，0x00则是1024的big-endian encode。这部分的首字节被限制在0xb8-0xbf，即最大支持8字节的长度描述，最大支持2^(8*4)字节长度的bytes</li>
 <li>另外还有个概念就是list，就相当于bytes或者其他list的一个容器，例如[[‘h’, ‘e’], [‘l’, ‘p’]]。如果这个list的总payload（子元素，包括了前缀，的长度加起来）是0-55bytes，那么就单用一个0xc0（192）来表述。</li>
 <li>和前面一样，如果超过55，那就用0xf7+长度。首字节范围在0xf8-0xff，也是最大支持2^(8*4)字节长度的bytes。</li>
 </ul>
-<h2 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h2><p>在翻rlp资料时候看到了eth社区提出的<a href="https://ethresear.ch/t/blob-serialisation/1705" target="_blank" rel="noopener">blob serialisation</a>。这里说下至今<br><a href="https://github.com/prysmaticlabs/prysm/pull/92" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/92</a><br><a href="https://github.com/prysmaticlabs/prysm/pull/147" target="_blank" rel="noopener">https://github.com/prysmaticlabs/prysm/pull/147</a><br>现在状况就是人家折腾半天然后跑去拥抱protobuf了。</p>
-<h2 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h2><p>serde&#x3D;SERializing &amp; DEserializing, rust里的framework就叫这个</p>
+<h2 id="blob"><a class="markdownIt-Anchor" href="#blob"></a> Blob</h2>
+<p>在翻rlp资料时候看到了eth社区提出的<a target="_blank" rel="noopener" href="https://ethresear.ch/t/blob-serialisation/1705">blob serialisation</a>。这里说下至今<br />
+<a target="_blank" rel="noopener" href="https://github.com/prysmaticlabs/prysm/pull/92">https://github.com/prysmaticlabs/prysm/pull/92</a><br />
+<a target="_blank" rel="noopener" href="https://github.com/prysmaticlabs/prysm/pull/147">https://github.com/prysmaticlabs/prysm/pull/147</a><br />
+现在状况就是人家折腾半天然后跑去拥抱protobuf了。</p>
+<h2 id="备注"><a class="markdownIt-Anchor" href="#备注"></a> 备注：</h2>
+<p>serde=SERializing &amp; DEserializing, rust里的framework就叫这个</p>
 
     </div>
 
@@ -389,7 +435,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

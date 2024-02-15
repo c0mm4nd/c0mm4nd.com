@@ -140,7 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">确认数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%86%85%E5%AE%B9"><span class="nav-number">4.</span> <span class="nav-text">参考内容</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text"> 目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text"> 确认数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.</span> <span class="nav-text"> 其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%86%85%E5%AE%B9"><span class="nav-number">4.</span> <span class="nav-text"> 参考内容</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -259,66 +259,74 @@
     
     <div class="post-body" itemprop="articleBody"><p>汇总一些<em>实践上</em>各链上交易的确认时间</p>
 <span id="more"></span>
-
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>在对链上数据进行多线程录入(即同步到数据库)的过程中,这些确认时间可以作为线程数以防止出现对账户之类状态的deadlock</p>
-<h2 id="确认数"><a href="#确认数" class="headerlink" title="确认数"></a>确认数</h2><table>
+<h2 id="目的"><a class="markdownIt-Anchor" href="#目的"></a> 目的</h2>
+<p>在对链上数据进行多线程录入(即同步到数据库)的过程中,这些确认时间可以作为线程数以防止出现对账户之类状态的deadlock</p>
+<h2 id="确认数"><a class="markdownIt-Anchor" href="#确认数"></a> 确认数</h2>
+<table>
 <thead>
 <tr>
-<th align="left">链</th>
-<th align="right">确认数(交易后区块高度)</th>
+<th style="text-align:left">链</th>
+<th style="text-align:right">确认数(交易后区块高度)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">BTC</td>
-<td align="right">4</td>
+<tbody>
+<tr>
+<td style="text-align:left">BTC</td>
+<td style="text-align:right">4</td>
 </tr>
 <tr>
-<td align="left">ETH</td>
-<td align="right">20</td>
+<td style="text-align:left">ETH</td>
+<td style="text-align:right">20</td>
 </tr>
 <tr>
-<td align="left">LTC</td>
-<td align="right">12</td>
+<td style="text-align:left">LTC</td>
+<td style="text-align:right">12</td>
 </tr>
 <tr>
-<td align="left">XMR</td>
-<td align="right">15</td>
+<td style="text-align:left">XMR</td>
+<td style="text-align:right">15</td>
 </tr>
 <tr>
-<td align="left">EOS</td>
-<td align="right">1</td>
+<td style="text-align:left">EOS</td>
+<td style="text-align:right">1</td>
 </tr>
 <tr>
-<td align="left">XRP</td>
-<td align="right">1</td>
+<td style="text-align:left">XRP</td>
+<td style="text-align:right">1</td>
 </tr>
 <tr>
-<td align="left">SOL</td>
-<td align="right">1</td>
+<td style="text-align:left">SOL</td>
+<td style="text-align:right">1</td>
 </tr>
 <tr>
-<td align="left">LSK</td>
-<td align="right">303</td>
+<td style="text-align:left">LSK</td>
+<td style="text-align:right">303</td>
 </tr>
 <tr>
-<td align="left">DOT</td>
-<td align="right">25</td>
+<td style="text-align:left">DOT</td>
+<td style="text-align:right">25</td>
 </tr>
 <tr>
-<td align="left">FIL</td>
-<td align="right">200</td>
+<td style="text-align:left">FIL</td>
+<td style="text-align:right">200</td>
 </tr>
 <tr>
-<td align="left">TRON</td>
-<td align="right">20</td>
+<td style="text-align:left">TRON</td>
+<td style="text-align:right">20</td>
 </tr>
-</tbody></table>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>表中为实践上的确认数,必大于理论上确认数(例如,ETH理论为7,为设计时预计的5min)</p>
-<p>实际的确认时间&#x3D;确认数 * 预计区块时间</p>
+</tbody>
+</table>
+<h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
+<p>表中为实践上的确认数,必大于理论上确认数(例如,ETH理论为7,为设计时预计的5min)</p>
+<p>实际的确认时间=确认数 * 预计区块时间</p>
 <p>预计区块时间可以在源码或Wiki里找到</p>
-<p>Token的确认时间&#x3D;Token所在链的交易确认时间</p>
-<p>有些家大业大有矿池的交易所(如OK,币安),为了提高客户体验,会减少BTC等”利益一致”币的确认时间</p>
-<h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p><a href="https://support.kraken.com/hc/en-us/articles/203325283-Cryptocurrency-deposit-processing-times" target="_blank" rel="noopener">kraken交易所</a><br><a href="https://www.reddit.com/r/ethereum/comments/4eplsv/how_many_confirms_is_considered_safe_in_ethereum/" target="_blank" rel="noopener">How many confirms is considered ‘safe’ in Ethereum?</a><br><a href="https://developers.circle.com/docs/confirmations" target="_blank" rel="noopener">Circle钱包</a><br><a href="https://www.okex.com/support/hc/en-us/articles/360000205532-Token-Confirmation-Requirements-Blockchain-Explorers" target="_blank" rel="noopener">OKEX交易所</a></p>
+<p>Token的确认时间=Token所在链的交易确认时间</p>
+<p>有些家大业大有矿池的交易所(如OK,币安),为了提高客户体验,会减少BTC等&quot;利益一致&quot;币的确认时间</p>
+<h2 id="参考内容"><a class="markdownIt-Anchor" href="#参考内容"></a> 参考内容</h2>
+<p><a target="_blank" rel="noopener" href="https://support.kraken.com/hc/en-us/articles/203325283-Cryptocurrency-deposit-processing-times">kraken交易所</a><br />
+<a target="_blank" rel="noopener" href="https://www.reddit.com/r/ethereum/comments/4eplsv/how_many_confirms_is_considered_safe_in_ethereum/">How many confirms is considered ‘safe’ in Ethereum?</a><br />
+<a target="_blank" rel="noopener" href="https://developers.circle.com/docs/confirmations">Circle钱包</a><br />
+<a target="_blank" rel="noopener" href="https://www.okex.com/support/hc/en-us/articles/360000205532-Token-Confirmation-Requirements-Blockchain-Explorers">OKEX交易所</a></p>
 
     </div>
 
@@ -425,7 +433,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

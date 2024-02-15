@@ -139,7 +139,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#go%E7%9A%84profile"><span class="nav-number">1.</span> <span class="nav-text">go的profile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#topNN"><span class="nav-number">1.1.</span> <span class="nav-text">topNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web"><span class="nav-number">1.2.</span> <span class="nav-text">web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">1.3.</span> <span class="nav-text">list</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ref"><span class="nav-number">3.</span> <span class="nav-text">Ref</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#go%E7%9A%84profile"><span class="nav-number">1.</span> <span class="nav-text"> go的profile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#topnn"><span class="nav-number">1.1.</span> <span class="nav-text"> topNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web"><span class="nav-number">1.2.</span> <span class="nav-text"> web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">1.3.</span> <span class="nav-text"> list</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text"> 优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ref"><span class="nav-number">3.</span> <span class="nav-text"> Ref</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -259,14 +259,16 @@
     <div class="post-body" itemprop="articleBody"><p>因为新版本的ngcore已经把mining模块删除了，因此在空闲状态从理论上看应该是非常低调的一个p2p“哑巴”。但是实际在PC这个3600x相对高级u的环境下都能占据&gt;10%的cpu且高耗电。因此这里就开始对程序尝试调优。</p>
 <p>暂时就只关注cpu利用率的问题（高耗电在客户端上太致命了</p>
 <span id="more"></span>
-
 <p>首先通过注释掉<code>import _ &quot;net/http/pprof&quot;</code>确认了高电量不是由于引入profile导致的。</p>
 <p>然后根据profile给出的结果对几个loop都加了runtime.Goshced，并没有太大起色。</p>
 <p>profile结果全是runtime.xxx这种内部的方法。</p>
-<h2 id="go的profile"><a href="#go的profile" class="headerlink" title="go的profile"></a>go的profile</h2><p>首先肯定是需要熟练一下go自带的pprof工具。</p>
-<p>为了方便profiling，ngcore会在一个随机可用端口上建立一个http server来为pprof提供当前运行数据。<br>一般可以使用<code>go tool pprof http://localhost:[port]</code>来开启命令行模式，如果带<code>-http=:[another_port]</code>参数就可以在another_port上建一个网页来展示diagrams</p>
+<h2 id="go的profile"><a class="markdownIt-Anchor" href="#go的profile"></a> go的profile</h2>
+<p>首先肯定是需要熟练一下go自带的pprof工具。</p>
+<p>为了方便profiling，ngcore会在一个随机可用端口上建立一个http server来为pprof提供当前运行数据。<br />
+一般可以使用<code>go tool pprof http://localhost:[port]</code>来开启命令行模式，如果带<code>-http=:[another_port]</code>参数就可以在another_port上建一个网页来展示diagrams</p>
 <p>下面说一下在命令行模式下的一些命令</p>
-<h3 id="topNN"><a href="#topNN" class="headerlink" title="topNN"></a>topNN</h3><p>NN可以换成任何数字，比如top10就profile（CPU）前十的func。</p>
+<h3 id="topnn"><a class="markdownIt-Anchor" href="#topnn"></a> topNN</h3>
+<p>NN可以换成任何数字，比如top10就profile（CPU）前十的func。</p>
 <p>go的blog上示例明显老旧了，这里我拿go1.16下的结果讲解一下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">(pprof) top10</span><br><span class="line">Showing nodes accounting for 15330ms, 54.15% of 28310ms total</span><br><span class="line">Dropped 151 nodes (cum &lt;= 141.55ms)</span><br><span class="line">Showing top 10 nodes out of 86</span><br><span class="line">显示节点占15330ms，占28310ms总数的54.15% （pprof标识的有效样本时间，和总样本时间）</span><br><span class="line">删除了 151 个节点（cum &lt;= 141.55ms，意思就是这151个剩余的加起来不超过141ms）</span><br><span class="line">显示 86 个节点中的前 10 个节点（即top10）</span><br><span class="line"></span><br><span class="line">      flat  flat%   sum%        cum   cum%</span><br><span class="line">    3530ms 12.47% 12.47%     8150ms 28.79%  runtime.selectgo</span><br><span class="line">    2920ms 10.31% 22.78%     2930ms 10.35%  runtime.stdcall1</span><br><span class="line">    1660ms  5.86% 28.65%     1700ms  6.00%  runtime.unlock2</span><br><span class="line">    1320ms  4.66% 33.31%    11930ms 42.14%  runtime.schedule</span><br><span class="line">    1310ms  4.63% 37.94%     1310ms  4.63%  runtime.stdcall2</span><br><span class="line">    1270ms  4.49% 42.42%     3300ms 11.66%  runtime.lock2</span><br><span class="line">     960ms  3.39% 45.81%     9160ms 32.36%  github.com/ngchain/ngcore/consensus.(*PoWork).eventLoop</span><br><span class="line">     920ms  3.25% 49.06%     6950ms 24.55%  runtime.findrunnable</span><br><span class="line">     850ms  3.00% 52.07%     3230ms 11.41%  runtime.checkTimers</span><br><span class="line">     590ms  2.08% 54.15%     1630ms  5.76%  runtime.sellock</span><br></pre></td></tr></table></figure>
 <ul>
@@ -276,16 +278,20 @@
 <li>cum：func出现（包括running<strong>或waiting for a called function to return</strong>）的样本时间（用-cum就用它排序）</li>
 <li>cum%：占总百分比</li>
 </ul>
-<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><p><code>web</code>命令就是在网页显示stack trace。命令行打开的web不如直接host在http。</p>
+<h3 id="web"><a class="markdownIt-Anchor" href="#web"></a> web</h3>
+<p><code>web</code>命令就是在网页显示stack trace。命令行打开的web不如直接host在http。</p>
 <p>通过trace就可以看到是主要哪里call了这个在前面疯狂running的func。</p>
-<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><code>list Func</code>会给你打印Func这个func的源码，并且在每行的左边显示对应的flat和cum</p>
-<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>从上面的可以看出来其实是eventLoop里的select导致了selectgo的大量调用。</p>
+<h3 id="list"><a class="markdownIt-Anchor" href="#list"></a> list</h3>
+<p><code>list Func</code>会给你打印Func这个func的源码，并且在每行的左边显示对应的flat和cum</p>
+<h2 id="优化"><a class="markdownIt-Anchor" href="#优化"></a> 优化</h2>
+<p>从上面的可以看出来其实是eventLoop里的select导致了selectgo的大量调用。</p>
 <p>在这个函数里我用了两个case的for-select结构，两个case都是从channel里接受内容。</p>
 <p>尝试了下把for-select-<code>&lt;- ch</code>分解成了两个for-<code>&lt;- ch</code>（不影响业务），cpu占用瞬间变成1-2%（而且是平板上）可以说是相当显著。</p>
 <p>有关这个for-select性能的讨论</p>
-<p><a href="https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485" target="_blank" rel="noopener">https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485</a></p>
-<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://blog.golang.org/pprof" target="_blank" rel="noopener">https://blog.golang.org/pprof</a></p>
-<p><a href="https://github.com/dgryski/go-perfbook/blob/master/performance.md" target="_blank" rel="noopener">https://github.com/dgryski/go-perfbook/blob/master/performance.md</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485">https://stackoverflow.com/questions/42059800/performance-of-golang-select-statement-in-a-for-loop/42062485</a></p>
+<h2 id="ref"><a class="markdownIt-Anchor" href="#ref"></a> Ref</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.golang.org/pprof">https://blog.golang.org/pprof</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/dgryski/go-perfbook/blob/master/performance.md">https://github.com/dgryski/go-perfbook/blob/master/performance.md</a></p>
 
     </div>
 
@@ -389,7 +395,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

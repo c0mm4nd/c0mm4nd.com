@@ -258,13 +258,13 @@
     
     <div class="post-body" itemprop="articleBody"><p>因为要做系统模拟，所以决定在服务器上先搭个qemu试试</p>
 <span id="more"></span>
-
-<p>OP-TEE 文档上写的支持的是就Ubuntu20.04和22.04，但是作为超大胆我们服务器都是arch……<br>本来是想虚拟机或者docker解决，但是考虑到这种嵌套跑东西太麻烦就选择了直接用arch编译</p>
+<p>OP-TEE 文档上写的支持的是就Ubuntu20.04和22.04，但是作为超大胆我们服务器都是arch……<br />
+本来是想虚拟机或者docker解决，但是考虑到这种嵌套跑东西太麻烦就选择了直接用arch编译</p>
 <p>很难受的是，并没有现成AUR包。</p>
-<p>因为我相比c更熟悉rust，因此主要是跟随的<a href="https://optee.readthedocs.io/en/latest/building/optee_with_rust.html" target="_blank" rel="noopener">https://optee.readthedocs.io/en/latest/building/optee_with_rust.html</a> 这个篇章。</p>
-<p>第一个坑是 <code>repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml</code> 这里，因为是大家一起用的服务器，因此没有global的git.user.name 和email，repo工具就会报错。<br>这个时候就修改一下repo的git配置 <code>manifests.git/config</code> 这个问题，加入这样几行</p>
+<p>因为我相比c更熟悉rust，因此主要是跟随的<a target="_blank" rel="noopener" href="https://optee.readthedocs.io/en/latest/building/optee_with_rust.html">https://optee.readthedocs.io/en/latest/building/optee_with_rust.html</a> 这个篇章。</p>
+<p>第一个坑是 <code>repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml</code> 这里，因为是大家一起用的服务器，<a target="_blank" rel="noopener" href="http://xn--globalgit-zr4p953lj6k01dvw9b.user.name">因此没有global的git.user.name</a> 和email，repo工具就会报错。<br />
+这个时候就修改一下repo的git配置 <code>manifests.git/config</code> 这个问题，加入这样几行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">    name = MyName</span><br><span class="line">    email = my@email.com</span><br></pre></td></tr></table></figure>
-
 <p>然后重新init，之后sync</p>
 <p>大坑在 <code>(cd build &amp;&amp; make toolchains &amp;&amp; make OPTEE_RUST_ENABLE=y CFG_TEE_RAM_VA_SIZE=0x00300000)</code> 这个部分，</p>
 <p>首先 <code>make toolchains</code> 是需要从外部下载文件的，而且走的是wget，直接HTTPS_PROXY科学不管用，得开TUN之类的虚拟网卡 or 设置 <code>~/.wgetrc</code></p>
@@ -272,22 +272,26 @@
 <ul>
 <li>command not found: 少命令，基本上pacman都能直接装</li>
 <li>少cryptography，这个得用pip安装 <code>pip install cryptography</code>；后面还有个缺 elftools 的提示，需要 <code>pip install pyelftools</code>，注意开头有py</li>
-<li>edk2编译问题，原因是arch里gcc版本是12，会造成不兼容。参考下面三个网页第一个回复。应该改gcc版本也可以，但是用 CC 和 CXX 环境变量在make里好像没生效（没仔细看make内容<ul>
-<li><a href="https://edk2.groups.io/g/devel/message/87983" target="_blank" rel="noopener">https://edk2.groups.io/g/devel/message/87983</a></li>
-<li><a href="https://edk2.groups.io/g/devel/message/87984" target="_blank" rel="noopener">https://edk2.groups.io/g/devel/message/87984</a></li>
-<li><a href="https://edk2.groups.io/g/devel/message/87986" target="_blank" rel="noopener">https://edk2.groups.io/g/devel/message/87986</a><br>（不懂为什么22年3月就有的修复到23年4月都没补，新版本gcc真卑微</li>
+<li>edk2编译问题，原因是arch里gcc版本是12，会造成不兼容。参考下面三个网页第一个回复。应该改gcc版本也可以，但是用 CC 和 CXX 环境变量在make里好像没生效（没仔细看make内容
+<ul>
+<li><a target="_blank" rel="noopener" href="https://edk2.groups.io/g/devel/message/87983">https://edk2.groups.io/g/devel/message/87983</a></li>
+<li><a target="_blank" rel="noopener" href="https://edk2.groups.io/g/devel/message/87984">https://edk2.groups.io/g/devel/message/87984</a></li>
+<li><a target="_blank" rel="noopener" href="https://edk2.groups.io/g/devel/message/87986">https://edk2.groups.io/g/devel/message/87986</a><br />
+（不懂为什么22年3月就有的修复到23年4月都没补，新版本gcc真卑微</li>
 </ul>
 </li>
 </ul>
-<p>arch包管理装的内容大概这些，rust我是自己用AUR的rustup装的，python用的conda<br><code>yay -S base-devel repo dtc iasl bc cpio ninja libslirp</code></p>
+<p>arch包管理装的内容大概这些，rust我是自己用AUR的rustup装的，python用的conda<br />
+<code>yay -S base-devel repo dtc iasl bc cpio ninja libslirp</code></p>
 <p>处理out_br过程中出现问题，会缺文件，然后编译生成，然后就直接退出（应该流程问题）</p>
 <p>我这边先省略rust内容，直接用 <code>(cd build &amp;&amp; make run)</code> 编译别的</p>
 <p>后面步骤中出错挺麻烦，比如缺少 <code>config.status</code> 这种就是因为 <code>./configure</code> 失败导致</p>
-<p>curl 的问题，按理说应该 CFLAGS+&#x3D;-Wno-error&#x3D;deprecated-declarations 就可以的，但是这个make好像不传递给它的子make，CC什么的试了也都没用就只好改源码了</p>
-<p>qemu&#x2F;block&#x2F;curl.c</p>
-<pre><code>- `CURLOPT_PROTOCOLS` -&gt; `CURLOPT_PROTOCOLS_STR`: 就加个_STR
+<p>curl 的问题，按理说应该 CFLAGS+=-Wno-error=deprecated-declarations 就可以的，但是这个make好像不传递给它的子make，CC什么的试了也都没用就只好改源码了</p>
+<p>qemu/block/curl.c</p>
+<pre class="highlight"><code class="">- `CURLOPT_PROTOCOLS` -&gt; `CURLOPT_PROTOCOLS_STR`: 就加个_STR
 - `CURLOPT_REDIR_PROTOCOLS` -&gt; `CURLOPT_REDIR_PROTOCOLS_STR`: 就加个_STR
 - `CURLINFO_CONTENT_LENGTH_DOWNLOAD` -&gt; `CURLINFO_CONTENT_LENGTH_DOWNLOAD_T`: 就加个_T
+
 </code></pre>
 
     </div>
@@ -305,8 +309,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/fit5125-research-method-notes/" rel="prev" title="Notes for FIT5125: IT research methods S1 2021">
-                  <i class="fa fa-chevron-left"></i> Notes for FIT5125: IT research methods S1 2021
+                <a href="/fit5057-pm-notes/" rel="prev" title="Notes for FIT5057: Project management">
+                  <i class="fa fa-chevron-left"></i> Notes for FIT5057: Project management
                 </a>
             </div>
             <div class="post-nav-item">
@@ -395,7 +399,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

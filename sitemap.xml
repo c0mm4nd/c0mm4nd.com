@@ -254,15 +254,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/fit5125-research-method-notes/</loc>
-    
-    <lastmod>2021-10-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/bitcoins-with-homomorphic-value/</loc>
     
     <lastmod>2021-10-11</lastmod>
@@ -281,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/bulletproof-paper/</loc>
+    <loc>https://c0mm4nd.com/chain-on-enterprise-view/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -290,7 +281,7 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/chain-on-enterprise-view/</loc>
+    <loc>https://c0mm4nd.com/bulletproof-paper/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -363,6 +354,15 @@
   
   <url>
     <loc>https://c0mm4nd.com/fit5057-pm-notes/</loc>
+    
+    <lastmod>2021-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/fit5125-research-method-notes/</loc>
     
     <lastmod>2021-10-11</lastmod>
     
@@ -677,13 +677,6 @@
 
   
   <url>
-    <loc>https://c0mm4nd.com/tags/research/</loc>
-    <lastmod>2024-02-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/tags/bitcointalk/</loc>
     <lastmod>2024-02-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -754,27 +747,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/crunchbase/</loc>
-    <lastmod>2024-02-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/spider/</loc>
-    <lastmod>2024-02-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/data-gathering/</loc>
-    <lastmod>2024-02-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/tags/edx/</loc>
     <lastmod>2024-02-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -790,6 +762,27 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/tps/</loc>
+    <lastmod>2024-02-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/crunchbase/</loc>
+    <lastmod>2024-02-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/spider/</loc>
+    <lastmod>2024-02-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/data-gathering/</loc>
     <lastmod>2024-02-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -852,20 +845,6 @@
   </url>
   
   <url>
-    <loc>https://c0mm4nd.com/tags/game-theory/</loc>
-    <lastmod>2024-02-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/federated-learning/</loc>
-    <lastmod>2024-02-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://c0mm4nd.com/tags/cross-chain/</loc>
     <lastmod>2024-02-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -881,6 +860,20 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/cryptocurrency/</loc>
+    <lastmod>2024-02-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/game-theory/</loc>
+    <lastmod>2024-02-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/federated-learning/</loc>
     <lastmod>2024-02-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -916,6 +909,13 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/project-management/</loc>
+    <lastmod>2024-02-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/research/</loc>
     <lastmod>2024-02-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -979,6 +979,20 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/java/</loc>
+    <lastmod>2024-02-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/pump-and-dump/</loc>
+    <lastmod>2024-02-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://c0mm4nd.com/tags/scam/</loc>
     <lastmod>2024-02-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1098,20 +1112,6 @@
   
   <url>
     <loc>https://c0mm4nd.com/tags/wallet/</loc>
-    <lastmod>2024-02-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/pump-and-dump/</loc>
-    <lastmod>2024-02-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://c0mm4nd.com/tags/scam/</loc>
     <lastmod>2024-02-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

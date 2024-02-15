@@ -338,7 +338,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br>而我们需要的仅仅只是一个简单的blob存储&#x2F;传输方案。</p>
+          <p>实在是苦于protobuf，不论是g家的老版本还是新版本，还是gogo，都逃离不了protobuf是非常面向对象的事实。<br />
+而我们需要的仅仅只是一个简单的blob存储/传输方案。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/ngchain-serialization-selection/#more" rel="contents">
@@ -421,7 +422,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>本文档定义了确定性数字签名生成程序。<br>此类签名与标准数字签名算法 (DSA) 和椭圆曲线数字签名算法 (ECDSA) 数字签名兼容，并且可以使用未经修改的验证器进行处理，无需了解其中描述的过程。<br>确定性签名保留了与数字签名相关的加密安全功能，但可以更轻松地在各种环境中实现，因为它们不需要访问高质量的随机源。</p>
+          <p>本文档定义了确定性数字签名生成程序。<br>
+此类签名与标准数字签名算法 (DSA) 和椭圆曲线数字签名算法 (ECDSA) 数字签名兼容，并且可以使用未经修改的验证器进行处理，无需了解其中描述的过程。<br>
+确定性签名保留了与数字签名相关的加密安全功能，但可以更轻松地在各种环境中实现，因为它们不需要访问高质量的随机源。</p>
 <p>DSA [FIPS-186-4] 和 ECDSA [X9.62] 是两种标准的数字签名方案。 它们在各种协议中提供数据完整性和可验证的真实性。</p>
 <p>DSA 和 ECDSA 的一个特点是它们需要为每个签名生成生成一个新的随机值（以下称为 k）。 为了有效的安全性，必须使用加密安全过程从一组模整数中随机且一致地选择 k。 在这个过程中即使是轻微的偏斜也可能变成对签名方案的攻击。</p>
 <p>对加密安全随机源的需求已被公认是在某些架构中部署 DSA 和 ECDSA 签名方案的障碍，其中安全随机数生成具有挑战性，特别是嵌入式系统，如智能卡。 在这些系统中，RSA 签名算法，如公钥密码标准 (PKCS) #1 [RFC3447]（使用“类型 1”填充，而不是概率签名方案 (PSS)）和 ISO 9796-2 [ISO-9796-2]，通常是首选，即使它在计算上更昂贵，因为 RSA（具有此类填充方案）是确定性的，因此不需要随机源。</p>
@@ -434,8 +437,12 @@
 <li>使用确定性 DSA 和 ECDSA 意味着没有任何秘密或公共价值的额外存储要求。</li>
 <li>确定性 DSA 和 ECDSA 可以应用于与普通 DSA 和 ECDSA 相同的输入，即对要签名的消息计算的哈希值，具有加密安全的哈希函数。</li>
 </ul>
-<p>在本文档中指定的确定性 (EC)DSA 的定义中采取了一些相对随意的选择。<br>这样做是为了使其尽可能普遍适用，从而最大限度地提高包含的测试向量的有用性。 有关一些可能的变体的讨论，请参见第 3.6 节。</p>
-<p>需要注意的是，密钥对的生成仍然需要一个随机源。<br>在随机性存在问题的嵌入式系统中，通常可以安排在更可控的条件下生成密钥对（例如，在特殊的智能卡初始化过程中或在宣誓代理的物理控制下）；<br>或者甚至可以在其他地方生成密钥并导入到设备中。<br>确定性 DSA 和 ECDSA 仅处理签名生成时对随机性的需求。</p>
+<p>在本文档中指定的确定性 (EC)DSA 的定义中采取了一些相对随意的选择。<br>
+这样做是为了使其尽可能普遍适用，从而最大限度地提高包含的测试向量的有用性。 有关一些可能的变体的讨论，请参见第 3.6 节。</p>
+<p>需要注意的是，密钥对的生成仍然需要一个随机源。<br>
+在随机性存在问题的嵌入式系统中，通常可以安排在更可控的条件下生成密钥对（例如，在特殊的智能卡初始化过程中或在宣誓代理的物理控制下）；<br>
+或者甚至可以在其他地方生成密钥并导入到设备中。<br>
+确定性 DSA 和 ECDSA 仅处理签名生成时对随机性的需求。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/rfc6979/#more" rel="contents">
@@ -520,7 +527,8 @@
     <div class="post-body" itemprop="articleBody">
           <p>作者 Shuhan Wang, Fang He &amp; Erik Andersen</p>
 <p>论文翻译，侵删</p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>设计引人入胜的学习内容固然重要，但也很困难，并且通常涉及许多手动规范。 我们提出了一个统一的框架，该框架利用<strong>自动问题分解和部分排序图的构建</strong>来简化多个工作流：知识评估以及进行性分析和设计。 我们通过在线日语评估工具对847名参与者进行了研究，结果表明我们的框架可以有效地衡量学生的能力并预测学生在特定问题上的表现。 我们还提供了对课程分析的结果，结果表明两种不同教科书的进度令人惊讶地相似，并且我们的框架可以导致发现专家进行设计的一般原理。 最后，我们演示了自动进度生成以及所需的排序和步调，允许进行进度定制以及将从一个课程中提取的参数映射到另一个课程</p>
+<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要</h2>
+<p>设计引人入胜的学习内容固然重要，但也很困难，并且通常涉及许多手动规范。 我们提出了一个统一的框架，该框架利用<strong>自动问题分解和部分排序图的构建</strong>来简化多个工作流：知识评估以及进行性分析和设计。 我们通过在线日语评估工具对847名参与者进行了研究，结果表明我们的框架可以有效地衡量学生的能力并预测学生在特定问题上的表现。 我们还提供了对课程分析的结果，结果表明两种不同教科书的进度令人惊讶地相似，并且我们的框架可以导致发现专家进行设计的一般原理。 最后，我们演示了自动进度生成以及所需的排序和步调，允许进行进度定制以及将从一个课程中提取的参数映射到另一个课程</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/fit5152-a1-paper/#more" rel="contents">
@@ -604,7 +612,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>首先在各种公开消息来源上都说这个是刷分水课来着。再加上本身自己在设计上想要有点提高（怎么说也算当过艺术生的），又经常有需要设计的场景（项目别太多）。现在也是前端更火热，所以掌握这个是很有价值的。</p>
-<hr>
+<hr />
 <p>总算总结完了，感觉这门课可以改名叫UI Guidelines了……太tm多了这内容</p>
           <!--noindex-->
             <div class="post-button">
@@ -771,7 +779,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>学校要求的是使用bluej这个ide&#x2F;editor。这个工具和intellij idea不同，完全是面向教学，写Java有种写script的感觉。可以拿来写各种class但是不能保存各种实例化的object。</p>
+          <p>学校要求的是使用bluej这个ide/editor。这个工具和intellij idea不同，完全是面向教学，写Java有种写script的感觉。可以拿来写各种class但是不能保存各种实例化的object。</p>
 <p>到目前（W4）为止，内容都是很简单的。</p>
 <p>到W7也還是很簡單……</p>
 <p>到W12依然还是很简单……</p>
@@ -852,7 +860,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>整体难度不大，tutor也很给面子（要是我自己给自己打分肯定更低</p>
-<p>建议尽早摘抄知识点并且在Tut&#x2F;Ass时候就用起来，别像我一样前面拍脑子考前总结才发现都在PPT里。</p>
+<p>建议尽早摘抄知识点并且在Tut/Ass时候就用起来，别像我一样前面拍脑子考前总结才发现都在PPT里。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/fit9132-db-notes/#more" rel="contents">
@@ -1113,7 +1121,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

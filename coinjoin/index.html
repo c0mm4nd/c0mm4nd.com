@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CoinJoin-%E7%8E%B0%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E6%AF%94%E7%89%B9%E5%B8%81%E9%9A%90%E7%A7%81"><span class="nav-number">1.</span> <span class="nav-text">CoinJoin:现实世界的比特币隐私</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.1.</span> <span class="nav-text">常见问题</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#coinjoin%E7%8E%B0%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E6%AF%94%E7%89%B9%E5%B8%81%E9%9A%90%E7%A7%81"><span class="nav-number">1.</span> <span class="nav-text"> CoinJoin:现实世界的比特币隐私</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.1.</span> <span class="nav-text"> 常见问题</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -266,15 +266,14 @@
     <div class="post-body" itemprop="articleBody"><p>比特币通常被宣传为隐私工具，但比特币中的唯一隐私性来自匿名地址，该匿名地址易销毁，但是通过地址重复使用，“污点”分析，跟踪付款，监控节点IP地址，网络爬虫以及许多其他机制很容易使该隐私性受到破坏。一旦破坏了这种隐私，很难恢复，有些情况下恢复成本也很高。</p>
 <p>传统银行业务默认提供大量隐私保护。您的亲人看不到您正在购买节育措施剥夺他们未来的孙子孙女；您的雇主无法从薪水中获悉您支持的公益；贼人们也无法看到您最近的购买或判断您是如何富有的人，他们无法锁定目标并欺骗您。对于个人和企业而言，比特币的隐私性不足会是一个首要的切实的不利因素。</p>
 <p>即使用户通过切换到BIP32地址链上来避免地址重复使用，当他们进行较大的交易时，他们仍然会因旧币和过去的付款而失去隐私。</p>
-<p>隐私错误也会造成外部成本：您可能有良好的保护隐私行为，但是当您与不这样做的人（例如使用<a href="https://en.bitcoin.it/wiki/Green_address" target="_blank" rel="noopener">“绿色地址”</a>的人）进行交易时，您和每个与他交易的人一样都会被迫失去一些隐私性。隐私性的缺失也给比特币带来了严重的系统风险：如果降级了的隐私性允许人们汇集中心化的列表甄别好坏币，则当您真诚接受的硬币后来未被其他人兑现时，您就会发现比特币上币与币之间的可替代性遭到破坏，并且其去中心性也伴随着人们被迫给他们自己的币实施流行的黑名单。</p>
+<p>隐私错误也会造成外部成本：您可能有良好的保护隐私行为，但是当您与不这样做的人（例如使用<a target="_blank" rel="noopener" href="https://en.bitcoin.it/wiki/Green_address">“绿色地址”</a>的人）进行交易时，您和每个与他交易的人一样都会被迫失去一些隐私性。隐私性的缺失也给比特币带来了严重的系统风险：如果降级了的隐私性允许人们汇集中心化的列表甄别好坏币，则当您真诚接受的硬币后来未被其他人兑现时，您就会发现比特币上币与币之间的可替代性遭到破坏，并且其去中心性也伴随着人们被迫给他们自己的币实施流行的黑名单。</p>
 <p>这条消息描述了比特币用户可以用来显着改善其隐私性的交易方式，我一直称其为CoinJoin。它不涉及比特币协议的任何更改，并且几年前至今也有数次使用，但是似乎尚未得到广泛的理解。</p>
 <p>我首先在一个异想天开的帖子中公开地描述了这种交易方式——“全盘污染！”——通过这个着重讨论了这些交易的一个特定副作用，并期望人们会自己看到其余的含义。</p>
 <p>往往清晰击败含蓄，甚至理解该想法的人也有一些本可以被解答的问题。因此，这个帖子就是为此而写。</p>
 <span id="more"></span>
-
-<h1 id="CoinJoin-现实世界的比特币隐私"><a href="#CoinJoin-现实世界的比特币隐私" class="headerlink" title="CoinJoin:现实世界的比特币隐私"></a>CoinJoin:现实世界的比特币隐私</h1><p>这个想法很简单，首先要有一些简单的背景知识：</p>
+<h1 id="coinjoin现实世界的比特币隐私"><a class="markdownIt-Anchor" href="#coinjoin现实世界的比特币隐私"></a> CoinJoin:现实世界的比特币隐私</h1>
+<p>这个想法很简单，首先要有一些简单的背景知识：</p>
 <img src="/coinjoin/tx.png" class="">
-
 <p>比特币交易消耗一个或多个输入(Input)并创建具有指定值的一个或多个输出(Output)。</p>
 <p>每个输入都是过去交易的输出。对于每个输入，都有一个不同的签名（scriptsig），该签名是根据过去使用的输出（scriptpubkey）中指定的规则创建的。</p>
 <p>比特币系统负责确保签名正确，输入存在且可支配，并且输出值的总和小于或等于输入值的总和（任何超出部分都将作为支付给矿工的费用包括交易）。</p>
@@ -289,7 +288,8 @@
 <p>这个想法也可以更随意地使用。当您要付款时，找到也要付款并共同付款的其他人。这样做并不会增加太多隐私，但是实际上会使您的交易更小，从而在网络上更轻松（费用更低）；额外的隐私更是一种增益。</p>
 <p>这样的交易在外部来看与通过常规使用创建的交易没有区别。因此，如果这些交易变得很普遍，它们甚至可以改善不使用它们的人的隐私，因为不再将输入共同参与作为通用控制的有力证据。</p>
 <p>这个想法可能有很多变种，并且可以与变种共存，因为该想法不需要更改比特币系统。百花齐放：我们可以在实现这一目标的方式上有多种选择，并学到最好的方法。</p>
-<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><p><em>是否不需要tor或其他东西来阻止所有人分析每个人的IP？</em></p>
+<h3 id="常见问题"><a class="markdownIt-Anchor" href="#常见问题"></a> 常见问题</h3>
+<p><em>是否不需要tor或其他东西来阻止所有人分析每个人的IP？</em></p>
 <p>任何希望隐藏用户地址的交易隐私系统都应以某种匿名网络开始。 没什么两样。 幸运的是，像Tor，I2P，Bitmessage和Freenet这样的网络都已经存在，并且可以全部用于此目的。 （但是，Freenet会导致交易非常缓慢）</p>
 <p>但是，加强“污点分析”并缩小交易规模甚至不需要用户彼此私密。 因此，即使没有类似tor之类的，也不会比常规交易更糟糕。</p>
 <p><em>用户是否不了解哪些输入与哪些输出匹配？</em></p>
@@ -307,7 +307,7 @@
 <p>在所有情况下，您都可以通过工作证明，保真度绑定或其他稀缺资源使用来补充反DoS机制。但是我怀疑，随着实际攻击的发生，最好适应这种攻击，因为我们不必事先针对所有用户都采用单一的安全机制。我还认为，错误的输入排除可以为入门提供足够的保护。</p>
 <p><em>匿名集大小是否不受一次交易中可以拥有多少方的限制？</em></p>
 <p>不完全是。显然，单个交易的匿名集大小受其参与方数量的限制。交易规模的限制以及失败（重试）的风险意味着真正庞大的联合交易是不明智的。但是，由于这些交易价格便宜，因此可以联合的交易数量没有限制。</p>
-<p>特别是，如果您可以建立每个事务有m个参与者的事务，则可以创建一个m*3事务序列，该序列构成一个三阶段交换网络，该网络允许m^2个最终输出中的任何一个来自m^2个原始输入（例如，使用32个交易的三个阶段，每个输入有32个输入，每个1024个用户可以加入96个交易）。这允许匿名集设置为任何大小，仅受参与限制。</p>
+<p>特别是，如果您可以建立每个事务有m个参与者的事务，则可以创建一个m*3事务序列，该序列构成一个三阶段交换网络，该网络允许m<sup>2个最终输出中的任何一个来自m</sup>2个原始输入（例如，使用32个交易的三个阶段，每个输入有32个输入，每个1024个用户可以加入96个交易）。这允许匿名集设置为任何大小，仅受参与限制。</p>
 <p>实际上，我希望大多数用户只希望防止闲的蛋疼的朋友（和小偷）进入他们的财务生活，并恢复由于地址重用等不良做法而丢失的一些隐私。这些用户可能只通过一次通行证就会感到满意；其他人将只是机会性地进行操作，而其他人则可能会努力实现许多通行证和重要的匿名设置。所有人都可以共存。</p>
 <p><em>与ZeroCoin相比如何？</em></p>
 <p>作为一个密码学和计算机科学的极客，我对Zerocoin感到非常兴奋：其背后的技术令人着迷并且非常重要。但是，作为比特币用户和开发人员，推广它作为改善隐私的解决方案令我感到失望。</p>
@@ -338,7 +338,7 @@
 <p>Joe-criminal可以外出购买120％PPS采矿来获得全新的硬币，或者通过一系列半伪造的高现金流量赌博企业来赚钱，以减少50％的费用，他们可以负担寻找并与之交互的成本这些卑鄙的服务…乔和简·多伊？他们的名字在blockchain.info的跑马灯上。对于他们来说，这似乎不太好，但是如果修复它的成本很高，他们根本不会，因为修复它的成本是非常具体的，而且损失的成本或投机性是遥不可及的。他们可能只需要放弃比特币，而转而使用几乎完全私人的东西：现金…普通用户需要有效且廉价的隐私才能完全帮助他们。</p>
 <p>我知道制作这样的工具并不适合许多比特币企业的快速致富模式，但是重要性是显而易见的，并且最简单的版本不需要非常深入的技术指导。我认为，改善人们隐私的“政治”风险是您应该认真考虑的真实风险，但是在这些部分附近，我看到人们在一些风险非常高的东西上贴上自己的名字。我希望“全盘污染”的话题足以激发社区的某些行动，但是也许会。</p>
 <p>因此，应该反过来，我问你：它在哪里？</p>
-<p><a href="https://bitcointalk.org/index.php?topic=279249.0" target="_blank" rel="noopener">原文</a></p>
+<p><a target="_blank" rel="noopener" href="https://bitcointalk.org/index.php?topic=279249.0">原文</a></p>
 
     </div>
 
@@ -449,7 +449,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

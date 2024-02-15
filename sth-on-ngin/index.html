@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#28-April-2020-%E7%88%B2%E4%BB%80%E9%BA%BD%E9%81%B8%E6%93%87%E4%B8%8D%E6%B7%BB%E5%8A%A0TD-Toatl-Difficulty"><span class="nav-number">1.</span> <span class="nav-text">28 April 2020 爲什麽選擇不添加TD(Toatl Difficulty)?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28-April-2020-Sync%E6%A9%9F%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">28 April 2020 Sync機制?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#orphan"><span class="nav-number">3.</span> <span class="nav-text">orphan</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quill"><span class="nav-number">4.</span> <span class="nav-text">quill</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#28-april-2020-%E7%88%B2%E4%BB%80%E9%BA%BD%E9%81%B8%E6%93%87%E4%B8%8D%E6%B7%BB%E5%8A%A0tdtoatl-difficulty"><span class="nav-number">1.</span> <span class="nav-text"> 28 April 2020 爲什麽選擇不添加TD(Toatl Difficulty)?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28-april-2020-sync%E6%A9%9F%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text"> 28 April 2020 Sync機制?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#orphan"><span class="nav-number">3.</span> <span class="nav-text"> orphan</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quill"><span class="nav-number">4.</span> <span class="nav-text"> quill</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -261,8 +261,8 @@
     
     <div class="post-body" itemprop="articleBody"><p>隨意地記錄一些NGIN上的一些思考</p>
 <span id="more"></span>
-
-<h2 id="28-April-2020-爲什麽選擇不添加TD-Toatl-Difficulty"><a href="#28-April-2020-爲什麽選擇不添加TD-Toatl-Difficulty" class="headerlink" title="28 April 2020 爲什麽選擇不添加TD(Toatl Difficulty)?"></a>28 April 2020 爲什麽選擇不添加TD(Toatl Difficulty)?</h2><p>本來是打算加的，因爲有如下好處</p>
+<h2 id="28-april-2020-爲什麽選擇不添加tdtoatl-difficulty"><a class="markdownIt-Anchor" href="#28-april-2020-爲什麽選擇不添加tdtoatl-difficulty"></a> 28 April 2020 爲什麽選擇不添加TD(Toatl Difficulty)?</h2>
+<p>本來是打算加的，因爲有如下好處</p>
 <ul>
 <li>藉鑒ETH的sync</li>
 <li>讓同一時間收到的Block之間有不同的rank， 方便node決定fork方向</li>
@@ -275,12 +275,13 @@
 <li>Sync還不完善。Sync機制還是殘廢狀態，不應該開始考慮調優</li>
 <li>rank應該能有別的替代品: UnixNano, len(txs) …</li>
 </ul>
-<h2 id="28-April-2020-Sync機制"><a href="#28-April-2020-Sync機制" class="headerlink" title="28 April 2020 Sync機制?"></a>28 April 2020 Sync機制?</h2><p>P2P_protocol-v0.0.1下NGIN的Sync機制比較殘廢，是直接不停地pingpong來獲取Wired Node的狀態（最高高度）來確認自己是不是out of date.</p>
+<h2 id="28-april-2020-sync機制"><a class="markdownIt-Anchor" href="#28-april-2020-sync機制"></a> 28 April 2020 Sync機制?</h2>
+<p>P2P_protocol-v0.0.1下NGIN的Sync機制比較殘廢，是直接不停地pingpong來獲取Wired Node的狀態（最高高度）來確認自己是不是out of date.</p>
 <p>這裏先簡單説一下其他區塊鏈網絡的Sync機制</p>
 <ol>
 <li>Bitcoin</li>
 </ol>
-<p>BTC的Sync機制是發一個hash_stop&#x3D;0（即取盡可能多）的getheaders&#x2F;getblocks，讓remoteNode傳回一份Inv也就是庫存清單，localNode就check了一眼這個清單，對自己沒的Block發getdata</p>
+<p>BTC的Sync機制是發一個hash_stop=0（即取盡可能多）的getheaders/getblocks，讓remoteNode傳回一份Inv也就是庫存清單，localNode就check了一眼這個清單，對自己沒的Block發getdata</p>
 <ol start="2">
 <li>Ethereum</li>
 </ol>
@@ -288,31 +289,36 @@
 <p>這裏就講下Block的。</p>
 <p>ETH在連接建立之後就會優先交換一個Status message，裏面就包括了bestHash，前面說的TD，還有一些區別forknet的字段。</p>
 <p>然後localNode一看我自家的TD不如別家啊，然後，就會發個GetBlockHeaders請求，認證了PoW信息之後再通過GetBlockBodies把内容也取來，之後就存（執行）起來。</p>
-<hr>
+<hr />
 <p>因爲Discovery是利用libp2p的kaddht實現，Broadcast機制也已經用libp2p的pubsub給實現了，所以NGIN天生就和上面的不一樣……</p>
-<p>libp2p這裏有寫好的<a href="https://godoc.org/github.com/libp2p/go-libp2p-consensus" target="_blank" rel="noopener">共識</a>（<a href="https://godoc.org/github.com/libp2p/go-libp2p-raft" target="_blank" rel="noopener">raft</a>）</p>
-<p>當然還有<a href="https://godoc.org/github.com/ipfs/ipfs-cluster/consensus/raft" target="_blank" rel="noopener">ipfs自己在用的raft</a></p>
+<p>libp2p這裏有寫好的<a target="_blank" rel="noopener" href="https://godoc.org/github.com/libp2p/go-libp2p-consensus">共識</a>（<a target="_blank" rel="noopener" href="https://godoc.org/github.com/libp2p/go-libp2p-raft">raft</a>）</p>
+<p>當然還有<a target="_blank" rel="noopener" href="https://godoc.org/github.com/ipfs/ipfs-cluster/consensus/raft">ipfs自己在用的raft</a></p>
 <p>雖然這個raft庫不能用，也不能從ipfs的改，但是一些架構可以參考</p>
 <p>比如，這個consensus是建立在p2p的上層</p>
 <p>這就很顛覆了……</p>
-<p>&#x3D; &#x3D;這樣咋收response</p>
-<p>！！！<br>哦對哦</p>
+<p>= =這樣咋收response</p>
+<p>！！！<br />
+哦對哦</p>
 <p>這個Wired又不是broadcast要register！我返回stream然後做個阻塞讀不就好了！</p>
-<p>參考<a href="https://github.com/prysmaticlabs/prysm/blob/master/beacon-chain/p2p/sender.go" target="_blank" rel="noopener">prysm</a></p>
+<p>參考<a target="_blank" rel="noopener" href="https://github.com/prysmaticlabs/prysm/blob/master/beacon-chain/p2p/sender.go">prysm</a></p>
 <p>媽的，被libp2p的example帶跑了……</p>
-<p>看了下prysm的<a href="https://github.com/prysmaticlabs/prysm/tree/9d173dcad2146f34bf5583f359f6227951bf3efc/beacon-chain/sync" target="_blank" rel="noopener">sync</a>，看來他們對initial sync也花了不少心思……居然還有個old……</p>
-<h2 id="orphan"><a href="#orphan" class="headerlink" title="orphan"></a>orphan</h2><p>因爲上綫了測試網，因此p2p上很多問題就暴露出來了，其中最嚴重的是由於BlockTime過短導致的分叉。</p>
-<p>查了很多遍”prevent&#x2F;avoid fork”都沒結果，現在在看DAG方案時候才發現人家管這個問題叫orphan block…</p>
+<p>看了下prysm的<a target="_blank" rel="noopener" href="https://github.com/prysmaticlabs/prysm/tree/9d173dcad2146f34bf5583f359f6227951bf3efc/beacon-chain/sync">sync</a>，看來他們對initial sync也花了不少心思……居然還有個old……</p>
+<h2 id="orphan"><a class="markdownIt-Anchor" href="#orphan"></a> orphan</h2>
+<p>因爲上綫了測試網，因此p2p上很多問題就暴露出來了，其中最嚴重的是由於BlockTime過短導致的分叉。</p>
+<p>查了很多遍&quot;prevent/avoid fork&quot;都沒結果，現在在看DAG方案時候才發現人家管這個問題叫orphan block…</p>
 <p>大概是手上沒有算力的情況分叉的確就孤兒了……</p>
 <p>eth的思路是uncle block，形象一点就是把敌人化为己用，就把uncle的header和hash保存进Block的uncle字段里。</p>
 <p>如果分叉节点收到这个带uncle的Block广播就知道了自己手里拿着的这个Block是没用的，它就会“从良”回到这个主线上。</p>
 <p>NGIN没有这个设计，因为我觉得uncle信息是冗余的，而且真的作为10s的blockTime要叉出去也很难直接救回来</p>
 <p>所以在NGIN裏只有强制fork的情況，儅遠程節點比本機高出數個blockCheckRound的時候就會觸發</p>
 <p>爲了防止惡意擡高區塊高度來强制fork，我們需要給這個機制加一個cap。換句話説就是對於離綫過久切分叉太遠的直接孤立隔離，避免其污染網絡</p>
-<h2 id="quill"><a href="#quill" class="headerlink" title="quill"></a>quill</h2><p>在对错误处理升级的时候突然萌生了使用子协议来对tx进行操作的想法。暂时把这个协议称为quill（羽毛笔）。</p>
+<h2 id="quill"><a class="markdownIt-Anchor" href="#quill"></a> quill</h2>
+<p>在对错误处理升级的时候突然萌生了使用子协议来对tx进行操作的想法。暂时把这个协议称为quill（羽毛笔）。</p>
 <p>现在tx的种类众多，却只是通过switch来将他们发到各个handler上进行验证或是处理。</p>
-<p>现在我们希望能把contract相关的tx（append,delete,以及未来的lock,unlock）通过quill来进行整合，<br>即，使用quill来解析extra内容。看起来就应该像是在用tx操作一个quill（羽毛笔）在contract上写内容。</p>
-<p>除了负责这些基本操作以外，quill也应当负责保证accounts的一致性。<br>和raft，paxos这些算法不同，quill是一个针对PoW环境的一致性算法，即记账人已经确定。</p>
+<p>现在我们希望能把contract相关的tx（append,delete,以及未来的lock,unlock）通过quill来进行整合，<br />
+即，使用quill来解析extra内容。看起来就应该像是在用tx操作一个quill（羽毛笔）在contract上写内容。</p>
+<p>除了负责这些基本操作以外，quill也应当负责保证accounts的一致性。<br />
+和raft，paxos这些算法不同，quill是一个针对PoW环境的一致性算法，即记账人已经确定。</p>
 
     </div>
 
@@ -421,7 +427,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {

@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">解决的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Beta%E6%B5%8B%E8%AF%95%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">Beta测试指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%BA%BA%E8%AF%9D"><span class="nav-number">3.</span> <span class="nav-text">说人话</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text"> 解决的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#beta%E6%B5%8B%E8%AF%95%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text"> Beta测试指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%BA%BA%E8%AF%9D"><span class="nav-number">3.</span> <span class="nav-text"> 说人话</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -261,22 +261,27 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>因为之前都是让IDE&#x2F;VScode(goreturns)自动处理的import，所以今天在用vscode重新format的时候才看到，在<code>import &quot;C&quot;</code>的上面有个可以点的<code>regenerate cgo definitions</code>按钮。</p>
-<p>这里就根据这个<a href="https://github.com/golang/go/issues/35721" target="_blank" rel="noopener">github issue</a>来阐述一下这个按钮是干啥的，该怎么用。答案是根据<a href="https://www.reddit.com/r/vscode/comments/hjphbz/what_is_the_purpose_of_regenerate_cgo_definitions/" target="_blank" rel="noopener">reddit上这个帖子的回复</a>找到的</p>
+    <div class="post-body" itemprop="articleBody"><p>因为之前都是让IDE/VScode(goreturns)自动处理的import，所以今天在用vscode重新format的时候才看到，在<code>import &quot;C&quot;</code>的上面有个可以点的<code>regenerate cgo definitions</code>按钮。</p>
+<p>这里就根据这个<a target="_blank" rel="noopener" href="https://github.com/golang/go/issues/35721">github issue</a>来阐述一下这个按钮是干啥的，该怎么用。答案是根据<a target="_blank" rel="noopener" href="https://www.reddit.com/r/vscode/comments/hjphbz/what_is_the_purpose_of_regenerate_cgo_definitions/">reddit上这个帖子的回复</a>找到的</p>
 <span id="more"></span>
-
-<h2 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h2><p>使用了<code>import &quot;C&quot;</code>的源代码文件不是真正有效的Go。它们在严重依赖于go tool在构建软件包时所产生的额外信息。尽管可以通过设置<a href="https://golang.org/pkg/go/types/#Config" target="_blank" rel="noopener">types.Config.FakeImportC flag</a>来解决这些问题，可以对它们进行解析，但不能进行类型检查。</p>
-<p>许多人建议gopls使用包中的GoFiles而不是其CompiledGoFiles。<br>GoFiles是原始的（即无效的）文件。使用它们可能会给编辑包的人带来更好的体验，但是由于包将不再进行类型检查，因此它将完全破坏依赖于类型信息的所有内容。在当前架构中进行更改之前，我们必须非常仔细地评估效果。</p>
+<h2 id="解决的问题"><a class="markdownIt-Anchor" href="#解决的问题"></a> 解决的问题</h2>
+<p>使用了<code>import &quot;C&quot;</code>的源代码文件不是真正有效的Go。它们在严重依赖于go tool在构建软件包时所产生的额外信息。尽管可以通过设置<a target="_blank" rel="noopener" href="https://golang.org/pkg/go/types/#Config">types.Config.FakeImportC flag</a>来解决这些问题，可以对它们进行解析，但不能进行类型检查。</p>
+<p>许多人建议gopls使用包中的GoFiles而不是其CompiledGoFiles。<br />
+GoFiles是原始的（即无效的）文件。使用它们可能会给编辑包的人带来更好的体验，但是由于包将不再进行类型检查，因此它将完全破坏依赖于类型信息的所有内容。在当前架构中进行更改之前，我们必须非常仔细地评估效果。</p>
 <p>我们可以考虑两次检查cgo软件包的类型，一次使用实际代码，一次使用用户的代码。那将会是一个重大的架构变化。</p>
 <p>或者，我们可以在<code>.go</code>文件更改时运行cgo工具，以生成实际代码。这是一种更加可靠的方法，但是运行cgo处理的成本可能太高，尤其是在大型的包上。</p>
 <p>无论如何，这是一个大项目，需要大量的测试和思考。我们不太可能很快在这里做出巨大的改进。</p>
-<h2 id="Beta测试指令"><a href="#Beta测试指令" class="headerlink" title="Beta测试指令"></a>Beta测试指令</h2><p>这是当前的状态：如果您使用tip Go（即gotip安装的golang, gotip是从开发分支上编译并运行go的命令）在master分支上构建gopls，那么您应该具有很好的cgo创作经验。<br>据我所知有一个bug在自动代码补全上，它会提供_cgo_foo之类的符号，而不是正确的C.foo。</p>
-<p>不过，有一个障碍是，除非您告知，否则它不会重新生成cgo绑定。<br>为此，在使用cgo的文件中，在<code>import &quot;C&quot;</code>行的顶部应该有一个<code>regenerate cgo</code>的按钮。<br>当您引用C中的新标识符时，或使用影响Go可以看到的符号的方式更改魔术注释时，将需要使用它。</p>
+<h2 id="beta测试指令"><a class="markdownIt-Anchor" href="#beta测试指令"></a> Beta测试指令</h2>
+<p>这是当前的状态：如果您使用tip Go（即gotip安装的golang, gotip是从开发分支上编译并运行go的命令）在master分支上构建gopls，那么您应该具有很好的cgo创作经验。<br />
+据我所知有一个bug在自动代码补全上，它会提供_cgo_foo之类的符号，而不是正确的C.foo。</p>
+<p>不过，有一个障碍是，除非您告知，否则它不会重新生成cgo绑定。<br />
+为此，在使用cgo的文件中，在<code>import &quot;C&quot;</code>行的顶部应该有一个<code>regenerate cgo</code>的按钮。<br />
+当您引用C中的新标识符时，或使用影响Go可以看到的符号的方式更改魔术注释时，将需要使用它。</p>
 <p>要进行设置，请按照以下说明进行操作：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ go get golang.org/dl/gotip</span><br><span class="line">$ gotip download # 安装开发版golang</span><br><span class="line">[...]</span><br><span class="line">Success. You may now run &#x27;gotip&#x27;!</span><br><span class="line">$ cd /</span><br><span class="line">$ GO111MODULE=on gotip get golang.org/x/tools/gopls@master</span><br><span class="line">$ gotip version</span><br><span class="line">... devel +f7f9c8f ...</span><br><span class="line">$ gotip version $(which gopls)</span><br><span class="line">... devel +f7f9c8f ...</span><br></pre></td></tr></table></figure>
-
 <p>您无需使用tip Go即可在自己的项目上工作，仅需用其构建gopls。（这是2020.05.01的更新，现在2020.10.24估计是不用了）</p>
-<h2 id="说人话"><a href="#说人话" class="headerlink" title="说人话"></a>说人话</h2><p>就是，go自己读不懂cgo，要靠别的工具。但是别的工具一直调用会很浪费资源，那就让大家通过按钮手动让go通过工具读cgo。</p>
+<h2 id="说人话"><a class="markdownIt-Anchor" href="#说人话"></a> 说人话</h2>
+<p>就是，go自己读不懂cgo，要靠别的工具。但是别的工具一直调用会很浪费资源，那就让大家通过按钮手动让go通过工具读cgo。</p>
 <p>但是看起来bug还是挺多的，所以issue也没close</p>
 
     </div>
@@ -388,7 +393,14 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","input_position":"bottom","loading":"lazy"}</script>
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha256-hLTCMFlKxdNgPXyWlSSxYN0ykJmxxq9Yt3MNfdRGWeA=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"c0mm4nd/c0mm4nd.com","repo_id":"R_kgDOJz8syw","category":"General","category_id":"DIC_kwDOJz8sy84CXdaV","mapping":"title","reactions_enabled":1,"emit_metadata":1,"theme":"light","lang":"en","crossorigin":"anonymous","input_position":"bottom","loading":"lazy"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {
